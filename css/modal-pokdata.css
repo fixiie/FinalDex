@@ -1,0 +1,463 @@
+.pokdata-modal-outer {
+	position: fixed;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	opacity: 1;
+	visibility: hidden;
+	display: none;
+	transition: visibility .5s linear, opacity .5s ease;
+}
+.pokdata-modal-outer.open {
+	visibility: visible;
+	opacity: 1;
+	display: block;
+}
+.pokdata-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 21;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+.pokdata-modal-x {
+	position: absolute;
+	top: 4%;
+	right: 4%;
+	font-size: 18px;
+	color: #4C4C4C;
+	cursor: pointer;
+	z-index: 10;
+}
+.pokdata-modal-x:active {
+	color: #999999;
+}
+
+
+
+
+
+
+
+.pokdata-regID-1,
+.pokdata-regID-2,
+.pokdata-regID-3,
+.pokdata-regID-4,
+.pokdata-regID-5 {
+	display: none;
+}
+
+.pokdata-map {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.pokdata-aside0[name="v2"] .pokdata-map {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pokdata-img-mark {
+	object-fit: scale-down;
+	position: absolute;
+	top: 0;
+	left: 10%;
+	display: none;
+	pointer-events: none;
+	filter: invert(20%) sepia(91%) saturate(7452%) hue-rotate(358deg) brightness(104%) contrast(117%);
+	-moz-animation: blink normal 2s infinite ease-in-out;
+	-webkit-animation: blink normal 2s infinite ease-in-out;
+	-ms-animation: blink normal 2s infinite ease-in-out;
+	animation: blink normal 2s infinite ease-in-out;
+}
+.pokdata-img-border {
+	object-fit: scale-down;
+	position: absolute;
+	pointer-events: none;
+	z-index: 1;
+}
+
+.markdisplay {
+	display: inline !important;
+}
+
+
+.pokdata-aside2[name="v2"] .pokdata  {
+	padding: 5%;
+}
+.pokdata br {
+	content: " ";
+	display: block;
+	padding: 6px 0;
+}
+.pokdata sup {
+	font-size: 80%;
+	font-weight: bold;
+	padding: 0 1px;
+	text-shadow: 1px 0 0 rgba(0,0,0,0.8), 0 -1px 0 rgba(0,0,0,0.8), 0 1px 0 rgba(0,0,0,0.8), -1px 0 0 rgba(0,0,0,0.8);
+}
+.pokdata sup[name="Form"], .pokdata sup[name="Time"] {
+	text-shadow: none;
+}
+.pokdata sup[name="Winter"] {
+	color: #F0D8F8;
+}
+.pokdata sup[name="Summer"] {
+	color: #78D0F8;
+}
+.pokdata sup[name="Spring"] {
+	color: #B0F858;
+}
+.pokdata sup[name="Autumn"] {
+	color: #F89058;
+}
+.pokdata sup[name="Morning"] {
+	color: #DCD677;
+}
+.pokdata sup[name="Day"] {
+	color: #96E0FF;
+}
+.pokdata sup[name="Night"] {
+	color: #597A9B;
+}
+.pokdata sup[title="Monday"] {
+	color: #DDDD33;
+}
+.pokdata sup[title="Tuesday"] {
+	color: #DD3333;
+}
+.pokdata sup[title="Wednesday"] {
+	color: #3333DD;
+}
+.pokdata sup[title="Thursday"] {
+	color: #33DD33;
+}
+.pokdata sup[title="Friday"] {
+	color: #FFD700;
+}
+.pokdata sup[title="Saturday"] {
+	color: #885522;
+}
+.pokdata sup[title="Sunday"] {
+	color: #AAAAAA;
+}
+.evolve-from {
+	position: absolute;
+	left: 0;
+	height: 100px;
+	transition: .3s ease;
+	transition-property: transform;
+	transform: translateX(-268px);
+	background-color: #D8D8D8;
+	z-index: 10;
+}
+.evolve-from br {
+	content: " ";
+	display: block;
+	padding: 2px 0;
+}
+.evolve-from main {
+	display: inline-block;
+	width: 268px;
+	height: 100px;
+	text-align: center;
+	overflow-y: auto;
+}
+.evolve-from main button {
+	border: none;
+	outline: none;
+	background: none;
+}
+.evolve-from main button:hover {
+	color: #F2F2F2;
+}
+.evolve-from-toggle {
+	display: inline-block;
+	height: 100px;
+	width: 68px;
+	border-top-right-radius: 68px;
+	border-bottom-right-radius: 68px;
+	position: absolute;
+	right: -68px;
+	background-color: #D8D8D8;
+	z-index: -1;
+	cursor: pointer;
+	overflow: hidden;
+}
+.evolve-from-toggle img {
+	border-top-right-radius: 68px;
+	border-bottom-right-radius: 68px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	object-fit: scale-down;
+	cursor: pointer;
+}
+.evolve-from h6 {
+	padding: 5px 0 0;
+	cursor: pointer;
+}
+.evolve-from h4 {
+	padding: 5px 0;
+	cursor: pointer;
+}
+.evolve-from p {
+	padding: 5px;
+	font-size: 80%;
+}
+.evolve-from-toggle:hover img {
+	filter: brightness(1.2);
+}
+.evolve-from[name="1-1"] {
+	top: 40%;
+}
+.evolve-to {
+	position: absolute;
+	right: 0;
+	height: 100px;
+	transition: .3s ease;
+	transition-property: transform;
+	transform: translateX(268px);
+	background-color: #D8D8D8;
+	z-index: 10;
+}
+.evolve-to br {
+	content: " ";
+	display: block;
+	padding: 2px 0;
+}
+.evolve-to main {
+	display: inline-block;
+	width: 268px;
+	height: 100px;
+	text-align: center;
+	overflow-y: auto;
+}
+.evolve-to main button {
+	border: none;
+	outline: none;
+	background: none;
+}
+.evolve-to main button:hover {
+	color: #F2F2F2;
+}
+.evolve-to-toggle {
+	display: inline-block;
+	height: 100px;
+	width: 68px;
+	border-top-left-radius: 68px;
+	border-bottom-left-radius: 68px;
+	position: absolute;
+	left: -68px;
+	background-color: #D8D8D8;
+	z-index: -1;
+	cursor: pointer;
+	overflow: hidden; 
+}
+.evolve-to-toggle img {
+	border-top-left-radius: 68px;
+	border-bottom-left-radius: 68px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	object-fit: scale-down;
+	cursor: pointer;
+}
+.evolve-to-toggle:hover img {
+	filter: brightness(1.2);
+}
+.evolve-to h6 {
+	padding: 5px 0 0;
+	cursor: pointer;
+}
+.evolve-to h4 {
+	padding: 5px 0;
+	cursor: pointer;
+}
+.evolve-to p {
+	padding: 5px;
+	font-size: 80%;
+}
+.evolve-to[name="1-1"] {
+	top: 40%;
+}
+.evolve-to[name="2-1"] {
+	top: 35%;
+}
+.evolve-to[name="2-2"] {
+	top: 45%;
+}
+.evolve-to[name="3-1"] {
+	top: 30%;
+}
+.evolve-to[name="3-2"] {
+	top: 40%;
+}
+.evolve-to[name="3-3"] {
+	top: 50%;
+}
+.evolve-to[name="4-1"] {
+	top: 25%;
+}
+.evolve-to[name="4-2"] {
+	top: 35%;
+}
+.evolve-to[name="4-3"] {
+	top: 45%;
+}
+.evolve-to[name="4-4"] {
+	top: 55%;
+}
+.evolve-to[name="5-1"] {
+	top: 20%;
+}
+.evolve-to[name="5-2"] {
+	top: 30%;
+}
+.evolve-to[name="5-3"] {
+	top: 40%;
+}
+.evolve-to[name="5-4"] {
+	top: 50%;
+}
+.evolve-to[name="5-5"] {
+	top: 60%;
+}
+.evolve-to[name="6-1"] {
+	top: 15%;
+}
+.evolve-to[name="6-2"] {
+	top: 25%;
+}
+.evolve-to[name="6-3"] {
+	top: 35%;
+}
+.evolve-to[name="6-4"] {
+	top: 45%;
+}
+.evolve-to[name="6-5"] {
+	top: 55%;
+}
+.evolve-to[name="6-6"] {
+	top: 65%;
+}
+.evolve-to[name="7-1"] {
+	top: 15%;
+}
+.evolve-to[name="7-2"] {
+	top: 25%;
+}
+.evolve-to[name="7-3"] {
+	top: 35%;
+}
+.evolve-to[name="7-4"] {
+	top: 45%;
+}
+.evolve-to[name="7-5"] {
+	top: 55%;
+}
+.evolve-to[name="7-6"] {
+	top: 65%;
+}
+.evolve-to[name="7-7"] {
+	top: 75%;
+}
+.evolve-to[name="8-1"] {
+	top: 10%;
+}
+.evolve-to[name="8-2"] {
+	top: 20%;
+}
+.evolve-to[name="8-3"] {
+	top: 30%;
+}
+.evolve-to[name="8-4"] {
+	top: 40%;
+}
+.evolve-to[name="8-5"] {
+	top: 50%;
+}
+.evolve-to[name="8-6"] {
+	top: 60%;
+}
+.evolve-to[name="8-7"] {
+	top: 70%;
+}
+.evolve-to[name="8-8"] {
+	top: 80%;
+}
+.evolve-to[name="9-1"] {
+	top: 5%;
+}
+.evolve-to[name="9-2"] {
+	top: 15%;
+}
+.evolve-to[name="9-3"] {
+	top: 25%;
+}
+.evolve-to[name="9-4"] {
+	top: 35%;
+}
+.evolve-to[name="9-5"] {
+	top: 45%;
+}
+.evolve-to[name="9-6"] {
+	top: 55%;
+}
+.evolve-to[name="9-7"] {
+	top: 65%;
+}
+.evolve-to[name="9-8"] {
+	top: 75%;
+}
+.evolve-to[name="9-9"] {
+	top: 85%;
+}
+.evolve-from span[name="female"], .evolve-to span[name="female"] {
+	font-size: 110%;
+	color: #F20C0C;
+}
+.evolve-from span[name="male"], .evolve-to span[name="male"] {
+	font-size: 110%;
+	color: #320CF2;
+}
+.egg-group-outer {
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+}
+.egg-group {
+	visibility: hidden;
+	width: 300px;
+	max-height: 450px;
+	position: absolute;
+	text-align: left;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #F7F7F7;
+	border-style: solid;
+	border-width: 1px;
+	margin: 5px -5px;
+	display: unset;
+}
+.egg-group img {
+	object-fit: scale-down;
+}
+.egg-group[name="Ditto"] {
+	width: unset;
+}
+.egg-group img:hover {
+	filter: brightness(1.2);
+}
+.egg-group-outer:hover .egg-group {
+	visibility: visible;
+}
+
+

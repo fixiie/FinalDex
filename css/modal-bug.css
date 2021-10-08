@@ -1,0 +1,133 @@
+.bug-modal-outer {
+	position: fixed;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	visibility: hidden;
+	transition: visibility .5s linear, opacity .5s ease;
+}
+.bug-modal-outer.open {
+	visibility: visible;
+	opacity: 1;
+}
+.bug-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 21;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+.bug-modal-x {
+	position: absolute;
+	top: 7%;
+	right: 5%;
+	font-size: 18px;
+	color: #4C4C4C;
+	cursor: pointer;
+	z-index: 10;
+}
+.bug-modal-x:active {
+	color: #999999;
+}
+.bug-modal {
+	position: relative;
+	z-index: 22;
+	width: 30%;
+	height: 40%;
+	top: 27.5%;
+	padding: 20px 40px;
+	box-shadow: 0 0 10px #000;
+	margin: 0 auto;
+	background: #B2B2B2;
+	text-align: center;
+	min-height: 320px;
+}
+.gform {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.gform select, .gform textarea, .gform input, .gform button {
+	display: block;
+}
+.form-elements {
+	width: 100%;
+	height: 100%;
+}
+.gform h1 {
+	text-align: center;
+	margin: 0 auto;
+	padding: 20px 0;
+	width: 80%;
+	height: 10%;
+	line-height: 90%;
+}
+.gform select {
+	width: 50%;
+	height: 10%;
+	min-height: 30px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
+	background: lightgray;
+	cursor: pointer;
+	margin: 20px auto;
+	min-width: 150px;
+}
+.gform textarea {
+	cursor: text;
+	min-width: 100px;
+	width: 70%;
+	height: 30%;
+	padding: 5px 10px;
+	resize: none;
+	margin: 20px auto;
+}
+.gform textarea::placeholder {
+	opacity: 0.8;
+} 
+.gform button {
+	min-width: 60px;
+	width: 20%;
+	height: 10%;
+	min-height: 30px;
+	padding: 5px 10px;
+	cursor: pointer;
+	background-color: #E52222;
+	border-width: 1px;
+	border-style: solid;
+	color: #F2F2F2;
+	font-weight: bold;
+	font-size: 12px;
+	outline: none;
+	text-align: center;
+	text-transform: uppercase;
+	margin: 0 auto;
+}
+.gform button:hover {
+	filter: brightness(90%);
+}
+.gform button:active {
+	transform: scale(0.97);
+}
+.gform option[value=""][disabled] {
+	display: none;
+}
+#honeypot {
+	display: none !important;
+}
+.thankyou_message {
+	width: 100%;
+	height: 100%;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	line-height: 200%;
+	font-size: 120%;
+}
+.thankyou_message span {
+	font-size: 70%;
+}
