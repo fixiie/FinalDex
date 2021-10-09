@@ -1,4 +1,4 @@
-function modalPokdata(finaldataDefaultGame,finaldataFormDefault,finaldataCategoryDefault,finaldataTypeDefault,finaldataPokédexEntryDefault,finaldataAbilityDefault,finaldataLevelingRateDefault,finaldataEggGroupDefault,finaldataHatchRateDefault,finaldataExperienceYieldDefault) {
+function modalPokdata() {
 
 
 
@@ -12,7 +12,7 @@ function modalPokdata(finaldataDefaultGame,finaldataFormDefault,finaldataCategor
                 var x = this.value;
 
                 if (!document.body.contains(document.querySelector("#pokdata-modal" + this.value))) {
-                    createPokData(i,x,finaldataDefaultGame,finaldataFormDefault,finaldataCategoryDefault,finaldataTypeDefault,finaldataPokédexEntryDefault,finaldataAbilityDefault,finaldataLevelingRateDefault,finaldataEggGroupDefault,finaldataHatchRateDefault,finaldataExperienceYieldDefault);
+                    createPokData(i,x);
                 }
                 
                 var modalWindow = document.querySelector("#pokdata-modal" + this.value);
