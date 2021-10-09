@@ -20,9 +20,6 @@ PokémonMetadataRequest.onload = function() {
   var PokémonMetadata = PokémonMetadataRequest.response;
   const finaldataReference = PokémonMetadata["Reference"];
 
-
-  var obj = 
-      [{"Reference":[{"ID":1,"Name":"xaxa"},{"ID":1,"Name":"xaxa"}]},{"XAXA":[{"ID":1,"Name":"xaxa"},{"ID":1,"Name":"xaxa"}]}]
 console.log(PokémonMetadata)
 
   for (var i = 0; i < finaldataReference.length; i++) {
