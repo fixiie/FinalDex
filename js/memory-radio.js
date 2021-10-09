@@ -36,23 +36,3 @@ function memoryRadio2() {
 
 
 
-
-
-function memoryRadio3(finaldataDefaultGame) {
-    for (var i = 0; i < finaldataDefaultGame.length; i++) {
-        let x = i + 1;
-        var radios = document.getElementsByName("finaldex-pokDataNav" + x);
-        var val = localStorage.getItem("finaldex-pokDataNav"  + x);
-        for (var u = 0; u < radios.length; u++) {
-            if (radios[u].value == val) {
-                radios[u].click();
-            }
-            else {
-                radios[0].click();
-            }
-        }
-        $('input[name="finaldex-pokDataNav' + x +'"]').on('change', function() {
-            localStorage.setItem("finaldex-pokDataNav" + x, $(this).val());
-        });
-    }
-}
