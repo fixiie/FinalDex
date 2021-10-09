@@ -1,16 +1,19 @@
-var createPokData = function(i,x,finaldataDefaultGame,finaldataFormDefault,finaldataCategoryDefault,finaldataTypeDefault,finaldataPokédexEntryDefault,finaldataAbilityDefault,finaldataLevelingRateDefault,finaldataEggGroupDefault,finaldataHatchRateDefault,finaldataExperienceYieldDefault) {
+var createPokData = function(i,x) {
 
-var defaultID = finaldataFormDefault[i]["ID"];
-var defaultName = finaldataFormDefault[i]["Pokémon"];
-var defaultDebutGeneration = finaldataFormDefault[i]["Generation"];
+var defaultID = finaldataReferenceDefault[i]["ID"];
+var defaultName = finaldataReferenceDefault[i]["Pokémon"];
 var defaultCategory = finaldataCategoryDefault[i][JSONPath_Category];
+var defaultDebutGeneration = finaldataReferenceDefault[i]["Generation"];
 var defaultTypePrimary = finaldataTypeDefault[i]["Primary_"+JSONPath_Type];
 var defaultTypeSecondary = finaldataTypeDefault[i]["Secondary_"+JSONPath_Type];
 var defaultPokédexEntry = finaldataPokédexEntryDefault[i][JSONPath_PokédexEntry];
 var defaultAbilityPrimary = finaldataAbilityDefault[i]["Primary_"+JSONPath_Ability];
 var defaultAbilitySecondary = finaldataAbilityDefault[i]["Secondary_"+JSONPath_Ability];
 var defaultAbilityHidden = finaldataAbilityDefault[i]["Hidden_"+JSONPath_Ability];
+var defaultCatchRate = finaldataCatchRateDefault[i][JSONPath_CatchRate];
 var defaultLevelingRate = finaldataLevelingRateDefault[i][JSONPath_LevelingRate];
+var defaultGenderRatioMale = finaldataGenderRatioDefault[i]["Male_"+JSONPath_GenderRatio];
+var defaultGenderRatioFemale = finaldataGenderRatioDefault[i]["Female_"+JSONPath_GenderRatio];
 var defaultEggGroupPrimary = finaldataEggGroupDefault[i]["Primary_"+JSONPath_EggGroup];
 var defaultEggGroupSecondary = finaldataEggGroupDefault[i]["Secondary_"+JSONPath_EggGroup];
 var defaultHatchRateEggCycle = finaldataHatchRateDefault[i]["EggCycle_"+JSONPath_HatchRateEggCycle];
@@ -60,6 +63,7 @@ var pokdataAside1Category = document.createElement("span");
 var pokdataAside1Type = document.createElement("div");
 var pokdataAside1TypePrimary = document.createElement("img");
 var pokdataAside1TypeSecondary = document.createElement("img");
+var pokdataAside1TypeBreak = document.createElement("br");
 
 var pokdataAside2 = document.createElement("aside");
 
@@ -190,8 +194,10 @@ pokdataAside1Category.innerText = '"' + defaultCategory + ' Pokémon"';
 
 pokdataAside1Type.classList.add("pokdata-type");
 pokdataAside1TypePrimary.src = "./media/Images/Misc/Type/Text/" + iconTypePath + "/" + defaultTypePrimary + ".png";
+pokdataAside1TypePrimary.setAttribute("onerror",'this.style.display="none"');
 pokdataAside1TypePrimary.title = defaultTypePrimary;
 pokdataAside1TypeSecondary.src = "./media/Images/Misc/Type/Text/" + iconTypePath + "/" + defaultTypeSecondary + ".png";
+pokdataAside1TypeSecondary.setAttribute("onerror",'this.style.display="none"');
 pokdataAside1TypeSecondary.title = defaultTypeSecondary;
 
 
@@ -340,6 +346,7 @@ pokdataAside1DebutCategory.appendChild(pokdataAside1DebutCategoryBreak);
 pokdataAside1DebutCategory.appendChild(pokdataAside1Debut);
 pokdataAside1DebutCategoryOuter.appendChild(pokdataAside1Type);
 pokdataAside1Type.appendChild(pokdataAside1TypePrimary);
+pokdataAside1Type.appendChild(pokdataAside1TypeBreak);
 pokdataAside1Type.appendChild(pokdataAside1TypeSecondary);
 
 
