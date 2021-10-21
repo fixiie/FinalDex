@@ -1,0 +1,49 @@
+[data-theme="dark"] {
+	--color1: #F7F7F7;
+	--color2: #F2F2F2;
+	--color3: #D8D8D8;
+	--color4: #CCCCCC;
+	--color5: #C0C0C0;
+	--color6: #B2B2B2;
+	--color7: #A5A5A5;
+	--color8: #999999;
+	--color9: #8C8C8C;
+	--color10: #7F7F7F;
+	--color11: #727272;
+	--color12: #666666;
+	--color13: #595959;
+	--color14: #4C4C4C;
+	--color15: #454545;
+	--color16: #414141;
+	--color17: #333333;
+	--color18: #262626;
+	--color19: #2B2B2B;
+	--color20: #0C0C0C;
+
+	--colorRed:#CC0000;
+	--colorBlue:#5050E6;
+	--colorGreen:#009900;
+
+	--border2:#595959;
+	--border1:#262626;
+	
+	--descending1: #333333;
+
+	--font2:#1A1A1A;
+	--font1:#E5E5E5;
+
+	--background:#4C4C4C;
+	--contain: #404040;
+}
+
+
+[data-theme="dark"] #settings-img {
+	filter: invert(63%) sepia(0%) saturate(0%) hue-rotate(268deg) brightness(98%) contrast(84%);
+}
+[data-theme="dark"] #mechanic-descriptioniconimg {
+	filter: invert(63%) sepia(0%) saturate(0%) hue-rotate(268deg) brightness(98%) contrast(84%);
+}
+[data-theme="dark"] .gamedata-modal-background div {
+	filter: brightness(0) saturate(100%) invert(10%) sepia(9%) saturate(19%) hue-rotate(314deg) brightness(99%) contrast(87%);
+}
+
