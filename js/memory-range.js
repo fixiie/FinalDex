@@ -1,3 +1,5 @@
+function memoryRange() {
+
 function setUpEventHandlers() {
     $(".save-ra-state").change(function() {
         localStorage[this.id] = $(this).val();
@@ -17,3 +19,5 @@ $(function() {
     loadLocalStorageValues();
     document.getElementById('resize').click();
 });
+
+}
