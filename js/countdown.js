@@ -418,7 +418,7 @@ function countdown() {
     }else{
       var countdownli = document.createElement('li');
       countdownLapCount += 1;
-      countdownli.innerHTML = "#"+countdownLapCount+" "+count.innerHTML;
+      countdownli.innerHTML = "<span>#"+countdownLapCount+"</span>"+count.innerHTML;
       countdownLapContainer.appendChild(countdownli);
     }
   }
