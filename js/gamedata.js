@@ -82,7 +82,7 @@ function zoomReset() {
 
 function showDefaults() {
     sleep(500).then(() => {
-        document.querySelector('.gamedata-nav input[value="1"]').click();
+        document.querySelector('.gamedata-nav').firstChild.nextElementSibling.click();
     });
 }
 
@@ -282,6 +282,10 @@ function typeSwitch(type) {
     for (var i = 0; i < brk.length; i++) {
         brk[i].remove()
     }
+    var spn = document.querySelectorAll(".type-againstopposed data span");
+    for (var i = 0; i < spn.length; i++) {
+        spn[i].remove()
+    }
 
     
     let typetitle = document.querySelector(".type-description-title h1");
@@ -346,33 +350,57 @@ for (var i = 0; i < finaldataTypeChart.length; i++) {
     if (finaldataTypeChart[i][type] == "0×") {
         var ImmunityType = document.createElement("img");
         ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         ImmunityType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         ImmunityType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         againstImmune.appendChild(ImmunityType);
+
+        var ImmunityTypeText = document.createElement("span");
+        ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        againstImmune.appendChild(ImmunityTypeText);
+
         againstImmuneBreak.remove();
     }
     if (finaldataTypeChart[i][type] == "½×") {
         var IneffectivenessType = document.createElement("img");
         IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         IneffectivenessType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         IneffectivenessType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         againstIneffective.appendChild(IneffectivenessType);
+
+        var IneffectivenessTypeText = document.createElement("span");
+        IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        againstIneffective.appendChild(IneffectivenessTypeText);
+
         againstIneffectiveBreak.remove();
     }
     if (finaldataTypeChart[i][type] == "1×") {
         var DefaultType = document.createElement("img");
         DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         DefaultType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         DefaultType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         againstDefault.appendChild(DefaultType);
+
+        var DefaultTypeText = document.createElement("span");
+        DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        againstDefault.appendChild(DefaultTypeText);
+
         againstDefaultBreak.remove();
     }
     if (finaldataTypeChart[i][type] == "2×") {
         var EffectivenessType = document.createElement("img");
         EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         EffectivenessType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         EffectivenessType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         againstEffective.appendChild(EffectivenessType);
+
+        var EffectivenessTypeText = document.createElement("span");
+        EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        againstEffective.appendChild(EffectivenessTypeText);
+
         againstEffectiveBreak.remove();
     }
 }
@@ -383,36 +411,60 @@ for (var i = 0; i < finaldataTypeChart.length; i++) {
     if (finaldataTypeChart[index][Object.getOwnPropertyNames(finaldataTypeChart[0])[i]] == "0×") {
         var ImmunityType = document.createElement("img");
         ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         ImmunityType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         ImmunityType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         opposedImmune.appendChild(ImmunityType);
+
+        var ImmunityTypeText = document.createElement("span");
+        ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        opposedImmune.appendChild(ImmunityTypeText);
+
         opposedImmuneBreak.remove();
     }
 
     if (finaldataTypeChart[index][Object.getOwnPropertyNames(finaldataTypeChart[0])[i]] == "½×") {
         var IneffectivenessType = document.createElement("img");
         IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         IneffectivenessType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         IneffectivenessType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         opposedIneffective.appendChild(IneffectivenessType);
+
+        var IneffectivenessTypeText = document.createElement("span");
+        IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        opposedIneffective.appendChild(IneffectivenessTypeText);
+
         opposedIneffectiveBreak.remove();
     }
 
     if (finaldataTypeChart[index][Object.getOwnPropertyNames(finaldataTypeChart[0])[i]] == "1×") {
         var DefaultType = document.createElement("img");
         DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         DefaultType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         DefaultType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         opposedDefault.appendChild(DefaultType);
+
+        var DefaultTypeText = document.createElement("span");
+        DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        opposedDefault.appendChild(DefaultTypeText);
+
         opposedDefaultBreak.remove();
     }
 
     if (finaldataTypeChart[index][Object.getOwnPropertyNames(finaldataTypeChart[0])[i]] == "2×") {
         var EffectivenessType = document.createElement("img");
         EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+        EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
         EffectivenessType.setAttribute("title",finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
         EffectivenessType.setAttribute("onclick",'typeSwitch("'+finaldataTypeChartTitle[i]+'")');
         opposedEffective.appendChild(EffectivenessType);
+
+        var EffectivenessTypeText = document.createElement("span");
+        EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+        opposedEffective.appendChild(EffectivenessTypeText);
+
         opposedEffectiveBreak.remove();
     }
     
