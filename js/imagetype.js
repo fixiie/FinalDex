@@ -39,8 +39,15 @@ function imgType() {
 
             imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>' + '<p>' + imgType[i].parentElement.innerText + '</p>' + '<div><img src="./media/Images/Misc/FinalDex/' + dataExtension + '.png" name="' + dataExtension + '" /></div>';
         
-            for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/' + dataPath + '/' + conimg[q].id + "." + dataExtension;
+            if(!dataType.includes("Art")) {
+                for (var q = 0; q < conimg.length; q++) {
+                    conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/Normal/Front/' + dataPath + '/' + conimg[q].id + "." + dataExtension;
+                }
+            }
+            else {
+                for (var q = 0; q < conimg.length; q++) {
+                    conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataPath + '/' + conimg[q].id + "." + dataExtension;
+                }
             }
         }
     }
