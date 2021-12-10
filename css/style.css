@@ -1,135 +1,88 @@
-* {
-	margin: 0;
-	padding: 0;
-	border-color: var(--border-color);
-	outline-color: var(--outline-color);
-	cursor: default;
-}
 :root {
-	--bg-color: #BFBFBF;
-	--font-color: #0C0C0C;
-	--border-color: #333333;
-	--outline-color: #333333;
-}
-body {
-	background: var(--bg-color);
-	color: var(--font-color);
-	background-image: url('../media/Images/Misc/FinalDex/Pattern.png') !important;
-	font-family: 'Roboto';
-}
+	--color_97: #F7F7F7;
+	--color_95: #F2F2F2;
+	--color_90: #E5E5E5;
+	--color_85: #D8D8D8;
+	--color_80: #CCCCCC;
+	--color_75: #C0C0C0;
+	--color_70: #B2B2B2;
+	--color_65: #A5A5A5;
+	--color_60: #999999;
+	--color_55: #8C8C8C;
+	--color_50: #7F7F7F;
+	--color_45: #727272;
+	--color_40: #666666;
+	--color_35: #595959;
+	--color_30: #4C4C4C;
+	--color_25: #414141;
+	--color_20: #333333;
+	--color_15: #262626;
+	--color_10: #1A1A1A;
+	--color_5: #0C0C0C;
 
-img,
-a {
-	-webkit-user-drag: none;
-	-khtml-user-drag: none;
-	-moz-user-drag: none;
-	-o-user-drag: none;
-	color: unset;
-}
-li {
-	list-style: none;
-}
-button {
-	background: none;
-	outline: none;
-	font-size: unset;
-	text-transform: unset;
-	color: unset;
-	font-family: unset;
-}
-table,
-label,
-.information-modal-x,
-.resetcheck-modal-x,
-.location-modal-x,
-.bug-modal-x,
-.button-dropdown,
-.info-img-mark,
-.location-img-mark,
-#showall,
-#dexswitch,
-#loader,
-#contain img {
-	user-select: none;
-}
-#contain label {
-	user-select: unset;
-}
-input[type=checkbox],
-input[type=radio] {
-	display: none;
-}
+	--fontDark:#0D0D0D;
+	--fontLight:#F2F2F2;
 
-.dropdown-menu {
-	position: absolute;
-	display: none;
-}
-.dropdown-toggle:active,
-.dropdown-toggle.active {
-	background: #CCCCCC;
-}
+	--color20: #F7F7F7;
+	--color19: #F2F2F2;
+	--color18: #E5E5E5;
+	--color17: #D8D8D8;
+	--color16: #CCCCCC;
+	--color15: #C0C0C0;
+	--color14: #B2B2B2;
+	--color13: #A5A5A5;
+	--color12: #999999;
+	--color11: #8C8C8C;
+	--color10: #7F7F7F;
+	--color9: #727272;
+	--color8: #666666;
+	--color7: #595959;
+	--color6: #4C4C4C;
+	--color5: #414141;
+	--color4: #333333;
+	--color3: #262626;
+	--color2: #1A1A1A;
+	--color1: #0C0C0C;
 
+	--colorRed:#E60000;
+	--colorBlue:#7373E6;
+	--colorGreen:#13BF13;
 
-.mapify-holder{
-	position: relative;
-	display: inline-block;
-	font-size: 0px;
-	max-width: 100%;
-	z-index:1;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;  
-    -moz-user-select: none;     
-    -ms-user-select: none;
-}
-.mapify-imgHolder{
-	position:relative; 
-	z-index:1;
-}
-.mapify-holder *,
-.mapify-GPU{
-	-webkit-transform: translate3d(0,0,0);
-    -moz-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    -o-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-}
-.mapify-imgHolder .mapify{
-	max-width: 100%;
-	height: auto;
-}
-.mapify-img{
-	position: absolute;
-	top:0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: -2;
-}
-.mapify-svg{
-	position: absolute;
-	top:0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: -2;
-}
-.mapify-polygon{
-	transition: all 0.5s;
-	fill:transparent;
-	stroke: transparent;
-	stroke-width: 0;
-}
-.mapify-hover{
-	fill:#FE2222;
-}
-@keyframes blink {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+	--border1:#262626;
+	--border2:#D8D8D8;
+
+	--descending1: #999999;
+
+	--font1:#1A1A1A;
+	--font2:#E5E5E5;
+
+	--background:#C0C0C0;
+	--contain: #CCCCCC;
+
+	--typeNormal:#9099A1;
+	--typeFighting:#CE4069;
+	--typeFlying:#8FA8DD;
+	--typePoison:#AB6AC8;
+	--typeGround:#D97746;
+	--typeRock:#C7B78B;
+	--typeBug:#90C12C;
+	--typeGhost:#5269AC;
+	--typeSteel:#5A8EA1;
+	--typeFire:#FF9C54;
+	--typeWater:#4D90D5;
+	--typeGrass:#63BB5B;
+	--typeElectric:#F3D23B;
+	--typePsychic:#F97176;
+	--typeIce:#74CEC0;
+	--typeDragon:#0A6DC4;
+	--typeDark:#5A5366;
+	--typeFairy:#EC8FE6;
+
+	--statHP:#FF5959;
+	--statAtk:#F5AC78;
+	--statDef:#FAE078;
+	--statSpecial:#974DFF;
+	--statSpAtk:#9DB7F5;
+	--statSpDef:#A7DB8D;
+	--statSpeed:#FA92B2;
 }
