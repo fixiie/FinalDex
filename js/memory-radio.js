@@ -1,38 +1,30 @@
-function memoryRadio1() {
-    var radios = document.getElementsByName("finaldex-imgType" + currentGen);
-    var val = localStorage.getItem("finaldex-imgType" + currentGen);
-    for (var i = 0; i < radios.length; i++) {
-        if (radios[i].value == val) {
-            radios[i].click();
+function memoryRadio() {
+    var radios1 = document.getElementsByName("finaldex-imgtype" + GameID);
+    var val1 = localStorage.getItem("finaldex-imgtype" + GameID);
+    for (var i = 0; i < radios1.length; i++) {
+        if (radios1[i].value == val1) {
+            radios1[i].click();
         }
-        else if (val == null) {
-            radios[0].click();
+        else if (val1 == null) {
+            radios1[0].click();
         }
     }
-    $('input[name="finaldex-imgType' + currentGen + '"]').on('change', function() {
-        localStorage.setItem('finaldex-imgType' + currentGen, $(this).val());
+    $('input[name="finaldex-imgtype' + GameID + '"]').on('change', function() {
+        localStorage.setItem('finaldex-imgtype' + GameID, $(this).val());
     });
-}
 
-
-function memoryRadio2() {
-    var radios = document.getElementsByName("finaldex-dexSwitch" + gameid);
-    var val = localStorage.getItem("finaldex-dexSwitch" + gameid);
-    for (var i = 0; i < radios.length; i++) {
-        if (radios[i].value == val) {
-            radios[i].click();
+    var radios2 = document.getElementsByName("finaldex-dexswitch" + GameID);
+    var val2 = localStorage.getItem("finaldex-dexswitch" + GameID);
+    for (var i = 0; i < radios2.length; i++) {
+        if (radios2[i].value == val2) {
+            radios2[i].click();
         }
-        else if (val == null) {
-            radios[radios.length - 1].click();
+        else if (val2 == null) {
+            radios2[radios2.length - 1].click();
         }
     }
     
-    $('input[name="finaldex-dexSwitch' + gameid + '"]').on('change', function() {
-        localStorage.setItem('finaldex-dexSwitch' + gameid, $(this).val());
+    $('input[name="finaldex-dexswitch' + GameID + '"]').on('change', function() {
+        localStorage.setItem('finaldex-dexswitch' + GameID, $(this).val());
     });
 }
-
-
-
-
-
