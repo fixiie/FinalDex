@@ -16,7 +16,7 @@ function resizeDiv() {
 	const img = document.querySelectorAll(".contain-img");
 	const name = document.querySelectorAll(".contain-name");
 
-	var sliderSwitch = 100;
+	var sliderSwitch = 180;
     
     for (i = 0; i < u.length; i++) {
         u[i].style.width = slider.value + 'px';
