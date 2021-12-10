@@ -1,7 +1,9 @@
+function filter() {
+
 var $filterCheckboxes = $('.filterby input');
 var filterFunc = function() {
 
-    document.getElementById("search").value = "";
+    document.getElementById("searchbar").value = "";
 
     var selectedFilters = {};
 
@@ -42,11 +44,13 @@ var filterFunc = function() {
 
 $filterCheckboxes.on('change', filterFunc);
 
+}
+
 function showAll() {
 
-    var search = document.getElementById("search");
+    var search = document.getElementById("searchbar");
 
-    if (search.value < "0") {
+    if (search.value == "") {
 
         var uncheck = document.querySelectorAll('.filterby input:checked');
         for (var i = 0; i < uncheck.length; i++) {
@@ -55,19 +59,9 @@ function showAll() {
         $('#contain-inner div').removeClass('hidden');
 
     }
-
-}
-
-
-function exitText() {
-
-    var search = document.getElementById("search");
-
-    if (search.value > "0") {
-
+    else {
         search.value = "";
-        $('#contain-inner div').removeClass('hidden');
-
+        $('#contain-inner div').removeClass('hidden')
     }
 
 }
