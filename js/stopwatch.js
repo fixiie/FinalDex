@@ -369,7 +369,7 @@ function stopwatch() {
     }else{
       var stopwatchli = document.createElement('li');
       stopwatchLapCount += 1;
-      stopwatchli.innerHTML = "#"+stopwatchLapCount+" "+watch.innerHTML;
+      stopwatchli.innerHTML = "<span>#"+stopwatchLapCount+"</span>"+watch.innerHTML;
       stopwatchLapContainer.appendChild(stopwatchli);
     }
   }
