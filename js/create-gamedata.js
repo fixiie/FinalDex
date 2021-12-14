@@ -2121,7 +2121,7 @@ var searchaccuracy = ["30%","40%","50%","60%","70%","80%","90%","100%","-"];
 var searchcontact = ["y","n"];
 var searchrange = ["alladjacent","allally","allenemy"];
 
-for (var q = 0; q < moveOptionsTitle.length; q++) {
+for (var q = 0; q < finaldataMove.length; q++) {
     var gamedataMoveAside1OptionsInput = document.createElement("input");
     var gamedataMoveAside1OptionsLabel = document.createElement("label");
     gamedataMoveAside1OptionsInput.setAttribute("type","radio");
@@ -2131,7 +2131,7 @@ for (var q = 0; q < moveOptionsTitle.length; q++) {
     gamedataMoveAside1OptionsInput.value = q;
     gamedataMoveAside1OptionsLabel.setAttribute("for","move-options-" + q);
     gamedataMoveAside1OptionsLabel.setAttribute("name","medium");
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",moveOptionsTitle[q].toLowerCase());
+    gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",finaldataMove[q]["Name"].toLowerCase());
     gamedataMoveAside1OptionsLabel.setAttribute("data-search-type",searchtype[Math.floor(Math.random() * searchtype.length)].toLowerCase());
     gamedataMoveAside1OptionsLabel.setAttribute("data-search-category",searchcategory[Math.floor(Math.random() * searchcategory.length)].toLowerCase());
     gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp",searchpp[Math.floor(Math.random() * searchpp.length)].toLowerCase());
@@ -2140,13 +2140,57 @@ for (var q = 0; q < moveOptionsTitle.length; q++) {
     gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact",searchcontact[Math.floor(Math.random() * searchcontact.length)].toLowerCase());
     gamedataMoveAside1OptionsLabel.setAttribute("data-search-range",searchrange[Math.floor(Math.random() * searchrange.length)].toLowerCase());
 
-    gamedataMoveAside1OptionsLabel.innerText = moveOptionsTitle[q];
+    gamedataMoveAside1OptionsLabel.innerText = finaldataMove[q]["Name"];
     gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsInput);
     gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsLabel);
 
     gamedataMoveAside1OptionsInput.addEventListener("click", moveOptionsSelector);
     function moveOptionsSelector() {
-        gamedataMoveAside2TitleName.innerText = moveOptionsTitle[this.value];
+        gamedataMoveAside2TitleName.innerText = finaldataMove[this.value]["Name"];
+        gamedataMoveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID"+"_"+JSONPath_MoveID];
+        gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
+        gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
+
+        gamedataMoveAside4SidebarDescriptionTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] + ".png";
+        gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title",finaldataMoveType[this.value]["Type_"+JSONPath_MoveType]);
+        gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = finaldataMoveType[this.value]["Type_"+JSONPath_MoveType];
+        gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory] + ".png";
+        gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
+        gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory];
+        gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerText = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" ("+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")";
+        if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
+            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "";
+        }
+        else {
+            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = finaldataMovePower[this.value]["Power_"+JSONPath_MovePower];
+        }
+        if (finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
+            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "";
+        }
+        else {
+            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy];
+        }
+        gamedataMoveAside4SidebarDescriptionContactText.innerText = finaldataMoveOtherMoves[this.value]["Contact"];
+        gamedataMoveAside4SidebarDescriptionRangeText.innerText = finaldataMoveAffect[this.value]["Affect"];
+        gamedataMoveAside4SidebarDescriptionHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
+        gamedataMoveAside4SidebarDescriptionTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
+
+        //gamedataMoveAside3EffectText.innerHTML = "";
+
+        /*
+
+
+        finaldataMoveTutor
+        finaldataMoveMachine
+        finaldataMoveAffect
+        finaldataMoveOtherMoves
+        finaldataMoveAccuracy
+        finaldataMovePower
+        finaldataMovePP
+        finaldataMoveCategory
+        finaldataMoveID
+        finaldataMoveType
+        */
     }
 }
 // Moves End
