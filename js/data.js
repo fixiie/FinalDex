@@ -58,6 +58,20 @@ var finaldataLocationNavigation = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
 
+
+var finaldataMove = [];
+var finaldataMoveDescription = [];
+var finaldataMoveTutor = [];
+var finaldataMoveMachine = [];
+var finaldataMoveAffect = [];
+var finaldataMoveOtherMoves = [];
+var finaldataMoveAccuracy = [];
+var finaldataMovePower = [];
+var finaldataMovePP = [];
+var finaldataMoveCategory = [];
+var finaldataMoveID = [];
+var finaldataMoveType = [];
+
 let PokémonMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Pok%C3%A9mon%20Metadata.json';
 let PokémonMetadataRequest = new XMLHttpRequest();
 PokémonMetadataRequest.open('GET', PokémonMetadataRequestURL);
@@ -122,6 +136,58 @@ if (Generation >= 3 && GameID != 31 && GameID != 32) {
       finaldataAbilityFlavor.push(AbilityMetadata["Flavor"][i]);
     }
 
+  }
+}
+
+let MoveMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Move%20Metadata.json';
+let MoveMetadataRequest = new XMLHttpRequest();
+MoveMetadataRequest.open('GET', MoveMetadataRequestURL);
+MoveMetadataRequest.responseType = 'json';
+MoveMetadataRequest.send();
+
+MoveMetadataRequest.onload = function() {
+  var MoveMetadata = MoveMetadataRequest.response;
+
+  for (var i = 0; i < MoveMetadata["Description"].length; i++) {
+    finaldataMoveDescription.push(MoveMetadata["Description"][i]);
+  }
+
+  for (var i = 0; i < MoveMetadata["Reference"].length; i++) {
+    if(finaldataMoveDescription[i][JSONPath_MoveDescription+"_"+"Description"] != undefined) {
+      finaldataMove.push(MoveMetadata["Reference"][i]);
+    }
+  }
+
+
+  for (var i = 0; i < MoveMetadata["Tutor"].length; i++) {
+    finaldataMoveTutor.push(MoveMetadata["Tutor"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Machine"].length; i++) {
+    finaldataMoveMachine.push(MoveMetadata["Machine"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Affect"].length; i++) {
+    finaldataMoveAffect.push(MoveMetadata["Affect"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Other Moves"].length; i++) {
+    finaldataMoveOtherMoves.push(MoveMetadata["Other Moves"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Accuracy"].length; i++) {
+    finaldataMoveAccuracy.push(MoveMetadata["Accuracy"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Power"].length; i++) {
+    finaldataMovePower.push(MoveMetadata["Power"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["PP"].length; i++) {
+    finaldataMovePP.push(MoveMetadata["PP"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Category"].length; i++) {
+    finaldataMoveCategory.push(MoveMetadata["Category"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["ID"].length; i++) {
+    finaldataMoveID.push(MoveMetadata["ID"][i]);
+  }
+  for (var i = 0; i < MoveMetadata["Type"].length; i++) {
+    finaldataMoveType.push(MoveMetadata["Type"][i]);
   }
 }
 
