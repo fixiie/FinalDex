@@ -48,6 +48,8 @@ if (GameID == 6) {
     var ImageType_Extension = ["PNG","GIF","PNG","PNG"];
     var JSONPath_Area = "Crystal";
     var JSONPath_LocationConnection = "Crystal";
+    var JSONPath_MoveDescription = "Crystal";
+    var JSONPath_MoveTutor = "Crystal";
 }
 if (GameID == 7) {
     var JSONPath_PokédexEntry = "Ruby";
@@ -65,7 +67,7 @@ if (GameID == 9) {
     var JSONPath_PokédexEntry = "";
     var MEDIAPath_Map = "Colosseum";
     var MEDIAPath_Type_Text = "Colosseum";
-    var ImageType_Name = ["Col","Official","HOME"];
+    var ImageType_Name = ["Colosseum","Official","HOME"];
     var ImageType_Path = ["Battle","Art","Art"];
     var ImageType_Extension = ["PNG","PNG","PNG"];
     var JSONPath_Area = "Colosseum";
@@ -74,6 +76,8 @@ if (GameID == 9) {
     var JSONPath_LocationDescription = "Colosseum";
     var JSONPath_LocationSlogan = "Colosseum";
     var JSONPath_LocationNavigation = "Colosseum";
+    var JSONPath_MoveDescription = "Colosseum";
+    var JSONPath_MoveID = "Colosseum";
 }
 if (GameID == 10) {
     var JSONPath_PokédexEntry = "FireRed";
@@ -96,6 +100,8 @@ if (GameID == 12) {
     var JSONPath_LocationDescription = "Emerald";
     var JSONPath_LocationSlogan = "Emerald";
     var JSONPath_LocationNavigation = "Emerald";
+    var JSONPath_MoveDescription = "Emerald";
+    var JSONPath_MoveTutor = "Emerald";
 }
 if (GameID == 13) {
     var JSONPath_PokédexEntry = "";
@@ -111,6 +117,9 @@ if (GameID == 13) {
     var JSONPath_LocationDescription = "XD";
     var JSONPath_LocationSlogan = "XD";
     var JSONPath_LocationNavigation = "XD";
+    var JSONPath_MoveDescription = "XD";
+    var JSONPath_MoveTutor = "XD";
+    var JSONPath_MoveID = "XD";
 }
 if (GameID == 14) {
     var JSONPath_PokédexEntry = "Diamond";
@@ -137,6 +146,8 @@ if (GameID == 16) {
     var JSONPath_LocationDescription = "Platinum";
     var JSONPath_LocationSlogan = "Platinum";
     var JSONPath_LocationNavigation = "Platinum";
+    var JSONPath_MoveDescription = "Platinum";
+    var JSONPath_MoveTutor = "Platinum";
 }
 if (GameID == 17) {
     var JSONPath_PokédexEntry = "HeartGold";
@@ -213,10 +224,12 @@ if (GameID == 30) {
 if (GameID == 31) {
     var JSONPath_PokédexEntry = "Lets Go Pikachu";
     var JSONPath_Area = "Lets Go Pikachu";
+    var JSONPath_MoveTutor = "Lets Go Pikachu";
 }
 if (GameID == 32) {
     var JSONPath_PokédexEntry = "Lets Go Eevee";
     var JSONPath_Area = "Lets Go Eevee";
+    var JSONPath_MoveTutor = "Lets Go Eevee";
 }
 if (GameID == 33) {
     var JSONPath_PokédexEntry = "Sword";
@@ -258,6 +271,7 @@ if (GameID >= 1 && GameID <= 3) {
 if (GameID >= 4 && GameID <= 5) {
     var MEDIAPath_Encounter = "GS";
     var JSONPath_LocationConnection = "GS";
+    var JSONPath_MoveDescription = "GS";
 }
 if (GameID >= 4 && GameID <= 6) {
     var Generation = 2;
@@ -284,6 +298,8 @@ if (GameID >= 7 && GameID <= 8) {
     var JSONPath_LocationDescription = "RS";
     var JSONPath_LocationSlogan = "RS";
     var JSONPath_LocationNavigation = "RS";
+    var JSONPath_MoveDescription = "RS";
+    var JSONPath_MoveTutor = "RS";
 }
 if (GameID >= 7 && GameID <= 13) {
     var Generation = 3;
@@ -294,6 +310,8 @@ if (GameID >= 7 && GameID <= 8 || GameID >= 10 && GameID <= 12) {
     var MEDIAPath_ExclusiveItem = ["RS","RS","Emerald","FRLG","FRLG"];
     var JSONPath_ExclusiveFeature = ["Ruby","Sapphire","Emerald","FireRed","LeafGreen"];
     var JSONPath_AbilityFlavor = "RSEFRLG";
+    var JSONPath_MovePower = "RSEFRLG";
+    var JSONPath_MoveID = "RSEFRLG";
 }
 if (GameID >= 7 && GameID <= 8 || GameID == 12) {
     var JSONPath_Pokédex = ["Hoenn Pokédex_RSE"];
@@ -302,9 +320,13 @@ if (GameID >= 7 && GameID <= 8 || GameID == 12) {
     var MEDIAPath_Map = "RSE";
     var MEDIAPath_Type_Text = "RSE";
     var JSONPath_ExclusivePokémon = ["Ruby","Sapphire","Emerald"];
+    var JSONPath_MoveMachine = "RSE";
 }
 if (GameID >= 9 && GameID <= 11) {
     var JSONPath_EvolutionMethod = "FRLGCol";
+}
+if (GameID >= 9 && GameID <= 11 || GameID == 13) {
+    var JSONPath_MoveMachine = "FRLGColXD";
 }
 if (GameID >= 10 && GameID <= 11) {
     var JSONPath_Pokédex = ["Kanto Pokédex_FRLG"];
@@ -323,6 +345,8 @@ if (GameID >= 10 && GameID <= 11) {
     var JSONPath_LocationDescription = "FRLG";
     var JSONPath_LocationSlogan = "FRLG";
     var JSONPath_LocationNavigation = "FRLG";
+    var JSONPath_MoveDescription = "FRLG";
+    var JSONPath_MoveTutor = "FRLG";
 }
 if (GameID == 9 || GameID == 13) {
     var JSONPath_Pokédex = ["Strategy Memo (Alphabetical)_ColXD","Strategy Memo (Heaviest)_ColXD","Strategy Memo (Lightest)_ColXD","Strategy Memo (Tallest)_ColXD","Strategy Memo (Shortest)_ColXD"];
@@ -353,6 +377,9 @@ if (GameID >= 14 && GameID <= 15) {
     var JSONPath_LocationDescription = "DP";
     var JSONPath_LocationSlogan = "DP";
     var JSONPath_LocationNavigation = "DP";
+    var JSONPath_MoveDescription = "DP";
+    var JSONPath_MoveTutor = "DP";
+    var JSONPath_MoveAccuracy = "DP";
 }
 if (GameID == 14 || GameID == 16) {
     var JSONPath_HeldItem = "DPt";
@@ -362,6 +389,10 @@ if (GameID >= 14 && GameID <= 16) {
     var MEDIAPath_Map = "DPPt";
     var JSONPath_ExclusivePokémon = ["Diamond","Pearl","Platinum"];
     var JSONPath_AbilityFlavor = "DPPt";
+    var JSONPath_MoveMachine = "DPPt";
+}
+if (GameID >= 16 && GameID <= 18) {
+    var JSONPath_MoveAccuracy = "PtHGSS";
 }
 if (GameID >= 17 && GameID <= 18) {
     var JSONPath_Pokédex = ["Johto Pokédex_HGSS"];
@@ -381,6 +412,9 @@ if (GameID >= 17 && GameID <= 18) {
     var JSONPath_LocationSlogan = "HGSS";
     var JSONPath_LocationNavigation = "HGSS";
     var JSONPath_AbilityFlavor = "HGSS";
+    var JSONPath_MoveDescription = "HGSS";
+    var JSONPath_MoveTutor = "HGSS";
+    var JSONPath_MoveMachine = "HGSS";
 }
 if (GameID >= 19 && GameID <= 22) {
     var Generation = 5;
@@ -400,6 +434,8 @@ if (GameID >= 19 && GameID <= 20) {
     var JSONPath_Location = "BW";
     var JSONPath_LocationSlogan = "BW";
     var JSONPath_LocationNavigation = "BW";
+    var JSONPath_MoveDescription = "BW";
+    var JSONPath_MoveTutor = "BW";
 }
 if (GameID >= 21 && GameID <= 22) {
     var JSONPath_Pokédex = ["New Unova Pokédex_B2W2"];
@@ -413,6 +449,8 @@ if (GameID >= 21 && GameID <= 22) {
     var JSONPath_Location = "B2W2";
     var JSONPath_LocationSlogan = "B2W2";
     var JSONPath_LocationNavigation = "B2W2";
+    var JSONPath_MoveDescription = "B2W2";
+    var JSONPath_MoveTutor = "B2W2";
 }
 if (GameID >= 23 && GameID <= 26) {
     var Generation = 6;
@@ -434,6 +472,10 @@ if (GameID >= 23 && GameID <= 24) {
     var JSONPath_LocationDescription = "XY";
     var JSONPath_LocationSlogan = "XY";
     var JSONPath_LocationNavigation = "XY";
+    var JSONPath_MoveDescription = "XY";
+    var JSONPath_MoveTutor = "XY";
+    var JSONPath_MoveMachine = "XY";
+    var JSONPath_MoveID = "XY";
 }
 if (GameID >= 25 && GameID <= 28) {
     var JSONPath_CatchRate = "ORASSM";
@@ -450,6 +492,10 @@ if (GameID >= 25 && GameID <= 26) {
     var JSONPath_LocationDescription = "ORAS";
     var JSONPath_LocationSlogan = "ORAS";
     var JSONPath_LocationNavigation = "ORAS";
+    var JSONPath_MoveDescription = "ORAS";
+    var JSONPath_MoveTutor = "ORAS";
+    var JSONPath_MoveMachine = "ORAS";
+    var JSONPath_MoveID = "ORAS";
 }
 if (GameID == 27 || GameID == 29) {
     var JSONPath_EvolutionMethod = "SUS";
@@ -468,6 +514,9 @@ if (GameID >= 27 && GameID <= 30) {
     var MEDIAPath_Pokémon_Box = "SMUSUM";
     var JSONPath_ExclusiveItem = ["Sun","Moon","Ultra Sun","Ultra Moon"];
     var MEDIAPath_ExclusiveItem = ["SM","SM","USUM","USUM"];
+    var JSONPath_MoveMachine = "SMUSUM";
+    var JSONPath_MovePower = "SMUSUM";
+    var JSONPath_MovePP = "SMUSUM";
 }
 if (GameID >= 27 && GameID <= 28) {
     var JSONPath_Pokédex = ["Alola Pokédex_SM","Melemele Pokédex_SM","Akala Pokédex_SM","Ula'ula Pokédex_SM","Poni Pokédex_SM"];
@@ -482,6 +531,9 @@ if (GameID >= 27 && GameID <= 28) {
     var JSONPath_LocationSlogan = "SM";
     var JSONPath_LocationNavigation = "SM";
     var JSONPath_AbilityFlavor = "SM";
+    var JSONPath_MoveDescription = "SM";
+    var JSONPath_MoveTutor = "SM";
+    var JSONPath_MoveID = "SM";
 }
 if (GameID >= 29 && GameID <= 30) {
     var JSONPath_Pokédex = ["Alola Pokédex_USUM","Melemele Pokédex_USUM","Akala Pokédex_USUM","Ula'ula Pokédex_USUM","Poni Pokédex_USUM"];
@@ -496,6 +548,9 @@ if (GameID >= 29 && GameID <= 30) {
     var JSONPath_LocationSlogan = "USUM";
     var JSONPath_LocationNavigation = "USUM";
     var JSONPath_AbilityFlavor = "USUM";
+    var JSONPath_MoveDescription = "USUM";
+    var JSONPath_MoveTutor = "USUM";
+    var JSONPath_MoveID = "USUM";
 }
 if (GameID >= 31 && GameID <= 32) {
     var JSONPath_Pokédex = ["Kanto Pokédex_LGPE"];
@@ -517,6 +572,11 @@ if (GameID >= 31 && GameID <= 32) {
     var JSONPath_LocationDescription = "LGPE";
     var JSONPath_LocationSlogan = "LGPE";
     var JSONPath_LocationNavigation = "LGPE";
+    var JSONPath_MoveDescription = "LGPE";
+    var JSONPath_MoveMachine = "LGPE";
+    var JSONPath_MovePower = "LGPE";
+    var JSONPath_MovePP = "LGPE";
+    var JSONPath_MoveID = "LGPE";
 }
 if (GameID >= 33 && GameID <= 34) {
     var Generation = 8;
@@ -538,6 +598,8 @@ if (GameID >= 33 && GameID <= 34) {
     var JSONPath_LocationSlogan = "SwSh";
     var JSONPath_LocationNavigation = "SwSh";
     var JSONPath_AbilityFlavor = "SwSh";
+    var JSONPath_MoveDescription = "SwSh";
+    var JSONPath_MoveTutor = "SwSh";
 }
 
 if (Generation >= 1 && Generation <= 2) {
@@ -548,11 +610,15 @@ if (Generation >= 1 && Generation <= 3) {
     var JSONPath_ExperienceYield = "1-3";
     var JSONPath_EvolutionMethod = "1-3";
 }
+if (Generation >= 1 && Generation <= 6) {
+    var JSONPath_MoveCategory = "1-6";
+}
 if (Generation >= 2 && Generation <= 3) {
     var JSONPath_EVYield = "2-3";
 }
 if (Generation >= 2 && Generation <= 4) {
     var JSONPath_Type = "2-4";
+    var JSONPath_MoveType = "2-4";
 }
 if (Generation >= 2 && Generation <= 5) {
     var JSONPath_Typechart = "2-5";
@@ -585,6 +651,10 @@ if (Generation >= 6 && Generation <= 8) {
     var JSONPath_Typechart = "6-8";
     var JSONPath_Type = "6-8";
     var JSONPath_Category = "6-8";
+    var JSONPath_MoveType = "6-8";
+}
+if (Generation >= 7 && Generation <= 8) {
+    var JSONPath_MoveCategory = "7-8";
 }
 if (Generation >= 4 && Generation <= 7) {
     var JSONPath_EvolutionStage = "4-7";
@@ -619,12 +689,23 @@ if (Generation == 1) {
     var MEDIAPath_Pokémon_Box = "III-V";
     var JSONPath_EvolutionSpecie = "1";
     var JSONPath_EvolutionStage = "1";
+    var JSONPath_MoveMachine = "1";
+    var JSONPath_MoveAccuracy = "1";
+    var JSONPath_MovePower = "1";
+    var JSONPath_MovePP = "1";
+    var JSONPath_MoveID = "1";
+    var JSONPath_MoveType = "1";
 }
 if (Generation == 2) {
     var JSONPath_CatchRate = "2";
     var MEDIAPath_Pokémon_Box = "III-V";
     var JSONPath_EvolutionSpecie = "2";
     var JSONPath_EvolutionStage = "2";
+    var JSONPath_MoveMachine = "2";
+    var JSONPath_MoveAccuracy = "2";
+    var JSONPath_MovePower = "2";
+    var JSONPath_MovePP = "2";
+    var JSONPath_MoveID = "2";
 }
 if (Generation == 3) {
     var JSONPath_HatchRateSteps = "3";
@@ -633,6 +714,8 @@ if (Generation == 3) {
     var JSONPath_EvolutionSpecie = "3";
     var JSONPath_EvolutionStage = "3";
     var JSONPath_AbilityReference = "3";
+    var JSONPath_MoveAccuracy = "3";
+    var JSONPath_MovePP = "3";
 }
 if (Generation == 4) {
     var JSONPath_HatchRateSteps = "4";
@@ -641,6 +724,9 @@ if (Generation == 4) {
     var JSONPath_EVYield = "4";
     var JSONPath_EvolutionMethod = "4";
     var JSONPath_AbilityReference = "4";
+    var JSONPath_MovePower = "4";
+    var JSONPath_MovePP = "4";
+    var JSONPath_MoveID = "4";
 }
 if (Generation == 5) {
     var JSONPath_Type = "5";
@@ -651,6 +737,12 @@ if (Generation == 5) {
     var ImageType_Extension = ["PNG","GIF","PNG","PNG"];
     var JSONPath_AbilityFlavor = "5";
     var JSONPath_AbilityReference = "5";
+    var JSONPath_MoveMachine = "5";
+    var JSONPath_MoveAccuracy = "5";
+    var JSONPath_MovePower = "5";
+    var JSONPath_MovePP = "5";
+    var JSONPath_MoveID = "5";
+    var JSONPath_MoveType = "5";
 }
 if (Generation == 6) {
     var JSONPath_Ability = "6";
@@ -661,6 +753,9 @@ if (Generation == 6) {
     var MEDIAPath_Pokémon_Box = "VI";
     var JSONPath_AbilityFlavor = "6";
     var JSONPath_AbilityReference = "6";
+    var JSONPath_MoveAccuracy = "6";
+    var JSONPath_MovePower = "6";
+    var JSONPath_MovePP = "6";
 }
 if (Generation == 7) {
     var JSONPath_Ability = "7";
@@ -669,6 +764,7 @@ if (Generation == 7) {
     var MEDIAPath_Currency = "VII";
     var JSONPath_EVYield = "7";
     var JSONPath_AbilityReference = "7";
+    var JSONPath_MoveAccuracy = "7";
 }
 if (Generation == 8) {
     var JSONPath_Ability = "8";
@@ -684,4 +780,9 @@ if (Generation == 8) {
     var JSONPath_EvolutionStage = "8";
     var JSONPath_EvolutionMethod = "8";
     var JSONPath_AbilityReference = "8";
+    var JSONPath_MoveMachine = "8";
+    var JSONPath_MoveAccuracy = "8";
+    var JSONPath_MovePower = "8";
+    var JSONPath_MovePP = "8";
+    var JSONPath_MoveID = "8";
 }
