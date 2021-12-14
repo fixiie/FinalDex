@@ -2157,7 +2157,10 @@ for (var q = 0; q < finaldataMove.length; q++) {
         gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory] + ".png";
         gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
         gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory];
-        gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerText = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" ("+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")";
+
+        gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" <span>("+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")</span>";
+        
+        
         if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
             gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "";
         }
