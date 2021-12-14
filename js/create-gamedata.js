@@ -1879,49 +1879,36 @@ var gamedataMoveAside4SidebarDescriptionRange = document.createElement("div");
 var gamedataMoveAside4SidebarDescriptionRangeContent = document.createElement("span");
 var gamedataMoveAside4SidebarDescriptionRangeText = document.createElement("h4");
 
-var gamedataMoveAside4SidebarDescriptionHMTM = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionHMTMContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionHMTMText = document.createElement("h3");
 
-var gamedataMoveAside4SidebarDescriptionTutor = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionTutorOuter = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionTutorContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionTutorTitle = document.createElement("h3");
-var gamedataMoveAside4SidebarDescriptionTutorText = document.createElement("p");
+
+
 
 
 gamedataMoveAside4SidebarDescription.classList.add("move-sidebar-description");
 
 gamedataMoveAside4SidebarDescriptionType.classList.add("move-sidebar-description-type");
-gamedataMoveAside4SidebarDescriptionTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + "Water" + ".png";
-gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title","Water");
+gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title","");
 gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
-gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = "Water";
-gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + "Special" + ".png";
-gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title","Special");
+gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = "";
+gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title","");
 gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
-gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = "Special";
+gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = "";
 
 gamedataMoveAside4SidebarDescriptionPPPA.classList.add("move-sidebar-description-pppa");
 gamedataMoveAside4SidebarDescriptionPPPAPowerPointsTitle.innerText = "PP";
-gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerText = "15";
+gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerText = "";
 gamedataMoveAside4SidebarDescriptionPPPAPowerTitle.innerText = "Power";
-gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "90";
+gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "";
 gamedataMoveAside4SidebarDescriptionPPPAAccuracyTitle.innerText = "Accuracy";
-gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "100%";
+gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "";
 
 gamedataMoveAside4SidebarDescriptionContact.classList.add("move-sidebar-description-contact");
-gamedataMoveAside4SidebarDescriptionContactText.innerText = "Does not make Contact";
+gamedataMoveAside4SidebarDescriptionContactText.innerText = "";
 
 gamedataMoveAside4SidebarDescriptionRange.classList.add("move-sidebar-description-range");
-gamedataMoveAside4SidebarDescriptionRangeText.innerText = "Affects all Pokémon Adjacent to the user";
+gamedataMoveAside4SidebarDescriptionRangeText.innerText = "";
 
-gamedataMoveAside4SidebarDescriptionHMTM.classList.add("move-sidebar-description-hmtm");
-gamedataMoveAside4SidebarDescriptionHMTMText.innerText = "HM04";
 
-gamedataMoveAside4SidebarDescriptionTutor.classList.add("move-sidebar-description-tutor");
-gamedataMoveAside4SidebarDescriptionTutorTitle.innerText = "Move Tutor";
-gamedataMoveAside4SidebarDescriptionTutorText.innerText = "Route 4";
 
 
 
@@ -1953,14 +1940,7 @@ gamedataMoveAside4SidebarDescriptionContactContent.appendChild(gamedataMoveAside
 gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionRange);
 gamedataMoveAside4SidebarDescriptionRange.appendChild(gamedataMoveAside4SidebarDescriptionRangeContent);
 gamedataMoveAside4SidebarDescriptionRangeContent.appendChild(gamedataMoveAside4SidebarDescriptionRangeText);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionHMTM);
-gamedataMoveAside4SidebarDescriptionHMTM.appendChild(gamedataMoveAside4SidebarDescriptionHMTMContent);
-gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMText);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionTutor);
-gamedataMoveAside4SidebarDescriptionTutor.appendChild(gamedataMoveAside4SidebarDescriptionTutorOuter);
-gamedataMoveAside4SidebarDescriptionTutorOuter.appendChild(gamedataMoveAside4SidebarDescriptionTutorContent);
-gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorTitle);
-gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorText);
+
 
 
 
@@ -2113,13 +2093,7 @@ for (var i = 0; i < sidebarMoveOption.length; i++) {
 
 
 
-var searchtype = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark","Fairy"];
-var searchcategory = ["Special","Physical"];
-var searchpp = ["5","10","15","20","25","30","35","40"];
-var searchpower = ["20","25","30","35","40","45","50","55","60","65","70","75","80","85","90","95","100","105","110","115","120","125","130","135","140","-"];
-var searchaccuracy = ["30%","40%","50%","60%","70%","80%","90%","100%","-"];
-var searchcontact = ["y","n"];
-var searchrange = ["alladjacent","allally","allenemy"];
+
 
 for (var q = 0; q < finaldataMove.length; q++) {
     var gamedataMoveAside1OptionsInput = document.createElement("input");
@@ -2131,14 +2105,55 @@ for (var q = 0; q < finaldataMove.length; q++) {
     gamedataMoveAside1OptionsInput.value = q;
     gamedataMoveAside1OptionsLabel.setAttribute("for","move-options-" + q);
     gamedataMoveAside1OptionsLabel.setAttribute("name","medium");
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",finaldataMove[q]["Name"].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-type",searchtype[Math.floor(Math.random() * searchtype.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-category",searchcategory[Math.floor(Math.random() * searchcategory.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp",searchpp[Math.floor(Math.random() * searchpp.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-power",searchpower[Math.floor(Math.random() * searchpower.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy",searchaccuracy[Math.floor(Math.random() * searchaccuracy.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact",searchcontact[Math.floor(Math.random() * searchcontact.length)].toLowerCase());
-    gamedataMoveAside1OptionsLabel.setAttribute("data-search-range",searchrange[Math.floor(Math.random() * searchrange.length)].toLowerCase());
+
+    if (finaldataMove[q]["Name"] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",finaldataMove[q]["Name"].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-name","");
+    }
+    if (finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-type",finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-type","");
+    }
+    if (finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-category",finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());  
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-category","");
+    }
+    if (finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp",finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp","");
+    }
+    if (finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-power",finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-power","");
+    }
+    if (finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy",finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy","");
+    }
+    if (finaldataMoveOtherMoves[q]["Contact"] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact",finaldataMoveOtherMoves[q]["Contact"].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","");
+    }
+    if (finaldataMoveRange[q]["Range"] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-range",finaldataMoveRange[q]["Range"].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-range","");
+    }
 
     gamedataMoveAside1OptionsLabel.innerText = finaldataMove[q]["Name"];
     gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsInput);
@@ -2158,7 +2173,16 @@ for (var q = 0; q < finaldataMove.length; q++) {
         gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
         gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory];
 
-        gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" <span>("+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")</span>";
+
+        if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] == undefined) {
+            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = "";
+        }
+        else if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP] == undefined) {
+            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP];
+        }
+        else {
+            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")</span>";
+        }
         
         
         if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
@@ -2174,9 +2198,76 @@ for (var q = 0; q < finaldataMove.length; q++) {
             gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy];
         }
         gamedataMoveAside4SidebarDescriptionContactText.innerText = finaldataMoveOtherMoves[this.value]["Contact"];
-        gamedataMoveAside4SidebarDescriptionRangeText.innerText = finaldataMoveAffect[this.value]["Affect"];
-        gamedataMoveAside4SidebarDescriptionHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
-        gamedataMoveAside4SidebarDescriptionTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
+        gamedataMoveAside4SidebarDescriptionRangeText.innerText = finaldataMoveRange[this.value]["Range"];
+
+
+
+        var divs = gamedataMoveAside4SidebarDescription.querySelectorAll(":scope > div");
+        for (var u = 0; u < divs.length; u++) {
+            if (divs[u].getAttribute("class") == "move-sidebar-description-hmtm" || divs[u].getAttribute("class") == "move-sidebar-description-tutor" || divs[u].getAttribute("class") == "move-sidebar-description-other") {
+                divs[u].remove();
+            }
+        }
+
+
+        if (Generation == 1) {
+            var othermove = ["Mirror Move","Sound-Based","Outside Battle"];
+        }
+        if (Generation == 2) {
+            var othermove = ["Protect","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+        }
+        if (Generation >= 3 && Generation <= 4) {
+            var othermove = ["Protect","Magic Coat","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+        }
+        if (Generation >= 5 && Generation <= 8) {
+            var othermove = ["Protect","Magic Coat/Magic Bounce","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+        }
+
+        for (var u = 0; u < othermove.length; u++) {
+            if (finaldataMoveOtherMoves[this.value][othermove[u]] != undefined) {
+                var gamedataMoveAside4SidebarDescriptionOther = document.createElement("div");
+                var gamedataMoveAside4SidebarDescriptionOtherContent = document.createElement("span");
+                var gamedataMoveAside4SidebarDescriptionOtherText = document.createElement("h4");
+                gamedataMoveAside4SidebarDescriptionOther.classList.add("move-sidebar-description-other");
+                gamedataMoveAside4SidebarDescriptionOtherText.innerText = finaldataMoveOtherMoves[this.value][othermove[u]];
+                gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionOther);
+                gamedataMoveAside4SidebarDescriptionOther.appendChild(gamedataMoveAside4SidebarDescriptionOtherContent);
+                gamedataMoveAside4SidebarDescriptionOtherContent.appendChild(gamedataMoveAside4SidebarDescriptionOtherText);
+            }
+        }
+        
+
+
+        if (finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine] != undefined) {
+            var gamedataMoveAside4SidebarDescriptionHMTM = document.createElement("div");
+            var gamedataMoveAside4SidebarDescriptionHMTMContent = document.createElement("span");
+            var gamedataMoveAside4SidebarDescriptionHMTMText = document.createElement("h3");
+            gamedataMoveAside4SidebarDescriptionHMTM.classList.add("move-sidebar-description-hmtm");
+            gamedataMoveAside4SidebarDescriptionHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
+            gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionHMTM);
+            gamedataMoveAside4SidebarDescriptionHMTM.appendChild(gamedataMoveAside4SidebarDescriptionHMTMContent);
+            gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMText);
+        }
+
+
+        if (finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor] != undefined) {
+            var gamedataMoveAside4SidebarDescriptionTutor = document.createElement("div");
+            var gamedataMoveAside4SidebarDescriptionTutorOuter = document.createElement("span");
+            var gamedataMoveAside4SidebarDescriptionTutorContent = document.createElement("span");
+            var gamedataMoveAside4SidebarDescriptionTutorTitle = document.createElement("h3");
+            var gamedataMoveAside4SidebarDescriptionTutorText = document.createElement("p");
+            gamedataMoveAside4SidebarDescriptionTutor.classList.add("move-sidebar-description-tutor");
+            gamedataMoveAside4SidebarDescriptionTutorTitle.innerText = "Move Tutor";
+            gamedataMoveAside4SidebarDescriptionTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
+            gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionTutor);
+            gamedataMoveAside4SidebarDescriptionTutor.appendChild(gamedataMoveAside4SidebarDescriptionTutorOuter);
+            gamedataMoveAside4SidebarDescriptionTutorOuter.appendChild(gamedataMoveAside4SidebarDescriptionTutorContent);
+            gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorTitle);
+            gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorText);
+        }
+
+
+
 
         //gamedataMoveAside3EffectText.innerHTML = "";
 
@@ -2185,7 +2276,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
 
         finaldataMoveTutor
         finaldataMoveMachine
-        finaldataMoveAffect
+        finaldataMoveRange
         finaldataMoveOtherMoves
         finaldataMoveAccuracy
         finaldataMovePower
