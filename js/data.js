@@ -63,7 +63,7 @@ var finaldataMove = [];
 var finaldataMoveDescription = [];
 var finaldataMoveTutor = [];
 var finaldataMoveMachine = [];
-var finaldataMoveAffect = [];
+var finaldataMoveRange = [];
 var finaldataMoveOtherMoves = [];
 var finaldataMoveAccuracy = [];
 var finaldataMovePower = [];
@@ -153,7 +153,7 @@ MoveMetadataRequest.onload = function() {
   }
 
   for (var i = 0; i < MoveMetadata["Reference"].length; i++) {
-    if(finaldataMoveDescription[i][JSONPath_MoveDescription+"_"+"Description"] != undefined) {
+    if(finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription] != undefined) {
       finaldataMove.push(MoveMetadata["Reference"][i]);
     }
   }
@@ -165,8 +165,8 @@ MoveMetadataRequest.onload = function() {
   for (var i = 0; i < MoveMetadata["Machine"].length; i++) {
     finaldataMoveMachine.push(MoveMetadata["Machine"][i]);
   }
-  for (var i = 0; i < MoveMetadata["Affect"].length; i++) {
-    finaldataMoveAffect.push(MoveMetadata["Affect"][i]);
+  for (var i = 0; i < MoveMetadata["Range"].length; i++) {
+    finaldataMoveRange.push(MoveMetadata["Range"][i]);
   }
   for (var i = 0; i < MoveMetadata["Other Moves"].length; i++) {
     finaldataMoveOtherMoves.push(MoveMetadata["Other Moves"][i]);
