@@ -1780,6 +1780,25 @@ var gamedataMoveAside3EffectText = document.createElement("p");
 var gamedataMoveAside4 = document.createElement("aside");
 
 
+/*
+Affects all adjacent foes, but not allies		allenemynoally
+Affects all allies								allally
+Affects all foes								allenemy
+Affects all Pokémon adjacent to the user		alladjacent
+Affects all Pokémon on the field				all
+May affect anyone but the user					allnouser
+May affect anyone adjacent to the user			adjacent
+Affects an adjacent ally						adjacentally
+May affect any adjacent foe, but not allies		adjacentenemynoally
+Affects the user								user
+May affect the user or an adjacent ally			useradjacent
+Affects the user and all allies					userally
+*/
+
+
+
+
+
 gamedataMoveOuter.setAttribute("id","move-outer");
 gamedataMoveOuter.setAttribute("name","Moves");
 gamedataMoveOuter.classList.add("gamedata-contentdiv");
@@ -1788,7 +1807,7 @@ gamedataMoveAside1OptionsTitleOuter.setAttribute("id","move-options-title");
 gamedataMoveAside1OptionsSearchOuter.setAttribute("id","move-options-search");
 gamedataMoveAside1OptionsSearch.setAttribute("type","text");
 gamedataMoveAside1OptionsSearch.setAttribute("id","move-search");
-gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [value/-]\ncategory:: [value/-]\npp:: [value/-]\npp:> [value/-]\npp:< [value/-]\npower:: [value/-]\npower:> [value/-]\npower:< [value/-]\naccuracy:: [value/-]\naccuracy:> [value/-]\naccuracy:< [value/-]\ncontact:: [y/n]\nrange:: [alladjacent/allenemy/allally]");
+gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [value/-]\ncategory:: [value/-]\npp:: [value/-]\npp:> [value/-]\npp:< [value/-]\npower:: [value/-]\npower:> [value/-]\npower:< [value/-]\naccuracy:: [value/-]\naccuracy:> [value/-]\naccuracy:< [value/-]\nmachine:: [value/-]\ncontact:: [y/n]\ntutor:: [y/n]");
 gamedataMoveAside1OptionsSearch.setAttribute("placeholder","Search Moves...");
 gamedataMoveAside1OptionsSearch.setAttribute("onfocus","this.placeholder=''");
 gamedataMoveAside1OptionsSearch.setAttribute("onblur","this.placeholder='Search Moves...'");
@@ -1854,9 +1873,6 @@ var gamedataMoveAside4SidebarDescriptionTypeText = document.createElement("span"
 var gamedataMoveAside4SidebarDescriptionTypeTextImg = document.createElement("img");
 var gamedataMoveAside4SidebarDescriptionTypeTextText = document.createElement("h4");
 var gamedataMoveAside4SidebarDescriptionTypeMove = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionTypeMoveImg = document.createElement("img");
-var gamedataMoveAside4SidebarDescriptionTypeMoveText = document.createElement("h4");
-
 var gamedataMoveAside4SidebarDescriptionPPPA = document.createElement("div");
 var gamedataMoveAside4SidebarDescriptionPPPAPowerPoints = document.createElement("span");
 var gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent = document.createElement("span");
@@ -1875,9 +1891,7 @@ var gamedataMoveAside4SidebarDescriptionContact = document.createElement("div");
 var gamedataMoveAside4SidebarDescriptionContactContent = document.createElement("span");
 var gamedataMoveAside4SidebarDescriptionContactText = document.createElement("h4");
 
-var gamedataMoveAside4SidebarDescriptionRange = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionRangeContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionRangeText = document.createElement("h4");
+
 
 
 
@@ -1888,11 +1902,7 @@ gamedataMoveAside4SidebarDescription.classList.add("move-sidebar-description");
 
 gamedataMoveAside4SidebarDescriptionType.classList.add("move-sidebar-description-type");
 gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title","");
-gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
 gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = "";
-gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title","");
-gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
-gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = "";
 
 gamedataMoveAside4SidebarDescriptionPPPA.classList.add("move-sidebar-description-pppa");
 gamedataMoveAside4SidebarDescriptionPPPAPowerPointsTitle.innerText = "PP";
@@ -1905,9 +1915,6 @@ gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "";
 gamedataMoveAside4SidebarDescriptionContact.classList.add("move-sidebar-description-contact");
 gamedataMoveAside4SidebarDescriptionContactText.innerText = "";
 
-gamedataMoveAside4SidebarDescriptionRange.classList.add("move-sidebar-description-range");
-gamedataMoveAside4SidebarDescriptionRangeText.innerText = "";
-
 
 
 
@@ -1919,8 +1926,6 @@ gamedataMoveAside4SidebarDescriptionType.appendChild(gamedataMoveAside4SidebarDe
 gamedataMoveAside4SidebarDescriptionTypeText.appendChild(gamedataMoveAside4SidebarDescriptionTypeTextImg);
 gamedataMoveAside4SidebarDescriptionTypeText.appendChild(gamedataMoveAside4SidebarDescriptionTypeTextText);
 gamedataMoveAside4SidebarDescriptionType.appendChild(gamedataMoveAside4SidebarDescriptionTypeMove);
-gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveImg);
-gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveText);
 gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionPPPA);
 gamedataMoveAside4SidebarDescriptionPPPA.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPoints);
 gamedataMoveAside4SidebarDescriptionPPPAPowerPoints.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent);
@@ -1937,12 +1942,33 @@ gamedataMoveAside4SidebarDescriptionPPPAAccuracyContent.appendChild(gamedataMove
 gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionContact);
 gamedataMoveAside4SidebarDescriptionContact.appendChild(gamedataMoveAside4SidebarDescriptionContactContent);
 gamedataMoveAside4SidebarDescriptionContactContent.appendChild(gamedataMoveAside4SidebarDescriptionContactText);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionRange);
-gamedataMoveAside4SidebarDescriptionRange.appendChild(gamedataMoveAside4SidebarDescriptionRangeContent);
-gamedataMoveAside4SidebarDescriptionRangeContent.appendChild(gamedataMoveAside4SidebarDescriptionRangeText);
 
 
+var gamedataMoveAside4SidebarRange = document.createElement("div");
+var gamedataMoveAside4SidebarRangeOuter = document.createElement("span");
+var gamedataMoveAside4SidebarRangeContent1 = document.createElement("span");
+var gamedataMoveAside4SidebarRangeContent2 = document.createElement("span");
+gamedataMoveAside4SidebarRange.classList.add("move-sidebar-range");
+gamedataMoveAside4Sidebar.appendChild(gamedataMoveAside4SidebarRange);
+gamedataMoveAside4SidebarRange.appendChild(gamedataMoveAside4SidebarRangeOuter);
+gamedataMoveAside4SidebarRangeOuter.appendChild(gamedataMoveAside4SidebarRangeContent1);
+gamedataMoveAside4SidebarRangeOuter.appendChild(gamedataMoveAside4SidebarRangeContent2);
 
+for (var q = 0; q < 6; q++) {
+    var gamedataMoveAside4SidebarRangeText = document.createElement("span");
+    if (q >= 0 && q <= 2) {
+        gamedataMoveAside4SidebarRangeText.innerText = "Enemy";
+        gamedataMoveAside4SidebarRangeContent1.appendChild(gamedataMoveAside4SidebarRangeText);
+    }
+    else if (q == 3) {
+        gamedataMoveAside4SidebarRangeText.innerText = "User";
+        gamedataMoveAside4SidebarRangeContent2.appendChild(gamedataMoveAside4SidebarRangeText);
+    }
+    else if (q >= 4 && q <= 5) {
+        gamedataMoveAside4SidebarRangeText.innerText = "Ally";
+        gamedataMoveAside4SidebarRangeContent2.appendChild(gamedataMoveAside4SidebarRangeText);
+    }
+}
 
 
 
@@ -2142,17 +2168,26 @@ for (var q = 0; q < finaldataMove.length; q++) {
     else {
         gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy","");
     }
-    if (finaldataMoveOtherMoves[q]["Contact"] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact",finaldataMoveOtherMoves[q]["Contact"].toLowerCase());
+    if (finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","y");
+    }
+    else if (finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","n");
     }
     else {
         gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","");
     }
-    if (finaldataMoveRange[q]["Range"] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-range",finaldataMoveRange[q]["Range"].toLowerCase());
+    if (finaldataMoveTutor[q]["Tutor_"+JSONPath_MoveTutor] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","y");
     }
     else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-range","");
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","n");
+    }
+    if (finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine",finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
+    }
+    else {
+        gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine","");
     }
 
     gamedataMoveAside1OptionsLabel.innerText = finaldataMove[q]["Name"];
@@ -2165,17 +2200,31 @@ for (var q = 0; q < finaldataMove.length; q++) {
         gamedataMoveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID"+"_"+JSONPath_MoveID];
         gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
         gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
-
+        gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
         gamedataMoveAside4SidebarDescriptionTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] + ".png";
         gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title",finaldataMoveType[this.value]["Type_"+JSONPath_MoveType]);
         gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = finaldataMoveType[this.value]["Type_"+JSONPath_MoveType];
-        gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory] + ".png";
-        gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
-        gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory];
 
+        var cate = gamedataMoveAside4SidebarDescriptionTypeMove.querySelectorAll(":scope > *");
+        for (var u = 0; u < cate.length; u++) {
+            cate[u].remove();
+        }
+
+        for (var u = 0; u < finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
+            var gamedataMoveAside4SidebarDescriptionTypeMoveImg = document.createElement("img");
+            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title","");
+            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
+            gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u] + ".png";
+            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
+            gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveImg);
+
+            var gamedataMoveAside4SidebarDescriptionTypeMoveText = document.createElement("h4");
+            gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u];
+            gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveText);
+        }
 
         if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = "";
+            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = "N/A";
         }
         else if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP] == undefined) {
             gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP];
@@ -2186,19 +2235,19 @@ for (var q = 0; q < finaldataMove.length; q++) {
         
         
         if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "";
+            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "N/A";
         }
         else {
             gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = finaldataMovePower[this.value]["Power_"+JSONPath_MovePower];
         }
         if (finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "";
+            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "N/A";
         }
         else {
             gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy];
         }
         gamedataMoveAside4SidebarDescriptionContactText.innerText = finaldataMoveOtherMoves[this.value]["Contact"];
-        gamedataMoveAside4SidebarDescriptionRangeText.innerText = finaldataMoveRange[this.value]["Range"];
+        gamedataMoveAside4SidebarRangeOuter.setAttribute("title",finaldataMoveRange[this.value]["Range"]);
 
 
 
@@ -2240,12 +2289,17 @@ for (var q = 0; q < finaldataMove.length; q++) {
 
         if (finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine] != undefined) {
             var gamedataMoveAside4SidebarDescriptionHMTM = document.createElement("div");
+            var gamedataMoveAside4SidebarDescriptionHMTMOuter = document.createElement("span");
             var gamedataMoveAside4SidebarDescriptionHMTMContent = document.createElement("span");
-            var gamedataMoveAside4SidebarDescriptionHMTMText = document.createElement("h3");
+            var gamedataMoveAside4SidebarDescriptionHMTMTitle = document.createElement("h3");
+            var gamedataMoveAside4SidebarDescriptionHMTMText = document.createElement("button");
             gamedataMoveAside4SidebarDescriptionHMTM.classList.add("move-sidebar-description-hmtm");
+            gamedataMoveAside4SidebarDescriptionHMTMTitle.innerText = "Machine"
             gamedataMoveAside4SidebarDescriptionHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
             gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionHMTM);
-            gamedataMoveAside4SidebarDescriptionHMTM.appendChild(gamedataMoveAside4SidebarDescriptionHMTMContent);
+            gamedataMoveAside4SidebarDescriptionHMTM.appendChild(gamedataMoveAside4SidebarDescriptionHMTMOuter);
+            gamedataMoveAside4SidebarDescriptionHMTMOuter.appendChild(gamedataMoveAside4SidebarDescriptionHMTMContent);
+            gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMTitle);
             gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMText);
         }
 
@@ -2255,7 +2309,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
             var gamedataMoveAside4SidebarDescriptionTutorOuter = document.createElement("span");
             var gamedataMoveAside4SidebarDescriptionTutorContent = document.createElement("span");
             var gamedataMoveAside4SidebarDescriptionTutorTitle = document.createElement("h3");
-            var gamedataMoveAside4SidebarDescriptionTutorText = document.createElement("p");
+            var gamedataMoveAside4SidebarDescriptionTutorText = document.createElement("button");
             gamedataMoveAside4SidebarDescriptionTutor.classList.add("move-sidebar-description-tutor");
             gamedataMoveAside4SidebarDescriptionTutorTitle.innerText = "Move Tutor";
             gamedataMoveAside4SidebarDescriptionTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
