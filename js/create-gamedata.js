@@ -2005,7 +2005,7 @@ for (var i = 0; i < sidebarMoveOption.length; i++) {
     for (var q = 0; q < sidebarMoveLearnsetOption.length; q++) {
         var gamedataMoveAside4SidebarLearnsetHeaderText = document.createElement("h6");
         if (q == 0) {
-            gamedataMoveAside4SidebarLearnsetHeaderText.innerText = "Pokémon"
+            gamedataMoveAside4SidebarLearnsetHeaderText.innerText = "Pokémon";
         }
          else {
             gamedataMoveAside4SidebarLearnsetHeaderText.innerText = sidebarMoveLearnsetOption[i];
@@ -2101,10 +2101,12 @@ for (var i = 0; i < sidebarMoveOption.length; i++) {
         if (this.value == 0) {
             gamedataMoveAside4SidebarDescription.style.display = "flex";
             gamedataMoveAside4SidebarLearnset.style.display = "none";
+            gamedataMoveAside4SidebarRange.style.display = "block";
         }
         else if (this.value == 1) {
             gamedataMoveAside4SidebarDescription.style.display = "none";
             gamedataMoveAside4SidebarLearnset.style.display = "block";
+            gamedataMoveAside4SidebarRange.style.display = "none";
         }
     });
 
@@ -2198,6 +2200,12 @@ for (var q = 0; q < finaldataMove.length; q++) {
     function moveOptionsSelector() {
         gamedataMoveAside2TitleName.innerText = finaldataMove[this.value]["Name"];
         gamedataMoveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID"+"_"+JSONPath_MoveID];
+        if (finaldataMoveID[this.value]["ID Type"] != undefined) {
+            gamedataMoveAside2TitleID.title = finaldataMoveID[this.value]["ID Type"] + " Index number";
+        }
+        else {
+            gamedataMoveAside2TitleID.title = "Index number";
+        }
         gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
         gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
         gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
@@ -2212,10 +2220,9 @@ for (var q = 0; q < finaldataMove.length; q++) {
 
         for (var u = 0; u < finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
             var gamedataMoveAside4SidebarDescriptionTypeMoveImg = document.createElement("img");
-            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title","");
             gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
             gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u] + ".png";
-            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory]);
+            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u]);
             gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveImg);
 
             var gamedataMoveAside4SidebarDescriptionTypeMoveText = document.createElement("h4");
