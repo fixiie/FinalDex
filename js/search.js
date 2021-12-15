@@ -52,17 +52,17 @@ $('#move-options-search input').on('keyup', function() {
     }
     else if (searchVal.toLowerCase().includes('pp::')) {
         filterItems.addClass('hidden');
-        $('#move-options label[data-search-pp*="' + searchVal.toLowerCase().split("pp::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
+        $('#move-options label[data-search-pp="' + searchVal.toLowerCase().split("pp::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('power::')) {
         filterItems.addClass('hidden');
-        $('#move-options label[data-search-power*="' + searchVal.toLowerCase().split("power::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
+        $('#move-options label[data-search-power="' + searchVal.toLowerCase().split("power::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('accuracy::')) {
         filterItems.addClass('hidden');
-        $('#move-options label[data-search-accuracy*="' + searchVal.toLowerCase().split("accuracy::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
+        $('#move-options label[data-search-accuracy="' + searchVal.toLowerCase().split("accuracy::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('contact::')) {
@@ -70,9 +70,14 @@ $('#move-options-search input').on('keyup', function() {
         $('#move-options label[data-search-contact*="' + searchVal.toLowerCase().split("contact::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
         this.style.color = "var(--colorRed)";
     }
-    else if (searchVal.toLowerCase().includes('range::')) {
+    else if (searchVal.toLowerCase().includes('tutor::')) {
         filterItems.addClass('hidden');
-        $('#move-options label[data-search-range*="' + searchVal.toLowerCase().split("range::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
+        $('#move-options label[data-search-tutor="' + searchVal.toLowerCase().split("tutor::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
+        this.style.color = "var(--colorRed)";
+    }
+    else if (searchVal.toLowerCase().includes('machine::')) {
+        filterItems.addClass('hidden');
+        $('#move-options label[data-search-machine*="' + searchVal.toLowerCase().split("machine::")[1].replaceAll(" ","") + '"]').removeClass('hidden');
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('pp:>')) {
