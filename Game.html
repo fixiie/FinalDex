@@ -4278,7 +4278,7 @@ a {
     width: 80%;
     float: right;
     position: inherit;
-    box-shadow: 0 1px 1px var(--border1F);
+    box-shadow: 0 1px 1px var(--border1);
     z-index: 3;
 }
 #map-aside3 {
@@ -7585,7 +7585,7 @@ span[title="Female"] {
 
 
 .move-sidebar-description {
-    height: 90%;
+    height: 75%;
     width: 100%;
     background: var(--color17);
     display: flex;
@@ -7599,10 +7599,111 @@ span[title="Female"] {
     justify-content: center;
 }
 .move-sidebar-description > div.move-sidebar-description-contact,
-.move-sidebar-description > div.move-sidebar-description-range,
 .move-sidebar-description > div.move-sidebar-description-other {
     height: 50%;
 }
+
+.move-sidebar-range {
+    height: 15%;
+    display: block;
+    width: 100%;
+    border-top: 1px solid;
+}
+.move-sidebar-range > span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.move-sidebar-range > span > span {
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+.move-sidebar-range > span > span > span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    background: var(--color12);
+    border-right: none;
+}
+
+.move-sidebar-range > span[title] > span:first-child > span:first-child,
+.move-sidebar-range > span[title] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title] > span:first-child > span:last-child {
+    border-top: none;
+}
+
+.move-sidebar-range > span[title] > span:first-child > span:first-child,
+.move-sidebar-range > span[title] > span:last-child > span:first-child {
+    border-left: none;
+}
+
+.move-sidebar-range > span[title="May affect anyone adjacent to the user"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="May affect anyone adjacent to the user"] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title="May affect anyone adjacent to the user"] > span:last-child > span:nth-child(2) { 
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects the user"] > span:last-child > span:first-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects all adjacent foes, but not allies"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="Affects all adjacent foes, but not allies"] > span:first-child > span:nth-child(2) {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="May affect anyone but the user"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="May affect anyone but the user"] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title="May affect anyone but the user"] > span:first-child > span:last-child,
+.move-sidebar-range > span[title="May affect anyone but the user"] > span:last-child > span:nth-child(2),
+.move-sidebar-range > span[title="May affect anyone but the user"] > span:last-child > span:last-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects an adjacent ally"] > span:last-child > span:nth-child(2) {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:first-child > span:last-child,
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:last-child > span:first-child,
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:last-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects all Pokémon on the field"] > span:last-child > span:last-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects all Pokémon adjacent to the user"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="Affects all Pokémon adjacent to the user"] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects all Pokémon adjacent to the user"] > span:last-child > span:nth-child(2) {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects all foes"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="Affects all foes"] > span:first-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects all foes"] > span:first-child > span:last-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects all allies"] > span:last-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects all allies"] > span:last-child > span:last-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="Affects the user and all allies"] > span:last-child > span:first-child,
+.move-sidebar-range > span[title="Affects the user and all allies"] > span:last-child > span:nth-child(2),
+.move-sidebar-range > span[title="Affects the user and all allies"] > span:last-child > span:last-child {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="May affect any adjacent foe, but not allies"] > span:first-child > span:first-child,
+.move-sidebar-range > span[title="May affect any adjacent foe, but not allies"] > span:first-child > span:nth-child(2) {
+    background: var(--colorBlue);
+}
+.move-sidebar-range > span[title="May affect the user or an adjacent ally"] > span:last-child > span:first-child,
+.move-sidebar-range > span[title="May affect the user or an adjacent ally"] > span:last-child > span:nth-child(2) {
+    background: var(--colorBlue);
+}
+
+
 
 .move-sidebar-description > div > span {
     width: 100%;
@@ -7611,6 +7712,9 @@ span[title="Female"] {
     align-items: center;
     justify-content: center;
     box-shadow: 0.5px 0.5px 0.5px var(--border1);
+}
+.move-sidebar-description > div > span > span > button {
+    padding: 5px 0;
 }
 .move-sidebar-description > div span img {
     max-width: 50%;
@@ -7626,6 +7730,13 @@ span[title="Female"] {
 .move-sidebar-description-pppa span span *:last-child,
 .move-sidebar-description-tutor span span *:last-child {
     padding: 5px 0;
+}
+.move-sidebar-description-tutor span span > button {
+    cursor: pointer;
+}
+.move-sidebar-description-tutor span span > button:hover,
+.move-sidebar-description-tutor span span > button:active {
+    color: var(--font2);
 }
 .move-sidebar-description-pppa span span p > span {
     font-size: 80%;
