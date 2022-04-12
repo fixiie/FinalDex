@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FinalDex</title>
+    <link rel="icon" href="./media/Images/Misc/FinalDex/FinalDex.png" type="image/gif" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+
+    <script src="./js/lib/jquery-1.10.2.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">-->
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue">-->
+
+    <link rel="stylesheet" href="./media/Fonts/Roboto.ttf">
+    <link rel="stylesheet" href="./media/Fonts/BebasNeue.ttf">
+<style>
+
+    img {
+        -webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    button {
+        background: none;
+        border: none;
+        user-select: none;
+    }
+    ::-webkit-scrollbar {
+	width: 15px;
+  }
+  ::-webkit-scrollbar-thumb {
+	  background: var(--color_50);
+  }
+  ::-webkit-scrollbar-track {
+	  background: var(--color_90);
+  }
+  ::-webkit-scrollbar-corner {
+	  background: rgba(255, 255, 255, 0);
+  }
+    #navigation {
+        width: 100%;
+        height: 5vh;
+        position:unset;
+        display: flex;
+        align-items: center;
+        justify-content:space-evenly;
+        background: #F0F0F0;
+        box-shadow: 0 0 1px #000;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+       
+    }
+    
+  
+
+   
+    #navigation * {
+        text-transform: uppercase;
+        font-family: Roboto;
+        font-weight: bold;
+    }
+    #navigation > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 200px;
+        height: 50px;
+        font-family: Roboto;
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+    }
+    #navigation > span > h1 {
+        text-align: center;
+        cursor: default;
+        font-size: 0;
+        transition: .2s ease font-size;
+    }
+    #navigation.sticky > span > h1 {
+        font-size: 1.5em;
+    }
+    #navigation > span > h1 > span {
+        font-size: 0px;
+        font-weight: normal;
+        text-align: center;
+        transition: .5s ease opacity;
+        opacity: 0;
+        display: block;
+    }
+
+    #navigation > span > h1:hover > span {
+        font-size: 10px;
+        opacity: 1;
+    }
+
+    #navigation > span > a {
+        background-image: url("./media/Images/Misc/FinalDex/FinalDex.png");
+        width: 50px;
+        height: 100%; 
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin: 5px;
+    }
+    #navigation > span > a:hover {
+        filter:brightness(1.1);
+    }
+    #navigation > span > a:active {
+        background-image: url("./media/Images/Misc/FinalDex/FinalDex2.png");
+    }
+    #navigation > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+   
+    #navigation > div > button {
+        cursor: pointer;
+    }
+    #navigation > div > button:hover {
+        text-decoration: underline;
+    }
+    #navigation > div > button:active {
+        color: darkgray;
+        text-decoration: underline;
+    }
+    
+    
+    #navigation > div > div {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        background: blue;
+    }
+    #navigation > div > div.active {
+        display: flex;
+    }
+
+
+    #gameslist {
+        width: 100%;
+        height: 95vh;
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        position: relative;
+    }
+    #gameslist > span {
+        position: absolute;
+        top: 1vh;
+        left: 1vw;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        text-align: center;
+        font-size: 40px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        z-index: 10;
+        cursor: pointer;
+        transition: none;
+        transition-delay: none;
+        opacity: 0;
+        user-select: none;
+    }
+    #gameslist > span.inactive {
+        opacity: 0;
+    }
+    #gameslist > span.active {
+        opacity: 1;
+        transition: 1s ease opacity;
+        transition-delay: 3s;
+    }
+    #gameslist > span:hover {
+        color: white;
+    }
+    #gameslist > button {
+        width: 10vw;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        box-shadow: 0 0 1px #000;
+        transition: 0.2s ease width;
+        transition-delay: 0.2s;
+        flex-direction: column;
+        min-width: 50px;
+        
+    }
+    #gameslist > button:not(.active) {
+        cursor: pointer;
+    }
+    #gameslist > button.active,
+    #gameslist > button.inactive {
+        transition: 1s ease width;
+        transition-delay: 2s;
+        min-width: unset;
+    }
+    #gameslist > button.active {
+        width: 100%;
+    }
+    #gameslist > button.inactive {
+        width: 0;
+    }
+
+    #gameslist > button.active > img:not([name]) {
+        animation: blinks 0.5s normal linear;
+        animation-delay: 0.5s;
+    }
+    #gameslist > button > span {
+        background: black;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        opacity: 0.2;
+        transition: 0.2s ease opacity;
+    }
+    
+    #gameslist > button > img:not([name="Art"]) {
+        width: 90%;
+        object-fit: scale-down;
+        z-index: 5;
+        max-width: 20vw;
+        max-height: 40vh;
+    }
+    #gameslist > button > img[name*="Art"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.5;
+    }
+    #gameslist > button > img[name*="Art-Extra"] {
+        opacity: 0.7;
+        z-index: 4;
+    }
+    #gameslist > button > p {
+        display: none;
+        text-align: center;
+        opacity: 0;
+        transition: none;
+        transition-delay: none;
+        z-index: 5;
+        width: 30%;
+    }
+    #gameslist > button.active > p {
+        display: block;
+        opacity: 1;
+        transition: 1s ease opacity;
+        transition-delay: 4s;
+    }
+    #gameslist > button.inactive > p {
+        opacity: 0;
+    }
+    
+  
+    #gameslist > button:not(.active,.progress,.inactive):hover,
+    #gameslist > button:not(.active,.progress,.inactive):focus {
+        width: 50%;
+    }
+
+    #gameslist > button:not(.active):hover > span {
+        opacity: 0;
+    }
+    #gameslist > button:not(.active):hover > img:not([name*="Art"]) {
+        animation: opafade 1s infinite linear;
+    }
+
+    @keyframes opafade {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.98);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+  
+    @keyframes blinks {
+        0% {
+            filter: brightness(1) contrast(1);
+        }
+        50% {
+            filter: brightness(1.2) contrast(1.2);
+        }
+        100% {
+            filter: brightness(1) contrast(1);
+        }
+    }
+  
+
+#home {
+    margin-top: 5vh;
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto;
+    font-weight: bold;
+    flex-direction: column;
+    background:gainsboro;
+    box-shadow: 0 0 1px #000;
+    font-size: 20px;
+    position: relative;
+    background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
+
+}
+#home > h5 {
+    padding: 10px 0;
+    font-weight: normal
+}
+#home > h1,
+#home > h5 {
+    transition: 5s ease opacity;
+    opacity: 0;
+}
+#home.active > h1,
+#home.active > h5 {
+    opacity: 1;
+}
+#home > h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 80px;
+}
+#home > h1,
+#navigation > span > h1 > p {
+    background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -ms-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -o-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: linear-gradient(to right, #3F3F3F, #7F7F7F);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+#home > span {
+    font-weight: normal;
+    font-size: 12px;
+    position: absolute;
+    bottom: 2px;
+    right: 15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="navigation">
+    <span><a href="main.html"></a><h1><span>Version 1.0.0</span><p>FINALDEX</p></h1></span>
+    <div><button>Games List</button></div>
+    <div><button>FAQ</button></div>
+    <div><button>Submit a Bug</button></div>
+    <div><button>Changelog</button></div>
+    <div><button>Sources</button></div>
+</section>
+<div id="home">
+    <h1>FinalDex</h1>
+    <h5>A Pokémon Checklist with In-Game Data for all the Mainline Pokémon Games</h5>
+    <span>Version 1.0.0</span>
+</div>
+<div id="gameslist"></div>
+
+<script>
+
+
+function build() {
+
+var GamesFull = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
+var GamesSimple = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
+var GamesArt = ["Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","","","","Kanto_FRLG","Kanto_FRLG","","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","Johto_HGSS","Johto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
+var GamesDescription = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+
+
+var x = document.createElement("span");
+x.innerHTML = "‹";
+x.setAttribute("onclick","line('x')");
+document.querySelector("#gameslist").appendChild(x)
+
+
+for (var i = 0; i < GamesFull.length; i++) {
+    var x = i + 1;
+    var btn = document.createElement("button");
+    var sp = document.createElement("span");
+    var p = document.createElement("p");
+
+    btn.name = x;
+    btn.setAttribute("onclick","line("+x+")");
+    p.innerHTML = "Lorem Ipsum";
+
+    document.querySelector("#gameslist").appendChild(btn)
+    btn.appendChild(sp)
+
+    if (GamesArt[i] != "") {
+        var art = document.createElement("img");
+        art.src = "C:/Users/Avaris/Downloads/mapart/" + GamesArt[i] + ".png";
+        art.name = "Art";
+        btn.appendChild(art)
+    }
+
+    var title = document.createElement("img");
+    title.src = "./media/Images/Misc/Title/Text/" + GamesSimple[i] + ".png";
+    btn.appendChild(title)
+
+    btn.appendChild(p)
+}
+
+
+}
+
+
+
+function line(i) {
+
+    var cosp = document.querySelector("#gameslist > span");
+    var as0 = document.querySelectorAll("#gameslist > button");
+    var as1 = document.querySelectorAll("#gameslist > button:not([name='"+i+"'])");
+    var as2 = document.querySelectorAll("#gameslist > button[name='"+i+"']");
+
+
+    if (i == "x") {
+        for (var q = 0; q < as0.length; q++) {
+            as0[q].setAttribute("onclick","line("+q+")");
+        }
+
+        for (var u = 0; u < as0.length; u++) {
+            as0[u].classList.remove("inactive");
+            as0[u].classList.remove("active");
+        }
+
+        cosp.classList.remove("active");
+        cosp.classList.add("inactive");
+    }
+    else {
+        for (var q = 0; q < as0.length; q++) {
+            as0[q].removeAttribute("onclick");
+        }
+        for (var q = 0; q < as1.length; q++) {
+            as1[q].classList.add("inactive");
+        }
+        for (var q = 0; q < as2.length; q++) {
+            as2[q].classList.add("active");
+        }
+
+        cosp.classList.remove("inactive");
+        cosp.classList.add("active");
+    }
+
+}
+
+
+
+document.querySelector("#home").classList.add("active");
+build();
+
+
+
+
+
+
+
+$(document).ready(function() {
+		// grab the initial top offset of the navigation 
+		var stickyNavTop = $('#navigation').offset().top;
+		
+		// our function that decides weather the navigation bar should have "fixed" css position or not.
+		var stickyNav = function(){
+			var scrollTop = $(window).scrollTop(); // our current vertical position from the top
+				 
+			// if we've scrolled more than the navigation, change its position to fixed to stick to top,
+			// otherwise change it back to relative
+			if (scrollTop > stickyNavTop) {
+				$('#navigation').addClass('sticky');
+			} else {
+				$('#navigation').removeClass('sticky');
+			}
+		};
+	
+		stickyNav();
+		// and run it again every time you scroll
+		$(window).scroll(function() {
+			stickyNav();
+		});
+	});
+</script>
+
+</body>
+
+</html>
