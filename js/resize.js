@@ -32,7 +32,7 @@ function resizeDiv() {
 			img[i].style.margin = "5%";
 			name[i].style.display = "none";
 		}
-		if (slider.value > sliderSwitch) {
+		if (slider.value >= sliderSwitch) {
 			main[i].style.display = containMainDefaultDisplay;
 			img[i].style.height = containImgDefaultHeight;
 			img[i].style.margin = containImgDefaultMargin;
