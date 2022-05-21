@@ -77,6 +77,26 @@
 	--typeDragon:#0A6DC4;
 	--typeDark:#5A5366;
 	--typeFairy:#EC8FE6;
+	--typeUnknown:#68A090;
+	--typePhysical:#C92112;
+	--typeSpecial:#6890F0;
+	--typeStatus:#787878;
+
+	--eggMonster:#D25064;
+	--eggWater1:#97B5FD;
+	--eggBug:#AAC22A;
+	--eggFlying:#B29AFA;
+	--eggField:#E0C068;
+	--eggFairy:#FFC8F0;
+	--eggGrass:#82D25A;
+	--eggHuman-Like:#D29682;
+	--eggWater3:#5876BE;
+	--eggMineral:#7A6252;
+	--eggAmorphous:#8A8A8A;
+	--eggWater2:#729AFA;
+	--eggDitto:#A664BF;
+	--eggDragon:#7A42FF;
+	--eggUndiscovered:#333333;
 
 	--statHP:#FF5959;
 	--statAtk:#F5AC78;
