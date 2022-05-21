@@ -2,25 +2,76 @@ function search() {
 
 $('#searchbar').on('keyup', function() {
     var searchVal = $(this).val();
-    var filterItems = $('#contain div');
-
+    var filterItems = $('#contain div > div');
+    this.style.color = "var(--fontDark)";
+    
     var uncheck = document.querySelectorAll('.filterby input:checked');
     for (var i = 0; i < uncheck.length; i++) {
         uncheck[i].checked = false;
     }
 
-    if (searchVal != '') {
-        filterItems.addClass('hidden');
-        $('[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass('hidden');
-    } else {
-        filterItems.removeClass('hidden');
+    var searchoptions = ["evolution::","type::","ability::","catchrate::","catchrate:>","catchrate:<","eggcycle::","eggcycle:>","eggcycle:<","genderratio::","egggroup::","expyield::","expyield:>","expyield:<","expyieldcategory::","levelrate::","levelrate:>","levelrate:<","helditem::","statshp::","statshp:>","statshp:<","statsatk::","statsatk:>","statsatk:<","statsdef::","statsdef:>","statsdef:<","statsspatk::","statsspatk:>","statsspatk:<","statsspdef::","statsspdef:>","statsspdef:<","statsspeed::","statsspeed:>","statsspeed:<","statstotal::","statstotal:>","statstotal:<","evyieldhp::","evyieldhp:>","evyieldhp:<","evyieldatk::","evyieldatk:>","evyieldatk:<","evyielddef::","evyielddef:>","evyielddef:<","evyieldspatk::","evyieldspatk:>","evyieldspatk:<","evyieldspdef::","evyieldspdef:>","evyieldspdef:<","evyieldspeed::","evyieldspeed:>","evyieldspeed:<","evyieldtotal::","evyieldtotal:>","evyieldtotal:<","variant::"];
+    
+    if (Generation <= 2 || GameID == 31 || GameID == 32) {
+        searchoptions = searchoptions.filter(item => !item.includes("ability"));
     }
+
+    var searchspec;
+
+    for (var i = 0; i < searchoptions.length; i++) {
+        if (searchVal.includes(searchoptions[i])) {
+            searchspec = searchoptions[i];
+        }
+    }
+
+
+        if (searchVal.toLowerCase().includes("::") && searchVal.toLowerCase().includes(searchspec)) {
+            filterItems.addClass('hidden');
+
+            if (searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
+                $('#contain div > div[data-search-' + searchspec.split("::")[0].toLowerCase() + '="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
+            }
+            else {
+                $('#contain div > div[data-search-' + searchspec.split("::")[0].toLowerCase() + '*="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
+            }
+
+            this.style.color = "var(--colorRed)";
+        }
+        else if (searchVal.toLowerCase().includes(":>") && searchVal.toLowerCase().includes(searchspec)) {
+            for (var q = 0; q < filterItems.length; q++) {
+                filterItems[q].classList.add("hidden");
+                if (parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":>")[0])) >= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
+                    filterItems[q].classList.remove('hidden');
+                }
+            }
+            this.style.color = "var(--colorRed)";
+
+        }
+        else if (searchVal.toLowerCase().includes(":<") && searchVal.toLowerCase().includes(searchspec)) {
+            for (var q = 0; q < filterItems.length; q++) {
+                filterItems[q].classList.add("hidden");
+                if (parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":<")[0])) <= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
+                    filterItems[q].classList.remove('hidden');
+                }
+            }
+            this.style.color = "var(--colorRed)";
+        }
+        else if (searchVal.toLowerCase() != '') {
+            filterItems.addClass('hidden');
+            $('#contain div > div[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass('hidden');
+        } 
+        else {
+            filterItems.removeClass('hidden');
+        }
+
+
+
     count();
 });
 
 
 
-if (Generation >= 3) {
+if (Ability.length >= 1) {
     $('#ability-options-search input').on('keyup', function() {
         var searchVal = $(this).val();
         var filterItems = $('#ability-options label');
@@ -37,7 +88,6 @@ if (Generation >= 3) {
 $('#move-options-search input').on('keyup', function() {
     var searchVal = $(this).val();
     var filterItems = $('#move-options label');
-    var labels = document.querySelectorAll("#move-options label");
     this.style.color = "var(--fontDark)";
 
     if (searchVal.toLowerCase().includes('type::')) {
@@ -81,55 +131,55 @@ $('#move-options-search input').on('keyup', function() {
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('pp:>')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-pp")) >= parseInt(searchVal.toLowerCase().split("pp:>")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-pp")) >= parseInt(searchVal.toLowerCase().split("pp:>")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('pp:<')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-pp")) <= parseInt(searchVal.toLowerCase().split("pp:<")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-pp")) <= parseInt(searchVal.toLowerCase().split("pp:<")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('power:>')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-power")) >= parseInt(searchVal.toLowerCase().split("power:>")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-power")) >= parseInt(searchVal.toLowerCase().split("power:>")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('power:<')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-power")) <= parseInt(searchVal.toLowerCase().split("power:<")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-power")) <= parseInt(searchVal.toLowerCase().split("power:<")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('accuracy:>')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-accuracy").replaceAll("%","")) >= parseInt(searchVal.toLowerCase().split("accuracy:>")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-accuracy").replaceAll("%","")) >= parseInt(searchVal.toLowerCase().split("accuracy:>")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
     }
     else if (searchVal.toLowerCase().includes('accuracy:<')) {
-        for (var i = 0; i < labels.length; i++) {
-            labels[i].classList.add("hidden");
-            if (parseInt(labels[i].getAttribute("data-search-accuracy").replaceAll("%","")) <= parseInt(searchVal.toLowerCase().split("accuracy:<")[1].replaceAll(" ",""))) {
-                labels[i].classList.remove('hidden');
+        for (var i = 0; i < filterItems.length; i++) {
+            filterItems[i].classList.add("hidden");
+            if (parseInt(filterItems[i].getAttribute("data-search-accuracy").replaceAll("%","")) <= parseInt(searchVal.toLowerCase().split("accuracy:<")[1].replaceAll(" ",""))) {
+                filterItems[i].classList.remove('hidden');
             }
         }
         this.style.color = "var(--colorRed)";
@@ -201,7 +251,7 @@ function exitSearch() {
     }
 }
 
-if (Generation >= 3) {
+if (Ability.length >= 1) {
 document.querySelector("#ability-search-exit").addEventListener("click", exitAbilitySearch);
 
 function exitAbilitySearch() {
