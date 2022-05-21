@@ -44,6 +44,10 @@ for (var q = 0; q < GamedataNavigation.length; q++) {
     gamedataNavigation.appendChild(gamedataNavigationInput);
     gamedataNavigation.appendChild(gamedataNavigationLabel);
 
+    if (q == 0) {
+        gamedataNavigationInput.setAttribute("checked","");
+    }
+
     
     gamedataNavigationInput.addEventListener("click", gamedataNavSelector);
 }
@@ -114,6 +118,7 @@ for (var u = 0; u < mechanicSub.length; u++) {
 
 var x = u + 1;
 
+
 var gamedataMechanicAside1OptionsSubInput = document.createElement("input");
 var gamedataMechanicAside1OptionsSubLabel = document.createElement("label");
 gamedataMechanicAside1OptionsSubInput.setAttribute("type","radio");
@@ -123,6 +128,10 @@ gamedataMechanicAside1OptionsSubInput.setAttribute("autocomplete","off");
 gamedataMechanicAside1OptionsSubInput.setAttribute("value",u)
 gamedataMechanicAside1OptionsSubLabel.setAttribute("for","mechanic-options-sub-selector-" + x);
 gamedataMechanicAside1OptionsSubLabel.innerText = mechanicSub[u];
+
+if (u == 0) {
+    gamedataMechanicAside1OptionsSubInput.setAttribute("checked","");
+}
 
 gamedataMechanicAside1OptionsSub.appendChild(gamedataMechanicAside1OptionsSubInput);
 gamedataMechanicAside1OptionsSub.appendChild(gamedataMechanicAside1OptionsSubLabel);
@@ -214,6 +223,10 @@ for (var i = 0; i < mechanicOptionsTitle.length; i++) {
             gamedataMechanicAside3Content.innerHTML = mechanicOptions[this.alt][this.value];
             gamedataMechanicAside4IconImage.src = "./media/Images/Misc/FinalDex/" + mechanicOptionsTitle[this.alt][this.value] + ".png";
             gamedataMechanicAside4IconImage.style.display = "unset";
+        }
+
+        if (i == 0 && q == 0) {
+            gamedataMechanicAside1OptionsLabel.click();
         }
     }
 
@@ -321,7 +334,7 @@ if (ExclusivePokémonExist.includes("true")) {
             if (finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]] != undefined) {
                 var Exclusive = document.createElement("li");
                 var ExclusiveImg = document.createElement("img");
-                ExclusiveImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonID(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]) + ".png";
+                ExclusiveImg.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/" + ImageType_Name[0] + "/" + getPokémonMediaPath(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]) + ".png";
                 ExclusiveImg.setAttribute("title",finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]);
                 ExclusiveImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
                 gamedataExclusiveAside3PokContent.appendChild(Exclusive);
@@ -447,6 +460,9 @@ for (var q = 0; q < exclusiveOptions.length; q++) {
         for (var q = 0; q < exclusiveContent.length; q++) {
             exclusiveContent[q].style.display = "flex";
         }
+    }
+    if (q == 0) {
+        gamedataExclusiveAside1OptionsLabel.click();
     }
 }
 // Exclusives End
@@ -1306,6 +1322,10 @@ for (var q = 0; q < typeOptionsTitle.length; q++) {
             typechartContent[q].style.display = "flex";
         }
     }
+
+    if (q == 0) {
+        gamedataTypeAside1OptionsLabel.click();
+    }
 }
 // Types End
 
@@ -1356,28 +1376,6 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 var stopwatchcountdown = ["stopwatch","countdown"];
-
-for (var q = 0; q < stopwatchcountdown.length; q++) {
-    var x = q + 1;
-
-    var gamedataToolAside3TimerSelector = document.createElement("div");
-    var gamedataToolAside3TimerSelectorInput = document.createElement("input");
-    var gamedataToolAside3TimerSelectorLabel = document.createElement("label");
-
-    gamedataToolAside3TimerSelector.setAttribute("id","timer-selector");
-    gamedataToolAside3TimerSelectorInput.setAttribute("type","radio");
-    gamedataToolAside3TimerSelectorInput.setAttribute("id","timerselector" + x);
-    gamedataToolAside3TimerSelectorInput.setAttribute("name","timerselector");
-    gamedataToolAside3TimerSelectorInput.setAttribute("autocomplete","off");
-    gamedataToolAside3TimerSelectorLabel.setAttribute("for","timerselector" + x);
-    gamedataToolAside3TimerSelectorLabel.innerText = capitalizeFirstLetter(stopwatchcountdown[q]);
-
-    gamedataToolAside3TimerSelectorOuter.appendChild(gamedataToolAside3TimerSelector);
-    gamedataToolAside3TimerSelector.appendChild(gamedataToolAside3TimerSelectorInput);
-    gamedataToolAside3TimerSelector.appendChild(gamedataToolAside3TimerSelectorLabel);
-
-    gamedataToolAside3TimerSelectorInput.addEventListener("click", timerSelector);   
-}
 
 
 for (var q = 0; q < stopwatchcountdown.length; q++) {
@@ -1457,6 +1455,34 @@ for (var q = 0; q < stopwatchcountdown.length; q++) {
     gamedataToolAside3TimerOuter.appendChild(gamedataToolAside3TimerLaps);
     gamedataToolAside3TimerOuter.appendChild(gamedataToolAside3TimerReset);
 }
+
+for (var q = 0; q < stopwatchcountdown.length; q++) {
+    var x = q + 1;
+
+    var gamedataToolAside3TimerSelector = document.createElement("div");
+    var gamedataToolAside3TimerSelectorInput = document.createElement("input");
+    var gamedataToolAside3TimerSelectorLabel = document.createElement("label");
+
+    gamedataToolAside3TimerSelector.setAttribute("id","timer-selector");
+    gamedataToolAside3TimerSelectorInput.setAttribute("type","radio");
+    gamedataToolAside3TimerSelectorInput.setAttribute("id","timerselector" + x);
+    gamedataToolAside3TimerSelectorInput.setAttribute("name","timerselector");
+    gamedataToolAside3TimerSelectorInput.setAttribute("autocomplete","off");
+    gamedataToolAside3TimerSelectorLabel.setAttribute("for","timerselector" + x);
+    gamedataToolAside3TimerSelectorLabel.innerText = capitalizeFirstLetter(stopwatchcountdown[q]);
+
+    gamedataToolAside3TimerSelectorOuter.appendChild(gamedataToolAside3TimerSelector);
+    gamedataToolAside3TimerSelector.appendChild(gamedataToolAside3TimerSelectorInput);
+    gamedataToolAside3TimerSelector.appendChild(gamedataToolAside3TimerSelectorLabel);
+
+    if (q == 0) {
+        gamedataToolAside3TimerSelectorLabel.click();
+    }
+
+    gamedataToolAside3TimerSelectorInput.addEventListener("click", timerSelector);   
+}
+
+
 
 var gamedataToolAside3RNGOuter = document.createElement("div");
 var gamedataToolAside3RNG = document.createElement("div");
@@ -1542,6 +1568,7 @@ for (var q = 0; q < toolOptionsTitle.length; q++) {
     gamedataToolAside1OptionsLabel.innerHTML = toolOptionsTitle[q];
     gamedataToolAside1Options.appendChild(gamedataToolAside1OptionsInput);
     gamedataToolAside1Options.appendChild(gamedataToolAside1OptionsLabel);
+   
 
 
     gamedataToolAside1OptionsInput.addEventListener("click", toolOptionsSelector);
@@ -1560,13 +1587,18 @@ for (var q = 0; q < toolOptionsTitle.length; q++) {
             toolContent[q].style.display = "block";
         }
     }
+
+    if (q == 0) {
+        gamedataToolAside1OptionsLabel.click();
+    }
+
 }
 // Tools End
 
 
 
 // Abilities Start
-if (Generation >= 3 && GameID != 31 && GameID != 32) {
+if (Ability.length >= 1) {
 var gamedataAbilityOuter = document.createElement("div");
 var gamedataAbilityAside1 = document.createElement("aside");
 var gamedataAbilityAside1OptionsTitleOuter = document.createElement("div");
@@ -1669,6 +1701,7 @@ gamedataAbilityAside3Description.appendChild(gamedataAbilityAside3EffectTitle);
 gamedataAbilityAside3Description.appendChild(gamedataAbilityAside3EffectText);
 gamedataAbilityOuter.appendChild(gamedataAbilityAside4);
 
+var firstabilityiteration;
 
 for (var q = 0; q < finaldataAbility.length; q++) {
     for (var u = 0; u < finaldataAbility.length; u++) {
@@ -1709,7 +1742,7 @@ for (var q = 0; q < finaldataAbility.length; q++) {
             sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
         }
 
-        var AbilityResults = getPokémonData(finaldataAbilityAll,finaldataAbility[this.value][JSONPath_AbilityReference+"_"+"Name"],sidebarAbilityListFull);
+        var AbilityResults = getPokémonData(finaldataPokémonAbility,finaldataAbility[this.value][JSONPath_AbilityReference+"_"+"Name"],sidebarAbilityListFull);
         for (var i = 0; i < AbilityResults.length; i++) {
             var gamedataAbilityAside4SidebarLi = document.createElement("li");
             gamedataAbilityAside4SidebarUl.appendChild(gamedataAbilityAside4SidebarLi);
@@ -1718,17 +1751,19 @@ for (var q = 0; q < finaldataAbility.length; q++) {
                     var gamedataAbilityAside4SidebarLiImgOuter = document.createElement("div");
                     var gamedataAbilityAside4SidebarLiImg = document.createElement("img");
                     gamedataAbilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + AbilityResults[i]["Folder Name"] + AbilityResults[i]["File Name"] + ".png";
-                    gamedataAbilityAside4SidebarLiImg.value = getPokémonID(AbilityResults[i]["Pokémon"])
                     gamedataAbilityAside4SidebarLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
                     if (AbilityResults[i]["Form"] != undefined) {
                         gamedataAbilityAside4SidebarLiImg.setAttribute("title",AbilityResults[i]["Form"])
+                        gamedataAbilityAside4SidebarLiImg.value = getPokémonInt(AbilityResults[i]["Form"]);
                     }
                     else {
-                        gamedataAbilityAside4SidebarLiImg.setAttribute("title",AbilityResults[i]["Pokémon"])  
+                        gamedataAbilityAside4SidebarLiImg.setAttribute("title",AbilityResults[i]["Pokémon"]);
+                        gamedataAbilityAside4SidebarLiImg.value = getPokémonInt(AbilityResults[i]["Pokémon"]);
                     }
                     gamedataAbilityAside4SidebarLi.appendChild(gamedataAbilityAside4SidebarLiImgOuter);
                     gamedataAbilityAside4SidebarLiImgOuter.appendChild(gamedataAbilityAside4SidebarLiImg);
-                    gamedataAbilityAside4SidebarLiImg.addEventListener("click", closeOpenModal2);
+                    gamedataAbilityAside4SidebarLiImg.addEventListener("click", function(){modalPokdata("open")});
+                    
                 }
                 else if (q != 0) {
                     var gamedataAbilityAside4SidebarLiTextOuter = document.createElement("span");
@@ -1739,14 +1774,24 @@ for (var q = 0; q < finaldataAbility.length; q++) {
                     if (AbilityResults[i][sidebarAbilityListFull[q - 1]] == finaldataAbility[this.value][JSONPath_AbilityReference+"_"+"Name"]) {
                         gamedataAbilityAside4SidebarLiText.classList.add("active");   
                     }
+                    else {
+                        gamedataAbilityAside4SidebarLiText.addEventListener("click", dataRedirect);
+                    }
+                    gamedataAbilityAside4SidebarLiText.setAttribute("name","ability");
                     gamedataAbilityAside4SidebarLiText.setAttribute("title",sidebarAbilityList[q])
                     gamedataAbilityAside4SidebarLi.appendChild(gamedataAbilityAside4SidebarLiTextOuter);
                     gamedataAbilityAside4SidebarLiTextOuter.appendChild(gamedataAbilityAside4SidebarLiText);
 
-                    gamedataAbilityAside4SidebarLiText.addEventListener("click", AbilityRedirect);
+
                 }
             }
         }
+    }
+
+
+    if (firstabilityiteration != true) {
+        firstabilityiteration = true;
+        gamedataAbilityAside1OptionsLabel.click();
     }
 }
 
@@ -1807,7 +1852,12 @@ gamedataMoveAside1OptionsTitleOuter.setAttribute("id","move-options-title");
 gamedataMoveAside1OptionsSearchOuter.setAttribute("id","move-options-search");
 gamedataMoveAside1OptionsSearch.setAttribute("type","text");
 gamedataMoveAside1OptionsSearch.setAttribute("id","move-search");
-gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [value/-]\ncategory:: [value/-]\npp:: [value/-]\npp:> [value/-]\npp:< [value/-]\npower:: [value/-]\npower:> [value/-]\npower:< [value/-]\naccuracy:: [value/-]\naccuracy:> [value/-]\naccuracy:< [value/-]\nmachine:: [value/-]\ncontact:: [y/n]\ntutor:: [y/n]");
+if (Generation == 8) {
+    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/fighting/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00/TR00]\ncontact:: [y/n]\ntutor:: [y/n]");
+}
+else {
+    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/fighting/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00]\ncontact:: [y/n]\ntutor:: [y/n]"); 
+}
 gamedataMoveAside1OptionsSearch.setAttribute("placeholder","Search Moves...");
 gamedataMoveAside1OptionsSearch.setAttribute("onfocus","this.placeholder=''");
 gamedataMoveAside1OptionsSearch.setAttribute("onblur","this.placeholder='Search Moves...'");
@@ -1818,14 +1868,14 @@ gamedataMoveAside1Options.setAttribute("id","move-options");
 gamedataMoveAside2.setAttribute("id","move-aside2");
 gamedataMoveAside2Title.classList.add("move-title");
 gamedataMoveAside2TitleID.innerText = "#";
-gamedataMoveAside2TitleName.innerText = "Moves";
+gamedataMoveAside2TitleName.innerText = "-";
 gamedataMoveAside2Debut.classList.add("move-debut")
-gamedataMoveAside2DebutText.innerText = "Introduced in Generation I";
+gamedataMoveAside2DebutText.innerText = "-";
 gamedataMoveAside3.setAttribute("id","move-aside3");
 gamedataMoveAside3Description.classList.add("move-description")
-gamedataMoveAside3DescriptionText.innerText = "The user attacks everything around it by swamping its surroundings with a giant wave. This can also be used for crossing water.";
+gamedataMoveAside3DescriptionText.innerText = "-";
 gamedataMoveAside3EffectTitle.innerText = "Effect";
-gamedataMoveAside3EffectText.innerHTML = "Surf inflicts damage and has no secondary effect.";
+gamedataMoveAside3EffectText.innerHTML = "-";
 gamedataMoveAside4.setAttribute("id","move-aside4");
 
 
@@ -1852,44 +1902,39 @@ gamedataMoveOuter.appendChild(gamedataMoveAside4);
 
 
 
-var gamedataMoveAside4Sidebar = document.createElement("div");
-var gamedataMoveAside4SidebarTitle = document.createElement("div");
-var gamedataMoveAside4SidebarTitleOption = document.createElement("li");
-
-gamedataMoveAside4Sidebar.classList.add("move-sidebar");
-gamedataMoveAside4SidebarTitle.classList.add("move-sidebar-title");
-
-
-gamedataMoveAside4.appendChild(gamedataMoveAside4Sidebar);
-gamedataMoveAside4Sidebar.appendChild(gamedataMoveAside4SidebarTitle);
-gamedataMoveAside4SidebarTitle.appendChild(gamedataMoveAside4SidebarTitleOption);
 
 
 
-var gamedataMoveAside4SidebarDescription = document.createElement("div");
 
-var gamedataMoveAside4SidebarDescriptionType = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionTypeText = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionTypeTextImg = document.createElement("img");
-var gamedataMoveAside4SidebarDescriptionTypeTextText = document.createElement("h4");
-var gamedataMoveAside4SidebarDescriptionTypeMove = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPA = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerPoints = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerPointsTitle = document.createElement("h3");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText = document.createElement("p");
-var gamedataMoveAside4SidebarDescriptionPPPAPower = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerTitle = document.createElement("h3");
-var gamedataMoveAside4SidebarDescriptionPPPAPowerText = document.createElement("p");
-var gamedataMoveAside4SidebarDescriptionPPPAAccuracy = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAAccuracyContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionPPPAAccuracyTitle = document.createElement("h3");
-var gamedataMoveAside4SidebarDescriptionPPPAAccuracyText = document.createElement("p");
 
-var gamedataMoveAside4SidebarDescriptionContact = document.createElement("div");
-var gamedataMoveAside4SidebarDescriptionContactContent = document.createElement("span");
-var gamedataMoveAside4SidebarDescriptionContactText = document.createElement("h4");
+var gamedataMoveAside3Sidebar = document.createElement("div");
+
+var gamedataMoveAside3SidebarLeft = document.createElement("div");
+
+var gamedataMoveAside3SidebarType = document.createElement("div");
+var gamedataMoveAside3SidebarTypeText = document.createElement("span");
+var gamedataMoveAside3SidebarTypeTextImg = document.createElement("img");
+var gamedataMoveAside3SidebarTypeTextText = document.createElement("h4");
+var gamedataMoveAside3SidebarTypeMove = document.createElement("span");
+var gamedataMoveAside3SidebarPPPA = document.createElement("div");
+var gamedataMoveAside3SidebarPPPAPowerPoints = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAPowerPointsContent = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAPowerPointsTitle = document.createElement("h3");
+var gamedataMoveAside3SidebarPPPAPowerPointsText = document.createElement("p");
+var gamedataMoveAside3SidebarPPPAPower = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAPowerContent = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAPowerTitle = document.createElement("h3");
+var gamedataMoveAside3SidebarPPPAPowerText = document.createElement("p");
+var gamedataMoveAside3SidebarPPPAAccuracy = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAAccuracyContent = document.createElement("span");
+var gamedataMoveAside3SidebarPPPAAccuracyTitle = document.createElement("h3");
+var gamedataMoveAside3SidebarPPPAAccuracyText = document.createElement("p");
+
+var gamedataMoveAside3SidebarRight = document.createElement("div");
+
+var gamedataMoveAside3SidebarContact = document.createElement("div");
+var gamedataMoveAside3SidebarContactContent = document.createElement("span");
+var gamedataMoveAside3SidebarContactText = document.createElement("p");
 
 
 
@@ -1898,222 +1943,100 @@ var gamedataMoveAside4SidebarDescriptionContactText = document.createElement("h4
 
 
 
-gamedataMoveAside4SidebarDescription.classList.add("move-sidebar-description");
+gamedataMoveAside3Sidebar.classList.add("move-sidebar");
 
-gamedataMoveAside4SidebarDescriptionType.classList.add("move-sidebar-description-type");
-gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title","");
-gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = "";
+gamedataMoveAside3SidebarType.classList.add("move-sidebar-type");
+gamedataMoveAside3SidebarTypeTextImg.setAttribute("title","");
+gamedataMoveAside3SidebarTypeTextText.innerText = "";
 
-gamedataMoveAside4SidebarDescriptionPPPA.classList.add("move-sidebar-description-pppa");
-gamedataMoveAside4SidebarDescriptionPPPAPowerPointsTitle.innerText = "PP";
-gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerText = "";
-gamedataMoveAside4SidebarDescriptionPPPAPowerTitle.innerText = "Power";
-gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "";
-gamedataMoveAside4SidebarDescriptionPPPAAccuracyTitle.innerText = "Accuracy";
-gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "";
+gamedataMoveAside3SidebarPPPA.classList.add("move-sidebar-pppa");
+gamedataMoveAside3SidebarPPPAPowerPointsTitle.innerText = "PP";
+gamedataMoveAside3SidebarPPPAPowerPointsText.innerText = "";
+gamedataMoveAside3SidebarPPPAPowerTitle.innerText = "Power";
+gamedataMoveAside3SidebarPPPAPowerText.innerText = "";
+gamedataMoveAside3SidebarPPPAAccuracyTitle.innerText = "Accuracy";
+gamedataMoveAside3SidebarPPPAAccuracyText.innerText = "";
 
-gamedataMoveAside4SidebarDescriptionContact.classList.add("move-sidebar-description-contact");
-gamedataMoveAside4SidebarDescriptionContactText.innerText = "";
-
-
+gamedataMoveAside3SidebarContact.classList.add("move-sidebar-contact");
+gamedataMoveAside3SidebarContactText.innerText = "";
 
 
 
 
-gamedataMoveAside4Sidebar.appendChild(gamedataMoveAside4SidebarDescription);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionType);
-gamedataMoveAside4SidebarDescriptionType.appendChild(gamedataMoveAside4SidebarDescriptionTypeText);
-gamedataMoveAside4SidebarDescriptionTypeText.appendChild(gamedataMoveAside4SidebarDescriptionTypeTextImg);
-gamedataMoveAside4SidebarDescriptionTypeText.appendChild(gamedataMoveAside4SidebarDescriptionTypeTextText);
-gamedataMoveAside4SidebarDescriptionType.appendChild(gamedataMoveAside4SidebarDescriptionTypeMove);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionPPPA);
-gamedataMoveAside4SidebarDescriptionPPPA.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPoints);
-gamedataMoveAside4SidebarDescriptionPPPAPowerPoints.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent);
-gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPointsTitle);
-gamedataMoveAside4SidebarDescriptionPPPAPowerPointsContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText);
-gamedataMoveAside4SidebarDescriptionPPPA.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPower);
-gamedataMoveAside4SidebarDescriptionPPPAPower.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerContent);
-gamedataMoveAside4SidebarDescriptionPPPAPowerContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerTitle);
-gamedataMoveAside4SidebarDescriptionPPPAPowerContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAPowerText);
-gamedataMoveAside4SidebarDescriptionPPPA.appendChild(gamedataMoveAside4SidebarDescriptionPPPAAccuracy);
-gamedataMoveAside4SidebarDescriptionPPPAAccuracy.appendChild(gamedataMoveAside4SidebarDescriptionPPPAAccuracyContent);
-gamedataMoveAside4SidebarDescriptionPPPAAccuracyContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAAccuracyTitle);
-gamedataMoveAside4SidebarDescriptionPPPAAccuracyContent.appendChild(gamedataMoveAside4SidebarDescriptionPPPAAccuracyText);
-gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionContact);
-gamedataMoveAside4SidebarDescriptionContact.appendChild(gamedataMoveAside4SidebarDescriptionContactContent);
-gamedataMoveAside4SidebarDescriptionContactContent.appendChild(gamedataMoveAside4SidebarDescriptionContactText);
 
 
-var gamedataMoveAside4SidebarRange = document.createElement("div");
-var gamedataMoveAside4SidebarRangeOuter = document.createElement("span");
-var gamedataMoveAside4SidebarRangeContent1 = document.createElement("span");
-var gamedataMoveAside4SidebarRangeContent2 = document.createElement("span");
-gamedataMoveAside4SidebarRange.classList.add("move-sidebar-range");
-gamedataMoveAside4Sidebar.appendChild(gamedataMoveAside4SidebarRange);
-gamedataMoveAside4SidebarRange.appendChild(gamedataMoveAside4SidebarRangeOuter);
-gamedataMoveAside4SidebarRangeOuter.appendChild(gamedataMoveAside4SidebarRangeContent1);
-gamedataMoveAside4SidebarRangeOuter.appendChild(gamedataMoveAside4SidebarRangeContent2);
+gamedataMoveAside3.appendChild(gamedataMoveAside3Sidebar);
+gamedataMoveAside3Sidebar.appendChild(gamedataMoveAside3SidebarLeft);
+gamedataMoveAside3Sidebar.appendChild(gamedataMoveAside3SidebarRight);
+gamedataMoveAside3SidebarLeft.appendChild(gamedataMoveAside3SidebarType);
+gamedataMoveAside3SidebarType.appendChild(gamedataMoveAside3SidebarTypeText);
+gamedataMoveAside3SidebarTypeText.appendChild(gamedataMoveAside3SidebarTypeTextImg);
+gamedataMoveAside3SidebarTypeText.appendChild(gamedataMoveAside3SidebarTypeTextText);
+gamedataMoveAside3SidebarType.appendChild(gamedataMoveAside3SidebarTypeMove);
+gamedataMoveAside3SidebarLeft.appendChild(gamedataMoveAside3SidebarPPPA);
+gamedataMoveAside3SidebarPPPA.appendChild(gamedataMoveAside3SidebarPPPAPowerPoints);
+gamedataMoveAside3SidebarPPPAPowerPoints.appendChild(gamedataMoveAside3SidebarPPPAPowerPointsContent);
+gamedataMoveAside3SidebarPPPAPowerPointsContent.appendChild(gamedataMoveAside3SidebarPPPAPowerPointsTitle);
+gamedataMoveAside3SidebarPPPAPowerPointsContent.appendChild(gamedataMoveAside3SidebarPPPAPowerPointsText);
+gamedataMoveAside3SidebarPPPA.appendChild(gamedataMoveAside3SidebarPPPAPower);
+gamedataMoveAside3SidebarPPPAPower.appendChild(gamedataMoveAside3SidebarPPPAPowerContent);
+gamedataMoveAside3SidebarPPPAPowerContent.appendChild(gamedataMoveAside3SidebarPPPAPowerTitle);
+gamedataMoveAside3SidebarPPPAPowerContent.appendChild(gamedataMoveAside3SidebarPPPAPowerText);
+gamedataMoveAside3SidebarPPPA.appendChild(gamedataMoveAside3SidebarPPPAAccuracy);
+gamedataMoveAside3SidebarPPPAAccuracy.appendChild(gamedataMoveAside3SidebarPPPAAccuracyContent);
+gamedataMoveAside3SidebarPPPAAccuracyContent.appendChild(gamedataMoveAside3SidebarPPPAAccuracyTitle);
+gamedataMoveAside3SidebarPPPAAccuracyContent.appendChild(gamedataMoveAside3SidebarPPPAAccuracyText);
+gamedataMoveAside3SidebarRight.appendChild(gamedataMoveAside3SidebarContact);
+gamedataMoveAside3SidebarContact.appendChild(gamedataMoveAside3SidebarContactContent);
+gamedataMoveAside3SidebarContactContent.appendChild(gamedataMoveAside3SidebarContactText);
 
-for (var q = 0; q < 6; q++) {
-    var gamedataMoveAside4SidebarRangeText = document.createElement("span");
-    if (q >= 0 && q <= 2) {
-        gamedataMoveAside4SidebarRangeText.innerText = "Enemy";
-        gamedataMoveAside4SidebarRangeContent1.appendChild(gamedataMoveAside4SidebarRangeText);
+
+
+
+
+
+var gamedataMoveAside4Learnset = document.createElement("div");
+
+gamedataMoveAside4Learnset.classList.add("move-learnset");
+
+gamedataMoveAside4.appendChild(gamedataMoveAside4Learnset);
+
+
+var gamedataMoveAside4LearnsetTitle = document.createElement("div");
+var gamedataMoveAside4LearnsetTitleText = document.createElement("h2");
+
+
+gamedataMoveAside4LearnsetTitle.classList.add("move-sidebar-title");
+
+gamedataMoveAside4LearnsetTitleText.innerText = "Learnset";
+
+gamedataMoveAside4Learnset.appendChild(gamedataMoveAside4LearnsetTitle);
+gamedataMoveAside4LearnsetTitle.appendChild(gamedataMoveAside4LearnsetTitleText);
+
+
+var MoveLearnsetOption = ["Level Up","HM"];
+
+
+var gamedataMoveAside4LearnsetContent = document.createElement("div");
+var gamedataMoveAside4LearnsetHeader = document.createElement("div");
+var gamedataMoveAside4LearnsetUl = document.createElement("ul");
+
+gamedataMoveAside4LearnsetContent.classList.add("move-learnset-content");
+gamedataMoveAside4LearnsetHeader.classList.add("move-learnset-header");
+
+gamedataMoveAside4Learnset.appendChild(gamedataMoveAside4LearnsetContent);
+gamedataMoveAside4LearnsetContent.appendChild(gamedataMoveAside4LearnsetHeader);
+gamedataMoveAside4LearnsetContent.appendChild(gamedataMoveAside4LearnsetUl);
+
+for (var q = 0; q < MoveLearnsetOption.length; q++) {
+    var gamedataMoveAside4LearnsetHeaderText = document.createElement("h6");
+    if (q == 0) {
+        gamedataMoveAside4LearnsetHeaderText.innerText = "Pokémon";
     }
-    else if (q == 3) {
-        gamedataMoveAside4SidebarRangeText.innerText = "User";
-        gamedataMoveAside4SidebarRangeContent2.appendChild(gamedataMoveAside4SidebarRangeText);
-    }
-    else if (q >= 4 && q <= 5) {
-        gamedataMoveAside4SidebarRangeText.innerText = "Ally";
-        gamedataMoveAside4SidebarRangeContent2.appendChild(gamedataMoveAside4SidebarRangeText);
-    }
-}
-
-
-
-
-var gamedataMoveAside4SidebarLearnset = document.createElement("div");
-var gamedataMoveAside4SidebarLearnsetFooter = document.createElement("div");
-
-
-gamedataMoveAside4SidebarLearnset.classList.add("move-sidebar-learnset");
-gamedataMoveAside4SidebarLearnsetFooter.classList.add("move-sidebar-learnset-footer");
-
-gamedataMoveAside4Sidebar.appendChild(gamedataMoveAside4SidebarLearnset);
-
-
-
-var sidebarMoveOption = ["Description","Learnset"];
-var sidebarMoveLearnsetOption = ["Level Up","HM"];
-
-for (var i = 0; i < sidebarMoveOption.length; i++) {
-
-
-    var gamedataMoveAside4SidebarLearnsetContent = document.createElement("div");
-    var gamedataMoveAside4SidebarLearnsetHeader = document.createElement("div");
-    var gamedataMoveAside4SidebarLearnsetUl = document.createElement("ul");
-
-    gamedataMoveAside4SidebarLearnsetContent.classList.add("move-sidebar-learnset-content");
-    gamedataMoveAside4SidebarLearnsetContent.setAttribute("name",i);
-    gamedataMoveAside4SidebarLearnsetHeader.classList.add("move-sidebar-learnset-header");
-
-    gamedataMoveAside4SidebarLearnset.appendChild(gamedataMoveAside4SidebarLearnsetContent);
-    gamedataMoveAside4SidebarLearnsetContent.appendChild(gamedataMoveAside4SidebarLearnsetHeader);
-    gamedataMoveAside4SidebarLearnsetContent.appendChild(gamedataMoveAside4SidebarLearnsetUl);
-
-    for (var q = 0; q < sidebarMoveLearnsetOption.length; q++) {
-        var gamedataMoveAside4SidebarLearnsetHeaderText = document.createElement("h6");
-        if (q == 0) {
-            gamedataMoveAside4SidebarLearnsetHeaderText.innerText = "Pokémon";
+        else {
+        gamedataMoveAside4LearnsetHeaderText.innerText = "Source";
         }
-         else {
-            gamedataMoveAside4SidebarLearnsetHeaderText.innerText = sidebarMoveLearnsetOption[i];
-         }
-        gamedataMoveAside4SidebarLearnsetHeader.appendChild(gamedataMoveAside4SidebarLearnsetHeaderText);
-    }
-
-    for (var q = 0; q < Math.floor(Math.random() * 100); q++) {
-        var gamedataMoveAside4SidebarLearnsetLi = document.createElement("li");
-        gamedataMoveAside4SidebarLearnsetUl.appendChild(gamedataMoveAside4SidebarLearnsetLi);
-        
-        var gamedataMoveAside4SidebarLearnsetLiImgOuter = document.createElement("div");
-        var gamedataMoveAside4SidebarLearnsetLiImg = document.createElement("img");
-        
-        var gamedataMoveAside4SidebarLearnsetLiTextOuter = document.createElement("span");
-        var gamedataMoveAside4SidebarLearnsetLiText = document.createElement("p");
-
-        gamedataMoveAside4SidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + [q+1] + ".png";
-        gamedataMoveAside4SidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
-        
-        gamedataMoveAside4SidebarLearnsetLiText.innerText = sidebarMoveLearnsetOption[i];
-        gamedataMoveAside4SidebarLearnsetLiText.setAttribute("title",sidebarMoveLearnsetOption[i])
-
-        gamedataMoveAside4SidebarLearnsetLi.appendChild(gamedataMoveAside4SidebarLearnsetLiImgOuter);
-        gamedataMoveAside4SidebarLearnsetLiImgOuter.appendChild(gamedataMoveAside4SidebarLearnsetLiImg);
-
-        gamedataMoveAside4SidebarLearnsetLi.appendChild(gamedataMoveAside4SidebarLearnsetLiTextOuter);
-        gamedataMoveAside4SidebarLearnsetLiTextOuter.appendChild(gamedataMoveAside4SidebarLearnsetLiText);
-        
-    }
-}
-
-
-gamedataMoveAside4SidebarLearnset.appendChild(gamedataMoveAside4SidebarLearnsetFooter);
-
-
-
-
-for (var i = 0; i < sidebarMoveLearnsetOption.length; i++) {
-
-    var gamedataMoveAside4SidebarLearnsetFooterOptionInput = document.createElement("input");
-    var gamedataMoveAside4SidebarLearnsetFooterOptionLabel = document.createElement("label");
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("type","radio");
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("value",i);
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("name","move-sidebar-learnset-option");
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("id","move-sidebar-learnset-option" + i);
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("autocomplete","off");
-    gamedataMoveAside4SidebarLearnsetFooterOptionLabel.setAttribute("for","move-sidebar-learnset-option" + i);
-    gamedataMoveAside4SidebarLearnsetFooterOptionLabel.innerText = sidebarMoveLearnsetOption[i];
-
-    gamedataMoveAside4SidebarLearnsetFooter.appendChild(gamedataMoveAside4SidebarLearnsetFooterOptionInput);
-    gamedataMoveAside4SidebarLearnsetFooter.appendChild(gamedataMoveAside4SidebarLearnsetFooterOptionLabel);
-
-    gamedataMoveAside4SidebarLearnsetFooterOptionInput.addEventListener("click", function() {
-
-            var uls = document.querySelectorAll(".move-sidebar-learnset-content");
-            for (var i = 0; i < uls.length; i++) {
-                uls[i].style.display = "none";
-            }
-            var ul = document.querySelector(".move-sidebar-learnset-content[name='" + this.value + "']");
-            ul.style.display = "block";
-    });
-
-
-    if (i == 0) {
-        gamedataMoveAside4SidebarLearnsetFooterOptionInput.setAttribute("checked","")
-        gamedataMoveAside4SidebarLearnsetFooterOptionInput.click();
-    }
-
-}
-
-
-
-
-
-for (var i = 0; i < sidebarMoveOption.length; i++) {
-    var gamedataMoveAside4SidebarTitleOptionInput = document.createElement("input");
-    var gamedataMoveAside4SidebarTitleOptionLabel = document.createElement("label");
-    gamedataMoveAside4SidebarTitleOptionInput.setAttribute("type","radio");
-    gamedataMoveAside4SidebarTitleOptionInput.setAttribute("value",i);
-    gamedataMoveAside4SidebarTitleOptionInput.setAttribute("name","move-sidebar-option");
-    gamedataMoveAside4SidebarTitleOptionInput.setAttribute("id","move-sidebar-option" + i);
-    gamedataMoveAside4SidebarTitleOptionInput.setAttribute("autocomplete","off");
-    gamedataMoveAside4SidebarTitleOptionLabel.setAttribute("for","move-sidebar-option" + i);
-    gamedataMoveAside4SidebarTitleOptionLabel.innerText = sidebarMoveOption[i];
-
-    gamedataMoveAside4SidebarTitleOption.appendChild(gamedataMoveAside4SidebarTitleOptionInput);
-    gamedataMoveAside4SidebarTitleOption.appendChild(gamedataMoveAside4SidebarTitleOptionLabel);
-
-
-
-    gamedataMoveAside4SidebarTitleOptionInput.addEventListener("click", function() {
-        if (this.value == 0) {
-            gamedataMoveAside4SidebarDescription.style.display = "flex";
-            gamedataMoveAside4SidebarLearnset.style.display = "none";
-            gamedataMoveAside4SidebarRange.style.display = "block";
-        }
-        else if (this.value == 1) {
-            gamedataMoveAside4SidebarDescription.style.display = "none";
-            gamedataMoveAside4SidebarLearnset.style.display = "block";
-            gamedataMoveAside4SidebarRange.style.display = "none";
-        }
-    });
-
-    if (i == 0) {
-        gamedataMoveAside4SidebarTitleOptionInput.setAttribute("checked","")
-        gamedataMoveAside4SidebarTitleOptionInput.click();
-    }
+    gamedataMoveAside4LearnsetHeader.appendChild(gamedataMoveAside4LearnsetHeaderText);
 }
 
 
@@ -2121,231 +2044,475 @@ for (var i = 0; i < sidebarMoveOption.length; i++) {
 
 
 
+
+
+
+
+
+
+
+
+
+var firstmoveiteration;
 
 
 for (var q = 0; q < finaldataMove.length; q++) {
-    var gamedataMoveAside1OptionsInput = document.createElement("input");
-    var gamedataMoveAside1OptionsLabel = document.createElement("label");
-    gamedataMoveAside1OptionsInput.setAttribute("type","radio");
-    gamedataMoveAside1OptionsInput.setAttribute("name","move-options");
-    gamedataMoveAside1OptionsInput.setAttribute("id","move-options-" + q);
-    gamedataMoveAside1OptionsInput.setAttribute("autocomplete","off");
-    gamedataMoveAside1OptionsInput.value = q;
-    gamedataMoveAside1OptionsLabel.setAttribute("for","move-options-" + q);
-    gamedataMoveAside1OptionsLabel.setAttribute("name","medium");
+    if (finaldataMoveLength[q] == true) {
 
-    if (finaldataMove[q]["Name"] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",finaldataMove[q]["Name"].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-name","");
-    }
-    if (finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-type",finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-type","");
-    }
-    if (finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-category",finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());  
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-category","");
-    }
-    if (finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp",finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp","");
-    }
-    if (finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-power",finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-power","");
-    }
-    if (finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy",finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy","");
-    }
-    if (finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","y");
-    }
-    else if (finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","n");
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","");
-    }
-    if (finaldataMoveTutor[q]["Tutor_"+JSONPath_MoveTutor] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","y");
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","n");
-    }
-    if (finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine",finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
-    }
-    else {
-        gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine","");
-    }
+        var gamedataMoveAside1OptionsInput = document.createElement("input");
+        var gamedataMoveAside1OptionsLabel = document.createElement("label");
+        gamedataMoveAside1OptionsInput.setAttribute("type","radio");
+        gamedataMoveAside1OptionsInput.setAttribute("name","move-options");
+        gamedataMoveAside1OptionsInput.setAttribute("id","move-options-" + q);
+        gamedataMoveAside1OptionsInput.setAttribute("autocomplete","off");
+        gamedataMoveAside1OptionsInput.value = q;
+        gamedataMoveAside1OptionsLabel.setAttribute("for","move-options-" + q);
+        gamedataMoveAside1OptionsLabel.setAttribute("name","medium");
 
-    gamedataMoveAside1OptionsLabel.innerText = finaldataMove[q]["Name"];
-    gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsInput);
-    gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsLabel);
-
-    gamedataMoveAside1OptionsInput.addEventListener("click", moveOptionsSelector);
-    function moveOptionsSelector() {
-        gamedataMoveAside2TitleName.innerText = finaldataMove[this.value]["Name"];
-        gamedataMoveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID"+"_"+JSONPath_MoveID];
-        if (finaldataMoveID[this.value]["ID Type"] != undefined) {
-            gamedataMoveAside2TitleID.title = finaldataMoveID[this.value]["ID Type"] + " Index number";
+        if (finaldataMove[q]["Name"+"_"+JSONPath_MoveName] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-name",finaldataMove[q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
         }
         else {
-            gamedataMoveAside2TitleID.title = "Index number";
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-name","");
         }
-        gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
-        gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
-        gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
-        gamedataMoveAside4SidebarDescriptionTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] + ".png";
-        gamedataMoveAside4SidebarDescriptionTypeTextImg.setAttribute("title",finaldataMoveType[this.value]["Type_"+JSONPath_MoveType]);
-        gamedataMoveAside4SidebarDescriptionTypeTextText.innerText = finaldataMoveType[this.value]["Type_"+JSONPath_MoveType];
-
-        var cate = gamedataMoveAside4SidebarDescriptionTypeMove.querySelectorAll(":scope > *");
-        for (var u = 0; u < cate.length; u++) {
-            cate[u].remove();
-        }
-
-        for (var u = 0; u < finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
-            var gamedataMoveAside4SidebarDescriptionTypeMoveImg = document.createElement("img");
-            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
-            gamedataMoveAside4SidebarDescriptionTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u] + ".png";
-            gamedataMoveAside4SidebarDescriptionTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u]);
-            gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveImg);
-
-            var gamedataMoveAside4SidebarDescriptionTypeMoveText = document.createElement("h4");
-            gamedataMoveAside4SidebarDescriptionTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u];
-            gamedataMoveAside4SidebarDescriptionTypeMove.appendChild(gamedataMoveAside4SidebarDescriptionTypeMoveText);
-        }
-
-        if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = "N/A";
-        }
-        else if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP];
+        if (finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-type",finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
         }
         else {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")</span>";
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-type","");
         }
-        
-        
-        if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = "N/A";
+        if (finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-category",finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());  
         }
         else {
-            gamedataMoveAside4SidebarDescriptionPPPAPowerText.innerText = finaldataMovePower[this.value]["Power_"+JSONPath_MovePower];
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-category","");
         }
-        if (finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
-            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = "N/A";
+        if (finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp",finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
         }
         else {
-            gamedataMoveAside4SidebarDescriptionPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy];
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-pp","");
         }
-        gamedataMoveAside4SidebarDescriptionContactText.innerText = finaldataMoveOtherMoves[this.value]["Contact"];
-        gamedataMoveAside4SidebarRangeOuter.setAttribute("title",finaldataMoveRange[this.value]["Range"]);
+        if (finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-power",finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
+        }
+        else {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-power","");
+        }
+        if (finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy",finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
+        }
+        else {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-accuracy","");
+        }
+        if (finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","y");
+        }
+        else if (finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","n");
+        }
+        else {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-contact","");
+        }
+        if (finaldataMoveTutor[q]["Tutor_"+JSONPath_MoveTutor] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","y");
+        }
+        else {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-tutor","n");
+        }
+        if (finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine",finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
+        }
+        else {
+            gamedataMoveAside1OptionsLabel.setAttribute("data-search-machine","");
+        }
 
+        gamedataMoveAside1OptionsLabel.innerText = finaldataMove[q]["Name"+"_"+JSONPath_MoveName];
+        gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsInput);
+        gamedataMoveAside1Options.appendChild(gamedataMoveAside1OptionsLabel);
 
-
-        var divs = gamedataMoveAside4SidebarDescription.querySelectorAll(":scope > div");
-        for (var u = 0; u < divs.length; u++) {
-            if (divs[u].getAttribute("class") == "move-sidebar-description-hmtm" || divs[u].getAttribute("class") == "move-sidebar-description-tutor" || divs[u].getAttribute("class") == "move-sidebar-description-other") {
-                divs[u].remove();
+        gamedataMoveAside1OptionsInput.addEventListener("click", moveOptionsSelector);
+        function moveOptionsSelector() {
+            gamedataMoveAside2TitleName.innerText = finaldataMove[this.value]["Name"+"_"+JSONPath_MoveName];
+            gamedataMoveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID"+"_"+JSONPath_MoveID];
+            if (finaldataMoveID[this.value]["ID Type"] != undefined) {
+                gamedataMoveAside2TitleID.title = finaldataMoveID[this.value]["ID Type"] + " Index number";
             }
-        }
-
-
-        if (Generation == 1) {
-            var othermove = ["Mirror Move","Sound-Based","Outside Battle"];
-        }
-        if (Generation == 2) {
-            var othermove = ["Protect","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
-        }
-        if (Generation >= 3 && Generation <= 4) {
-            var othermove = ["Protect","Magic Coat","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
-        }
-        if (Generation >= 5 && Generation <= 8) {
-            var othermove = ["Protect","Magic Coat/Magic Bounce","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
-        }
-
-        for (var u = 0; u < othermove.length; u++) {
-            if (finaldataMoveOtherMoves[this.value][othermove[u]] != undefined) {
-                var gamedataMoveAside4SidebarDescriptionOther = document.createElement("div");
-                var gamedataMoveAside4SidebarDescriptionOtherContent = document.createElement("span");
-                var gamedataMoveAside4SidebarDescriptionOtherText = document.createElement("h4");
-                gamedataMoveAside4SidebarDescriptionOther.classList.add("move-sidebar-description-other");
-                gamedataMoveAside4SidebarDescriptionOtherText.innerText = finaldataMoveOtherMoves[this.value][othermove[u]];
-                gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionOther);
-                gamedataMoveAside4SidebarDescriptionOther.appendChild(gamedataMoveAside4SidebarDescriptionOtherContent);
-                gamedataMoveAside4SidebarDescriptionOtherContent.appendChild(gamedataMoveAside4SidebarDescriptionOtherText);
+            else {
+                gamedataMoveAside2TitleID.title = "Index number";
             }
+            gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
+            gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
+            gamedataMoveAside3SidebarTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
+            gamedataMoveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] + ".png";
+            gamedataMoveAside3SidebarTypeTextImg.setAttribute("title",finaldataMoveType[this.value]["Type_"+JSONPath_MoveType]);
+
+            if (finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] == undefined) {
+                gamedataMoveAside3SidebarTypeTextImg.style.display = "none";
+                gamedataMoveAside3SidebarTypeTextText.style.display = "block";
+            }
+            else {
+                gamedataMoveAside3SidebarTypeTextImg.style.display = "block";
+                gamedataMoveAside3SidebarTypeTextText.style.display = "none";
+            }
+            gamedataMoveAside3SidebarTypeTextText.innerText = finaldataMoveType[this.value]["Type_"+JSONPath_MoveType];
+
+            var cate = gamedataMoveAside3SidebarTypeMove.querySelectorAll(":scope > *");
+            for (var u = 0; u < cate.length; u++) {
+                cate[u].remove();
+            }
+
+            for (var u = 0; u < finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
+                var gamedataMoveAside3SidebarTypeMoveImg = document.createElement("img");
+                gamedataMoveAside3SidebarTypeMoveImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
+                gamedataMoveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u] + ".png";
+                gamedataMoveAside3SidebarTypeMoveImg.setAttribute("title",finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u]);
+                gamedataMoveAside3SidebarTypeMove.appendChild(gamedataMoveAside3SidebarTypeMoveImg);
+
+                var gamedataMoveAside3SidebarTypeMoveText = document.createElement("h4");
+                gamedataMoveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_"+JSONPath_MoveCategory].split(",")[u];
+                gamedataMoveAside3SidebarTypeMove.appendChild(gamedataMoveAside3SidebarTypeMoveText);
+            }
+
+            if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] == undefined) {
+                gamedataMoveAside3SidebarPPPAPowerPointsText.innerHTML = "–";
+            }
+            else if (finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP] == undefined) {
+                gamedataMoveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP];
+            }
+            else {
+                gamedataMoveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[this.value]["PP Max_"+JSONPath_MovePP]+")</span>";
+            }
+            
+            
+            if (finaldataMovePower[this.value]["Power_"+JSONPath_MovePower] == undefined) {
+                gamedataMoveAside3SidebarPPPAPowerText.innerText = "–";
+            }
+            else {
+                gamedataMoveAside3SidebarPPPAPowerText.innerText = finaldataMovePower[this.value]["Power_"+JSONPath_MovePower];
+            }
+            if (finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
+                gamedataMoveAside3SidebarPPPAAccuracyText.innerText = "–";
+            }
+            else {
+                gamedataMoveAside3SidebarPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_"+JSONPath_MoveAccuracy];
+            }
+
+            if (finaldataMoveOtherMoves[this.value]["Contact"] == "Makes contact") {
+                gamedataMoveAside3SidebarContactText.innerHTML = "Makes <b>contact</b>";
+            }
+            else if (finaldataMoveOtherMoves[this.value]["Contact"] == "Does not make contact") {
+                gamedataMoveAside3SidebarContactText.innerHTML = "Does not make <b>contact</b>";
+            }
+
+            if (finaldataMoveOtherMoves[this.value]["Contact"].includes("not") || finaldataMoveOtherMoves[this.value]["Contact"].includes("Not")) {
+                gamedataMoveAside3SidebarContact.setAttribute("name","negative");
+            }
+            else {
+                gamedataMoveAside3SidebarContact.setAttribute("name","positive");
+            }
+
+
+
+
+            var divs = gamedataMoveAside3SidebarRight.querySelectorAll(":scope > div");
+            for (var u = 0; u < divs.length; u++) {
+                if (divs[u].getAttribute("class") == "move-sidebar-description-hmtm" || divs[u].getAttribute("class") == "move-sidebar-description-tutor" || divs[u].getAttribute("class") == "move-sidebar-description-other") {
+                    divs[u].remove();
+                }
+            }
+
+
+            if (Generation == 1) {
+                var othermove = ["Mirror Move","Sound-Based","Outside Battle"];
+            }
+            if (Generation == 2) {
+                var othermove = ["Protect","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+            }
+            if (Generation >= 3 && Generation <= 4) {
+                var othermove = ["Protect","Magic Coat","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+            }
+            if (Generation >= 5 && Generation <= 8) {
+                var othermove = ["Protect","Magic Coat/Magic Bounce","Snatch","Mirror Move","King's Rock","Sound-Based","Outside Battle"];
+            }
+
+            for (var u = 0; u < othermove.length; u++) {
+                if (finaldataMoveOtherMoves[this.value][othermove[u]] != undefined) {
+                    var gamedataMoveAside3SidebarOther = document.createElement("div");
+                    var gamedataMoveAside3SidebarOtherContent = document.createElement("span");
+                    var gamedataMoveAside3SidebarOtherText = document.createElement("p");
+                    gamedataMoveAside3SidebarOther.classList.add("move-sidebar-description-other");
+
+
+                    for (var q = 0; q < othermove.length; q++) {
+
+                        if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Affected by "+othermove[q]) {
+                            gamedataMoveAside3SidebarOtherText.innerHTML = "Affected by <b>"+othermove[q]+"</b>";
+                        }
+                        else if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Not affected by "+othermove[q]) {
+                            gamedataMoveAside3SidebarOtherText.innerHTML = "Not affected by <b>"+othermove[q]+"</b>";
+                        }
+                    }
+
+
+                    if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Usable outside of battle") {
+                        gamedataMoveAside3SidebarOtherText.innerHTML = "Usable <b>outside of battle</b>";
+                    }
+                    else if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Is a sound-based move") {
+                        gamedataMoveAside3SidebarOtherText.innerHTML = "Is a <b>sound-based</b> move";
+                    }
+                    else if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
+                        gamedataMoveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat and Magic Bounce</b>";
+                    }
+                    else if (finaldataMoveOtherMoves[this.value][othermove[u]] == "Not affected by Magic Coat") {
+                        gamedataMoveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
+                    }
+                 
+
+                    gamedataMoveAside3SidebarRight.appendChild(gamedataMoveAside3SidebarOther);
+                    gamedataMoveAside3SidebarOther.appendChild(gamedataMoveAside3SidebarOtherContent);
+                    gamedataMoveAside3SidebarOtherContent.appendChild(gamedataMoveAside3SidebarOtherText);
+
+                    if (finaldataMoveOtherMoves[this.value][othermove[u]].includes("not") || finaldataMoveOtherMoves[this.value][othermove[u]].includes("Not")) {
+                        gamedataMoveAside3SidebarOther.setAttribute("name","negative");
+                    }
+                    else {
+                        gamedataMoveAside3SidebarOther.setAttribute("name","positive");
+                    }
+                }
+            }
+            
+
+
+            if (finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine] != undefined) {
+                var gamedataMoveAside3SidebarHMTM = document.createElement("div");
+                var gamedataMoveAside3SidebarHMTMOuter = document.createElement("span");
+                var gamedataMoveAside3SidebarHMTMContent = document.createElement("span");
+                var gamedataMoveAside3SidebarHMTMTitle = document.createElement("h3");
+                var gamedataMoveAside3SidebarHMTMText = document.createElement("p");
+                gamedataMoveAside3SidebarHMTM.classList.add("move-sidebar-description-hmtm");
+                gamedataMoveAside3SidebarHMTMTitle.innerText = "Machine"
+                gamedataMoveAside3SidebarHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
+                gamedataMoveAside3SidebarRight.appendChild(gamedataMoveAside3SidebarHMTM);
+                gamedataMoveAside3SidebarHMTM.appendChild(gamedataMoveAside3SidebarHMTMOuter);
+                gamedataMoveAside3SidebarHMTMOuter.appendChild(gamedataMoveAside3SidebarHMTMContent);
+                gamedataMoveAside3SidebarHMTMContent.appendChild(gamedataMoveAside3SidebarHMTMTitle);
+                gamedataMoveAside3SidebarHMTMContent.appendChild(gamedataMoveAside3SidebarHMTMText);
+            }
+
+
+            if (finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor] != undefined) {
+                var gamedataMoveAside3SidebarTutor = document.createElement("div");
+                var gamedataMoveAside3SidebarTutorOuter = document.createElement("span");
+                var gamedataMoveAside3SidebarTutorContent = document.createElement("span");
+                var gamedataMoveAside3SidebarTutorTitle = document.createElement("h3");
+                var gamedataMoveAside3SidebarTutorText = document.createElement("p");
+                gamedataMoveAside3SidebarTutor.classList.add("move-sidebar-description-tutor");
+                gamedataMoveAside3SidebarTutorTitle.innerText = "Move Tutor";
+                gamedataMoveAside3SidebarTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
+                gamedataMoveAside3SidebarRight.appendChild(gamedataMoveAside3SidebarTutor);
+                gamedataMoveAside3SidebarTutor.appendChild(gamedataMoveAside3SidebarTutorOuter);
+                gamedataMoveAside3SidebarTutorOuter.appendChild(gamedataMoveAside3SidebarTutorContent);
+                gamedataMoveAside3SidebarTutorContent.appendChild(gamedataMoveAside3SidebarTutorTitle);
+                gamedataMoveAside3SidebarTutorContent.appendChild(gamedataMoveAside3SidebarTutorText);
+            }
+
+
+            var lis = gamedataMoveAside4LearnsetUl.querySelectorAll(":scope > li");
+            for (var u = 0; u < lis.length; u++) {
+                    lis[u].remove();
+            }
+
+            var learnsetlevelarr = [];
+
+            for (var q = 0; q < finaldataLearnsetLevel.length; q++) {
+                if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[this.value]["Name"+"_"+JSONPath_MoveName] && finaldataLearnsetLevelLength[q] == true) {
+                    var obj = new Object();
+                    obj["Pokémon"] = finaldataLearnsetLevel[q]["Pokémon"];
+                    if (finaldataLearnsetLevel[q]["Form"] != undefined) {
+                        obj["Form"] = finaldataLearnsetLevel[q]["Form"];
+                    }
+                    obj["Factor"] = finaldataLearnsetLevel[q]["Factor"];
+                    learnsetlevelarr.push(obj);
+         
+                }
+            }
+
+            learnsetlevelarr = learnsetlevelarr.filter(value => Object.keys(value).length !== 0);
+
+            learnsetlevelarr.sort(function (a, b) {
+                return parseInt(a["Factor"]) - parseInt(b["Factor"]);
+            });
+
+
+            for (var q = 0; q < learnsetlevelarr.length; q++) {
+                var gamedataMoveAside4LearnsetLi = document.createElement("li");
+                gamedataMoveAside4LearnsetUl.appendChild(gamedataMoveAside4LearnsetLi);
+                
+                var gamedataMoveAside4LearnsetLiImgOuter = document.createElement("div");
+                var gamedataMoveAside4LearnsetLiImg = document.createElement("img");
+                var gamedataMoveAside4LearnsetLiSourceOuter = document.createElement("span");
+                var gamedataMoveAside4LearnsetLiSource = document.createElement("p");
+            
+                gamedataMoveAside4LearnsetLiSourceOuter.title = "Level Up";
+                gamedataMoveAside4LearnsetLiSource.innerHTML = "Level Up: "+"<b>"+learnsetlevelarr[q]["Factor"]+"</b>";
+
+                if(learnsetlevelarr[q]["Form"] == undefined) {
+                    gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Pokémon"]) + ".png";
+                    gamedataMoveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
+                    gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(learnsetlevelarr[q]["Pokémon"]);
+                }
+                else {
+                    gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Form"]) + ".png";
+                    gamedataMoveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Form"];
+                    gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(learnsetlevelarr[q]["Form"]);
+                }
+
+                gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+
+                gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+            
+                gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiImgOuter);
+                gamedataMoveAside4LearnsetLiImgOuter.appendChild(gamedataMoveAside4LearnsetLiImg);
+                gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiSourceOuter);
+                gamedataMoveAside4LearnsetLiSourceOuter.appendChild(gamedataMoveAside4LearnsetLiSource);
+            }
+
+            for (var q = 0; q < finaldataLearnsetMachine.length; q++) {
+                if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[this.value]["Name"+"_"+JSONPath_MoveName] && finaldataLearnsetMachineLength[q] == true) {
+                    var gamedataMoveAside4LearnsetLi = document.createElement("li");
+                    gamedataMoveAside4LearnsetUl.appendChild(gamedataMoveAside4LearnsetLi);
+                    
+                    var gamedataMoveAside4LearnsetLiImgOuter = document.createElement("div");
+                    var gamedataMoveAside4LearnsetLiImg = document.createElement("img");
+                    var gamedataMoveAside4LearnsetLiSourceOuter = document.createElement("span");
+                    var gamedataMoveAside4LearnsetLiSource = document.createElement("p");
+
+           
+
+                
+                    if(finaldataLearnsetMachine[q]["Machine"].includes("HM")) {
+                        gamedataMoveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+                        gamedataMoveAside4LearnsetLiSource.title = "HM";
+                    }
+                    else if(finaldataLearnsetMachine[q]["Machine"].includes("TM")) {
+                        gamedataMoveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+                        gamedataMoveAside4LearnsetLiSource.title = "TM";
+                    }
+                    else if(finaldataLearnsetMachine[q]["Machine"].includes("TR")) {
+                        gamedataMoveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+                        gamedataMoveAside4LearnsetLiSource.title = "TR";
+                    }
+
+                    if(finaldataLearnsetMachine[q]["Form"] == undefined) {
+                        gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Pokémon"]) + ".png";
+                        gamedataMoveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
+                        gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]);
+                    }
+                    else {
+                        gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Form"]) + ".png";
+                        gamedataMoveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Form"];
+                        gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetMachine[q]["Form"]);
+                    }
+
+                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+
+                    gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+                
+                    gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiImgOuter);
+                    gamedataMoveAside4LearnsetLiImgOuter.appendChild(gamedataMoveAside4LearnsetLiImg);
+                    gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiSourceOuter);
+                    gamedataMoveAside4LearnsetLiSourceOuter.appendChild(gamedataMoveAside4LearnsetLiSource);
+                }
+                
+            }
+
+            for (var q = 0; q < finaldataLearnsetBreed.length; q++) {
+                if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[this.value]["Name"+"_"+JSONPath_MoveName] && finaldataLearnsetBreedLength[q] == true) {
+                    var gamedataMoveAside4LearnsetLi = document.createElement("li");
+                    gamedataMoveAside4LearnsetUl.appendChild(gamedataMoveAside4LearnsetLi);
+                    
+                    var gamedataMoveAside4LearnsetLiImgOuter = document.createElement("div");
+                    var gamedataMoveAside4LearnsetLiImg = document.createElement("img");
+                    var gamedataMoveAside4LearnsetLiSourceOuter = document.createElement("span");
+                    var gamedataMoveAside4LearnsetLiSourceText = document.createElement("p");
+                    var gamedataMoveAside4LearnsetLiSourceImgOuter = document.createElement("span");
+
+                    gamedataMoveAside4LearnsetLiSourceOuter.title = "Parent";
+                    gamedataMoveAside4LearnsetLiSourceText.innerText = "Parent:";
+
+               
+
+
+      
+                    if(finaldataLearnsetBreed[q]["Parent"].includes(",")) {
+                        for (var r = 0; r < finaldataLearnsetBreed[q]["Parent"].split(",").length; r++) {
+                            var gamedataMoveAside4LearnsetLiSource = document.createElement("img");
+                            gamedataMoveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"].split(",")[r]) + ".png";
+                            gamedataMoveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
+                            gamedataMoveAside4LearnsetLiSource.value = getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]);
+                            gamedataMoveAside4LearnsetLiSourceImgOuter.appendChild(gamedataMoveAside4LearnsetLiSource);
+                            gamedataMoveAside4LearnsetLiSource.addEventListener("click", function(){modalPokdata("open")});
+
+                        }
+                    }
+                    else if (finaldataLearnsetBreed[q]["Parent"] == "None") {
+                        gamedataMoveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetBreed[q]["Parent"];
+                    }
+                    else {
+                        var gamedataMoveAside4LearnsetLiSource = document.createElement("img");
+                        gamedataMoveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"]) + ".png";
+                        gamedataMoveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"];
+                        gamedataMoveAside4LearnsetLiSourceImgOuter.appendChild(gamedataMoveAside4LearnsetLiSource);
+                    }
+
+                    if (finaldataLearnsetBreed[q]["Form"] == undefined) {
+                        gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Pokémon"]) + ".png";
+                        gamedataMoveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
+                        gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]);
+                    }
+                    else {
+                        gamedataMoveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Form"]) + ".png";
+                        gamedataMoveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Form"];
+                        gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[q]["Form"]);
+                    }
+
+                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+
+                    gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+                
+                    gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiImgOuter);
+                    gamedataMoveAside4LearnsetLiImgOuter.appendChild(gamedataMoveAside4LearnsetLiImg);
+                    gamedataMoveAside4LearnsetLi.appendChild(gamedataMoveAside4LearnsetLiSourceOuter);
+                    gamedataMoveAside4LearnsetLiSourceOuter.appendChild(gamedataMoveAside4LearnsetLiSourceText);
+                    gamedataMoveAside4LearnsetLiSourceOuter.appendChild(gamedataMoveAside4LearnsetLiSourceImgOuter);
+                }
+                
+            }
+            
+
+
+            //gamedataMoveAside3EffectText.innerHTML = "";
+
+            /*
+
+
+            finaldataMoveTutor
+            finaldataMoveMachine
+            finaldataMoveRange
+            finaldataMoveOtherMoves
+            finaldataMoveAccuracy
+            finaldataMovePower
+            finaldataMovePP
+            finaldataMoveCategory
+            finaldataMoveID
+            finaldataMoveType
+            */
         }
-        
-
-
-        if (finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine] != undefined) {
-            var gamedataMoveAside4SidebarDescriptionHMTM = document.createElement("div");
-            var gamedataMoveAside4SidebarDescriptionHMTMOuter = document.createElement("span");
-            var gamedataMoveAside4SidebarDescriptionHMTMContent = document.createElement("span");
-            var gamedataMoveAside4SidebarDescriptionHMTMTitle = document.createElement("h3");
-            var gamedataMoveAside4SidebarDescriptionHMTMText = document.createElement("button");
-            gamedataMoveAside4SidebarDescriptionHMTM.classList.add("move-sidebar-description-hmtm");
-            gamedataMoveAside4SidebarDescriptionHMTMTitle.innerText = "Machine"
-            gamedataMoveAside4SidebarDescriptionHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_"+JSONPath_MoveMachine];
-            gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionHMTM);
-            gamedataMoveAside4SidebarDescriptionHMTM.appendChild(gamedataMoveAside4SidebarDescriptionHMTMOuter);
-            gamedataMoveAside4SidebarDescriptionHMTMOuter.appendChild(gamedataMoveAside4SidebarDescriptionHMTMContent);
-            gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMTitle);
-            gamedataMoveAside4SidebarDescriptionHMTMContent.appendChild(gamedataMoveAside4SidebarDescriptionHMTMText);
+        if (firstmoveiteration != true) {
+            firstmoveiteration = true;
+            gamedataMoveAside1OptionsLabel.click();
         }
-
-
-        if (finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor] != undefined) {
-            var gamedataMoveAside4SidebarDescriptionTutor = document.createElement("div");
-            var gamedataMoveAside4SidebarDescriptionTutorOuter = document.createElement("span");
-            var gamedataMoveAside4SidebarDescriptionTutorContent = document.createElement("span");
-            var gamedataMoveAside4SidebarDescriptionTutorTitle = document.createElement("h3");
-            var gamedataMoveAside4SidebarDescriptionTutorText = document.createElement("button");
-            gamedataMoveAside4SidebarDescriptionTutor.classList.add("move-sidebar-description-tutor");
-            gamedataMoveAside4SidebarDescriptionTutorTitle.innerText = "Move Tutor";
-            gamedataMoveAside4SidebarDescriptionTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_"+JSONPath_MoveTutor];
-            gamedataMoveAside4SidebarDescription.appendChild(gamedataMoveAside4SidebarDescriptionTutor);
-            gamedataMoveAside4SidebarDescriptionTutor.appendChild(gamedataMoveAside4SidebarDescriptionTutorOuter);
-            gamedataMoveAside4SidebarDescriptionTutorOuter.appendChild(gamedataMoveAside4SidebarDescriptionTutorContent);
-            gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorTitle);
-            gamedataMoveAside4SidebarDescriptionTutorContent.appendChild(gamedataMoveAside4SidebarDescriptionTutorText);
-        }
-
-
-
-
-        //gamedataMoveAside3EffectText.innerHTML = "";
-
-        /*
-
-
-        finaldataMoveTutor
-        finaldataMoveMachine
-        finaldataMoveRange
-        finaldataMoveOtherMoves
-        finaldataMoveAccuracy
-        finaldataMovePower
-        finaldataMovePP
-        finaldataMoveCategory
-        finaldataMoveID
-        finaldataMoveType
-        */
     }
 }
 // Moves End
@@ -2512,6 +2679,10 @@ for (var q = 0; q < itemOptionsTitle.length; q++) {
     gamedataItemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
     function itemOptionsSelector() {
             gamedataItemAside2TitleName.innerText = itemOptionsTitle[this.value];
+    }
+
+    if (q == 0) {
+        gamedataItemAside1OptionsLabel.click();
     }
 }
 // Items End
@@ -2712,7 +2883,7 @@ var DescriptionSelectorOuter = document.createElement("div");
 DescriptionSelectorOuter.classList.add("map-description-selector-outer")
 gamedataMapAside4Description.appendChild(DescriptionSelectorOuter);
 
-var mapDescriptionTitles = ["Overview","Pokémon","Items","Trainers"];
+var mapDescriptionTitles = ["Overview","Pokémon","Items","Trainers","Move Tutor"];
 
 for (var q = 0; q < mapDescriptionTitles.length; q++) {
     var DescriptionSelector = document.createElement("div");
@@ -2732,6 +2903,10 @@ for (var q = 0; q < mapDescriptionTitles.length; q++) {
     DescriptionSelector.appendChild(DescriptionSelectorLabel);
 
     DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+
+    if (q == 0) {
+        DescriptionSelectorLabel.click();
+    }
 
 }
 
@@ -3004,6 +3179,10 @@ for (var q = 0; q < finaldataLocation.length; q++) {
     gamedataMapAside1Options.appendChild(gamedataMapAside1OptionsLabel);
 
     gamedataMapAside1OptionsInput.addEventListener("click", mapOptionsSelector);
+
+    if (q == 0) {
+        gamedataMapAside1OptionsLabel.click();
+    }
     
 }
 
@@ -3055,7 +3234,8 @@ function mapOptionsSelector() {
                 gamedataMapAside3AreaTitle.innerText = "Location";
                 gamedataMapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",")[u];
                 gamedataMapAside3AreaContent.appendChild(gamedataMapAside3AreaText);
-                gamedataMapAside3AreaText.addEventListener("click", MapRedirect);
+                gamedataMapAside3AreaText.setAttribute("name","map");
+                gamedataMapAside3AreaText.addEventListener("click", dataRedirect);
             }
         }
     }
@@ -3067,7 +3247,8 @@ function mapOptionsSelector() {
                     gamedataMapAside3AreaTitle.innerText = "Sub Areas";
                     gamedataMapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"];
                     gamedataMapAside3AreaContent.appendChild(gamedataMapAside3AreaText);
-                    gamedataMapAside3AreaText.addEventListener("click", MapRedirect);
+                    gamedataMapAside3AreaText.setAttribute("name","map");
+                    gamedataMapAside3AreaText.addEventListener("click", dataRedirect);
                 }
             }
         }
@@ -3126,7 +3307,8 @@ function mapOptionsSelector() {
                 for (var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"North"].split(",").length; u++) {
                     var btn = document.createElement("button");
                     btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"North"].split(",")[u];
-                    btn.addEventListener("click", MapRedirect);
+                    btn.setAttribute("name","map");
+                    btn.addEventListener("click", dataRedirect);
                     gamedataMapAside3MapUpMain.appendChild(btn);
                 }
             }
@@ -3138,7 +3320,8 @@ function mapOptionsSelector() {
                 for (var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"West"].split(",").length; u++) {
                     var btn = document.createElement("button");
                     btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"West"].split(",")[u];
-                    btn.addEventListener("click", MapRedirect);
+                    btn.setAttribute("name","map");
+                    btn.addEventListener("click", dataRedirect);
                     gamedataMapAside3MapLeftMain.appendChild(btn);
                 }
             }
@@ -3150,7 +3333,8 @@ function mapOptionsSelector() {
                 for (var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"East"].split(",").length; u++) {
                     var btn = document.createElement("button");
                     btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"East"].split(",")[u];
-                    btn.addEventListener("click", MapRedirect);
+                    btn.setAttribute("name","map");
+                    btn.addEventListener("click", dataRedirect);
                     gamedataMapAside3MapRightMain.appendChild(btn);
                 }
             }
@@ -3162,7 +3346,8 @@ function mapOptionsSelector() {
                 for (var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"South"].split(",").length; u++) {
                     var btn = document.createElement("button");
                     btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"South"].split(",")[u];
-                    btn.addEventListener("click", MapRedirect);
+                    btn.setAttribute("name","map");
+                    btn.addEventListener("click", dataRedirect);
                     gamedataMapAside3MapDownMain.appendChild(btn);
                 }
             }
@@ -3242,6 +3427,7 @@ function gamedataNavSelector() {
     }
 }
 
+
 }
 
 
@@ -3310,14 +3496,3 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
-function MapRedirect() {
-    var x = (this.innerText).toLowerCase();
-    var tar = document.querySelector('#map-options > label[data-search-name="'+x+'"]');
-    tar.click();
-}
-
-function AbilityRedirect() {
-    var x = (this.innerText).toLowerCase();
-    var tar = document.querySelector('#ability-options > label[data-search-name="'+x+'"]');
-    tar.click();
-}
