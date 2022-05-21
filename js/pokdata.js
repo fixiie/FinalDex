@@ -1,99 +1,68 @@
-function modalPokdata() {
+function modalPokdata(action) {
 
-        var openModalButton = document.getElementsByClassName('pokdata-modal-open');
-        for (var i = 0; i < openModalButton.length; i++) {
-            openModalButton[i].addEventListener("click", openModal);
+    var action;
+    var int;
+    var id;
+    var def;
+    var target;
+
+    target = event.currentTarget;
+    int = target.value;
+    def = true;
+
+    for (var i = 0; i < finaldataPokémon.length; i++) {
+        if (int != undefined) {
+            if (i == int) {
+                id = finaldataPokémon[i]["ID"];
+                if (!finaldataPokémon[i]["Variant"].includes("Default")) {
+                    def = false;
+                }
+            }
         }
-        var closeModalButton = document.getElementsByClassName('pokdata-modal-close');
-        for (var i = 0; i < closeModalButton.length; i++) {
-            closeModalButton[i].addEventListener("click", closeModal);
-        }
-        var closeOpenModalButton = document.getElementsByClassName('pokdata-modal-close-open');
-        for (var i = 0; i < closeOpenModalButton.length; i++) {
-            closeOpenModalButton[i].addEventListener("click", closeOpenModal);
-        }
-        
-}
-
-function openModal() {
-
-    var i = this.value - 1;
-    var x = this.value;
-
-
-    if (!document.body.contains(document.querySelector("#pokdata-modal" + this.value))) {
-        createPokData(i,x);
-        panZoomModal(x);
-    }
-    
-    var modalWindow = document.querySelector("#pokdata-modal" + this.value);
-    $("body").addClass("modal-open");
-
-    modalWindow.classList ? modalWindow.classList.add('open') : modalWindow.className += ' ' + 'open';
-
-    modalPokdata();
-    navKeeper(x);
-    resetZoom(x);
-    dexCheck();
-}
-
-function closeModal() {
-    var modalWindowActive = document.querySelector(".pokdata-modal-outer.open");
-
-    $("body").removeClass("modal-open");
-
-    modalWindowActive.classList ? modalWindowActive.classList.remove('open') : modalWindowActive.className = modalWindowActive.className.replace(new RegExp('(^|\\b)' + 'open'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-    modalPokdata();
-}
-
-function closeOpenModal() {
-    var modalWindowActive = document.querySelector(".pokdata-modal-outer.open");
-    $("body").removeClass("modal-open");
-    modalWindowActive.classList ? modalWindowActive.classList.remove('open') : modalWindowActive.className = modalWindowActive.className.replace(new RegExp('(^|\\b)' + 'open'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-    
-    var i = this.value - 1;
-    var x = this.value;
-
-    if (!document.body.contains(document.querySelector("#pokdata-modal" + this.value))) {
-        createPokData(i,x);
-        panZoomModal(x);
     }
 
-    var modalWindow = document.querySelector("#pokdata-modal" + this.value);
-    $("body").addClass("modal-open");
 
-    modalWindow.classList ? modalWindow.classList.add('open') : modalWindow.className += ' ' + 'open';
-
-    modalPokdata();
-    navKeeper(x);
-    resetZoom(x);
-    dexCheck();
-}
+    var activeWindow = document.querySelector(".pokdata-modal-outer.open");
+    var currentWindow = document.querySelector("#pokdata-modal" + id);
 
 
-function closeOpenModal2() {
-    var modalWindowActive = document.querySelector(".gamedata-modal-outer.open");
-    $("body").removeClass("modal-open");
-    modalWindowActive.classList ? modalWindowActive.classList.remove('open') : modalWindowActive.className = modalWindowActive.className.replace(new RegExp('(^|\\b)' + 'open'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-    
-    var i = this.value - 1;
-    var x = this.value;
+ 
 
-    if (!document.body.contains(document.querySelector("#pokdata-modal" + this.value))) {
-        createPokData(i,x);
-        panZoomModal(x);
+    if (action == "open") {
+
+        if (!document.body.contains(currentWindow)) {
+            createPokData(id,int);
+            panZoomModal(id);
+        }
+
+        console.log("#pokdata-modal" + id)
+        document.querySelector("#pokdata-modal" + id).classList.add("open");
+
+
+
+
+        if (def == false) {
+            document.querySelector("#pokdata-modal" + id + " .pokdata-form > input[value='"+int+"'").click();
+        }
+        else if (def == true) {
+            document.querySelector("#pokdata-modal" + id + " .pokdata-form > input:first-child").click();
+        }
+
+        modalPokdata();
+        navKeeper(id);
+        resetZoom(id);
+        dexCheck();
     }
-
-    var modalWindow = document.querySelector("#pokdata-modal" + this.value);
-    $("body").addClass("modal-open");
-
-    modalWindow.classList ? modalWindow.classList.add('open') : modalWindow.className += ' ' + 'open';
-
-    modalPokdata();
-    navKeeper(x);
-    resetZoom(x);
-    dexCheck();
+    if (action == "close") {
+        activeWindow.classList.remove("open");
+        modalPokdata();
+    }
 }
+
+
+
+
+
 
 
 function panZoomModal(x) {
