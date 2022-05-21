@@ -1,9 +1,9 @@
 var createNav = function() {
 
 var AreaFilterTemp1 = [];
-for (var q = 0; q < finaldataAreaAll.length; q++) {
-    if (finaldataAreaAll[q]["Filter_"+JSONPath_Area] != undefined) {
-        AreaFilterTemp1.push(finaldataAreaAll[q]["Filter_"+JSONPath_Area]);
+for (var q = 0; q < finaldataPokémonArea.length; q++) {
+    if (finaldataPokémonArea[q]["Filter_"+JSONPath_Area] != undefined) {
+        AreaFilterTemp1.push(finaldataPokémonArea[q]["Filter_"+JSONPath_Area]);
     }
 }
 let AreaFilterTemp2 = [...AreaFilterTemp1];
@@ -160,6 +160,48 @@ navigationSearchInput.setAttribute("onfocus","this.placeholder = ''");
 navigationSearchInput.setAttribute("onblur","this.placeholder = 'Search...'");
 navigationSearchInput.setAttribute("autocomplete","off");
 navigationSearchInput.setAttribute("tabindex","0");
+
+
+
+
+
+
+
+var searchoptions = ["evolution:: [charizard/slowbro/...]","type:: [normal/fighting/...]","ability:: [static/shadow tag/...]","catchrate:: [value]","catchrate:> [value]","catchrate:< [value]","eggcycle:: [value]","eggcycle:> [value]","eggcycle:< [value]","genderratio:: [7:0/3:1/...]","egggroup:: [field/human-like/...]","expyield:: [value]","expyield:> [value]","expyield:< [value]","expyieldcategory:: [very high/medium/...]","levelrate:: [value]","levelrate:> [value]","levelrate:< [value]","helditem:: [Silver Powder/Sitrus Berry/...]","variant:: [default/form/...]","statshp:: [value]","statshp:> [value]","statshp:< [value]","...","evyieldhp:: [value]","evyieldhp:> [value]","evyieldhp:< [value]","..."];
+if (Ability.length <= 0) {
+    for (var q = 0; q < searchoptions.length; q++) {
+        if (searchoptions[q].includes("ability")) {
+            searchoptions.splice(q,1);
+        }
+    }
+}
+if (Egg != true) {
+    for (var q = 0; q < searchoptions.length; q++) {
+        if (searchoptions[q].includes("egg")) {
+            searchoptions.splice(q,1);
+        }
+    }
+}
+if (Gender != true) {
+    for (var q = 0; q < searchoptions.length; q++) {
+        if (searchoptions[q].includes("gender")) {
+            searchoptions.splice(q,1);
+        }
+    }
+}
+if (HeldItem != true) {
+    for (var q = 0; q < searchoptions.length; q++) {
+        if (searchoptions[q].includes("item")) {
+            searchoptions.splice(q,1);
+        }
+    }
+}
+
+
+
+
+navigationSearchInput.setAttribute("title","Search options:"+searchoptions.join("\n"));
+
 navigationSearchExit.setAttribute("id","search-exit");
 navigationCount.setAttribute("id","count-outer");
 navigationCountContent.setAttribute("id","count");
