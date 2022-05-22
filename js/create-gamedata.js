@@ -1676,7 +1676,7 @@ gamedataAbilityAside2Debut.classList.add("ability-debut")
 gamedataAbilityAside3.setAttribute("id","ability-aside3");
 gamedataAbilityAside3Description.classList.add("ability-description")
 gamedataAbilityAside3EffectTitle.innerText = "Effect";
-gamedataAbilityAside3EffectText.innerHTML = "Every second turn, a Pokémon with Truant cannot use a move due to loafing around, such that the Pokémon can move on its first turn but not its second turn. Switching out or gaining the Ability Truant resets the turn count for Truant. Using an item does not count as a turn for the purposes of Truant. Truant is reset by sleep and a Pokémon with Truant will always be able to attack on the turn it wakes up.<br><br>Moves with a charging turn, such as Fly, will not work (unless the user is holding a Power Herb).<br>Moves that requires recharging, such as Hyper Beam, will not work.<br><br>If a Pokémon gains Truant after it calls upon Mega Evolution, Ultra Burst, or Dynamax at the beginning of a turn, but before it moves that turn, Truant will activate on its first attempt to move.<br><br>Truant cannot be overwritten by Simple Beam, Worry Seed, or Entrainment, but it can be overwritten by Skill Swap or Role Play.";
+gamedataAbilityAside3EffectText.innerText = "-";
 gamedataAbilityAside4.setAttribute("id","ability-aside4");
 
 
