@@ -267,6 +267,9 @@ GameMetadataRequest.onload = function() {
     finaldataPokémonType.push(PokémonMetadata["Type"][i]);
   }
 
+  console.log(returnData(5,"Held Item",""))
+
+
   ContinuationDiscontinuation();
 
   createNav();
