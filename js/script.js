@@ -1909,16 +1909,12 @@ function returnData(id,type,additional) {
             if (i == id) {
                 if (Array.isArray(column)) {
                     for (var q = 0; q < column.length; q++) {
-                        if (arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column[q]] != undefined) {
-                            result.push(arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column[q]]);
-                        }
+                        result.push(arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column[q]]);
                     }
             
                 }
                 else {
-                    if (arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column] != undefined) {
-                        result.push(arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column]); 
-                    }
+                    result.push(arr[arr.map(function(e) { return e.ID; }).indexOf(arr[i]["ID"])][column]); 
                 }
             }
         }
@@ -2381,8 +2377,20 @@ function loadData() {
             helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').style.display = "none";
         }
     }
+    
+    var heldcheck;
+    for (var q = 0; q < returnData(i,"Held Item","").length; q++) {
+        if (returnData(i,"Held Item","")[q] == undefined) {
+            heldcheck = false;
+        }
+        else {
+            heldcheck = true;
+            break
+        }
+    }
+    
 
-    if (returnData(i,"Held Item","").length <= 0) {
+    if (heldcheck == false) {
         helditem.parentElement.style.display = "none";
     }
     else {
