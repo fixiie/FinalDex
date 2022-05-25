@@ -32,7 +32,7 @@
 
 <script>
 //var GameID = Math.floor(Math.random() * 24) + 7;
-var GameID = 24;
+var GameID = 23;
 </script>
 <style>
 
@@ -3019,7 +3019,10 @@ body {
     text-align: left;
 }
 
-.pokdata-type > span.active {
+.pokdata-type[name="2"] span:first-child.active {
+    padding: 5px 0;
+}
+.pokdata-type > span.active{
     display: block;
 }
 
@@ -6242,7 +6245,7 @@ span[name="Status"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color14);
+    background: var(--color15);
 }
 
 
