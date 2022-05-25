@@ -39,8 +39,8 @@ for (var i = 0; i < grps.length; i++) {
 }
 
 var formopts = [];
-for (var q = 0; q < finaldataPokémonReference.length; q++) {
-    if (finaldataPokémonReference[q] == true && finaldataPokémonArea[q]["Filter_"+JSONPath_Area] != "Unobtainable") {
+for (var q = 0; q < finaldataPokémon.length; q++) {
+    if (finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_"+JSONPath_Area] != "Unobtainable") {
         formopts.push(finaldataPokémon[q]["Variant"])
     }
 }
