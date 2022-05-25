@@ -32,8 +32,6 @@ var JSONPath_ExclusiveFeature;
 var JSONPath_ExclusiveItem;
 var JSONPath_ExclusivePokémon;
 var JSONPath_ExperienceYield;
-var JSONPath_FileName;
-var JSONPath_FolderName;
 var JSONPath_GenderRatio;
 var JSONPath_HatchRateEggCycle;
 var JSONPath_HatchRateSteps;
@@ -73,6 +71,9 @@ var MEDIAPath_Type_Icon;
 var MEDIAPath_Type_Symbol;
 var MEDIAPath_Type_Text;
 
+var JSONPath_Path;
+var JSONPath_Form;
+var JSONPath_Reference;
 
 
 
@@ -165,10 +166,14 @@ if (GameID == 9) {
 if (GameID == 10) {
     JSONPath_PokédexEntry = "FireRed";
     JSONPath_Area = "FireRed";
+    JSONPath_Path = "FireRed";
+    JSONPath_Form = "FireRed";
 }
 if (GameID == 11) {
     JSONPath_PokédexEntry = "LeafGreen";
     JSONPath_Area = "LeafGreen";
+    JSONPath_Path = "LeafGreen";
+    JSONPath_Form = "LeafGreen";
 }
 if (GameID == 12) {
     JSONPath_PokédexEntry = "Emerald";
@@ -185,6 +190,8 @@ if (GameID == 12) {
     JSONPath_LocationNavigation = "Emerald";
     JSONPath_MoveDescription = "Emerald";
     JSONPath_MoveTutor = "Emerald";
+    JSONPath_Path = "Emerald";
+    JSONPath_Form = "Emerald";
 }
 if (GameID == 13) {
     JSONPath_PokédexEntry = "";
@@ -232,6 +239,7 @@ if (GameID == 16) {
     JSONPath_LocationNavigation = "Platinum";
     JSONPath_MoveDescription = "Platinum";
     JSONPath_MoveTutor = "Platinum";
+    JSONPath_Reference = "Platinum";
 }
 if (GameID == 17) {
     JSONPath_PokédexEntry = "HeartGold";
@@ -309,11 +317,13 @@ if (GameID == 31) {
     JSONPath_PokédexEntry = "Lets Go Pikachu";
     JSONPath_Area = "Lets Go Pikachu";
     JSONPath_MoveTutor = "Lets Go Pikachu";
+    JSONPath_Reference = "Lets Go Pikachu";
 }
 if (GameID == 32) {
     JSONPath_PokédexEntry = "Lets Go Eevee";
     JSONPath_Area = "Lets Go Eevee";
     JSONPath_MoveTutor = "Lets Go Eevee";
+    JSONPath_Reference = "Lets Go Eevee";
 }
 if (GameID == 33) {
     JSONPath_PokédexEntry = "Sword";
@@ -350,6 +360,7 @@ if (GameID >= 1 && GameID <= 3) {
     JSONPath_LocationDescription = "RBY";
     JSONPath_LocationSlogan = "RBY";
     JSONPath_LocationNavigation = "RBY";
+    JSONPath_Reference = "RBY";
 }
 
 if (GameID >= 4 && GameID <= 5) {
@@ -372,6 +383,7 @@ if (GameID >= 4 && GameID <= 6) {
     JSONPath_LocationDescription = "GSC";
     JSONPath_LocationSlogan = "GSC";
     JSONPath_LocationNavigation = "GSC";
+    JSONPath_Reference = "GSC";
 }
 if (GameID >= 7 && GameID <= 8) {
     MEDIAPath_Item_Bag = "RS";
@@ -384,6 +396,7 @@ if (GameID >= 7 && GameID <= 8) {
     JSONPath_LocationNavigation = "RS";
     JSONPath_MoveDescription = "RS";
     JSONPath_MoveTutor = "RS";
+    JSONPath_Reference = "RS";
 }
 if (GameID >= 7 && GameID <= 13) {
     Generation = 3;
@@ -411,6 +424,9 @@ if (GameID >= 9 && GameID <= 11) {
 }
 if (GameID >= 9 && GameID <= 11 || GameID == 13) {
     JSONPath_MoveMachine = "FRLGColXD";
+}
+if (GameID >= 9 && GameID <= 11 || GameID >= 12 && GameID <= 13) {
+    JSONPath_Reference = "FRLGEColXD";
 }
 if (GameID >= 10 && GameID <= 11) {
     JSONPath_Pokédex = ["Kanto Pokédex_FRLG"];
@@ -464,6 +480,7 @@ if (GameID >= 14 && GameID <= 15) {
     JSONPath_MoveDescription = "DP";
     JSONPath_MoveTutor = "DP";
     JSONPath_MoveAccuracy = "DP";
+    JSONPath_Reference = "DP";
 }
 if (GameID == 14 || GameID == 16) {
     JSONPath_HeldItem = "DPt";
@@ -499,6 +516,7 @@ if (GameID >= 17 && GameID <= 18) {
     JSONPath_MoveDescription = "HGSS";
     JSONPath_MoveTutor = "HGSS";
     JSONPath_MoveMachine = "HGSS";
+    JSONPath_Reference = "HGSS";
 }
 if (GameID >= 19 && GameID <= 22) {
     Generation = 5;
@@ -520,6 +538,7 @@ if (GameID >= 19 && GameID <= 20) {
     JSONPath_LocationNavigation = "BW";
     JSONPath_MoveDescription = "BW";
     JSONPath_MoveTutor = "BW";
+    JSONPath_Reference = "BW";
 }
 if (GameID >= 21 && GameID <= 22) {
     JSONPath_Pokédex = ["New Unova Pokédex_B2W2"];
@@ -535,6 +554,7 @@ if (GameID >= 21 && GameID <= 22) {
     JSONPath_LocationNavigation = "B2W2";
     JSONPath_MoveDescription = "B2W2";
     JSONPath_MoveTutor = "B2W2";
+    JSONPath_Reference = "B2W2";
 }
 if (GameID >= 23 && GameID <= 26) {
     Generation = 6;
@@ -560,6 +580,7 @@ if (GameID >= 23 && GameID <= 24) {
     JSONPath_MoveTutor = "XY";
     JSONPath_MoveMachine = "XY";
     JSONPath_MoveID = "XY";
+    JSONPath_Reference = "XY";
 }
 if (GameID >= 25 && GameID <= 28) {
     JSONPath_CatchRate = "ORASSM";
@@ -580,12 +601,13 @@ if (GameID >= 25 && GameID <= 26) {
     JSONPath_MoveTutor = "ORAS";
     JSONPath_MoveMachine = "ORAS";
     JSONPath_MoveID = "ORAS";
+    JSONPath_Reference = "ORAS";
 }
 if (GameID == 27 || GameID == 29) {
-    JSONPath_EvolutionMethod = "SUS";
+    JSONPath_EvolutionMethod = "Sun,Ultra Sun";
 }
 if (GameID == 28 || GameID == 30) {
-    JSONPath_EvolutionMethod = "MUM";
+    JSONPath_EvolutionMethod = "Moon,Ultra Moon";
 }
 if (GameID >= 27 && GameID <= 32) {
     Generation = 7;
@@ -618,6 +640,7 @@ if (GameID >= 27 && GameID <= 28) {
     JSONPath_MoveDescription = "SM";
     JSONPath_MoveTutor = "SM";
     JSONPath_MoveID = "SM";
+    JSONPath_Reference = "SM";
 }
 if (GameID >= 29 && GameID <= 30) {
     JSONPath_Pokédex = ["Alola Pokédex_USUM","Melemele Pokédex_USUM","Akala Pokédex_USUM","Ula'ula Pokédex_USUM","Poni Pokédex_USUM"];
@@ -635,6 +658,7 @@ if (GameID >= 29 && GameID <= 30) {
     JSONPath_MoveDescription = "USUM";
     JSONPath_MoveTutor = "USUM";
     JSONPath_MoveID = "USUM";
+    JSONPath_Reference = "USUM";
 }
 if (GameID >= 31 && GameID <= 32) {
     JSONPath_Pokédex = ["Kanto Pokédex_LGPE"];
@@ -684,6 +708,7 @@ if (GameID >= 33 && GameID <= 34) {
     JSONPath_AbilityFlavor = "SwSh";
     JSONPath_MoveDescription = "SwSh";
     JSONPath_MoveTutor = "SwSh";
+    JSONPath_Reference = "SwSh+DLC";
 }
 
 if (Generation >= 1 && Generation <= 2) {
@@ -761,13 +786,17 @@ if (Generation >= 1 && Generation <= 8) {
     MEDIAPath_Type_Icon = "SwSh";
     MEDIAPath_Type_Symbol = "SwSh";
     MEDIAPath_Pokémon_Portrait = "HOME";
-    JSONPath_FileName = "1-8";
-    JSONPath_FolderName = "1-8";
 }
 
 if (Generation == 2 || Generation == 7) {
     JSONPath_HatchRateSteps = "2+7";
 }
+
+if (Generation >= 1 && Generation <= 2 || GameID >= 7 && GameID <= 9  || GameID >= 12 && GameID <= 13 || Generation >= 4 && Generation <= 8) {
+    JSONPath_Path = "1-2+RSEColXD+4-8";
+    JSONPath_Form = "1-2+RSEColXD+4-8";
+}
+
 
 
 if (Generation >= 2) {
