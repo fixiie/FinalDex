@@ -1,13 +1,12 @@
-function modalPokdata(action) {
+function modalPokdata() {
 
-    var action;
     var int;
     var id;
     var def;
-    var target;
 
-    target = event.currentTarget;
-    int = target.value;
+
+
+    int = this.value
     def = true;
 
     for (var i = 0; i < finaldataPokémon.length; i++) {
@@ -22,41 +21,68 @@ function modalPokdata(action) {
     }
 
 
-    var activeWindow = document.querySelector(".pokdata-modal-outer.open");
-    var currentWindow = document.querySelector("#pokdata-modal" + id);
+    var activeWindow;
+    activeWindow = document.querySelector(".pokdata-modal-outer.open");
 
+    if (activeWindow != null) {
+        activeWindow.classList.remove("open");
+    }
 
- 
+    var activeSecondWindow;
+    activeSecondWindow = document.querySelector(".gamedata-modal-outer.open");
 
-    if (action == "open") {
+    if (activeSecondWindow != null) {
+        activeSecondWindow.classList.remove("open");
+    }
+console.log(def)
 
-        if (!document.body.contains(currentWindow)) {
+    if (id != undefined) {
+
+        var currentWindow;
+        var formSpec;
+        var formFirst;
+
+        currentWindow = document.querySelector("#pokdata-modal" + id);
+
+        if (currentWindow == null) {
             createPokData(id,int);
             panZoomModal(id);
+
+            if (int != undefined) {
+                formSpec = document.querySelector("#pokdata-modal" + id + " .pokdata-form > input[value='"+int+"'");
+                formFirst = document.querySelector("#pokdata-modal" + id + " .pokdata-form > input:first-child");
+        
+                if (def == false) {
+                    if (formSpec != null) {
+                        formSpec.click();
+                    }
+                }
+                else if (def == true) {
+                    if (formFirst != null) {
+                        formFirst.click();
+                    }
+                }
+            }
         }
 
-        console.log("#pokdata-modal" + id)
-        document.querySelector("#pokdata-modal" + id).classList.add("open");
+        currentWindow = document.querySelector("#pokdata-modal" + id);
 
-
-
-
-        if (def == false) {
-            document.querySelector("#pokdata-modal" + id + " .pokdata-form > input[value='"+int+"'").click();
-        }
-        else if (def == true) {
-            document.querySelector("#pokdata-modal" + id + " .pokdata-form > input:first-child").click();
+        if (currentWindow != null) {
+            currentWindow.classList.add("open");
         }
 
-        modalPokdata();
+        
+
         navKeeper(id);
         resetZoom(id);
-        dexCheck();
     }
-    if (action == "close") {
-        activeWindow.classList.remove("open");
-        modalPokdata();
-    }
+
+
+
+    dexCheck();
+    
+
+
 }
 
 
