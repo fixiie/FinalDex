@@ -5,8 +5,6 @@ var id;
 
 
 
-
-
 var pokdataDiv = document.createElement("div");
 var pokdataDivOverlay = document.createElement("div");
 var pokdataDivContent = document.createElement("div");
@@ -31,13 +29,13 @@ var pokdataForm = document.createElement("section");
 var variant = [];
 
 for (var u = 0; u < finaldataPokémon.length; u++) {
-    if (finaldataPokémon[u]["ID"] == id && finaldataPokémonReference[u] == true) {
+    if (finaldataPokémon[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
         variant.push(finaldataPokémon[u]["Pokémon"])
     }
 }
 
 for (var u = 0; u < finaldataPokémon.length; u++) {
-    if (finaldataPokémon[u]["ID"] == id && finaldataPokémonReference[u] == true) {
+    if (finaldataPokémon[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
         var pokdataFormInput = document.createElement("input");
         var pokdataFormLabel = document.createElement("label");
         var pokdataFormImg = document.createElement("img");
@@ -51,13 +49,13 @@ for (var u = 0; u < finaldataPokémon.length; u++) {
         pokdataForm.appendChild(pokdataFormLabel)
         pokdataFormLabel.appendChild(pokdataFormImg)
 
-        if (finaldataPokémon[u]["Form"] == undefined) {
-            pokdataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémon[u]["Pokémon"])+".png";
-            pokdataFormLabel.title = finaldataPokémon[u]["Pokémon"];
+        if (finaldataPokémonForm[u]["Form_"+JSONPath_Form] == undefined) {
+            pokdataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Pokémon"])+".png";
+            pokdataFormLabel.title = finaldataPokémonForm[u]["Pokémon"];
         }
         else {
-            pokdataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémon[u]["Form"])+".png";
-            pokdataFormLabel.title = finaldataPokémon[u]["Form"];
+            pokdataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Form_"+JSONPath_Form])+".png";
+            pokdataFormLabel.title = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
         }
 
         if (!variant.length >= 2) {
@@ -148,7 +146,7 @@ pokdataDivOverlay.classList.add("pokdata-modal-overlay");
 pokdataDivContent.classList.add("pokdata-modal");
 pokdataNavigation.setAttribute("id","pokdata-navigation");
 
-pokdataDivOverlay.addEventListener("click", function(){modalPokdata("close")});
+pokdataDivOverlay.addEventListener("click", modalPokdata);
 
 pokdataForm.classList.add("pokdata-form");
 
@@ -175,7 +173,6 @@ for (var q = 0; q < navz.length; q++) {
 pokdataAside1.classList.add("pokdata-aside1");
 pokdataAside1DivPortrait.classList.add("pokdata-portrait");
 pokdataAside1DivPortraitContent.classList.add("pokdata-portrait-content");
-pokdataAside1Portrait.src = "./media/Images/Pokémon/Art/HOME/" + x + ".png";
 pokdataAside1Portrait.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
 pokdataAside1Portrait.setAttribute("id","pokdata-portrait-img-"+id);
 
@@ -297,6 +294,11 @@ pokdataAside2AreaDiv.classList.add("pokdata-area");
 pokdataAside2AreaDiv.setAttribute("id","pokdata-area"+id);
 pokdataAside2Area.classList.add("pokdata-area-content");
 pokdataAside2AreaTitle.classList.add("pokdata-area-title");
+pokdataAside2AreaText.classList.add("pokdata-area-text");
+pokdataAside2AreaText.classList.add("scroll");
+
+
+/*
 pokdataAside2AreaTitle.setAttribute("name",finaldataPokémonArea[i]["Filter_"+JSONPath_Area]);
 
 if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Catchable") {
@@ -349,8 +351,6 @@ if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Unobtainable") {
 }
 
 pokdataAside2AreaTitle.innerText = finaldataPokémonArea[i]["Filter_"+JSONPath_Area];
-pokdataAside2AreaText.classList.add("pokdata-area-text");
-pokdataAside2AreaText.classList.add("scroll");
 pokdataAside2AreaText.innerHTML = finaldataPokémonArea[i]["Area_"+JSONPath_Area];
 
 
@@ -366,7 +366,7 @@ for (q = 0; q < JSONPath_Pokédex.length; q++) {
 
     pokdataAside1DivIdName.appendChild(pokdataAside1IDRegional);
 }
-
+*/
 
 if (Ability.length >= 1) {
     var pokdataAside2MetadataSidebarRow1 = document.createElement("div");
@@ -976,10 +976,6 @@ for (var q = 0; q < evonext; q++) {
 
 
 
-
-
-
-
 document.getElementById("pokdata").appendChild(pokdataDiv);
 pokdataDiv.appendChild(pokdataDivOverlay);
 pokdataDiv.appendChild(pokdataDivContent);
@@ -1175,7 +1171,7 @@ pokdataAside2LearnsetTitle.appendChild(pokdataAside2LearnsetTitleLi);
 
 pokdataAside2LearnsetOuter.appendChild(pokdataAside2LearnsetUl);
 
-/*
+
 
 var categoriez = ["Source","Move","Type","Category","Power","Accuracy","PP"];
 for (u = 0; u < categoriez.length; u++) {
@@ -1185,276 +1181,7 @@ for (u = 0; u < categoriez.length; u++) {
 }
 
 
-for (u = 0; u < finaldataLearnsetLevel.length; u++) {
-    if (finaldataLearnsetLevel[u]["Pokémon"] == Name && finaldataLearnsetLevelLength[u] == true) {
-        var pokdataAside2LearnsetLi = document.createElement("li");
-        pokdataAside2LearnsetLi
-        pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
-        for (y = 0; y < categoriez.length; y++) {
-            var pokdataAside2LearnsetLiText = document.createElement("span");
-            pokdataAside2LearnsetLi.appendChild(pokdataAside2LearnsetLiText);
 
-            if (y == 0) {
-                pokdataAside2LearnsetLiText.title = "Level Up";
-                if (finaldataLearnsetLevel[u]["Factor"] == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = finaldataLearnsetLevel[u]["Factor"];
-                }
-            }
-            if (y == 1) {
-                pokdataAside2LearnsetLiText.title = "Move";
-                if (finaldataLearnsetLevel[u]["Move"] == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = finaldataLearnsetLevel[u]["Move"];
-                    pokdataAside2LearnsetLiText.setAttribute("name","move");
-                    pokdataAside2LearnsetLiText.addEventListener("click", dataRedirect);
-                }
-            }
-            if (y == 2) {
-                pokdataAside2LearnsetLiText.title = "Type";
-                if (getMoveData(finaldataLearnsetLevel[u]["Move"],"Type") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetLevel[u]["Move"],"Type");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 3) {
-                pokdataAside2LearnsetLiText.title = "Category";
-                if (getMoveData(finaldataLearnsetLevel[u]["Move"],"Category") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetLevel[u]["Move"],"Category");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 4) {
-                pokdataAside2LearnsetLiText.title = "Power";
-                if (getMoveData(finaldataLearnsetLevel[u]["Move"],"Power") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetLevel[u]["Move"],"Power");
-                }
-            }
-            if (y == 5) {
-                pokdataAside2LearnsetLiText.title = "Accuracy";
-                if (getMoveData(finaldataLearnsetLevel[u]["Move"],"Accuracy") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetLevel[u]["Move"],"Accuracy");
-                }   
-            }
-            if (y == 6) {
-                pokdataAside2LearnsetLiText.title = "PP";
-                if (getMoveData(finaldataLearnsetLevel[u]["Move"],"PP Min") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerHTML = getMoveData(finaldataLearnsetLevel[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(finaldataLearnsetLevel[u]["Move"],"PP Max")+")</span>";
-                }
-            }
-        }
-    }
-}
-
-for (u = 0; u < finaldataLearnsetMachine.length; u++) {
-    if (finaldataLearnsetMachine[u]["Pokémon"] == Name && finaldataLearnsetMachineLength[u] == true) {
-        var pokdataAside2LearnsetLi = document.createElement("li");
-        pokdataAside2LearnsetLi
-        pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
-        for (y = 0; y < categoriez.length; y++) {
-            var pokdataAside2LearnsetLiText = document.createElement("span");
-            pokdataAside2LearnsetLi.appendChild(pokdataAside2LearnsetLiText);
-
-            if (y == 0) {
-                if (finaldataLearnsetMachine[u]["Machine"].includes("TM")) {
-                    pokdataAside2LearnsetLiText.title = "TM";
-                }
-                else if (finaldataLearnsetMachine[u]["Machine"].includes("HM")) {
-                    pokdataAside2LearnsetLiText.title = "HM";
-                }
-                else if (finaldataLearnsetMachine[u]["Machine"].includes("TR")) {
-                    pokdataAside2LearnsetLiText.title = "TR";
-                }
-                if (finaldataLearnsetMachine[u]["Machine"] == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = finaldataLearnsetMachine[u]["Machine"];
-                }
-            }
-            if (y == 1) {
-                pokdataAside2LearnsetLiText.title = "Move";
-                if (getMachineMove(finaldataLearnsetMachine[u]["Machine"]) == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMachineMove(finaldataLearnsetMachine[u]["Machine"]);
-                    pokdataAside2LearnsetLiText.setAttribute("name","move");
-                    pokdataAside2LearnsetLiText.addEventListener("click", dataRedirect);
-                }
-            }
-            if (y == 2) {
-                pokdataAside2LearnsetLiText.title = "Type";
-                if (getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Type") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Type");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 3) {
-                pokdataAside2LearnsetLiText.title = "Category";
-                if (getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Category") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Category");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 4) {
-                pokdataAside2LearnsetLiText.title = "Power";
-                if (getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Power") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Power");
-                }
-            }
-            if (y == 5) {
-                pokdataAside2LearnsetLiText.title = "Accuracy";
-                if (getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Accuracy") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"Accuracy");
-                }   
-            }
-            if (y == 6) {
-                pokdataAside2LearnsetLiText.title = "PP";
-                if (getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"PP Min") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerHTML = getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"PP Min")+" <span>(max. "+getMoveData(getMachineMove(finaldataLearnsetMachine[u]["Machine"]),"PP Max")+")</span>";
-                }
-            }
-        }
-    }
-}
-
-for (u = 0; u < finaldataLearnsetBreed.length; u++) {
-    if (finaldataLearnsetBreed[u]["Pokémon"] == Name && finaldataLearnsetBreedLength[u] == true) {
-        var pokdataAside2LearnsetLi = document.createElement("li");
-        pokdataAside2LearnsetLi
-        pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
-        for (y = 0; y < categoriez.length; y++) {
-            var pokdataAside2LearnsetLiText = document.createElement("span");
-            pokdataAside2LearnsetLi.appendChild(pokdataAside2LearnsetLiText);
-    
-
-            if (y == 0) {
-                pokdataAside2LearnsetLiText.title = "Parent";
-                if (finaldataLearnsetBreed[u]["Parent"] == undefined) {
-                    pokdataAside2LearnsetLiText.innerText = "–";
-                }
-                else if (finaldataLearnsetBreed[u]["Parent"] == "None") {
-                    pokdataAside2LearnsetLiText.innerText = finaldataLearnsetBreed[u]["Parent"];
-                }
-                else {
-                    if (finaldataLearnsetBreed[u]["Parent"].includes(",")) {
-                        for (p = 0; p < finaldataLearnsetBreed[u]["Parent"].split(",").length; p++) {
-                            var pokdataAside2LearnsetLiImg = document.createElement("img");
-                            pokdataAside2LearnsetLiImg.setAttribute("src",'./Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(finaldataLearnsetBreed[u]["Parent"].split(",")[p])+'.png');
-                            pokdataAside2LearnsetLiImg.setAttribute("title",finaldataLearnsetBreed[u]["Parent"].split(",")[p]);
-                            pokdataAside2LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[u]["Parent"].split(",")[p]);
-                            pokdataAside2LearnsetLiText.appendChild(pokdataAside2LearnsetLiImg);
-                            pokdataAside2LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
-                        }
-                    } 
-                    else {
-                        var pokdataAside2LearnsetLiImg = document.createElement("img");
-                        pokdataAside2LearnsetLiImg.setAttribute("src",'./Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(finaldataLearnsetBreed[u]["Parent"])+'.png');
-                        pokdataAside2LearnsetLiImg.setAttribute("title",finaldataLearnsetBreed[u]["Parent"]);
-                        pokdataAside2LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[u]["Parent"]);
-                        pokdataAside2LearnsetLiText.appendChild(pokdataAside2LearnsetLiImg);
-                        pokdataAside2LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
-                    }
-                }
-            }
-            if (y == 1) {
-                pokdataAside2LearnsetLiText.title = "Move";
-                if (finaldataLearnsetBreed[u]["Move"] == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = finaldataLearnsetBreed[u]["Move"];
-                    pokdataAside2LearnsetLiText.setAttribute("name","move");
-                    pokdataAside2LearnsetLiText.addEventListener("click", dataRedirect);
-                }
-            }
-            if (y == 2) {
-                pokdataAside2LearnsetLiText.title = "Type";
-                
-                if (getMoveData(finaldataLearnsetBreed[u]["Move"],"Type") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetBreed[u]["Move"],"Type");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 3) {
-                pokdataAside2LearnsetLiText.title = "Category";
-                if (getMoveData(finaldataLearnsetBreed[u]["Move"],"Category") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetBreed[u]["Move"],"Category");
-                }
-                pokdataAside2LearnsetLiText.setAttribute("name",pokdataAside2LearnsetLiText.innerText);
-            }
-            if (y == 4) {
-                pokdataAside2LearnsetLiText.title = "Power";
-                if (getMoveData(finaldataLearnsetBreed[u]["Move"],"Power") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetBreed[u]["Move"],"Power");
-                }
-            }
-            if (y == 5) {
-                pokdataAside2LearnsetLiText.title = "Accuracy";
-                if (getMoveData(finaldataLearnsetBreed[u]["Move"],"Accuracy") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerText = getMoveData(finaldataLearnsetBreed[u]["Move"],"Accuracy");
-                }   
-            }
-            if (y == 6) {
-                pokdataAside2LearnsetLiText.title = "PP";
-                if (getMoveData(finaldataLearnsetBreed[u]["Move"],"PP Min") == undefined) {
-                    pokdataAside2LearnsetLiText.innerHTML = "–";
-                }
-                else {
-                    pokdataAside2LearnsetLiText.innerHTML = getMoveData(finaldataLearnsetBreed[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(finaldataLearnsetBreed[u]["Move"],"PP Max")+")</span>";
-                }
-            }
-        }
-    }
-}
-*/    
 
 pokdataAside2.appendChild(pokdataAside2AreaDiv);
 pokdataAside2AreaDiv.appendChild(pokdataAside2Area);
@@ -1561,7 +1288,6 @@ for (q = 0; q < baseEVTotal.length; q++) {
         baseEVTotal[q].addEventListener("click", function(){callPopUp(id,finaldataPokémonEVYield,"EV Yield","Total")});
     }
 }
-
 
 
 
