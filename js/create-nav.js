@@ -167,7 +167,7 @@ navigationSearchInput.setAttribute("tabindex","0");
 
 
 
-var searchoptions = ["evolution:: [charizard/slowbro/...]","type:: [normal/fighting/...]","ability:: [static/shadow tag/...]","catchrate:: [value]","catchrate:> [value]","catchrate:< [value]","eggcycle:: [value]","eggcycle:> [value]","eggcycle:< [value]","genderratio:: [7:0/3:1/...]","egggroup:: [field/human-like/...]","expyield:: [value]","expyield:> [value]","expyield:< [value]","expyieldcategory:: [very high/medium/...]","levelrate:: [value]","levelrate:> [value]","levelrate:< [value]","helditem:: [Silver Powder/Sitrus Berry/...]","variant:: [default/form/...]","statshp:: [value]","statshp:> [value]","statshp:< [value]","...","evyieldhp:: [value]","evyieldhp:> [value]","evyieldhp:< [value]","..."];
+var searchoptions = ["evolution:: [charizard/slowbro/...]","type:: [normal/fighting/...]","ability:: [static/shadow tag/...]","catchrate:: [value]","eggcycle:: [value]","genderratio:: [7:0/3:1/...]","egggroup:: [field/human-like/...]","expyield:: [value]","expyieldcategory:: [very high/medium/...]","levelrate:: [value]","helditem:: [silver powder/sitrus berry/...]","variant:: [default/form/...]","statshp:: [value]","statshp:> [value]","statshp:< [value]","...","evyieldhp:: [value]","evyieldhp:> [value]","evyieldhp:< [value]","...","equal::","doesnotequal:!","greaterthan:>","lessthan:<"];
 if (Ability.length <= 0) {
     for (var q = 0; q < searchoptions.length; q++) {
         if (searchoptions[q].includes("ability")) {
@@ -200,7 +200,7 @@ if (HeldItem != true) {
 
 
 
-navigationSearchInput.setAttribute("title","Search options:"+searchoptions.join("\n"));
+navigationSearchInput.setAttribute("title"," Search Examples:"+"\n"+searchoptions.join("\n"));
 
 navigationSearchExit.setAttribute("id","search-exit");
 navigationCount.setAttribute("id","count-outer");
