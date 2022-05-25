@@ -1750,7 +1750,7 @@ for (var q = 0; q < finaldataAbility.length; q++) {
                 if (q == 0) {
                     var gamedataAbilityAside4SidebarLiImgOuter = document.createElement("div");
                     var gamedataAbilityAside4SidebarLiImg = document.createElement("img");
-                    gamedataAbilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + AbilityResults[i]["Folder Name"] + AbilityResults[i]["File Name"] + ".png";
+                    gamedataAbilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + AbilityResults[i]["Folder"] + AbilityResults[i]["File"] + ".png";
                     gamedataAbilityAside4SidebarLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
                     if (AbilityResults[i]["Form"] != undefined) {
                         gamedataAbilityAside4SidebarLiImg.setAttribute("title",AbilityResults[i]["Form"])
@@ -1762,7 +1762,7 @@ for (var q = 0; q < finaldataAbility.length; q++) {
                     }
                     gamedataAbilityAside4SidebarLi.appendChild(gamedataAbilityAside4SidebarLiImgOuter);
                     gamedataAbilityAside4SidebarLiImgOuter.appendChild(gamedataAbilityAside4SidebarLiImg);
-                    gamedataAbilityAside4SidebarLiImg.addEventListener("click", function(){modalPokdata("open")});
+                    gamedataAbilityAside4SidebarLiImg.addEventListener("click", modalPokdata);
                     
                 }
                 else if (q != 0) {
@@ -2368,7 +2368,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
                     gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(learnsetlevelarr[q]["Form"]);
                 }
 
-                gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+                gamedataMoveAside4LearnsetLiImg.addEventListener("click", modalPokdata);
 
                 gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
             
@@ -2415,7 +2415,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
                         gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetMachine[q]["Form"]);
                     }
 
-                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", modalPokdata);
 
                     gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
                 
@@ -2452,7 +2452,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
                             gamedataMoveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
                             gamedataMoveAside4LearnsetLiSource.value = getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]);
                             gamedataMoveAside4LearnsetLiSourceImgOuter.appendChild(gamedataMoveAside4LearnsetLiSource);
-                            gamedataMoveAside4LearnsetLiSource.addEventListener("click", function(){modalPokdata("open")});
+                            gamedataMoveAside4LearnsetLiSource.addEventListener("click", modalPokdata);
 
                         }
                     }
@@ -2477,7 +2477,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
                         gamedataMoveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[q]["Form"]);
                     }
 
-                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", function(){modalPokdata("open")});
+                    gamedataMoveAside4LearnsetLiImg.addEventListener("click", modalPokdata);
 
                     gamedataMoveAside4LearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
                 
