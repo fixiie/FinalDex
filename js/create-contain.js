@@ -11,7 +11,10 @@ for (var q = 0; q < div.length; q++) {
 
 document.getElementById("load-description").innerHTML = "Creating Pokémon list<span>.</span><span>.</span><span>.</span>";
 
-for (var i = 0; i < finaldataPokémonReference.length; i++) {
+
+
+
+for (var i = 0; i < finaldataPokémon.length; i++) {
 
 var conditions = [];
 
@@ -48,8 +51,7 @@ if (options != undefined) {
 }
 
 
-
-if (finaldataPokémonReference[i] == true && finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != "Unobtainable") {
+if (finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != "Unobtainable") {
     for (var q = 0; q < conditions.length; q++) {
 /*
         //console.log(Object.keys(conditions[q]))
@@ -64,8 +66,8 @@ if (finaldataPokémonReference[i] == true && finaldataPokémonArea[i]["Filter_"+
         var x = finaldataPokémon[i]["ID"];
 
         var ID = finaldataPokémon[i]["ID"];
-        var Name = finaldataPokémon[i]["Pokémon"];
-        var formName = finaldataPokémon[i]["Form"];
+        var Name = finaldataPokémonForm[i]["Pokémon"];
+        var formName = finaldataPokémonForm[i]["Form_"+JSONPath_Form];
         var variant = finaldataPokémon[i]["Variant"];
 
 
@@ -116,7 +118,7 @@ if (finaldataPokémonReference[i] == true && finaldataPokémonArea[i]["Filter_"+
             contentDiv.setAttribute("data-filter",finaldataPokémonArea[i]["Filter_"+JSONPath_Area].replaceAll(" ",""));
         }
 
-        contentDiv.setAttribute("data-search-evolution",getEvolutionFamily(i).map(val => val.toLowerCase()));
+        contentDiv.setAttribute("data-search-evolution",getEvolutionFamily(i).map(function(v){return v["Pokémon"]}).join(",").toLowerCase());
         contentDiv.setAttribute("data-search-type",returnData(i,"Type","lower,undefined"));
         contentDiv.setAttribute("data-search-ability",returnData(i,"Ability","lower,undefined"));
         contentDiv.setAttribute("data-search-catchrate",returnData(i,"Catch Rate","lower,undefined"));
@@ -169,7 +171,7 @@ if (finaldataPokémonReference[i] == true && finaldataPokémonArea[i]["Filter_"+
         contentLabel.addEventListener("click", function(){count()});
 
         contentMainButton.value = i;
-        contentMainButton.addEventListener("click", function(){modalPokdata("open")});
+        contentMainButton.addEventListener("click", modalPokdata);
         contentMainButtonImg.src = "./media/Images/Misc/FinalDex/Location.png";
 
         contentMainNationalID.classList.add("contain-nationalID");
@@ -194,15 +196,15 @@ if (finaldataPokémonReference[i] == true && finaldataPokémonArea[i]["Filter_"+
             }
         }
         else {
-            if (finaldataPokémon[i]["Variant"].includes("Default")) {
-                contentName.innerText = Name;
-                contentImg.setAttribute("id",Name);
-                contentDiv.setAttribute("data-search-name",Name.toLowerCase());
-            }
-            else if (formName != undefined) {
+            if (formName != undefined) {
                 contentName.innerText = formName;
                 contentImg.setAttribute("id",formName);
                 contentDiv.setAttribute("data-search-name",formName.toLowerCase());
+            }
+            else {
+                contentName.innerText = Name;
+                contentImg.setAttribute("id",Name);
+                contentDiv.setAttribute("data-search-name",Name.toLowerCase());
             }
         }
        
