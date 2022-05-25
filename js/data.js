@@ -1,4 +1,6 @@
 var finaldataPokémon = [];
+var finaldataPokémonPath = [];
+var finaldataPokémonForm = [];
 var finaldataPokémonAbility = [];
 var finaldataPokémonArea = [];
 var finaldataPokémonBaseStats = [];
@@ -17,8 +19,6 @@ var finaldataPokémonLevelingRate = [];
 var finaldataPokémonPokédexEntry = [];
 var finaldataPokémonPokédexID = [];
 var finaldataPokémonType = [];
-
-var finaldataPokémonReference = [];
 
 var finaldataGame = [];
 var finaldataTypeChart = [];
@@ -114,19 +114,48 @@ LocationMetadataRequest.onload = function() {
 
 LearnsetMetadataRequest.onload = function() {
   var LearnsetMetadata = LearnsetMetadataRequest.response;
-  for (var i = 0; i < LearnsetMetadata["Machine"].length; i++) {
-    finaldataLearnsetMachine.push(LearnsetMetadata["Machine"][i]);
-  }
+   
   for (var i = 0; i < LearnsetMetadata["Level Up"].length; i++) {
-    finaldataLearnsetLevel.push(LearnsetMetadata["Level Up"][i]);
+      finaldataLearnsetLevel.push(LearnsetMetadata["Level Up"][i]);
+  }
+  for (var i = 0; i < LearnsetMetadata["Machine"].length; i++) {
+      finaldataLearnsetMachine.push(LearnsetMetadata["Machine"][i]);
   }
   for (var i = 0; i < LearnsetMetadata["Breeding"].length; i++) {
-    finaldataLearnsetBreed.push(LearnsetMetadata["Breeding"][i]);
+      finaldataLearnsetBreed.push(LearnsetMetadata["Breeding"][i]);
   }
+
 
   finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel,"Game","Single");
   finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine,"Game","Single");
   finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed,"Game","Single");
+
+
+  for (var i = 0; i < finaldataLearnsetLevel.length; i++) {
+    if (finaldataLearnsetLevelLength[i] == false) {
+      finaldataLearnsetLevel[i] = undefined;
+    }
+  }
+  for (var i = 0; i < finaldataLearnsetMachine.length; i++) {
+    if (finaldataLearnsetMachineLength[i] == false) {
+      finaldataLearnsetMachine[i] = undefined;
+    }
+  }
+  for (var i = 0; i < finaldataLearnsetBreed.length; i++) {
+    if (finaldataLearnsetBreedLength[i] == false) {
+      finaldataLearnsetBreed[i] = undefined;
+    }
+  }
+
+
+  finaldataLearnsetLevel = finaldataLearnsetLevel.filter(function(v) {return v != undefined;});
+  finaldataLearnsetMachine = finaldataLearnsetMachine.filter(function(v) {return v != undefined;});
+  finaldataLearnsetBreed = finaldataLearnsetBreed.filter(function(v) {return v != undefined;});
+
+
+  console.log(finaldataLearnsetLevel)
+  console.log(finaldataLearnsetMachine)
+  console.log(finaldataLearnsetBreed)
 
 
 }
@@ -247,6 +276,8 @@ GameMetadataRequest.onload = function() {
 
   for (var i = 0; i < finaldataRef.length; i++) {
     finaldataPokémon.push(PokémonMetadata["Reference"][i]);
+    finaldataPokémonPath.push(PokémonMetadata["Path"][i]);
+    finaldataPokémonForm.push(PokémonMetadata["Form"][i]);
     finaldataPokémonAbility.push(PokémonMetadata["Ability"][i]);
     finaldataPokémonArea.push(PokémonMetadata["Area"][i]);
     finaldataPokémonBaseStats.push(PokémonMetadata["Base Stats"][i]);
@@ -267,10 +298,8 @@ GameMetadataRequest.onload = function() {
     finaldataPokémonType.push(PokémonMetadata["Type"][i]);
   }
 
-  console.log(returnData(5,"Held Item",""))
 
 
-  ContinuationDiscontinuation();
 
   createNav();
   createGameData();
@@ -288,7 +317,9 @@ GameMetadataRequest.onload = function() {
   variantSelector();
 
   load();
-  
+
+
+
 
 
 }
