@@ -73,7 +73,6 @@ function RNG() {
   
       var lis = document.querySelectorAll("#rng ul li");
       for (var q = 0; q < lis.length; q++) {
-        //console.log(lis[q].lastElementChild.firstChild.value)
         themin.push(lis[q].lastElementChild.previousElementSibling.firstChild.value);
         themax.push(lis[q].lastElementChild.firstChild.value);
         lis[q].remove();
