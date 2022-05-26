@@ -249,7 +249,6 @@ MoveMetadataRequest.onload = function() {
     finaldataMoveType.push(MoveMetadata["Type"][i]);
   }
 
-  finaldataMoveLength = Continuation(finaldataMove,"Game","Multiple");
   initialize();
 }
 
@@ -339,8 +338,8 @@ function initialize() {
 
   loaddescription.innerHTML = "Fetching Databases<span>.</span><span>.</span><span>.</span>";
 
-  if (new Date() - initTimeStart >= 1000) {
-    loaddescription.innerHTML = "Finishing Up<span>.</span><span>.</span><span>.</span>";
+  if (new Date() - initTimeStart >= 5000 && !initEnd >= initLength) {
+    loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
   }
 
 
@@ -348,7 +347,7 @@ function initialize() {
   if (initEnd >= initLength) {
 
     
-    loaddescription.innerHTML = "Load Complete!";
+    loaddescription.innerHTML = "Finishing Up<span>.</span><span>.</span><span>.</span>";
 
     createGameData();
     createNav();
