@@ -19,10 +19,10 @@ function memoryCheckbox(what) {
     // Get all checkboxes that you want to monitor state for
     if (what == "contain") {
         for (var i in cbstate) {
-            var el = document.querySelector('#contain input[name="' + i + '"]');
+            var el = document.querySelector('#pokémon-outer > div input[name="' + i + '"]');
             if (el) el.click();
         }
-        var cb = document.querySelectorAll("#contain .save-cb-state");
+        var cb = document.querySelectorAll("#pokémon-outer > div .save-cb-state");
     }
     else {
         for (var i in cbstate) {
