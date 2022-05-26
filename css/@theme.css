@@ -46,9 +46,9 @@
 [data-theme="dark"] .gamedata-modal-background div {
 	filter: brightness(0) saturate(100%) invert(10%) sepia(9%) saturate(19%) hue-rotate(314deg) brightness(99%) contrast(87%);
 }
-[data-theme="dark"] #contain main img {
+[data-theme="dark"] #pokémon-outer > div main img {
     filter: invert(1);
 }
-[data-theme="dark"] #contain input:checked + label main img {
+[data-theme="dark"] #pokémon-outer > div input:checked + label main img {
     filter: invert(1) brightness(90%) opacity(100%);
 }
