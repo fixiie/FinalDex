@@ -2,7 +2,7 @@ function search() {
 
 $('#searchbar').on('keyup', function() {
     var searchVal = $(this).val();
-    var filterItems = $('#contain div > div');
+    var filterItems = $('#pokémon-outer > div li');
     this.style.color = "var(--fontDark)";
     
     var uncheck = document.querySelectorAll('.filterby input:checked');
@@ -10,7 +10,7 @@ $('#searchbar').on('keyup', function() {
         uncheck[i].checked = false;
     }
 
-    var searchoptions = ["evolution::","evolution:!","type::","type:!","ability::","ability:!","catchrate::","catchrate:!","catchrate:>","catchrate:<","eggcycle::","eggcycle:!","eggcycle:>","eggcycle:<","genderratio::","genderratio:!","egggroup::","egggroup:!","expyield::","expyield:!","expyield:>","expyield:<","expyieldcategory::","expyieldcategory:!","levelrate::","levelrate:!","levelrate:>","levelrate:<","helditem::","helditem:!","statshp::","statshp:!","statshp:>","statshp:<","statsatk::","statsatk:!","statsatk:>","statsatk:<","statsdef::","statsdef:!","statsdef:>","statsdef:<","statsspatk::","statsspatk:!","statsspatk:>","statsspatk:<","statsspdef::","statsspdef:!","statsspdef:>","statsspdef:<","statsspeed::","statsspeed:!","statsspeed:>","statsspeed:<","statstotal::","statstotal:!","statstotal:>","statstotal:<","evyieldhp::","evyieldhp:!","evyieldhp:>","evyieldhp:<","evyieldatk::","evyieldatk:!","evyieldatk:>","evyieldatk:<","evyielddef::","evyielddef:!","evyielddef:>","evyielddef:<","evyieldspatk::","evyieldspatk:!","evyieldspatk:>","evyieldspatk:<","evyieldspdef::","evyieldspdef:!","evyieldspdef:>","evyieldspdef:<","evyieldspeed::","evyieldspeed:!","evyieldspeed:>","evyieldspeed:<","evyieldtotal::","evyieldtotal:!","evyieldtotal:>","evyieldtotal:<","variant::","variant:!"];
+    var searchoptions = ["evolution::","evolution:!","type::","type:!","ability::","ability:!","catchrate::","catchrate:!","catchrate:>","catchrate:<","eggcycle::","eggcycle:!","eggcycle:>","eggcycle:<","genderratio::","genderratio:!","egggroup::","egggroup:!","expyield::","expyield:!","expyield:>","expyield:<","expyieldcategory::","expyieldcategory:!","levelrate::","levelrate:!","levelrate:>","levelrate:<","helditem::","helditem:!","statshp::","statshp:!","statshp:>","statshp:<","statsatk::","statsatk:!","statsatk:>","statsatk:<","statsdef::","statsdef:!","statsdef:>","statsdef:<","statsspatk::","statsspatk:!","statsspatk:>","statsspatk:<","statsspdef::","statsspdef:!","statsspdef:>","statsspdef:<","statsspeed::","statsspeed:!","statsspeed:>","statsspeed:<","statstotal::","statstotal:!","statstotal:>","statstotal:<","evyieldhp::","evyieldhp:!","evyieldhp:>","evyieldhp:<","evyieldatk::","evyieldatk:!","evyieldatk:>","evyieldatk:<","evyielddef::","evyielddef:!","evyielddef:>","evyielddef:<","evyieldspatk::","evyieldspatk:!","evyieldspatk:>","evyieldspatk:<","evyieldspdef::","evyieldspdef:!","evyieldspdef:>","evyieldspdef:<","evyieldspeed::","evyieldspeed:!","evyieldspeed:>","evyieldspeed:<","evyieldtotal::","evyieldtotal:!","evyieldtotal:>","evyieldtotal:<","variant::","variant:!","checked::"];
     
     if (Generation <= 2 || GameID == 31 || GameID == 32) {
         searchoptions = searchoptions.filter(item => !item.includes("ability"));
@@ -24,15 +24,28 @@ $('#searchbar').on('keyup', function() {
         }
     }
 
+    if (searchVal.toLowerCase().includes("checked::true") && searchVal.toLowerCase().includes(searchspec)) {
+        filterItems.addClass('hidden');
 
-    if (searchVal.toLowerCase().includes("::") && searchVal.toLowerCase().includes(searchspec)) {
+        $('#pokémon-outer > div input:checked').parent().removeClass('hidden');
+
+        this.style.color = "var(--colorRed)";
+    }
+    else if (searchVal.toLowerCase().includes("checked::false") && searchVal.toLowerCase().includes(searchspec)) {
+        filterItems.addClass('hidden');
+
+        $('#pokémon-outer > div input:not(:checked)').parent().removeClass('hidden');
+
+        this.style.color = "var(--colorRed)";
+    }
+    else if (searchVal.toLowerCase().includes("::") && searchVal.toLowerCase().includes(searchspec)) {
         filterItems.addClass('hidden');
 
         if (searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-            $('#contain div > div[data-search-' + searchspec.split("::")[0].toLowerCase() + '="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
+            $('#pokémon-outer > div li[data-search-' + searchspec.split("::")[0].toLowerCase() + '="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
         }
         else {
-            $('#contain div > div[data-search-' + searchspec.split("::")[0].toLowerCase() + '*="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
+            $('#pokémon-outer > div li[data-search-' + searchspec.split("::")[0].toLowerCase() + '*="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass('hidden');
         }
 
         this.style.color = "var(--colorRed)";
@@ -41,10 +54,10 @@ $('#searchbar').on('keyup', function() {
         filterItems.addClass('hidden');
 
         if (searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-            $('#contain div > div:not([data-search-' + searchspec.split(":!")[0].toLowerCase() + '="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass('hidden');
+            $('#pokémon-outer > div li:not([data-search-' + searchspec.split(":!")[0].toLowerCase() + '="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass('hidden');
         }
         else {
-            $('#contain div > div:not([data-search-' + searchspec.split(":!")[0].toLowerCase() + '*="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass('hidden');
+            $('#pokémon-outer > div li:not([data-search-' + searchspec.split(":!")[0].toLowerCase() + '*="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass('hidden');
         }
 
         this.style.color = "var(--colorRed)";
@@ -71,7 +84,7 @@ $('#searchbar').on('keyup', function() {
     }
     else if (searchVal.toLowerCase() != '') {
         filterItems.addClass('hidden');
-        $('#contain div > div[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass('hidden');
+        $('#pokémon-outer > div li[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass('hidden');
     } 
     else {
         filterItems.removeClass('hidden');
@@ -258,7 +271,7 @@ function exitSearch() {
 
     if (filters.length == 0) {
         search.value = "";
-        $('#contain-inner div').removeClass('hidden');
+        $('#pokémon-outer > div li').removeClass('hidden');
         search.focus();
         count();
     }
