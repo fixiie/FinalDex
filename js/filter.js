@@ -63,5 +63,6 @@ function showAll() {
         search.value = "";
         $('#contain-inner div').removeClass('hidden')
     }
+    count();
 
 }
