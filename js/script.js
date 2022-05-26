@@ -1298,6 +1298,7 @@ function rememberVariant() {
 
 var variantRotation;
 function variantSelector() {
+
     var variants = [];
 
     if (document.querySelectorAll("#reset-aside1 div > input:checked").length >= 1) {
@@ -1312,11 +1313,11 @@ function variantSelector() {
             }
         }
 
-        createContain(variants);
+        //createContain(variants);
         imgType();
         resizeDiv();
+        dexSwitch();
         memoryCheckbox("contain");
-        count();
 
         document.getElementById("searchbar").value = "";        
 
@@ -1324,9 +1325,15 @@ function variantSelector() {
         $(".reset-modal-outer.open").removeClass("open");
     }
     else {
-        if (variantRotation != true) {
-            //document.getElementById(localStorage.resetCheck.replaceAll('"','')).click();
-            //variantSelector();
+        if (variantRotation != true && localStorage.resetCheck != undefined) {
+            document.getElementById(localStorage.resetCheck.replaceAll('"','')).click();
+            variantSelector();
+        }
+        else if (variantRotation != true && localStorage.resetCheck == undefined) {
+            if (document.body.contains(document.querySelector("#reset-aside1 div input:first-child"))) {
+                document.querySelector("#reset-aside1 div input:first-child").click();
+                variantSelector();
+            }
         }
         document.querySelector("#reset-aside1 div button").animate([
         { transform: 'translateX(0%)'},
@@ -1347,7 +1354,7 @@ function variantSelector() {
 
 function UncheckAll() {
     count();
-    var uncheck = document.querySelectorAll('#contain-inner div:not([style*="display: none"]):not(.hidden) input:checked');
+    var uncheck = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden) input:checked');
     for (var i = 0; i < uncheck.length; i++) {
         uncheck[i].click();
     }
@@ -1355,7 +1362,7 @@ function UncheckAll() {
 
 function CheckAll() {
     count();
-    var check = document.querySelectorAll('#contain-inner div:not([style*="display: none"]):not(.hidden) input:not(:checked)');
+    var check = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden) input:not(:checked)');
     for (var i = 0; i < check.length; i++) {
         check[i].click();
     }
@@ -1384,11 +1391,13 @@ function dataRedirect() {
     }
     typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
 
-    if (document.querySelector(".gamedata-modal-outer.open") == undefined) { // if not open
+
+    if (document.querySelector(".pokdata-modal-outer.open") != undefined) {
         document.querySelector(".pokdata-modal-outer.open").classList.remove("open");
-        document.querySelector(".gamedata-modal-outer").classList.add("open");
-        document.querySelector(".gamedata-modal-outer .gamedata-nav > input[value='"+typevariant+"']").click();
     }
+
+    document.querySelector("#navigation > input[value='"+typevariant+"']").click();
+
     document.querySelector('#'+type+'-options > label[data-search-name="'+x+'"]').click();
     document.querySelector('#'+type+'-options > label[data-search-name="'+x+'"]').scrollIntoView();
 }
@@ -1650,7 +1659,9 @@ function loadData() {
     
     category.innerText = '"'+returnData(i,"Category","")[0]+' Pokémon"';
 
-    description.querySelector(':scope p').innerText = returnData(i,"Pokédex Entry","")[0];
+    if (returnData(i,"Pokédex Entry","")[0] != undefined) {
+        description.querySelector(':scope p').innerText = returnData(i,"Pokédex Entry","")[0];
+     }
 
     if (returnData(i,"Debut","")[0].includes("-")) {
         debut.innerText = "Introduced in "+returnData(i,"Debut","")[0].split("-")[0];
@@ -1746,9 +1757,16 @@ function loadData() {
 
     name.innerText = getPokémonName(i);
 
-    hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i,"Hatch Rate","")[1] + " Steps";
+
+    if (returnData(i,"Hatch Rate","")[1] != undefined) {
+        hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i,"Hatch Rate","")[1] + " Steps";
+        hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title","Steps required to hatch an egg containing "+getPokémonName(i)+".");
+    }
+    else {
+        hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i,"Hatch Rate","")[0] + " Egg Cycles";
+        hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title","Egg Cycles required to hatch an egg containing "+getPokémonName(i)+".");
+    }
     hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value",returnData(i,"Hatch Rate","")[0]);
-    hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title","Steps required to hatch an egg containing "+getPokémonName(i)+".");
 
     if (Egg == true) {
         if (returnData(i,"Egg Group","")[0] != undefined) {
@@ -1930,9 +1948,8 @@ function loadData() {
         pokdataAside2LearnsetList[u].remove();
     }
 
-    console.log(getPokémonName(i))
     for (u = 0; u < finaldataLearnsetLevel.length; u++) {
-        if (finaldataLearnsetLevel[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] || finaldataLearnsetLevel[u]["Form"] == finaldataPokémon[i]["Form"]) {
+        if (finaldataLearnsetLevel[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] && finaldataLearnsetLevel[u]["Form"] == finaldataPokémon[i]["Form"]) {
             var pokdataAside2LearnsetLi = document.createElement("li");
             pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
             for (y = 0; y < pokdataAside2LearnsetHeader.length; y++) {
@@ -2011,7 +2028,7 @@ function loadData() {
     }
     
     for (u = 0; u < finaldataLearnsetMachine.length; u++) {
-        if (finaldataLearnsetMachine[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] || finaldataLearnsetMachine[u]["Form"] == finaldataPokémon[i]["Form"]) {
+        if (finaldataLearnsetMachine[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] && finaldataLearnsetMachine[u]["Form"] == finaldataPokémon[i]["Form"]) {
             var pokdataAside2LearnsetLi = document.createElement("li");
             pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
             for (y = 0; y < pokdataAside2LearnsetHeader.length; y++) {
@@ -2098,7 +2115,7 @@ function loadData() {
     }
     
     for (u = 0; u < finaldataLearnsetBreed.length; u++) {
-        if (finaldataLearnsetBreed[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] || finaldataLearnsetBreed[u]["Form"] == finaldataPokémon[i]["Form"]) {
+        if (finaldataLearnsetBreed[u]["Pokémon"] == finaldataPokémon[i]["Pokémon"] && finaldataLearnsetBreed[u]["Form"] == finaldataPokémon[i]["Form"]) {
             var pokdataAside2LearnsetLi = document.createElement("li");
             pokdataAside2LearnsetUl.appendChild(pokdataAside2LearnsetLi);
             for (y = 0; y < pokdataAside2LearnsetHeader.length; y++) {
