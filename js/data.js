@@ -1,3 +1,7 @@
+var initStart = 1;
+var initLength;
+var initTimeStart;
+
 var finaldataPokémon = [];
 var finaldataPokémonPath = [];
 var finaldataPokémonForm = [];
@@ -87,6 +91,22 @@ LocationMetadataRequest.open('GET', LocationMetadataRequestURL);
 LocationMetadataRequest.responseType = 'json';
 LocationMetadataRequest.send();
 
+
+let MoveMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Move%20Metadata.json';
+let MoveMetadataRequest = new XMLHttpRequest();
+MoveMetadataRequest.open('GET', MoveMetadataRequestURL);
+MoveMetadataRequest.responseType = 'json';
+MoveMetadataRequest.send();
+
+
+if (Ability.length >= 1) {
+  initLength = 6;
+}
+else {
+  initLength = 5;
+}
+
+
 LocationMetadataRequest.onload = function() {
   var LocationMetadata = LocationMetadataRequest.response;
 
@@ -108,9 +128,10 @@ LocationMetadataRequest.onload = function() {
     finaldataLocationNavigation.push(LocationMetadata["Navigation"][i]);
   }
 
-
+  initialize();
  
 }
+
 
 LearnsetMetadataRequest.onload = function() {
   var LearnsetMetadata = LearnsetMetadataRequest.response;
@@ -153,11 +174,11 @@ LearnsetMetadataRequest.onload = function() {
   finaldataLearnsetBreed = finaldataLearnsetBreed.filter(function(v) {return v != undefined;});
 
 
-  console.log(finaldataLearnsetLevel)
-  console.log(finaldataLearnsetMachine)
-  console.log(finaldataLearnsetBreed)
 
 
+
+
+  initialize();
 }
 
 if (Ability.length >= 1) {
@@ -179,23 +200,15 @@ if (Ability.length >= 1) {
     for (var i = 0; i < AbilityMetadata["Flavor"].length; i++) {
       finaldataAbilityFlavor.push(AbilityMetadata["Flavor"][i]);
     }
-
+    initialize();
   }
 }
 
 
-let MoveMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Move%20Metadata.json';
-let MoveMetadataRequest = new XMLHttpRequest();
-MoveMetadataRequest.open('GET', MoveMetadataRequestURL);
-MoveMetadataRequest.responseType = 'json';
-MoveMetadataRequest.send();
+
 
 MoveMetadataRequest.onload = function() {
   var MoveMetadata = MoveMetadataRequest.response;
-
-
-
-
 
   for (var i = 0; i < MoveMetadata["Description"].length; i++) {
     finaldataMoveDescription.push(MoveMetadata["Description"][i]);
@@ -237,7 +250,7 @@ MoveMetadataRequest.onload = function() {
   }
 
   finaldataMoveLength = Continuation(finaldataMove,"Game","Multiple");
-
+  initialize();
 }
 
 
@@ -263,10 +276,10 @@ GameMetadataRequest.onload = function() {
     }
     
     config(GameMetadata);
+    initialize();
+}
   
-  }
-  
-  PokémonMetadataRequest.onload = function() {
+PokémonMetadataRequest.onload = function() {
 
   var PokémonMetadata = PokémonMetadataRequest.response;
   
@@ -300,58 +313,72 @@ GameMetadataRequest.onload = function() {
 
 
 
-
-  createNav();
-  createGameData();
-  createReset();
-
-  modalGamedata();
-  modalReset();
-
-  defaults();
-  eventListener();
-
-  memoryCheckbox();
-  memoryRadio();
-  memoryRange();
-  variantSelector();
-
-  load();
-
-
-
-
-
+  initialize();
 }
 
 
 
-function defaults() {
-  count();
-  search();
-  sort();
-  countdown();
-  stopwatch();
-  theme();
-  dropdown();
-  filter();
-  typeSwitch("NORMAL");
-  RNG();
+
+
+
+
+function initialize() {
+  var initEnd = initStart++;
+  var loaddescription = document.getElementById("load-description");
+  var type = event.target.responseURL.split("/")[event.target.responseURL.split("/").length - 1].split("%20")[0];
+
+
+  if (initEnd == 1) {
+    initTimeStart = new Date();
+  }
+
+  if (type == "Pok%C3%A9mon") {
+    type = "Pokémon";
+  }
+
+
+  loaddescription.innerHTML = "Fetching Databases<span>.</span><span>.</span><span>.</span>";
+
+  if (new Date() - initTimeStart >= 1000) {
+    loaddescription.innerHTML = "Finishing Up<span>.</span><span>.</span><span>.</span>";
+  }
+
+
+
+  if (initEnd >= initLength) {
+
+    
+    loaddescription.innerHTML = "Load Complete!";
+
+    createGameData();
+    createNav();
+    createReset();
+
+    modalReset();
+    modalGamedata();
+
+    count();
+    search();
+    sort();
+    countdown();
+    stopwatch();
+    dropdown();
+    typeSwitch("NORMAL");
+    RNG();
+
+    memoryCheckbox();
+    memoryRadio();
+    memoryRange();
+    variantSelector();
+
+    load();
+  }
 }
 
 
 
-function eventListener() {
-    var dexSwitchLabel = document.querySelectorAll('#dexswitch label');
-    for (var i = 0; i < dexSwitchLabel.length; i++) {
-        dexSwitchLabel[i].addEventListener("click", count);
-    }
-    var filterLabel = document.querySelectorAll('#filter-outer label');
-    for (var i = 0; i < filterLabel.length; i++) {
-        filterLabel[i].addEventListener("click", count);
-    }
-    document.getElementById('showall').addEventListener("click", count);
-}
+
+
 
 // temp data
 
@@ -428,3 +455,5 @@ var locationTrainer3Move = [locationTrainer1Pok6Move,locationTrainer1Pok5Move,lo
 var locationTrainerListMove = [locationTrainer1Move,locationTrainer2Move,locationTrainer3Move];
 
 var locationTrainerValue = ["1920","1500","800"];
+
+
