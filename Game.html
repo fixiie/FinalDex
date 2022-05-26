@@ -31,9 +31,12 @@
     <link rel="stylesheet" href="./media/Fonts/BebasNeue.ttf">
 
 <script>
-//var GameID = Math.floor(Math.random() * 24) + 7;
-var GameID = 23;
+//var GameID = Math.floor(Math.random() * 34) + 1;
+var GameID = 33;
 </script>
+
+<script src="./js/theme.js"></script>
+<script>theme()</script>
 <style>
 
 .filterby input:checked ~ label {
@@ -94,10 +97,10 @@ label,
 #showall,
 #dexswitch,
 #loader,
-#contain img {
+#pokémon-outer img {
 	user-select: none;
 }
-#contain label {
+#pokémon-outer label {
 	user-select: unset;
 }
 input[type=text] {
@@ -1543,7 +1546,7 @@ color: var(--font2);
 
 #search-exit {
     position: absolute;
-    width: 80%;
+    width: 90%;
     height: 40%;
     padding: 0 1vw;
     display: flex;
@@ -1556,7 +1559,7 @@ color: var(--font2);
 #search-exit::after {
     position: absolute;
     font-size: 28px;
-    right: 3%;
+    right: 10px;
     content: "⨯";
     cursor: pointer;
     pointer-events: auto;
@@ -1742,6 +1745,7 @@ color: var(--font2);
     width: 80%;
     height: 20%;
     z-index: 3;
+    position:relative;
     box-shadow: 0 1px 1px var(--border1);
 }
 #tool-aside3 {
@@ -1779,6 +1783,7 @@ color: var(--font2);
     height: 20%;
     z-index: 3;
     box-shadow: 0 1px 1px var(--border1);
+    position:relative;
 }
 #ability-aside3,
 #move-aside3,
@@ -1973,11 +1978,9 @@ color: var(--font2);
 	display: block;
 }
 
-#settings-outer {
 
-}
 
-#filter-outer,
+
 #showall-outer {
     box-shadow: 0.5px 0 1px var(--border1);
 }
@@ -1985,35 +1988,32 @@ color: var(--font2);
    
 }
 
-#filter-outer,
 #showall-outer,
 #dexswitch-outer,
 #search-outer,
 #count-outer,
 #gametitle-outer,
 #settings-outer {
-    height: 100% !important;
+    height: 100%;
 }
 
 
-#filter-outer,
 #dexswitch-outer {
-    width: 12.5% !important;
-}
-#showall-outer {
-    width: 7.5% !important;
+    width: 17.5%;
 }
 
 #search-outer {
-    width: 35% !important;
+    width: 50%;
 }
 
-#gametitle-outer,
+#gametitle-outer {
+    width: 12.5%;
+}
 #settings-outer {
-    width: 12.5% !important;
+    width: 12.5%;
 }
 #count-outer {
-    width: 7.5% !important;
+    width: 7.5%;
 }
 #search {
     width: 100%;
@@ -2021,7 +2021,7 @@ color: var(--font2);
     position:relative;
 }
 #searchbar {
-    width: 80%;
+    width: 90%;
     height: 40%;
     padding: 0 1vw;
 }
@@ -2106,17 +2106,7 @@ body {
     width: 100%;
 }
 
-#contain {
-    margin-top: 10vh;
-    height: 90vh;
-    width: 100vw;
-    overflow-y: auto;
-    overflow-x: hidden;
 
-}
-#contain-inner {
-    padding: 20px 0;
-}
 
 #dexswitch label {
     width: 85%;
@@ -2128,7 +2118,7 @@ body {
 }
 
 #settings-outer ul {
-    margin-top: 2px;
+    margin-top: 1px;
 }
 #settings-outer ul li  {
     width: 100%;
@@ -2182,15 +2172,6 @@ body {
 	transform: scale(0.97);
 }
 
-#filterby-outer,
-#showall-outer,
-#dexswitch-outer,
-#search-outer,
-#count-outer,
-#gametitle-outer,
-#settings-outer {
-   
-}
 #gametitle-outer img {
     width: 90%;
     height: 100%;
@@ -2230,64 +2211,22 @@ body {
     display: none;
 }
 
-#navigation {
-	height: 10vh;
-	background: var(--color14);
-	box-shadow: 0 2px 1px var(--border1);
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 10;
-}
-#navigation nav {
 
-	float: left;
-	width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-#navigation ul li {
-	float: left;
-	position: relative;
-	text-align: center;
-}
-#navigation ul li a {
-	display: block;
-
-}
-
-
-
-
-
-
-
-
-#navigation ul {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-#navigation ul li {
-	position: relative;
-}
 #gametitle {
-
-
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-#gametitle:active {
-	background: var(--color16);
-}
+
 #gametitle img {
     max-width: 90%;
     max-height: 80%;
-	cursor: pointer;
 	object-fit: scale-down;
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+	image-rendering:   -o-crisp-edges;         /* Opera */
+	image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
 
 
@@ -2571,7 +2510,7 @@ body {
 
 
 
-#contain {
+#pokémon-outer {
 	
 	text-align: center;
 	
@@ -2592,32 +2531,28 @@ body {
 	-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 	margin: 0 5%;
 }
-#contain span {
+.contain-name {
+    opacity: 0;
+}
+
+#pokémon-outer > div span {
 	display: none;
 }
-#contain main p {
+#pokémon-outer > div main caption,
+#pokémon-outer > div main p {
     position: absolute;
 	cursor: pointer;
 	width: 100%;
 	height: 100%;
-	display: none;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
-#contain main p:nth-child(3) {
+#pokémon-outer > div main caption:nth-child(3) {
     display: flex;
 }
-.contain-name {
-	text-align: center;
-	opacity: 0;
-	font-size: 100%;
-	width: 100%;
-	height: 20%;
-	 display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#contain-inner div {
+
+#pokémon-outer > div li {
 	display: inline-block;
 	background: var(--contain);
 	border: 2px groove;
@@ -2628,10 +2563,10 @@ body {
 	margin: 3px 3px;
 	cursor: pointer;
 }
-#contain-inner div.hidden {
+#pokémon-outer > div li.hidden {
 	display: none !important;
 }
-#contain main button {
+#pokémon-outer > div li main button {
 	position: absolute;
 	height: 100%;
 	width: 20%;
@@ -2643,7 +2578,7 @@ body {
 	right: 0;
     z-index: 1;
 }
-#contain main button img {
+#pokémon-outer > div li main button img {
 	object-fit: scale-down;
 	width: 100%;
 	height: 50%;
@@ -2652,25 +2587,26 @@ body {
     justify-content: center;
 	cursor: pointer;
 }
-#contain main button:hover {
+#pokémon-outer > div li main button:hover {
 	opacity: 0.3;
 	transition-duration: 0s;
 }
-#contain label {
+#pokémon-outer > div li label {
 	display: block;
 	position: relative;
 	cursor: pointer;
 	height: 100%;
 	width: 100%;
 }
-#contain main {
+#pokémon-outer > div li main {
 	height: 20%;
 	width: 100%;
 	cursor: pointer;
 	position: relative;
     display: block;
+    overflow-y: auto;
 }
-#contain main span {
+#pokémon-outer > div li main span {
 	position: absolute;
 	display: flex;
     align-items: center;
@@ -2680,7 +2616,7 @@ body {
     font-size: 70%;
     color: var(--fontDark);
 }
-#contain main span:before {
+#pokémon-outer > div li main span:before {
 	content: " ";
 	border-radius: 50%;
 	border: 1px solid;
@@ -2697,28 +2633,28 @@ body {
     align-items: center;
 	justify-content: center;
 }
-#contain input:checked + label main span:before {
+#pokémon-outer > div li input:checked + label main span:before {
 	content: "✔";
 	background: var(--colorGreen);
 	transition-duration: .5s;
 	transition-property: opacity;
 	opacity: 1;
 }
-#contain input:checked + label img {
+#pokémon-outer > div li input:checked + label img {
 	filter: brightness(90%) opacity(100%);
 	transition-duration: 1s;
 	transition-property: filter;
 }
-#contain input:checked + label p {
+#pokémon-outer > div li input:checked + label p {
 	transition-duration: 1.5s;
 	transition-property: opacity;
 	opacity: 1;
 }
-#contain input:checked + label button {
+#pokémon-outer > div li input:checked + label button {
 	opacity: 0.3;
 	transition-duration: .3s;
 }
-#contain input:checked + label button:hover {
+#pokémon-outer > div li input:checked + label button:hover {
 	opacity: 0.5;
 	transition-duration: 0s;
 }
@@ -2989,7 +2925,7 @@ body {
 .pokdata-idname-outer {
     float: left;
 	text-align: left;
-	width: 40%;
+	width: 30%;
 	height: 100%;
 	position: relative;
     bck: pink;
@@ -2997,7 +2933,7 @@ body {
 .pokdata-debutcategorytype-outer {
     float: left;
 	text-align: right;
-	width: 25%;
+	width: 35%;
 	height: 100%;
 	position: relative;
     bck: yellowgreen;
@@ -3988,6 +3924,7 @@ body {
 
 </style>
 <style>
+#pokémon-outer,
 #mechanic-outer,
 #exclusive-outer,
 #type-outer,
@@ -3997,12 +3934,9 @@ body {
 #item-outer,
 #map-outer {
     width: 100%;
-    height: 92%;
-    position: inherit;
+    height: 100%;
+    position: relative;
     display: none;
-}
-#mechanic-outer {
-    display: block;
 }
 
 
@@ -4013,41 +3947,27 @@ body {
     display: none;
 }
 .gamedata-modal-outer {
-	position: fixed;
-	z-index: 20;
-    top: 0;
+
 	width: 100%;
 	height: 100%;
-	opacity: 0;
-	visibility: hidden;
-	transition: visibility .5s linear, opacity .5s ease;
 }
 .gamedata-modal-outer.open {
 	visibility: visible;
 	opacity: 1;
 }
-.gamedata-modal-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	z-index: 21;
-	background: rgba(0, 0, 0, 0.7);
+#gamedata {
+    height: 96vh;
 }
-
 .gamedata-modal {
-	position: relative;
-	z-index: 22;
-	height: 90%;
-	width: 90%;
-	top: 2.5%;
-	
-	box-shadow: 0 0 10px var(--border1);
-	margin: 0 auto;
+
+
+	height: 100%;
+	width: 100%;
+
+
 	background: var(--color16);
 	text-align: center;
-    border: 1px solid;
+
 }
 .gamedata-modal-background {
     overflow:visible;
@@ -4323,7 +4243,7 @@ a {
     height: 20%;
     width: 80%;
     float: right;
-    position: inherit;
+    position: relative;
     overflow: hidden;
     z-index: 3;
     box-shadow: 0 1px 1px var(--border1);
@@ -4369,7 +4289,7 @@ a {
 #exclusive-aside2 {
     height: 20%;
     width: 80%;
-    position: inherit;
+    position: relative;
     overflow: hidden;
     bck: green;
     z-index: 3;
@@ -4400,7 +4320,7 @@ a {
     height: 20%;
     width: 80%;
     float: right;
-    position: inherit;
+    position: relative;
     overflow: hidden;
     box-shadow: 0 1px 1px var(--border1);
     z-index: 3;
@@ -4435,7 +4355,7 @@ a {
     height: 20%;
     width: 80%;
     float: right;
-    position: inherit;
+    position: relative;
     box-shadow: 0 1px 1px var(--border1);
     z-index: 3;
 }
@@ -4839,7 +4759,7 @@ display: none;
 .type-description-title {
     width: 100%;
     height: 20%;
-    position: inherit;
+    position: relative;
 }
 .type-description-title span {
     border-bottom: 1px solid;
@@ -7005,6 +6925,96 @@ span[name="Status"] {
     background:unset;
 }
 
+#tempnav {
+    height: 3vh;
+    background: var(--color14);
+    box-shadow: 0 2px 1px var(--border1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+#navigation {
+    height: 4vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    z-index: 5;
+}
+#navigation label {
+	display: flex;
+	height: 100%;
+    width: 100%;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+	font-size: 0.8vw;
+	font-weight: bold;
+	cursor: pointer;
+    box-shadow: 0 0 0 1px var(--border1);
+    z-index: inherit;
+    background: var(--color14);
+}
+#navigation input:checked + label,
+#navigation label:active {
+	background: var(--color10);
+    color: var(--font2);
+}
+#pokémon-outer {
+    display: block;
+}
+
+
+
+#pokémon-outer > div {
+    height: 90%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+
+#pokémon-outer nav {
+	width: 100%;
+    height: 10%;
+    position: relative;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    z-index: 10;
+    background: var(--color14);
+}
+
+#pokémon-outer > nav ul li {
+	float: left;
+	position: relative;
+	text-align: center;
+}
+#pokémon-outer > nav ul li a {
+	display: block;
+
+}
+
+
+
+
+
+
+
+
+#pokémon-outer nav ul {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#pokémon-outer nav ul li {
+	position: relative;
+}
+#pokémon-outer > div > ul {
+    padding: 10px 0;
+}
 </style>
 
 </head>
@@ -7026,7 +7036,10 @@ span[name="Status"] {
         <h1 class="load-title">Dex</h1>
     </div>
 
+
     <section id="navigation"></section>
+
+
 
     <div id="reset"></div>
 
@@ -7034,9 +7047,8 @@ span[name="Status"] {
     	
     <div id="pokdata"></div>
     
-    <div id="contain">
-        <div id="contain-inner"></div>
-    </div>
+
+
 
 
     <script src="./js/config.js"></script>
@@ -7054,7 +7066,6 @@ span[name="Status"] {
 
     <script src="./js/count.js"></script>
     <script src="./js/countdown.js"></script>
-    <script src="./js/filter.js"></script>
     <script src="./js/gamedata.js"></script>
     <script src="./js/imagetype.js"></script>
     <script src="./js/load.js"></script>
@@ -7066,8 +7077,9 @@ span[name="Status"] {
     <script src="./js/search.js"></script>
     <script src="./js/sort.js"></script>
     <script src="./js/stopwatch.js"></script>
-    <script src="./js/theme.js"></script>
+
 
 </body>
+
 
 </html>
