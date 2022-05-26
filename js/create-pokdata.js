@@ -355,6 +355,7 @@ pokdataAside2AreaText.innerHTML = finaldataPokémonArea[i]["Area_"+JSONPath_Area
 
 
 
+*/
 
 for (q = 0; q < JSONPath_Pokédex.length; q++) {
     var pokdataAside1IDRegional = document.createElement("span");
@@ -366,7 +367,7 @@ for (q = 0; q < JSONPath_Pokédex.length; q++) {
 
     pokdataAside1DivIdName.appendChild(pokdataAside1IDRegional);
 }
-*/
+
 
 if (Ability.length >= 1) {
     var pokdataAside2MetadataSidebarRow1 = document.createElement("div");
