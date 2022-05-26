@@ -34,7 +34,7 @@ function modalPokdata() {
     if (activeSecondWindow != null) {
         activeSecondWindow.classList.remove("open");
     }
-console.log(def)
+
 
     if (id != undefined) {
 
