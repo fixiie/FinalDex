@@ -6,16 +6,14 @@ function config(GameMetadata) {
 }
 
 
+var Ability = [];
 var Egg;
-var Ability;
-var HeldItem;
-var Stats;
 var Gender;
 var Generation;
-
-var ImageType_Extension;
-var ImageType_Name;
-var ImageType_Path;
+var HeldItem;
+var ImageType_Extension = [];
+var ImageType_Name = [];
+var ImageType_Path = [];
 var JSONPath_Ability;
 var JSONPath_AbilityFlavor;
 var JSONPath_AbilityReference;
@@ -28,15 +26,16 @@ var JSONPath_EvolutionMethod;
 var JSONPath_EvolutionSpecie;
 var JSONPath_EvolutionStage;
 var JSONPath_EVYield;
-var JSONPath_ExclusiveFeature;
-var JSONPath_ExclusiveItem;
-var JSONPath_ExclusivePokémon;
+var JSONPath_ExclusiveFeature = [];
+var JSONPath_ExclusiveItem = [];
+var JSONPath_ExclusivePokémon = [];
 var JSONPath_ExperienceYield;
+var JSONPath_Form;
 var JSONPath_GenderRatio;
 var JSONPath_HatchRateEggCycle;
 var JSONPath_HatchRateSteps;
 var JSONPath_HeldItem;
-var JSONPath_HeldItemPercentage;
+var JSONPath_HeldItemPercentage = [];
 var JSONPath_LevelingRate;
 var JSONPath_Location;
 var JSONPath_LocationConnection;
@@ -53,14 +52,16 @@ var JSONPath_MovePower;
 var JSONPath_MovePP;
 var JSONPath_MoveTutor;
 var JSONPath_MoveType;
-var JSONPath_Pokédex;
+var JSONPath_Path;
+var JSONPath_Pokédex = [];
 var JSONPath_PokédexEntry;
+var JSONPath_Reference;
 var JSONPath_Type;
 var JSONPath_Typechart;
 var MEDIAPath_Character_Battle;
 var MEDIAPath_Currency;
 var MEDIAPath_Encounter;
-var MEDIAPath_ExclusiveItem;
+var MEDIAPath_ExclusiveItem = [];
 var MEDIAPath_Item_Bag;
 var MEDIAPath_Map;
 var MEDIAPath_Pocket_Icon;
@@ -70,11 +71,7 @@ var MEDIAPath_Type_Category;
 var MEDIAPath_Type_Icon;
 var MEDIAPath_Type_Symbol;
 var MEDIAPath_Type_Text;
-
-var JSONPath_Path;
-var JSONPath_Form;
-var JSONPath_Reference;
-
+var Stats = [];
 
 
 MEDIAPath_Character_Battle = "HGSS";
