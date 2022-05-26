@@ -33,7 +33,6 @@ function imgType() {
     var conimg = document.querySelectorAll('.contain-img');
 
     for (var i = 0; i < imgType.length; i++) {
-
         if(imgType[i].checked == true) {
             var dataType = imgType[i].getAttribute("data-type");
             var dataPath = imgType[i].getAttribute("data-path");
@@ -45,9 +44,11 @@ function imgType() {
                 for (var q = 0; q < conimg.length; q++) {
                     if (conimg[q].getAttribute("id").includes("Shiny")) {
                         conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/Shiny/Front/' + dataPath + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
+                        conimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
                     }
                     else {
                         conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/Normal/Front/' + dataPath + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
+                        conimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
                     }
                 }
             }
