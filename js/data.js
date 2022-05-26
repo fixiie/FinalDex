@@ -338,7 +338,7 @@ function initialize() {
 
   loaddescription.innerHTML = "Fetching Databases<span>.</span><span>.</span><span>.</span>";
 
-  if (new Date() - initTimeStart >= 5000 && !initEnd >= initLength) {
+  if (new Date() - initTimeStart >= 5000) {
     loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
   }
 
