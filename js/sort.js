@@ -2,44 +2,53 @@ function sort() {
 
     var dexEventListener = document.querySelectorAll('#dexswitch input');
     for (var i = 0; i < dexEventListener.length; i++) {
+        dexEventListener[i].addEventListener("click", dexMove);
         dexEventListener[i].addEventListener("click", dexSwitch);
-        
-    function dexSwitch() {
+    }
 
-        if (this.value == JSONPath_Pokédex.length + 1) {
-            this.nextElementSibling.style.display = "none";
-            this.parentElement.firstChild.nextElementSibling.style.display = "flex";
-        }
-        else {
-            this.nextElementSibling.style.display = "none";
-            this.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "flex";
-        }
+}
 
-        if(this.value == JSONPath_Pokédex.length + 1) {
-            var divList = $('#contain-inner div');
-            divList.sort(function(a, b) {
-                return $(a).data("national") - $(b).data("national")
-            });
-            $("#contain-inner").html(divList);
-            
-        }
+function dexMove() {
 
+    var x = this.value
+
+    if (x == JSONPath_Pokédex.length + 1) {
+        this.nextElementSibling.style.display = "none";
+        this.parentElement.firstChild.nextElementSibling.style.display = "flex";
+    }
+    else {
+        this.nextElementSibling.style.display = "none";
+        this.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "flex";
+    }
+
+    dexChecker.fill(x);
+}
+
+
+function dexSwitch() {
+
+
+    var divList = $('#pokémon-outer > div li');
+    var x = dexChecker[0];
+
+
+    if (x == JSONPath_Pokédex.length + 1) {
+        divList.sort(function(a, b) {
+            return $(a).data("national") - $(b).data("national")
+        });
+        $("#pokémon-outer > div ul").html(divList);
+    }
+    else {
         for (q = 0; q < JSONPath_Pokédex.length; q++) {
-            var x = this.value;
-
-            var divList = $('#contain-inner div');
             divList.sort(function(a, b) {
                 return $(a).data("regional-" + x) - $(b).data("regional-" + x)
             });
-            $("#contain-inner").html(divList);
-
-            count();
-        }
-            dexChecker.fill(this.value);
-            dexCheck();
+            $("#pokémon-outer > div ul").html(divList);
         }
     }
 
+    dexCheck();
+    count();
 }
 
 
@@ -47,11 +56,11 @@ function sort() {
 
 
 function dexCheck() {
-    var contdiv = document.querySelectorAll('#contain-inner div');
+    var contdiv = document.querySelectorAll('#pokémon-outer > div li');
     for (u = 0; u < contdiv.length; u++) {
         contdiv[u].style.display = "inline-block";
     }
-    let contid = document.querySelectorAll('#contain main p');
+    let contid = document.querySelectorAll('#pokémon-outer > div caption');
     for (u = 0; u < contid.length; u++) {
             contid[u].style.display = "none";
     }
@@ -68,7 +77,7 @@ function dexCheck() {
         nxt[u].style.display = "none";
     }
     /*
-    var unobtainablediv = document.querySelectorAll('#contain-inner div[data-filter="Unobtainable"]');
+    var unobtainablediv = document.querySelectorAll('#pokémon-outer > div li[data-filter="Unobtainable"]');
     for (u = 0; u < unobtainablediv.length; u++) {
         unobtainablediv[u].style.display = "none";
     }
@@ -82,7 +91,7 @@ function dexCheck() {
             for (u = 0; u < contreg.length; u++) {
                 contreg[u].style.display = "flex";
             }
-            var contregdiv = document.querySelectorAll('#contain-inner div[data-regional-' + p + '=""]');
+            var contregdiv = document.querySelectorAll('#pokémon-outer > div li[data-regional-' + p + '=""]');
             for (u = 0; u < contregdiv.length; u++) {
                 contregdiv[u].style.display = "none";
             }
