@@ -2393,10 +2393,10 @@ gamedataMoveAside1OptionsSearchOuter.setAttribute("id","move-options-search");
 gamedataMoveAside1OptionsSearch.setAttribute("type","text");
 gamedataMoveAside1OptionsSearch.setAttribute("id","move-search");
 if (Generation == 8) {
-    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/fighting/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00/TR00]\ncontact:: [y/n]\ntutor:: [y/n]");
+    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00/TR00]\ncontact:: [y/n]\ntutor:: [y/n]");
 }
 else {
-    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/fighting/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00]\ncontact:: [y/n]\ntutor:: [y/n]"); 
+    gamedataMoveAside1OptionsSearch.setAttribute("title","Search options:\ntype:: [normal/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00]\ncontact:: [y/n]\ntutor:: [y/n]"); 
 }
 gamedataMoveAside1OptionsSearch.setAttribute("placeholder","Search Moves...");
 gamedataMoveAside1OptionsSearch.setAttribute("onfocus","this.placeholder=''");
@@ -2681,7 +2681,7 @@ for (var q = 0; q < finaldataMove.length; q++) {
             else {
                 gamedataMoveAside2TitleID.title = "Index number";
             }
-            gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Generation"].split("-")[0];
+            gamedataMoveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Debut"].split("-")[0];
             gamedataMoveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_"+JSONPath_MoveDescription];
             gamedataMoveAside3SidebarTypeTextImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block'");
             gamedataMoveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_"+JSONPath_MoveType] + ".png";
