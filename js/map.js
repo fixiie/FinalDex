@@ -329,7 +329,7 @@ var createMap = function() {
 			mapAside4DescriptionTrainerUlTopCount.innerText = x + "/" + locationTrainerPok.length;
 			mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall" + z + ".png";
 			mapAside4DescriptionTrainerIconOuter.setAttribute("id", "map-description-trainer-icon")
-			mapAside4DescriptionTrainerIcon.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/" + ImageType_Name[0] + "/" + locationTrainerPok[q][u] + ".png";
+			mapAside4DescriptionTrainerIcon.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/" + ImageType_Path[0] + "/" + locationTrainerPok[q][u] + ".png";
 			mapAside4DescriptionTrainerIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			mapAside4DescriptionTrainerIcon.setAttribute("title", getPokémonName(locationTrainerPok[q][u]));
 			mapAside4DescriptionTrainerLvGender.setAttribute("id", "map-description-trainer-lvgender");
