@@ -1,6 +1,4 @@
 var createPokémon = function() {
-	createSettings();
-    modalSettings();
 	var contentOuter = document.createElement("div");
 	contentOuter.setAttribute("id", "pokémon-outer");
 	contentOuter.setAttribute("name", "Pokémon");
@@ -127,10 +125,8 @@ var createPokémon = function() {
 	navigationGameImg.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
 	navigationSettings.setAttribute("id", "settings-outer");
 	navigationSettingsImg.src = "./media/Images/Misc/FinalDex/Cog.png";
-	navigationSettingsImg.setAttribute("id", "settings-img");
 
 
-    navigationSettingsImg.classList.add("settings-modal-open");
 
 	var navigationDexInput = document.createElement("input");
 	var navigationDexLabel = document.createElement("label");
@@ -145,15 +141,15 @@ var createPokémon = function() {
 	navigationDexContent.appendChild(navigationDexInput);
 	navigationDexContent.appendChild(navigationDexLabel);
 	for(var i = 0; i < JSONPath_Pokédex.length; i++) {
-		let x = i + 1;
+		let x = i + 2;
 		var navigationDexInput = document.createElement("input");
 		var navigationDexLabel = document.createElement("label");
 		navigationDexInput.setAttribute("type", "radio");
-		navigationDexInput.setAttribute("value", [x + 1]);
+		navigationDexInput.setAttribute("value", x);
 		navigationDexInput.setAttribute("name", "finaldex-dexswitch" + GameID);
-		navigationDexInput.setAttribute("id", "dexswitch" + [x + 1]);
+		navigationDexInput.setAttribute("id", "dexswitch" + x);
 		navigationDexInput.setAttribute("autocomplete", "off");
-		navigationDexLabel.setAttribute("for", "dexswitch" + [x + 1]);
+		navigationDexLabel.setAttribute("for", "dexswitch" + x);
 		navigationDexLabel.setAttribute("name", JSONPath_Pokédex[i].split("_")[0]);
 		navigationDexLabel.innerText = JSONPath_Pokédex[i].split("_")[0];
 		navigationDexContent.appendChild(navigationDexInput);
@@ -184,6 +180,7 @@ var createPokémon = function() {
     var teamBox = document.createElement("section");
     var teamPartyButton = document.createElement("button");
     var teamBoxButton = document.createElement("button");
+    team.setAttribute("name","Team");
     teamPartyButton.innerText = "Party";
     teamBoxButton.innerText = "Box";
     teamParty.setAttribute("name","Party");
@@ -198,6 +195,9 @@ var createPokémon = function() {
 
     teamPartyButton.addEventListener("click", partyBoxOpen);
     teamBoxButton.addEventListener("click", partyBoxOpen);
+
+    navigationSettingsImg.addEventListener("click", openSettings);
+
 
     itemOptionsTitle.unshift("Held Item");
     Natures.unshift("Nature")
@@ -230,7 +230,12 @@ var createPokémon = function() {
         var teamNickOuter = document.createElement("span");
         var teamNick = document.createElement("input");
 
-        teamImg.src = "./media/Images/Pokémon/Battle/GIF/Normal/Front/"+ImageType_Name[1]+"/" + getPokémonMediaPath(getPokémonName(getIntID("",ranPok))) + ".gif";
+        if (ImageType_Extension[1] == "GIF") {
+            teamImg.src = "./media/Images/Pokémon/Battle/GIF/Normal/Front/"+ImageType_Path[1]+"/" + getPokémonMediaPath(getPokémonName(getIntID("",ranPok))) + ".gif";
+        }
+        else {
+            teamImg.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageType_Path[0]+"/" + getPokémonMediaPath(getPokémonName(getIntID("",ranPok))) + ".png";
+        }
         teamImg.setAttribute("value", getIntID("",ranPok));
         teamImg.setAttribute("title",getPokémonName(getIntID("",ranPok)));
         teamImg.addEventListener("click", modalData);
@@ -446,7 +451,7 @@ var createPokémon = function() {
     var boxDiv = document.createElement("ul");
     teamBox.appendChild(boxDiv);
 
-    for (var q = 0; q < 30; q++) {
+    for (var q = 0; q < 120; q++) {
         
         var ranPok = Math.floor(Math.random() * 100) + 1; 
         var boxImgOuter = document.createElement("li");
@@ -619,7 +624,187 @@ var createPokémon = function() {
 			}
 		}
 	}
-	modalSettings();
+
+
+
+    var settings = document.createElement("main");
+    settings.setAttribute("name","Settings");
+	contentOuter.appendChild(settings);
+
+
+
+
+
+
+
+
+
+
+
+
+    var settingsDefaultImgtypeOuter = document.createElement("span");
+    var settingsDefaultImgtype = document.createElement("select");
+
+    var settingsDefaultResizeOuter = document.createElement("span");
+    var settingsDefaultResize = document.createElement("div");
+    var settingsDefaultResizeValue = document.createElement("p");
+    var settingsDefaultResizeInput = document.createElement("input");
+
+    var settingsDefaultThemeOuter = document.createElement("span");
+    var settingsDefaultTheme = document.createElement("div");
+    var settingsDefaultThemeInput = document.createElement("input");
+    var settingsDefaultThemeSpan = document.createElement("span");
+
+
+
+
+
+
+
+
+    for (var i = 0; i < ImageType_Path.length; i++) { 
+        var settingsDefaultImgtypeOption = document.createElement("option");
+        settingsDefaultImgtypeOption.setAttribute("data-name",ImageType_Path[i]);
+        settingsDefaultImgtypeOption.setAttribute("data-path",ImageType_Type[i]);
+        settingsDefaultImgtypeOption.setAttribute("data-extension",ImageType_Extension[i]);
+
+        if (ImageType_Type[i].includes("Battle")) {
+            settingsDefaultImgtypeOption.innerText = "Battle";
+            settingsDefaultImgtypeOption.value = "Battle";
+        }
+        if (ImageType_Type[i].includes("Battle") && Generation <= 5) {
+            settingsDefaultImgtypeOption.innerText = "Battle Sprites";
+            settingsDefaultImgtypeOption.value = "Battle Sprites";
+        }
+        if (ImageType_Type[i].includes("Battle") && Generation >= 6 || ImageType_Type[i].includes("Battle") && GameID == 12 || ImageType_Type[i].includes("Battle") && GameID == 13) {
+            settingsDefaultImgtypeOption.innerText = "Battle Models";
+            settingsDefaultImgtypeOption.value = "Battle Models";
+        }
+        if (ImageType_Type[i].includes("Art")) {
+            settingsDefaultImgtypeOption.innerText = ImageType_Path[i] + " " + ImageType_Type[i];
+            settingsDefaultImgtypeOption.value = ImageType_Path[i] + " " + ImageType_Type[i];
+        }
+        if (ImageType_Path[i].includes("Recolor")) {
+            settingsDefaultImgtypeOption.innerText = "Recolor Battle Sprites";
+            settingsDefaultImgtypeOption.value = "Recolor Battle Sprites";
+        }
+
+        if (ImageType_Extension[i].includes("GIF")) {
+            settingsDefaultImgtypeOption.innerText += " Animated";
+            settingsDefaultImgtypeOption.value += " Animated";
+    
+        }
+  
+        settingsDefaultImgtype.appendChild(settingsDefaultImgtypeOption);
+    }
+
+
+
+
+    settingsDefaultImgtypeOuter.setAttribute("name","ImageType");
+    settingsDefaultResizeOuter.setAttribute("name","Resize");
+    settingsDefaultResize.setAttribute("id","resize-outer");
+    settingsDefaultResizeValue.setAttribute("id","resize-value");
+    settingsDefaultResizeInput.setAttribute("type","range");
+    settingsDefaultResizeInput.setAttribute("id","resize");
+    settingsDefaultResizeInput.setAttribute("min","60");
+    settingsDefaultResizeInput.setAttribute("max","540");
+    settingsDefaultResizeInput.setAttribute("value","300");
+    settingsDefaultResizeInput.setAttribute("step","60");
+    settingsDefaultResizeInput.setAttribute("autocomplete","off");
+    settingsDefaultResizeInput.setAttribute("onclick","resizeDiv()");
+    settingsDefaultResizeInput.classList.add("save-ra-state");
+    settingsDefaultThemeOuter.setAttribute("name","Theme");
+    settingsDefaultTheme.setAttribute("id","theme");
+    settingsDefaultThemeInput.setAttribute("type","checkbox");
+    settingsDefaultThemeInput.addEventListener('change', switchTheme, false);
+    if (localStorage.getItem('finaldex-theme') == 'dark') {
+        settingsDefaultThemeInput.checked = true;
+    }
+
+
+    settings.appendChild(settingsDefaultImgtypeOuter);
+    settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtype);
+
+
+    settings.appendChild(settingsDefaultResizeOuter);
+    settingsDefaultResizeOuter.appendChild(settingsDefaultResize);
+    settingsDefaultResize.appendChild(settingsDefaultResizeValue);
+    settingsDefaultResize.appendChild(settingsDefaultResizeInput);
+
+    settings.appendChild(settingsDefaultThemeOuter);
+    settingsDefaultThemeOuter.appendChild(settingsDefaultTheme);
+    settingsDefaultTheme.appendChild(settingsDefaultThemeInput);
+    settingsDefaultTheme.appendChild(settingsDefaultThemeSpan);
+
+
+    var settingsDefaultCheckbox = document.createElement("span")
+	var settingsDefaultCheckboxCheck = document.createElement("button");
+	var settingsDefaultCheckboxUncheck = document.createElement("button");
+
+
+    settingsDefaultCheckbox.setAttribute("name","Checkbox");
+	settingsDefaultCheckboxCheck.innerText = "Check All";
+	settingsDefaultCheckboxCheck.setAttribute("title", "Applies to current filters only");
+	settingsDefaultCheckboxCheck.addEventListener("click", CheckAll);
+	settingsDefaultCheckboxUncheck.innerText = "Uncheck All";
+	settingsDefaultCheckboxUncheck.setAttribute("title", "Applies to current filters only");
+	settingsDefaultCheckboxUncheck.addEventListener("click", UncheckAll);
+
+    settings.appendChild(settingsDefaultCheckbox);
+	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxCheck);
+	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxUncheck);
+
+
+
+
+    var settingsVariant = document.createElement("span");
+    
+	var formopts = [];
+	for(var q = 0; q < finaldataPokémon.length; q++) {
+		if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_" + JSONPath_Area] != "Unobtainable") {
+			formopts.push(finaldataPokémon[q]["Variant"]);
+		}
+	}
+	formopts = formopts.filter(
+		(item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
+	for(var q = 0; q < formopts.length; q++) {
+		formopts[q] = formopts[q].replace("Form", "Other Form");
+		formopts[q] = formopts[q].replace("Alolan", "Regional Form");
+		formopts[q] = formopts[q].replace("Galarian", "Regional Form");
+		formopts[q] = formopts[q].replace("Mega", "Mega Evolution");
+	}
+	formopts = [...new Set(formopts)];
+	for(var i = 0; i < formopts.length; i++) {
+		var settingsVariantInput = document.createElement("input");
+		var settingsVariantLabel = document.createElement("label");
+		var settingsVariantSpan = document.createElement("span");
+		settingsVariantInput.setAttribute("type", "checkbox");
+		settingsVariantInput.classList.add("save-cb-state");
+		settingsVariantInput.setAttribute("id", "settings-form-" + formopts[i] + "-" + i);
+		settingsVariantInput.setAttribute("name", "settings-form-" + formopts[i] + "-" + GameID + "-" + i);
+		settingsVariantLabel.setAttribute("for", "settings-form-" + formopts[i] + "-" + i);
+		settingsVariantLabel.innerText = formopts[i];
+		settingsVariant.appendChild(settingsVariantInput);
+		settingsVariant.appendChild(settingsVariantLabel);
+		settingsVariantLabel.appendChild(settingsVariantSpan);
+		settingsVariantInput.addEventListener("click", rememberVariant);
+        settingsVariantInput.addEventListener("click", variantSelector);
+	}
+
+	settingsVariant.setAttribute("name", "Variant");
+
+    settings.appendChild(settingsVariant);
+
+
+
+
+    settingsDefaultImgtype.addEventListener("change",imageType);
+
+
+
+
+
 
 
 
@@ -703,244 +888,8 @@ function imgType() {
 		}
 	}
 }
-var createSettings = function() {
-	var settingsDiv = document.createElement("div");
-	var settingsDivOverlay = document.createElement("div");
-	var settingsDivContent = document.createElement("div");
-	var settingsGroup = document.createElement("div");
-	var settingsGroupOuter = document.createElement("div");
-
-	var settings = ["Settings","Variant"];
-	for (var i = 0; i < settings.length; i++) {
-		var settingsGroupOuterInput = document.createElement("input");
-		var settingsGroupOuterLabel = document.createElement("label");
-		settingsGroupOuterInput.setAttribute("type", "radio");
-		settingsGroupOuterInput.setAttribute("id", "settings-group-" + settings[i] + "-" + i);
-		settingsGroupOuterInput.setAttribute("name", "settings-group");
-		settingsGroupOuterInput.setAttribute("alt", settings[i]);
-        settingsGroupOuterInput.setAttribute("onclick", "var x=this.alt;var nodes=this.parentElement.parentElement.parentElement.querySelectorAll(':scope > aside[name]');var node=this.parentElement.parentElement.parentElement.querySelector(':scope > aside[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
-
-		settingsGroupOuterLabel.setAttribute("for", "settings-group-" + settings[i] + "-" + i);
-
-		if(i == 0) {
-			settingsGroupOuterInput.setAttribute("checked", "");
-            settingsGroupOuterLabel.innerText = settings[i];
-		}
-        else if (i == 1) {
-            settingsGroupOuterLabel.innerText = settings[i] + " Selectors";
-		}
-		settingsGroupOuter.appendChild(settingsGroupOuterInput);
-		settingsGroupOuter.appendChild(settingsGroupOuterLabel);
-	}
-
-	settingsDiv.setAttribute("id", "settings-modal");
-	settingsDiv.classList.add("settings-modal-outer");
-	settingsDivOverlay.classList.add("settings-modal-close");
-	settingsDivOverlay.setAttribute("name", "overlay");
-	settingsDivContent.classList.add("settings-modal");
-
-	document.getElementById("settings").appendChild(settingsDiv);
-	settingsDiv.appendChild(settingsDivOverlay);
-	settingsDiv.appendChild(settingsDivContent);
-	settingsDivContent.appendChild(settingsGroup);
-	settingsGroup.appendChild(settingsGroupOuter);
-	
 
 
-
-    var settingsVariant = document.createElement("aside");
-	var settingsVariantOptions = document.createElement("div");
-	var settingsVariantApply = document.createElement("div");
-	var settingsVariantApplyButton = document.createElement("button");
-
-	var formopts = [];
-	for(var q = 0; q < finaldataPokémon.length; q++) {
-		if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_" + JSONPath_Area] != "Unobtainable") {
-			formopts.push(finaldataPokémon[q]["Variant"]);
-		}
-	}
-	formopts = formopts.filter(
-		(item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
-	for(var q = 0; q < formopts.length; q++) {
-		formopts[q] = formopts[q].replace("Form", "Other Form");
-		formopts[q] = formopts[q].replace("Alolan", "Regional Form");
-		formopts[q] = formopts[q].replace("Galarian", "Regional Form");
-		formopts[q] = formopts[q].replace("Mega", "Mega Evolution");
-	}
-	formopts = [...new Set(formopts)];
-	for(var i = 0; i < formopts.length; i++) {
-		var settingsVariantInput = document.createElement("input");
-		var settingsVariantLabel = document.createElement("label");
-		var settingsVariantSpan = document.createElement("span");
-		settingsVariantInput.setAttribute("type", "checkbox");
-		settingsVariantInput.classList.add("save-cb-state");
-		settingsVariantInput.setAttribute("id", "settings-form-" + formopts[i] + "-" + i);
-		settingsVariantInput.setAttribute("name", "settings-form-" + formopts[i] + "-" + GameID + "-" + i);
-		settingsVariantLabel.setAttribute("for", "settings-form-" + formopts[i] + "-" + i);
-		settingsVariantLabel.innerText = formopts[i];
-		settingsVariantOptions.appendChild(settingsVariantInput);
-		settingsVariantOptions.appendChild(settingsVariantLabel);
-		settingsVariantLabel.appendChild(settingsVariantSpan);
-		settingsVariantInput.addEventListener("click", rememberVariant);
-	}
-
-	settingsVariant.setAttribute("name", "Variant");
-	settingsVariantApplyButton.innerText = "Apply";
-	settingsVariantApplyButton.addEventListener("click", variantSelector);
-
-    settingsDivContent.appendChild(settingsVariant);
-	settingsVariant.appendChild(settingsVariantOptions);
-	settingsVariant.appendChild(settingsVariantApply);
-	settingsVariantApply.appendChild(settingsVariantApplyButton);
-
-
-
-	var settingsDefault = document.createElement("aside");
-    var settingsDefaultCheckbox = document.createElement("li")
-	var settingsDefaultCheckboxCheck = document.createElement("button");
-	var settingsDefaultCheckboxUncheck = document.createElement("button");
-
-
-	settingsDefault.setAttribute("name", "Settings");
-	settingsDefaultCheckboxCheck.classList.add("settings-modal-close");
-	settingsDefaultCheckboxCheck.innerText = "Check All";
-	settingsDefaultCheckboxCheck.setAttribute("title", "Applies to current filters only");
-	settingsDefaultCheckboxCheck.addEventListener("click", CheckAll);
-	settingsDefaultCheckboxUncheck.classList.add("settings-modal-close");
-	settingsDefaultCheckboxUncheck.innerText = "Uncheck All";
-	settingsDefaultCheckboxUncheck.setAttribute("title", "Applies to current filters only");
-	settingsDefaultCheckboxUncheck.addEventListener("click", UncheckAll);
-
-    settingsDivContent.appendChild(settingsDefault);
-    settingsDefault.appendChild(settingsDefaultCheckbox);
-	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxCheck);
-	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxUncheck);
-
-
-
-var settingsDefaultEssentials = document.createElement("li");
-
-var settingsDefaultImgtype = document.createElement("select");
-
-
-
-var settingsDefaultResize = document.createElement("div");
-var settingsDefaultResizeValue = document.createElement("p");
-var settingsDefaultResizeInput = document.createElement("input");
-
-var settingsDefaultTheme = document.createElement("div");
-var settingsDefaultThemeInput = document.createElement("input");
-var settingsDefaultThemeSpan = document.createElement("span");
-
-
-
-
-
-
-
-
-for (var i = 0; i < ImageType_Name.length; i++) { 
-    var settingsDefaultImgtypeOption = document.createElement("option");
-
-
-    if (ImageType_Path[i].includes("Battle")) {
-        settingsDefaultImgtypeOption.innerText = "Battle";
-    }
-    if (ImageType_Path[i].includes("Battle") && Generation <= 5) {
-        settingsDefaultImgtypeOption.innerText = "Battle Sprites";
-    }
-    if (ImageType_Path[i].includes("Battle") && Generation >= 6 || ImageType_Path[i].includes("Battle") && GameID == 12 || ImageType_Path[i].includes("Battle") && GameID == 13) {
-        settingsDefaultImgtypeOption.innerText = "Battle Models";
-    }
-    if (ImageType_Path[i].includes("Art")) {
-        settingsDefaultImgtypeOption.innerText = ImageType_Name[i] + " " + ImageType_Path[i];
-    }
-    if (ImageType_Name[i].includes("Recolor")) {
-        settingsDefaultImgtypeOption.innerText = "Recolor Battle Sprites";
-    }
-
-
-    settingsDefaultImgtypeOption.innerText += " ("+ImageType_Extension[i]+")";
-
-
-    settingsDefaultImgtype.appendChild(settingsDefaultImgtypeOption);
-}
-
-
-
-
-
-
-settingsDefaultResize.setAttribute("id","resize-outer");
-settingsDefaultResizeValue.setAttribute("id","resize-value");
-settingsDefaultResizeInput.setAttribute("type","range");
-settingsDefaultResizeInput.setAttribute("id","resize");
-settingsDefaultResizeInput.setAttribute("min","60");
-settingsDefaultResizeInput.setAttribute("max","540");
-settingsDefaultResizeInput.setAttribute("value","300");
-settingsDefaultResizeInput.setAttribute("step","60");
-settingsDefaultResizeInput.setAttribute("autocomplete","off");
-settingsDefaultResizeInput.setAttribute("onclick","resizeDiv()");
-settingsDefaultResizeInput.classList.add("save-ra-state");
-settingsDefaultTheme.setAttribute("id","theme");
-settingsDefaultThemeInput.setAttribute("type","checkbox");
-settingsDefaultThemeInput.addEventListener('change', switchTheme, false);
-if (localStorage.getItem('finaldex-theme') == 'dark') {
-    settingsDefaultThemeInput.checked = true;
-}
-
-settingsDefault.appendChild(settingsDefaultEssentials);
-
-settingsDefaultEssentials.appendChild(settingsDefaultImgtype);
-
-settingsDefaultEssentials.appendChild(settingsDefaultResize);
-settingsDefaultResize.appendChild(settingsDefaultResizeValue);
-settingsDefaultResize.appendChild(settingsDefaultResizeInput);
-
-settingsDefaultEssentials.appendChild(settingsDefaultTheme);
-settingsDefaultTheme.appendChild(settingsDefaultThemeInput);
-settingsDefaultTheme.appendChild(settingsDefaultThemeSpan);
-
-settingsDefaultImgtype.addEventListener("change",imgtyp);
-
-
-
-
-};
-
-function modalSettings() {
-	function openModal() {
-		var modalTrigger = document.getElementsByClassName("settings-modal-open");
-		for(var i = 0; i < modalTrigger.length; i++) {
-			modalTrigger[i].onclick = function() {
-				var modalWindow = document.getElementById("settings-modal");
-				$("body").addClass("modal-open");
-				modalWindow.classList ? modalWindow.classList.add("open") : (modalWindow.className += " " + "open");
-			};
-		}
-	}
-
-	function closeModal() {
-		var closeButton = document.getElementsByClassName("settings-modal-close");
-		for(var i = 0; i < closeButton.length; i++) {
-			closeButton[i].onclick = function() {
-				var modalWindowActive = document.querySelector(".settings-modal-outer.open");
-				$("body").removeClass("modal-open");
-				modalWindowActive.classList ? modalWindowActive.classList.remove("open") : (modalWindowActive.className = modalWindowActive.className.replace(new RegExp("(^|\\b)" + "open".split(" ").join("|") + "(\\b|$)", "gi"), " "));
-			};
-		}
-	}
-
-	function ready(fn) {
-		if(document.readyState != "loading") {
-			fn();
-		} else {
-			document.addEventListener("DOMContentLoaded", fn);
-		}
-	}
-	ready(openModal);
-	ready(closeModal);
-}
 
 
 function resizeDiv() {
