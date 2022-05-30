@@ -37,7 +37,7 @@
 }
 
 
-[data-theme="dark"] #settings-img {
+[data-theme="dark"] #settings-outer img {
 	filter: invert(63%) sepia(0%) saturate(0%) hue-rotate(268deg) brightness(98%) contrast(84%);
 }
 [data-theme="dark"] #mechanic-descriptioniconimg {
