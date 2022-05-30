@@ -987,61 +987,67 @@ function loadData() {
 			}
 		}
 	}
-	genderratio.querySelector(':scope > span').style.display = "unset";
-	if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "0") { // Always Male
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "100% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 0");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "7" && returnData(i, "Gender Ratio", "")[1] == "1") { // Very Often Male
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "87.5% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "12.5% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "7 : 1");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "3" && returnData(i, "Gender Ratio", "")[1] == "1") { // Often Male
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "75% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "25% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "3 : 1");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "1") { // Equal Ratio
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "50% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "50% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 1");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "3") { // Often Female
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "25% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "75% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 3");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "7") { // Very Often Female
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "12.5% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "87.5% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 7");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "1") { // Always Female
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "100% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 1");
-	} else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "0") { // Genderless
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
-		genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "Genderless");
-		genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 0");
-	}
+    if (Gender == true) {
+        genderratio.querySelector(':scope > span').style.display = "unset";
+
+        if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "0") { // Always Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "100% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 0");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "7" && returnData(i, "Gender Ratio", "")[1] == "1") { // Very Often Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "87.5% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "12.5% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "7 : 1");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "3" && returnData(i, "Gender Ratio", "")[1] == "1") { // Often Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "75% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "25% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "3 : 1");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "1") { // Equal Ratio
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "50% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "50% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 1");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "3") { // Often Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "25% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "75% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 3");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "7") { // Very Often Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "12.5% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "87.5% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 7");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "1") { // Always Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "100% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 1");
+        } else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "0") { // Genderless
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "Genderless");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 0");
+        }
+    }
 	levelrate.querySelector(':scope *[dataname="value"]').innerText = returnData(i, "Leveling Rate", "")[0];
 	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, "Leveling Rate", "")[0]);
 	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("title", "Time approximated for " + getPokémonName(i) + " to Level Up.");
 	name.innerText = getPokémonName(i);
-	if(returnData(i, "Hatch Rate", "")[1] != undefined) {
-		hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[1] + " Steps";
-		hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Steps required to hatch an egg containing " + getPokémonName(i) + ".");
-	} else {
-		hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[0] + " Egg Cycles";
-		hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Egg Cycles required to hatch an egg containing " + getPokémonName(i) + ".");
-	}
-	hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value", returnData(i, "Hatch Rate", "")[0]);
+ 
+
 	if(Egg == true) {
+        if(returnData(i, "Hatch Rate", "")[1] != undefined) {
+            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[1] + " Steps";
+            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Steps required to hatch an egg containing " + getPokémonName(i) + ".");
+        } else {
+            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[0] + " Egg Cycles";
+            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Egg Cycles required to hatch an egg containing " + getPokémonName(i) + ".");
+        }
+        hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value", returnData(i, "Hatch Rate", "")[0]);
+
 		if(returnData(i, "Egg Group", "")[0] != undefined) {
 			egggroup.querySelector(':scope span[name="Primary"]').style.display = "flex";
 			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').setAttribute("name", "egg" + returnData(i, "Egg Group", "")[0]);
@@ -1421,38 +1427,38 @@ function partyBoxOpen() {
     var target = event.target;
 
     if (target.innerText == "Party") {
-        if (document.querySelector('#pokémon-outer main section[name="Party"].open') != undefined) {
-            document.querySelector('#pokémon-outer main section[name="Party"]').classList.remove("open");
-            if (document.querySelector('#pokémon-outer main.open') != undefined) {
-                document.querySelector('#pokémon-outer main').classList.remove("open");
+        if (document.querySelector('#pokémon-outer main[name="Team"] section[name="Party"].open') != undefined) {
+            document.querySelector('#pokémon-outer main[name="Team"] section[name="Party"]').classList.remove("open");
+            if (document.querySelector('#pokémon-outer main[name="Team"].open') != undefined) {
+                document.querySelector('#pokémon-outer main[name="Team"]').classList.remove("open");
             }
         }
         else {
             document.querySelector('#pokémon-outer main section[name="Party"]').classList.add("open");
-            if (document.querySelector('#pokémon-outer main.open') == undefined) {
-                document.querySelector('#pokémon-outer main').classList.add("open");
+            if (document.querySelector('#pokémon-outer main[name="Team"].open') == undefined) {
+                document.querySelector('#pokémon-outer main[name="Team"]').classList.add("open");
             }        
         }
-        if (document.querySelector('#pokémon-outer main section[name="Box"].open') != undefined) {
-            document.querySelector('#pokémon-outer main section[name="Box"]').classList.remove("open");
+        if (document.querySelector('#pokémon-outer main[name="Team"] section[name="Box"].open') != undefined) {
+            document.querySelector('#pokémon-outer main[name="Team"] section[name="Box"]').classList.remove("open");
         }
     }
     else if (target.innerText == "Box") {
-        if (document.querySelector('#pokémon-outer main section[name="Box"].open') != undefined) {
-            document.querySelector('#pokémon-outer main section[name="Box"]').classList.remove("open");
-            if (document.querySelector('#pokémon-outer main.open') != undefined) {
-                document.querySelector('#pokémon-outer main').classList.remove("open");
+        if (document.querySelector('#pokémon-outer main[name="Team"] section[name="Box"].open') != undefined) {
+            document.querySelector('#pokémon-outer main[name="Team"] section[name="Box"]').classList.remove("open");
+            if (document.querySelector('#pokémon-outer main[name="Team"].open') != undefined) {
+                document.querySelector('#pokémon-outer main[name="Team"]').classList.remove("open");
             }
         }
         else {
-            document.querySelector('#pokémon-outer main section[name="Box"]').classList.add("open");
-            if (document.querySelector('#pokémon-outer main.open') == undefined) {
-                document.querySelector('#pokémon-outer main').classList.add("open");
+            document.querySelector('#pokémon-outer main[name="Team"] section[name="Box"]').classList.add("open");
+            if (document.querySelector('#pokémon-outer main[name="Team"].open') == undefined) {
+                document.querySelector('#pokémon-outer main[name="Team"]').classList.add("open");
             }    
         }
 
-        if (document.querySelector('#pokémon-outer main section[name="Party"].open') != undefined) {
-            document.querySelector('#pokémon-outer main section[name="Party"]').classList.remove("open");
+        if (document.querySelector('#pokémon-outer main[name="Team"] section[name="Party"].open') != undefined) {
+            document.querySelector('#pokémon-outer main[name="Team"] section[name="Party"]').classList.remove("open");
         }
     }
 }
@@ -1460,9 +1466,16 @@ function partyBoxOpen() {
 
 
 $(document).on('click', function(e) {
-    if (!$(e.target).is($("#pokémon-outer > main")) && $("#pokémon-outer > main").has(e.target).length === 0) {
-        $("#pokémon-outer > main.open").removeClass();
-        $("#pokémon-outer > main > section.open").removeClass();
+    if (!$(e.target).is($("#pokémon-outer > main[name='Team']")) && $("#pokémon-outer > main[name='Team']").has(e.target).length === 0) {
+        $("#pokémon-outer > main[name='Team'].open").removeClass();
+        $("#pokémon-outer > main[name='Team'] > section.open").removeClass();
+    }
+});
+
+
+$(document).on('click', function(e) {
+    if (!$(e.target).is($("#pokémon-outer > main[name='Settings']")) && $("#pokémon-outer > main[name='Settings']").has(e.target).length === 0 && !$(e.target).is($("#settings-outer img")) && $("#settings-outer img").has(e.target).length === 0) {
+        $("#pokémon-outer > main[name='Settings'].open").removeClass();
     }
 });
 
@@ -1504,8 +1517,31 @@ function partyDataSwitch() {
 }
 
 
-function imgtyp() {
-    console.log(this.value)
+function imageType() {
+
+    var conimg = document.querySelectorAll('#pokémon-outer > div ul li img');
+
+    var dataName = this.querySelector(":scope > option[value='"+this.value+"']").getAttribute("data-name");
+    var dataPath = this.querySelector(":scope > option[value='"+this.value+"']").getAttribute("data-path");
+    var dataExtension = this.querySelector(":scope > option[value='"+this.value+"']").getAttribute("data-extension");
+ 
+
+
+        for (var q = 0; q < conimg.length; q++) {
+
+            if(!dataPath.includes("Art")) {
+                conimg[q].src = './media/Images/Pokémon/' + dataPath + '/' + dataExtension + '/Normal/Front/' + dataName + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
+                conimg[q].setAttribute("path",dataName + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+            }
+            else {
+                conimg[q].src = './media/Images/Pokémon/' + dataPath + '/' + dataName + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
+                conimg[q].setAttribute("path",dataName + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+            }
+        }
+    
+        
+    
+
 }
 
 function partyExitSwitch() {
@@ -1544,6 +1580,19 @@ function partyExitSwitch() {
 
     if (aside2 != undefined) {
         aside2.style.display = "flex";
+    }
+
+}
+
+
+
+function openSettings() {
+
+    if (document.body.contains(document.querySelector('#pokémon-outer > main[name="Settings"].open'))) {
+        document.querySelector("#pokémon-outer > main:last-child").classList.remove("open");
+    }
+    else if (!document.body.contains(document.querySelector('#pokémon-outer > main[name="Settings"].open'))) {
+        document.querySelector("#pokémon-outer > main:last-child").classList.add("open");
     }
 
 }
