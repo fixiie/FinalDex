@@ -10,8 +10,8 @@ var Gender;
 var Generation;
 var HeldItem;
 var ImageType_Extension = [];
-var ImageType_Name = [];
 var ImageType_Path = [];
+var ImageType_Type = [];
 var JSONPath_Ability;
 var JSONPath_AbilityFlavor;
 var JSONPath_AbilityReference;
@@ -87,22 +87,22 @@ if(GameID == 3) {
 	JSONPath_CatchRate = "Yellow";
 	JSONPath_HeldItem = "Yellow";
 	JSONPath_HeldItemPercentage = ["100%"];
-	ImageType_Name = ["Yellow", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["Yellow", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_Area = "Yellow";
 }
 if(GameID == 4) {
 	JSONPath_PokédexEntry = "Gold";
-	ImageType_Name = ["Gold", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["Gold", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_Area = "Gold";
 }
 if(GameID == 5) {
 	JSONPath_PokédexEntry = "Silver";
-	ImageType_Name = ["Silver", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["Silver", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_Area = "Silver";
 }
@@ -110,8 +110,8 @@ if(GameID == 6) {
 	JSONPath_PokédexEntry = "Crystal";
 	JSONPath_Category = "Crystal";
 	MEDIAPath_Encounter = "Crystal";
-	ImageType_Name = ["Crystal", "Crystal", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["Crystal", "Crystal", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_Area = "Crystal";
 	JSONPath_LocationConnection = "Crystal";
@@ -134,8 +134,8 @@ if(GameID == 9) {
 	JSONPath_PokédexEntry = "";
 	MEDIAPath_Map = "Colosseum";
 	MEDIAPath_Type_Text = "Colosseum";
-	ImageType_Name = ["Colosseum", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["Colosseum", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_Area = "Colosseum";
 	JSONPath_Location = "Colosseum";
@@ -164,8 +164,8 @@ if(GameID == 12) {
 	JSONPath_PokédexEntry = "Emerald";
 	MEDIAPath_Item_Bag = "Emerald";
 	MEDIAPath_Encounter = "Emerald";
-	ImageType_Name = ["Emerald", "Emerald", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["Emerald", "Emerald", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_Area = "Emerald";
 	JSONPath_Location = "Emerald";
@@ -182,8 +182,8 @@ if(GameID == 13) {
 	JSONPath_PokédexEntry = "";
 	MEDIAPath_Map = "XD";
 	MEDIAPath_Type_Text = "XD";
-	ImageType_Name = ["XD", "XD", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["XD", "XD", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_Area = "XD";
 	JSONPath_EvolutionMethod = "XD";
@@ -214,8 +214,8 @@ if(GameID == 16) {
 	MEDIAPath_Item_Bag = "Platinum";
 	MEDIAPath_Encounter = "Platinum";
 	MEDIAPath_Pocket_Icon = "Platinum";
-	ImageType_Name = ["Platinum", "Platinum", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["Platinum", "Platinum", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_Area = "Platinum";
 	JSONPath_Location = "Platinum";
@@ -325,8 +325,8 @@ if(GameID >= 1 && GameID <= 2) {
 	JSONPath_CatchRate = "RB";
 	JSONPath_HeldItem = "RB";
 	JSONPath_HeldItemPercentage = ["100%"];
-	ImageType_Name = ["RB", "RB-Recolor", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["RB", "RB-Recolor", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG", "PNG"];
 }
 if(GameID >= 1 && GameID <= 3) {
@@ -372,8 +372,8 @@ if(GameID >= 4 && GameID <= 6) {
 if(GameID >= 7 && GameID <= 8) {
 	MEDIAPath_Item_Bag = "RS";
 	MEDIAPath_Encounter = "RS";
-	ImageType_Name = ["RS", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["RS", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_LocationDescription = "RS";
 	JSONPath_LocationSlogan = "RS";
@@ -420,8 +420,8 @@ if(GameID >= 10 && GameID <= 11) {
 	MEDIAPath_Map = "FRLG";
 	MEDIAPath_Encounter = "FRLG";
 	MEDIAPath_Type_Text = "FRLG";
-	ImageType_Name = ["FRLG", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Art", "Art"];
+	ImageType_Path = ["FRLG", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_ExclusivePokémon = ["FireRed", "LeafGreen"];
 	JSONPath_Location = "FRLG";
@@ -453,8 +453,8 @@ if(GameID >= 14 && GameID <= 15) {
 	MEDIAPath_Item_Bag = "DP";
 	MEDIAPath_Encounter = "DP";
 	MEDIAPath_Pocket_Icon = "DP";
-	ImageType_Name = ["DP", "DP", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["DP", "DP", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_Location = "DP";
 	JSONPath_LocationConnection = "DP";
@@ -487,8 +487,8 @@ if(GameID >= 17 && GameID <= 18) {
 	MEDIAPath_Map = "HGSS";
 	MEDIAPath_Encounter = "HGSS";
 	MEDIAPath_Pocket_Icon = "HGSS";
-	ImageType_Name = ["HGSS", "HGSS", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["HGSS", "HGSS", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_ExclusivePokémon = ["HeartGold", "SoulSilver"];
 	JSONPath_Location = "HGSS";
@@ -682,8 +682,8 @@ if(GameID >= 33 && GameID <= 34) {
 	JSONPath_HeldItemPercentage = ["5%", "50%", "100%"];
 	MEDIAPath_Pocket_Icon = "SwSh";
 	MEDIAPath_Type_Text = "SwSh";
-	ImageType_Name = ["SwSh", "SwSh", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["SwSh", "SwSh", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_ExclusivePokémon = ["Sword", "Shield", "Isle of Armor", "Crown Tundra", ];
 	JSONPath_ExclusiveItem = ["Sword", "Shield", "Isle of Armor", "Crown Tundra"];
@@ -710,7 +710,6 @@ if(Generation >= 1 && Generation <= 3) {
 	JSONPath_EvolutionMethod = "1-3";
 }
 if(Generation >= 2 && Generation <= 3) {
-	JSONPath_EVYield = "2-3";
 	JSONPath_MoveCategory = "2-3";
 }
 if(Generation >= 2 && Generation <= 4) {
@@ -743,8 +742,8 @@ if(Generation >= 5 && Generation <= 6) {
 	JSONPath_EvolutionMethod = "5-6";
 }
 if(Generation >= 6 && Generation <= 7) {
-	ImageType_Name = ["VI-VII", "VI-VII", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["VI-VII", "VI-VII", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_EvolutionSpecie = "6-7";
 	JSONPath_MoveName = "6-7";
@@ -827,6 +826,7 @@ if(Generation == 1) {
 	JSONPath_MoveID = "1";
 	JSONPath_MoveType = "1";
 	JSONPath_MoveCategory = "1";
+    JSONPath_EVYield = "2";
 }
 if(Generation == 2) {
 	JSONPath_CatchRate = "2";
@@ -838,6 +838,7 @@ if(Generation == 2) {
 	JSONPath_MovePower = "2";
 	JSONPath_MovePP = "2";
 	JSONPath_MoveID = "2";
+    JSONPath_EVYield = "2";
 }
 if(Generation == 3) {
 	JSONPath_HatchRateSteps = "3";
@@ -848,6 +849,7 @@ if(Generation == 3) {
 	JSONPath_AbilityReference = "3";
 	JSONPath_MoveAccuracy = "3";
 	JSONPath_MovePP = "3";
+    JSONPath_EVYield = "3";
 }
 if(Generation == 4) {
 	JSONPath_HatchRateSteps = "4";
@@ -865,8 +867,8 @@ if(Generation == 5) {
 	JSONPath_Type = "5";
 	JSONPath_ExperienceYield = "5";
 	MEDIAPath_Type_Text = "V";
-	ImageType_Name = ["V", "V", "Official", "HOME"];
-	ImageType_Path = ["Battle", "Battle", "Art", "Art"];
+	ImageType_Path = ["V", "V", "Official", "HOME"];
+	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
 	JSONPath_AbilityFlavor = "5";
 	JSONPath_AbilityReference = "5";
