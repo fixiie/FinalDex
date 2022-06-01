@@ -41,9 +41,6 @@ var createItem = function() {
 	itemAside2DebutText.innerText = "Introduced in Generation I";
 	itemAside3.setAttribute("id", "item-aside3");
 	itemAside3Description.classList.add("item-description");
-	itemAside3DescriptionText.innerText = "A peculiar stone that makes certain species of Pokémon evolve. It is as black as the night sky.";
-	itemAside3EffectTitle.innerText = "Effect";
-	itemAside3EffectText.innerHTML = "Can be used to evolve one of several Pokémon. This consumes the Moon Stone.<li>Causes Nidorina to evolve into Nidoqueen</li><li>Causes Nidorino to evolve into Nidoking</li><li>Causes Clefairy to evolve into Clefable</li><li>Causes Jigglypuff to evolve into Wigglytuff</li><li>Causes Skitty to evolve into Delcatty</li><li>Causes Munna to evolve into Musharna</li>";
 	itemAside4.setAttribute("id", "item-aside4");
 	document.querySelector("#contain").appendChild(itemOuter);
 	itemOuter.appendChild(itemAside1);
@@ -113,7 +110,7 @@ var createItem = function() {
 		itemAside4SidebarTitleBottomText.innerText = sidebarItemList[q];
 		itemAside4SidebarTitleBottom.appendChild(itemAside4SidebarTitleBottomText);
 	}
-	for(var i = 0; i < Math.floor(Math.random() * 100); i++) {
+	for(var i = 0; i < 0; i++) {
 		var itemAside4SidebarLi = document.createElement("li");
 		itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
 		for(var q = 0; q < sidebarItemList.length; q++) {
