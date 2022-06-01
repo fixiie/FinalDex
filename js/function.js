@@ -378,3 +378,22 @@ function getPokémonName(int) {
 		}
 	}
 }
+
+function getPokémonName2(int) {
+	var int;
+	var arr = finaldataPokémonForm;
+	for(var i = 0; i < arr.length; i++) {
+		if(int == i) {
+			if(arr[i]["Form_" + JSONPath_Form] != undefined && !arr[i]["Variant"].includes("Default")) {
+				return arr[i]["Form_" + JSONPath_Form];
+			} else {
+				return arr[i]["Pokémon"];
+			}
+		}
+	}
+}
+
+
+
+//$("body").css("cursor","progress");
+//$("body").css("cursor","default");
