@@ -46,9 +46,6 @@ var createMove = function() {
 	moveAside2DebutText.innerText = "-";
 	moveAside3.setAttribute("id", "move-aside3");
 	moveAside3Description.classList.add("move-description");
-	moveAside3DescriptionText.innerText = "-";
-	moveAside3EffectTitle.innerText = "Effect";
-	moveAside3EffectText.innerHTML = "-";
 	moveAside4.setAttribute("id", "move-aside4");
 	document.querySelector("#contain").appendChild(moveOuter);
 	moveOuter.appendChild(moveAside1);
@@ -231,7 +228,9 @@ var createMove = function() {
 					moveAside2TitleID.title = "Index number";
 				}
 				moveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Debut"].split("-")[0];
-				moveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_" + JSONPath_MoveDescription];
+                if (finaldataMoveDescription[this.value]["Description_" + JSONPath_MoveDescription] != undefined) {
+                    moveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_" + JSONPath_MoveDescription];
+                }
 				moveAside3SidebarTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
 				moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_" + JSONPath_MoveType] + ".png";
 				moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[this.value]["Type_" + JSONPath_MoveType]);
@@ -370,7 +369,7 @@ var createMove = function() {
 				}
 				var learnsetlevelarr = [];
 				for(var q = 0; q < finaldataLearnsetLevel.length; q++) {
-					if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName]) {
+					if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetLevelLength[q] == true) {
 						var obj = new Object();
 						obj["Pokémon"] = finaldataLearnsetLevel[q]["Pokémon"];
 						if(finaldataLearnsetLevel[q]["Form"] != undefined) {
@@ -410,8 +409,9 @@ var createMove = function() {
 					moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
 					moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
 				}
+
 				for(var q = 0; q < finaldataLearnsetMachine.length; q++) {
-					if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName]) {
+					if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetMachineLength[q] == true) {
 						var moveAside4LearnsetLi = document.createElement("li");
 						moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 						var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -446,7 +446,7 @@ var createMove = function() {
 					}
 				}
 				for(var q = 0; q < finaldataLearnsetBreed.length; q++) {
-					if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName]) {
+					if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetBreedLength[q] == true) {
 						var moveAside4LearnsetLi = document.createElement("li");
 						moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 						var moveAside4LearnsetLiImgOuter = document.createElement("div");
