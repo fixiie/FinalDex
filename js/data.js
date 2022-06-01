@@ -1006,6 +1006,13 @@ var createData = function(id, i) {
 			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemImg);
 		}
 	}
+    dataAside1TypePrimaryText.addEventListener("click", function() {
+		callPopUp(id, finaldataPokémonType, "Type", "Single");
+	});
+	dataAside1TypeSecondaryText.addEventListener("click", function() {
+		callPopUp(id, finaldataPokémonType, "Type", "Single");
+	});
+
 	dataAside1TypePrimaryImg.addEventListener("click", function() {
 		callPopUp(id, finaldataPokémonType, "Type", "Single");
 	});
