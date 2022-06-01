@@ -248,7 +248,8 @@ PokémonMetadataRequest.onload = function() {
 	}
 	initialize();
 }
-
+var drag;
+var savedtar;
 function initialize() {
 
 	var initEnd = initStart++;
@@ -260,12 +261,12 @@ function initialize() {
 	if(type == "Pok%C3%A9mon") {
 		type = "Pokémon";
 	}
-	loaddescription.innerHTML = "Fetching Databases<span>.</span><span>.</span><span>.</span>";
+	loaddescription.innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
 	if(new Date() - initTimeStart >= 5000) {
 		loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
 	}
 	if(initEnd >= initLength) {
-		loaddescription.innerHTML = "Finishing Up<span>.</span><span>.</span><span>.</span>";
+		loaddescription.innerHTML = "Complete!";
 
     config();
 
@@ -295,8 +296,18 @@ function initialize() {
 		memoryRange();
 		variantSelector();
 		load();
+
+
+
+
 	}
 }
+
+
+
+
+
+
 // temp data
 var fdataCatching = "<p>Throwing a Poké Ball on a wild Pokémon has a chance to capture it, if thrown on a Pokémon that already has a trainer the Poké Ball will fail and disappear.</p><br><h3>Catch Rate</h3><p>Each species of Pokémon each has a set Catch Rate determining the difficulty of catching it.<br><br>A Pokémon Catch Rate can be modified with any of the following methods:</p><li>Health relative to its full health (⅓ greatest increase)</li><li>Type of Pokéball</li><li>Status Condition (Asleep or Frozen greatest increase)</li>";
 var fdataExperience = "<p>Any Pokémon that takes part in the battle earns Experience split among them when the opposing Pokémon faints. A Pokémon can also gain Experience from Candies or Catching a Pokémon.<br><br><br>The amount of experience gained from a battle depends on:</p><li>Opposing Pokémon's Level</li><li>Opposing Pokémon's Experience Yield</li><br><br><p>A Pokémon may gain a boosted amount of Experience due to the following reasons:</p><li>If the Pokémon was Traded</li><li>If the Player is in a Trainer Battle</li><li>If the Pokémon is holding a Lucky Egg</li><li>If the Pokémon has high enough Affection</li><li>If a Pass Power is active</li><li>If the Pokémon is past the level it would evolve but has not</li><br><br><p>The amount of Experience required for a level up is different between species and depends on its Leveling Rate.</p>";
@@ -353,11 +364,8 @@ var locationTrainerListMove = [locationTrainer1Move, locationTrainer2Move, locat
 var locationTrainerValue = ["1920", "1500", "800"];
 
 function load() {
-	const loaddescription = document.querySelector("#load-description");
 	const load = document.querySelector("#load");
 	document.body.style.overflowY = "unset";
-	sleep(1000).then(() => {
-		document.documentElement.scrollTop = 0;
-		load.className += "hidden";
-	});
+  document.documentElement.scrollTop = 0;
+  load.className += "hidden";
 }
