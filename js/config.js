@@ -70,10 +70,9 @@ var MEDIAPath_Type_Icon;
 var MEDIAPath_Type_Symbol;
 var MEDIAPath_Type_Text;
 var Stats = [];
+var Natures = [];
 var JSONPath_MoveReference;
 MEDIAPath_Character_Battle = "HGSS";
-var Natures;
-Natures = ["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
 if(GameID == 1) {
 	JSONPath_PokédexEntry = "Red";
 	JSONPath_Area = "Red";
@@ -799,10 +798,13 @@ if(Generation <= 2 || GameID == 31 || GameID == 32) {
 } else if(Generation >= 5) {
 	Ability = ["Primary", "Secondary", "Hidden"];
 }
-if(GameID >= 31 && GameID <= 32) {
+if(GameID >= 31 && GameID <= 32 || Generation <= 1) {
 	HeldItem = false;
 } else {
 	HeldItem = true;
+}
+if(Generation >= 3) {
+    Natures = ["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
 }
 if(Generation <= 1) {
 	Stats = ["HP", "Attack", "Defense", "Special", "Speed", "Total"];
@@ -826,7 +828,7 @@ if(Generation == 1) {
 	JSONPath_MoveID = "1";
 	JSONPath_MoveType = "1";
 	JSONPath_MoveCategory = "1";
-    JSONPath_EVYield = "2";
+    JSONPath_EVYield = "1";
 }
 if(Generation == 2) {
 	JSONPath_CatchRate = "2";
