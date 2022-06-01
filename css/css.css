@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Bebas+Neue");
 
+html {
+	scroll-behavior: smooth;
+}
+
 .filterby input:checked ~ label {
 	transition: .5s ease;
 	transition-property: background-color;
@@ -196,19 +200,6 @@ input[type=radio] {
 	fill: #FE2222;
 }
 
-@keyframes blink {
-	0% {
-		opacity: 1;
-	}
-
-	50% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
 
 
 
@@ -621,10 +612,10 @@ input[type=radio] {
 	display: none;
 	pointer-events: none;
 	filter: invert(20%) sepia(91%) saturate(7452%) hue-rotate(358deg) brightness(104%) contrast(117%);
-	-moz-animation: blink normal 2s infinite ease-in-out;
-	-webkit-animation: blink normal 2s infinite ease-in-out;
-	-ms-animation: blink normal 2s infinite ease-in-out;
-	animation: blink normal 2s infinite ease-in-out;
+	-moz-animation: blinkOpacity normal 2s infinite ease-in-out;
+	-webkit-animation: blinkOpacity normal 2s infinite ease-in-out;
+	-ms-animation: blinkOpacity normal 2s infinite ease-in-out;
+	animation: blinkOpacity normal 2s infinite ease-in-out;
 }
 
 .data-img-border {
@@ -2077,7 +2068,7 @@ body {
     filter:brightness(0.5);
 }
 
-.modal-open #settings-outer img {
+#settings-outer img.open {
 	transform: scale(0.8) rotate(90deg);
 }
 
@@ -4807,6 +4798,7 @@ a {
 #map,
 #map-panzoom {
 	height: 52.5vh;
+	position:relative;
 }
 
 #map-panzoom {
@@ -4907,10 +4899,10 @@ a {
 	z-index: 2;
 	pointer-events: none;
 	filter: invert(20%) sepia(91%) saturate(7452%) hue-rotate(358deg) brightness(104%) contrast(117%);
-	-moz-animation: blink normal 2s infinite ease-in-out;
-	-webkit-animation: blink normal 2s infinite ease-in-out;
-	-ms-animation: blink normal 2s infinite ease-in-out;
-	animation: blink normal 2s infinite ease-in-out;
+	-moz-animation: blinkOpacity normal 2s infinite ease-in-out;
+	-webkit-animation: blinkOpacity normal 2s infinite ease-in-out;
+	-ms-animation: blinkOpacity normal 2s infinite ease-in-out;
+	animation: blinkOpacity normal 2s infinite ease-in-out;
 }
 
 .map-img-error {
@@ -5216,7 +5208,7 @@ a {
 	bottom: 0;
 }
 
-@keyframes blink {
+@keyframes blinkOpacity {
 	0% {
 		opacity: 1;
 	}
@@ -5230,7 +5222,7 @@ a {
 	}
 }
 
-@-webkit-keyframes blink {
+@-webkit-keyframes blinkOpacity {
 	0% {
 		opacity: 1;
 	}
@@ -6070,6 +6062,7 @@ span[name="Status"] {
 	background: var(--color17);
 	display: flex;
 	border-top: 1px solid;
+	text-align: center;
 }
 
 .move-sidebar > div {
@@ -7025,8 +7018,8 @@ span[name="Status"] {
     justify-content: space-around;
     border-right: 1px solid;
 	border-left: 1px solid;
-	top: 10%;
 }
+
 #pokémon-outer > main[name='Settings'] > span[name="Checkbox"] {
 	flex-direction: row;
 }
@@ -7140,17 +7133,26 @@ span[name="Status"] {
 	width: 100px;
 }
 
-
 #pokémon-outer > main section > button {
-    cursor: pointer;
+	width: 100%;
+	height: 100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	position:relative;
+	cursor: pointer;
+}
+#pokémon-outer > main section > button span {
     width: 100%;
     height: 100%;
     border-bottom: 1px solid;
+	position: absolute;
+	pointer-events: none;
 }
 
 
 #pokémon-outer > main[name="Team"] section[name="Party"].open ~ section button:first-child,
-#pokémon-outer > main[name="Team"] section[name="Box"].open ~ section button:last-child {
+#pokémon-outer > main[name="Team"] section[name="Box"].open ~ section button:first-child {
     background: var(--color10);
     color: var(--font2);
 }
@@ -7179,9 +7181,6 @@ span[name="Status"] {
 
 
 
-#pokémon-outer > main section[name="Party"] div aside:last-child button:active {
-	color: var(--font2);
-}
 #pokémon-outer > main section[name="Party"] div aside:last-child button {
 	width: 100%;
     height: 100%;
@@ -7192,6 +7191,7 @@ span[name="Status"] {
     justify-content: center;
     align-items: center;
     opacity: 0.95;
+	cursor: auto;
 }
 
 #pokémon-outer > main section[name="Party"] div aside {
@@ -7217,8 +7217,12 @@ span[name="Status"] {
     flex-wrap: wrap;
     flex-direction: row;
     align-content: flex-start;
-	background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
-	overflow:auto
+	overflow:auto;
+
+	background-color: var(--color16);
+opacity: 0.8;
+background-size: 10px 10px;
+background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color17) 1px, var(--color16) 0, var(--color16) 50%);
 }
 
 #pokémon-outer > main section[name="Box"] ul li {
@@ -7267,7 +7271,7 @@ span[name="Status"] {
 	filter: unset;
 }
 
-#pokémon-outer > main[name='Team'] div span button:last-child {
+#pokémon-outer > main[name='Team'] div span:first-child button:last-child {
 	pointer-events: none;
 }
 
@@ -7517,4 +7521,34 @@ span[name="Status"] {
 
 #pokémon-outer main[name='Settings'] span button:active {
 	transform: scale(0.97);
+}
+
+
+
+.blinkindicator.enabled {
+    background: linear-gradient(90deg, var(--border1) 50%, transparent 50%), 
+                linear-gradient(90deg, var(--border1) 50%, transparent 50%), 
+                linear-gradient(0deg, var(--border1) 50%, transparent 50%), 
+                linear-gradient(0deg, var(--border1) 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 3px, 16px 3px, 3px 16px, 3px 16px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    animation: dash 10s linear infinite;
+}
+.blinkindicator.enabled.hover {
+	background: linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), 
+                linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), 
+                linear-gradient(0deg, var(--colorGreen) 50%, transparent 50%), 
+                linear-gradient(0deg, var(--colorGreen) 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 3px, 16px 3px, 3px 16px, 3px 16px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    animation: dash 10s linear infinite;
+}
+
+
+@keyframes dash {
+    to {
+        background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
+    }
 }
