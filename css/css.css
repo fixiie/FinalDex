@@ -7109,7 +7109,7 @@ span[name="Status"] {
     flex-wrap: nowrap;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
+	position:relative;
 }
 
 #pokémon-outer > main section:not([name]){
@@ -7118,11 +7118,17 @@ span[name="Status"] {
 }
 
 #pokémon-outer > main section[name] {
-    width: 0;
+    width: 80%;
+	display: none;
+}
+
+
+#pokémon-outer > main section[name] * {
+	color:var(--fontLight);
 }
 
 #pokémon-outer > main[name="Team"] section[name].open {
-    width: 80%;
+    display:flex;
 }
 
 #pokémon-outer > main[name="Team"]:not(.open) section:not([name]) {
@@ -7152,7 +7158,7 @@ span[name="Status"] {
 
 
 #pokémon-outer > main[name="Team"] section[name="Party"].open ~ section button:first-child,
-#pokémon-outer > main[name="Team"] section[name="Box"].open ~ section button:first-child {
+#pokémon-outer > main[name="Team"] section[name="Box"].open ~ section button:last-child {
     background: var(--color10);
     color: var(--font2);
 }
@@ -7161,11 +7167,13 @@ span[name="Status"] {
     font-weight: bold;
 }
 
-
 #pokémon-outer > main section div {
     width: 100%;
 	height: 16.66667%;
     position: relative;
+	overflow:hidden;
+	background: var(--color17);
+	border: 1px solid;
 }
 
 #pokémon-outer > main div aside,
@@ -7174,8 +7182,10 @@ span[name="Status"] {
 	height: 100%;
 }
 
-#pokémon-outer > main section[name="Party"] div aside:last-child {
+#pokémon-outer > main section[name="Party"] div aside:first-child {
 	display: none;
+}
+#pokémon-outer > main section[name="Party"] div aside:last-child {
 	background: linear-gradient(to right, Skyblue, var(--color_50));
 }
 
@@ -7201,7 +7211,6 @@ span[name="Status"] {
     flex-wrap: nowrap;
     flex-direction: row;
     align-content: space-around;
-	border: 1px solid;
 }
 
 
@@ -7210,6 +7219,12 @@ span[name="Status"] {
 	height: 100%;
 }
 
+
+#pokémon-outer > main section[name="Box"] {
+	background-color: var(--color16);
+	background-size: 10px 10px;
+	background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color17) 1px, var(--color16) 0, var(--color16) 50%);
+}
 #pokémon-outer > main section[name="Box"] ul {
     display: flex;
     align-items: flex-start;
@@ -7218,11 +7233,29 @@ span[name="Status"] {
     flex-direction: row;
     align-content: flex-start;
 	overflow:auto;
+}
+#pokémon-outer > main section[name="Box"] > button {
+	position:absolute;
+	left: 10px;
+	bottom: 10px;
+	width: 50px;
+	height: 50px;
+}
 
-	background-color: var(--color16);
-opacity: 0.8;
-background-size: 10px 10px;
-background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color17) 1px, var(--color16) 0, var(--color16) 50%);
+#pokémon-outer > main section[name="Box"] > button img {
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
+	filter: grayscale(1) brightness(0);
+	cursor: auto;
+}
+
+
+#pokémon-outer > main section[name="Box"] > button img.prohibition {
+	filter: none;
+}
+#pokémon-outer > main section[name="Box"] > button.ui-droppable-active img {
+	animation: rotate infinite 5s linear;
 }
 
 #pokémon-outer > main section[name="Box"] ul li {
@@ -7252,13 +7285,9 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
 
 
 
-#pokémon-outer > main[name='Team'] img:hover {
+#pokémon-outer > main[name='Team'] img:not(.deselect):hover {
     filter: brightness(1.1);
     cursor: pointer;
-}
-
-#pokémon-outer > main[name='Team'] section > div {
-	cursor: move;
 }
 
 #pokémon-outer > main[name='Team'] div button {
@@ -7320,6 +7349,13 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
 	position: relative
 }
 
+#pokémon-outer > main section[name="Party"] div aside > span:nth-child(3) select {
+	text-shadow: rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px;
+	font-weight: bold;
+	font-family: fantasy;
+}
+
+
 #pokémon-outer > main section[name="Party"] div aside > span:last-child,
 #pokémon-outer > main section[name="Party"] div aside > span:nth-child(3),
 #pokémon-outer > main section[name="Party"] div aside > span:first-child  {
@@ -7332,6 +7368,7 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
 
 #pokémon-outer > main section[name="Party"] div aside > span:nth-child(3) * {
 	margin: 10px 0;
+	z-index: 10;
 }
 
 
@@ -7343,11 +7380,14 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
     font-size: 12px;
 }
 
-#pokémon-outer > main img {
-    object-fit:scale-down;
+#pokémon-outer > main img:not(.deselect) {
+    object-fit: scale-down;
     -webkit-user-drag: auto;
+}
+#pokémon-outer > main section[name="Party"] div span img:last-child {
 	max-height: 70%;
 }
+
 
 #pokémon-outer > main section[name="Party"] div span img:first-child {
 	position: absolute;
@@ -7423,6 +7463,11 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
 #pokémon-outer > main div aside > span input[type=number] {
     font-size: 80%;
 }
+
+#pokémon-outer > main[name='Team'] select option:checked {
+	font-weight: bold;
+}
+
 
 #pokémon-outer > main div aside > span select,
 #pokémon-outer > main div aside > span input[type=number]::-webkit-inner-spin-button {
@@ -7552,3 +7597,301 @@ background-image: repeating-linear-gradient(45deg, var(--color17) 0, var(--color
         background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
     }
 }
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+[name="styleColorTypeNormal"] {
+	color: var(--typeNormal) !important;
+}
+
+[name="styleColorTypeFighting"] {
+	color: var(--typeFighting) !important;
+}
+
+[name="styleColorTypeFlying"] {
+	color: var(--typeFlying) !important;
+}
+
+[name="styleColorTypePoison"] {
+	color: var(--typePoison) !important;
+}
+
+[name="styleColorTypeGround"] {
+	color: var(--typeGround) !important;
+}
+
+[name="styleColorTypeRock"] {
+	color: var(--typeRock) !important;
+}
+
+[name="styleColorTypeBug"] {
+	color: var(--typeBug) !important;
+}
+
+[name="styleColorTypeGhost"] {
+	color: var(--typeGhost) !important;
+}
+
+[name="styleColorTypeSteel"] {
+	color: var(--typeSteel) !important;
+}
+
+[name="styleColorTypeFire"] {
+	color: var(--typeFire) !important;
+}
+
+[name="styleColorTypeWater"] {
+	color: var(--typeWater) !important;
+}
+
+[name="styleColorTypeGrass"] {
+	color: var(--typeGrass) !important;
+}
+
+[name="styleColorTypeElectric"] {
+	color: var(--typeElectric) !important;
+}
+
+[name="styleColorTypePsychic"] {
+	color: var(--typePsychic) !important;
+}
+
+[name="styleColorTypeIce"] {
+	color: var(--typeIce) !important;
+}
+
+[name="styleColorTypeDragon"] {
+	color: var(--typeDragon) !important;
+}
+
+[name="styleColorTypeDark"] {
+	color: var(--typeDark) !important;
+}
+
+[name="styleColorTypeFairy"] {
+	color: var(--typeFairy) !important;
+}
+
+[name="styleColorType???"] {
+	color: var(--typeUnknown) !important;
+}
+
+
+
+
+
+
+
+[name="styleBackgroundTypeNormal"] {
+	background: var(--typeNormal) !important;
+}
+
+[name="styleBackgroundTypeFighting"] {
+	background: var(--typeFighting) !important;
+}
+
+[name="styleBackgroundTypeFlying"] {
+	background: var(--typeFlying) !important;
+}
+
+[name="styleBackgroundTypePoison"] {
+	background: var(--typePoison) !important;
+}
+
+[name="styleBackgroundTypeGround"] {
+	background: var(--typeGround) !important;
+}
+
+[name="styleBackgroundTypeRock"] {
+	background: var(--typeRock) !important;
+}
+
+[name="styleBackgroundTypeBug"] {
+	background: var(--typeBug) !important;
+}
+
+[name="styleBackgroundTypeGhost"] {
+	background: var(--typeGhost) !important;
+	color:var(--fontLight) !important;
+}
+
+[name="styleBackgroundTypeSteel"] {
+	background: var(--typeSteel) !important;
+}
+
+[name="styleBackgroundTypeFire"] {
+	background: var(--typeFire) !important;
+}
+
+[name="styleBackgroundTypeWater"] {
+	background: var(--typeWater) !important;
+}
+
+[name="styleBackgroundTypeGrass"] {
+	background: var(--typeGrass) !important;
+}
+
+[name="styleBackgroundTypeElectric"] {
+	background: var(--typeElectric) !important;
+}
+
+[name="styleBackgroundTypePsychic"] {
+	background: var(--typePsychic) !important;
+}
+
+[name="styleBackgroundTypeIce"] {
+	background: var(--typeIce) !important;
+}
+
+[name="styleBackgroundTypeDragon"] {
+	background: var(--typeDragon) !important;
+	color:var(--fontLight) !important;
+}
+
+[name="styleBackgroundTypeDark"] {
+	background: var(--typeDark) !important;
+	color:var(--fontLight) !important;
+}
+
+[name="styleBackgroundTypeFairy"] {
+	background: var(--typeFairy) !important;
+}
+
+[name="styleBackgroundType???"] {
+	background: var(--typeUnknown) !important;
+}
+
+
+
+
+
+
+
+
+
+#pokémon-outer select[name="styleBackgroundTypeNormal"] {
+	background: var(--typeNormal) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeFighting"] {
+	background: var(--typeFighting) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeFlying"] {
+	background: var(--typeFlying) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypePoison"] {
+	background: var(--typePoison) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeGround"] {
+	background: var(--typeGround) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeRock"] {
+	background: var(--typeRock) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeBug"] {
+	background: var(--typeBug) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeGhost"] {
+	background: var(--typeGhost) !important;
+	color:var(--fontLight) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeSteel"] {
+	background: var(--typeSteel) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeFire"] {
+	background: var(--typeFire) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeWater"] {
+	background: var(--typeWater) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeGrass"] {
+	background: var(--typeGrass) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeElectric"] {
+	background: var(--typeElectric) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypePsychic"] {
+	background: var(--typePsychic) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeIce"] {
+	background: var(--typeIce) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeDragon"] {
+	background: var(--typeDragon) !important;
+	color:var(--fontLight) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeDark"] {
+	background: var(--typeDark) !important;
+	color:var(--fontLight) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundTypeFairy"] {
+	background: var(--typeFairy) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+#pokémon-outer select[name="styleBackgroundType???"] {
+	background: var(--typeUnknown) !important;
+	box-shadow: 0 0 1px var(--border1);
+}
+
+
+
+
+
+
+
+
+
+
+
+[name="♂"] {
+	color:var(--colorBlue) !important;
+}
+[name="♀"] {
+	color:var(--colorRed) !important;
+}
+
+[name="☿"] {
+	color:var(--fontDark) !important;
+	color:var(--gender)
+	
+}
+
