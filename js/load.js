@@ -250,6 +250,8 @@ PokémonMetadataRequest.onload = function() {
 }
 var drag;
 var savedtar;
+var saveddrag;
+var boxDrag;
 function initialize() {
 
 	var initEnd = initStart++;
@@ -296,9 +298,6 @@ function initialize() {
 		memoryRange();
 		variantSelector();
 		load();
-
-
-
 
 	}
 }
