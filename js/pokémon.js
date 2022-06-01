@@ -180,9 +180,13 @@ var createPokémon = function() {
     var teamBox = document.createElement("section");
     var teamPartyButton = document.createElement("button");
     var teamBoxButton = document.createElement("button");
+    var teamPartyButtonInner = document.createElement("span");
+    var teamBoxButtonInner = document.createElement("span");
     team.setAttribute("name","Team");
     teamPartyButton.innerText = "Party";
     teamBoxButton.innerText = "Box";
+    teamPartyButtonInner.classList.add("blinkindicator");
+    teamBoxButtonInner.classList.add("blinkindicator");
     teamParty.setAttribute("name","Party");
     teamBox.setAttribute("name","Box");
 
@@ -191,7 +195,9 @@ var createPokémon = function() {
     team.appendChild(teamBox);
     team.appendChild(teamNav);
     teamNav.appendChild(teamPartyButton);
+    teamPartyButton.appendChild(teamPartyButtonInner);
     teamNav.appendChild(teamBoxButton);
+    teamBoxButton.appendChild(teamBoxButtonInner);
 
     teamPartyButton.addEventListener("click", partyBoxOpen);
     teamBoxButton.addEventListener("click", partyBoxOpen);
@@ -199,8 +205,10 @@ var createPokémon = function() {
     navigationSettingsImg.addEventListener("click", openSettings);
 
 
-    itemOptionsTitle.unshift("Held Item");
-    Natures.unshift("Nature")
+    itemOptionsTitle.unshift("Item");
+    if (Natures.length > 0) {
+        Natures.unshift("Nature")
+    }
 
     for (var i = 0; i < 6; i++) {
         var ranPok = Math.floor(Math.random() * 100) + 1;
@@ -225,7 +233,7 @@ var createPokémon = function() {
 
         var teamRight = document.createElement("span");
         var teamStatsButton = document.createElement("button");
-        var teamBoxButton = document.createElement("button");
+        var teamExportButton = document.createElement("button");
         var teamLevel = document.createElement("input");
         var teamNickOuter = document.createElement("span");
         var teamNick = document.createElement("input");
@@ -250,22 +258,26 @@ var createPokémon = function() {
         teamExitButton.innerText = "❌";
         teamQuestionButton.innerText = "⋮⋮⋮";
         teamStatsButton.innerText = "⟲";
-        teamBoxButton.innerText = "➢";
+        teamExportButton.innerText = "➢";
 
         teamAdd.innerText = "+";
+        teamAdd.classList.add("blinkindicator");
 
-        teamStatsButton.setAttribute("value","IV Stats");
+        teamStatsButton.setAttribute("value","Individual Values");
         teamStatsButton.setAttribute("id",Math.floor(Math.random() * 1000) + 1)
 
 
-        
+        teamNickOuter.setAttribute("name","Name");
+        teamImgOuter.setAttribute("name","Pokémon");
+        teamHeldItem.setAttribute("name","Item");
+
+
         teamLevel.setAttribute("type","number");
         teamLevel.setAttribute("min","1");
         teamLevel.setAttribute("max","100");
         teamLevel.setAttribute("placeholder","Lvl.");
         teamNick.setAttribute("type","text");
         teamNick.setAttribute("placeholder",getPokémonName(getIntID("",ranPok)));
-        teamNick.setAttribute("name",getPokémonName(getIntID("",ranPok)));
         if (Generation >= 1 && Generation <= 5) {
             teamNick.setAttribute("maxlength","10");
         }
@@ -341,7 +353,7 @@ var createPokémon = function() {
 
 
 
-        var dataOptions = ["Moves","IV Stats","EV Stats","Calculated Stats"];
+        var dataOptions = ["Moves","Individual Values","Effort Values","Calculated Stats"];
         for (var u = 0; u < dataOptions.length; u++) {
             var teamData = document.createElement("span");
             teamData.setAttribute("name",dataOptions[u]);
@@ -351,6 +363,9 @@ var createPokémon = function() {
                 var teamDataInner = document.createElement("span");
                 teamData.appendChild(teamDataInner);
 
+                if (y == 2 && u != 0 && Natures.length > 0) {
+                    teamDataInner.setAttribute("name","Nature");
+                }
 
                 if (y == 0) {
                     var teamDataTitle = document.createElement("h5");
@@ -358,22 +373,22 @@ var createPokémon = function() {
                     teamDataInner.appendChild(teamDataTitle);
                 }
 
-                else if (dataOptions[u].includes("Stats") && y == 1) {
+                else if (u > 0 && y == 1) {
                     for (var q = 0; q < Stats.length; q++) {
                         if (Stats[q] != "Total") {
                             var teamDataInput = document.createElement("input");
                             teamDataInput.setAttribute("type","number");
-                            if (dataOptions[u].includes("EV")) {
-                                teamDataInput.setAttribute("placeholder",Stats[q]+" EVs");
-                                teamDataInput.setAttribute("min","0");
-                                teamDataInput.setAttribute("max","255");
-                            }
-                            else if (dataOptions[u].includes("IV")) {
+                            if (u == 1) {
                                 teamDataInput.setAttribute("placeholder",Stats[q]+" IVs");
                                 teamDataInput.setAttribute("min","0");
                                 teamDataInput.setAttribute("max","31");
                             }
-                            else if (dataOptions[u].includes("Calculated")) {
+                            else if (u == 2) {
+                                teamDataInput.setAttribute("placeholder",Stats[q]+" EVs");
+                                teamDataInput.setAttribute("min","0");
+                                teamDataInput.setAttribute("max","255");
+                            }
+                            else if (u == 3) {
                                 teamDataInput.setAttribute("placeholder",Stats[q]);
                                 teamDataInput.setAttribute("min","");
                                 teamDataInput.setAttribute("max","");
@@ -421,9 +436,10 @@ var createPokémon = function() {
                     }
                 }
 
-                if (y == 2 && dataOptions[u] != "Moves") {
+                if (y == 2 && dataOptions[u] != "Moves" && Natures.length > 0) {
                     var teamDataSelect = document.createElement("select");
                     teamDataInner.appendChild(teamDataSelect);
+                    teamDataSelect.addEventListener("change", partyNature)
                     for (var q = 0; q < Natures.length; q++) {
                         var teamDataOption = document.createElement("option");
                         teamDataOption.setAttribute("value",Natures[q]);
@@ -438,11 +454,15 @@ var createPokémon = function() {
 
         teamAside1.appendChild(teamRight);
         teamRight.appendChild(teamStatsButton);
-        teamRight.appendChild(teamBoxButton);
+        teamRight.appendChild(teamExportButton);
 
         teamStatsButton.addEventListener("click", partyDataSwitch);
-        teamExitButton.addEventListener("click", partyExitSwitch);
-        teamAdd.addEventListener("click", partyExitSwitch);
+        teamExitButton.addEventListener("click", function() {partyDefault(this.parentElement.parentElement.parentElement);});
+        teamExitButton.addEventListener("click", function() {partyHide(this.parentElement.parentElement.parentElement);});
+        teamHeldItemInput.addEventListener("change", partyItem);
+
+
+
 
     }
 
@@ -475,8 +495,19 @@ var createPokémon = function() {
         $('#pokémon-outer > main section[name="Party"]').sortable();
         $('#pokémon-outer > main section[name="Party"]').disableSelection();
     });
-    
 
+    var PartyPlus = document.querySelectorAll('#pokémon-outer main[name="Team"] section[name="Party"] aside > button');
+    var PartyBox = document.querySelectorAll('#pokémon-outer > main[name="Team"] section:not([name]) > button');
+
+    var PPPB = [PartyPlus,PartyBox]
+    for(var u = 0; u < PPPB.length; u++) {
+        for(var q = 0; q < PPPB[u].length; q++) {
+            PPPB[u][q].addEventListener("dragenter",dragEnter);
+            PPPB[u][q].addEventListener("dragleave",dragLeave);
+            PPPB[u][q].addEventListener("dragover",dragOver);
+            PPPB[u][q].addEventListener("drop",dragDrop);
+        }
+    }
 
 
 
@@ -492,25 +523,6 @@ var createPokémon = function() {
 			var Name = finaldataPokémonForm[i]["Pokémon"];
 			var formName = finaldataPokémonForm[i]["Form_" + JSONPath_Form];
 			var variant = finaldataPokémon[i]["Variant"];
-			var testarr = [];
-			var teststr;
-			var testnum = Math.floor(Math.random() * 100) + 1;
-			if(testnum >= 1 && testnum <= 25) {
-				testarr = ["gastly", "haunter", "gengar"];
-				teststr = "str1";
-			} else if(testnum >= 26 && testnum <= 50) {
-				testarr = ["machop", "machoke", "machamp"];
-				teststr = "str2";
-			} else if(testnum >= 51 && testnum <= 75) {
-				testarr = ["zubat", "golbat", "crobat"];
-				teststr = "str3";
-			} else if(testnum >= 76 && testnum <= 99) {
-				testarr = ["pichu", "pikachu", "raichu"];
-				teststr = "str4";
-			} else if(testnum == 100) {
-				testarr = [];
-				teststr = "";
-			}
 			var contentDiv = document.createElement("li");
 			var contentInput = document.createElement("input");
 			var contentLabel = document.createElement("label");
@@ -522,6 +534,8 @@ var createPokémon = function() {
 			var contentImg = document.createElement("img");
 			var contentMainDown = document.createElement("main");
 			var contentName = document.createElement("p");
+            contentDiv.setAttribute("id",i);
+
 			if(finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != undefined) {
 				contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_" + JSONPath_Area].replaceAll(" ", ""));
 			}
@@ -529,13 +543,24 @@ var createPokémon = function() {
 				return v["Pokémon"];
 			}).join(",").toLowerCase());
 			contentDiv.setAttribute("data-search-type", returnData(i, "Type", "lower,undefined"));
-			contentDiv.setAttribute("data-search-ability", returnData(i, "Ability", "lower,undefined"));
 			contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate", "lower,undefined"));
-			contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate", "lower,undefined")[0]);
-			contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio", "lower,undefined").join(":"));
-			contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group", "lower,undefined"));
+
+            if (Ability.length > 0) {
+                contentDiv.setAttribute("data-search-ability", returnData(i, "Ability", "lower,undefined"));
+            }
+
+            if (Gender == true) {
+                contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio", "lower,undefined").join(":"));
+            }
+            if (Egg == true) {
+                contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate", "lower,undefined")[0]);
+                contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group", "lower,undefined"));
+            }
 			contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield", "lower,undefined"));
-			contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item", "lower,undefined"));
+            if (HeldItem == true) {
+                contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item", "lower,undefined"));
+            }
+
 			if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 300) {
 				contentDiv.setAttribute("data-search-expyieldcategory", "Very High".toLowerCase());
 			} else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 299) {
@@ -548,20 +573,15 @@ var createPokémon = function() {
 				contentDiv.setAttribute("data-search-expyieldcategory", "Very Low".toLowerCase());
 			}
 			contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statshp", returnData(i, "Base Stats HP", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statsatk", returnData(i, "Base Stats Attack", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statsdef", returnData(i, "Base Stats Defense", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statsspatk", returnData(i, "Base Stats Sp. Atk", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statsspdef", returnData(i, "Base Stats Sp. Def", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statsspeed", returnData(i, "Base Stats Speed", "lower,undefined"));
-			contentDiv.setAttribute("data-search-statstotal", returnData(i, "Base Stats Total", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldhp", returnData(i, "EV Yield HP", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldatk", returnData(i, "EV Yield Attack", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyielddef", returnData(i, "EV Yield Defense", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldspatk", returnData(i, "EV Yield Sp. Atk", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldspdef", returnData(i, "EV Yield Sp. Def", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldspeed", returnData(i, "EV Yield Speed", "lower,undefined"));
-			contentDiv.setAttribute("data-search-evyieldtotal", returnData(i, "EV Yield Total", "lower,undefined"));
+
+            var statsevL = ["Base Stats","EV Yield"];
+            var statsevS = ["stats","evyield"];
+            for(var q = 0; q < statsevL.length; q++) {
+                for(var u = 0; u < Stats.length; u++) {
+                    contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined"));
+                }
+            }
+
 			contentDiv.setAttribute("data-search-variant", variant.toLowerCase());
 			contentInput.setAttribute("type", "checkbox");
 			contentInput.classList.add("save-cb-state");
@@ -622,6 +642,9 @@ var createPokémon = function() {
 				contentMainRegionalID.classList.add("contain-regionalID-" + y);
 				contentMainUp.appendChild(contentMainRegionalID);
 			}
+            contentDiv.addEventListener("dragstart", dragStart);
+            contentDiv.addEventListener("dragend", dragEnd);
+            contentDiv.addEventListener("drag", dragMove);
 		}
 	}
 
@@ -664,8 +687,8 @@ var createPokémon = function() {
 
     for (var i = 0; i < ImageType_Path.length; i++) { 
         var settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.setAttribute("data-name",ImageType_Path[i]);
-        settingsDefaultImgtypeOption.setAttribute("data-path",ImageType_Type[i]);
+        settingsDefaultImgtypeOption.setAttribute("data-path",ImageType_Path[i]);
+        settingsDefaultImgtypeOption.setAttribute("data-type",ImageType_Type[i]);
         settingsDefaultImgtypeOption.setAttribute("data-extension",ImageType_Extension[i]);
 
         if (ImageType_Type[i].includes("Battle")) {
@@ -800,23 +823,17 @@ var createPokémon = function() {
 
 
     settingsDefaultImgtype.addEventListener("change",imageType);
-
-
-
-
+    settingsDefaultImgtype.addEventListener("click",imageType);
+    settingsDefaultImgtype.click();
 
 
 
 
     $( function() {
         $('#pokémon-outer > div li img').draggable();
-        $('#pokémon-outer > main section[name="Box"] ul').droppable({
-          drop: function( event, ui ) {
-           //alert("dropped!")
-          }
-        });
+        $('#pokémon-outer > main section[name="Box"] ul').droppable();
       } );
-};
+    };
 
 function count() {
 	function showChecked() {
