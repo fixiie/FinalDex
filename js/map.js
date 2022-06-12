@@ -125,6 +125,15 @@ var createMap = function() {
 	mapAside3MapPanzoom.appendChild(mapAside3MapMark);
 	mapAside3MapPanzoom.appendChild(mapAside3MapImage);
 	mapAside3MapPanzoom.appendChild(mapAside3MapCordinateOuter);
+
+
+    var mapAside2Game = document.createElement("span");
+    var mapAside2GameImage = document.createElement("img");
+    mapAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    mapAside2GameImage.setAttribute("onerror","this.display='none'");
+    mapAside2.appendChild(mapAside2Game);
+    mapAside2Game.appendChild(mapAside2GameImage);
+
 	var mapAside3AreaNavigation = document.createElement("div");
 	mapAside3AreaNavigation.classList.add("map-area-navigation");
 	mapAside3.appendChild(mapAside3AreaNavigation);
