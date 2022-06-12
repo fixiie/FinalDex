@@ -52,3 +52,10 @@
 [data-theme="dark"] #pokémon-outer > div input:checked + label main img {
     filter: invert(1) brightness(90%) opacity(100%);
 }
+
+[data-theme="dark"] #pokémon-outer > div li main span::after {
+	filter: brightness(0.8);
+}
+[data-theme="dark"] #pokémon-outer > div li main span {
+	background: var(--color10);
+}
