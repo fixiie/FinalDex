@@ -4,7 +4,9 @@ var initTimeStart;
 var finaldataPokémon = [];
 var finaldataPokémonPath = [];
 var finaldataPokémonForm = [];
+var finaldataPokémonFormItem = [];
 var finaldataPokémonAbility = [];
+var finaldataPokémonFriendship = [];
 var finaldataPokémonArea = [];
 var finaldataPokémonBaseStats = [];
 var finaldataPokémonCatchRate = [];
@@ -227,7 +229,9 @@ PokémonMetadataRequest.onload = function() {
 		finaldataPokémon.push(PokémonMetadata["Reference"][i]);
 		finaldataPokémonPath.push(PokémonMetadata["Path"][i]);
 		finaldataPokémonForm.push(PokémonMetadata["Form"][i]);
+    finaldataPokémonFormItem.push(PokémonMetadata["Form Item"][i]);
 		finaldataPokémonAbility.push(PokémonMetadata["Ability"][i]);
+    finaldataPokémonFriendship.push(PokémonMetadata["Base Friendship"][i]);
 		finaldataPokémonArea.push(PokémonMetadata["Area"][i]);
 		finaldataPokémonBaseStats.push(PokémonMetadata["Base Stats"][i]);
 		finaldataPokémonCatchRate.push(PokémonMetadata["Catch Rate"][i]);
@@ -256,13 +260,10 @@ function initialize() {
 
 	var initEnd = initStart++;
 	var loaddescription = document.getElementById("load-description");
-	var type = event.target.responseURL.split("/")[event.target.responseURL.split("/").length - 1].split("%20")[0];
 	if(initEnd == 1) {
 		initTimeStart = new Date();
 	}
-	if(type == "Pok%C3%A9mon") {
-		type = "Pokémon";
-	}
+
 	loaddescription.innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
 	if(new Date() - initTimeStart >= 5000) {
 		loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
@@ -286,19 +287,23 @@ function initialize() {
 		createItem();
 		createType();
 		createMove();
-		count();
+
 		search();
-		sort();
 		countdown();
 		stopwatch();
 		typeSwitch("NORMAL");
 		RNG();
-		memoryCheckbox();
-		memoryRadio();
-		memoryRange();
-		variantSelector();
-		load();
 
+    boxMemory("Restore")
+    partyMemory("Restore");
+    memoryDexSwitch();
+    memory("Restore","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
+    memory("Restore","resize","site",document.getElementById('resize'));
+    memory("Restore","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
+
+    variantSelector();
+    
+    load();
 	}
 }
 
