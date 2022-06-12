@@ -67,6 +67,15 @@ var createMove = function() {
 	moveAside3Description.appendChild(moveAside3EffectTitle);
 	moveAside3Description.appendChild(moveAside3EffectText);
 	moveOuter.appendChild(moveAside4);
+
+
+    var moveAside2Game = document.createElement("span");
+    var moveAside2GameImage = document.createElement("img");
+    moveAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    moveAside2GameImage.setAttribute("onerror","this.display='none'");
+    moveAside2.appendChild(moveAside2Game);
+    moveAside2Game.appendChild(moveAside2GameImage);
+
 	var moveAside3Sidebar = document.createElement("div");
 	var moveAside3SidebarLeft = document.createElement("div");
 	var moveAside3SidebarType = document.createElement("div");
@@ -396,11 +405,11 @@ var createMove = function() {
 					if(learnsetlevelarr[q]["Form"] == undefined) {
 						moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Pokémon"]) + ".png";
 						moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
-						moveAside4LearnsetLiImg.value = getPokémonInt(learnsetlevelarr[q]["Pokémon"]);
+						moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
 					} else {
 						moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Form"]) + ".png";
 						moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Form"];
-						moveAside4LearnsetLiImg.value = getPokémonInt(learnsetlevelarr[q]["Form"]);
+						moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Form"]));
 					}
 					moveAside4LearnsetLiImg.addEventListener("click", modalData);
 					moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
@@ -431,11 +440,11 @@ var createMove = function() {
 						if(finaldataLearnsetMachine[q]["Form"] == undefined) {
 							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Pokémon"]) + ".png";
 							moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
-							moveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]);
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
 						} else {
 							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Form"]) + ".png";
 							moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Form"];
-							moveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetMachine[q]["Form"]);
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Form"]));
 						}
 						moveAside4LearnsetLiImg.addEventListener("click", modalData);
 						moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
@@ -461,7 +470,7 @@ var createMove = function() {
 								var moveAside4LearnsetLiSource = document.createElement("img");
 								moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"].split(",")[r]) + ".png";
 								moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
-								moveAside4LearnsetLiSource.value = getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]);
+								moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]))
 								moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
 								moveAside4LearnsetLiSource.addEventListener("click", modalData);
 							}
@@ -476,11 +485,11 @@ var createMove = function() {
 						if(finaldataLearnsetBreed[q]["Form"] == undefined) {
 							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Pokémon"]) + ".png";
 							moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
-							moveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]);
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
 						} else {
 							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Form"]) + ".png";
 							moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Form"];
-							moveAside4LearnsetLiImg.value = getPokémonInt(finaldataLearnsetBreed[q]["Form"]);
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Form"]));
 						}
 						moveAside4LearnsetLiImg.addEventListener("click", modalData);
 						moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
