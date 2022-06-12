@@ -3,56 +3,6 @@ var createPokémon = function() {
 	contentOuter.setAttribute("id", "pokémon-outer");
 	contentOuter.setAttribute("name", "Pokémon");
 	document.querySelector("#contain").appendChild(contentOuter);
-	var AreaFilterTemp1 = [];
-	for(var q = 0; q < finaldataPokémonArea.length; q++) {
-		if(finaldataPokémonArea[q]["Filter_" + JSONPath_Area] != undefined) {
-			AreaFilterTemp1.push(finaldataPokémonArea[q]["Filter_" + JSONPath_Area]);
-		}
-	}
-	let AreaFilterTemp2 = [...AreaFilterTemp1];
-	AreaFilterTemp2.splice(AreaFilterTemp2.indexOf(""), 1);
-	AreaFilterTemp2.splice(AreaFilterTemp2.indexOf("Unobtainable"), 1);
-	let AreaFilterNumberTemp1 = new Set(AreaFilterTemp2);
-	let AreaFilterNumberTemp2 = [...AreaFilterNumberTemp1];
-	AreaFilterNumberTemp2.forEach(function(val, u) {
-		if(val == "Catchable") AreaFilterNumberTemp2[u] = "1.1";
-		if(val == "Snaggable") AreaFilterNumberTemp2[u] = "1.2";
-		if(val == "Evolve") AreaFilterNumberTemp2[u] = "2.1";
-		if(val == "Trade Evolution") AreaFilterNumberTemp2[u] = "2.2";
-		if(val == "Breed") AreaFilterNumberTemp2[u] = "2.3";
-		if(val == "Gift") AreaFilterNumberTemp2[u] = "3.1";
-		if(val == "Choice") AreaFilterNumberTemp2[u] = "3.2";
-		if(val == "Swarm") AreaFilterNumberTemp2[u] = "4.1";
-		if(val == "Max Raid Battle") AreaFilterNumberTemp2[u] = "4.2";
-		if(val == "Poké Radar") AreaFilterNumberTemp2[u] = "4.3";
-		if(val == "The Underground") AreaFilterNumberTemp2[u] = "4.4";
-		if(val == "White Forest") AreaFilterNumberTemp2[u] = "4.5";
-		if(val == "Unique") AreaFilterNumberTemp2[u] = "5.1";
-		if(val == "Event") AreaFilterNumberTemp2[u] = "5.2";
-		if(val == "Unavailable") AreaFilterNumberTemp2[u] = "6.1";
-		if(val == "Unobtainable") AreaFilterNumberTemp2[u] = "6.2";
-	});
-	AreaFilterNumberTemp2.sort();
-	AreaFilterNumberTemp2.forEach(function(val, u) {
-		if(val == "1.1") AreaFilterNumberTemp2[u] = "Catchable";
-		if(val == "1.2") AreaFilterNumberTemp2[u] = "Snaggable";
-		if(val == "2.1") AreaFilterNumberTemp2[u] = "Evolve";
-		if(val == "2.2") AreaFilterNumberTemp2[u] = "Trade Evolution";
-		if(val == "2.3") AreaFilterNumberTemp2[u] = "Breed";
-		if(val == "3.1") AreaFilterNumberTemp2[u] = "Gift";
-		if(val == "3.2") AreaFilterNumberTemp2[u] = "Choice";
-		if(val == "4.1") AreaFilterNumberTemp2[u] = "Swarm";
-		if(val == "4.2") AreaFilterNumberTemp2[u] = "Max Raid Battle";
-		if(val == "4.3") AreaFilterNumberTemp2[u] = "Poké Radar";
-		if(val == "4.4") AreaFilterNumberTemp2[u] = "The Underground";
-		if(val == "4.5") AreaFilterNumberTemp2[u] = "White Forest";
-		if(val == "5.1") AreaFilterNumberTemp2[u] = "Unique";
-		if(val == "5.2") AreaFilterNumberTemp2[u] = "Event";
-		if(val == "6.1") AreaFilterNumberTemp2[u] = "Unavailable";
-		if(val == "6.2") AreaFilterNumberTemp2[u] = "Unobtainable";
-	});
-	let AreaFilter = new Set(AreaFilterNumberTemp2);
-	let AreaFilters = [...AreaFilter];
 	var navigation = document.createElement("nav");
 	var navigationContent = document.createElement("ul");
 	var navigationDex = document.createElement("li");
@@ -83,7 +33,7 @@ var createPokémon = function() {
 	navigationSearchInput.setAttribute("onblur", "this.placeholder = 'Search...'");
 	navigationSearchInput.setAttribute("autocomplete", "off");
 	navigationSearchInput.setAttribute("tabindex", "0");
-	var searchoptions = ["checked:: [true/false]", "catchable:: [wild/gift/...]", "evolution:: [charizard/slowbro/...]", "type:: [normal/fighting/...]", "ability:: [static/shadow tag/...]", "catchrate:: [value]", "eggcycle:: [value]", "genderratio:: [7:0/3:1/...]", "egggroup:: [field/human-like/...]", "expyield:: [value]", "expyieldcategory:: [very high/medium/...]", "levelrate:: [value]", "helditem:: [silver powder/sitrus berry/...]", "variant:: [default/form/...]", "statshp:: [value]", "...", "evyieldhp:: [value]", "...", "equal::", "doesnotequal:!", "greaterthan:>", "lessthan:<", ];
+	var searchoptions = ["checked:: [true/false]", "catchable:: [wild/gift/...]", "evolution:: [charizard/slowbro/...]", "type:: [normal/fighting/...]", "ability:: [static/shadow tag/...]", "catchrate:: [value]", "eggcycle:: [value]", "genderratio:: [7:1/3:1/...]", "egggroup:: [field/human-like/...]", "expyield:: [value]", "expyieldcategory:: [very high/medium/...]", "levelrate:: [value]","learnset:: [leech seed/surf/...]","helditem:: [silver powder/sitrus berry/...]","variant:: [default/form/...]", "statshp:: [value]", "...", "evyieldhp:: [value]", "..."];
 	if(Ability.length <= 0) {
 		for(var q = 0; q < searchoptions.length; q++) {
 			if(searchoptions[q].includes("ability")) {
@@ -126,34 +76,41 @@ var createPokémon = function() {
 	navigationSettings.setAttribute("id", "settings-outer");
 	navigationSettingsImg.src = "./media/Images/Misc/FinalDex/Cog.png";
 
-
-
+    var navigationDexOuter = document.createElement("span");
+    var navigationDexInner = document.createElement("span");
 	var navigationDexInput = document.createElement("input");
 	var navigationDexLabel = document.createElement("label");
 	navigationDexInput.setAttribute("type", "radio");
 	navigationDexInput.setAttribute("value", "1");
-	navigationDexInput.setAttribute("name", "finaldex-dexswitch" + GameID);
+	navigationDexInput.setAttribute("name", "finaldex-dexswitch-" + GameID);
 	navigationDexInput.setAttribute("id", "dexswitch1");
 	navigationDexInput.setAttribute("autocomplete", "off");
 	navigationDexLabel.setAttribute("for", "dexswitch1");
 	navigationDexLabel.setAttribute("name", "National Pokédex");
 	navigationDexLabel.innerText = "National Pokédex";
-	navigationDexContent.appendChild(navigationDexInput);
-	navigationDexContent.appendChild(navigationDexLabel);
+    navigationDexContent.appendChild(navigationDexOuter);
+    navigationDexOuter.appendChild(navigationDexInner);
+	navigationDexInner.appendChild(navigationDexInput);
+	navigationDexInner.appendChild(navigationDexLabel);
+    navigationDexInput.addEventListener("click", dexMove);
+    navigationDexInput.addEventListener("click", dexSwitch);
+
 	for(var i = 0; i < JSONPath_Pokédex.length; i++) {
 		let x = i + 2;
 		var navigationDexInput = document.createElement("input");
 		var navigationDexLabel = document.createElement("label");
 		navigationDexInput.setAttribute("type", "radio");
 		navigationDexInput.setAttribute("value", x);
-		navigationDexInput.setAttribute("name", "finaldex-dexswitch" + GameID);
+		navigationDexInput.setAttribute("name", "finaldex-dexswitch-" + GameID);
 		navigationDexInput.setAttribute("id", "dexswitch" + x);
 		navigationDexInput.setAttribute("autocomplete", "off");
 		navigationDexLabel.setAttribute("for", "dexswitch" + x);
 		navigationDexLabel.setAttribute("name", JSONPath_Pokédex[i].split("_")[0]);
 		navigationDexLabel.innerText = JSONPath_Pokédex[i].split("_")[0];
-		navigationDexContent.appendChild(navigationDexInput);
-		navigationDexContent.appendChild(navigationDexLabel);
+		navigationDexInner.appendChild(navigationDexInput);
+		navigationDexInner.appendChild(navigationDexLabel);
+        navigationDexInput.addEventListener("click", dexMove);
+		navigationDexInput.addEventListener("click", dexSwitch);
 	}
 	contentOuter.appendChild(navigation);
 	navigation.appendChild(navigationContent);
@@ -207,69 +164,60 @@ var createPokémon = function() {
 
     navigationSettingsImg.addEventListener("click", openSettings);
 
+    var itemTemp = [];
 
-    itemOptionsTitle.unshift("Item");
+    if (HeldItem == true) {
+        itemTemp = itemOptionsTitle;
+        itemTemp.unshift("Item");
+    }
+
+    var natureTemp = [];
+
     if (Natures.length > 0) {
-        Natures.unshift("Nature")
+        natureTemp = Natures;
     }
 
     for (var i = 0; i < 6; i++) {
-
-
         var teamDiv = document.createElement("div");
         var teamAside1 = document.createElement("aside");
         var teamAside2 = document.createElement("aside");
         var teamAdd = document.createElement("button");
         var teamLeft = document.createElement("span");
-        var teamExitButton = document.createElement("button");
-        var teamQuestionButton = document.createElement("button");
+        var teamExit = document.createElement("select");
+        var teamGrab = document.createElement("button");
         var teamPokémon = document.createElement("span");
-        var teamHeldItem = document.createElement("span");
-        var teamHeldItemInput = document.createElement("select");
+
+
         var teamImgOuter = document.createElement("span");
         var teamImg = document.createElement("img");
-        var teamHeldItemImage = document.createElement("img");
-        var teamMiddle = document.createElement("span");
-        var teamCount = document.createElement("h5");
-        var teamGender = document.createElement("select");
 
         var teamRight = document.createElement("span");
         var teamStatsButton = document.createElement("button");
-        var teamExportButton = document.createElement("button");
+        var teamExport = document.createElement("select");
         var teamLevel = document.createElement("input");
         var teamNickOuter = document.createElement("span");
         var teamNick = document.createElement("input");
-        teamHeldItemInput.addEventListener("change",selectModify);
-        teamGender.addEventListener("change",selectModify);
+
         teamDiv.setAttribute("name","empty")
         teamImg.src = "";
         teamImg.setAttribute("value","");
         teamImg.setAttribute("title","");
         teamImg.addEventListener("click", modalData);
         teamImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-        teamHeldItemImage.src = "";
-        teamHeldItemImage.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error.png'");
-        teamHeldItemImage.setAttribute("title","");
 
-        teamCount.innerText = (i+1)+"/"+"6"
-
-
-        teamExitButton.innerText = "❌";
-        teamQuestionButton.innerText = "⋮⋮⋮";
+        teamGrab.innerText = "⋮⋮⋮";
         teamStatsButton.innerText = "⟲";
-        teamExportButton.innerText = "➢";
 
         teamAdd.innerText = "+";
         teamAdd.classList.add("blinkindicator");
 
-        teamStatsButton.setAttribute("value","Individual Values");
+        teamStatsButton.setAttribute("value","Moves");
         teamNickOuter.setAttribute("name","Name");
         teamImgOuter.setAttribute("name","Pokémon");
-        teamHeldItem.setAttribute("name","Item");
 
 
         teamLevel.setAttribute("type","number");
-        teamLevel.setAttribute("min","1");
+        teamLevel.setAttribute("min","0");
         teamLevel.setAttribute("max","100");
         teamLevel.setAttribute("placeholder","Lvl.");
         teamNick.setAttribute("type","text");
@@ -282,17 +230,14 @@ var createPokémon = function() {
         }
    
 
-        for (var u = 0; u < itemOptionsTitle.length; u++) {
-            var teamHeldItemOption = document.createElement("option");
-            teamHeldItemOption.value = itemOptionsTitle[u];
-            teamHeldItemOption.innerText = itemOptionsTitle[u];    
-            teamHeldItemInput.appendChild(teamHeldItemOption);
-        }
+        teamAdd.addEventListener("click", partyAdd)
 
-
+        teamLevel.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
         teamLevel.addEventListener("change", inputMinMax);
+        teamLevel.addEventListener("change", function() {calcPartyStat(this);});
 
-
+        teamNick.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+        teamNick.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
 
 
         teamParty.appendChild(teamDiv);
@@ -301,38 +246,119 @@ var createPokémon = function() {
         teamAside2.appendChild(teamAdd);
 
         teamAside1.appendChild(teamLeft);
-        teamLeft.appendChild(teamExitButton);
+        teamLeft.appendChild(teamExit);
         teamLeft.appendChild(teamLevel);
-        teamLeft.appendChild(teamQuestionButton);
+        teamLeft.appendChild(teamGrab);
         teamAside1.appendChild(teamPokémon);
-        teamPokémon.appendChild(teamHeldItem);
-        teamHeldItem.appendChild(teamHeldItemInput);
+
+        if (HeldItem == true) {
+            var teamItemOuter = document.createElement("span");
+            teamItemOuter.setAttribute("name","Item");
+            teamPokémon.appendChild(teamItemOuter);
+        }
+
+
         teamPokémon.appendChild(teamImgOuter);
-        teamImgOuter.appendChild(teamHeldItemImage);
+
+        if (HeldItem == true) {
+
+            var teamItemSelect = document.createElement("select");
+            teamItemOuter.appendChild(teamItemSelect);
+
+            var teamHeldItemImage = document.createElement("img");
+            teamHeldItemImage.src = "";
+            teamHeldItemImage.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error.png'");
+            teamHeldItemImage.setAttribute("title","");
+            teamImgOuter.appendChild(teamHeldItemImage);
+
+
+            teamItemSelect.addEventListener("change",selectModify);
+            teamItemSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+            teamItemSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            teamItemSelect.addEventListener("change", partyItem);
+            for (var u = 0; u < itemTemp.length; u++) {
+                var teamItemOption = document.createElement("option");
+                teamItemOption.value = itemTemp[u];
+                teamItemOption.innerText = itemTemp[u];    
+                teamItemSelect.appendChild(teamItemOption);
+            }
+        }
+
+
         teamImgOuter.appendChild(teamImg);
         teamPokémon.appendChild(teamNickOuter);
         teamNickOuter.appendChild(teamNick);
         
-        teamAside1.appendChild(teamMiddle);
-        teamMiddle.appendChild(teamCount);
-        teamMiddle.appendChild(teamGender);
+
+
+
+ 
 
 
 
 
-        var dataOptions = ["Moves","Individual Values","Effort Values","Calculated Stats"];
+
+        var exitOptions = ["❌","Send to Box","Delete"];
+        for (var u = 0; u < exitOptions.length; u++) {
+            var teamExitOption = document.createElement("option");
+            teamExitOption.setAttribute("value",exitOptions[u]);
+            teamExitOption.innerText = exitOptions[u];
+            teamExit.appendChild(teamExitOption);
+        }
+
+        var exportOptions = ["➢","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form","Export Pokémon Data String"];
+        for (var u = 0; u < exportOptions.length; u++) {
+            var teamExportOption = document.createElement("option");
+            teamExportOption.setAttribute("value",exportOptions[u]);
+            teamExportOption.innerText = exportOptions[u];
+            teamExport.appendChild(teamExportOption);
+        }
+
+        teamExit.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+        teamExit.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+        teamExit.addEventListener("change", selectModify);
+        teamExport.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+        teamExport.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+        teamExport.addEventListener("change", selectModify);
+
+
+        if (GameID >= 31 && GameID <= 32) {
+            var dataOptions = ["Moves","Individual Values","Awakening Values","Additional"];
+        }
+        else {
+            var dataOptions = ["Moves","Individual Values","Effort Values","Additional"];
+        }
         for (var u = 0; u < dataOptions.length; u++) {
             var teamData = document.createElement("span");
-            teamData.setAttribute("name",dataOptions[u]);
+            if (dataOptions[u] == "Awakening Values") {
+                teamData.setAttribute("name","Effort Values");
+            }
+            else {
+                teamData.setAttribute("name",dataOptions[u]);
+            }
+            teamData.classList.add("scroll");
             teamAside1.appendChild(teamData);
 
             for (var y = 0; y < 3; y++) {
                 var teamDataInner = document.createElement("span");
                 teamData.appendChild(teamDataInner);
 
-                if (y == 2 && u != 0 && Natures.length > 0) {
+                if (y == 2 && dataOptions[u].includes("Values") && natureTemp.length > 0) {
                     teamDataInner.setAttribute("name","Nature");
                 }
+                if (y == 2 && dataOptions[u] == "Moves" && Ability.length > 0) {
+                    teamDataInner.setAttribute("name","Ability");
+                }
+                if (y == 2 && dataOptions[u].includes("Values") && natureTemp.length < 1) {
+                    teamDataInner.remove();
+                }
+                if (y == 2 && dataOptions[u] == "Moves" && Ability.length < 1) {
+                    teamDataInner.remove();
+                }
+                if (y == 2 && dataOptions[u] == "Additional") {
+                    teamDataInner.remove();
+                }
+
 
                 if (y == 0) {
                     var teamDataTitle = document.createElement("h5");
@@ -340,36 +366,146 @@ var createPokémon = function() {
                     teamDataInner.appendChild(teamDataTitle);
                 }
 
-                else if (u > 0 && y == 1) {
-                    for (var q = 0; q < Stats.length; q++) {
-                        if (Stats[q] != "Total") {
-                            var teamDataInput = document.createElement("input");
-                            teamDataInput.setAttribute("type","number");
-                            if (u == 1) {
-                                teamDataInput.setAttribute("placeholder",Stats[q]+" IVs");
-                                teamDataInput.setAttribute("min","0");
-                                teamDataInput.setAttribute("max","31");
+                else if (y == 1 && u >= 1 && u <= 2) {
+                    for (var r = 0; r < 2; r++) {
+                        var teamDataStats = document.createElement("span");
+                        teamDataInner.appendChild(teamDataStats);
+                        for (var q = 0; q < Stats.length; q++) {
+                            if (Stats[q] != "Total") {
+                                var teamDataInput = document.createElement("input");
+                                teamDataInput.setAttribute("type","number");
+
+                                if (u == 1 && r == 0) {
+                                    teamDataInput.setAttribute("placeholder",Stats[q]+" IV");
+                                    if (Generation >= 1 && Generation <= 2) {
+                                        teamDataInput.setAttribute("min","0");
+                                        teamDataInput.setAttribute("max","15");
+                                    }
+                                    else if (Generation >= 3) {
+                                        teamDataInput.setAttribute("min","0");
+                                        teamDataInput.setAttribute("max","31");
+                                    }
+                                    teamDataInput.addEventListener("change", inputMinMax);
+                                }
+                                else if (u == 2 && r == 0) {
+                                    if (Generation >= 1 && Generation <= 2) {
+                                        teamDataInput.setAttribute("min","0");
+                                        teamDataInput.setAttribute("max","65535");
+                                        teamDataInput.setAttribute("placeholder",Stats[q]+" EV");
+                                    }
+                                    else if (GameID >= 31 && GameID <= 32) {
+                                        teamDataInput.setAttribute("min","0");
+                                        teamDataInput.setAttribute("max","200");
+                                        teamDataInput.setAttribute("placeholder",Stats[q]+" AV");
+                                    }
+                                    else if (Generation >= 3) {
+                                        teamDataInput.setAttribute("min","0");
+                                        teamDataInput.setAttribute("max","255");
+                                        teamDataInput.setAttribute("placeholder",Stats[q]+" EV");
+                                        teamDataInput.addEventListener("blur", evInputMax);
+                                        teamDataInput.addEventListener("focus", evInputMax);
+                                        teamDataInput.addEventListener("change", evInputMax);
+                                    }
+                                    teamDataInput.addEventListener("change", inputMinMax);
+                                }
+                                if (r == 1) {
+                                    teamDataInput.setAttribute("min","0");
+                                    teamDataInput.setAttribute("max","0");
+                                    teamDataInput.addEventListener("change", inputMinMax);
+                                    teamDataInput.setAttribute("title",Stats[q]);
+                                    teamDataInput.setAttribute("disabled","");
+                                }
+                              
+                                teamDataInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                                teamDataInput.addEventListener("change", function() {calcPartyStat(this);});
+                                teamDataStats.appendChild(teamDataInput);
                             }
-                            else if (u == 2) {
-                                teamDataInput.setAttribute("placeholder",Stats[q]+" EVs");
-                                teamDataInput.setAttribute("min","0");
-                                teamDataInput.setAttribute("max","255");
-                            }
-                            else if (u == 3) {
-                                teamDataInput.setAttribute("placeholder",Stats[q]);
-                                teamDataInput.setAttribute("min","0");
-                                teamDataInput.setAttribute("max","0");
-                            }
-                            teamDataInner.appendChild(teamDataInput);
-                            teamDataInput.addEventListener("change", inputMinMax)
                         }
                     }
                 }
+
+                else if (y == 1 && u == 3) {
+                    var teamDataAddOuter = document.createElement("span");
+                    teamDataInner.appendChild(teamDataAddOuter);
+
+                    var met = ["Location","Level","Date"];
+                    for(var r = 0; r < met.length; r++) {
+                        var teamDataAdd = document.createElement("label");
+                        var teamDataAddText = document.createElement("span");
+                        teamDataAdd.setAttribute("name",met[r]);
+                        teamDataAddText.innerText = met[r]+" Met: ";
+                        teamDataAddOuter.appendChild(teamDataAdd);
+                        teamDataAdd.appendChild(teamDataAddText)
+                        if (met[r] == "Location") {
+                            var teamDataAddInput = document.createElement("select");
+                            teamDataAdd.appendChild(teamDataAddInput)
+                            teamDataAddInput.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                            teamDataAddInput.addEventListener("change", selectModify);
+
+                            var teamDataAddLabel = document.createElement("option");
+                            teamDataAddLabel.innerText = "";
+                            teamDataAddLabel.value = "";
+                            teamDataAddInput.appendChild(teamDataAddLabel)
+
+                            for(var t = 0; t < finaldataLocation.length; t++) {
+                                if (finaldataLocation[t][JSONPath_Location+"_Name"] != undefined) {
+                                    var teamDataAddLabel = document.createElement("option");
+                                    teamDataAddLabel.innerText = finaldataLocation[t][JSONPath_Location+"_Name"];
+                                    teamDataAddLabel.value = finaldataLocation[t][JSONPath_Location+"_Name"];
+                                    teamDataAddInput.appendChild(teamDataAddLabel)
+                                }
+                            }
+                        }
+                        else if (met[r] == "Level") {
+                            var teamDataAddInput = document.createElement("input");
+                            teamDataAddInput.setAttribute("type","number");
+                            teamDataAddInput.setAttribute("min","0");
+                            teamDataAddInput.setAttribute("max","100");
+                            teamDataAdd.appendChild(teamDataAddInput)
+                            teamDataAddInput.addEventListener("change", inputMinMax);
+                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                        }
+                        else if (met[r] == "Date") {
+                            var teamDataAddInput = document.createElement("input");
+                            teamDataAddInput.setAttribute("type","date");
+                            teamDataAdd.appendChild(teamDataAddInput)
+                            teamDataAddInput.addEventListener("change", inputMinMax);
+                            teamDataAddInput.addEventListener("focus", function() {dateHideShow(event,"open");});
+                            teamDataAddInput.addEventListener("blur", function() {dateHideShow(event,"close");});
+                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                        }
+                    }
+
+                    
+                    if (Friendship == true) {
+                        var teamDataAdd = document.createElement("label");
+                        var teamDataAddText = document.createElement("span");
+                        var teamDataAddInput = document.createElement("input");
+                        teamDataAdd.setAttribute("name","Friendship");
+                        teamDataAddText.innerText = "Friendship: ";
+                        teamDataAddInput.setAttribute("type","number");
+                        teamDataAddInput.setAttribute("min","0");
+                        teamDataAddInput.setAttribute("max","255");
+                        teamDataAddOuter.appendChild(teamDataAdd);
+                        teamDataAdd.appendChild(teamDataAddText);
+                        teamDataAdd.appendChild(teamDataAddInput);
+                        teamDataAddInput.addEventListener("change", inputMinMax);
+                        teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                        teamDataAddInput.addEventListener("change",function() {calcPartyStat(this);});
+                    }
+                }
+
                 else if (y == 1 && dataOptions[u] == "Moves") {
                     for (var p = 0; p < 4; p++) {
+                        var teamDataSelectOuter = document.createElement("span");
                         var teamDataSelect = document.createElement("select");
-                        teamDataInner.appendChild(teamDataSelect);
+                        teamDataInner.appendChild(teamDataSelectOuter);
+                        teamDataSelectOuter.appendChild(teamDataSelect);
                         teamDataSelect.addEventListener("change",selectModify);
+                        teamDataSelect.addEventListener("focus",selectModify);
+                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
                     }
                 }
                 else if (y == 2 && dataOptions[u] == "Moves") {
@@ -377,19 +513,26 @@ var createPokémon = function() {
                         var teamDataSelect = document.createElement("select");
                         teamDataInner.appendChild(teamDataSelect);
                         teamDataSelect.addEventListener("change",selectModify);
+                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
                     }
                 }
 
-                if (y == 2 && dataOptions[u] != "Moves" && Natures.length > 0) {
-                    var teamDataSelect = document.createElement("select");
-                    teamDataInner.appendChild(teamDataSelect);
-                    teamDataSelect.addEventListener("change",selectModify);
-                    teamDataSelect.addEventListener("change", partyNature)
-                    for (var q = 0; q < Natures.length; q++) {
-                        var teamDataOption = document.createElement("option");
-                        teamDataOption.setAttribute("value",Natures[q]);
-                        teamDataOption.innerText = Natures[q];
-                        teamDataSelect.appendChild(teamDataOption);
+                if (y == 2 && u >= 1 && u <= 2) {
+                    if (natureTemp.length > 0) {
+                        var teamDataSelect = document.createElement("select");
+                        teamDataInner.appendChild(teamDataSelect);
+                        teamDataSelect.addEventListener("change",selectModify);
+                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                        teamDataSelect.addEventListener("change", partyNature);
+                        teamDataSelect.addEventListener("change", function() {calcPartyStat(this);});
+                        for (var q = 0; q < natureTemp.length; q++) {
+                            var teamDataOption = document.createElement("option");
+                            teamDataOption.setAttribute("value",natureTemp[q]);
+                            teamDataOption.innerText = natureTemp[q];
+                            teamDataSelect.appendChild(teamDataOption);
+                        }
                     }
                 }
             }
@@ -399,12 +542,18 @@ var createPokémon = function() {
 
         teamAside1.appendChild(teamRight);
         teamRight.appendChild(teamStatsButton);
-        teamRight.appendChild(teamExportButton);
 
-        teamStatsButton.addEventListener("click", partyDataSwitch);
-        teamExitButton.addEventListener("click", function() {partyDefault(this.parentElement.parentElement.parentElement);});
-        teamExitButton.addEventListener("click", function() {partyHide(this.parentElement.parentElement.parentElement);});
-        teamHeldItemInput.addEventListener("change", partyItem);
+        if (Gender == true) {
+            var teamGender = document.createElement("select");
+            teamRight.appendChild(teamGender);
+            teamGender.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            teamGender.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+            teamGender.addEventListener("change",selectModify);
+        }
+
+        teamRight.appendChild(teamExport);
+
+        teamStatsButton.addEventListener("click", partyDataSwitchAll);
 
 
 
@@ -422,21 +571,6 @@ var createPokémon = function() {
     teamBox.appendChild(teamBoxTrash);
     teamBoxTrash.appendChild(teamBoxTrashImg);
 
-    for (var q = 0; q < 120; q++) {
-        
-        var ranPok = Math.floor(Math.random() * 100) + 1; 
-        var boxImgOuter = document.createElement("li");
-        var boxShadow = document.createElement("span");
-        var boxImg = document.createElement("img");
-        boxImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",ranPok)))+".png";
-        boxImg.setAttribute("value", getIntID("",ranPok));
-        boxImg.setAttribute("title",getPokémonName(getIntID("",ranPok)));
-        boxImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-        boxImgOuter.setAttribute("data-i",getIntID("",ranPok))
-        boxDiv.appendChild(boxImgOuter);
-        boxImgOuter.appendChild(boxShadow);
-        boxImgOuter.appendChild(boxImg);
-    }
     var btnImg = document.querySelector('#pokémon-outer > main section[name="Box"] > button img');
     var blinktar = document.querySelector('#pokémon-outer > main section:not([name]) > button:first-child');
     var data = [];
@@ -446,33 +580,36 @@ var createPokémon = function() {
     $(function() {
         $('#pokémon-outer > main section[name="Box"] > ul').sortable({
             start: function(e, ui) {
-                console.log("start")
                 saveddrag = ui.item.context;
                 startDrag();
+                boxMemory("Save");
             },
             stop: function(e, ui) {
-                console.log("stop")
                 stopDrag();
+                boxMemory("Save");
             },
         });
 
-        $('#pokémon-outer > main section[name="Box"] > ul').disableSelection();
+        $('#pokémon-outer > main section[name="Party"] > div span[name="Moves"] > span:nth-child(2)').sortable({
+            stop: function(e,ui) {
+                reNumberMove(e.target);
+            },
+            axis: "y",
+            scroll: false,
+        });
+
         $('#pokémon-outer > main section[name="Box"] > button').droppable({
             drop: function(e, ui) {
-                console.log(this)
-                console.log(saveddrag)
                 if (saveddrag != undefined) {
-                    deleteBox(saveddrag)
+                    deleteBox(saveddrag);
                 }
             }
         });
 
         $('#pokémon-outer > main section:not([name]) > button:first-child').droppable({
             drop: function(e, ui) {
-                console.log(this)
-                console.log(data)
                 var tar = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] > div[name="empty"]');
-                if (saveddrag != undefined && tar.length > 0) {
+                if (saveddrag != undefined) {
                     if (tar.length > 0) {
                         if (data.length > 1) {
                             data = data.join("|")
@@ -495,8 +632,8 @@ var createPokémon = function() {
         function startDrag() {
             saveddrag.style.pointerEvents = "none";
 
-            if (saveddrag.getAttribute("data-i") != undefined) {
-                data.push("i:"+saveddrag.getAttribute("data-i"));
+            if (saveddrag.getAttribute("data-pok") != undefined) {
+                data.push("pok:"+saveddrag.getAttribute("data-pok"));
             }
             if (saveddrag.getAttribute("data-item") != undefined) {
                 data.push("it:"+saveddrag.getAttribute("data-item"));
@@ -525,6 +662,18 @@ var createPokémon = function() {
             if (saveddrag.getAttribute("data-nature") != undefined) {
                 data.push("na:"+saveddrag.getAttribute("data-nature"));
             }
+            if (saveddrag.getAttribute("data-metlocation") != undefined) {
+                data.push("metlo:"+saveddrag.getAttribute("data-metlocation"));
+            }
+            if (saveddrag.getAttribute("data-metlevel") != undefined) {
+                data.push("metlv:"+saveddrag.getAttribute("data-metlevel"));
+            }
+            if (saveddrag.getAttribute("data-metdate") != undefined) {
+                data.push("metda:"+saveddrag.getAttribute("data-metdate"));
+            }
+            if (saveddrag.getAttribute("data-friendship") != undefined) {
+                data.push("fr:"+saveddrag.getAttribute("data-friendship"));
+            }
 
             boxDrag = true;
             blinktar.firstElementChild.classList.add("enabled");
@@ -548,22 +697,35 @@ var createPokémon = function() {
                 btnImg.classList.remove("prohibition");
             }
 
-            if (e.target === blinktar) {
-                blinktar.firstElementChild.classList.add("hover");
-            }
-            else {
-                blinktar.firstElementChild.classList.remove("hover");
+
+
+            var tar = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] > div[name="empty"]');
+            if (tar.length > 0) {
+                if (e.target === blinktar) {
+                    blinktar.firstElementChild.classList.add("hover");
+                }
+                else {
+                    blinktar.firstElementChild.classList.remove("hover");
+                }
             }
         }
+        else {
+            var hovers = document.getElementsByClassName("hover");
+            for (var u = 0; u < hovers.length; u++) {
+                hovers[u].classList.remove("hover");
+            }
+        }
+       
+
+        
     });
 
     $(function() {
         $('#pokémon-outer > main section[name="Party"]').sortable({
             stop: function(e,ui) {
-                reNumber();
             },
-            cursor: "move",
             axis: "y",
+            scroll: false,
         });
     });
 
@@ -588,153 +750,9 @@ var createPokémon = function() {
 	content.appendChild(contentInner);
 
 
-	for(var i = 0; i < finaldataPokémon.length; i++) {
-		if((finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != "Unobtainable") || (finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[i]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable")) {
-			var ID = finaldataPokémon[i]["ID"];
-			var Name = finaldataPokémonForm[i]["Pokémon"];
-			var formName = finaldataPokémonForm[i]["Form_" + JSONPath_Form];
-			var variant = finaldataPokémon[i]["Variant"];
-			var contentDiv = document.createElement("li");
-			var contentInput = document.createElement("input");
-			var contentLabel = document.createElement("label");
-			var contentMainUp = document.createElement("main");
-			var contentSpan = document.createElement("span");
-			var contentButton = document.createElement("button");
-			var contentButtonImg = document.createElement("img");
-			var contentNationalID = document.createElement("caption");
-			var contentImg = document.createElement("img");
-			var contentMainDown = document.createElement("main");
-			var contentName = document.createElement("p");
-            contentDiv.setAttribute("id",i);
-
-			if(finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != undefined) {
-				contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_" + JSONPath_Area].replaceAll(" ", ""));
-			}
-			contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {
-				return v["Pokémon"];
-			}).join(",").toLowerCase());
-			contentDiv.setAttribute("data-search-type", returnData(i, "Type", "lower,undefined"));
-			contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate", "lower,undefined"));
-
-            if (Ability.length > 0) {
-                contentDiv.setAttribute("data-search-ability", returnData(i, "Ability", "lower,undefined"));
-            }
-
-            if (Gender == true) {
-                contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio", "lower,undefined").join(":"));
-            }
-            if (Egg == true) {
-                contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate", "lower,undefined")[0]);
-                contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group", "lower,undefined"));
-            }
-			contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield", "lower,undefined"));
-            if (HeldItem == true) {
-                contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item", "lower,undefined"));
-            }
-
-			if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 300) {
-				contentDiv.setAttribute("data-search-expyieldcategory", "Very High".toLowerCase());
-			} else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 299) {
-				contentDiv.setAttribute("data-search-expyieldcategory", "High".toLowerCase());
-			} else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 100 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 199) {
-				contentDiv.setAttribute("data-search-expyieldcategory", "Medium".toLowerCase());
-			} else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 50 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 99) {
-				contentDiv.setAttribute("data-search-expyieldcategory", "Low".toLowerCase());
-			} else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 0 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 49) {
-				contentDiv.setAttribute("data-search-expyieldcategory", "Very Low".toLowerCase());
-			}
-			contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate", "lower,undefined"));
-
-            var statsevL = ["Base Stats","EV Yield"];
-            var statsevS = ["stats","evyield"];
-            for(var q = 0; q < statsevL.length; q++) {
-                for(var u = 0; u < Stats.length; u++) {
-                    contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined"));
-                }
-            }
-
-			contentDiv.setAttribute("data-search-variant", variant.toLowerCase());
-			contentInput.setAttribute("type", "checkbox");
-			contentInput.classList.add("save-cb-state");
-			contentInput.setAttribute("id", "finaldex-" + GameID + "-" + i);
-			contentInput.setAttribute("name", "finaldex-" + GameID + "-" + i);
-			contentLabel.setAttribute("for", "finaldex-" + GameID + "-" + i);
-			contentButton.value = i;
-			contentButton.addEventListener("click", modalData);
-            contentButton.addEventListener("click", count);
-			contentButtonImg.src = "./media/Images/Misc/FinalDex/Location.png";
-			contentNationalID.classList.add("contain-nationalID");
-			contentNationalID.innerText = "#" + ID;
-			contentImg.classList.add("contain-img");
-			contentImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			contentName.classList.add("contain-name");
-			if(formName != undefined) {
-				contentName.innerText = formName;
-				contentImg.setAttribute("id", formName);
-				contentDiv.setAttribute("data-search-name", formName.toLowerCase());
-			} else {
-				contentName.innerText = Name;
-				contentImg.setAttribute("id", Name);
-				contentDiv.setAttribute("data-search-name", Name.toLowerCase());
-			}
-			contentDiv.setAttribute("data-national", ID);
-			contentInner.appendChild(contentDiv);
-			contentDiv.appendChild(contentInput);
-			contentDiv.appendChild(contentLabel);
-			contentLabel.appendChild(contentMainUp);
-			contentMainUp.appendChild(contentSpan);
-			contentMainUp.appendChild(contentButton);
-			contentButton.appendChild(contentButtonImg);
-			contentMainUp.appendChild(contentNationalID);
-			contentLabel.appendChild(contentImg);
-			contentLabel.appendChild(contentMainDown);
-			contentMainDown.appendChild(contentName);
-			for(q = 0; q < JSONPath_Pokédex.length; q++) {
-				let y = q + 1;
-				var contentMainRegionalID = document.createElement("caption");
-				if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] == undefined) {
-					if(finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
-							return e.ID;
-						}).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
-						contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
-							return e.ID;
-						}).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]]);
-						contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
-							return e.ID;
-						}).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]];
-					} else {
-						contentDiv.setAttribute("data-regional-" + y, "");
-						contentMainRegionalID.innerText = "#";
-					}
-				} else {
-					contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]);
-					contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
-				}
-				contentMainRegionalID.classList.add("contain-regionalID-" + y);
-				contentMainUp.appendChild(contentMainRegionalID);
-			}
-            contentDiv.addEventListener("dragstart", dragStart);
-            contentDiv.addEventListener("dragend", dragEnd);
-            contentDiv.addEventListener("drag", dragMove);
-		}
-	}
-
-
-
     var settings = document.createElement("main");
     settings.setAttribute("name","Settings");
 	contentOuter.appendChild(settings);
-
-
-
-
-
-
-
-
-
-
-
 
     var settingsDefaultImgtypeOuter = document.createElement("span");
     var settingsDefaultImgtype = document.createElement("select");
@@ -802,12 +820,10 @@ var createPokémon = function() {
     settingsDefaultResizeInput.setAttribute("type","range");
     settingsDefaultResizeInput.setAttribute("id","resize");
     settingsDefaultResizeInput.setAttribute("min","60");
-    settingsDefaultResizeInput.setAttribute("max","540");
-    settingsDefaultResizeInput.setAttribute("value","300");
+    settingsDefaultResizeInput.setAttribute("max","420");
+    settingsDefaultResizeInput.setAttribute("value","240");
     settingsDefaultResizeInput.setAttribute("step","60");
     settingsDefaultResizeInput.setAttribute("autocomplete","off");
-    settingsDefaultResizeInput.setAttribute("onclick","resizeDiv()");
-    settingsDefaultResizeInput.classList.add("save-ra-state");
     settingsDefaultThemeOuter.setAttribute("name","Theme");
     settingsDefaultTheme.setAttribute("id","theme");
     settingsDefaultThemeInput.setAttribute("type","checkbox");
@@ -825,6 +841,8 @@ var createPokémon = function() {
     settingsDefaultResizeOuter.appendChild(settingsDefaultResize);
     settingsDefaultResize.appendChild(settingsDefaultResizeValue);
     settingsDefaultResize.appendChild(settingsDefaultResizeInput);
+
+    settingsDefaultResizeInput.addEventListener("change",resizeDiv);
 
     settings.appendChild(settingsDefaultThemeOuter);
     settingsDefaultThemeOuter.appendChild(settingsDefaultTheme);
@@ -853,6 +871,16 @@ var createPokémon = function() {
 
 
     var settingsVariant = document.createElement("span");
+    var settingsVariantTop = document.createElement("span");
+    var settingsVariantBottom = document.createElement("span");
+    var settingsVariantButton = document.createElement("button");
+	settingsVariant.setAttribute("name", "Variant");
+    settingsVariantButton.innerText = "Apply";
+    settings.appendChild(settingsVariant);
+    settingsVariant.appendChild(settingsVariantTop);
+    settingsVariant.appendChild(settingsVariantBottom);
+    settingsVariantBottom.appendChild(settingsVariantButton);
+
     
 	var formopts = [];
 	for(var q = 0; q < finaldataPokémon.length; q++) {
@@ -863,7 +891,6 @@ var createPokémon = function() {
 	formopts = formopts.filter(
 		(item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
 	for(var q = 0; q < formopts.length; q++) {
-		formopts[q] = formopts[q].replace("Form", "Other Form");
 		formopts[q] = formopts[q].replace("Alolan", "Regional Form");
 		formopts[q] = formopts[q].replace("Galarian", "Regional Form");
 		formopts[q] = formopts[q].replace("Mega", "Mega Evolution");
@@ -874,28 +901,27 @@ var createPokémon = function() {
 		var settingsVariantLabel = document.createElement("label");
 		var settingsVariantSpan = document.createElement("span");
 		settingsVariantInput.setAttribute("type", "checkbox");
-		settingsVariantInput.classList.add("save-cb-state");
+
 		settingsVariantInput.setAttribute("id", "settings-form-" + formopts[i] + "-" + i);
-		settingsVariantInput.setAttribute("name", "settings-form-" + formopts[i] + "-" + GameID + "-" + i);
+		settingsVariantInput.setAttribute("name",i);
 		settingsVariantLabel.setAttribute("for", "settings-form-" + formopts[i] + "-" + i);
 		settingsVariantLabel.innerText = formopts[i];
-		settingsVariant.appendChild(settingsVariantInput);
-		settingsVariant.appendChild(settingsVariantLabel);
+		settingsVariantTop.appendChild(settingsVariantInput);
+		settingsVariantTop.appendChild(settingsVariantLabel);
 		settingsVariantLabel.appendChild(settingsVariantSpan);
-		settingsVariantInput.addEventListener("click", rememberVariant);
-        settingsVariantInput.addEventListener("click", variantSelector);
+        settingsVariantInput.addEventListener("click", function() {preventCheckboxZero(this.parentElement);});
+        if (i == 0) {
+            settingsVariantInput.checked = true
+        }
+
 	}
 
-	settingsVariant.setAttribute("name", "Variant");
-
-    settings.appendChild(settingsVariant);
+    settingsVariantButton.addEventListener("click", variantSelector);
 
 
 
 
     settingsDefaultImgtype.addEventListener("change",imageType);
-    settingsDefaultImgtype.addEventListener("click",imageType);
-    settingsDefaultImgtype.click();
 
 
 
@@ -903,8 +929,10 @@ var createPokémon = function() {
     $( function() {
         $('#pokémon-outer > div li img').draggable();
         $('#pokémon-outer > main section[name="Box"] ul').droppable();
-      } );
-    };
+    } );
+
+
+}
 
 function count() {
 	function showChecked() {
@@ -981,7 +1009,7 @@ function imgType() {
 
 
 function resizeDiv() {
-    var sliderDefaultValue = 300;
+    var sliderDefaultValue = 240;
     var containIDDefaultDisplay = "flex";
     var containImgDefaultHeight = "60%";
     var containImgDefaultMargin = "0 5%";
@@ -1012,6 +1040,8 @@ function resizeDiv() {
 		}
 	}
 	output.innerText = Math.round((slider.value / sliderDefaultValue) * 100) + "%";
+
+    memory("Save","resize","site",document.getElementById("resize"))
 }
 
 function search() {
@@ -1023,7 +1053,7 @@ function search() {
 		for(var i = 0; i < uncheck.length; i++) {
 			uncheck[i].checked = false;
 		}
-		var searchoptions = ["evolution::", "evolution:!", "type::", "type:!", "ability::", "ability:!", "catchrate::", "catchrate:!", "catchrate:>", "catchrate:<", "eggcycle::", "eggcycle:!", "eggcycle:>", "eggcycle:<", "genderratio::", "genderratio:!", "egggroup::", "egggroup:!", "expyield::", "expyield:!", "expyield:>", "expyield:<", "expyieldcategory::", "expyieldcategory:!", "levelrate::", "levelrate:!", "levelrate:>", "levelrate:<", "helditem::", "helditem:!", "statshp::", "statshp:!", "statshp:>", "statshp:<", "statsatk::", "statsatk:!", "statsatk:>", "statsatk:<", "statsdef::", "statsdef:!", "statsdef:>", "statsdef:<", "statsspatk::", "statsspatk:!", "statsspatk:>", "statsspatk:<", "statsspdef::", "statsspdef:!", "statsspdef:>", "statsspdef:<", "statsspeed::", "statsspeed:!", "statsspeed:>", "statsspeed:<", "statstotal::", "statstotal:!", "statstotal:>", "statstotal:<", "evyieldhp::", "evyieldhp:!", "evyieldhp:>", "evyieldhp:<", "evyieldatk::", "evyieldatk:!", "evyieldatk:>", "evyieldatk:<", "evyielddef::", "evyielddef:!", "evyielddef:>", "evyielddef:<", "evyieldspatk::", "evyieldspatk:!", "evyieldspatk:>", "evyieldspatk:<", "evyieldspdef::", "evyieldspdef:!", "evyieldspdef:>", "evyieldspdef:<", "evyieldspeed::", "evyieldspeed:!", "evyieldspeed:>", "evyieldspeed:<", "evyieldtotal::", "evyieldtotal:!", "evyieldtotal:>", "evyieldtotal:<", "variant::", "variant:!", "checked::", ];
+		var searchoptions = ["evolution::", "evolution:!", "type::", "type:!", "ability::", "ability:!", "catchrate::", "catchrate:!", "catchrate:>", "catchrate:<", "eggcycle::", "eggcycle:!", "eggcycle:>", "eggcycle:<", "genderratio::", "genderratio:!", "egggroup::", "egggroup:!", "expyield::", "expyield:!", "expyield:>", "expyield:<", "expyieldcategory::", "expyieldcategory:!", "levelrate::", "levelrate:!", "levelrate:>", "levelrate:<", "helditem::", "helditem:!", "statshp::", "statshp:!", "statshp:>", "statshp:<", "statsattack::", "statsattack:!", "statsattack:>", "statsattack:<", "statsdefense::", "statsdefense:!", "statsdefense:>", "statsdefense:<", "statsspatk::", "statsspatk:!", "statsspatk:>", "statsspatk:<", "statsspdef::", "statsspdef:!", "statsspdef:>", "statsspdef:<", "statsspeed::", "statsspeed:!", "statsspeed:>", "statsspeed:<", "statstotal::", "statstotal:!", "statstotal:>", "statstotal:<", "evyieldhp::", "evyieldhp:!", "evyieldhp:>", "evyieldhp:<", "evyieldatk::", "evyieldatk:!", "evyieldatk:>", "evyieldatk:<", "evyielddef::", "evyielddef:!", "evyielddef:>", "evyielddef:<", "evyieldspatk::", "evyieldspatk:!", "evyieldspatk:>", "evyieldspatk:<", "evyieldspdef::", "evyieldspdef:!", "evyieldspdef:>", "evyieldspdef:<", "evyieldspeed::", "evyieldspeed:!", "evyieldspeed:>", "evyieldspeed:<", "evyieldtotal::", "evyieldtotal:!", "evyieldtotal:>", "evyieldtotal:<", "variant::", "variant:!", "checked::","learnset::","learnset:!"];
 		if(Generation <= 2 || GameID == 31 || GameID == 32) {
 			searchoptions = searchoptions.filter((item) => !item.includes("ability"));
 		}
@@ -1262,22 +1292,14 @@ function search() {
 	}
 }
 
-function sort() {
-	var dexEventListener = document.querySelectorAll("#dexswitch input");
-	for(var i = 0; i < dexEventListener.length; i++) {
-		dexEventListener[i].addEventListener("click", dexMove);
-		dexEventListener[i].addEventListener("click", dexSwitch);
-	}
-}
-
 function dexMove() {
-	var x = this.value;
-	if(x == JSONPath_Pokédex.length + 1) {
-		this.nextElementSibling.style.display = "none";
-		this.parentElement.firstChild.nextElementSibling.style.display = "flex";
-	} else {
-		this.nextElementSibling.style.display = "none";
-		this.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "flex";
+	var x = parseInt(this.value);
+
+	if (x > JSONPath_Pokédex.length) {
+		this.parentElement.style.transform = "translate(0%)";
+	}
+    else {
+		this.parentElement.style.transform = "translate(-"+x+"00%)";
 	}
 	dexChecker.fill(x);
 }
@@ -1379,6 +1401,7 @@ function UncheckAll() {
 	for(var i = 0; i < uncheck.length; i++) {
 		uncheck[i].click();
 	}
+    memory("Save","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));
 }
 
 function CheckAll() {
@@ -1387,18 +1410,178 @@ function CheckAll() {
 	for(var i = 0; i < check.length; i++) {
 		check[i].click();
 	}
+    memory("Save","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));
 }
 
-function reNumber() {
 
-    var tar = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] > div:not([name="empty"])');
 
-    for (var q = 0; q < tar.length; q++) {
-        var x = q+1;
-        var y = tar.length;
-        var tartext = tar[q].querySelector(":scope aside span h5");
-        tartext.innerText = x+"/"+y;
+
+
+function createContain(condition) {
+
+    var condition;
+
+    var lis = document.querySelectorAll("#pokémon-outer > div li");
+    for (var q = 0; q < lis.length; q++) {
+        lis[q].remove();
     }
 
-console.log("renumbered!")
+	for(var i = 0; i < finaldataPokémon.length; i++) {
+        var conditions = [];
+        if (condition != undefined) {
+            if (condition.includes("Default")) {
+                conditions.push(finaldataPokémon[i]["Variant"].includes("Default"));
+            }
+            if (condition.includes("Regional Form")) {
+                conditions.push(finaldataPokémon[i]["Variant"].includes("Alolan") || finaldataPokémon[i]["Variant"].includes("Galarian"));
+            }
+            if (condition.includes("Form")) {
+                conditions.push(finaldataPokémon[i]["Variant"] == "Form");
+            }
+            if (condition.includes("Mega Evolution")) {
+                conditions.push(finaldataPokémon[i]["Variant"].includes("Mega"));
+            }
+            if (condition.includes("Gigantamax")) {
+                conditions.push(finaldataPokémon[i]["Variant"].includes("Gigantamax"));
+            }
+        }
+
+        if(finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != "Unobtainable" || finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[i]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+            for (var q = 0; q < conditions.length; q++) {
+                if (conditions[q] == true) {
+                    var ID = finaldataPokémon[i]["ID"];
+                    var Name = finaldataPokémonForm[i]["Pokémon"];
+                    var formName = finaldataPokémonForm[i]["Form_" + JSONPath_Form];
+                    var variant = finaldataPokémon[i]["Variant"];
+                    var contentDiv = document.createElement("li");
+                    var contentInput = document.createElement("input");
+                    var contentLabel = document.createElement("label");
+                    var contentMainUp = document.createElement("main");
+                    var contentSpan = document.createElement("span");
+                    var contentButton = document.createElement("button");
+                    var contentButtonImg = document.createElement("img");
+                    var contentNationalID = document.createElement("caption");
+                    var contentImg = document.createElement("img");
+                    var contentMainDown = document.createElement("main");
+                    var contentName = document.createElement("p");
+                    contentDiv.setAttribute("id",i);
+
+                    if(finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != undefined) {
+                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_" + JSONPath_Area].replaceAll(" ", ""));
+                    }
+                    contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {
+                        return v["Pokémon"];
+                    }).join(",").toLowerCase());
+                    contentDiv.setAttribute("data-search-type", returnData(i, "Type", "lower,undefined"));
+                    contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate", "lower,undefined"));
+
+                    if (Ability.length > 0) {
+                        contentDiv.setAttribute("data-search-ability", returnData(i, "Ability", "lower,undefined"));
+                    }
+
+                    if (Gender == true) {
+                        contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio", "lower,undefined").join(":"));
+                    }
+                    if (Egg == true) {
+                        contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate", "lower,undefined")[0]);
+                        contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group", "lower,undefined"));
+                    }
+                    contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield", "lower,undefined"));
+                    if (HeldItem == true) {
+                        contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item", "lower,undefined"));
+                    }
+                    contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
+
+                    if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 300) {
+                        contentDiv.setAttribute("data-search-expyieldcategory", "Very High".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 299) {
+                        contentDiv.setAttribute("data-search-expyieldcategory", "High".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 100 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 199) {
+                        contentDiv.setAttribute("data-search-expyieldcategory", "Medium".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 50 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 99) {
+                        contentDiv.setAttribute("data-search-expyieldcategory", "Low".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 0 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 49) {
+                        contentDiv.setAttribute("data-search-expyieldcategory", "Very Low".toLowerCase());
+                    }
+                    contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate", "lower,undefined"));
+
+                    var statsevL = ["Base Stats","EV Yield"];
+                    var statsevS = ["stats","evyield"];
+                    for(var q = 0; q < statsevL.length; q++) {
+                        for(var u = 0; u < Stats.length; u++) {
+                            contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined"));
+                        }
+                    }
+
+                    contentDiv.setAttribute("data-search-variant", variant.toLowerCase());
+                    contentInput.setAttribute("type", "checkbox");
+                    contentInput.setAttribute("id", "finaldex-" + GameID + "-" + i);
+                    contentInput.setAttribute("name",i);
+                    contentLabel.setAttribute("for", "finaldex-" + GameID + "-" + i);
+                    contentButton.value = i;
+                    contentButton.addEventListener("click", modalData);
+                    contentButtonImg.src = "./media/Images/Misc/FinalDex/Location.png";
+                    contentNationalID.classList.add("contain-nationalID");
+                    contentNationalID.innerText = "#" + ID;
+                    contentImg.classList.add("contain-img");
+                    contentImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+                    contentName.classList.add("contain-name");
+                    if(formName != undefined) {
+                        contentName.innerText = formName;
+                        contentImg.setAttribute("id", formName);
+                        contentDiv.setAttribute("data-search-name", formName.toLowerCase());
+                    } else {
+                        contentName.innerText = Name;
+                        contentImg.setAttribute("id", Name);
+                        contentDiv.setAttribute("data-search-name", Name.toLowerCase());
+                    }
+                    contentDiv.setAttribute("data-national", ID);
+                    document.querySelector("#pokémon-outer > div > ul").appendChild(contentDiv);
+                    contentDiv.appendChild(contentInput);
+                    contentDiv.appendChild(contentLabel);
+                    contentLabel.appendChild(contentMainUp);
+                    contentMainUp.appendChild(contentSpan);
+                    contentMainUp.appendChild(contentButton);
+                    contentButton.appendChild(contentButtonImg);
+                    contentMainUp.appendChild(contentNationalID);
+                    contentLabel.appendChild(contentImg);
+                    contentLabel.appendChild(contentMainDown);
+                    contentMainDown.appendChild(contentName);
+                    
+                    contentInput.addEventListener("change",function() {memory("Save","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));});
+                    contentInput.addEventListener("change", count);
+
+
+                    for(q = 0; q < JSONPath_Pokédex.length; q++) {
+                        let y = q + 1;
+                        var contentMainRegionalID = document.createElement("caption");
+                        if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] == undefined) {
+                            if(finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                    return e.ID;
+                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
+                                contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                    return e.ID;
+                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]]);
+                                contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                    return e.ID;
+                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]];
+                            } else {
+                                contentDiv.setAttribute("data-regional-" + y, "");
+                                contentMainRegionalID.innerText = "#";
+                            }
+                        } else {
+                            contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]);
+                            contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
+                        }
+                        contentMainRegionalID.classList.add("contain-regionalID-" + y);
+                        contentMainUp.appendChild(contentMainRegionalID);
+                    }
+                    contentDiv.addEventListener("dragstart", dragStart);
+                    contentDiv.addEventListener("dragend", dragEnd);
+                    contentDiv.addEventListener("drag", dragMove);
+                }
+            }
+        }
+        conditions = [];
+	}
 }
