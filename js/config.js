@@ -9,6 +9,7 @@ var Egg;
 var Gender;
 var Generation;
 var HeldItem;
+var Friendship;
 var ImageType_Extension = [];
 var ImageType_Path = [];
 var ImageType_Type = [];
@@ -56,6 +57,7 @@ var JSONPath_PokédexEntry;
 var JSONPath_Reference;
 var JSONPath_Type;
 var JSONPath_Typechart;
+var JSONPath_Friendship;
 var MEDIAPath_Character_Battle;
 var MEDIAPath_Currency;
 var MEDIAPath_Encounter;
@@ -239,12 +241,14 @@ if(GameID == 19) {
 	JSONPath_Area = "Black";
 	JSONPath_LocationConnection = "Black";
 	JSONPath_LocationDescription = "Black";
+    JSONPath_Location = "Black";
 }
 if(GameID == 20) {
 	JSONPath_PokédexEntry = "White";
 	JSONPath_Area = "White";
 	JSONPath_LocationConnection = "White";
 	JSONPath_LocationDescription = "White";
+    JSONPath_Location = "White";
 }
 if(GameID == 21) {
 	JSONPath_PokédexEntry = "Black 2";
@@ -516,7 +520,6 @@ if(GameID >= 19 && GameID <= 20) {
 	MEDIAPath_Encounter = "BW";
 	JSONPath_ExclusivePokémon = ["Black", "White"];
 	JSONPath_EVYield = "BW";
-	JSONPath_Location = "BW";
 	JSONPath_LocationSlogan = "BW";
 	JSONPath_LocationNavigation = "BW";
 	JSONPath_MoveDescription = "BW";
@@ -708,6 +711,9 @@ if(Generation >= 1 && Generation <= 3) {
 	JSONPath_ExperienceYield = "1-3";
 	JSONPath_EvolutionMethod = "1-3";
 }
+if(Generation >= 1 && Generation <= 6) {
+	JSONPath_FormItem = "1-6";
+}
 if(Generation >= 2 && Generation <= 3) {
 	JSONPath_MoveCategory = "2-3";
 }
@@ -726,6 +732,9 @@ if(Generation >= 3 && Generation <= 5) {
 }
 if(Generation >= 3 && Generation <= 6) {
 	JSONPath_CatchRate = "3-6";
+}
+if(Generation >= 3 && Generation <= 7) {
+	JSONPath_Friendship = "3-7";
 }
 if(Generation >= 4 && Generation <= 5) {
 	JSONPath_Ability = "4-5";
@@ -755,6 +764,7 @@ if(Generation >= 6 && Generation <= 8) {
 }
 if(Generation >= 7 && Generation <= 8) {
 	JSONPath_MoveCategory = "7-8";
+    JSONPath_FormItem = "7-8";
 }
 if(Generation >= 4 && Generation <= 7) {
 	JSONPath_EvolutionStage = "4-7";
@@ -797,6 +807,9 @@ if(Generation <= 2 || GameID == 31 || GameID == 32) {
 	Ability = ["Primary", "Secondary"];
 } else if(Generation >= 5) {
 	Ability = ["Primary", "Secondary", "Hidden"];
+}
+if(Generation >= 2) {
+	Friendship = true;
 }
 if(GameID >= 31 && GameID <= 32 || Generation <= 1) {
 	HeldItem = false;
@@ -841,6 +854,7 @@ if(Generation == 2) {
 	JSONPath_MovePP = "2";
 	JSONPath_MoveID = "2";
     JSONPath_EVYield = "2";
+    JSONPath_Friendship = "2";
 }
 if(Generation == 3) {
 	JSONPath_HatchRateSteps = "3";
@@ -924,4 +938,5 @@ if(Generation == 8) {
 	JSONPath_MovePP = "8";
 	JSONPath_MoveID = "8";
 	JSONPath_MoveName = "8";
+    JSONPath_Friendship = "8";
 }
