@@ -40,6 +40,14 @@ var createExclusive = function() {
 	exclusiveAside3.appendChild(exclusiveAside3PokOuter);
 	exclusiveAside3.appendChild(exclusiveAside3ItemOuter);
 	exclusiveAside3.appendChild(exclusiveAside3FeatureOuter);
+
+    var exclusiveAside2Game = document.createElement("span");
+    var exclusiveAside2GameImage = document.createElement("img");
+    exclusiveAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    exclusiveAside2GameImage.setAttribute("onerror","this.display='none'");
+    exclusiveAside2.appendChild(exclusiveAside2Game);
+    exclusiveAside2Game.appendChild(exclusiveAside2GameImage);
+
 	var exclusiveOptions = [];
 	var ExclusivePokémonExist = "";
 	for(var i = 0; i < JSONPath_ExclusivePokémon.length; i++) {
