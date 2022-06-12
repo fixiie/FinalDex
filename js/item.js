@@ -62,6 +62,14 @@ var createItem = function() {
 	itemAside3Description.appendChild(itemAside3EffectTitle);
 	itemAside3Description.appendChild(itemAside3EffectText);
 	itemOuter.appendChild(itemAside4);
+
+    var itemAside2Game = document.createElement("span");
+    var itemAside2GameImage = document.createElement("img");
+    itemAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    itemAside2GameImage.setAttribute("onerror","this.display='none'");
+    itemAside2.appendChild(itemAside2Game);
+    itemAside2Game.appendChild(itemAside2GameImage);
+
 	var itemAside4Sidebar = document.createElement("div");
 	var itemAside4SidebarTitle = document.createElement("div");
 	var itemAside4SidebarTitleTop = document.createElement("li");
