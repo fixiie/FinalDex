@@ -234,12 +234,14 @@ function Continuation(arr, column, style) {
 	return result;
 }
 
-function getRegionalID(seperator, id, dex) {
+function getRegionalID(seperator,id,dex) {
 	var seperator;
 	var id;
 	var dex;
 	var arr = finaldataPokémonPokédexID;
 	var tempid;
+    var result;
+
 	if(seperator == "-") {
 		seperator = -1;
 	}
@@ -253,20 +255,25 @@ function getRegionalID(seperator, id, dex) {
 		for(var q = 0; q < arr.length; q++) {
 			if(arr[q]["ID"] == id) {
 				tempid = parseInt(arr[q][dex]) + seperator;
+                break;
 			}
 		}
 		for(var q = 0; q < arr.length; q++) {
 			if(arr[q][dex] == tempid) {
-				return arr[q]["ID"];
+				result = arr[q]["ID"];
+                break;
 			}
 		}
 	} else {
 		for(var q = 0; q < arr.length; q++) {
 			if(arr[q]["ID"] == id) {
-				return arr[q][dex];
+				result = arr[q][dex];
+                break;
 			}
 		}
 	}
+
+    return result
 }
 
 function getMoveData(move, type) {
@@ -297,6 +304,10 @@ function getMoveData(move, type) {
 	if(type == "Category") {
 		arr = finaldataMoveCategory;
 		game = "Category_" + JSONPath_MoveCategory;
+	}
+    if(type == "Description") {
+		arr = finaldataMoveDescription;
+		game = "Description_" + JSONPath_MoveDescription;
 	}
 	for(var i = 0; i < arr.length; i++) {
 		if(arr[i]["Name" + "_" + JSONPath_MoveName] == move) {
@@ -355,6 +366,35 @@ function getEvolutionStage(name) {
 	}
 }
 
+function abbreviateStats(stats) {
+    var stats;
+    if (stats == "Attack") {
+        return "Atk";
+    }
+    if (stats == "Defense") {
+        return "Def";
+    }
+    if (stats == "Sp. Atk") {
+        return "SpAtk";
+    }
+    if (stats == "Sp. Def") {
+        return "SpDef";
+    }
+    if (stats == "Speed") {
+        return "Spe";
+    }
+    return stats;
+}
+
+function findUpTag(el, tag) {
+    while (el.parentNode) {
+        el = el.parentNode;
+        if (el.tagName === tag)
+            return el;
+    }
+    return null;
+}
+
 function getPokémonInt(name) {
 	var name;
 	var arr = finaldataPokémonForm;
@@ -395,5 +435,86 @@ function getPokémonName2(int) {
 
 
 
-//$("body").css("cursor","progress");
-//$("body").css("cursor","default");
+
+
+function removeDuplicateObjectFromArray(array, key) {
+    let check = {};
+    let res = [];
+    for(let i=0; i<array.length; i++) {
+        if(!check[array[i][key]]){
+            check[array[i][key]] = true;
+            res.push(array[i]);
+        }
+    }
+    return res;
+}
+
+function friendshipModifer(friendship) {
+    var friendship;
+
+    return 1+(Math.floor((10*friendship)/255)/100)
+}
+
+
+function getPokémonForm(i) {
+    var i;
+    var id = getIntID(i,"");
+    var result = [];
+
+    for(var u = 0; u < finaldataPokémonForm.length; u++) {
+		if(finaldataPokémonForm[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
+            if (finaldataPokémonForm[u]["Form_"+JSONPath_Form] != undefined) {
+                result.push(finaldataPokémonForm[u]["Form_"+JSONPath_Form]);
+            }
+            else {
+                result.push(finaldataPokémonForm[u]["Pokémon"]);
+            }
+		}
+	}
+
+    return result;
+}
+
+function getPositionAbility(i,column) {
+    var arr = finaldataPokémonAbility;
+    var column;
+    var i;
+    var result;
+
+    for (var q = 0; q < arr.length; q++) {
+        if (q == i) {
+            if (arr[q][column+"_"+JSONPath_Ability] != undefined) {
+                result = arr[q][column+"_"+JSONPath_Ability];
+                break;
+            }
+        }
+    }
+
+    if (result == undefined) {
+        for (var q = 0; q < arr.length; q++) {
+            if (q == getDefaultInt(i)) {
+                result = arr[q][column+"_"+JSONPath_Ability];
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+function getDefaultInt(i) {
+
+    var i;
+    var id = getIntID(i,"");
+    var arr = finaldataPokémon;
+    var result;
+
+    for (var q = 0; q < arr.length; q++) {
+        if (arr[q]["ID"] == id) {
+            result = q;
+            break;
+        }
+    }
+
+    return result;
+}
