@@ -70,6 +70,15 @@ var createMechanic = function() {
 	mechanicOuter.appendChild(mechanicAside4);
 	mechanicAside4.appendChild(mechanicAside4Icon);
 	mechanicAside4Icon.appendChild(mechanicAside4IconImage);
+
+    var mechanicAside2Game = document.createElement("span");
+    var mechanicAside2GameImage = document.createElement("img");
+    mechanicAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    mechanicAside2GameImage.setAttribute("onerror","this.display='none'");
+    mechanicAside2.appendChild(mechanicAside2Game);
+    mechanicAside2Game.appendChild(mechanicAside2GameImage);
+
+
 	for(var i = 0; i < mechanicOptionsTitle.length; i++) {
 		var mechanicAside1OptionsOuter = document.createElement("div");
 		var mechanicAside1Options = document.createElement("div");
