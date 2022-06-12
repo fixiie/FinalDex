@@ -1945,11 +1945,11 @@ function createParty(base,data) {
         }
         else if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"] != undefined) {
             var notreq = [];
-            if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].includes(",")) {
-                notreq = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].split(",")
+            if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].includes(",")) {
+                notreq = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].split(",")
             }
             else {
-                notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
+                notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
             }
 
 
