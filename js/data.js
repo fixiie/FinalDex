@@ -402,91 +402,92 @@ var createData = function(id, i) {
 		dataAside2MetadataSidebarEggGroupSecondaryOuter.appendChild(dataAside2MetadataSidebarEggGroupSecondary);
 	}
 	dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow4);
-	/*
-	  if (parseInt(id) - 1 != 0) {
-	  var dataPrevious = document.createElement("div");
-	  var dataPreviousNational = document.createElement("button");
-	  var dataPreviousNationalImg = document.createElement("img");
-	  
-	  dataPrevious.classList.add("data-previous");
-	  dataPreviousNational.setAttribute("id","data-previous-national");
-	  dataPreviousNational.setAttribute("name","national");
-	  dataPreviousNational.classList.add("data-modal-close-open");
-	  dataPreviousNational.setAttribute("value",parseInt(id) - 1);
-	  dataPreviousNational.title = "#" + [parseInt(id) - 1] + "\n" + getPokémonName(getIntID("",[parseInt(id) - 1]));
-	  dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",[parseInt(id) - 1]))) + ".png";
-	  dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	  
-	  dataDivContent.appendChild(dataPrevious);
-	  dataPrevious.appendChild(dataPreviousNational);
-	  dataPreviousNational.appendChild(dataPreviousNationalImg);
-	  
+
+      var d = getDefaultInt(i);
+
+      var dataPrevious = document.createElement("div");
+      var dataNext = document.createElement("div");
+      dataPrevious.classList.add("data-previous");
+      dataNext.classList.add("data-next");
+      dataDivContent.appendChild(dataPrevious);
+      dataDivContent.appendChild(dataNext);
+
+	  if ((parseInt(getIntID(d,"")) - 1) > 0) {
+        var dataPreviousNational = document.createElement("button");
+        var dataPreviousNationalImg = document.createElement("img");
+        
+        dataPreviousNational.setAttribute("id","data-previous-national");
+        dataPreviousNational.setAttribute("name","national");
+        dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
+        dataPreviousNational.title = "#" + (parseInt(getIntID(d,"")) - 1) + "\n" + finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
+        dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) - 1)))) + ".png";
+        dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        
+        dataPrevious.appendChild(dataPreviousNational);
+        dataPreviousNational.appendChild(dataPreviousNationalImg);
+
+        dataPreviousNational.addEventListener("click",modalData);
+	  }
+
+	  if (finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) + 1))][JSONPath_Reference] == "true") {
+        var dataNextNational = document.createElement("button");
+        var dataNextNationalImg = document.createElement("img");
+        
+        dataNextNational.setAttribute("id","data-next-national");
+        dataNextNational.setAttribute("name","national");
+        dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) + 1)));
+        dataNextNational.title = "#" + (parseInt(getIntID(d,"")) + 1) + "\n" + finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) + 1))]["Pokémon"];
+        dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) + 1)))) + ".png";
+        dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        
+        dataNext.appendChild(dataNextNational);
+        dataNextNational.appendChild(dataNextNationalImg);
+
+        dataNextNational.addEventListener("click",modalData);
 	  }
 	  
-	  if (parseInt(id) + 1 <= finaldataPokémon.length) {
-	  
-	  var dataNext = document.createElement("div");
-	  var dataNextNational = document.createElement("button");
-	  var dataNextNationalImg = document.createElement("img");
-	  
-	  dataNext.classList.add("data-next");
-	  dataNextNational.setAttribute("id","data-next-national");
-	  dataNextNational.setAttribute("name","national");
-	  dataNextNational.classList.add("data-modal-close-open");
-	  dataNextNational.setAttribute("value",parseInt(id) + 1);
-	  dataNextNational.title = "#" + [parseInt(id) + 1] + "\n" + getPokémonName(getIntID("",[parseInt(id) - 1]));
-	  dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",[parseInt(id) - 1]))) + ".png";
-	  dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	  
-	  dataDivContent.appendChild(dataNext);
-	  dataNext.appendChild(dataNextNational);
-	  dataNextNational.appendChild(dataNextNationalImg);
-	  
-	  
-	  
-	  }
-	  
+
 	  for (q = 0; q < JSONPath_Pokédex.length; q++) {
 	      var y = q + 1;
-	  
-	      var previousID = parseInt(getRegionalID("-",x.toString(),JSONPath_Pokédex[q].toString()));
-	      var nextID = parseInt(getRegionalID("+",x.toString(),JSONPath_Pokédex[q].toString()));
-	  
-	      if (!isNaN(parseFloat(previousID))) {
+	      var previousID = getRegionalID("-",getIntID(d,""),JSONPath_Pokédex[q]);
+	      var nextID = getRegionalID("+",getIntID(d,""),JSONPath_Pokédex[q]);
+
+	      if (previousID != undefined) {
 	          var dataPreviousRegional = document.createElement("button");
 	          var dataPreviousRegionalImg = document.createElement("img");
 	  
 	          dataPreviousRegional.setAttribute("id","data-previous-regional" + y);
 	          dataPreviousRegional.setAttribute("name","regional" + y);
-	          dataPreviousRegional.classList.add("data-modal-close-open");
-	          dataPreviousRegional.setAttribute("value",previousID);
-	          dataPreviousRegional.title = "#" + [parseInt(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]) - 1] + "\n" + getPokémonName(previousID);
-	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + previousID + ".png";
+	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
+	          dataPreviousRegional.title = "#" + finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]] + "\n" + finaldataPokémon[getIntID("",previousID)]["Pokémon"];
+	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",previousID))) + ".png";
 	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataPrevious.appendChild(dataPreviousRegional);
 	          dataPreviousRegional.appendChild(dataPreviousRegionalImg);
+
+              dataPreviousRegional.addEventListener("click",modalData);
 	      }
-	      if (!isNaN(parseFloat(nextID))) {
+	      if (nextID != undefined) {
 	          var dataNextRegional = document.createElement("button");
 	          var dataNextRegionalImg = document.createElement("img");
 	  
 	          dataNextRegional.setAttribute("id","data-next-regional" + y); 
 	          dataNextRegional.setAttribute("name","regional" + y);
-	          dataNextRegional.classList.add("data-modal-close-open");
-	          dataNextRegional.setAttribute("value",nextID);
-	          dataNextRegional.title = "#" + [parseInt(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]) + 1] + "\n" + getPokémonName(nextID);
-	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + nextID + ".png";
+	          dataNextRegional.setAttribute("value",getIntID("",nextID));
+	          dataNextRegional.title = "#" + finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]] + "\n" + finaldataPokémon[getIntID("",nextID)]["Pokémon"];
+	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",nextID))) + ".png";
 	          dataNextRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataNext.appendChild(dataNextRegional);
 	          dataNextRegional.appendChild(dataNextRegionalImg);
+
+              dataNextRegional.addEventListener("click",modalData);
 	      }
 	  }
 	  
-	  
-	  
-	  
+
+	  /*
 	  var PokémonStage = finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage];
 	  var FamilyStage = finaldataPokémonEvolutionStage[i]["Family Stage_"+JSONPath_EvolutionStage];
 	  
@@ -1186,20 +1187,22 @@ function modalData() {
 		if(currentWindow == null) {
 			createData(id, int);
 			panZoomModal(id);
-			if(int != undefined) {
-				formSpec = document.querySelector("#data-modal" + id + " .data-form > input[value='" + int + "'");
-				formFirst = document.querySelector("#data-modal" + id + " .data-form > input:first-child");
-				if(def == false) {
-					if(formSpec != null) {
-						formSpec.click();
-					}
-				} else if(def == true) {
-					if(formFirst != null) {
-						formFirst.click();
-					}
-				}
-			}
 		}
+
+        if(int != undefined) {
+            formSpec = document.querySelector("#data-modal" + id + " .data-form > input[value='" + int + "'");
+            formFirst = document.querySelector("#data-modal" + id + " .data-form > input:first-child");
+            if(def == false) {
+                if(formSpec != null) {
+                    formSpec.click();
+                }
+            } else if(def == true) {
+                if(formFirst != null) {
+                    formFirst.click();
+                }
+            }
+        }
+
 		currentWindow = document.querySelector("#data-modal" + id);
 		if(currentWindow != null) {
 			currentWindow.classList.add("open");
