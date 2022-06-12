@@ -36,6 +36,14 @@ var createTool = function() {
 	toolAside3.appendChild(toolAside3TimersOuter);
 	toolAside3TimersOuter.appendChild(toolAside3TimerSelectorOuter);
 
+
+  var toolAside2Game = document.createElement("span");
+  var toolAside2GameImage = document.createElement("img");
+  toolAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+  toolAside2GameImage.setAttribute("onerror","this.display='none'");
+  toolAside2.appendChild(toolAside2Game);
+  toolAside2Game.appendChild(toolAside2GameImage);
+
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
