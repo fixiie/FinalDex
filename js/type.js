@@ -170,6 +170,14 @@ var createType = function() {
 	typeAside4DescriptionOpposed.appendChild(typeAside4DescriptionOpposedDefault);
 	typeAside4DescriptionOpposedDefault.appendChild(typeAside4DescriptionOpposedDefaultTitle);
 	typeAside4DescriptionOpposedDefault.appendChild(typeAside4DescriptionOpposedDefaultContain);
+
+    var typeAside2Game = document.createElement("span");
+    var typeAside2GameImage = document.createElement("img");
+    typeAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    typeAside2GameImage.setAttribute("onerror","this.display='none'");
+    typeAside2.appendChild(typeAside2Game);
+    typeAside2Game.appendChild(typeAside2GameImage);
+
 	for(var i = 0; i < 2; i++) {
 		var typeAside4DescriptionSelectorInput = document.createElement("input");
 		var typeAside4DescriptionSelectorLabel = document.createElement("label");
