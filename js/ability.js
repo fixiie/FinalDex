@@ -65,8 +65,6 @@ var createAbility = function() {
 		abilityAside2Debut.classList.add("ability-debut");
 		abilityAside3.setAttribute("id", "ability-aside3");
 		abilityAside3Description.classList.add("ability-description");
-		abilityAside3EffectTitle.innerText = "Effect";
-		abilityAside3EffectText.innerText = "-";
 		abilityAside4.setAttribute("id", "ability-aside4");
 		document.querySelector("#contain").appendChild(abilityOuter);
 		abilityOuter.appendChild(abilityAside1);
@@ -88,6 +86,15 @@ var createAbility = function() {
 		abilityAside3Description.appendChild(abilityAside3EffectTitle);
 		abilityAside3Description.appendChild(abilityAside3EffectText);
 		abilityOuter.appendChild(abilityAside4);
+
+        var abilityAside2Game = document.createElement("span");
+        var abilityAside2GameImage = document.createElement("img");
+        abilityAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+        abilityAside2GameImage.setAttribute("onerror","this.display='none'");
+        abilityAside2.appendChild(abilityAside2Game);
+        abilityAside2Game.appendChild(abilityAside2GameImage);
+
+
 		var firstabilityiteration;
 		for(var q = 0; q < finaldataAbility.length; q++) {
 			for(var u = 0; u < finaldataAbility.length; u++) {
@@ -150,10 +157,10 @@ var createAbility = function() {
 									abilityAside4SidebarLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 									if(AbilityResults[i]["Form"] != undefined) {
 										abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[i]["Form"]);
-										abilityAside4SidebarLiImg.value = getPokémonInt(AbilityResults[i]["Form"]);
+										abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[i]["Form"]));
 									} else {
 										abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[i]["Pokémon"]);
-										abilityAside4SidebarLiImg.value = getPokémonInt(AbilityResults[i]["Pokémon"]);
+										abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[i]["Pokémon"]));
 									}
 									abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiImgOuter);
 									abilityAside4SidebarLiImgOuter.appendChild(abilityAside4SidebarLiImg);
