@@ -427,6 +427,23 @@ var createPokémon = function() {
                 else if (y == 1 && u == 3) {
                     var teamDataAddOuter = document.createElement("span");
                     teamDataInner.appendChild(teamDataAddOuter);
+                    
+                    if (Friendship == true) {
+                        var teamDataAdd = document.createElement("label");
+                        var teamDataAddText = document.createElement("span");
+                        var teamDataAddInput = document.createElement("input");
+                        teamDataAdd.setAttribute("name","Friendship");
+                        teamDataAddText.innerText = "Friendship: ";
+                        teamDataAddInput.setAttribute("type","number");
+                        teamDataAddInput.setAttribute("min","0");
+                        teamDataAddInput.setAttribute("max","255");
+                        teamDataAddOuter.appendChild(teamDataAdd);
+                        teamDataAdd.appendChild(teamDataAddText);
+                        teamDataAdd.appendChild(teamDataAddInput);
+                        teamDataAddInput.addEventListener("change", inputMinMax);
+                        teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                        teamDataAddInput.addEventListener("change",function() {calcPartyStat(this);});
+                    }
 
                     var met = ["Location","Level","Date"];
                     for(var r = 0; r < met.length; r++) {
@@ -477,23 +494,7 @@ var createPokémon = function() {
                         }
                     }
 
-                    
-                    if (Friendship == true) {
-                        var teamDataAdd = document.createElement("label");
-                        var teamDataAddText = document.createElement("span");
-                        var teamDataAddInput = document.createElement("input");
-                        teamDataAdd.setAttribute("name","Friendship");
-                        teamDataAddText.innerText = "Friendship: ";
-                        teamDataAddInput.setAttribute("type","number");
-                        teamDataAddInput.setAttribute("min","0");
-                        teamDataAddInput.setAttribute("max","255");
-                        teamDataAddOuter.appendChild(teamDataAdd);
-                        teamDataAdd.appendChild(teamDataAddText);
-                        teamDataAdd.appendChild(teamDataAddInput);
-                        teamDataAddInput.addEventListener("change", inputMinMax);
-                        teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                        teamDataAddInput.addEventListener("change",function() {calcPartyStat(this);});
-                    }
+ 
                 }
 
                 else if (y == 1 && dataOptions[u] == "Moves") {
