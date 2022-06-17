@@ -6265,10 +6265,39 @@ span[name="Status"] {
 }
 
 .move-learnset-content {
-	height: 90%;
+	height: 80%;
 	width: 100%;
 	position: relative;
 }
+.move-learnset-partybox {
+	height: 10%;
+	width: 100%;
+	position:relative;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.move-learnset-partybox label {
+	display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 0.8vw;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px var(--border1);
+    z-index: inherit;
+    background: var(--color14);
+	position: relative;
+}
+
+.move-learnset-partybox input:checked + label {
+	background: var(--color10);
+    color: var(--font2);
+}
+
 
 .move-learnset-content ul {
 	width: 100%;
