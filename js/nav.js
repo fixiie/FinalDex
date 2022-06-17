@@ -23,7 +23,7 @@ var createNav = function() {
 		if(q == 0) {
 			navigationInput.setAttribute("checked", "");
 		}
-		navigationInput.addEventListener("click", navSelector);
+		navigationInput.addEventListener("change", navSelector);
 	}
 }
 
