@@ -7493,6 +7493,7 @@ span[name="Status"] {
 	position: absolute;
     left: 10%;
     top: 5%;
+	z-index: 10;
 }
 
 #pokémon-outer > main section[name="Party"] div aside > span > span {
@@ -8084,7 +8085,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Brave"] input:nth-child(2),
 #pokémon-outer > main section[name="Party"] span[name="Adamant"] input:nth-child(2),
 #pokémon-outer > main section[name="Party"] span[name="Naughty"] input:nth-child(2) {
-	color: var(--colorGreen);
+	color: var(--colorGreen) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8092,7 +8093,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Relaxed"] input:nth-child(3),
 #pokémon-outer > main section[name="Party"] span[name="Impish"] input:nth-child(3),
 #pokémon-outer > main section[name="Party"] span[name="Lax"] input:nth-child(3) {
-	color: var(--colorGreen);
+	color: var(--colorGreen) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8100,7 +8101,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Mild"] input:nth-child(4),
 #pokémon-outer > main section[name="Party"] span[name="Quiet"] input:nth-child(4),
 #pokémon-outer > main section[name="Party"] span[name="Rash"] input:nth-child(4) {
-	color: var(--colorGreen);
+	color: var(--colorGreen) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8108,7 +8109,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Gentle"] input:nth-child(5),
 #pokémon-outer > main section[name="Party"] span[name="Sassy"] input:nth-child(5),
 #pokémon-outer > main section[name="Party"] span[name="Careful"] input:nth-child(5) {
-	color: var(--colorGreen);
+	color: var(--colorGreen) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8116,7 +8117,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Hasty"] input:nth-child(6),
 #pokémon-outer > main section[name="Party"] span[name="Jolly"] input:nth-child(6),
 #pokémon-outer > main section[name="Party"] span[name="Naive"] input:nth-child(6) {
-	color: var(--colorGreen);
+	color: var(--colorGreen) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8126,7 +8127,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Timid"] input:nth-child(2),
 #pokémon-outer > main section[name="Party"] span[name="Modest"] input:nth-child(2),
 #pokémon-outer > main section[name="Party"] span[name="Calm"] input:nth-child(2) {
-	color: var(--colorRed);
+	color: var(--colorRed) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8134,7 +8135,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Hasty"] input:nth-child(3),
 #pokémon-outer > main section[name="Party"] span[name="Mild"] input:nth-child(3),
 #pokémon-outer > main section[name="Party"] span[name="Gentle"] input:nth-child(3) {
-	color: var(--colorRed);
+	color: var(--colorRed) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8142,7 +8143,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Impish"] input:nth-child(4),
 #pokémon-outer > main section[name="Party"] span[name="Jolly"] input:nth-child(4),
 #pokémon-outer > main section[name="Party"] span[name="Careful"] input:nth-child(4) {
-	color: var(--colorRed);
+	color: var(--colorRed) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8150,7 +8151,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Lax"] input:nth-child(5),
 #pokémon-outer > main section[name="Party"] span[name="Naive"] input:nth-child(5),
 #pokémon-outer > main section[name="Party"] span[name="Rash"] input:nth-child(5) {
-	color: var(--colorRed);
+	color: var(--colorRed) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
@@ -8158,7 +8159,7 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] span[name="Relaxed"] input:nth-child(6),
 #pokémon-outer > main section[name="Party"] span[name="Quiet"] input:nth-child(6),
 #pokémon-outer > main section[name="Party"] span[name="Sassy"] input:nth-child(6) {
-	color: var(--colorRed);
+	color: var(--colorRed) !important;
 	text-shadow: 1px 1px 1px var(--border1);
 	font-weight: bold;
 }
