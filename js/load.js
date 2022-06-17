@@ -110,7 +110,7 @@ LocationMetadataRequest.onload = function() {
 LearnsetMetadataRequest.onload = function() {
 	var LearnsetMetadata = LearnsetMetadataRequest.response;
 	for(var i = 0; i < LearnsetMetadata["Prior Evolution"].length; i++) {
-		finaldataLearnsetLevel.push(LearnsetMetadata["Prior Evolution"][i]);
+		finaldataLearnsetEvolution.push(LearnsetMetadata["Evolution"][i]);
 	}
 	for(var i = 0; i < LearnsetMetadata["Level Up"].length; i++) {
 		finaldataLearnsetLevel.push(LearnsetMetadata["Level Up"][i]);
