@@ -36,8 +36,10 @@ var finaldataLocationDescription = [];
 var finaldataLocationSlogan = [];
 var finaldataLocationNavigation = [];
 var finaldataLearnsetMachine = [];
+var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
+var finaldataLearnsetEvolutionLength = [];
 var finaldataLearnsetLevelLength = [];
 var finaldataLearnsetMachineLength = [];
 var finaldataLearnsetBreedLength = [];
@@ -109,7 +111,7 @@ LocationMetadataRequest.onload = function() {
 }
 LearnsetMetadataRequest.onload = function() {
 	var LearnsetMetadata = LearnsetMetadataRequest.response;
-	for(var i = 0; i < LearnsetMetadata["Prior Evolution"].length; i++) {
+	for(var i = 0; i < LearnsetMetadata["Evolution"].length; i++) {
 		finaldataLearnsetEvolution.push(LearnsetMetadata["Evolution"][i]);
 	}
 	for(var i = 0; i < LearnsetMetadata["Level Up"].length; i++) {
@@ -121,30 +123,7 @@ LearnsetMetadataRequest.onload = function() {
 	for(var i = 0; i < LearnsetMetadata["Breeding"].length; i++) {
 		finaldataLearnsetBreed.push(LearnsetMetadata["Breeding"][i]);
 	}
-	for(var i = 0; i < finaldataLearnsetLevel.length; i++) {
-		if(finaldataLearnsetLevelLength[i] == false) {
-			finaldataLearnsetLevel[i] = undefined;
-		}
-	}
-	for(var i = 0; i < finaldataLearnsetMachine.length; i++) {
-		if(finaldataLearnsetMachineLength[i] == false) {
-			finaldataLearnsetMachine[i] = undefined;
-		}
-	}
-	for(var i = 0; i < finaldataLearnsetBreed.length; i++) {
-		if(finaldataLearnsetBreedLength[i] == false) {
-			finaldataLearnsetBreed[i] = undefined;
-		}
-	}
-	finaldataLearnsetLevel = finaldataLearnsetLevel.filter(function(v) {
-		return v != undefined;
-	});
-	finaldataLearnsetMachine = finaldataLearnsetMachine.filter(function(v) {
-		return v != undefined;
-	});
-	finaldataLearnsetBreed = finaldataLearnsetBreed.filter(function(v) {
-		return v != undefined;
-	});
+
 	initialize();
 }
 if(Ability.length >= 1) {
@@ -274,11 +253,12 @@ function initialize() {
 	if(initEnd >= initLength) {
 		loaddescription.innerHTML = "Complete!";
 
-    config();
+		config();
 
-    finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel, "Game", "Single");
-    finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
-    finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
+		finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel, "Game", "Single");
+		finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
+		finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
+		finaldataLearnsetEvolutionLength = Continuation(finaldataLearnsetEvolution, "Game", "Single");
 
 		createNav();
 		createPokémon();
@@ -297,16 +277,16 @@ function initialize() {
 		typeSwitch("NORMAL");
 		RNG();
 
-    boxMemory("Restore")
-    partyMemory("Restore");
-    memoryDexSwitch();
-    memory("Restore","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
-    memory("Restore","resize","site",document.getElementById('resize'));
-    memory("Restore","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
+		boxMemory("Restore")
+		partyMemory("Restore");
+		memoryDexSwitch();
+		memory("Restore","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
+		memory("Restore","resize","site",document.getElementById('resize'));
+		memory("Restore","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
 
-    variantSelector();
-    
-    load();
+		variantSelector();
+		
+		load();
 	}
 }
 
