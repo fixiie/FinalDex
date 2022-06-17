@@ -1208,15 +1208,35 @@ function loadData() {
             var dataAside2LearnsetLiText = document.createElement("span");
             dataAside2LearnsetLi.appendChild(dataAside2LearnsetLiText);
             if(y == 0) {
-                if (learnsetArr[u]["Factor"] != undefined) {
-                    dataAside2LearnsetLiText.title = "Level Up";
+                dataAside2LearnsetLiText.title = "via "+learnsetArr[u]["Type"];
+
+                if (learnsetArr[u]["Type"] == "Prior Evolution") {
+                    if(learnsetArr[u]["Evolution"].includes(",")) {
+                        for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
+                            var dataAside2LearnsetLiImg = document.createElement("img");
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p]) + '.png');
+                            dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
+                            dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
+                            dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
+                            dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                        }
+                    } else {
+                        var dataAside2LearnsetLiImg = document.createElement("img");
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Evolution"]) + '.png');
+                        dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
+                        dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
+                        dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
+                        dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                    }
+                }
+
+                if (learnsetArr[u]["Type"] == "Level Up") {
                     dataAside2LearnsetLiText.innerText = learnsetArr[u]["Factor"];
                 }
-                else if (learnsetArr[u]["Machine"] != undefined) {
-                    dataAside2LearnsetLiText.title = "Machine";
+                else if (learnsetArr[u]["Type"] == "Machine") {
                     dataAside2LearnsetLiText.innerText = learnsetArr[u]["Machine"];
                 }
-                else if (learnsetArr[u]["Parent"] != undefined) {
+                else if (learnsetArr[u]["Type"] == "Breeding") {
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
@@ -2268,9 +2288,11 @@ function deleteBox(element) {
 
 function returnMoveSet(int,additional) {
     var int;
+    var arre = finaldataLearnsetEvolution;
     var arrl = finaldataLearnsetLevel;
     var arrm = finaldataLearnsetMachine;
     var arrb = finaldataLearnsetBreed;
+    var arrE = finaldataLearnsetEvolutionLength;
     var arrlL = finaldataLearnsetLevelLength;
     var arrmL = finaldataLearnsetMachineLength;
     var arrbL = finaldataLearnsetBreedLength;
@@ -2278,10 +2300,40 @@ function returnMoveSet(int,additional) {
 
     var name = getPokémonName2(int);
 
+    var evores = [];
     var lvlres = [];
     var machres = [];
     var breres = [];
 
+
+    for(var i = 0; i < arre.length; i++) {
+		if(arre[i]["Pokémon"] == name && arrE[i] == true) {
+            var obj = new Object();
+            obj["Pokémon"] = arre[i]["Pokémon"];
+            obj["Form"] = arre[i]["Form"];
+            obj["Move"] = arre[i]["Move"];
+            obj["Evolution"] = arre[i]["Evolution"];
+            obj["Additional"] = arre[i]["Additional"];
+            obj["Game"] = arre[i]["Game"];
+            obj["Type"] = "Prior Evolution";
+            evores.push(obj)
+		}
+	}
+    if (!evores.length > 0) {
+        for(var i = 0; i < arre.length; i++) {
+            if(arre[i]["Form"] == name && arrE[i] == true) {
+                var obj = new Object();
+                obj["Pokémon"] = arre[i]["Pokémon"];
+                obj["Form"] = arre[i]["Form"];
+                obj["Move"] = arre[i]["Move"];
+                obj["Evolution"] = arre[i]["Evolution"];
+                obj["Additional"] = arre[i]["Additional"];
+                obj["Game"] = arre[i]["Game"];
+                obj["Type"] = "Prior Evolution";
+                evores.push(obj)
+            }
+        }
+    }
 
     for(var i = 0; i < arrl.length; i++) {
 		if(arrl[i]["Pokémon"] == name && arrlL[i] == true) {
@@ -2373,6 +2425,23 @@ function returnMoveSet(int,additional) {
 
     var name = getPokémonName2([finaldataPokémon.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[int]["ID"])]);
 
+
+    if (!evores.length > 0) {
+        for(var i = 0; i < arre.length; i++) {
+            if(arre[i]["Pokémon"] == name && arrE[i] == true) {
+                var obj = new Object();
+                obj["Pokémon"] = arre[i]["Pokémon"];
+                obj["Form"] = arre[i]["Form"];
+                obj["Move"] = arre[i]["Move"];
+                obj["Evolution"] = arre[i]["Evolution"];
+                obj["Additional"] = arre[i]["Additional"];
+                obj["Game"] = arre[i]["Game"];
+                obj["Type"] = "Prior Evolution";
+                evores.push(obj)
+            }
+        }
+    }
+    
     if (!lvlres.length > 0) {
         for(var i = 0; i < arrl.length; i++) {
             if(arrl[i]["Pokémon"] == name && arrlL[i] == true) {
@@ -2414,7 +2483,7 @@ function returnMoveSet(int,additional) {
                 obj["Additional"] = arrb[i]["Additional"];
                 obj["Move"] = arrb[i]["Move"];
                 obj["Game"] = arrb[i]["Game"];
-                obj["Type"] = "Breeding";
+                obj["Type"] = "Egg Move";
                 breres.push(obj)
             }
         }
@@ -2424,6 +2493,9 @@ function returnMoveSet(int,additional) {
 
     var result = [];
 
+    for(var q = 0; q < evores.length; q++) {
+        result.push(evores[q]);
+    }
     for(var q = 0; q < lvlres.length; q++) {
         result.push(lvlres[q]);
     }
@@ -2694,7 +2766,7 @@ function storeInBox(data) {
     i = getPokémonInt(pok);
 
     var li = document.createElement("li");
-    var shadow = document.createElement("img");
+    var shadow = document.createElement("span");
     var img = document.createElement("img");
     img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(i))+".png";
     img.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
@@ -3436,4 +3508,109 @@ function changePartyForm(base,i) {
         }
         
     }
+}
+
+
+function learnsetPartyBox(action) {
+    var action;
+    var base = document.querySelector(".move-learnset-content > ul");
+    var lis = base.querySelectorAll(":scope > li");
+    var boxImg = document.querySelectorAll('#pokémon-outer > main[name="Team"] > section[name="Box"] ul > li img[value]');
+    var partyImg = document.querySelectorAll('#pokémon-outer > main[name="Team"] > section[name="Party"] > div img[value]');
+    var partyArr = [];
+    var boxArr = [];
+
+    for (var q = 0; q < boxImg.length; q++) {
+        if (boxImg[q].getAttribute("value") != undefined) {
+            boxArr.push(boxImg[q].getAttribute("value"));
+        }
+        else {
+            boxArr.push("");
+        }
+    }
+
+
+    for (var q = 0; q < partyImg.length; q++) {
+        if (partyImg[q].getAttribute("value") != undefined) {
+            partyArr.push(partyImg[q].getAttribute("value"));
+        }
+        else {
+            partyArr.push("");
+        }
+    }
+
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].style.display = "none";
+    }
+
+    if (action != undefined) {
+        for (var i = 0; i < lis.length; i++) {
+            var lisImg = lis[i].querySelectorAll(":scope div img[value]");
+            for (var q = 0; q < lisImg.length; q++) {
+                var conditions = [];
+                var tempArr = [];
+                if(action.includes(",")) {
+                    for (var u = 0; u < action.split(",").length; u++) {
+                        tempArr.push(action.split(",")[u]);
+                    }
+                }
+                else {
+                    tempArr = [action];
+                }
+
+                for (var u = 0; u < tempArr.length; u++) {
+                    if (tempArr[u] == "PARTY") {
+                        conditions.push(partyArr.includes(lisImg[q].getAttribute("value")))
+                    }
+                    if (tempArr[u] == "BOX") {
+                        conditions.push(boxArr.includes(lisImg[q].getAttribute("value")))
+                    }
+                }
+                if (conditions[0] == true || conditions[1] == true) {
+                    lis[i].style.removeProperty("display");
+                }
+            }
+        }
+    }
+    else {
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].style.removeProperty("display");
+        }
+    }
+  
+
+
+
+}
+
+var learnsetPB = [];
+function moveLearnseter() {
+    var label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]');
+
+    if (this.checked == true) {
+        if (!learnsetPB.includes(label.innerText)) {
+            learnsetPB.push(label.innerText);
+        }
+    }
+    else if (this.checked == false) {
+        if (learnsetPB.includes(label.innerText)) {
+            learnsetPB = learnsetPB.filter(function(v) {
+                return v != label.innerText;
+            })
+        }
+    }
+    var tempStr;
+
+    if (learnsetPB.length > 1) {
+        tempStr = learnsetPB.join(",");
+    }
+    else {
+        tempStr = learnsetPB[0];
+    }
+
+    var navMove = document.querySelector('#navigation input[value="Moves"]');
+    navMove.addEventListener("change", function() {learnsetPartyBox(tempStr);});
+
+    learnsetPartyBox(tempStr);
+    
 }
