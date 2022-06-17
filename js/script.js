@@ -1932,7 +1932,6 @@ function createParty(base,data) {
                 req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
             }
 
-
             var items = itemOptionsTitle;
             for (var q = 0; q < items.length; q++) {
                 if (req.includes(items[q])) {
@@ -1942,6 +1941,8 @@ function createParty(base,data) {
                     baseItem.appendChild(option)
                 }
             }
+            baseItemImg.style.display = "unset";
+            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+baseItem.querySelector(":scope option:first-child").value+".png";
         }
         else if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"] != undefined) {
             var notreq = [];
@@ -1951,7 +1952,6 @@ function createParty(base,data) {
             else {
                 notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
             }
-
 
             var items = itemOptionsTitle;
             for (var q = 0; q < items.length; q++) {
@@ -2083,10 +2083,18 @@ function createParty(base,data) {
         baseNick.value = nick;
     }
     if (item != undefined && HeldItem == true) {
-        baseItem.value = item;
-        baseItem.style.fontStyle = "unset";
-        baseItemImg.style.display = "unset";
-        baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png"
+        var baseItems = baseItem.querySelectorAll(":scope option");
+        var tempArr = [];
+        for (var q = 0; q < baseItems.length; q++) {
+            tempArr.push(baseItems[q].value);
+        }
+
+        if (tempArr.includes(item)) {
+            baseItem.value = item;
+            baseItem.style.fontStyle = "unset";
+            baseItemImg.style.display = "unset";
+            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png"
+        }
     }
     if (level != undefined) {
         baseLevel.value = level;
@@ -3022,12 +3030,17 @@ function partyAdd() {
                 temparr = data.split("pok:");
                 tempstr = getPokémonInt(temparr[1]);
             }
-            if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
-                createParty(this.parentElement.parentElement,data)
-                partyShow(this.parentElement.parentElement);
+            if (tempstr != undefined) {
+                if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
+                    createParty(this.parentElement.parentElement,data)
+                    partyShow(this.parentElement.parentElement);
+                }
+                else {
+                    alert("Pokémon Unavailable.")
+                }
             }
             else {
-                alert("Pokémon Unavailable.")
+                alert("Data returned an error.")
             }
         }
         else {
