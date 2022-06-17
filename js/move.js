@@ -143,7 +143,7 @@ var createMove = function() {
 	var moveAside4LearnsetTitle = document.createElement("div");
 	var moveAside4LearnsetTitleText = document.createElement("h2");
 	moveAside4LearnsetTitle.classList.add("move-sidebar-title");
-	moveAside4LearnsetTitleText.innerText = "Learnset";
+	moveAside4LearnsetTitleText.innerHTML = "Learnset";
 	moveAside4Learnset.appendChild(moveAside4LearnsetTitle);
 	moveAside4LearnsetTitle.appendChild(moveAside4LearnsetTitleText);
 	var MoveLearnsetOption = ["Level Up", "HM"];
@@ -155,6 +155,28 @@ var createMove = function() {
 	moveAside4Learnset.appendChild(moveAside4LearnsetContent);
 	moveAside4LearnsetContent.appendChild(moveAside4LearnsetHeader);
 	moveAside4LearnsetContent.appendChild(moveAside4LearnsetUl);
+	var moveAside4LearnsetPartyBox = document.createElement("div");
+	moveAside4LearnsetPartyBox.classList.add("move-learnset-partybox");
+	moveAside4Learnset.appendChild(moveAside4LearnsetPartyBox);
+
+	var parbo = ["Party","Box"];
+	for(var q = 0; q < parbo.length; q++) {
+		var moveAside4LearnsetInput = document.createElement("input");
+		var moveAside4LearnsetLabel = document.createElement("label");
+		moveAside4LearnsetInput.setAttribute("type","checkbox");
+		moveAside4LearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
+		moveAside4LearnsetInput.setAttribute("name","move-learnset-partybox");
+		moveAside4LearnsetLabel.setAttribute("for","move-learnset-partybox-"+q);
+		moveAside4LearnsetLabel.innerText = parbo[q];
+		if (parbo[q] == "Party") {
+			moveAside4LearnsetLabel.title = ""
+		}
+		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetInput);
+		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetLabel);
+		moveAside4LearnsetInput.addEventListener("change",moveLearnseter);
+	}
+
+	
 	for(var q = 0; q < MoveLearnsetOption.length; q++) {
 		var moveAside4LearnsetHeaderText = document.createElement("h6");
 		if(q == 0) {
@@ -176,6 +198,7 @@ var createMove = function() {
 			moveAside1OptionsInput.value = q;
 			moveAside1OptionsLabel.setAttribute("for", "move-options-" + q);
 			moveAside1OptionsLabel.setAttribute("name", "medium");
+			moveAside1OptionsLabel.setAttribute("tabindex",q+10);
 			if(finaldataMove[q]["Name" + "_" + JSONPath_MoveName] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name" + "_" + JSONPath_MoveName].toLowerCase());
 			} else {
@@ -226,68 +249,76 @@ var createMove = function() {
 			moveAside1OptionsLabel.innerText = finaldataMove[q]["Name" + "_" + JSONPath_MoveName];
 			moveAside1Options.appendChild(moveAside1OptionsInput);
 			moveAside1Options.appendChild(moveAside1OptionsLabel);
-			moveAside1OptionsInput.addEventListener("click", moveOptionsSelector);
+			moveAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;moveOptionsSelector(event.target.previousElementSibling.value);}}});
+			moveAside1OptionsInput.addEventListener("change", moveOptionsSelector);
 
-			function moveOptionsSelector() {
-				moveAside2TitleName.innerText = finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName];
-				moveAside2TitleID.innerText = "#" + finaldataMoveID[this.value]["ID" + "_" + JSONPath_MoveID];
-				if(finaldataMoveID[this.value]["ID Type"] != undefined) {
-					moveAside2TitleID.title = finaldataMoveID[this.value]["ID Type"] + " Index number";
+			function moveOptionsSelector(i) {
+				var i;
+				if (this.value != undefined) {
+					i = this.value;
+				}
+				
+				console.log(i)
+				
+				moveAside2TitleName.innerText = finaldataMove[i]["Name" + "_" + JSONPath_MoveName];
+				moveAside2TitleID.innerText = "#" + finaldataMoveID[i]["ID" + "_" + JSONPath_MoveID];
+				if(finaldataMoveID[i]["ID Type"] != undefined) {
+					moveAside2TitleID.title = finaldataMoveID[i]["ID Type"] + " Index number";
 				} else {
 					moveAside2TitleID.title = "Index number";
 				}
-				moveAside2DebutText.innerText = "Introduced in " + finaldataMove[this.value]["Debut"].split("-")[0];
-                if (finaldataMoveDescription[this.value]["Description_" + JSONPath_MoveDescription] != undefined) {
-                    moveAside3DescriptionText.innerText = finaldataMoveDescription[this.value]["Description_" + JSONPath_MoveDescription];
+				moveAside2DebutText.innerText = "Introduced in " + finaldataMove[i]["Debut"].split("-")[0];
+                if (finaldataMoveDescription[i]["Description_" + JSONPath_MoveDescription] != undefined) {
+                    moveAside3DescriptionText.innerText = finaldataMoveDescription[i]["Description_" + JSONPath_MoveDescription];
                 }
 				moveAside3SidebarTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-				moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[this.value]["Type_" + JSONPath_MoveType] + ".png";
-				moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[this.value]["Type_" + JSONPath_MoveType]);
-				if(finaldataMoveType[this.value]["Type_" + JSONPath_MoveType] == undefined) {
+				moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[i]["Type_" + JSONPath_MoveType] + ".png";
+				moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[i]["Type_" + JSONPath_MoveType]);
+				if(finaldataMoveType[i]["Type_" + JSONPath_MoveType] == undefined) {
 					moveAside3SidebarTypeTextImg.style.display = "none";
 					moveAside3SidebarTypeTextText.style.display = "block";
 				} else {
 					moveAside3SidebarTypeTextImg.style.display = "block";
 					moveAside3SidebarTypeTextText.style.display = "none";
 				}
-				moveAside3SidebarTypeTextText.innerText = finaldataMoveType[this.value]["Type_" + JSONPath_MoveType];
+				moveAside3SidebarTypeTextText.innerText = finaldataMoveType[i]["Type_" + JSONPath_MoveType];
 				var cate = moveAside3SidebarTypeMove.querySelectorAll(":scope > *");
 				for(var u = 0; u < cate.length; u++) {
 					cate[u].remove();
 				}
-				for(var u = 0; u < finaldataMoveCategory[this.value]["Category_" + JSONPath_MoveCategory].split(",").length; u++) {
+				for(var u = 0; u < finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",").length; u++) {
 					var moveAside3SidebarTypeMoveImg = document.createElement("img");
 					moveAside3SidebarTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-					moveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[this.value]["Category_" + JSONPath_MoveCategory].split(",")[u] + ".png";
-					moveAside3SidebarTypeMoveImg.setAttribute("title", finaldataMoveCategory[this.value]["Category_" + JSONPath_MoveCategory].split(",")[u]);
+					moveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u] + ".png";
+					moveAside3SidebarTypeMoveImg.setAttribute("title", finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u]);
 					moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveImg);
 					var moveAside3SidebarTypeMoveText = document.createElement("h4");
-					moveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[this.value]["Category_" + JSONPath_MoveCategory].split(",")[u];
+					moveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u];
 					moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveText);
 				}
-				if(finaldataMovePP[this.value]["PP Min_" + JSONPath_MovePP] == undefined) {
+				if(finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] == undefined) {
 					moveAside3SidebarPPPAPowerPointsText.innerHTML = "–";
-				} else if(finaldataMovePP[this.value]["PP Min_" + JSONPath_MovePP] != undefined && finaldataMovePP[this.value]["PP Max_" + JSONPath_MovePP] == undefined) {
-					moveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_" + JSONPath_MovePP];
+				} else if(finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] != undefined && finaldataMovePP[i]["PP Max_" + JSONPath_MovePP] == undefined) {
+					moveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_" + JSONPath_MovePP];
 				} else {
-					moveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[this.value]["PP Min_" + JSONPath_MovePP] + " <span>(max. " + finaldataMovePP[this.value]["PP Max_" + JSONPath_MovePP] + ")</span>";
+					moveAside3SidebarPPPAPowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] + " <span>(max. " + finaldataMovePP[i]["PP Max_" + JSONPath_MovePP] + ")</span>";
 				}
-				if(finaldataMovePower[this.value]["Power_" + JSONPath_MovePower] == undefined) {
+				if(finaldataMovePower[i]["Power_" + JSONPath_MovePower] == undefined) {
 					moveAside3SidebarPPPAPowerText.innerText = "–";
 				} else {
-					moveAside3SidebarPPPAPowerText.innerText = finaldataMovePower[this.value]["Power_" + JSONPath_MovePower];
+					moveAside3SidebarPPPAPowerText.innerText = finaldataMovePower[i]["Power_" + JSONPath_MovePower];
 				}
-				if(finaldataMoveAccuracy[this.value]["Accuracy_" + JSONPath_MoveAccuracy] == undefined) {
+				if(finaldataMoveAccuracy[i]["Accuracy_" + JSONPath_MoveAccuracy] == undefined) {
 					moveAside3SidebarPPPAAccuracyText.innerText = "–";
 				} else {
-					moveAside3SidebarPPPAAccuracyText.innerText = finaldataMoveAccuracy[this.value]["Accuracy_" + JSONPath_MoveAccuracy];
+					moveAside3SidebarPPPAAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_" + JSONPath_MoveAccuracy];
 				}
-				if(finaldataMoveOtherMoves[this.value]["Contact"] == "Makes contact") {
+				if(finaldataMoveOtherMoves[i]["Contact"] == "Makes contact") {
 					moveAside3SidebarContactText.innerHTML = "Makes <b>contact</b>";
-				} else if(finaldataMoveOtherMoves[this.value]["Contact"] == "Does not make contact") {
+				} else if(finaldataMoveOtherMoves[i]["Contact"] == "Does not make contact") {
 					moveAside3SidebarContactText.innerHTML = "Does not make <b>contact</b>";
 				}
-				if(finaldataMoveOtherMoves[this.value]["Contact"].includes("not") || finaldataMoveOtherMoves[this.value]["Contact"].includes("Not")) {
+				if(finaldataMoveOtherMoves[i]["Contact"].includes("not") || finaldataMoveOtherMoves[i]["Contact"].includes("Not")) {
 					moveAside3SidebarContact.setAttribute("name", "negative");
 				} else {
 					moveAside3SidebarContact.setAttribute("name", "positive");
@@ -311,38 +342,38 @@ var createMove = function() {
 					var othermove = ["Protect", "Magic Coat/Magic Bounce", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
 				}
 				for(var u = 0; u < othermove.length; u++) {
-					if(finaldataMoveOtherMoves[this.value][othermove[u]] != undefined) {
+					if(finaldataMoveOtherMoves[i][othermove[u]] != undefined) {
 						var moveAside3SidebarOther = document.createElement("div");
 						var moveAside3SidebarOtherContent = document.createElement("span");
 						var moveAside3SidebarOtherText = document.createElement("p");
 						moveAside3SidebarOther.classList.add("move-sidebar-description-other");
 						for(var q = 0; q < othermove.length; q++) {
-							if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Affected by " + othermove[q]) {
+							if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by " + othermove[q]) {
 								moveAside3SidebarOtherText.innerHTML = "Affected by <b>" + othermove[q] + "</b>";
-							} else if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Not affected by " + othermove[q]) {
+							} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by " + othermove[q]) {
 								moveAside3SidebarOtherText.innerHTML = "Not affected by <b>" + othermove[q] + "</b>";
 							}
 						}
-						if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Usable outside of battle") {
+						if(finaldataMoveOtherMoves[i][othermove[u]] == "Usable outside of battle") {
 							moveAside3SidebarOtherText.innerHTML = "Usable <b>outside of battle</b>";
-						} else if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Is a sound-based move") {
+						} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Is a sound-based move") {
 							moveAside3SidebarOtherText.innerHTML = "Is a <b>sound-based</b> move";
-						} else if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
+						} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
 							moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat and Magic Bounce</b>";
-						} else if(finaldataMoveOtherMoves[this.value][othermove[u]] == "Not affected by Magic Coat") {
+						} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat") {
 							moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
 						}
 						moveAside3SidebarRight.appendChild(moveAside3SidebarOther);
 						moveAside3SidebarOther.appendChild(moveAside3SidebarOtherContent);
 						moveAside3SidebarOtherContent.appendChild(moveAside3SidebarOtherText);
-						if(finaldataMoveOtherMoves[this.value][othermove[u]].includes("not") || finaldataMoveOtherMoves[this.value][othermove[u]].includes("Not")) {
+						if(finaldataMoveOtherMoves[i][othermove[u]].includes("not") || finaldataMoveOtherMoves[i][othermove[u]].includes("Not")) {
 							moveAside3SidebarOther.setAttribute("name", "negative");
 						} else {
 							moveAside3SidebarOther.setAttribute("name", "positive");
 						}
 					}
 				}
-				if(finaldataMoveMachine[this.value]["Machine_" + JSONPath_MoveMachine] != undefined) {
+				if(finaldataMoveMachine[i]["Machine_" + JSONPath_MoveMachine] != undefined) {
 					var moveAside3SidebarHMTM = document.createElement("div");
 					var moveAside3SidebarHMTMOuter = document.createElement("span");
 					var moveAside3SidebarHMTMContent = document.createElement("span");
@@ -350,14 +381,14 @@ var createMove = function() {
 					var moveAside3SidebarHMTMText = document.createElement("p");
 					moveAside3SidebarHMTM.classList.add("move-sidebar-description-hmtm");
 					moveAside3SidebarHMTMTitle.innerText = "Machine";
-					moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[this.value]["Machine_" + JSONPath_MoveMachine];
+					moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[i]["Machine_" + JSONPath_MoveMachine];
 					moveAside3SidebarRight.appendChild(moveAside3SidebarHMTM);
 					moveAside3SidebarHMTM.appendChild(moveAside3SidebarHMTMOuter);
 					moveAside3SidebarHMTMOuter.appendChild(moveAside3SidebarHMTMContent);
 					moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
 					moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
 				}
-				if(finaldataMoveTutor[this.value]["Tutor_" + JSONPath_MoveTutor] != undefined) {
+				if(finaldataMoveTutor[i]["Tutor_" + JSONPath_MoveTutor] != undefined) {
 					var moveAside3SidebarTutor = document.createElement("div");
 					var moveAside3SidebarTutorOuter = document.createElement("span");
 					var moveAside3SidebarTutorContent = document.createElement("span");
@@ -365,7 +396,7 @@ var createMove = function() {
 					var moveAside3SidebarTutorText = document.createElement("p");
 					moveAside3SidebarTutor.classList.add("move-sidebar-description-tutor");
 					moveAside3SidebarTutorTitle.innerText = "Move Tutor";
-					moveAside3SidebarTutorText.innerText = finaldataMoveTutor[this.value]["Tutor_" + JSONPath_MoveTutor];
+					moveAside3SidebarTutorText.innerText = finaldataMoveTutor[i]["Tutor_" + JSONPath_MoveTutor];
 					moveAside3SidebarRight.appendChild(moveAside3SidebarTutor);
 					moveAside3SidebarTutor.appendChild(moveAside3SidebarTutorOuter);
 					moveAside3SidebarTutorOuter.appendChild(moveAside3SidebarTutorContent);
@@ -378,7 +409,7 @@ var createMove = function() {
 				}
 				var learnsetlevelarr = [];
 				for(var q = 0; q < finaldataLearnsetLevel.length; q++) {
-					if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetLevelLength[q] == true) {
+					if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetLevelLength[q] == true) {
 						var obj = new Object();
 						obj["Pokémon"] = finaldataLearnsetLevel[q]["Pokémon"];
 						if(finaldataLearnsetLevel[q]["Form"] != undefined) {
@@ -393,6 +424,7 @@ var createMove = function() {
 				learnsetlevelarr.sort(function(a, b) {
 					return parseInt(a["Factor"]) - parseInt(b["Factor"]);
 				});
+
 				for(var q = 0; q < learnsetlevelarr.length; q++) {
 					var moveAside4LearnsetLi = document.createElement("li");
 					moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
@@ -418,9 +450,54 @@ var createMove = function() {
 					moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
 					moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
 				}
-
+				for(var q = 0; q < finaldataLearnsetEvolution.length; q++) {
+					if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetEvolutionLength[q] == true) {
+						var moveAside4LearnsetLi = document.createElement("li");
+						moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
+						var moveAside4LearnsetLiImgOuter = document.createElement("div");
+						var moveAside4LearnsetLiImg = document.createElement("img");
+						var moveAside4LearnsetLiSourceOuter = document.createElement("span");
+						var moveAside4LearnsetLiSourceText = document.createElement("p");
+						var moveAside4LearnsetLiSourceImgOuter = document.createElement("span");
+						moveAside4LearnsetLiSourceOuter.title = "Prior Evolution";
+						moveAside4LearnsetLiSourceText.innerText = "Prior Evolution:";
+						if(finaldataLearnsetEvolution[q]["Evolution"].includes(",")) {
+							for(var r = 0; r < finaldataLearnsetEvolution[q]["Evolution"].split(",").length; r++) {
+								var moveAside4LearnsetLiSource = document.createElement("img");
+								moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]) + ".png";
+								moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"].split(",")[r];
+								moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]))
+								moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
+								moveAside4LearnsetLiSource.addEventListener("click", modalData);
+							}
+						} else if(finaldataLearnsetEvolution[q]["Evolution"] == "None") {
+							moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetEvolution[q]["Evolution"];
+						} else {
+							var moveAside4LearnsetLiSource = document.createElement("img");
+							moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"]) + ".png";
+							moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
+							moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
+						}
+						if(finaldataLearnsetEvolution[q]["Form"] == undefined) {
+							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Pokémon"]) + ".png";
+							moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
+						} else {
+							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Form"]) + ".png";
+							moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Form"];
+							moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Form"]));
+						}
+						moveAside4LearnsetLiImg.addEventListener("click", modalData);
+						moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+						moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
+						moveAside4LearnsetLiImgOuter.appendChild(moveAside4LearnsetLiImg);
+						moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
+						moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceText);
+						moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceImgOuter);
+					}
+				}
 				for(var q = 0; q < finaldataLearnsetMachine.length; q++) {
-					if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetMachineLength[q] == true) {
+					if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetMachineLength[q] == true) {
 						var moveAside4LearnsetLi = document.createElement("li");
 						moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 						var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -455,7 +532,7 @@ var createMove = function() {
 					}
 				}
 				for(var q = 0; q < finaldataLearnsetBreed.length; q++) {
-					if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[this.value]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetBreedLength[q] == true) {
+					if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetBreedLength[q] == true) {
 						var moveAside4LearnsetLi = document.createElement("li");
 						moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 						var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -500,6 +577,16 @@ var createMove = function() {
 						moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceImgOuter);
 					}
 				}
+
+				var tempStr;
+
+				if (learnsetPB.length > 1) {
+					tempStr = learnsetPB.join(",");
+				}
+				else {
+					tempStr = learnsetPB[0];
+				}
+				learnsetPartyBox(tempStr);
 			}
 			if(firstmoveiteration != true) {
 				firstmoveiteration = true;
