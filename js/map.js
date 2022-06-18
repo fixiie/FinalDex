@@ -293,7 +293,7 @@ var createMap = function() {
 			DescriptionSelector.appendChild(DescriptionSelectorInput);
 			DescriptionSelector.appendChild(DescriptionSelectorLabel);
 			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
-			if(mapDescriptionTitles[q] == "Trainers") {
+			if(mapDescriptionTitles[q] == "Overview") {
 				DescriptionSelectorLabel.click();
 			}
 		}
