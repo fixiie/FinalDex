@@ -502,6 +502,42 @@ function getPositionAbility(i,column) {
     return result;
 }
 
+
+function getAbilityPosition(i,ability) {
+    var arr = finaldataPokémonAbility;
+	var i;
+    var ability;
+    var result;
+
+    for (var q = 0; q < arr.length; q++) {
+        if (q == i) {
+			var keys = Object.keys(arr[q]);
+			for (var u = 0; u < keys.length; u++) {
+				if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
+					result = keys[u].replaceAll("_"+JSONPath_Ability,"");
+					break;
+				}
+			}
+        }
+    }
+
+    if (result == undefined) {
+        for (var q = 0; q < arr.length; q++) {
+			if (q == getDefaultInt(i)) {
+				var keys = Object.keys(arr[q]);
+				for (var u = 0; u < keys.length; u++) {
+					if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
+						result = keys[u].replaceAll("_"+JSONPath_Ability,"");
+						break;
+					}
+				}
+			}
+		}
+    }
+
+    return result;
+}
+
 function getDefaultInt(i) {
 
     var i;
@@ -517,4 +553,24 @@ function getDefaultInt(i) {
     }
 
     return result;
+}
+
+
+function getLocationTrainers(location) {
+
+	var arr = finaldataTrainerLocation;
+	var arrLength = finaldataTrainerLocationLength;
+	var location;
+	var result = [];
+
+    for (var q = 0; q < arr.length; q++) {
+		if (arrLength[q] == true) {
+			if(arr[q]["Location"] == location) {
+				result.push(arr[q]);
+			}
+		}
+	}
+
+	return result;
+
 }
