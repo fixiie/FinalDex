@@ -1258,8 +1258,7 @@ input[type=radio] {
 	border-bottom: 1px solid;
 }
 
-#map-description-pok ul h4,
-#map-description-item ul h4 {
+#map-description-pok ul h4 {
 	width: 100%;
 	height: 50px;
 	text-align: center;
@@ -1267,6 +1266,13 @@ input[type=radio] {
 	align-items: center;
 	justify-content: center;
 	box-shadow: 0 0 1px var(--border1);
+}
+
+#map-description-item ul h4 {
+	padding: 10px;
+	text-align: center;
+	box-shadow: 0 0 1px var(--border1);
+	background: var(--color16);
 }
 
 #map-description-pok ul li:nth-child(2),
@@ -1288,8 +1294,16 @@ input[type=radio] {
 	justify-content: center;
 }
 
-#map-description-pok ul li span,
-#map-description-item ul li span {
+#map-description-item ul li {
+	width: 100%;
+	position: relative;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map-description-pok ul li span {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1300,8 +1314,7 @@ input[type=radio] {
 }
 
 #map-description-item ul li span {
-	width: 80%;
-	justify-content: unset;
+	width: 100%;
 }
 
 #map-description-pok ul li p,
@@ -1309,24 +1322,35 @@ input[type=radio] {
 	font-size: 80%;
 }
 
-#map-description-pok ul li div,
-#map-description-item ul li div {
+#map-description-pok ul li div {
 	width: 20%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
+#map-description-item ul li div {
+	width: 40%;
+	display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+	overflow: auto;
+	cursor: pointer;
+}
+
 #map-description-pok ul li div img,
 #map-description-item ul li div img {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	object-fit: scale-down;
 }
 
+#map-description-item ul li div img {
+	object-fit: scale-down;
+	margin: 0 -75%;
+}
+
+#map-description-item ul li div:hover img,
 #map-description-pok ul li div img:hover,
-#map-description-item ul li div img:hover,
 #map-description-trainer ul li div img:hover {
 	filter: brightness(1.1);
 }
@@ -6341,6 +6365,10 @@ span[name="Status"] {
 	justify-content: center;
 	flex-wrap: wrap;
 	flex-direction: column;
+}
+
+.move-learnset-content ul li > span span {
+	text-align:center;
 }
 
 .move-learnset-content ul li > span[title="Parent"] > p {
