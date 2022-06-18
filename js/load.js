@@ -335,35 +335,7 @@ var locationPokListRate = ["80%", "20%"];
 var locationPokListType = ["Old Rod", "Surf M"];
 var locationItemList = ["Aguav Berry", "Super Rod", "Never-Melt Ice"];
 var locationItemListLocation = ["From Santos near the Pokémon Center.", "Fishing man standing next to the Green House.", "After beating Xandyn in four consecutive battles."];
-var locationTrainerList = ["Rival Silver", "Burglar", "Firebreather"];
-var locationTrainer1Pok = ["1", "72", "42", "83", "452", "285"];
-var locationTrainer2Pok = ["442", "353", "66", "95"];
-var locationTrainer3Pok = ["93", "68", "133"];
-var locationTrainerPok = [locationTrainer1Pok, locationTrainer2Pok, locationTrainer3Pok];
-var locationTrainer1Lv = ["10", "14", "15", "14", "16", "19"];
-var locationTrainer2Lv = ["31", "33", "33", "35"];
-var locationTrainer3Lv = ["24", "25", "29"];
-var locationTrainerLv = [locationTrainer1Lv, locationTrainer2Lv, locationTrainer3Lv];
-var locationTrainer1Gender = ["♂", "♂", "♀", "♀", "♂", "♀"];
-var locationTrainer2Gender = ["♀", "♂", "♀", "♂"];
-var locationTrainer3Gender = ["♀", "♂", "♂"];
-var locationTrainerGender = [locationTrainer1Gender, locationTrainer2Gender, locationTrainer3Gender];
-var locationTrainer1HeldItem = ["Cell Battery", "", "Binding Band", "Douse Drive", "Life Orb", ""];
-var locationTrainer2HeldItem = ["", "Old Amber", "Absorb Bulb", ""];
-var locationTrainer3HeldItem = ["Hard Rock", "", "Power Orb"];
-var locationTrainerHeldItem = [locationTrainer1HeldItem, locationTrainer2HeldItem, locationTrainer3HeldItem];
-var locationTrainerClass = ["Silver", "Burglar", "Firebreather"];
-var locationTrainer1Pok1Move = ["Pound", "Mega Punch", "Psychic", "Glare"];
-var locationTrainer1Pok2Move = ["Nightmare", "Flame Wheel", "Lock-On", ""];
-var locationTrainer1Pok3Move = ["Moonlight", "Refresh", "", ""];
-var locationTrainer1Pok4Move = ["Tail Whip", "Attract", "Rock Tomb", "Wring Out"];
-var locationTrainer1Pok5Move = ["Natural Gift", "Feint", "Covet", "Yawn"];
-var locationTrainer1Pok6Move = ["Psycho Cut", "Knock Off", "Roost", "Blue Flare"];
-var locationTrainer1Move = [locationTrainer1Pok1Move, locationTrainer1Pok2Move, locationTrainer1Pok3Move, locationTrainer1Pok4Move, locationTrainer1Pok5Move, locationTrainer1Pok6Move];
-var locationTrainer2Move = [locationTrainer1Pok4Move, locationTrainer1Pok3Move, locationTrainer1Pok2Move, locationTrainer1Pok1Move];
-var locationTrainer3Move = [locationTrainer1Pok6Move, locationTrainer1Pok5Move, locationTrainer1Pok4Move];
-var locationTrainerListMove = [locationTrainer1Move, locationTrainer2Move, locationTrainer3Move];
-var locationTrainerValue = ["1920", "1500", "800"];
+
 
 function load() {
 	const load = document.querySelector("#load");
