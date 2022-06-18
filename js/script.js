@@ -2090,7 +2090,7 @@ function createParty(base,data) {
                 baseAbility.appendChild(option)
             }
         }
-        if (getAbilityData(baseAbility.value, "Flavor") != undefined) {
+        if (getAbilityData(baseAbility.value,"Flavor") != undefined) {
             baseAbility.setAttribute("title",getAbilityData(baseAbility.value, "Flavor"));
         }
     }
@@ -3233,6 +3233,52 @@ function natureModifier(type,nature) {
     return 1;
 }
 
+function getNatureTitle(nature) {
+    var result = []
+
+    if (nature == "Lonely" || nature == "Brave" || nature == "Adamant" || nature == "Naughty") {
+        result[0] =  "+Attack";
+    }
+    else if (nature == "Bold" || nature == "Timid" || nature == "Modest" || nature == "Calm") {
+        result[1] =  "-Attack";
+    }
+
+    if (nature == "Bold" || nature == "Relaxed" || nature == "Impish" || nature == "Lax") {
+        result[0] =  "+Defense";
+    }
+    else if (nature == "Lonely" || nature == "Hasty" || nature == "Mild" || nature == "Gentle") {
+        result[1] =  "-Defense";
+    }
+
+    if (nature == "Modest" || nature == "Mild" || nature == "Quiet" || nature == "Rash") {
+        result[0] =  "+Sp. Atk";
+    }
+    else if (nature == "Adamant" || nature == "Impish" || nature == "Jolly" || nature == "Careful") {
+        result[1] =  "-Sp. Atk";
+    }
+
+    if (nature == "Calm" || nature == "Gentle" || nature == "Sassy" || nature == "Careful") {
+        result[0] =  "+Sp. Def";
+    }
+    else if (nature == "Naughty" || nature == "Lax" || nature == "Naive" || nature == "Rash") {
+        result[1] =  "-Sp. Def";
+    }
+
+    if (nature == "Timid" || nature == "Hasty" || nature == "Jolly" || nature == "Naive") {
+        result[0] =  "+Speed";
+    }
+    else if (nature == "Brave" || nature == "Relaxed" || nature == "Quiet" || nature == "Sassy") {
+        result[1] =  "-Speed";
+    }
+    if(result.length == 0) {
+        return "Neutral"
+    }
+    else {
+        return result.join("\n");
+    }
+}
+
+
 
 function calcPartyStat(divBase) {
 
@@ -3613,4 +3659,48 @@ function moveLearnseter() {
 
     learnsetPartyBox(tempStr);
     
+}
+
+function trainerPokExport() {
+    var data = this.value;
+    navigator.clipboard.writeText(data);
+    alert("Copied Data String!");
+}
+
+
+function trainerPokCycle(event) {
+    var tar = event.target;
+    var val = tar.value;
+    var base = tar.parentElement.querySelector(':scope > div[name="Data"]');
+
+
+    var tempArr = [];
+    var divs = base.querySelectorAll(':scope > div[name]');
+
+    for (var q = 0; q < divs.length; q++) {
+        tempArr.push(divs[q].getAttribute("name"));
+    }
+
+    if (tempArr.length > 1) {
+        for (var q = 0; q < divs.length; q++) {
+            divs[q].style.display = "none";
+        }
+
+
+        var div = base.querySelectorAll(':scope > div[name="'+val+'"]');
+        for (var q = 0; q < div.length; q++) {
+            div[q].style.display = "unset";
+        }
+        
+        for (var q = 0; q < tempArr.length; q++) {
+            if(tempArr[q] == val) {
+                if (q != (parseInt(tempArr.length)-1)) {
+                    event.target.value = tempArr[q+1];
+                }
+                else {
+                    event.target.value = tempArr[0];   
+                }
+            }
+        }
+    }
 }
