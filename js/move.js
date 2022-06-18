@@ -258,8 +258,6 @@ var createMove = function() {
 					i = this.value;
 				}
 				
-				console.log(i)
-				
 				moveAside2TitleName.innerText = finaldataMove[i]["Name" + "_" + JSONPath_MoveName];
 				moveAside2TitleID.innerText = "#" + finaldataMoveID[i]["ID" + "_" + JSONPath_MoveID];
 				if(finaldataMoveID[i]["ID Type"] != undefined) {
