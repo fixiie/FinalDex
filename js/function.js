@@ -574,3 +574,46 @@ function getLocationTrainers(location) {
 	return result;
 
 }
+
+
+function getLocationItems(location) {
+
+	var arr = finaldataLocationItems;
+	var arrLength = finaldataLocationItemsLength;
+	var location;
+	var result = [];
+
+    for (var q = 0; q < arr.length; q++) {
+		if (arrLength[q] == true) {
+			if(arr[q]["Location"] == location) {
+				result.push(arr[q]);
+			}
+		}
+	}
+
+	return result;
+
+}
+
+
+function sortObjectArray(objectsArr, prop, ascending = true) {
+	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
+	if(objectsHaveProp)    {
+		let newObjectsArr = objectsArr.slice();
+		newObjectsArr.sort((a, b) => {
+			if(isNaN(Number(a[prop])))  {
+				let textA = a[prop].toUpperCase(),
+					textB = b[prop].toUpperCase();
+				if(ascending)   {
+					return textA < textB ? -1 : textA > textB ? 1 : 0;
+				} else {
+					return textB < textA ? -1 : textB > textA ? 1 : 0;
+				}
+			} else {
+				return ascending ? a[prop] - b[prop] : b[prop] - a[prop];
+			}
+		});
+		return newObjectsArr;
+	}
+	return objectsArr;
+}
