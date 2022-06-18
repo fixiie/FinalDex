@@ -74,7 +74,6 @@ var MEDIAPath_Type_Text;
 var Stats = [];
 var Natures = [];
 var JSONPath_MoveReference;
-MEDIAPath_Character_Battle = "HGSS";
 if(GameID == 1) {
 	JSONPath_PokédexEntry = "Red";
 	JSONPath_Area = "Red";
@@ -92,6 +91,7 @@ if(GameID == 3) {
 	ImageType_Type = ["Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG"];
 	JSONPath_Area = "Yellow";
+	MEDIAPath_Character_Battle = "Yellow";
 }
 if(GameID == 4) {
 	JSONPath_PokédexEntry = "Gold";
@@ -118,6 +118,7 @@ if(GameID == 6) {
 	JSONPath_LocationConnection = "Crystal";
 	JSONPath_MoveDescription = "Crystal";
 	JSONPath_MoveTutor = "Crystal";
+	MEDIAPath_Character_Battle = "Crystal";
 }
 if(GameID == 7) {
 	JSONPath_PokédexEntry = "Ruby";
@@ -148,6 +149,7 @@ if(GameID == 9) {
 	JSONPath_MoveID = "Colosseum";
 	JSONPath_MovePower = "Colosseum";
 	JSONPath_MoveReference = "Colosseum";
+	MEDIAPath_Character_Battle = "Colosseum";
 }
 if(GameID == 10) {
 	JSONPath_PokédexEntry = "FireRed";
@@ -178,6 +180,7 @@ if(GameID == 12) {
 	JSONPath_MoveTutor = "Emerald";
 	JSONPath_Path = "Emerald";
 	JSONPath_Form = "Emerald";
+	MEDIAPath_Character_Battle = "Emerald";
 }
 if(GameID == 13) {
 	JSONPath_PokédexEntry = "";
@@ -198,6 +201,7 @@ if(GameID == 13) {
 	JSONPath_MoveID = "XD";
 	JSONPath_MovePower = "XD";
 	JSONPath_MoveReference = "XD";
+	MEDIAPath_Character_Battle = "XD";
 }
 if(GameID == 14) {
 	JSONPath_PokédexEntry = "Diamond";
@@ -227,6 +231,7 @@ if(GameID == 16) {
 	JSONPath_MoveDescription = "Platinum";
 	JSONPath_MoveTutor = "Platinum";
 	JSONPath_Reference = "Platinum";
+	MEDIAPath_Character_Battle = "Platinum";
 }
 if(GameID == 17) {
 	JSONPath_PokédexEntry = "HeartGold";
@@ -331,6 +336,7 @@ if(GameID >= 1 && GameID <= 2) {
 	ImageType_Path = ["RB", "RB-Recolor", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "PNG", "PNG", "PNG"];
+	MEDIAPath_Character_Battle = "RB";
 }
 if(GameID >= 1 && GameID <= 3) {
 	Generation = 1;
@@ -353,6 +359,7 @@ if(GameID >= 4 && GameID <= 5) {
 	MEDIAPath_Encounter = "GS";
 	JSONPath_LocationConnection = "GS";
 	JSONPath_MoveDescription = "GS";
+	MEDIAPath_Character_Battle = "GS";
 }
 if(GameID >= 4 && GameID <= 6) {
 	Generation = 2;
@@ -384,6 +391,7 @@ if(GameID >= 7 && GameID <= 8) {
 	JSONPath_MoveDescription = "RS";
 	JSONPath_MoveTutor = "RS";
 	JSONPath_Reference = "RS";
+	MEDIAPath_Character_Battle = "RS";
 }
 if(GameID >= 7 && GameID <= 13) {
 	Generation = 3;
@@ -434,6 +442,7 @@ if(GameID >= 10 && GameID <= 11) {
 	JSONPath_LocationNavigation = "FRLG";
 	JSONPath_MoveDescription = "FRLG";
 	JSONPath_MoveTutor = "FRLG";
+	MEDIAPath_Character_Battle = "FRLG";
 }
 if(GameID == 9 || GameID == 13) {
 	JSONPath_Pokédex = ["Strategy Memo (Alphabetical)_ColXD", "Strategy Memo (Heaviest)_ColXD", "Strategy Memo (Lightest)_ColXD", "Strategy Memo (Tallest)_ColXD", "Strategy Memo (Shortest)_ColXD", ];
@@ -468,6 +477,7 @@ if(GameID >= 14 && GameID <= 15) {
 	JSONPath_MoveTutor = "DP";
 	JSONPath_MoveAccuracy = "DP";
 	JSONPath_Reference = "DP";
+	MEDIAPath_Character_Battle = "DP";
 }
 if(GameID == 14 || GameID == 16) {
 	JSONPath_HeldItem = "DPt";
@@ -504,6 +514,7 @@ if(GameID >= 17 && GameID <= 18) {
 	JSONPath_MoveTutor = "HGSS";
 	JSONPath_MoveMachine = "HGSS";
 	JSONPath_Reference = "HGSS";
+	MEDIAPath_Character_Battle = "HGSS";
 }
 if(GameID >= 19 && GameID <= 22) {
 	Generation = 5;
@@ -525,6 +536,7 @@ if(GameID >= 19 && GameID <= 20) {
 	JSONPath_MoveDescription = "BW";
 	JSONPath_MoveTutor = "BW";
 	JSONPath_Reference = "BW";
+	MEDIAPath_Character_Battle = "BW";
 }
 if(GameID >= 21 && GameID <= 22) {
 	JSONPath_Pokédex = ["New Unova Pokédex_B2W2"];
@@ -541,6 +553,7 @@ if(GameID >= 21 && GameID <= 22) {
 	JSONPath_MoveDescription = "B2W2";
 	JSONPath_MoveTutor = "B2W2";
 	JSONPath_Reference = "B2W2";
+	MEDIAPath_Character_Battle = "B2W2";
 }
 if(GameID >= 23 && GameID <= 26) {
 	Generation = 6;
@@ -630,6 +643,7 @@ if(GameID >= 27 && GameID <= 28) {
 	JSONPath_MoveID = "SM";
 	JSONPath_Reference = "SM";
 	JSONPath_MoveReference = "SM";
+	MEDIAPath_Character_Battle = "SM";
 }
 if(GameID >= 29 && GameID <= 30) {
 	JSONPath_Pokédex = ["Alola Pokédex_USUM", "Melemele Pokédex_USUM", "Akala Pokédex_USUM", "Ula'ula Pokédex_USUM", "Poni Pokédex_USUM", ];
@@ -649,6 +663,7 @@ if(GameID >= 29 && GameID <= 30) {
 	JSONPath_MoveID = "USUM";
 	JSONPath_Reference = "USUM";
 	JSONPath_MoveReference = "USUM";
+	MEDIAPath_Character_Battle = "USUM";
 }
 if(GameID >= 31 && GameID <= 32) {
 	JSONPath_Pokédex = ["Kanto Pokédex_LGPE"];
@@ -676,6 +691,7 @@ if(GameID >= 31 && GameID <= 32) {
 	JSONPath_MovePP = "LGPE";
 	JSONPath_MoveID = "LGPE";
 	JSONPath_MoveReference = "LGPE";
+	MEDIAPath_Character_Battle = "LGPE";
 }
 if(GameID >= 33 && GameID <= 34) {
 	Generation = 8;
