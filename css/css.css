@@ -1215,6 +1215,10 @@ input[type=radio] {
 	cursor: default;
 }
 
+#map-description-trainer-bottom li > div[name="Additional"] *:not([name="Ability"])[title] {
+	cursor: help;
+}
+
 #map-description-trainer-bottom li p[name="Ability"],
 #map-description-trainer ul li div[name="Moves"] p {
 	cursor: pointer;
