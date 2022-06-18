@@ -558,8 +558,8 @@ function getDefaultInt(i) {
 
 function getLocationTrainers(location) {
 
-	var arr = finaldataTrainerLocation;
-	var arrLength = finaldataTrainerLocationLength;
+	var arr = finaldataLocationTrainers;
+	var arrLength = finaldataLocationTrainersLength;
 	var location;
 	var result = [];
 
