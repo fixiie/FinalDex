@@ -750,10 +750,12 @@ function dataRedirect() {
 	var type = (this.getAttribute("name")).toLowerCase();
 	var x;
 	var typevariant;
-	if(this.innerHTML != undefined && this.innerHTML != "") {
-		x = (this.innerHTML).toLowerCase();
+	if(this.innerText != undefined && this.innerText != "") {
+		x = (this.innerText).toLowerCase();
 	} else if(this.getAttribute("title") != undefined) {
 		x = (this.getAttribute("title")).toLowerCase();
+	} else if(this.getAttribute("value") != undefined) {
+		x = (this.getAttribute("value")).toLowerCase();
 	}
 	if(type == "map") {
 		typevariant = type;
