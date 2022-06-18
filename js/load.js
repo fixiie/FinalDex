@@ -1,6 +1,3 @@
-var initStart = 1;
-var initLength;
-var initTimeStart;
 var finaldataPokémon = [];
 var finaldataPokémonPath = [];
 var finaldataPokémonForm = [];
@@ -35,16 +32,21 @@ var finaldataLocationConnection = [];
 var finaldataLocationDescription = [];
 var finaldataLocationSlogan = [];
 var finaldataLocationNavigation = [];
-var finaldataLocationTrainers = [];
 var finaldataLearnsetMachine = [];
 var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
+var finaldataLocationPokémonLength = [];
+var finaldataLocationItemsLength = [];
 var finaldataLocationTrainersLength = [];
 var finaldataLearnsetEvolutionLength = [];
 var finaldataLearnsetLevelLength = [];
 var finaldataLearnsetMachineLength = [];
 var finaldataLearnsetBreedLength = [];
+var finaldataItems = [];
+var finaldataLocationPokémon = [];
+var finaldataLocationItems = [];
+var finaldataLocationTrainers = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
 var finaldataMove = [];
@@ -60,198 +62,190 @@ var finaldataMovePP = [];
 var finaldataMoveCategory = [];
 var finaldataMoveID = [];
 var finaldataMoveType = [];
-let PokémonMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Pok%C3%A9mon%20Metadata.json';
-let PokémonMetadataRequest = new XMLHttpRequest();
-PokémonMetadataRequest.open('GET', PokémonMetadataRequestURL);
-PokémonMetadataRequest.responseType = 'json';
-PokémonMetadataRequest.send();
-let LocationTrainersMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Location%20Trainers%20Metadata.json';
-let LocationTrainersMetadataRequest = new XMLHttpRequest();
-LocationTrainersMetadataRequest.open('GET', LocationTrainersMetadataRequestURL);
-LocationTrainersMetadataRequest.responseType = 'json';
-LocationTrainersMetadataRequest.send();
-let LearnsetMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Learnset%20Metadata.json';
-let LearnsetMetadataRequest = new XMLHttpRequest();
-LearnsetMetadataRequest.open('GET', LearnsetMetadataRequestURL);
-LearnsetMetadataRequest.responseType = 'json';
-LearnsetMetadataRequest.send();
-let GameMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Game%20Metadata.json';
-let GameMetadataRequest = new XMLHttpRequest();
-GameMetadataRequest.open('GET', GameMetadataRequestURL);
-GameMetadataRequest.responseType = 'json';
-GameMetadataRequest.send();
-let LocationMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Location%20Metadata.json';
-let LocationMetadataRequest = new XMLHttpRequest();
-LocationMetadataRequest.open('GET', LocationMetadataRequestURL);
-LocationMetadataRequest.responseType = 'json';
-LocationMetadataRequest.send();
-let MoveMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Move%20Metadata.json';
-let MoveMetadataRequest = new XMLHttpRequest();
-MoveMetadataRequest.open('GET', MoveMetadataRequestURL);
-MoveMetadataRequest.responseType = 'json';
-MoveMetadataRequest.send();
-if(Ability.length >= 1) {
-	initLength = 7;
-} else {
-	initLength = 6;
-}
-LocationMetadataRequest.onload = function() {
-	var LocationMetadata = LocationMetadataRequest.response;
-	for(var i = 0; i < LocationMetadata["Reference"].length; i++) {
-		if(Object.keys(LocationMetadata["Reference"][i]).includes(JSONPath_Location + "_" + "Name")) {
-			finaldataLocation.push(LocationMetadata["Reference"][i]);
-		}
-	}
-	for(var i = 0; i < LocationMetadata["Connecting"].length; i++) {
-		finaldataLocationConnection.push(LocationMetadata["Connecting"][i]);
-	}
-	for(var i = 0; i < LocationMetadata["Description"].length; i++) {
-		finaldataLocationDescription.push(LocationMetadata["Description"][i]);
-	}
-	for(var i = 0; i < LocationMetadata["Slogan"].length; i++) {
-		finaldataLocationSlogan.push(LocationMetadata["Slogan"][i]);
-	}
-	for(var i = 0; i < LocationMetadata["Navigation"].length; i++) {
-		finaldataLocationNavigation.push(LocationMetadata["Navigation"][i]);
-	}
-	initialize();
-}
-LocationTrainersMetadataRequest.onload = function() {
-	var LocationTrainersMetadata = LocationTrainersMetadataRequest.response;
-	for(var i = 0; i < LocationTrainersMetadata["Trainers"].length; i++) {
-		finaldataLocationTrainers.push(LocationTrainersMetadata["Trainers"][i]);
-	}
-	initialize();
-}
-LearnsetMetadataRequest.onload = function() {
-	var LearnsetMetadata = LearnsetMetadataRequest.response;
-	for(var i = 0; i < LearnsetMetadata["Evolution"].length; i++) {
-		finaldataLearnsetEvolution.push(LearnsetMetadata["Evolution"][i]);
-	}
-	for(var i = 0; i < LearnsetMetadata["Level Up"].length; i++) {
-		finaldataLearnsetLevel.push(LearnsetMetadata["Level Up"][i]);
-	}
-	for(var i = 0; i < LearnsetMetadata["Machine"].length; i++) {
-		finaldataLearnsetMachine.push(LearnsetMetadata["Machine"][i]);
-	}
-	for(var i = 0; i < LearnsetMetadata["Breeding"].length; i++) {
-		finaldataLearnsetBreed.push(LearnsetMetadata["Breeding"][i]);
-	}
-
-	initialize();
-}
-if(Ability.length >= 1) {
-	let AbilityMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Ability%20Metadata.json';
-	let AbilityMetadataRequest = new XMLHttpRequest();
-	AbilityMetadataRequest.open('GET', AbilityMetadataRequestURL);
-	AbilityMetadataRequest.responseType = 'json';
-	AbilityMetadataRequest.send();
-	AbilityMetadataRequest.onload = function() {
-		var AbilityMetadata = AbilityMetadataRequest.response;
-		for(var i = 0; i < AbilityMetadata["Reference"].length; i++) {
-			if(Object.keys(AbilityMetadata["Reference"][i]).includes(JSONPath_AbilityReference + "_" + "Name")) {
-				finaldataAbility.push(AbilityMetadata["Reference"][i]);
-			}
-		}
-		for(var i = 0; i < AbilityMetadata["Flavor"].length; i++) {
-			finaldataAbilityFlavor.push(AbilityMetadata["Flavor"][i]);
-		}
-		initialize();
-	}
-}
-MoveMetadataRequest.onload = function() {
-	var MoveMetadata = MoveMetadataRequest.response;
-	for(var i = 0; i < MoveMetadata["Description"].length; i++) {
-		finaldataMoveDescription.push(MoveMetadata["Description"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Reference"].length; i++) {
-		finaldataMove.push(MoveMetadata["Reference"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Tutor"].length; i++) {
-		finaldataMoveTutor.push(MoveMetadata["Tutor"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Machine"].length; i++) {
-		finaldataMoveMachine.push(MoveMetadata["Machine"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Range"].length; i++) {
-		finaldataMoveRange.push(MoveMetadata["Range"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Other Moves"].length; i++) {
-		finaldataMoveOtherMoves.push(MoveMetadata["Other Moves"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Accuracy"].length; i++) {
-		finaldataMoveAccuracy.push(MoveMetadata["Accuracy"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Power"].length; i++) {
-		finaldataMovePower.push(MoveMetadata["Power"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["PP"].length; i++) {
-		finaldataMovePP.push(MoveMetadata["PP"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Category"].length; i++) {
-		finaldataMoveCategory.push(MoveMetadata["Category"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["ID"].length; i++) {
-		finaldataMoveID.push(MoveMetadata["ID"][i]);
-	}
-	for(var i = 0; i < MoveMetadata["Type"].length; i++) {
-		finaldataMoveType.push(MoveMetadata["Type"][i]);
-	}
-	initialize();
-}
-GameMetadataRequest.onload = function() {
-	var GameMetadata = GameMetadataRequest.response;
-	for(var i = 0; i < GameMetadata["Reference"].length; i++) {
-		finaldataGame.push(GameMetadata["Reference"][i]);
-	}
-	for(var i = 0; i < GameMetadata["Type Chart_" + JSONPath_Typechart].length; i++) {
-		finaldataTypeChart.push(GameMetadata["Type Chart_" + JSONPath_Typechart][i]);
-	}
-	for(var i = 0; i < GameMetadata["Exclusive Pokémon"].length; i++) {
-		finaldataExclusivePokémon.push(GameMetadata["Exclusive Pokémon"][i]);
-	}
-	for(var i = 0; i < GameMetadata["Exclusive Item"].length; i++) {
-		finaldataExclusiveItem.push(GameMetadata["Exclusive Item"][i]);
-	}
-	for(var i = 0; i < GameMetadata["Exclusive Feature"].length; i++) {
-		finaldataExclusiveFeature.push(GameMetadata["Exclusive Feature"][i]);
-	}
-	initialize();
-}
-PokémonMetadataRequest.onload = function() {
-	var PokémonMetadata = PokémonMetadataRequest.response;
-	const finaldataRef = PokémonMetadata["Reference"];
-	for(var i = 0; i < finaldataRef.length; i++) {
-		finaldataPokémon.push(PokémonMetadata["Reference"][i]);
-		finaldataPokémonPath.push(PokémonMetadata["Path"][i]);
-		finaldataPokémonForm.push(PokémonMetadata["Form"][i]);
-    	finaldataPokémonFormItem.push(PokémonMetadata["Form Item"][i]);
-		finaldataPokémonAbility.push(PokémonMetadata["Ability"][i]);
-    	finaldataPokémonFriendship.push(PokémonMetadata["Base Friendship"][i]);
-		finaldataPokémonArea.push(PokémonMetadata["Area"][i]);
-		finaldataPokémonBaseStats.push(PokémonMetadata["Base Stats"][i]);
-		finaldataPokémonCatchRate.push(PokémonMetadata["Catch Rate"][i]);
-		finaldataPokémonCategory.push(PokémonMetadata["Category"][i]);
-		finaldataPokémonEggGroup.push(PokémonMetadata["Egg Group"][i]);
-		finaldataPokémonEvolutionMethod.push(PokémonMetadata["Evolution Method"][i]);
-		finaldataPokémonEvolutionSpecie.push(PokémonMetadata["Evolution Specie"][i]);
-		finaldataPokémonEvolutionStage.push(PokémonMetadata["Evolution Stage"][i]);
-		finaldataPokémonEVYield.push(PokémonMetadata["Effort Value Yield"][i]);
-		finaldataPokémonExperienceYield.push(PokémonMetadata["Experience Yield"][i]);
-		finaldataPokémonGenderRatio.push(PokémonMetadata["Gender Ratio"][i]);
-		finaldataPokémonHatchRate.push(PokémonMetadata["Hatch Rate"][i]);
-		finaldataPokémonHeldItem.push(PokémonMetadata["Held Item"][i]);
-		finaldataPokémonLevelingRate.push(PokémonMetadata["Leveling Rate"][i]);
-		finaldataPokémonPokédexEntry.push(PokémonMetadata["Pokédex Entry"][i]);
-		finaldataPokémonPokédexID.push(PokémonMetadata["Pokédex ID"][i]);
-		finaldataPokémonType.push(PokémonMetadata["Type"][i]);
-	}
-	initialize();
-}
 var drag;
 var savedtar;
 var saveddrag;
 var boxDrag;
+var loads = ["Pokémon","Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics","Game"];
+var baseurl = "https://raw.githubusercontent.com/fixiie/FinalDex/main/data/";
+var baseextension = ".json";
+var baseextra = " Metadata"
+
+if (!Ability.length > 0) {
+	loads = loads.filter((v) => v != "Abilities");
+}
+
+var initStart = 1;
+var initLength = loads.length;
+var initTimeStart;
+
+for(var i = 0; i < loads.length; i++) {
+	var url = baseurl+loads[i]+baseextra+baseextension;
+	requestLoad(i,url);
+}
+
+function requestLoad(i,url) {
+	var i;
+	var url;
+	var request = new XMLHttpRequest();
+	request.open('GET', url);
+	request.responseType = 'json';
+	request.send();
+	request.onload = function() {
+		var Metadata = request.response;
+
+		if(loads[i] == "Locations") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_Location + "_" + "Name")) {
+					finaldataLocation.push(Metadata["Reference"][q]);
+				}
+			}
+			for(var q = 0; q < Metadata["Connecting"].length; q++) {
+				finaldataLocationConnection.push(Metadata["Connecting"][q]);
+			}
+			for(var q = 0; q < Metadata["Description"].length; q++) {
+				finaldataLocationDescription.push(Metadata["Description"][q]);
+			}
+			for(var q = 0; q < Metadata["Slogan"].length; q++) {
+				finaldataLocationSlogan.push(Metadata["Slogan"][q]);
+			}
+			for(var q = 0; q < Metadata["Navigation"].length; q++) {
+				finaldataLocationNavigation.push(Metadata["Navigation"][q]);
+			}
+		}
+		if (loads[i] == "Location Trainers") {
+			for(var q = 0; q < Metadata["Trainers"].length; q++) {
+				finaldataLocationTrainers.push(Metadata["Trainers"][q]);
+			}
+		}
+		if (loads[i] == "Location Pokémon") {
+			for(var q = 0; q < Metadata["Pokémon"].length; q++) {
+				finaldataLocationPokémon.push(Metadata["Pokémon"][q]);
+			}
+		}
+		if (loads[i] == "Location Items") {
+			for(var q = 0; q < Metadata["Items"].length; q++) {
+				finaldataLocationItems.push(Metadata["Items"][q]);
+			}
+		}
+		if (loads[i] == "Learnset") {
+			for(var q = 0; q < Metadata["Evolution"].length; q++) {
+				finaldataLearnsetEvolution.push(Metadata["Evolution"][q]);
+			}
+			for(var q = 0; q < Metadata["Level Up"].length; q++) {
+				finaldataLearnsetLevel.push(Metadata["Level Up"][q]);
+			}
+			for(var q = 0; q < Metadata["Machine"].length; q++) {
+				finaldataLearnsetMachine.push(Metadata["Machine"][q]);
+			}
+			for(var q = 0; q < Metadata["Breeding"].length; q++) {
+				finaldataLearnsetBreed.push(Metadata["Breeding"][q]);
+			}	
+		}
+		if (loads[i] == "Items") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				finaldataItems.push(Metadata["Reference"][q]);
+			}
+		}
+		if (loads[i] == "Abilities") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
+					finaldataAbility.push(Metadata["Reference"][q]);
+				}
+			}
+			for(var q = 0; q < Metadata["Flavor"].length; q++) {
+				finaldataAbilityFlavor.push(Metadata["Flavor"][q]);
+			}
+		}
+		if (loads[i] == "Moves") {
+			for(var q = 0; q < Metadata["Description"].length; q++) {
+				finaldataMoveDescription.push(Metadata["Description"][q]);
+			}
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				finaldataMove.push(Metadata["Reference"][q]);
+			}
+			for(var q = 0; q < Metadata["Tutor"].length; q++) {
+				finaldataMoveTutor.push(Metadata["Tutor"][q]);
+			}
+			for(var q = 0; q < Metadata["Machine"].length; q++) {
+				finaldataMoveMachine.push(Metadata["Machine"][q]);
+			}
+			for(var q = 0; q < Metadata["Range"].length; q++) {
+				finaldataMoveRange.push(Metadata["Range"][q]);
+			}
+			for(var q = 0; q < Metadata["Other Moves"].length; q++) {
+				finaldataMoveOtherMoves.push(Metadata["Other Moves"][q]);
+			}
+			for(var q = 0; q < Metadata["Accuracy"].length; q++) {
+				finaldataMoveAccuracy.push(Metadata["Accuracy"][q]);
+			}
+			for(var q = 0; q < Metadata["Power"].length; q++) {
+				finaldataMovePower.push(Metadata["Power"][q]);
+			}
+			for(var q = 0; q < Metadata["PP"].length; q++) {
+				finaldataMovePP.push(Metadata["PP"][q]);
+			}
+			for(var q = 0; q < Metadata["Category"].length; q++) {
+				finaldataMoveCategory.push(Metadata["Category"][q]);
+			}
+			for(var q = 0; q < Metadata["ID"].length; q++) {
+				finaldataMoveID.push(Metadata["ID"][q]);
+			}
+			for(var q = 0; q < Metadata["Type"].length; q++) {
+				finaldataMoveType.push(Metadata["Type"][q]);
+			}
+		}
+		if (loads[i] == "Game") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				finaldataGame.push(Metadata["Reference"][q]);
+			}
+			for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
+				finaldataTypeChart.push(Metadata["Type Chart_" + JSONPath_Typechart][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Pokémon"].length; q++) {
+				finaldataExclusivePokémon.push(Metadata["Exclusive Pokémon"][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Item"].length; q++) {
+				finaldataExclusiveItem.push(Metadata["Exclusive Item"][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Feature"].length; q++) {
+				finaldataExclusiveFeature.push(Metadata["Exclusive Feature"][q]);
+			}
+		}
+		if (loads[i] == "Pokémon") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				finaldataPokémon.push(Metadata["Reference"][q]);
+				finaldataPokémonPath.push(Metadata["Path"][q]);
+				finaldataPokémonForm.push(Metadata["Form"][q]);
+				finaldataPokémonFormItem.push(Metadata["Form Item"][q]);
+				finaldataPokémonAbility.push(Metadata["Ability"][q]);
+				finaldataPokémonFriendship.push(Metadata["Base Friendship"][q]);
+				finaldataPokémonArea.push(Metadata["Area"][q]);
+				finaldataPokémonBaseStats.push(Metadata["Base Stats"][q]);
+				finaldataPokémonCatchRate.push(Metadata["Catch Rate"][q]);
+				finaldataPokémonCategory.push(Metadata["Category"][q]);
+				finaldataPokémonEggGroup.push(Metadata["Egg Group"][q]);
+				finaldataPokémonEvolutionMethod.push(Metadata["Evolution Method"][q]);
+				finaldataPokémonEvolutionSpecie.push(Metadata["Evolution Specie"][q]);
+				finaldataPokémonEvolutionStage.push(Metadata["Evolution Stage"][q]);
+				finaldataPokémonEVYield.push(Metadata["Effort Value Yield"][q]);
+				finaldataPokémonExperienceYield.push(Metadata["Experience Yield"][q]);
+				finaldataPokémonGenderRatio.push(Metadata["Gender Ratio"][q]);
+				finaldataPokémonHatchRate.push(Metadata["Hatch Rate"][q]);
+				finaldataPokémonHeldItem.push(Metadata["Held Item"][q]);
+				finaldataPokémonLevelingRate.push(Metadata["Leveling Rate"][q]);
+				finaldataPokémonPokédexEntry.push(Metadata["Pokédex Entry"][q]);
+				finaldataPokémonPokédexID.push(Metadata["Pokédex ID"][q]);
+				finaldataPokémonType.push(Metadata["Type"][q]);
+			}
+		}
+
+
+		initialize();
+	}
+
+}
+
 function initialize() {
 
 	var initEnd = initStart++;
@@ -272,8 +266,11 @@ function initialize() {
 		finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel, "Game", "Single");
 		finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
 		finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
-		finaldataLocationTrainersLength = Continuation(finaldataLocationTrainers, "Game", "Single");
 
+		finaldataLocationPokémonLength = Continuation(finaldataLocationPokémon, "Game", "Single");
+		finaldataLocationItemsLength = Continuation(finaldataLocationItems, "Game", "Single");
+		finaldataLocationTrainersLength = Continuation(finaldataLocationTrainers, "Game", "Single");
+		
 		createNav();
 		createPokémon();
 		createMechanic();
@@ -304,6 +301,12 @@ function initialize() {
 	}
 }
 
+function load() {
+	const load = document.querySelector("#load");
+	document.body.style.overflowY = "unset";
+	document.documentElement.scrollTop = 0;
+	load.className += "hidden";
+}
 
 
 
@@ -336,9 +339,3 @@ var locationItemList = ["Aguav Berry", "Super Rod", "Never-Melt Ice"];
 var locationItemListLocation = ["From Santos near the Pokémon Center.", "Fishing man standing next to the Green House.", "After beating Xandyn in four consecutive battles."];
 
 
-function load() {
-	const load = document.querySelector("#load");
-	document.body.style.overflowY = "unset";
-  document.documentElement.scrollTop = 0;
-  load.className += "hidden";
-}
