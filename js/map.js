@@ -205,29 +205,8 @@ var createMap = function() {
 	mapAside4DescriptionItem.setAttribute("id", "map-description-item");
 	mapAside4DescriptionItem.setAttribute("name", "2");
 	mapAside4Description.appendChild(mapAside4DescriptionItem);
-	for(var q = 0; q < 4; q++) {
-		var mapAside4DescriptionItemUl = document.createElement("ul");
-		var mapAside4DescriptionItemUlTitle = document.createElement("h4");
-		mapAside4DescriptionItemUlTitle.innerText = "B1F";
-		mapAside4DescriptionItem.appendChild(mapAside4DescriptionItemUl);
-		mapAside4DescriptionItemUl.appendChild(mapAside4DescriptionItemUlTitle);
-		for(var u = 0; u < locationItemList.length; u++) {
-			var mapAside4DescriptionItemLi = document.createElement("li");
-			var mapAside4DescriptionItemIconOuter = document.createElement("div");
-			var mapAside4DescriptionItemIcon = document.createElement("img");
-			var mapAside4DescriptionItemLocationOuter = document.createElement("span");
-			var mapAside4DescriptionItemLocation = document.createElement("p");
-			mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+locationItemList[u]+".png";
-			mapAside4DescriptionItemIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			mapAside4DescriptionItemIcon.setAttribute("title", locationItemList[u]);
-			mapAside4DescriptionItemLocation.innerText = locationItemListLocation[u];
-			mapAside4DescriptionItemUl.appendChild(mapAside4DescriptionItemLi);
-			mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemIconOuter);
-			mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIcon);
-			mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemLocationOuter);
-			mapAside4DescriptionItemLocationOuter.appendChild(mapAside4DescriptionItemLocation);
-		}
-	}
+
+
 	var mapAside4DescriptionTrainer = document.createElement("base");
 	mapAside4DescriptionTrainer.setAttribute("id", "map-description-trainer");
 	mapAside4DescriptionTrainer.setAttribute("name", "3");
@@ -265,13 +244,37 @@ var createMap = function() {
 		var i = this.value;
 		var location = finaldataLocation[i][JSONPath_Location+"_"+"Name"];
 		var trainers = getLocationTrainers(location);
-
+		var items = [];
+		items = getLocationItems(location);
 
 		var mapDescriptionTitles = ["Overview", "Pokémon", "Items", "Trainers", "Move Tutor"];
 
 		if (trainers.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Trainers"));
 		}
+		if (items.length == 0) {
+			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Items"));
+		}
+
+		for(var q = 0; q < items.length; q++) {
+			if (items[q]["Area"] == undefined) {
+				items[q]["Area"] = "a";
+			}
+		}
+
+		items = sortObjectArray(items, "Area");
+
+		for(var q = 0; q < items.length; q++) {
+			if (items[q]["Area"] == "a") {
+				items[q]["Area"] = location;
+			}
+		}
+
+		var itemArea = [];
+		for(var q = 0; q < items.length; q++) {
+			itemArea.push(items[q]["Area"]);
+		}
+		itemArea = [...new Set(itemArea)];
 
 		var titles = DescriptionSelectorOuter.querySelectorAll(":scope > div");
 		for(var q = 0; q < titles.length; q++) {
@@ -297,6 +300,58 @@ var createMap = function() {
 				DescriptionSelectorLabel.click();
 			}
 		}
+
+		var uls = mapAside4DescriptionItem.querySelectorAll(":scope > ul");
+		for(var q = 0; q < uls.length; q++) {
+			uls[q].remove();
+		}
+
+		console.log(items)
+
+		for(var q = 0; q < itemArea.length; q++) {
+			var ul;
+			ul = mapAside4DescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
+
+			if (ul == null) {
+				var mapAside4DescriptionItemUl = document.createElement("ul");
+				mapAside4DescriptionItem.appendChild(mapAside4DescriptionItemUl);
+				var mapAside4DescriptionItemUlTitle = document.createElement("h4");
+				mapAside4DescriptionItemUl.appendChild(mapAside4DescriptionItemUlTitle);
+				mapAside4DescriptionItemUl.setAttribute("name",itemArea[q])
+				mapAside4DescriptionItemUlTitle.innerText = itemArea[q];
+			}
+			ul = mapAside4DescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
+
+			for(var u = 0; u < items.length; u++) {
+				if (items[u]["Area"] == itemArea[q]) {
+					var mapAside4DescriptionItemLi = document.createElement("li");
+					var mapAside4DescriptionItemIconOuter = document.createElement("div");
+					mapAside4DescriptionItemIconOuter.setAttribute("name","Item");
+					mapAside4DescriptionItemIconOuter.setAttribute("value",items[u]["Item"])
+					ul.appendChild(mapAside4DescriptionItemLi);
+					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemIconOuter);
+					mapAside4DescriptionItemIconOuter.addEventListener("click",dataRedirect)
+
+					for(var y = 0; y < items[u]["Quantity"]; y++) {
+						var mapAside4DescriptionItemIcon = document.createElement("img");
+						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+items[u]["Icon"]+".png";
+						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+						mapAside4DescriptionItemIcon.setAttribute("title",items[u]["Quantity"]+"x "+items[u]["Item"]);
+						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIcon);
+					}
+
+					if (items[u]["Location Description"] != undefined) {
+						var mapAside4DescriptionItemLocationOuter = document.createElement("span");
+						var mapAside4DescriptionItemLocation = document.createElement("p");
+						mapAside4DescriptionItemLocation.innerText = items[u]["Location Description"];
+						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemLocationOuter);
+						mapAside4DescriptionItemLocationOuter.appendChild(mapAside4DescriptionItemLocation);
+					}
+				}
+			}
+		}
+
+
 
 
 
