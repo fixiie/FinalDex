@@ -49,7 +49,7 @@ var createMap = function() {
 	mapAside1OptionsSearchExit.setAttribute("id", "map-search-exit");
 	mapAside2.setAttribute("id", "map-aside2");
 	mapAside2Title.setAttribute("id", "map-title");
-	mapAside2TitleText.innerText = "Map of " + Region;
+	mapAside2TitleText.innerText = "Map of "+Region;
 	mapAside2Flavor.setAttribute("id", "map-flavor");
 	mapAside2Flavor.setAttribute("title", "Slogan")
 	mapAside3.setAttribute("id", "map-aside3");
@@ -78,17 +78,17 @@ var createMap = function() {
 	mapAside3MapRightMain
 	mapAside3Map.setAttribute("id", "map");
 	mapAside3MapPanzoom.setAttribute("id", "map-panzoom");
-	mapAside3MapPanzoom.setAttribute("name", Region + "-" + MEDIAPath_Map);
+	mapAside3MapPanzoom.setAttribute("name", Region+"-"+MEDIAPath_Map);
 	mapAside3MapMark.classList.add("map-img-mark-outer");
-	mapAside3MapImage.src = "./media/Images/Misc/Map/" + MEDIAPath_Map + "/Map.png";
+	mapAside3MapImage.src = "./media/Images/Misc/Map/"+MEDIAPath_Map+"/Map.png";
 	mapAside3MapImage.onload = function() {
-		mapAside3MapImage.setAttribute("width", mapAside3MapImage.width + "px");
-		mapAside3MapImage.setAttribute("height", mapAside3MapImage.height + "px");
+		mapAside3MapImage.setAttribute("width", mapAside3MapImage.width+"px");
+		mapAside3MapImage.setAttribute("height", mapAside3MapImage.height+"px");
 	}
 	mapAside3MapImage.classList.add("map-img-main");
-	mapAside3MapImage.setAttribute("usemap", "#" + Region + "-" + MEDIAPath_Map + "-map");
-	mapAside3MapCordinateOuter.setAttribute("id", Region + "-" + MEDIAPath_Map + "-map");
-	mapAside3MapCordinateOuter.setAttribute("name", Region + "-" + MEDIAPath_Map + "-map");
+	mapAside3MapImage.setAttribute("usemap", "#"+Region+"-"+MEDIAPath_Map+"-map");
+	mapAside3MapCordinateOuter.setAttribute("id", Region+"-"+MEDIAPath_Map+"-map");
+	mapAside3MapCordinateOuter.setAttribute("name", Region+"-"+MEDIAPath_Map+"-map");
 	mapAside4.setAttribute("id", "map-aside4");
 	document.querySelector("#contain").appendChild(mapOuter);
 	mapOuter.appendChild(mapAside1);
@@ -129,7 +129,7 @@ var createMap = function() {
 
     var mapAside2Game = document.createElement("span");
     var mapAside2GameImage = document.createElement("img");
-    mapAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    mapAside2GameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
     mapAside2GameImage.setAttribute("onerror","this.display='none'");
     mapAside2.appendChild(mapAside2Game);
     mapAside2Game.appendChild(mapAside2GameImage);
@@ -162,26 +162,6 @@ var createMap = function() {
 	var DescriptionSelectorOuter = document.createElement("div");
 	DescriptionSelectorOuter.classList.add("map-description-selector-outer")
 	mapAside4Description.appendChild(DescriptionSelectorOuter);
-	var mapDescriptionTitles = ["Overview", "Pokémon", "Items", "Trainers", "Move Tutor"];
-	for(var q = 0; q < mapDescriptionTitles.length; q++) {
-		var DescriptionSelector = document.createElement("div");
-		var DescriptionSelectorInput = document.createElement("input");
-		var DescriptionSelectorLabel = document.createElement("label");
-		DescriptionSelectorInput.setAttribute("type", "radio");
-		DescriptionSelectorInput.setAttribute("name", "map-description-selector");
-		DescriptionSelectorInput.setAttribute("id", "map-description-selector-" + q);
-		DescriptionSelectorInput.setAttribute("autocomplete", "off");
-		DescriptionSelectorInput.setAttribute("value", q);
-		DescriptionSelectorLabel.setAttribute("for", "map-description-selector-" + q);
-		DescriptionSelectorLabel.innerText = mapDescriptionTitles[q];
-		DescriptionSelectorOuter.appendChild(DescriptionSelector);
-		DescriptionSelector.appendChild(DescriptionSelectorInput);
-		DescriptionSelector.appendChild(DescriptionSelectorLabel);
-		DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
-		if(q == 0) {
-			DescriptionSelectorLabel.click();
-		}
-	}
 	var mapAside4DescriptionPok = document.createElement("base");
 	mapAside4DescriptionPok.setAttribute("id", "map-description-pok");
 	mapAside4DescriptionPok.setAttribute("name", "1");
@@ -202,12 +182,12 @@ var createMap = function() {
 			var mapAside4DescriptionPokRate = document.createElement("p");
 			var mapAside4DescriptionPokTypeOuter = document.createElement("div");
 			var mapAside4DescriptionPokType = document.createElement("img");
-			mapAside4DescriptionPokIcon.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + locationPokList[u] + ".png";
+			mapAside4DescriptionPokIcon.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+locationPokList[u]+".png";
 			mapAside4DescriptionPokIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			mapAside4DescriptionPokIcon.setAttribute("title", getPokémonName(locationPokList[u]));
 			mapAside4DescriptionPokLv.innerText = locationPokListLv[u];
 			mapAside4DescriptionPokRate.innerText = locationPokListRate[u];
-			mapAside4DescriptionPokType.src = "./media/Images/Misc/Encounter/" + MEDIAPath_Encounter + "/" + locationPokListType[u] + ".png";
+			mapAside4DescriptionPokType.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+locationPokListType[u]+".png";
 			mapAside4DescriptionPokType.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			mapAside4DescriptionPokType.setAttribute("title", locationPokListType[u]);
 			mapAside4DescriptionPokUl.appendChild(mapAside4DescriptionPokLi);
@@ -237,7 +217,7 @@ var createMap = function() {
 			var mapAside4DescriptionItemIcon = document.createElement("img");
 			var mapAside4DescriptionItemLocationOuter = document.createElement("span");
 			var mapAside4DescriptionItemLocation = document.createElement("p");
-			mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + locationItemList[u] + ".png";
+			mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+locationItemList[u]+".png";
 			mapAside4DescriptionItemIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			mapAside4DescriptionItemIcon.setAttribute("title", locationItemList[u]);
 			mapAside4DescriptionItemLocation.innerText = locationItemListLocation[u];
@@ -252,128 +232,7 @@ var createMap = function() {
 	mapAside4DescriptionTrainer.setAttribute("id", "map-description-trainer");
 	mapAside4DescriptionTrainer.setAttribute("name", "3");
 	mapAside4Description.appendChild(mapAside4DescriptionTrainer);
-	for(var q = 0; q < locationTrainerPok.length; q++) {
-		var x = q + 1;
-		var mapAside4DescriptionTrainerUl = document.createElement("ul");
-		var mapAside4DescriptionTrainerUlTop = document.createElement("div");
-		var mapAside4DescriptionTrainerUlTopCountOuter = document.createElement("div");
-		var mapAside4DescriptionTrainerUlTopCount = document.createElement("h5");
-		var mapAside4DescriptionTrainerUlTopImgOuter = document.createElement("div");
-		var mapAside4DescriptionTrainerUlTopImgPrevious = document.createElement("img");
-		var mapAside4DescriptionTrainerUlTopImg = document.createElement("img");
-		var mapAside4DescriptionTrainerUlTopImgNext = document.createElement("img");
-		var mapAside4DescriptionTrainerUlTopTitle = document.createElement("div");
-		var mapAside4DescriptionTrainerUlTopTitleCount = document.createElement("span");
-		var mapAside4DescriptionTrainerUlTopTitleCountImg = document.createElement("img");
-		var mapAside4DescriptionTrainerUlTopTitleName = document.createElement("h3");
-		var mapAside4DescriptionTrainerUlTopTitleValue = document.createElement("h4");
-		var mapAside4DescriptionTrainerUlContent = document.createElement("div");
-		mapAside4DescriptionTrainerUl.setAttribute("name", q);
-		mapAside4DescriptionTrainerUlTop.setAttribute("id", "map-description-trainer-top");
-		mapAside4DescriptionTrainerUlTopCountOuter.setAttribute("id", "map-description-trainer-top-count");
-		mapAside4DescriptionTrainerUlTopImgOuter.setAttribute("id", "map-description-trainer-top-img");
-		mapAside4DescriptionTrainerUlTopImgPrevious.src = "./media/Images/Character/Battle/PNG/Front/" + MEDIAPath_Character_Battle + "/" + locationTrainerClass[q - 1] + ".png";
-		mapAside4DescriptionTrainerUlTopImgPrevious.setAttribute("name", parseInt(q) - 1);
-		mapAside4DescriptionTrainerUlTopImg.src = "./media/Images/Character/Battle/PNG/Front/" + MEDIAPath_Character_Battle + "/" + locationTrainerClass[q] + ".png";
-		mapAside4DescriptionTrainerUlTopImg.setAttribute("name", parseInt(q));
-		mapAside4DescriptionTrainerUlTopImgNext.src = "./media/Images/Character/Battle/PNG/Front/" + MEDIAPath_Character_Battle + "/" + locationTrainerClass[q + 1] + ".png";
-		mapAside4DescriptionTrainerUlTopImgNext.setAttribute("name", parseInt(q) + 1);
-		if(locationTrainerClass[q - 1] == undefined) {
-			mapAside4DescriptionTrainerUlTopImgPrevious.style.visibility = "hidden";
-			mapAside4DescriptionTrainerUlTopImgPrevious.style.pointerEvents = "none";
-		}
-		if(locationTrainerClass[q] == undefined) {
-			mapAside4DescriptionTrainerUlTopImg.style.visibility = "hidden";
-			mapAside4DescriptionTrainerUlTopImg.style.pointerEvents = "none";
-		}
-		if(locationTrainerClass[q + 1] == undefined) {
-			mapAside4DescriptionTrainerUlTopImgNext.style.visibility = "hidden";
-			mapAside4DescriptionTrainerUlTopImgNext.style.pointerEvents = "none";
-		}
-		mapAside4DescriptionTrainerUlTopImgPrevious.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-		mapAside4DescriptionTrainerUlTopImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-		mapAside4DescriptionTrainerUlTopImgNext.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-		mapAside4DescriptionTrainerUlTopTitle.setAttribute("id", "map-description-trainer-top-title");
-		mapAside4DescriptionTrainerUlTopTitleName.innerText = locationTrainerList[q];
-		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" />' + locationTrainerValue[q];
-		mapAside4DescriptionTrainerUlContent.setAttribute("id", "map-description-trainer-bottom");
-		mapAside4DescriptionTrainer.appendChild(mapAside4DescriptionTrainerUl);
-		mapAside4DescriptionTrainerUl.appendChild(mapAside4DescriptionTrainerUlTop);
-		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopCountOuter);
-		mapAside4DescriptionTrainerUlTopCountOuter.appendChild(mapAside4DescriptionTrainerUlTopCount);
-		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopImgOuter);
-		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImgPrevious);
-		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImg);
-		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImgNext);
-		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopTitle);
-		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleCount);
-		mapAside4DescriptionTrainerUlTopTitleCount.appendChild(mapAside4DescriptionTrainerUlTopTitleCountImg);
-		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleName);
-		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleValue);
-		mapAside4DescriptionTrainerUl.appendChild(mapAside4DescriptionTrainerUlContent);
-		mapAside4DescriptionTrainerUlTopImgPrevious.addEventListener("click", mapDescriptionTrainerSelector);
-		mapAside4DescriptionTrainerUlTopImg.addEventListener("click", mapDescriptionTrainerSelector);
-		mapAside4DescriptionTrainerUlTopImgNext.addEventListener("click", mapDescriptionTrainerSelector);
 
-		function mapDescriptionTrainerSelector() {
-			var mapDescriptionTrainers = document.querySelectorAll('#map-description-trainer ul[name]');
-			var mapDescriptionTrainer = document.querySelectorAll('#map-description-trainer ul[name="' + this.name + '"]');
-			for(var y = 0; y < mapDescriptionTrainers.length; y++) {
-				mapDescriptionTrainers[y].style.display = "none";
-			}
-			for(var y = 0; y < mapDescriptionTrainer.length; y++) {
-				mapDescriptionTrainer[y].style.display = "unset";
-			}
-		}
-		for(var u = 0; u < locationTrainerPok[q].length; u++) {
-			var z = u + 1;
-			var mapAside4DescriptionTrainerLi = document.createElement("li");
-			var mapAside4DescriptionTrainerIconOuter = document.createElement("div");
-			var mapAside4DescriptionTrainerIcon = document.createElement("img");
-			var mapAside4DescriptionTrainerLvGender = document.createElement("div");
-			var mapAside4DescriptionTrainerLv = document.createElement("h4");
-			var mapAside4DescriptionTrainerGender = document.createElement("span");
-			var mapAside4DescriptionTrainerHeldItem = document.createElement("img");
-			var mapAside4DescriptionTrainerMoveOuter = document.createElement("span");
-			mapAside4DescriptionTrainerUlTopCount.innerText = x + "/" + locationTrainerPok.length;
-			mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall" + z + ".png";
-			mapAside4DescriptionTrainerIconOuter.setAttribute("id", "map-description-trainer-icon")
-			mapAside4DescriptionTrainerIcon.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/" + ImageType_Path[0] + "/" + locationTrainerPok[q][u] + ".png";
-			mapAside4DescriptionTrainerIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			mapAside4DescriptionTrainerIcon.setAttribute("title", getPokémonName(locationTrainerPok[q][u]));
-			mapAside4DescriptionTrainerLvGender.setAttribute("id", "map-description-trainer-lvgender");
-			mapAside4DescriptionTrainerLv.innerText = "Lv. " + locationTrainerLv[q][u];
-			if(locationTrainerHeldItem[q][u] == "♂") {
-				mapAside4DescriptionTrainerGender.setAttribute("title", "Male");
-			}
-			if(locationTrainerHeldItem[q][u] == "♀") {
-				mapAside4DescriptionTrainerGender.setAttribute("title", "Female");
-			}
-			mapAside4DescriptionTrainerGender.innerText = locationTrainerGender[q][u];
-			if(locationTrainerHeldItem[q][u] != undefined && locationTrainerHeldItem[q][u] != "") {
-				mapAside4DescriptionTrainerHeldItem.src = "./media/Images/Item/Bag/" + "VIII" + "/" + locationTrainerHeldItem[q][u] + ".png";
-			}
-			mapAside4DescriptionTrainerHeldItem.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			mapAside4DescriptionTrainerHeldItem.setAttribute("title", locationTrainerHeldItem[q][u]);
-			mapAside4DescriptionTrainerUlContent.appendChild(mapAside4DescriptionTrainerLi);
-			mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerIconOuter);
-			mapAside4DescriptionTrainerIconOuter.appendChild(mapAside4DescriptionTrainerIcon);
-			mapAside4DescriptionTrainerIconOuter.appendChild(mapAside4DescriptionTrainerHeldItem);
-			mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerMoveOuter);
-			for(var y = 0; y < locationTrainerListMove[q][u].length; y++) {
-				var mapAside4DescriptionTrainerMove = document.createElement("div");
-				var mapAside4DescriptionTrainerMoveContent = document.createElement("p");
-				mapAside4DescriptionTrainerMove.setAttribute("name", y);
-				mapAside4DescriptionTrainerMove.classList.add("map-description-trainer-move");
-				mapAside4DescriptionTrainerMoveContent.innerText = locationTrainerListMove[q][u][y];
-				mapAside4DescriptionTrainerMoveOuter.appendChild(mapAside4DescriptionTrainerMove);
-				mapAside4DescriptionTrainerMove.appendChild(mapAside4DescriptionTrainerMoveContent);
-			}
-			mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerLvGender);
-			mapAside4DescriptionTrainerLvGender.appendChild(mapAside4DescriptionTrainerLv);
-			mapAside4DescriptionTrainerLvGender.appendChild(mapAside4DescriptionTrainerGender);
-		}
-	}
 	var mapAside1OptionsOuter = document.createElement("div");
 	var mapAside1Options = document.createElement("div");
 	mapAside1OptionsOuter.setAttribute("id", "map-options-outer");
@@ -386,14 +245,14 @@ var createMap = function() {
 		var mapAside1OptionsLabel = document.createElement("label");
 		mapAside1OptionsInput.setAttribute("type", "radio");
 		mapAside1OptionsInput.setAttribute("name", "map-options");
-		mapAside1OptionsInput.setAttribute("id", "map-options-" + q);
+		mapAside1OptionsInput.setAttribute("id", "map-options-"+q);
 		mapAside1OptionsInput.setAttribute("autocomplete", "off");
 		mapAside1OptionsInput.value = q;
 		mapAside1OptionsInput.alt = u;
-		mapAside1OptionsLabel.setAttribute("for", "map-options-" + q);
+		mapAside1OptionsLabel.setAttribute("for", "map-options-"+q);
 		mapAside1OptionsLabel.setAttribute("name", "medium");
-		mapAside1OptionsLabel.setAttribute("data-search-name", finaldataLocation[q][JSONPath_Location + "_" + "Name"].toLowerCase());
-		mapAside1OptionsLabel.innerText = finaldataLocation[q][JSONPath_Location + "_" + "Name"];
+		mapAside1OptionsLabel.setAttribute("data-search-name", finaldataLocation[q][JSONPath_Location+"_"+"Name"].toLowerCase());
+		mapAside1OptionsLabel.innerText = finaldataLocation[q][JSONPath_Location+"_"+"Name"];
 		mapAside1Options.appendChild(mapAside1OptionsInput);
 		mapAside1Options.appendChild(mapAside1OptionsLabel);
 		mapAside1OptionsInput.addEventListener("click", mapOptionsSelector);
@@ -403,7 +262,45 @@ var createMap = function() {
 	}
 
 	function mapOptionsSelector() {
-		mapAside2TitleText.innerText = finaldataLocation[this.value][JSONPath_Location + "_" + "Name"];
+		var i = this.value;
+		var location = finaldataLocation[i][JSONPath_Location+"_"+"Name"];
+		var trainers = getLocationTrainers(location);
+
+
+		var mapDescriptionTitles = ["Overview", "Pokémon", "Items", "Trainers", "Move Tutor"];
+
+		if (trainers.length == 0) {
+			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Trainers"));
+		}
+
+		var titles = DescriptionSelectorOuter.querySelectorAll(":scope > div");
+		for(var q = 0; q < titles.length; q++) {
+			titles[q].remove();
+		}
+
+		for(var q = 0; q < mapDescriptionTitles.length; q++) {
+			var DescriptionSelector = document.createElement("div");
+			var DescriptionSelectorInput = document.createElement("input");
+			var DescriptionSelectorLabel = document.createElement("label");
+			DescriptionSelectorInput.setAttribute("type", "radio");
+			DescriptionSelectorInput.setAttribute("name", "map-description-selector");
+			DescriptionSelectorInput.setAttribute("id", "map-description-selector-"+q);
+			DescriptionSelectorInput.setAttribute("autocomplete", "off");
+			DescriptionSelectorInput.setAttribute("value", q);
+			DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
+			DescriptionSelectorLabel.innerText = mapDescriptionTitles[q];
+			DescriptionSelectorOuter.appendChild(DescriptionSelector);
+			DescriptionSelector.appendChild(DescriptionSelectorInput);
+			DescriptionSelector.appendChild(DescriptionSelectorLabel);
+			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+			if(mapDescriptionTitles[q] == "Trainers") {
+				DescriptionSelectorLabel.click();
+			}
+		}
+
+
+
+		mapAside2TitleText.innerText = location;
 		mapAside2FlavorText.innerText = "";
 		var imgz = document.querySelectorAll(".map-img-mark-outer img");
 		for(var q = 0; q < imgz.length; q++) {
@@ -426,8 +323,8 @@ var createMap = function() {
 			dwnbtn[q].remove();
 		}
 		for(var q = 0; q < finaldataLocationSlogan.length; q++) {
-			if(finaldataLocationSlogan[q][JSONPath_LocationSlogan + "_" + "Name"] == finaldataLocation[this.value][JSONPath_Location + "_" + "Name"]) {
-				mapAside2FlavorText.innerHTML = '"' + finaldataLocationSlogan[q][JSONPath_LocationSlogan + "_" + "Slogan"] + '"';
+			if(finaldataLocationSlogan[q][JSONPath_LocationSlogan+"_"+"Name"] == location) {
+				mapAside2FlavorText.innerHTML = '"'+finaldataLocationSlogan[q][JSONPath_LocationSlogan+"_"+"Slogan"]+'"';
 			}
 		}
 		var subs = mapAside3AreaContent.querySelectorAll(":scope > p");
@@ -436,11 +333,11 @@ var createMap = function() {
 		}
 		mapAside3AreaTitle.innerText = "Sub Area/Location";
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Name"] == finaldataLocation[this.value][JSONPath_Location + "_" + "Name"] && finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"] != undefined) {
-				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"].split(",").length; u++) {
+			if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"] == location && finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
+				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",").length; u++) {
 					var mapAside3AreaText = document.createElement("p");
 					mapAside3AreaTitle.innerText = "Location";
-					mapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"].split(",")[u];
+					mapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",")[u];
 					mapAside3AreaContent.appendChild(mapAside3AreaText);
 					mapAside3AreaText.setAttribute("name", "map");
 					mapAside3AreaText.addEventListener("click", dataRedirect);
@@ -448,12 +345,12 @@ var createMap = function() {
 			}
 		}
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"] != undefined) {
-				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"].split(",").length; u++) {
-					if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Location"].split(",")[u] == finaldataLocation[this.value][JSONPath_Location + "_" + "Name"]) {
+			if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
+				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",").length; u++) {
+					if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",")[u] == location) {
 						var mapAside3AreaText = document.createElement("p");
 						mapAside3AreaTitle.innerText = "Sub Areas";
-						mapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Name"];
+						mapAside3AreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"];
 						mapAside3AreaContent.appendChild(mapAside3AreaText);
 						mapAside3AreaText.setAttribute("name", "map");
 						mapAside3AreaText.addEventListener("click", dataRedirect);
@@ -466,24 +363,24 @@ var createMap = function() {
 			navs[q].remove();
 		}
 		for(var q = 0; q < finaldataLocationNavigation.length; q++) {
-			if(finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Name"] == finaldataLocation[this.value][JSONPath_Location + "_" + "Name"] && finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Name"] != undefined) {
-				for(var u = 0; u < finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",").length; u++) {
+			if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Name"] == location && finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Name"] != undefined) {
+				for(var u = 0; u < finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",").length; u++) {
 					var mapAside3NavigationInnerContent = document.createElement("span")
 					var mapAside3NavigationInnerImg = document.createElement("img");
 					var mapAside3NavigationInnerText = document.createElement("p");
-					mapAside3NavigationInnerText.innerText = finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u];
-					if(finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Cut" || finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Strength") {
-						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + "HM Normal" + ".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Waterfall" || finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Surf" || finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Dive" || finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Whirlpool") {
-						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + "HM Water" + ".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Rock Smash" || finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Rock Climb") {
-						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + "HM Fighting" + ".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] == "Defog") {
-						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + "HM Flying" + ".png";
+					mapAside3NavigationInnerText.innerText = finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u];
+					if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Cut" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Strength") {
+						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Normal"+".png";
+					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Waterfall" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Surf" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Dive" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Whirlpool") {
+						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Water"+".png";
+					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Rock Smash" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Rock Climb") {
+						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Fighting"+".png";
+					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Defog") {
+						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Flying"+".png";
 					} else {
-						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u] + ".png";
+						mapAside3NavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]+".png";
 					}
-					mapAside3NavigationInnerImg.setAttribute("title", finaldataLocationNavigation[q][JSONPath_LocationNavigation + "_" + "Navigation"].split(",")[u]);
+					mapAside3NavigationInnerImg.setAttribute("title", finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]);
 					mapAside3NavigationInnerImg.setAttribute("onerror", "this.style.display='none'");
 					mapAside3NavigationContent.appendChild(mapAside3NavigationInnerContent);
 					mapAside3NavigationInnerContent.appendChild(mapAside3NavigationInnerImg);
@@ -496,12 +393,12 @@ var createMap = function() {
 		mapAside3MapRight.style.display = "none";
 		mapAside3MapDown.style.display = "none";
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "Name"] == finaldataLocation[this.value][JSONPath_Location + "_" + "Name"]) {
-				if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "North"] != undefined) {
+			if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"] == location) {
+				if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"North"] != undefined) {
 					mapAside3MapUp.style.display = "unset";
-					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "North"].split(",").length; u++) {
+					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"North"].split(",").length; u++) {
 						var btn = document.createElement("button");
-						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "North"].split(",")[u];
+						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"North"].split(",")[u];
 						btn.setAttribute("name", "map");
 						btn.addEventListener("click", dataRedirect);
 						mapAside3MapUpMain.appendChild(btn);
@@ -509,11 +406,11 @@ var createMap = function() {
 				} else {
 					mapAside3MapUp.style.display = "none";
 				}
-				if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "West"] != undefined) {
+				if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"West"] != undefined) {
 					mapAside3MapLeft.style.display = "unset";
-					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "West"].split(",").length; u++) {
+					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"West"].split(",").length; u++) {
 						var btn = document.createElement("button");
-						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "West"].split(",")[u];
+						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"West"].split(",")[u];
 						btn.setAttribute("name", "map");
 						btn.addEventListener("click", dataRedirect);
 						mapAside3MapLeftMain.appendChild(btn);
@@ -521,11 +418,11 @@ var createMap = function() {
 				} else {
 					mapAside3MapLeft.style.display = "none";
 				}
-				if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "East"] != undefined) {
+				if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"East"] != undefined) {
 					mapAside3MapRight.style.display = "unset";
-					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "East"].split(",").length; u++) {
+					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"East"].split(",").length; u++) {
 						var btn = document.createElement("button");
-						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "East"].split(",")[u];
+						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"East"].split(",")[u];
 						btn.setAttribute("name", "map");
 						btn.addEventListener("click", dataRedirect);
 						mapAside3MapRightMain.appendChild(btn);
@@ -533,11 +430,11 @@ var createMap = function() {
 				} else {
 					mapAside3MapRight.style.display = "none";
 				}
-				if(finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "South"] != undefined) {
+				if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"South"] != undefined) {
 					mapAside3MapDown.style.display = "unset";
-					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "South"].split(",").length; u++) {
+					for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"South"].split(",").length; u++) {
 						var btn = document.createElement("button");
-						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection + "_" + "South"].split(",")[u];
+						btn.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"South"].split(",")[u];
 						btn.setAttribute("name", "map");
 						btn.addEventListener("click", dataRedirect);
 						mapAside3MapDownMain.appendChild(btn);
@@ -548,22 +445,463 @@ var createMap = function() {
 			}
 		}
 		var mapAside3MapMarkImg = document.createElement("img");
-		mapAside3MapMarkImg.src = "./media/Images/Misc/Map/" + MEDIAPath_Map + "/Mark/" + finaldataLocation[this.value][JSONPath_Location + "_" + "Name"] + ".png";
+		mapAside3MapMarkImg.src = "./media/Images/Misc/Map/"+MEDIAPath_Map+"/Mark/"+location+".png";
 		mapAside3MapMarkImg.classList.add("map-img-mark");
 		mapAside3MapMarkImg.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error2.png';this.classList.remove('map-img-mark');this.classList.add('map-img-error');");
 		mapAside3MapMark.appendChild(mapAside3MapMarkImg);
+
+
+
+
+
+
+
+		
+	var uls = document.querySelectorAll("#map-description-trainer > ul");
+	for(var q = 0; q < uls.length; q++) {
+		uls[q].remove();
+	}
+
+
+	for(var q = 0; q < trainers.length; q++) {
+		var trainerName = trainers[q]["Name"];
+		var trainerClass = trainers[q]["Class"];
+		var trainerImage = trainers[q]["Image"];
+		var trainerItems = trainers[q]["Items"];
+		var trainerGender = trainers[q]["Gender"];
+		var trainerReward = trainers[q]["Reward"];
+		var trainerReq = trainers[q]["Requirement"];
+		var trainerExtra = trainers[q]["Extra"];
+		var trainerMatch = trainers[q]["Match"];
+		var trainerInfo = trainers[q]["Information"];
+
+		var trainerPrevious = undefined;
+		var trainerNext = undefined;
+
+		if (q != 0) {
+			trainerPrevious = trainers[q-1];
+		}
+		if (q != ((trainers.length)-1)) {
+			trainerNext = trainers[q+1];
+		}
+
+
+		var mapAside4DescriptionTrainerUl = document.createElement("ul");
+		var mapAside4DescriptionTrainerUlTop = document.createElement("div");
+		var mapAside4DescriptionTrainerUlTopCountOuter = document.createElement("div");
+		var mapAside4DescriptionTrainerUlTopImgOuter = document.createElement("div");
+		var mapAside4DescriptionTrainerUlTopImgPrevious = document.createElement("span");
+		var mapAside4DescriptionTrainerUlTopImgPreviousImage = document.createElement("img");
+		var mapAside4DescriptionTrainerUlTopImgCurrent = document.createElement("span");
+		var mapAside4DescriptionTrainerUlTopImgCurrentImage = document.createElement("img");
+		var mapAside4DescriptionTrainerUlTopImgNext = document.createElement("span");
+		var mapAside4DescriptionTrainerUlTopImgNextImage = document.createElement("img");
+		var mapAside4DescriptionTrainerUlTopTitle = document.createElement("div");
+		var mapAside4DescriptionTrainerUlTopTitleCount = document.createElement("span");
+		var mapAside4DescriptionTrainerUlTopTitleCountImg = document.createElement("img");
+		var mapAside4DescriptionTrainerUlTopTitleName = document.createElement("h4");
+		var mapAside4DescriptionTrainerUlTopTitleValue = document.createElement("h5");
+		var mapAside4DescriptionTrainerUlContent = document.createElement("div");
+		mapAside4DescriptionTrainerUl.setAttribute("name", q);
+		mapAside4DescriptionTrainerUlTop.setAttribute("id", "map-description-trainer-top");
+		mapAside4DescriptionTrainerUlTopCountOuter.setAttribute("id", "map-description-trainer-top-count");
+		mapAside4DescriptionTrainerUlTopImgOuter.setAttribute("id", "map-description-trainer-top-img");
+		mapAside4DescriptionTrainerUlTopImgPreviousImage.setAttribute("name", parseInt(q) - 1);
+		mapAside4DescriptionTrainerUlTopImgCurrentImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerImage+".png";
+		mapAside4DescriptionTrainerUlTopImgCurrentImage.setAttribute("name", parseInt(q));
+		mapAside4DescriptionTrainerUlTopImgNextImage.setAttribute("name", parseInt(q)+1);		
+
+		if (trainerInfo != undefined) {
+			mapAside4DescriptionTrainerUlTopImgCurrentImage.title = trainerInfo;
+			mapAside4DescriptionTrainerUlTopImgCurrentImage.style.cursor = "help";
+		}
+
+		if(trainerPrevious != undefined) {
+			mapAside4DescriptionTrainerUlTopImgPreviousImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerPrevious["Image"]+".png";
+			mapAside4DescriptionTrainerUlTopImgPreviousImage.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Name"];
+		}
+		else {
+			mapAside4DescriptionTrainerUlTopImgPrevious.style.visibility = "hidden";
+			mapAside4DescriptionTrainerUlTopImgPrevious.style.pointerEvents = "none";
+		}
+		if(trainerNext != undefined) {
+			mapAside4DescriptionTrainerUlTopImgNextImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerNext["Image"]+".png";
+			mapAside4DescriptionTrainerUlTopImgNextImage.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Name"];
+		}
+		else {
+			mapAside4DescriptionTrainerUlTopImgNext.style.visibility = "hidden";
+			mapAside4DescriptionTrainerUlTopImgNext.style.pointerEvents = "none";
+		}
+
+		mapAside4DescriptionTrainerUlTopImgPreviousImage.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+		mapAside4DescriptionTrainerUlTopImgCurrentImage.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+		mapAside4DescriptionTrainerUlTopImgNextImage.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+		mapAside4DescriptionTrainerUlTopTitle.setAttribute("id", "map-description-trainer-top-title");
+		mapAside4DescriptionTrainerUlTopTitleName.innerText = trainerClass+"\n"+trainerName;
+
+		if (trainerReq != undefined) {
+			mapAside4DescriptionTrainerUlTopTitleName.title = trainerReq;
+			mapAside4DescriptionTrainerUlTopTitleName.setAttribute("name","add");
+		}
+
+		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = trainerReward;
+		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = mapAside4DescriptionTrainerUlTopTitleValue.innerHTML.replaceAll("PokéDollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" />');
+		mapAside4DescriptionTrainerUlContent.setAttribute("id", "map-description-trainer-bottom");
+		mapAside4DescriptionTrainer.appendChild(mapAside4DescriptionTrainerUl);
+		mapAside4DescriptionTrainerUl.appendChild(mapAside4DescriptionTrainerUlTop);
+		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopCountOuter);
+		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopImgOuter);
+		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImgPrevious);
+		mapAside4DescriptionTrainerUlTopImgPrevious.appendChild(mapAside4DescriptionTrainerUlTopImgPreviousImage);
+		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImgCurrent);
+		mapAside4DescriptionTrainerUlTopImgCurrent.appendChild(mapAside4DescriptionTrainerUlTopImgCurrentImage);
+		mapAside4DescriptionTrainerUlTopImgOuter.appendChild(mapAside4DescriptionTrainerUlTopImgNext);
+		mapAside4DescriptionTrainerUlTopImgNext.appendChild(mapAside4DescriptionTrainerUlTopImgNextImage);
+		mapAside4DescriptionTrainerUlTop.appendChild(mapAside4DescriptionTrainerUlTopTitle);
+		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleCount);
+		mapAside4DescriptionTrainerUlTopTitleCount.appendChild(mapAside4DescriptionTrainerUlTopTitleCountImg);
+		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleName);
+		mapAside4DescriptionTrainerUlTopTitle.appendChild(mapAside4DescriptionTrainerUlTopTitleValue);
+		mapAside4DescriptionTrainerUl.appendChild(mapAside4DescriptionTrainerUlContent);
+		mapAside4DescriptionTrainerUlTopImgPreviousImage.addEventListener("click", mapDescriptionTrainerSelector);
+		mapAside4DescriptionTrainerUlTopImgCurrentImage.addEventListener("click", mapDescriptionTrainerSelector);
+		mapAside4DescriptionTrainerUlTopImgNextImage.addEventListener("click", mapDescriptionTrainerSelector);
+
+
+		var mapAside4DescriptionTrainerUlTopMatch = document.createElement("span");
+		mapAside4DescriptionTrainerUlTopMatch.setAttribute("name","Match");
+		mapAside4DescriptionTrainerUlTopCountOuter.appendChild(mapAside4DescriptionTrainerUlTopMatch);
+
+		var mapAside4DescriptionTrainerUlTopCount = document.createElement("h5");
+		mapAside4DescriptionTrainerUlTopCount.innerText = (q+1)+"/"+getLocationTrainers(location).length;
+		mapAside4DescriptionTrainerUlTopCount.setAttribute("name","Count");
+		mapAside4DescriptionTrainerUlTopCountOuter.appendChild(mapAside4DescriptionTrainerUlTopCount);
+	
+		var mapAside4DescriptionTrainerUlTopItems = document.createElement("span");
+		mapAside4DescriptionTrainerUlTopItems.setAttribute("name","Items");
+		mapAside4DescriptionTrainerUlTopCountOuter.appendChild(mapAside4DescriptionTrainerUlTopItems);
+
+
+		if (trainerExtra != undefined) {
+			var mapAside4DescriptionTrainerUlTopImgCurrentExtra = document.createElement("img");
+			mapAside4DescriptionTrainerUlTopImgCurrentExtra.src = "./media/Images/Misc/FinalDex/"+trainerExtra+".png";
+			mapAside4DescriptionTrainerUlTopImgCurrentExtra.title = trainerExtra;
+			mapAside4DescriptionTrainerUlTopImgCurrentExtra.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+			mapAside4DescriptionTrainerUlTopImgCurrentExtra.setAttribute("name","Extra");
+			mapAside4DescriptionTrainerUlTopImgCurrent.appendChild(mapAside4DescriptionTrainerUlTopImgCurrentExtra);
+		}
+
+		if (trainerMatch != undefined) {
+			var mapAside4DescriptionTrainerUlTopMatchText = document.createElement("i");
+			mapAside4DescriptionTrainerUlTopMatchText.innerText = trainerMatch;
+			mapAside4DescriptionTrainerUlTopMatch.appendChild(mapAside4DescriptionTrainerUlTopMatchText);
+		}
+
+
+		if (trainerItems != undefined) {
+			var tempItems = [];
+			tempItems = trainerItems.split("x ");
+
+			for(var u = 0; u < parseInt(tempItems[0]); u++) {
+				var mapAside4DescriptionTrainerUlTopItemsImage = document.createElement("img");
+				mapAside4DescriptionTrainerUlTopItemsImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+tempItems[1]+".png";
+				mapAside4DescriptionTrainerUlTopItemsImage.title = tempItems.join("x ");
+				mapAside4DescriptionTrainerUlTopItemsImage.setAttribute("name","Items");
+				mapAside4DescriptionTrainerUlTopItems.appendChild(mapAside4DescriptionTrainerUlTopItemsImage);
+			}
+		}
+
+
+
+		if (trainers[q]["Pokémon"].includes("\n")) {
+			var datas = trainers[q]["Pokémon"].split("\n");
+			for(var u = 0; u < datas.length; u++) {
+
+				var data = datas[u];
+				var pok = undefined;
+				var item = undefined;
+				var level = undefined;
+				var gender = undefined;
+				var move = undefined;
+				var ability = undefined;
+				var iv = undefined;
+				var ev = undefined;
+				var nature = undefined;
+
+				if(data.includes("|")) {
+					data = data.split("|")
+					for (var r = 0; r < data.length; r++) {
+						if (data[r].split(":")[0] == "pok") {
+							pok = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "it") {
+							item = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "lv") {
+							level = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "ge") {
+							gender = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "mo") {
+							move = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "ab") {
+							ability = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "iv") {
+							iv = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "ev") {
+							ev = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+						if (data[r].split(":")[0] == "na") {
+							nature = data[r].replaceAll(data[r].split(":")[0]+":","")
+						}
+					}
+				}
+				else {
+					if (data.split(":")[0] == "pok") {
+						pok = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "it") {
+						item = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "lv") {
+						level = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "ge") {
+						gender = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "mo") {
+						move = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "ab") {
+						ability = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "iv") {
+						iv = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "ev") {
+						ev = data.replaceAll(data.split(":")[0]+":","")
+					}
+					if (data.split(":")[0] == "na") {
+						nature = data.replaceAll(data.split(":")[0]+":","")
+					}
+				}
+
+				var mapAside4DescriptionTrainerLi = document.createElement("li");
+				mapAside4DescriptionTrainerUlContent.appendChild(mapAside4DescriptionTrainerLi);
+
+				mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall"+datas.length+".png";
+				
+				if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
+					var mapAside4DescriptionTrainerAdditional = document.createElement("div");
+					var mapAside4DescriptionTrainerAdditionalInner = document.createElement("span");
+					mapAside4DescriptionTrainerAdditional.setAttribute("name", "Additional");
+					mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerAdditional);
+					mapAside4DescriptionTrainerAdditional.appendChild(mapAside4DescriptionTrainerAdditionalInner);
+
+					if (move == undefined && iv == undefined && ev == undefined) {
+						mapAside4DescriptionTrainerAdditional.style.width = "25%";
+					}
+				
+					if (nature != undefined) {
+						var mapAside4DescriptionTrainerNature = document.createElement("p");
+						mapAside4DescriptionTrainerNature.innerText = nature;
+						mapAside4DescriptionTrainerNature.title = getNatureTitle(nature);
+						mapAside4DescriptionTrainerNature.setAttribute("name","Nature");
+						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerNature);
+					}
+
+					if (ability != undefined) {
+						var mapAside4DescriptionTrainerAbility = document.createElement("p");
+						mapAside4DescriptionTrainerAbility.innerText = ability;
+						mapAside4DescriptionTrainerAbility.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability\n"+getAbilityData(ability,"Flavor");
+						mapAside4DescriptionTrainerAbility.setAttribute("name","Ability");
+						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerAbility);
+						mapAside4DescriptionTrainerAbility.addEventListener("click", dataRedirect);
+					}
+					if (level != undefined) {
+						var mapAside4DescriptionTrainerLv = document.createElement("h5");
+						if (level.includes("-")) {
+							mapAside4DescriptionTrainerLv.innerText = "Lvls. "+level;
+						}
+						else {
+							mapAside4DescriptionTrainerLv.innerText = "Lvl. "+level;
+						}
+						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerLv);
+					}
+					if (gender != undefined) {
+						var mapAside4DescriptionTrainerGender = document.createElement("span");
+						if (gender == "♂") {
+							mapAside4DescriptionTrainerGender.setAttribute("title", "Male");
+						}
+						if(gender == "♀") {
+							mapAside4DescriptionTrainerGender.setAttribute("title", "Female");
+						}
+						if(gender == "☿") {
+							mapAside4DescriptionTrainerGender.setAttribute("title", "Genderless");
+						}
+						mapAside4DescriptionTrainerGender.innerText = gender;
+						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerGender);
+					}
+				}
+
+
+				var mapAside4DescriptionTrainerPokémon = document.createElement("div");
+				var mapAside4DescriptionTrainerPokémonImage = document.createElement("span");
+				mapAside4DescriptionTrainerPokémon.setAttribute("name", "Pokémon");
+				mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerPokémon);
+				mapAside4DescriptionTrainerPokémon.appendChild(mapAside4DescriptionTrainerPokémonImage);
+
+				if (item != undefined) {
+					var mapAside4DescriptionTrainerHeldItem = document.createElement("img");
+					mapAside4DescriptionTrainerHeldItem.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png";
+					mapAside4DescriptionTrainerHeldItem.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+					mapAside4DescriptionTrainerHeldItem.setAttribute("title",item);
+					mapAside4DescriptionTrainerHeldItem.setAttribute("name","Item");
+					mapAside4DescriptionTrainerHeldItem.setAttribute("value",item);
+					mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerHeldItem);
+					mapAside4DescriptionTrainerHeldItem.addEventListener("click", dataRedirect);
+				}
+
+				var mapAside4DescriptionTrainerPokémonImageMain = document.createElement("img");
+				mapAside4DescriptionTrainerPokémonImageMain.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageType_Path[0]+"/"+getPokémonMediaPath(pok)+".png";
+				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("title", pok);
+				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("value",getPokémonInt(pok));
+				mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerPokémonImageMain);
+				mapAside4DescriptionTrainerPokémonImageMain.addEventListener("click", modalData);
+
+				var mapAside4DescriptionTrainerPokémonText = document.createElement("h5");
+				mapAside4DescriptionTrainerPokémonText.innerText = pok;
+				mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerPokémonText);
+
+				if (move != undefined || iv != undefined || ev != undefined) {
+					var mapAside4DescriptionTrainerData = document.createElement("div");
+					mapAside4DescriptionTrainerData.setAttribute("name","Data");
+					mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerData);
+				}
+
+				if (move != undefined) {
+					var moves = undefined;
+					var mapAside4DescriptionTrainerMove = document.createElement("div");
+					mapAside4DescriptionTrainerMove.setAttribute("name", "Moves");
+					mapAside4DescriptionTrainerData.appendChild(mapAside4DescriptionTrainerMove);
+
+					if (move.includes(",")) {
+						moves = move.split(",");
+					}
+					else {
+						moves = move;
+					}
+					for(var y = 0; y < moves.length; y++) {
+						var mapAside4DescriptionTrainerMoveText = document.createElement("p");
+						mapAside4DescriptionTrainerMoveText.innerText = moves[y];
+						mapAside4DescriptionTrainerMoveText.title = formatMoveData(moves[y]);
+						mapAside4DescriptionTrainerMoveText.style.color = "var(--type"+getMoveData(moves[y],"Type")+")";
+						mapAside4DescriptionTrainerMoveText.setAttribute("name","Move");
+						mapAside4DescriptionTrainerMove.appendChild(mapAside4DescriptionTrainerMoveText);
+						mapAside4DescriptionTrainerMoveText.addEventListener("click", dataRedirect);
+					}
+				}
+
+				if (iv != undefined) {
+					var ivs = undefined;
+					var mapAside4DescriptionTrainerIV = document.createElement("div");
+					mapAside4DescriptionTrainerIV.setAttribute("name", "Individual Values");
+					mapAside4DescriptionTrainerData.appendChild(mapAside4DescriptionTrainerIV);
+
+					if (iv.includes(",")) {
+						ivs = iv.split(",");
+					}
+					else {
+						ivs = iv;
+					}
+					for(var y = 0; y < ivs.length; y++) {
+						if (ivs[y] != "") {
+							var mapAside4DescriptionTrainerIVText = document.createElement("p");
+							mapAside4DescriptionTrainerIVText.innerText = Stats[y]+" IV: "+ivs[y];
+							mapAside4DescriptionTrainerIVText.setAttribute("name","IV");
+							mapAside4DescriptionTrainerIV.appendChild(mapAside4DescriptionTrainerIVText);
+						}
+					}
+				}
+
+				if (ev != undefined) {
+					var evs = undefined;
+					var mapAside4DescriptionTrainerEV = document.createElement("div");
+					mapAside4DescriptionTrainerEV.setAttribute("name", "Effort Values");
+					mapAside4DescriptionTrainerData.appendChild(mapAside4DescriptionTrainerEV);
+
+					if (ev.includes(",")) {
+						evs = ev.split(",");
+					}
+					else {
+						evs = ev;
+					}
+					for(var y = 0; y < evs.length; y++) {
+						if (evs[y] != "") {
+							var mapAside4DescriptionTrainerEVText = document.createElement("p");
+							mapAside4DescriptionTrainerEVText.innerText = Stats[y]+" EV: "+evs[y];
+							mapAside4DescriptionTrainerEVText.setAttribute("name","EV");
+							mapAside4DescriptionTrainerEV.appendChild(mapAside4DescriptionTrainerEVText);
+						}
+					}
+				}
+
+				var mapAside4DescriptionTrainerButtonsExport = document.createElement("button");
+				mapAside4DescriptionTrainerButtonsExport.innerText = "➢";
+				mapAside4DescriptionTrainerButtonsExport.value = datas[u];
+				mapAside4DescriptionTrainerButtonsExport.title = "Export Pokémon Buttons String";
+				mapAside4DescriptionTrainerButtonsExport.setAttribute("name","Export");
+				mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerButtonsExport);
+				mapAside4DescriptionTrainerButtonsExport.addEventListener("click", trainerPokExport);
+
+				if (move != undefined || iv != undefined || ev != undefined ) {
+					var adds = mapAside4DescriptionTrainerLi.querySelectorAll(':scope > div[name="Data"] > div[name]');
+					if (adds.length > 1) {
+						var mapAside4DescriptionTrainerButtonsCycle = document.createElement("button");
+						mapAside4DescriptionTrainerButtonsCycle.innerText = "⟲";
+						mapAside4DescriptionTrainerButtonsCycle.value = "Individual Values";
+						mapAside4DescriptionTrainerButtonsCycle.setAttribute("name","Cycle");
+						mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerButtonsCycle);
+						mapAside4DescriptionTrainerButtonsCycle.addEventListener("click", trainerPokCycle);
+					}
+				}
+
+
+
+			}
+		}
+	}
+
+	function mapDescriptionTrainerSelector() {
+		var i = this.name;
+		var mapDescriptionTrainers = document.querySelectorAll('#map-description-trainer ul[name]');
+		var mapDescriptionTrainer = document.querySelectorAll('#map-description-trainer ul[name="'+i+'"]');
+		for(var y = 0; y < mapDescriptionTrainers.length; y++) {
+			mapDescriptionTrainers[y].style.display = "none";
+		}
+		for(var y = 0; y < mapDescriptionTrainer.length; y++) {
+			mapDescriptionTrainer[y].style.display = "unset";
+		}
+	}
 	}
 }
 
 function mapDescriptionSelector() {
+	var i = this.value;
 	var mapDescriptionOuters = document.querySelectorAll('#map-description base[name]');
-	var mapDescriptionOuter = document.querySelectorAll('#map-description base[name="' + this.value + '"]');
+	var mapDescriptionOuter = document.querySelectorAll('#map-description base[name="'+i+'"]');
 	for(var y = 0; y < mapDescriptionOuters.length; y++) {
 		mapDescriptionOuters[y].style.display = "none";
 	}
 	for(var y = 0; y < mapDescriptionOuter.length; y++) {
 		mapDescriptionOuter[y].style.display = "block";
 	}
+
 }
 $('.zoom-fullscreen').click(function(e) {
 	$('#map-contain').toggleClass('fullscreen');
@@ -611,6 +949,7 @@ $("#map-panzoom").contextmenu(doubleClicker(function(e) {
 	$('.zoom-out').click();
 }));
 zoomReset();
+/*
 $('body').click(function(event) {
 	if(!$(event.target).closest('.map-up').length && !$(event.target).is('.map-up')) {
 		$(".map-up").css("transform", "translateY(-50px)");
@@ -625,6 +964,7 @@ $('body').click(function(event) {
 		$(".map-right").css("transform", "translateX(150px)");
 	}
 });
+*/
 var mapup = document.getElementsByClassName("map-up-toggle");
 var i;
 for(i = 0; i < mapup.length; i++) {
