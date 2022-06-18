@@ -38,7 +38,6 @@ var createItem = function() {
 	itemAside2TitleID.innerText = "#";
 	itemAside2TitleName.innerText = "Items";
 	itemAside2Debut.classList.add("item-debut");
-	itemAside2DebutText.innerText = "Introduced in Generation I";
 	itemAside3.setAttribute("id", "item-aside3");
 	itemAside3Description.classList.add("item-description");
 	itemAside4.setAttribute("id", "item-aside4");
@@ -77,17 +76,15 @@ var createItem = function() {
 	var itemAside4SidebarTitleBottom = document.createElement("li");
 	var itemAside4SidebarUl = document.createElement("ul");
 	var itemAside4SidebarValue = document.createElement("div");
-	var itemAside4SidebarValueImgOuter = document.createElement("div");
-	var itemAside4SidebarValueImg = document.createElement("img");
+	var itemAside4SidebarPocket = document.createElement("div");
+	var itemAside4SidebarPocketImg = document.createElement("img");
 	var itemAside4SidebarValueTextOuter = document.createElement("div");
 	var itemAside4SidebarValueTitle = document.createElement("h4");
 	itemAside4Sidebar.classList.add("item-sidebar");
 	itemAside4SidebarTitle.classList.add("item-sidebar-title");
 	itemAside4SidebarTitleTopText.innerText = "Acquisition";
 	itemAside4SidebarValue.classList.add("item-sidebar-value");
-	itemAside4SidebarValueImg.src = "./media/Images/Misc/Pocket/Icon/" + MEDIAPath_Pocket_Icon + "/" + "Key Items" + ".png";
-	itemAside4SidebarValueImg.setAttribute("title", "Key Items" + " Pocket");
-	itemAside4SidebarValueImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+	itemAside4SidebarPocketImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	itemAside4SidebarValueTitle.innerText = "Value";
 	itemAside4.appendChild(itemAside4Sidebar);
 	itemAside4Sidebar.appendChild(itemAside4SidebarTitle);
@@ -96,8 +93,8 @@ var createItem = function() {
 	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleBottom);
 	itemAside4Sidebar.appendChild(itemAside4SidebarUl);
 	itemAside4Sidebar.appendChild(itemAside4SidebarValue);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueImgOuter);
-	itemAside4SidebarValueImgOuter.appendChild(itemAside4SidebarValueImg);
+	itemAside4SidebarValue.appendChild(itemAside4SidebarPocket);
+	itemAside4SidebarPocket.appendChild(itemAside4SidebarPocketImg);
 	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTextOuter);
 	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueTitle);
 	var sidebarItemValue = ["1000", "3000"];
@@ -130,27 +127,46 @@ var createItem = function() {
 			itemAside4SidebarLiTextOuter.appendChild(itemAside4SidebarLiText);
 		}
 	}
-	for(var q = 0; q < itemOptionsTitle.length; q++) {
-		var itemAside1OptionsInput = document.createElement("input");
-		var itemAside1OptionsLabel = document.createElement("label");
-		itemAside1OptionsInput.setAttribute("type", "radio");
-		itemAside1OptionsInput.setAttribute("name", "item-options");
-		itemAside1OptionsInput.setAttribute("id", "item-options-" + q);
-		itemAside1OptionsInput.setAttribute("autocomplete", "off");
-		itemAside1OptionsInput.value = q;
-		itemAside1OptionsLabel.setAttribute("for", "item-options-" + q);
-		itemAside1OptionsLabel.setAttribute("data-search-name", itemOptionsTitle[q].toLowerCase());
-		itemAside1OptionsLabel.setAttribute("name", "medium");
-		itemAside1OptionsLabel.innerText = itemOptionsTitle[q];
-		itemAside1Options.appendChild(itemAside1OptionsInput);
-		itemAside1Options.appendChild(itemAside1OptionsLabel);
-		itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
+	var firstiteration = true;
+	for(var q = 0; q < finaldataItems.length; q++) {
+
+		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined) {
+			var itemAside1OptionsInput = document.createElement("input");
+			var itemAside1OptionsLabel = document.createElement("label");
+			itemAside1OptionsInput.setAttribute("type", "radio");
+			itemAside1OptionsInput.setAttribute("name", "item-options");
+			itemAside1OptionsInput.setAttribute("id", "item-options-" + q);
+			itemAside1OptionsInput.setAttribute("autocomplete", "off");
+			itemAside1OptionsInput.value = q;
+			itemAside1OptionsLabel.setAttribute("for", "item-options-" + q);
+			itemAside1OptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+			itemAside1OptionsLabel.setAttribute("name", "medium");
+			itemAside1OptionsLabel.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+			itemAside1Options.appendChild(itemAside1OptionsInput);
+			itemAside1Options.appendChild(itemAside1OptionsLabel);
+			itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
+			if (firstiteration == true) {
+				itemAside1OptionsInput.click();
+			}
+			firstiteration = false;
+		}
+
 
 		function itemOptionsSelector() {
-			itemAside2TitleName.innerText = itemOptionsTitle[this.value];
-		}
-		if(q == 0) {
-			itemAside1OptionsLabel.click();
+			var i = this.value;
+			itemAside2TitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
+			itemAside2TitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
+
+			if (finaldataItems[i]["Pocket_"+JSONPath_Items] != undefined) {
+				itemAside4SidebarPocketImg.src = "./media/Images/Misc/Pocket/Icon/" + MEDIAPath_Pocket_Icon + "/" + finaldataItems[i]["Pocket_"+JSONPath_Items] + ".png";
+				itemAside4SidebarPocketImg.setAttribute("title",finaldataItems[i]["Pocket_"+JSONPath_Items]+" Pocket");
+				itemAside4SidebarPocketImg.style.removeProperty("display");
+			}
+			else {
+				itemAside4SidebarPocketImg.src = "";
+				itemAside4SidebarPocketImg.setAttribute("title","");
+				itemAside4SidebarPocketImg.style.display = "none";
+			}
 		}
 	}
 };
