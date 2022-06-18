@@ -168,9 +168,7 @@ var createMove = function() {
 		moveAside4LearnsetInput.setAttribute("name","move-learnset-partybox");
 		moveAside4LearnsetLabel.setAttribute("for","move-learnset-partybox-"+q);
 		moveAside4LearnsetLabel.innerText = parbo[q];
-		if (parbo[q] == "Party") {
-			moveAside4LearnsetLabel.title = ""
-		}
+		moveAside4LearnsetLabel.title = "Show results from "+parbo[q];
 		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetInput);
 		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetLabel);
 		moveAside4LearnsetInput.addEventListener("change",moveLearnseter);
