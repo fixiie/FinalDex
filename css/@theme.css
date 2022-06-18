@@ -59,3 +59,7 @@
 [data-theme="dark"] #pokémon-outer > div li main span {
 	background: var(--color10);
 }
+
+[data-theme="dark"] #map-description-trainer-top-title h5 img {
+	filter:invert(1);
+}
