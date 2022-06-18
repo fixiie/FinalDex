@@ -35,12 +35,12 @@ var finaldataLocationConnection = [];
 var finaldataLocationDescription = [];
 var finaldataLocationSlogan = [];
 var finaldataLocationNavigation = [];
-var finaldataTrainerLocation = [];
+var finaldataLocationTrainers = [];
 var finaldataLearnsetMachine = [];
 var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
-var finaldataTrainerLocationLength = [];
+var finaldataLocationTrainersLength = [];
 var finaldataLearnsetEvolutionLength = [];
 var finaldataLearnsetLevelLength = [];
 var finaldataLearnsetMachineLength = [];
@@ -118,8 +118,8 @@ LocationMetadataRequest.onload = function() {
 }
 LocationTrainersMetadataRequest.onload = function() {
 	var LocationTrainersMetadata = LocationTrainersMetadataRequest.response;
-	for(var i = 0; i < LocationTrainersMetadata["Location"].length; i++) {
-		finaldataLocationTrainersLocation.push(LocationTrainersMetadata["Location"][i]);
+	for(var i = 0; i < LocationTrainersMetadata["Trainers"].length; i++) {
+		finaldataLocationTrainers.push(LocationTrainersMetadata["Trainers"][i]);
 	}
 	initialize();
 }
