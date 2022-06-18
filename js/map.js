@@ -709,7 +709,7 @@ var createMap = function() {
 					if (nature != undefined) {
 						var mapAside4DescriptionTrainerNature = document.createElement("p");
 						mapAside4DescriptionTrainerNature.innerText = nature;
-						mapAside4DescriptionTrainerNature.title = getNatureTitle(nature);
+						mapAside4DescriptionTrainerNature.title = "Nature"+"\n"+getNatureTitle(nature);
 						mapAside4DescriptionTrainerNature.setAttribute("name","Nature");
 						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerNature);
 					}
