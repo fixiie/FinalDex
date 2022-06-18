@@ -35,10 +35,12 @@ var finaldataLocationConnection = [];
 var finaldataLocationDescription = [];
 var finaldataLocationSlogan = [];
 var finaldataLocationNavigation = [];
+var finaldataTrainerLocation = [];
 var finaldataLearnsetMachine = [];
 var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
+var finaldataTrainerLocationLength = [];
 var finaldataLearnsetEvolutionLength = [];
 var finaldataLearnsetLevelLength = [];
 var finaldataLearnsetMachineLength = [];
@@ -63,6 +65,11 @@ let PokémonMetadataRequest = new XMLHttpRequest();
 PokémonMetadataRequest.open('GET', PokémonMetadataRequestURL);
 PokémonMetadataRequest.responseType = 'json';
 PokémonMetadataRequest.send();
+let TrainerMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Trainer%20Metadata.json';
+let TrainerMetadataRequest = new XMLHttpRequest();
+TrainerMetadataRequest.open('GET', TrainerMetadataRequestURL);
+TrainerMetadataRequest.responseType = 'json';
+TrainerMetadataRequest.send();
 let LearnsetMetadataRequestURL = 'https://raw.githubusercontent.com/fixiie/FinalDex/main/data/Learnset%20Metadata.json';
 let LearnsetMetadataRequest = new XMLHttpRequest();
 LearnsetMetadataRequest.open('GET', LearnsetMetadataRequestURL);
@@ -84,9 +91,9 @@ MoveMetadataRequest.open('GET', MoveMetadataRequestURL);
 MoveMetadataRequest.responseType = 'json';
 MoveMetadataRequest.send();
 if(Ability.length >= 1) {
-	initLength = 6;
+	initLength = 7;
 } else {
-	initLength = 5;
+	initLength = 6;
 }
 LocationMetadataRequest.onload = function() {
 	var LocationMetadata = LocationMetadataRequest.response;
@@ -106,6 +113,13 @@ LocationMetadataRequest.onload = function() {
 	}
 	for(var i = 0; i < LocationMetadata["Navigation"].length; i++) {
 		finaldataLocationNavigation.push(LocationMetadata["Navigation"][i]);
+	}
+	initialize();
+}
+TrainerMetadataRequest.onload = function() {
+	var TrainerMetadata = TrainerMetadataRequest.response;
+	for(var i = 0; i < TrainerMetadata["Location"].length; i++) {
+		finaldataTrainerLocation.push(TrainerMetadata["Location"][i]);
 	}
 	initialize();
 }
@@ -211,9 +225,9 @@ PokémonMetadataRequest.onload = function() {
 		finaldataPokémon.push(PokémonMetadata["Reference"][i]);
 		finaldataPokémonPath.push(PokémonMetadata["Path"][i]);
 		finaldataPokémonForm.push(PokémonMetadata["Form"][i]);
-    finaldataPokémonFormItem.push(PokémonMetadata["Form Item"][i]);
+    	finaldataPokémonFormItem.push(PokémonMetadata["Form Item"][i]);
 		finaldataPokémonAbility.push(PokémonMetadata["Ability"][i]);
-    finaldataPokémonFriendship.push(PokémonMetadata["Base Friendship"][i]);
+    	finaldataPokémonFriendship.push(PokémonMetadata["Base Friendship"][i]);
 		finaldataPokémonArea.push(PokémonMetadata["Area"][i]);
 		finaldataPokémonBaseStats.push(PokémonMetadata["Base Stats"][i]);
 		finaldataPokémonCatchRate.push(PokémonMetadata["Catch Rate"][i]);
@@ -259,6 +273,7 @@ function initialize() {
 		finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
 		finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
 		finaldataLearnsetEvolutionLength = Continuation(finaldataLearnsetEvolution, "Game", "Single");
+		finaldataTrainerLocationLength = Continuation(finaldataTrainerLocation, "Game", "Single");
 
 		createNav();
 		createPokémon();
