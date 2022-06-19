@@ -592,6 +592,24 @@ function getLocationItems(location) {
 	}
 
 	return result;
+}
+
+function getLocationPokémon(location) {
+
+	var arr = finaldataLocationPokémon;
+	var arrLength = finaldataLocationPokémonLength;
+	var location;
+	var result = [];
+
+    for (var q = 0; q < arr.length; q++) {
+		if (arrLength[q] == true) {
+			if(arr[q]["Location"] == location) {
+				result.push(arr[q]);
+			}
+		}
+	}
+
+	return result;
 
 }
 
@@ -616,4 +634,27 @@ function sortObjectArray(objectsArr, prop, ascending = true) {
 		return newObjectsArr;
 	}
 	return objectsArr;
+}
+
+
+
+
+
+
+function getTutorData(val,column) {
+	var val;
+	var column;
+	var arr = finaldataLocationTutor;
+	var arrLength = finaldataLocationTutorLength;
+	var result = [];
+
+	for (var q = 0; q < arr.length; q++) {
+		if (arrLength[q] == true) {
+			if (arr[q][column] == val) {
+				result.push(arr[q])
+			}
+		}
+	}
+
+	return result;
 }
