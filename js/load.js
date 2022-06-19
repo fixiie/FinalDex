@@ -267,6 +267,7 @@ function initialize() {
 		finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel, "Game", "Single");
 		finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
 		finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
+		finaldataLearnsetEvolutionLength = Continuation(finaldataLearnsetEvolution, "Game", "Single");
 
 		finaldataLocationPokémonLength = Continuation(finaldataLocationPokémon, "Game", "Single");
 		finaldataLocationItemsLength = Continuation(finaldataLocationItems, "Game", "Single");
