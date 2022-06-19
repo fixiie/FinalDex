@@ -122,6 +122,7 @@ if(GameID == 6) {
 	JSONPath_MoveTutor = "Crystal";
 	MEDIAPath_Character_Battle = "Crystal";
 	JSONPath_Items = "Crystal";
+	JSONPath_Location = "Crystal";
 }
 if(GameID == 7) {
 	JSONPath_PokédexEntry = "Ruby";
@@ -369,6 +370,7 @@ if(GameID >= 4 && GameID <= 5) {
 	JSONPath_MoveDescription = "GS";
 	MEDIAPath_Character_Battle = "GS";
 	JSONPath_Items = "GS";
+	JSONPath_Location = "GS";
 }
 if(GameID >= 4 && GameID <= 6) {
 	Generation = 2;
@@ -381,7 +383,6 @@ if(GameID >= 4 && GameID <= 6) {
 	JSONPath_ExclusiveItem = ["Gold", "Silver", "Crystal"];
 	MEDIAPath_ExclusiveItem = ["", "", ""];
 	JSONPath_ExclusiveFeature = ["Gold", "Silver", "Crystal"];
-	JSONPath_Location = "GSC";
 	JSONPath_LocationDescription = "GSC";
 	JSONPath_LocationSlogan = "GSC";
 	JSONPath_LocationNavigation = "GSC";
