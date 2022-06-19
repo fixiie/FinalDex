@@ -1255,7 +1255,6 @@ input[type=radio] {
 #map-description-pok ul,
 #map-description-item ul {
 	width: 100%;
-	border-bottom: 1px solid;
 }
 
 #map-description-pok ul h4 {
@@ -1269,24 +1268,16 @@ input[type=radio] {
 }
 
 #map-description-item ul h4 {
-	padding: 10px;
+	padding: 20px 0;
 	text-align: center;
-	box-shadow: 0 0 1px var(--border1);
 	background: var(--color16);
+	border-top: 1px solid;
+    border-bottom: 1px solid;
 }
-
-#map-description-pok ul li:nth-child(2),
-#map-description-item ul li:nth-child(2) {
-	padding-top: 10px;
+#map-description-item ul:first-child h4 {
+	border-top: none;
 }
-
-#map-description-pok ul li:last-child,
-#map-description-item ul li:last-child {
-	padding-bottom: 20px;
-}
-
-#map-description-pok ul li,
-#map-description-item ul li {
+#map-description-pok ul li {
 	position: relative;
 	width: 100%;
 	display: flex;
@@ -1301,6 +1292,9 @@ input[type=radio] {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
+	padding: 10px 0;
+	border-bottom: 1px dotted;
 }
 
 #map-description-pok ul li span {
