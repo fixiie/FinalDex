@@ -234,7 +234,8 @@ var createMove = function() {
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-contact", "");
 			}
-			if(finaldataMoveTutor[q]["Tutor_" + JSONPath_MoveTutor] != undefined) {
+
+			if(getTutorData(finaldataMove[q]["Name" + "_" + JSONPath_MoveName],"Move").length > 0) {
 				moveAside1OptionsLabel.setAttribute("data-search-tutor", "y");
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-tutor", "n");
@@ -384,7 +385,7 @@ var createMove = function() {
 					moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
 					moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
 				}
-				if(finaldataMoveTutor[i]["Tutor_" + JSONPath_MoveTutor] != undefined) {
+				if(getTutorData(finaldataMove[i]["Name" + "_" + JSONPath_MoveName],"Move").length > 0) {
 					var moveAside3SidebarTutor = document.createElement("div");
 					var moveAside3SidebarTutorOuter = document.createElement("span");
 					var moveAside3SidebarTutorContent = document.createElement("span");
@@ -392,12 +393,14 @@ var createMove = function() {
 					var moveAside3SidebarTutorText = document.createElement("p");
 					moveAside3SidebarTutor.classList.add("move-sidebar-description-tutor");
 					moveAside3SidebarTutorTitle.innerText = "Move Tutor";
-					moveAside3SidebarTutorText.innerText = finaldataMoveTutor[i]["Tutor_" + JSONPath_MoveTutor];
+					moveAside3SidebarTutorText.innerText = getTutorData(finaldataMove[i]["Name" + "_" + JSONPath_MoveName],"Move")[0]["Location"];
+					moveAside3SidebarTutorText.setAttribute("name","Map");
 					moveAside3SidebarRight.appendChild(moveAside3SidebarTutor);
 					moveAside3SidebarTutor.appendChild(moveAside3SidebarTutorOuter);
 					moveAside3SidebarTutorOuter.appendChild(moveAside3SidebarTutorContent);
 					moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorTitle);
 					moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorText);
+					moveAside3SidebarTutorText.addEventListener("click",dataRedirect);
 				}
 				var lis = moveAside4LearnsetUl.querySelectorAll(":scope > li");
 				for(var u = 0; u < lis.length; u++) {
