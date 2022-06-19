@@ -747,30 +747,38 @@ function preventCheckboxZero(base) {
 }
 
 function dataRedirect() {
-	var type = (this.getAttribute("name")).toLowerCase();
-	var x;
-	var typevariant;
-	if(this.innerText != undefined && this.innerText != "") {
-		x = (this.innerText).toLowerCase();
-	} else if(this.getAttribute("title") != undefined) {
-		x = (this.getAttribute("title")).toLowerCase();
-	} else if(this.getAttribute("value") != undefined) {
-		x = (this.getAttribute("value")).toLowerCase();
-	}
-	if(type == "map") {
-		typevariant = type;
-	} else if(type == "ability") {
-		typevariant = "abilities";
-	} else {
-		typevariant = type + "s";
-	}
-	typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
-	if(document.querySelector(".data-modal-outer.open") != undefined) {
-		document.querySelector(".data-modal-outer.open").classList.remove("open");
-	}
-	document.querySelector("#navigation > input[value='" + typevariant + "']").click();
-	document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').click();
-	document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').scrollIntoView();
+    var type = (this.getAttribute("name")).toLowerCase();
+    var x;
+    var z;
+    var typevariant;
+    if(this.innerText != undefined && this.innerText != "") {
+        z = this.innerText;
+        x = (this.innerText).toLowerCase();
+    } else if(this.getAttribute("title") != undefined) {
+        z = this.getAttribute("title");
+        x = (this.getAttribute("title")).toLowerCase();
+    } else if(this.getAttribute("value") != undefined) {
+        z = this.getAttribute("value");
+        x = (this.getAttribute("value")).toLowerCase();
+    }
+
+    if (confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?") == true) {
+
+        if(type == "map") {
+            typevariant = type;
+        } else if(type == "ability") {
+            typevariant = "abilities";
+        } else {
+            typevariant = type + "s";
+        }
+        typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
+        if(document.querySelector(".data-modal-outer.open") != undefined) {
+            document.querySelector(".data-modal-outer.open").classList.remove("open");
+        }
+        document.querySelector("#navigation > input[value='" + typevariant + "']").click();
+        document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').click();
+        document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').scrollIntoView();  
+    }
 }
 
 function returnData(int, type, additional) {
@@ -3440,7 +3448,7 @@ function changePartyEvolution(base,i) {
 
     evos = evos.join("\n");
 
-    var reply = prompt("Enter Number:\n"+evos,"");
+    var reply = prompt("Change Evolution\nEnter Number:\n"+evos,"");
     var num = [];
 
     if (reply != null && reply != "") {
@@ -3512,7 +3520,7 @@ function changePartyForm(base,i) {
 
     forms = forms.join("\n");
 
-    var reply = prompt("Enter Number:\n"+forms,"");
+    var reply = prompt("Change Form\nEnter Number:\n"+forms,"");
     var num = [];
 
     if (reply != null && reply != "") {
