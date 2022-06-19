@@ -475,7 +475,9 @@ var createMove = function() {
 							var moveAside4LearnsetLiSource = document.createElement("img");
 							moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"]) + ".png";
 							moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
+							moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]))
 							moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
+							moveAside4LearnsetLiSource.addEventListener("click", modalData);
 						}
 						if(finaldataLearnsetEvolution[q]["Form"] == undefined) {
 							moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Pokémon"]) + ".png";
