@@ -1230,7 +1230,7 @@ input[type=radio] {
 	font-weight: bold;
 }
 #map-description-trainer ul li div[name="Moves"] p:hover {
-	filter:brightness(1.5);
+	filter:brightness(1.2);
 }
 
 #map-description-trainer ul li div[name="Moves"] p {
@@ -1317,6 +1317,7 @@ input[type=radio] {
 }
 #map-description-tutor ul li span:first-child h4:hover {
 	font-weight: bold;
+	filter: brightness(1.2);
 }
 
 #map-description-pok ul li p,
