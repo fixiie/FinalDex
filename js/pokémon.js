@@ -164,12 +164,9 @@ var createPokémon = function() {
 
     navigationSettingsImg.addEventListener("click", openSettings);
 
-    var itemTemp = [];
 
-    if (HeldItem == true) {
-        itemTemp = itemOptionsTitle;
-        itemTemp.unshift("Item");
-    }
+
+
 
     var natureTemp = [];
 
@@ -268,20 +265,15 @@ var createPokémon = function() {
             var teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
             teamHeldItemImage.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error.png'");
+            teamHeldItemImage.setAttribute("name","Item");
             teamHeldItemImage.setAttribute("title","");
             teamImgOuter.appendChild(teamHeldItemImage);
-
 
             teamItemSelect.addEventListener("change",selectModify);
             teamItemSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
             teamItemSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
             teamItemSelect.addEventListener("change", partyItem);
-            for (var u = 0; u < itemTemp.length; u++) {
-                var teamItemOption = document.createElement("option");
-                teamItemOption.value = itemTemp[u];
-                teamItemOption.innerText = itemTemp[u];    
-                teamItemSelect.appendChild(teamItemOption);
-            }
+            teamHeldItemImage.addEventListener("click", dataRedirect);
         }
 
 
@@ -889,8 +881,7 @@ var createPokémon = function() {
 			formopts.push(finaldataPokémon[q]["Variant"]);
 		}
 	}
-	formopts = formopts.filter(
-		(item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
+	formopts = formopts.filter((item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
 	for(var q = 0; q < formopts.length; q++) {
 		formopts[q] = formopts[q].replace("Alolan", "Regional Form");
 		formopts[q] = formopts[q].replace("Galarian", "Regional Form");
