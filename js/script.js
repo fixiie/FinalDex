@@ -1592,7 +1592,7 @@ function partyItem() {
     var base = this.parentElement.parentElement.parentElement.parentElement;
     var item = base.querySelector(':scope span[name="Pokémon"] img:first-child');
 
-    item.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+this.value+".png";
+    item.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+this.name+".png";
     item.title = this.value;
 
 
@@ -1953,6 +1953,18 @@ function createParty(base,data) {
 
 
     if (HeldItem == true) {
+
+        var items = [];
+        var result = finaldataItems.map(el => el["Pocket_"+JSONPath_Items] == "Berries" ? {...el, ["Pocket_"+JSONPath_Items]: "a"} : el).map(el => el["Pocket_"+JSONPath_Items] == "Items" || el["Pocket_"+JSONPath_Items] == "Other Items"  ? {...el, ["Pocket_"+JSONPath_Items]: "b"} : el).map(el => el["Pocket_"+JSONPath_Items] != "a" && el["Pocket_"+JSONPath_Items] != "b" ? {...el, ["Pocket_"+JSONPath_Items]: "c"} : el);
+
+        items = sortObjectArray(result,"Pocket_"+JSONPath_Items);
+
+        var obj = new Object();
+        obj["Name_"+JSONPath_Items] = "Item";
+        items.unshift(obj);
+
+
+
         if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"] != undefined) {
             var req = [];
             if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].includes(",")) {
@@ -1961,14 +1973,21 @@ function createParty(base,data) {
             else {
                 req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
             }
-
-            var items = itemOptionsTitle;
             for (var q = 0; q < items.length; q++) {
-                if (req.includes(items[q])) {
-                    var option = document.createElement("option");
-                    option.innerText = items[q];
-                    option.value = items[q];
-                    baseItem.appendChild(option)
+                if (items[q]["Name_"+JSONPath_Items] != undefined) {
+                    if (req.includes(items[q]["Name_"+JSONPath_Items])) {
+                        var teamItemOption = document.createElement("option");
+                        teamItemOption.value = items[q]["Name_"+JSONPath_Items];
+                        teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                        teamItemSelect.appendChild(teamItemOption);
+
+                        if (items[q]["Icon_"+JSONPath_Items] != undefined) {
+                            teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                        }
+                        else {
+                            teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                        }
+                    }
                 }
             }
             baseItemImg.style.display = "unset";
@@ -1982,24 +2001,39 @@ function createParty(base,data) {
             else {
                 notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
             }
-
-            var items = itemOptionsTitle;
             for (var q = 0; q < items.length; q++) {
-                if (!notreq.includes(items[q])) {
-                    var option = document.createElement("option");
-                    option.innerText = items[q];
-                    option.value = items[q];
-                    baseItem.appendChild(option)
+                if (items[q]["Name_"+JSONPath_Items] != undefined) {
+                    if (!notreq.includes(items[q]["Name_"+JSONPath_Items])) {
+                        var teamItemOption = document.createElement("option");
+                        teamItemOption.value = items[q]["Name_"+JSONPath_Items];
+                        teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                        teamItemSelect.appendChild(teamItemOption);
+
+                        if (items[q]["Icon_"+JSONPath_Items] != undefined) {
+                            teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                        }
+                        else {
+                            teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                        }
+                    }
                 }
             }
         }
         else {
-            var items = itemOptionsTitle;
             for (var q = 0; q < items.length; q++) {
-                var option = document.createElement("option");
-                option.innerText = items[q];
-                option.value = items[q];
-                baseItem.appendChild(option)
+                if (items[q]["Name_"+JSONPath_Items] != undefined) {
+                    var teamItemOption = document.createElement("option");
+                    teamItemOption.value = items[q]["Name_"+JSONPath_Items];
+                    teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                    baseItem.appendChild(teamItemOption);
+
+                    if (items[q]["Icon_"+JSONPath_Items] != undefined) {
+                        teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                    }
+                    else {
+                        teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                    }
+                }
             }
         }
     }
@@ -2114,6 +2148,7 @@ function createParty(base,data) {
     }
     if (item != undefined && HeldItem == true) {
         var baseItems = baseItem.querySelectorAll(":scope option");
+        var opt = baseItem.querySelector(':scope option[value="'+item+'"]')
         var tempArr = [];
         for (var q = 0; q < baseItems.length; q++) {
             tempArr.push(baseItems[q].value);
@@ -2121,9 +2156,11 @@ function createParty(base,data) {
 
         if (tempArr.includes(item)) {
             baseItem.value = item;
+            baseItem.setAttribute("name",opt.getAttribute("name"));
             baseItem.style.fontStyle = "unset";
             baseItemImg.style.display = "unset";
-            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png"
+            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+opt.getAttribute("name")+".png";
+            baseItemImg.setAttribute("title",item);
         }
     }
     if (level != undefined) {
@@ -2544,7 +2581,7 @@ function returnMoveSet(int,additional) {
 
 
 function selectModify(e) {
-
+    var opt = this.querySelector(':scope > option[value="'+this.value+'"]');
 
     if (this.value == "♂") {
         this.style.color = "var(--colorBlue)";
@@ -2564,6 +2601,12 @@ function selectModify(e) {
             this.style.fontStyle = "unset";
         }
     }
+
+
+    if (this.firstElementChild.value == "Item") {
+        this.setAttribute("name",opt.getAttribute("name"));
+    }
+
 
 
     if (this.parentElement.getAttribute("name") == "Nature") {
@@ -3567,7 +3610,7 @@ function changePartyForm(base,i) {
 }
 
 
-function learnsetPartyBox(action) {
+function moveLearnsetPartyBox(action) {
     var action;
     var base = document.querySelector(".move-learnset-content > ul");
     var lis = base.querySelectorAll(":scope > li");
@@ -3639,37 +3682,144 @@ function learnsetPartyBox(action) {
 
 }
 
-var learnsetPB = [];
-function moveLearnseter() {
+var moveLearnsetPB = [];
+function movePartyBoxLearnset() {
     var label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]');
 
     if (this.checked == true) {
-        if (!learnsetPB.includes(label.innerText)) {
-            learnsetPB.push(label.innerText);
+        if (!moveLearnsetPB.includes(label.innerText)) {
+            moveLearnsetPB.push(label.innerText);
         }
     }
     else if (this.checked == false) {
-        if (learnsetPB.includes(label.innerText)) {
-            learnsetPB = learnsetPB.filter(function(v) {
+        if (moveLearnsetPB.includes(label.innerText)) {
+            moveLearnsetPB = moveLearnsetPB.filter(function(v) {
                 return v != label.innerText;
             })
         }
     }
     var tempStr;
 
-    if (learnsetPB.length > 1) {
-        tempStr = learnsetPB.join(",");
+    if (moveLearnsetPB.length > 1) {
+        tempStr = moveLearnsetPB.join(",");
     }
     else {
-        tempStr = learnsetPB[0];
+        tempStr = moveLearnsetPB[0];
     }
 
     var navMove = document.querySelector('#navigation input[value="Moves"]');
-    navMove.addEventListener("change", function() {learnsetPartyBox(tempStr);});
+    navMove.addEventListener("change", function() {moveLearnsetPartyBox(tempStr);});
 
-    learnsetPartyBox(tempStr);
+    moveLearnsetPartyBox(tempStr);
     
 }
+
+
+
+
+function abilityLearnsetPartyBox(action) {
+    var action;
+    var base = document.querySelector(".ability-sidebar > ul");
+    var lis = base.querySelectorAll(":scope > li");
+    var boxImg = document.querySelectorAll('#pokémon-outer > main[name="Team"] > section[name="Box"] ul > li img[value]');
+    var partyImg = document.querySelectorAll('#pokémon-outer > main[name="Team"] > section[name="Party"] > div img[value]');
+    var partyArr = [];
+    var boxArr = [];
+
+    for (var q = 0; q < boxImg.length; q++) {
+        if (boxImg[q].getAttribute("value") != undefined) {
+            boxArr.push(boxImg[q].getAttribute("value"));
+        }
+        else {
+            boxArr.push("");
+        }
+    }
+
+
+    for (var q = 0; q < partyImg.length; q++) {
+        if (partyImg[q].getAttribute("value") != undefined) {
+            partyArr.push(partyImg[q].getAttribute("value"));
+        }
+        else {
+            partyArr.push("");
+        }
+    }
+
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].style.display = "none";
+    }
+
+    if (action != undefined) {
+        for (var i = 0; i < lis.length; i++) {
+            var lisImg = lis[i].querySelectorAll(":scope div img[value]");
+            for (var q = 0; q < lisImg.length; q++) {
+                var conditions = [];
+                var tempArr = [];
+                if(action.includes(",")) {
+                    for (var u = 0; u < action.split(",").length; u++) {
+                        tempArr.push(action.split(",")[u]);
+                    }
+                }
+                else {
+                    tempArr = [action];
+                }
+
+                for (var u = 0; u < tempArr.length; u++) {
+                    if (tempArr[u] == "PARTY") {
+                        conditions.push(partyArr.includes(lisImg[q].getAttribute("value")))
+                    }
+                    if (tempArr[u] == "BOX") {
+                        conditions.push(boxArr.includes(lisImg[q].getAttribute("value")))
+                    }
+                }
+                if (conditions[0] == true || conditions[1] == true) {
+                    lis[i].style.removeProperty("display");
+                }
+            }
+        }
+    }
+    else {
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].style.removeProperty("display");
+        }
+    }
+  
+
+
+
+}
+var abilityLearnsetPB = [];
+function abilityPartyBoxLearnset() {
+    var label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]');
+
+    if (this.checked == true) {
+        if (!abilityLearnsetPB.includes(label.innerText)) {
+            abilityLearnsetPB.push(label.innerText);
+        }
+    }
+    else if (this.checked == false) {
+        if (abilityLearnsetPB.includes(label.innerText)) {
+            abilityLearnsetPB = abilityLearnsetPB.filter(function(v) {
+                return v != label.innerText;
+            })
+        }
+    }
+    var tempStr;
+
+    if (abilityLearnsetPB.length > 1) {
+        tempStr = abilityLearnsetPB.join(",");
+    }
+    else {
+        tempStr = abilityLearnsetPB[0];
+    }
+
+    var navAbility = document.querySelector('#navigation input[value="Abilities"]');
+    navAbility.addEventListener("change", function() {abilityLearnsetPartyBox(tempStr);});
+
+    abilityLearnsetPartyBox(tempStr);
+    
+}
+
 
 function trainerPokExport() {
     var data = this.value;
@@ -3713,4 +3863,60 @@ function trainerPokCycle(event) {
             }
         }
     }
+}
+
+
+function overviewMove() {
+    var base = findUpTag(this,"BASE").querySelector(":scope > div");
+    var tar = base.querySelector(':scope > div');
+    var span = base.querySelector(':scope > div span[name="'+this.value+'"]');
+    var buttons = base.querySelectorAll(":scope button")
+    var x = parseInt(this.value);
+    var y = parseInt(tar.lastChild.getAttribute("name"));
+    var left = span.previousElementSibling;
+    var right = span.nextElementSibling;
+
+    if (this.innerText == "‹") {
+        x = parseInt(this.value) - 1;
+        tar.style.transform = "translate(-"+x+"00%, 0)";
+        
+        if (left != null) {
+            for (var q = 0; q < buttons.length; q++) {
+                buttons[q].value = left.getAttribute("name");
+            }
+        }
+    }
+    else if (this.innerText == "›") {
+        x = parseInt(this.value) + 1;
+        tar.style.transform = "translate(-"+x+"00%, 0)";
+
+        if (right != null) {
+            for (var q = 0; q < buttons.length; q++) {
+                buttons[q].value = right.getAttribute("name");
+            }
+        }
+    }
+
+
+    for (var q = 0; q < buttons.length; q++) {
+        buttons[q].style.removeProperty("display");
+    }
+
+
+
+    if (x <= 0) {
+        buttons[0].style.display = "none";
+    }
+    else {
+        buttons[0].style.removeProperty("display");
+    }
+    if (x >= y) {
+        buttons[1].style.display = "none";
+    }
+    else {
+        buttons[1].style.removeProperty("display");
+    }
+
+
+
 }
