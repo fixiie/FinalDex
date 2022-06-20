@@ -751,6 +751,7 @@ function dataRedirect() {
     var x;
     var z;
     var typevariant;
+    var lock;
     if(this.innerText != undefined && this.innerText != "") {
         z = this.innerText;
         x = (this.innerText).toLowerCase();
@@ -761,17 +762,31 @@ function dataRedirect() {
         z = this.getAttribute("value");
         x = (this.getAttribute("value")).toLowerCase();
     }
+    if(type == "map") {
+        typevariant = type;
+    } else if(type == "ability") {
+        typevariant = "abilities";
+    } else {
+        typevariant = type + "s";
+    }
+    typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
+    var input = document.querySelector('#navigation input[value="'+typevariant+'"]:checked');
+    var modal = document.querySelector(".data-modal-outer.open");
 
-    if (confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?") == true) {
-
-        if(type == "map") {
-            typevariant = type;
-        } else if(type == "ability") {
-            typevariant = "abilities";
-        } else {
-            typevariant = type + "s";
+    if (modal != null) {
+        lock = confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?");
+    }
+    else {
+        if (input == null) {
+            lock = confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?");
         }
-        typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
+        else {
+            lock = true;
+        }
+    }
+
+
+    if (lock) {
         if(document.querySelector(".data-modal-outer.open") != undefined) {
             document.querySelector(".data-modal-outer.open").classList.remove("open");
         }
@@ -779,6 +794,8 @@ function dataRedirect() {
         document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').click();
         document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').scrollIntoView();  
     }
+
+
 }
 
 function returnData(int, type, additional) {
@@ -3919,4 +3936,16 @@ function overviewMove() {
 
 
 
+}
+
+
+function mapMove() {
+    var base = this.parentElement;
+
+    if (base.classList.contains("open")) {
+        base.classList.remove("open");
+    }
+    else {
+        base.classList.add("open");
+    }
 }
