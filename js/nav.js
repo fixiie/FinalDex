@@ -1,5 +1,5 @@
 var createNav = function() {
-	var navOptions = ["Pokémon", "Moves", "Abilities", "Items", "Map", "Mechanics", "Type Advantage", "Exclusives", "Tools"];
+	var navOptions = ["Pokémon","Moves","Abilities","Items","Map","Mechanics","Type Advantage","Tools"];
 	if(Ability.length <= 0) {
 		for(var q = 0; q < navOptions.length; q++) {
 			if(navOptions[q].includes("Abilities")) {
@@ -7,6 +7,19 @@ var createNav = function() {
 			}
 		}
 	}
+
+	for(var q = 0; q < navOptions.length; q++) {
+		if(navOptions[q].includes("Mechanics")) {
+			navOptions.splice(q, 1);
+		}
+		if(navOptions[q].includes("Type Advantage")) {
+			navOptions.splice(q, 1);
+		}
+		if(navOptions[q].includes("Type Advantage")) {
+			navOptions.splice(q, 1);
+		}
+	}
+
 	for(var q = 0; q < navOptions.length; q++) {
 		var x = q + 1;
 		var navigationInput = document.createElement("input");
