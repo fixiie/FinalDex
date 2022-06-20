@@ -108,7 +108,7 @@ var createMove = function() {
 	moveAside3SidebarType.classList.add("move-sidebar-type");
 	moveAside3SidebarTypeTextImg.setAttribute("title", "");
 	moveAside3SidebarTypeTextText.innerText = "";
-	moveAside3SidebarAttribute.classList.add("move-sidebar-Attribute");
+	moveAside3SidebarAttribute.classList.add("move-sidebar-attribute");
 	moveAside3SidebarAttributePowerPointsTitle.innerText = "PP";
 	moveAside3SidebarAttributePowerPointsText.innerText = "";
 	moveAside3SidebarAttributePowerTitle.innerText = "Power";
@@ -128,22 +128,27 @@ var createMove = function() {
 	moveAside3SidebarTypeText.appendChild(moveAside3SidebarTypeTextText);
 	moveAside3SidebarType.appendChild(moveAside3SidebarTypeMove);
 	moveAside3SidebarLeft.appendChild(moveAside3SidebarAttribute);
+
 	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePowerPoints);
 	moveAside3SidebarAttributePowerPoints.appendChild(moveAside3SidebarAttributePowerPointsContent);
 	moveAside3SidebarAttributePowerPointsContent.appendChild(moveAside3SidebarAttributePowerPointsTitle);
 	moveAside3SidebarAttributePowerPointsContent.appendChild(moveAside3SidebarAttributePowerPointsText);
+
 	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePower);
 	moveAside3SidebarAttributePower.appendChild(moveAside3SidebarAttributePowerContent);
 	moveAside3SidebarAttributePowerContent.appendChild(moveAside3SidebarAttributePowerTitle);
 	moveAside3SidebarAttributePowerContent.appendChild(moveAside3SidebarAttributePowerText);
+
 	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributeAccuracy);
 	moveAside3SidebarAttributeAccuracy.appendChild(moveAside3SidebarAttributeAccuracyContent);
 	moveAside3SidebarAttributeAccuracyContent.appendChild(moveAside3SidebarAttributeAccuracyTitle);
 	moveAside3SidebarAttributeAccuracyContent.appendChild(moveAside3SidebarAttributeAccuracyText);
+
 	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePriority);
 	moveAside3SidebarAttributePriority.appendChild(moveAside3SidebarAttributePriorityContent);
 	moveAside3SidebarAttributePriorityContent.appendChild(moveAside3SidebarAttributePriorityTitle);
 	moveAside3SidebarAttributePriorityContent.appendChild(moveAside3SidebarAttributePriorityText);
+
 	moveAside3SidebarRight.appendChild(moveAside3SidebarContact);
 	moveAside3SidebarContact.appendChild(moveAside3SidebarContactContent);
 	moveAside3SidebarContactContent.appendChild(moveAside3SidebarContactText);
@@ -328,6 +333,27 @@ var createMove = function() {
 			moveAside3SidebarAttributeAccuracyText.innerText = "–";
 		} else {
 			moveAside3SidebarAttributeAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_" + JSONPath_MoveAccuracy];
+		}
+		if(finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == undefined) {
+			moveAside3SidebarAttributePriorityText.innerText = "–";
+		} else {
+			if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == "0" || finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == undefined) {
+				moveAside3SidebarAttributePriority.style.display = "none";
+			}
+			else {
+				moveAside3SidebarAttributePriority.style.removeProperty("display");
+			}
+
+
+			if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].includes("-")) {
+				moveAside3SidebarAttributePriorityText.innerText = "-"+finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].replaceAll("-","");
+			}
+			else if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].includes("+")) {
+				moveAside3SidebarAttributePriorityText.innerText = "+"+finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].replaceAll("+","");
+			}
+			else {
+				moveAside3SidebarAttributePriorityText.innerText = finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority];
+			}
 		}
 		if(finaldataMoveOtherMoves[i]["Contact"] == "Makes contact") {
 			moveAside3SidebarContactText.innerHTML = "Makes <b>contact</b>";
