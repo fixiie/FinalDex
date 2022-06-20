@@ -32,6 +32,29 @@ var createAbility = function() {
 		abilityAside4SidebarTitle.appendChild(abilityAside4SidebarTitleLiTop);
 		abilityAside4SidebarTitle.appendChild(abilityAside4SidebarTitleLiBottom);
 		abilityAside4Sidebar.appendChild(abilityAside4SidebarUl);
+
+		var abilityAside4LearnsetPartyBox = document.createElement("div");
+		abilityAside4LearnsetPartyBox.classList.add("learnset-partybox");
+		abilityAside4Sidebar.appendChild(abilityAside4LearnsetPartyBox);
+	
+		var parbo = ["Party","Box"];
+		for(var q = 0; q < parbo.length; q++) {
+			var abilityAside4LearnsetInput = document.createElement("input");
+			var abilityAside4LearnsetLabel = document.createElement("label");
+			abilityAside4LearnsetInput.setAttribute("type","checkbox");
+			abilityAside4LearnsetInput.setAttribute("id","ability-learnset-partybox-"+q);
+			abilityAside4LearnsetInput.setAttribute("name","ability-learnset-partybox");
+			abilityAside4LearnsetInput.value = "Abilities";
+			abilityAside4LearnsetLabel.setAttribute("for","ability-learnset-partybox-"+q);
+			abilityAside4LearnsetLabel.innerText = parbo[q];
+			abilityAside4LearnsetLabel.title = "Show results from "+parbo[q];
+			abilityAside4LearnsetPartyBox.appendChild(abilityAside4LearnsetInput);
+			abilityAside4LearnsetPartyBox.appendChild(abilityAside4LearnsetLabel);
+			abilityAside4LearnsetInput.addEventListener("change", abilityPartyBoxLearnset);
+		}
+	
+
+
 		var abilityAside4SidebarTitleLiTopText = document.createElement("h4");
 		abilityAside4SidebarTitleLiTop.appendChild(abilityAside4SidebarTitleLiTopText);
 		if(Generation <= 4) {
@@ -108,84 +131,15 @@ var createAbility = function() {
 					abilityAside1OptionsInput.value = q;
 					abilityAside1OptionsLabel.setAttribute("for", "ability-options-" + q);
 					abilityAside1OptionsLabel.setAttribute("name", "medium");
-					abilityAside1OptionsLabel.setAttribute("data-search-name", finaldataAbility[q][
-						JSONPath_AbilityReference + "_" + "Name"
-					].toLowerCase());
+					abilityAside1OptionsLabel.setAttribute("data-search-name", finaldataAbility[q][JSONPath_AbilityReference + "_" + "Name"].toLowerCase());
 					abilityAside1OptionsLabel.innerText = finaldataAbility[q][JSONPath_AbilityReference + "_" + "Name"];
 					abilityAside1Options.appendChild(abilityAside1OptionsInput);
 					abilityAside1Options.appendChild(abilityAside1OptionsLabel);
 					abilityAside1OptionsInput.addEventListener("click", abilityOptionsSelector);
+					abilityAside1OptionsLabel.setAttribute("tabindex",q+10);
+					abilityAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;abilityOptionsSelector(event.target.previousElementSibling.value);}}});
 
-					function abilityOptionsSelector() {
-						abilityAside4SidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;" + "<u>" + finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						] + "</u>";
-						abilityAside2TitleID.innerText = "#" + getAbilityData(finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						], "ID");
-						abilityAside2DebutText.innerText = "Introduced in " + getAbilityData(finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						], "Debut");
-						abilityAside2TitleName.innerText = finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						];
-						abilityAside3DescriptionText.innerText = getAbilityData(finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						], "Flavor");
-						var lis = document.querySelectorAll("#ability-aside4 ul li");
-						for(var q = 0; q < lis.length; q++) {
-							lis[q].remove();
-						}
-						var sidebarAbilityListFull = sidebarAbilityList.map(
-							(i) => i + "_" + JSONPath_Ability);
-						sidebarAbilityListFull = sidebarAbilityListFull.filter(
-							(item) => item !== "Pokémon" + "_" + JSONPath_Ability);
-						for(var q = 0; q < sidebarAbilityListFull.length; q++) {
-							sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability", "");
-						}
-						var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[this.value][
-							JSONPath_AbilityReference + "_" + "Name"
-						], sidebarAbilityListFull);
-						for(var i = 0; i < AbilityResults.length; i++) {
-							var abilityAside4SidebarLi = document.createElement("li");
-							abilityAside4SidebarUl.appendChild(abilityAside4SidebarLi);
-							for(var q = 0; q < sidebarAbilityList.length; q++) {
-								if(q == 0) {
-									var abilityAside4SidebarLiImgOuter = document.createElement("div");
-									var abilityAside4SidebarLiImg = document.createElement("img");
-									abilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + AbilityResults[i]["Folder"] + AbilityResults[i]["File"] + ".png";
-									abilityAside4SidebarLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-									if(AbilityResults[i]["Form"] != undefined) {
-										abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[i]["Form"]);
-										abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[i]["Form"]));
-									} else {
-										abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[i]["Pokémon"]);
-										abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[i]["Pokémon"]));
-									}
-									abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiImgOuter);
-									abilityAside4SidebarLiImgOuter.appendChild(abilityAside4SidebarLiImg);
-									abilityAside4SidebarLiImg.addEventListener("click", modalData);
-								} else if(q != 0) {
-									var abilityAside4SidebarLiTextOuter = document.createElement("span");
-									var abilityAside4SidebarLiText = document.createElement("button");
-									if(AbilityResults[i][sidebarAbilityListFull[q - 1]] != undefined) {
-										abilityAside4SidebarLiText.innerText = AbilityResults[i][sidebarAbilityListFull[q - 1]];
-									}
-									if(AbilityResults[i][sidebarAbilityListFull[q - 1]] == finaldataAbility[this.value][
-											JSONPath_AbilityReference + "_" + "Name"
-										]) {
-										abilityAside4SidebarLiText.classList.add("active");
-									} else {
-										abilityAside4SidebarLiText.addEventListener("click", dataRedirect);
-									}
-									abilityAside4SidebarLiText.setAttribute("name", "ability");
-									abilityAside4SidebarLiText.setAttribute("title", sidebarAbilityList[q]);
-									abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiTextOuter);
-									abilityAside4SidebarLiTextOuter.appendChild(abilityAside4SidebarLiText);
-								}
-							}
-						}
-					}
+
 					if(firstabilityiteration != true) {
 						firstabilityiteration = true;
 						abilityAside1OptionsLabel.click();
@@ -194,4 +148,80 @@ var createAbility = function() {
 			}
 		}
 	}
+
+
+
+	function abilityOptionsSelector(i) {
+		var i;
+		if (this.value != undefined) {
+			i = this.value;
+		}
+		console.log(i)
+	
+		abilityAside4SidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;" + "<u>" + finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"] + "</u>";
+		abilityAside2TitleID.innerText = "#" + getAbilityData(finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"], "ID");
+		abilityAside2DebutText.innerText = "Introduced in " + getAbilityData(finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"], "Debut");
+		abilityAside2TitleName.innerText = finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"];
+		abilityAside3DescriptionText.innerText = getAbilityData(finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"], "Flavor");
+		var lis = document.querySelectorAll("#ability-aside4 ul li");
+		for(var q = 0; q < lis.length; q++) {
+			lis[q].remove();
+		}
+
+
+		var sidebarAbilityListFull = sidebarAbilityList.map((v) => v + "_" + JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon" + "_" + JSONPath_Ability);
+		for(var q = 0; q < sidebarAbilityListFull.length; q++) {
+			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability", "");
+		}
+		var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[i][JSONPath_AbilityReference+"_" + "Name"], sidebarAbilityListFull);
+		console.log(AbilityResults)
+		for(var q = 0; q < AbilityResults.length; q++) {
+			var abilityAside4SidebarLi = document.createElement("li");
+			abilityAside4SidebarUl.appendChild(abilityAside4SidebarLi);
+			for(var u = 0; u < sidebarAbilityList.length; u++) {
+				if(u == 0) {
+					var abilityAside4SidebarLiImgOuter = document.createElement("div");
+					var abilityAside4SidebarLiImg = document.createElement("img");
+					abilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + AbilityResults[q]["Folder"] + AbilityResults[q]["File"] + ".png";
+					abilityAside4SidebarLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+					if(AbilityResults[q]["Form"] != undefined) {
+						abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[q]["Form"]);
+						abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[q]["Form"]));
+					} else {
+						abilityAside4SidebarLiImg.setAttribute("title", AbilityResults[q]["Pokémon"]);
+						abilityAside4SidebarLiImg.setAttribute("value",getPokémonInt(AbilityResults[q]["Pokémon"]));
+					}
+					abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiImgOuter);
+					abilityAside4SidebarLiImgOuter.appendChild(abilityAside4SidebarLiImg);
+					abilityAside4SidebarLiImg.addEventListener("click", modalData);
+				} else if(u != 0) {
+					var abilityAside4SidebarLiTextOuter = document.createElement("span");
+					var abilityAside4SidebarLiText = document.createElement("button");
+					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
+						abilityAside4SidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
+					}
+					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"]) {
+						abilityAside4SidebarLiText.classList.add("active");
+					} else {
+						abilityAside4SidebarLiText.addEventListener("click", dataRedirect);
+					}
+					abilityAside4SidebarLiText.setAttribute("name", "ability");
+					abilityAside4SidebarLiText.setAttribute("title", sidebarAbilityList[u]);
+					abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiTextOuter);
+					abilityAside4SidebarLiTextOuter.appendChild(abilityAside4SidebarLiText);
+				}
+			}
+		}
+	
+		var tempStr;
+		if (abilityLearnsetPB.length > 1) {
+			tempStr = abilityLearnsetPB.join(",");
+		}
+		else {
+			tempStr = abilityLearnsetPB[0];
+		}
+		abilityLearnsetPartyBox(tempStr);
+	}
 };
+
+
