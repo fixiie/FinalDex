@@ -167,7 +167,7 @@ var createData = function(id, i) {
 	dataAside2Map.setAttribute("name", Region + "-" + MEDIAPath_Map);
 	dataAside2MapPanzoom.setAttribute("id", "data-map-panzoom-" + id);
 	dataAside2MapPanzoom.setAttribute("name", Region + "-" + MEDIAPath_Map);
-	dataAside2MapImage.src = "./media/Images/Misc/Map/" + MEDIAPath_Map + "/Map.png";
+	dataAside2MapImage.src = "./media/Images/Location/Map/" + MEDIAPath_Map + "/Map.png";
 	dataAside2MapImage.onload = function() {
 		dataAside2MapImage.setAttribute("width", dataAside2MapImage.width + "px");
 		dataAside2MapImage.setAttribute("height", dataAside2MapImage.height + "px");
