@@ -62,19 +62,19 @@ var createMap = function() {
 	mapAside3MapCancel.addEventListener("click", mapCancel);
 	mapAside3MapUp.classList.add("map-up");
 	mapAside3MapUpToggle.classList.add("map-up-toggle");
-	mapAside3MapUpToggle.innerText = "↑";
+	mapAside3MapUpToggle.innerText = "⮝";
 	mapAside3MapUpMain
 	mapAside3MapDown.classList.add("map-down");
 	mapAside3MapDownToggle.classList.add("map-down-toggle");
-	mapAside3MapDownToggle.innerText = "↓";
+	mapAside3MapDownToggle.innerText = "⮟";
 	mapAside3MapDownMain
 	mapAside3MapLeft.classList.add("map-left");
 	mapAside3MapLeftToggle.classList.add("map-left-toggle");
-	mapAside3MapLeftToggle.innerText = "←";
+	mapAside3MapLeftToggle.innerText = "⮜";
 	mapAside3MapLeftMain
 	mapAside3MapRight.classList.add("map-right");
 	mapAside3MapRightToggle.classList.add("map-right-toggle");
-	mapAside3MapRightToggle.innerText = "→";
+	mapAside3MapRightToggle.innerText = "⮞";
 	mapAside3MapRightMain
 	mapAside3Map.setAttribute("id", "map");
 	mapAside3MapPanzoom.setAttribute("id", "map-panzoom");
@@ -126,6 +126,11 @@ var createMap = function() {
 	mapAside3MapPanzoom.appendChild(mapAside3MapImage);
 	mapAside3MapPanzoom.appendChild(mapAside3MapCordinateOuter);
 
+	mapAside3MapUpToggle.addEventListener("click", mapMove);
+	mapAside3MapDownToggle.addEventListener("click", mapMove);
+	mapAside3MapLeftToggle.addEventListener("click", mapMove);
+	mapAside3MapRightToggle.addEventListener("click", mapMove);
+
 
     var mapAside2Game = document.createElement("span");
     var mapAside2GameImage = document.createElement("img");
@@ -159,9 +164,13 @@ var createMap = function() {
 	var mapAside4Description = document.createElement("div");
 	mapAside4Description.setAttribute("id", "map-description");
 	mapAside4.appendChild(mapAside4Description);
-	var DescriptionSelectorOuter = document.createElement("div");
-	DescriptionSelectorOuter.classList.add("map-description-selector-outer")
-	mapAside4Description.appendChild(DescriptionSelectorOuter);
+
+	mapAside4DescriptionBorder = document.createElement("span");
+	mapAside4Description.appendChild(mapAside4DescriptionBorder);
+
+	var DescriptionSelector = document.createElement("div");
+	DescriptionSelector.classList.add("map-description-selector-outer")
+	mapAside4Description.appendChild(DescriptionSelector);
 
 	var mapAside4DescriptionOview = document.createElement("base");
 	mapAside4DescriptionOview.setAttribute("id", "map-description-oview");
@@ -285,28 +294,35 @@ var createMap = function() {
 		tutors = getTutorData(location,"Location");
 
 
-		var mapDescriptionTitles = ["Overview", "Pokémon", "Items", "Trainers", "Move Tutor"];
+		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Trainers", "Move Tutor"];
 
-		if (trainers.length == 0) {
-			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Trainers"));
+		if (poks.length == 0) {
+			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Pokémon"));
 		}
 		if (items.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Items"));
 		}
-		if (poks.length == 0) {
-			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Pokémon"));
+		if (trainers.length == 0) {
+			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Trainers"));
 		}
 		if (tutors.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Move Tutor"));
 		}
 
-		var titles = DescriptionSelectorOuter.querySelectorAll(":scope > div");
-		for(var q = 0; q < titles.length; q++) {
-			titles[q].remove();
+		var spans = DescriptionSelector.querySelectorAll(":scope span");
+		for(var q = 0; q < spans.length; q++) {
+			spans[q].remove();
+		}
+
+		var DescriptionSelectorUp = document.createElement("span");
+		DescriptionSelector.appendChild(DescriptionSelectorUp);
+
+		if (mapDescriptionTitles.length > 1) {
+			var DescriptionSelectorDown = document.createElement("span");
+			DescriptionSelector.appendChild(DescriptionSelectorDown);
 		}
 
 		for(var q = 0; q < mapDescriptionTitles.length; q++) {
-			var DescriptionSelector = document.createElement("div");
 			var DescriptionSelectorInput = document.createElement("input");
 			var DescriptionSelectorLabel = document.createElement("label");
 			DescriptionSelectorInput.setAttribute("type", "radio");
@@ -316,11 +332,11 @@ var createMap = function() {
 			DescriptionSelectorInput.setAttribute("value", mapDescriptionTitles[q]);
 			DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
 			DescriptionSelectorLabel.innerText = mapDescriptionTitles[q];
-			DescriptionSelectorOuter.appendChild(DescriptionSelector);
-			DescriptionSelector.appendChild(DescriptionSelectorInput);
-			DescriptionSelector.appendChild(DescriptionSelectorLabel);
-			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+
 			if (q == 0) {
+				DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
+				DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
+				DescriptionSelectorLabel.innerText = location;
 				DescriptionSelectorInput.setAttribute("checked","")
 				var mapDescriptionOuters = document.querySelectorAll('#map-description base[name]');
 				var mapDescriptionOuter = document.querySelectorAll('#map-description base[name="'+mapDescriptionTitles[q]+'"]');
@@ -331,9 +347,15 @@ var createMap = function() {
 					mapDescriptionOuter[y].style.removeProperty("display");
 				}
 			}
+			else {
+				DescriptionSelectorDown.appendChild(DescriptionSelectorInput);
+				DescriptionSelectorDown.appendChild(DescriptionSelectorLabel);
+			}
+
+			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
 		}
 
-		var input = DescriptionSelectorOuter.querySelector(':scope > div input[value="'+mapSelectorVal[0]+'"]');
+		var input = DescriptionSelector.querySelector(':scope div input[value="'+mapSelectorVal[0]+'"]');
 
 		if(input != undefined) {
 			input.click();
@@ -372,11 +394,15 @@ var createMap = function() {
 
 			if (ul == null) {
 				var mapAside4DescriptionItemUl = document.createElement("ul");
-				mapAside4DescriptionItem.appendChild(mapAside4DescriptionItemUl);
-				var mapAside4DescriptionItemUlTitle = document.createElement("h4");
-				mapAside4DescriptionItemUl.appendChild(mapAside4DescriptionItemUlTitle);
 				mapAside4DescriptionItemUl.setAttribute("name",itemArea[q])
-				mapAside4DescriptionItemUlTitle.innerText = itemArea[q];
+				mapAside4DescriptionItem.appendChild(mapAside4DescriptionItemUl);
+
+				if (itemArea[q] != location) {
+					var mapAside4DescriptionItemUlTitle = document.createElement("h4");
+					mapAside4DescriptionItemUlTitle.innerText = itemArea[q];
+					mapAside4DescriptionItemUl.appendChild(mapAside4DescriptionItemUlTitle);
+				}
+					
 			}
 			ul = mapAside4DescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
 
@@ -449,11 +475,14 @@ var createMap = function() {
 
 			if (ul == null) {
 				var mapAside4DescriptionPokUl = document.createElement("ul");
-				mapAside4DescriptionPok.appendChild(mapAside4DescriptionPokUl);
-				var mapAside4DescriptionPokUlTitle = document.createElement("h4");
-				mapAside4DescriptionPokUl.appendChild(mapAside4DescriptionPokUlTitle);
 				mapAside4DescriptionPokUl.setAttribute("name",pokArea[q])
-				mapAside4DescriptionPokUlTitle.innerText = pokArea[q];
+				mapAside4DescriptionPok.appendChild(mapAside4DescriptionPokUl);
+
+				if (pokArea[q] != location) {
+					var mapAside4DescriptionPokUlTitle = document.createElement("h4");
+					mapAside4DescriptionPokUlTitle.innerText = pokArea[q];
+					mapAside4DescriptionPokUl.appendChild(mapAside4DescriptionPokUlTitle);
+				}
 			}
 			ul = mapAside4DescriptionPok.querySelector(':scope > ul[name="'+pokArea[q]+'"]');
 
@@ -544,10 +573,15 @@ var createMap = function() {
 			if (ul == null) {
 				var mapAside4DescriptionTutorUl = document.createElement("ul");
 				mapAside4DescriptionTutor.appendChild(mapAside4DescriptionTutorUl);
-				var mapAside4DescriptionTutorUlTitle = document.createElement("h4");
-				mapAside4DescriptionTutorUl.appendChild(mapAside4DescriptionTutorUlTitle);
 				mapAside4DescriptionTutorUl.setAttribute("name",tutorArea[q])
-				mapAside4DescriptionTutorUlTitle.innerText = tutorArea[q];
+
+				if (tutorArea[q] != location) {
+					var mapAside4DescriptionTutorUlTitle = document.createElement("h4");
+					mapAside4DescriptionTutorUlTitle.innerText = tutorArea[q];
+					mapAside4DescriptionTutorUl.appendChild(mapAside4DescriptionTutorUlTitle);
+				}
+
+
 			}
 			ul = mapAside4DescriptionTutor.querySelector(':scope > ul[name="'+tutorArea[q]+'"]');
 
@@ -1276,74 +1310,22 @@ $("#map-panzoom").contextmenu(doubleClicker(function(e) {
 	$('.zoom-out').click();
 }));
 zoomReset();
-/*
+
 $('body').click(function(event) {
 	if(!$(event.target).closest('.map-up').length && !$(event.target).is('.map-up')) {
-		$(".map-up").css("transform", "translateY(-50px)");
+		$(".map-up").removeClass("open");
 	}
 	if(!$(event.target).closest('.map-down').length && !$(event.target).is('.map-down')) {
-		$(".map-down").css("transform", "translateY(50px)");
+		$(".map-down").removeClass("open");
 	}
 	if(!$(event.target).closest('.map-left').length && !$(event.target).is('.map-left')) {
-		$(".map-left").css("transform", "translateX(-150px)");
+		$(".map-left").removeClass("open");
 	}
 	if(!$(event.target).closest('.map-right').length && !$(event.target).is('.map-right')) {
-		$(".map-right").css("transform", "translateX(150px)");
+		$(".map-right").removeClass("open");
 	}
 });
-*/
-var mapup = document.getElementsByClassName("map-up-toggle");
-var i;
-for(i = 0; i < mapup.length; i++) {
-	mapup[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		var mapupouter = this.parentElement;
-		if(mapupouter.style.transform === "translateY(0px)") {
-			mapupouter.style.transform = "translateY(-50px)";
-		} else {
-			mapupouter.style.transform = "translateY(0px)";
-		}
-	});
-}
-var mapdown = document.getElementsByClassName("map-down-toggle");
-var i;
-for(i = 0; i < mapdown.length; i++) {
-	mapdown[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		var mapdownouter = this.parentElement;
-		if(mapdownouter.style.transform === "translateY(0px)") {
-			mapdownouter.style.transform = "translateY(50px)";
-		} else {
-			mapdownouter.style.transform = "translateY(0px)";
-		}
-	});
-}
-var mapleft = document.getElementsByClassName("map-left-toggle");
-var i;
-for(i = 0; i < mapleft.length; i++) {
-	mapleft[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		var mapleftouter = this.parentElement;
-		if(mapleftouter.style.transform === "translateX(0px)") {
-			mapleftouter.style.transform = "translateX(-150px)";
-		} else {
-			mapleftouter.style.transform = "translateX(0px)";
-		}
-	});
-}
-var mapright = document.getElementsByClassName("map-right-toggle");
-var i;
-for(i = 0; i < mapright.length; i++) {
-	mapright[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		var maprightouter = this.parentElement;
-		if(maprightouter.style.transform === "translateX(0px)") {
-			maprightouter.style.transform = "translateX(150px)";
-		} else {
-			maprightouter.style.transform = "translateX(0px)";
-		}
-	});
-}
+
 
 function mapCancel() {
 	var mapCancelInput = document.querySelectorAll('#map-options input:checked');
