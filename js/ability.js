@@ -156,7 +156,6 @@ var createAbility = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		console.log(i)
 	
 		abilityAside4SidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;" + "<u>" + finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"] + "</u>";
 		abilityAside2TitleID.innerText = "#" + getAbilityData(finaldataAbility[i][JSONPath_AbilityReference + "_" + "Name"], "ID");
@@ -174,7 +173,7 @@ var createAbility = function() {
 			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability", "");
 		}
 		var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[i][JSONPath_AbilityReference+"_" + "Name"], sidebarAbilityListFull);
-		console.log(AbilityResults)
+	
 		for(var q = 0; q < AbilityResults.length; q++) {
 			var abilityAside4SidebarLi = document.createElement("li");
 			abilityAside4SidebarUl.appendChild(abilityAside4SidebarLi);
