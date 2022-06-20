@@ -1207,6 +1207,7 @@ input[type=radio] {
 	position: absolute;
 	left: 0;
 	top: 0;
+	z-index: 10;
 }
 
 #map-description-trainer ul li p {
@@ -1490,16 +1491,15 @@ input[type=radio] {
 	-ms-interpolation-mode: nearest-neighbor;
 }
 
-#map-description-main,
+#map-description-oview,
 #map-description-pok,
 #map-description-item,
 #map-description-tutor,
 #map-description-trainer {
-	height: 90%;
+	height: 85%;
 	background: var(--color14);
 }
 
-#map-description-main,
 #map-description-pok,
 #map-description-item,
 #map-description-tutor {
@@ -1510,13 +1510,13 @@ input[type=radio] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	width: 100%;
-	height: 10%;
+	height: 15%;
 	border-bottom: 1px solid;
-	border-top: 1px solid;
 }
 
-.map-description-selector-outer > div {
+.map-description-selector-outer > span {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -1533,6 +1533,7 @@ input[type=radio] {
 	box-shadow: 0 0 1px var(--border1);
 	background: var(--color13);
 	color: var(--font2);
+	cursor:pointer;
 }
 
 .map-description-selector-outer input:checked + label {
@@ -1739,6 +1740,9 @@ input[type=radio] {
 	overflow: hidden;
 	display: flex;
 	z-index: 2;
+}
+#tool-aside3 > div {
+	border-left: 1px solid;
 }
 
 #tool-aside4 {
@@ -5002,7 +5006,16 @@ a {
 	height: 100%;
 	position: inherit;
 	text-align: left;
-	border-left: 1px solid;
+}
+#map-description > span {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid;
+    z-index: 20;
+	pointer-events: none;
 }
 
 .map-description-connection-outer {
@@ -5184,6 +5197,7 @@ a {
 	transition-property: transform;
 	background: var(--color17);
 	z-index: 10000;
+	user-select: none;
 }
 
 .map-up-toggle,
@@ -5200,7 +5214,15 @@ a {
 	overflow: hidden;
 	margin: auto 0;
 	text-align: center;
+	font-size: 120%;
 }
+.map-up-toggle:active,
+.map-down-toggle:active,
+.map-left-toggle:active,
+.map-right-toggle:active {
+	font-weight: bold;
+} 
+
 
 .map-up main,
 .map-down main,
@@ -5229,7 +5251,6 @@ a {
 	left: 35%;
 	width: 30%;
 	height: 50px;
-	transform: translateY(-50px);
 }
 
 .map-down {
@@ -5237,7 +5258,6 @@ a {
 	left: 35%;
 	width: 30%;
 	height: 50px;
-	transform: translateY(50px);
 }
 
 .map-left {
@@ -5245,7 +5265,6 @@ a {
 	left: 0;
 	width: 150px;
 	height: 20%;
-	transform: translateX(-150px);
 }
 
 .map-right {
@@ -5253,14 +5272,31 @@ a {
 	right: 0;
 	width: 150px;
 	height: 20%;
+}
+
+
+.map-up:not(.open) {
+	transform: translateY(-50px);
+}
+
+.map-down:not(.open) {
+	transform: translateY(50px);
+}
+
+.map-left:not(.open) {
+	transform: translateX(-150px);
+}
+
+.map-right:not(.open) {
 	transform: translateX(150px);
 }
+
 
 .map-up-toggle {
 	height: 40px;
 	width: 100%;
-	border-bottom-left-radius: 68px;
-	border-bottom-right-radius: 68px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 	left: 0;
 	top: 50px;
 }
@@ -5268,8 +5304,8 @@ a {
 .map-down-toggle {
 	height: 40px;
 	width: 100%;
-	border-top-left-radius: 68px;
-	border-top-right-radius: 68px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 	left: 0;
 	bottom: 50px;
 }
@@ -5277,8 +5313,8 @@ a {
 .map-left-toggle {
 	height: 100%;
 	width: 40px;
-	border-top-right-radius: 68px;
-	border-bottom-right-radius: 68px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
 	left: 150px;
 	bottom: 0;
 }
@@ -5286,11 +5322,12 @@ a {
 .map-right-toggle {
 	height: 100%;
 	width: 40px;
-	border-top-left-radius: 68px;
-	border-bottom-left-radius: 68px;
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
 	right: 150px;
 	bottom: 0;
 }
+
 
 @keyframes blinkOpacity {
 	0% {
@@ -5964,6 +6001,7 @@ span[name="Status"] {
 	height: 100%;
 	width: 100%;
 	background: var(--color16);
+	border-left: 1px solid;
 }
 
 .ability-description p {
@@ -6116,6 +6154,7 @@ span[name="Status"] {
 	height: 70%;
 	width: 100%;
 	background: var(--color16);
+	border-left: 1px solid;
 }
 
 .move-description p {
@@ -6332,7 +6371,7 @@ span[name="Status"] {
 }
 
 .move-sidebar-type,
-.move-sidebar-pppa {
+.move-sidebar-attribute {
 	width: 100%;
 	height: 50%;
 	display: flex;
@@ -6341,7 +6380,7 @@ span[name="Status"] {
 	align-content: center;
 }
 
-.move-sidebar-pppa span span *:last-child,
+.move-sidebar-attribute span span *:last-child,
 .move-sidebar-tutor span span *:last-child {
 	padding: 5px 0;
 }
@@ -6355,7 +6394,7 @@ span[name="Status"] {
 	filter: brightness(0.5);
 }
 
-.move-sidebar-pppa span span p > span {
+.move-sidebar-attribute span span p > span {
 	font-size: 80%;
 }
 
@@ -6527,6 +6566,7 @@ span[name="Status"] {
 	height: 100%;
 	width: 100%;
 	background: var(--color16);
+	border-left: 1px solid;
 }
 
 .item-description p {
@@ -8499,7 +8539,6 @@ span[name="Status"] {
 }
 
 #map-description-oview {
-	height: 90%;
     background: var(--color14);
 	display: flex;
     flex-direction: column;
@@ -8522,9 +8561,12 @@ span[name="Status"] {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: var(--color18);
+    background: var(--color_25);
     border-bottom: 1px solid;
-    border-color: var(--color20) !important;
+}
+#map-description-oview > span:first-child,
+#map-description-oview > span:first-child * {
+	color:var(--fontLight);
 }
 
 #map-description-oview > span:last-child {
@@ -8556,12 +8598,12 @@ span[name="Status"] {
 
 #map-description-oview > div > span {
 	width: 10%;
-	background: var(--color18);
+	background: var(--color_15);
 	display: flex;
     align-items: center;
     justify-content: center;
 	z-index: 10;
-	margin: 0 -1px;
+	color:var(--fontLight);
 }
 
 #map-description-oview > div button {
