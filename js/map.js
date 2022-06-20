@@ -80,7 +80,7 @@ var createMap = function() {
 	mapAside3MapPanzoom.setAttribute("id", "map-panzoom");
 	mapAside3MapPanzoom.setAttribute("name", Region+"-"+MEDIAPath_Map);
 	mapAside3MapMark.classList.add("map-img-mark-outer");
-	mapAside3MapImage.src = "./media/Images/Misc/Map/"+MEDIAPath_Map+"/Map.png";
+	mapAside3MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
 	mapAside3MapImage.onload = function() {
 		mapAside3MapImage.setAttribute("width", mapAside3MapImage.width+"px");
 		mapAside3MapImage.setAttribute("height", mapAside3MapImage.height+"px");
@@ -163,6 +163,63 @@ var createMap = function() {
 	DescriptionSelectorOuter.classList.add("map-description-selector-outer")
 	mapAside4Description.appendChild(DescriptionSelectorOuter);
 
+	var mapAside4DescriptionOview = document.createElement("base");
+	mapAside4DescriptionOview.setAttribute("id", "map-description-oview");
+	mapAside4DescriptionOview.setAttribute("name", "Overview");
+	mapAside4Description.appendChild(mapAside4DescriptionOview);
+
+	var mapAside4DescriptionOviewHeader = document.createElement("span");
+	var mapAside4DescriptionOviewHeaderText = document.createElement("h4");
+	mapAside4DescriptionOviewHeaderText.innerText = "B1F";
+	mapAside4DescriptionOview.appendChild(mapAside4DescriptionOviewHeader);
+	mapAside4DescriptionOviewHeader.appendChild(mapAside4DescriptionOviewHeaderText);
+
+	var mapAside4DescriptionOviewSelectorOuter = document.createElement("div");
+	mapAside4DescriptionOview.appendChild(mapAside4DescriptionOviewSelectorOuter);
+
+	var mapAside4DescriptionOviewButtonLeft = document.createElement("span");
+	var mapAside4DescriptionOviewButtonLeftButton = document.createElement("button");
+	mapAside4DescriptionOviewButtonLeftButton.innerText = "‹";
+	mapAside4DescriptionOviewButtonLeftButton.value = 0;
+	mapAside4DescriptionOviewSelectorOuter.appendChild(mapAside4DescriptionOviewButtonLeft);
+	mapAside4DescriptionOviewButtonLeft.appendChild(mapAside4DescriptionOviewButtonLeftButton);
+	mapAside4DescriptionOviewButtonLeftButton.style.display = "none";
+	mapAside4DescriptionOviewButtonLeftButton.addEventListener("click", overviewMove);
+
+
+	var mapAside4DescriptionOviewSelector = document.createElement("div");
+	mapAside4DescriptionOviewSelectorOuter.appendChild(mapAside4DescriptionOviewSelector);
+
+
+	var testimgs = ["Mistralton City Spring B","Celestial Tower 2F BW","Relic Castle B4F R BW","Twist Mountain Route 7 Autumn BW"]
+	for (var q = 0; q < testimgs.length; q++) {
+		var mapAside4DescriptionOviewImageInner = document.createElement("span");
+		var mapAside4DescriptionOviewImage = document.createElement("img");
+		mapAside4DescriptionOviewImageInner.setAttribute("name",q);
+		mapAside4DescriptionOviewImage.src = "./media/Images/Location/Overworld/BW/"+testimgs[q]+".png";
+		mapAside4DescriptionOviewSelector.appendChild(mapAside4DescriptionOviewImageInner);
+		mapAside4DescriptionOviewImageInner.appendChild(mapAside4DescriptionOviewImage);
+		//mapAside4DescriptionOviewImage.setAttribute("onerror","this.parentElement.remove()")
+		if (q == 0) {
+			mapAside4DescriptionOviewImageInner.classList.add("open")
+		}
+	}
+
+	var mapAside4DescriptionOviewButtonRight = document.createElement("span");
+	var mapAside4DescriptionOviewButtonRightButton = document.createElement("button");
+	mapAside4DescriptionOviewButtonRightButton.innerText = "›";
+	mapAside4DescriptionOviewButtonRightButton.value = 0;
+	mapAside4DescriptionOviewSelectorOuter.appendChild(mapAside4DescriptionOviewButtonRight);
+	mapAside4DescriptionOviewButtonRight.appendChild(mapAside4DescriptionOviewButtonRightButton);
+	mapAside4DescriptionOviewButtonRightButton.addEventListener("click", overviewMove);
+
+	var mapAside4DescriptionOviewDescription = document.createElement("span");
+	var mapAside4DescriptionOviewDescriptionText = document.createElement("p");
+	mapAside4DescriptionOviewDescriptionText.innerText = "Acuity Lakefront is an area in Pokémon Diamond, Pearl, and Platinum. It is located directly outside Lake Acuity, and connects Route 217 to Snowpoint City. Acuity Lakefront has the same Pokémon and music as Route 217. Despite being similar to Route 217, Eevee will not evolve into Glaceon here.";
+	mapAside4DescriptionOview.appendChild(mapAside4DescriptionOviewDescription);
+	mapAside4DescriptionOviewDescription.appendChild(mapAside4DescriptionOviewDescriptionText);
+
+
 	var mapAside4DescriptionPok = document.createElement("base");
 	mapAside4DescriptionPok.setAttribute("id", "map-description-pok");
 	mapAside4DescriptionPok.setAttribute("name", "Pokémon");
@@ -206,13 +263,18 @@ var createMap = function() {
 		mapAside1Options.appendChild(mapAside1OptionsInput);
 		mapAside1Options.appendChild(mapAside1OptionsLabel);
 		mapAside1OptionsInput.addEventListener("click", mapOptionsSelector);
+		mapAside1OptionsLabel.setAttribute("tabindex",q+10);
+		mapAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
 		if(q == 0) {
 			mapAside1OptionsLabel.click();
 		}
 	}
 
-	function mapOptionsSelector() {
-		var i = this.value;
+	function mapOptionsSelector(i) {
+		var i;
+		if (this.value != undefined) {
+			i = this.value;
+		}
 		var location = finaldataLocation[i][JSONPath_Location+"_"+"Name"];
 		var trainers = getLocationTrainers(location);
 		var items = [];
@@ -258,12 +320,22 @@ var createMap = function() {
 			DescriptionSelector.appendChild(DescriptionSelectorInput);
 			DescriptionSelector.appendChild(DescriptionSelectorLabel);
 			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+			if (q == 0) {
+				DescriptionSelectorInput.setAttribute("checked","")
+				var mapDescriptionOuters = document.querySelectorAll('#map-description base[name]');
+				var mapDescriptionOuter = document.querySelectorAll('#map-description base[name="'+mapDescriptionTitles[q]+'"]');
+				for(var y = 0; y < mapDescriptionOuters.length; y++) {
+					mapDescriptionOuters[y].style.display = "none";
+				}
+				for(var y = 0; y < mapDescriptionOuter.length; y++) {
+					mapDescriptionOuter[y].style.removeProperty("display");
+				}
+			}
 		}
 
-		var inputs = DescriptionSelectorOuter.querySelectorAll(":scope input:checked");
-		var input = DescriptionSelectorOuter.querySelector(":scope > div:first-child input");
+		var input = DescriptionSelectorOuter.querySelector(':scope > div input[value="'+mapSelectorVal[0]+'"]');
 
-		if(inputs.length == 0) {
+		if(input != undefined) {
 			input.click();
 		}
 
@@ -699,7 +771,7 @@ var createMap = function() {
 			}
 		}
 		var mapAside3MapMarkImg = document.createElement("img");
-		mapAside3MapMarkImg.src = "./media/Images/Misc/Map/"+MEDIAPath_Map+"/Mark/"+location+".png";
+		mapAside3MapMarkImg.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Mark/"+location+".png";
 		mapAside3MapMarkImg.classList.add("map-img-mark");
 		mapAside3MapMarkImg.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error2.png';this.classList.remove('map-img-mark');this.classList.add('map-img-error');");
 		mapAside3MapMark.appendChild(mapAside3MapMarkImg);
@@ -1144,7 +1216,7 @@ var createMap = function() {
 	}
 	}
 }
-
+var mapSelectorVal = [""];
 function mapDescriptionSelector() {
 	var i = this.value;
 	var mapDescriptionOuters = document.querySelectorAll('#map-description base[name]');
@@ -1155,7 +1227,8 @@ function mapDescriptionSelector() {
 	for(var y = 0; y < mapDescriptionOuter.length; y++) {
 		mapDescriptionOuter[y].style.display = "block";
 	}
-
+	mapSelectorVal.fill(i)
+	console.log(mapSelectorVal)
 }
 $('.zoom-fullscreen').click(function(e) {
 	$('#map-contain').toggleClass('fullscreen');
