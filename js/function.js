@@ -614,25 +614,34 @@ function getLocationPokémon(location) {
 }
 
 
-function sortObjectArray(objectsArr, prop, ascending = true) {
+function sortObjectArray(objectsArr, prop) {
+	var objectsArr;
+	var prop;
+	var ascending = true;
+
 	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
-	if(objectsHaveProp)    {
+
+	if(objectsHaveProp) {
 		let newObjectsArr = objectsArr.slice();
 		newObjectsArr.sort((a, b) => {
 			if(isNaN(Number(a[prop])))  {
 				let textA = a[prop].toUpperCase(),
 					textB = b[prop].toUpperCase();
 				if(ascending)   {
+	
 					return textA < textB ? -1 : textA > textB ? 1 : 0;
 				} else {
+		
 					return textB < textA ? -1 : textB > textA ? 1 : 0;
 				}
 			} else {
 				return ascending ? a[prop] - b[prop] : b[prop] - a[prop];
 			}
 		});
+
 		return newObjectsArr;
 	}
+
 	return objectsArr;
 }
 
