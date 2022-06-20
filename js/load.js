@@ -63,6 +63,7 @@ var finaldataMovePP = [];
 var finaldataMoveCategory = [];
 var finaldataMoveID = [];
 var finaldataMoveType = [];
+var finaldataMovePriority = [];
 var drag;
 var savedtar;
 var saveddrag;
@@ -194,6 +195,9 @@ function requestLoad(i,url) {
 			}
 			for(var q = 0; q < Metadata["Type"].length; q++) {
 				finaldataMoveType.push(Metadata["Type"][q]);
+			}
+			for(var q = 0; q < Metadata["Priority"].length; q++) {
+				finaldataMovePriority.push(Metadata["Priority"][q]);
 			}
 		}
 		if (loads[i] == "Game") {
