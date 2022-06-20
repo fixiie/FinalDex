@@ -145,28 +145,37 @@ var createItem = function() {
 			itemAside1Options.appendChild(itemAside1OptionsInput);
 			itemAside1Options.appendChild(itemAside1OptionsLabel);
 			itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
+
+			itemAside1OptionsLabel.setAttribute("tabindex",q+10);
+			itemAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
+
+
 			if (firstiteration == true) {
 				itemAside1OptionsInput.click();
 			}
 			firstiteration = false;
 		}
 
+	}
 
-		function itemOptionsSelector() {
-			var i = this.value;
-			itemAside2TitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
-			itemAside2TitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
+	
+	function itemOptionsSelector(i) {
+		var i;
+		if (this.value != undefined) {
+			i = this.value;
+		}
+		itemAside2TitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
+		itemAside2TitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
 
-			if (finaldataItems[i]["Pocket_"+JSONPath_Items] != undefined) {
-				itemAside4SidebarPocketImg.src = "./media/Images/Misc/Pocket/Icon/" + MEDIAPath_Pocket_Icon + "/" + finaldataItems[i]["Pocket_"+JSONPath_Items] + ".png";
-				itemAside4SidebarPocketImg.setAttribute("title",finaldataItems[i]["Pocket_"+JSONPath_Items]+" Pocket");
-				itemAside4SidebarPocketImg.style.removeProperty("display");
-			}
-			else {
-				itemAside4SidebarPocketImg.src = "";
-				itemAside4SidebarPocketImg.setAttribute("title","");
-				itemAside4SidebarPocketImg.style.display = "none";
-			}
+		if (finaldataItems[i]["Pocket_"+JSONPath_Items] != undefined) {
+			itemAside4SidebarPocketImg.src = "./media/Images/Misc/Pocket/Icon/" + MEDIAPath_Pocket_Icon + "/" + finaldataItems[i]["Pocket_"+JSONPath_Items] + ".png";
+			itemAside4SidebarPocketImg.setAttribute("title",finaldataItems[i]["Pocket_"+JSONPath_Items]+" Pocket");
+			itemAside4SidebarPocketImg.style.removeProperty("display");
+		}
+		else {
+			itemAside4SidebarPocketImg.src = "";
+			itemAside4SidebarPocketImg.setAttribute("title","");
+			itemAside4SidebarPocketImg.style.display = "none";
 		}
 	}
 };
