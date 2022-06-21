@@ -38,6 +38,30 @@ var createNav = function() {
 		}
 		navigationInput.addEventListener("change", navSelector);
 	}
+
+	var fullscreenButtonLeft = document.createElement("button");
+	var fullscreenButtonLeftText = document.createElement("p");
+	var fullscreenOverlay = document.createElement("span");
+	var fullscreenDiv = document.createElement("div");
+	var fullscreenUl = document.createElement("ul");
+	var fullscreenButtonRight = document.createElement("button");
+	var fullscreenButtonRightText = document.createElement("p");
+	fullscreenButtonLeftText.innerText = "«";
+	fullscreenButtonRightText.innerText = "»";
+	fullscreenButtonLeftText.value = 0;
+	fullscreenButtonRightText.value = 0;
+	var fullscreen = document.querySelector("#fullscreen");
+	fullscreen.appendChild(fullscreenButtonLeft);
+	fullscreenButtonLeft.appendChild(fullscreenButtonLeftText);
+	fullscreen.appendChild(fullscreenOverlay);
+	fullscreen.appendChild(fullscreenDiv);
+	fullscreenDiv.appendChild(fullscreenUl);
+	fullscreen.appendChild(fullscreenButtonRight);
+	fullscreenButtonRight.appendChild(fullscreenButtonRightText);
+
+	fullscreenOverlay.addEventListener("click",exitFullscreen);
+	fullscreenButtonLeftText.addEventListener("click",fullscreenMove);
+	fullscreenButtonRightText.addEventListener("click",fullscreenMove);
 }
 
 function navSelector() {
