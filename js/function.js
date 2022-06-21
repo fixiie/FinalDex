@@ -120,12 +120,26 @@ function getMachineMove(machine) {
 	var arr = finaldataMoveMachine;
 	var result;
 	for(i = 0; i < arr.length; i++) {
-		if(arr[i]["Machine_" + JSONPath_MoveMachine] == machine) {
-			result = arr[i]["Name" + "_" + JSONPath_MoveName]
+		if(arr[i]["Machine_"+JSONPath_MoveMachine] == machine) {
+			result = arr[i]["Name_"+JSONPath_MoveName]
 		}
 	}
 	return result;
 }
+
+function getMoveMachine(move) {
+	var move;
+	var arr = finaldataMoveMachine;
+	var result;
+	for(i = 0; i < arr.length; i++) {
+		if(arr[i]["Name_"+JSONPath_MoveName] == move) {
+			result = arr[i]["Machine_"+JSONPath_MoveMachine]
+		}
+	}
+	return result;
+}
+
+
 
 function Continuation(arr, column, style) {
 	var arr;
