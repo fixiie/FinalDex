@@ -1007,94 +1007,54 @@ var createData = function(id, i) {
 			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemImg);
 		}
 	}
-    dataAside1TypePrimaryText.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonType, "Type", "Single");
-	});
-	dataAside1TypeSecondaryText.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonType, "Type", "Single");
-	});
+    dataAside1TypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
+	dataAside1TypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
 
-	dataAside1TypePrimaryImg.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonType, "Type", "Single");
-	});
-	dataAside1TypeSecondaryImg.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonType, "Type", "Single");
-	});
+	dataAside1TypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
+	dataAside1TypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
+	
 	if(Ability.length >= 1) {
-		dataAside2MetadataSidebarAbilityPrimary.addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonAbility, "Ability", "Single");
-		});
-		dataAside2MetadataSidebarAbilitySecondary.addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonAbility, "Ability", "Single");
-		});
+		dataAside2MetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
+		dataAside2MetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
 		if(Ability.length >= 3) {
-			dataAside2MetadataSidebarAbilityHidden.addEventListener("click", function() {
-				callPopUp(id, finaldataPokémonAbility, "Ability", "Single");
-			});
+			dataAside2MetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
 		}
 	}
 	if(Egg == true) {
-		dataAside2MetadataSidebarEggGroupPrimary.addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");
+		dataAside2MetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");
 		});
-		dataAside2MetadataSidebarEggGroupSecondary.addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");
-		});
+		dataAside2MetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");});
 	}
-	dataAside2MetadataSidebarCatchRateOuter.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonCatchRate, "Catch Rate", "Single");
-	});
+	dataAside2MetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate, "Catch Rate", "Single");});
 	if(Egg == true) {
-		dataAside2MetadataSidebarHatchRateOuter.addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonHatchRate, "Hatch Rate", "Single");
-		});
+		dataAside2MetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate, "Hatch Rate", "Single");});
 	}
     if(Gender == true) {
-        dataAside2MetadataSidebarGenderRatioToggle.addEventListener("click", function() {
-            callPopUp(id, finaldataPokémonGenderRatio, "Gender Ratio", "Custom2");
-        });
+        dataAside2MetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio, "Gender Ratio", "Custom2");});
     }
-	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonExperienceYield, "Experience Yield", "Custom1");
-	});
-	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {
-		callPopUp(id, finaldataPokémonLevelingRate, "Leveling Rate", "Single");
-	});
+	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield, "Experience Yield", "Custom1");});
+	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate, "Leveling Rate", "Single");});
 	var helditm = document.querySelectorAll("#data-modal" + id + " .data-sidebar-helditem-img-outer > img");
 	for(q = 0; q < helditm.length; q++) {
-		helditm[q].addEventListener("click", function() {
-			callPopUp(id, finaldataPokémonHeldItem, "Held Item", "Single");
-		});
+		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem, "Held Item", "Single");});
 	}
-	dataAside2MetadataPopupTitleExit1.querySelector(":scope > p").addEventListener("click", function() {
-		OpenExitPopUp(id, false);
-	});
-	dataAside2MetadataPopupTitleExit2.querySelector(":scope > p").addEventListener("click", function() {
-		OpenExitPopUp(id, true);
-	});
+	dataAside2MetadataPopupTitleExit1.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, false);});
+	dataAside2MetadataPopupTitleExit2.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, true);});
 	showMetadataLearnsetArea();
 	var baseEV = document.querySelectorAll("#data-modal" + id + " .data-stats > ul li span");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
-			baseEV[q].addEventListener("click", function() {
-				callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Multiple");
-			});
+			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Multiple");});
 		} else if(baseEV[q].parentElement.parentElement.getAttribute("name") == "evyield") {
-			baseEV[q].addEventListener("click", function() {
-				callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Multiple");
-			});
+			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Multiple");});
 		}
 	}
 	var baseEVTotal = document.querySelectorAll("#data-modal" + id + " .data-stats > ul div");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
-			baseEVTotal[q].addEventListener("click", function() {
-				callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Total");
-			});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Total");});
 		} else if(baseEVTotal[q].parentElement.getAttribute("name") == "evyield") {
-			baseEVTotal[q].addEventListener("click", function() {
-				callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Total");
-			});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Total");});
 		}
 	}
 };
