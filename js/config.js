@@ -76,6 +76,8 @@ var JSONPath_MovePriority;
 var Stats = [];
 var Natures = [];
 var JSONPath_MoveReference;
+var tempLocationImages = [];
+var MEDIAPath_LocationOverworld;
 if(GameID == 1) {
 	JSONPath_PokédexEntry = "Red";
 	JSONPath_Area = "Red";
@@ -95,6 +97,7 @@ if(GameID == 3) {
 	JSONPath_Area = "Yellow";
 	MEDIAPath_Character_Battle = "Yellow";
 	JSONPath_Items = "Yellow";
+	MEDIAPath_LocationOverworld = "Yellow";
 }
 if(GameID == 4) {
 	JSONPath_PokédexEntry = "Gold";
@@ -124,6 +127,8 @@ if(GameID == 6) {
 	MEDIAPath_Character_Battle = "Crystal";
 	JSONPath_Items = "Crystal";
 	JSONPath_Location = "Crystal";
+	MEDIAPath_LocationOverworld = "Crystal";
+	tempLocationImages = ["Azalea Town","Azalea Town_Azalea Gym Exterior","Azalea Town_Azalea Gym","Battle Tower","Battle Tower_1F","Battle Tower_2F","Battle Tower_Battle Room","Battle Tower_Elevator","Bellchime Trail","Bellchime Trail_Gate 1F","Bellchime Trail_Gate 2F","Bellchime Trail_Gate 3F","Blackthorn City","Blackthorn City_Blackthorn Gym 1F","Blackthorn City_Blackthorn Gym 2F","Blackthorn City_Blackthorn Gym Exterior","Burned Tower_1F Before","Burned Tower_1F","Burned Tower_B1F","Celadon City","Celadon City_Celadon Gym Exterior","Celadon City_Celadon Gym","Celadon City_Celadon Restaurant","Celadon Department Store","Celadon Game Corner","Celadon Game Corner_Inside","Celadon Mansion","Celadon Mansion_1F","Celadon Mansion_2F","Celadon Mansion_3F","Celadon Mansion_Know It All Room","Celadon Mansion_Rooftop","Cerulean Cape","Cerulean City","Cerulean City_Cerulean Gym Exterior","Cerulean City_Cerulean Gym","Cherrygrove City","Cherrygrove City_Beta","Cianwood City","Cianwood Gym","Cinnabar Gym","Cinnabar Island","Dark Cave_1","Dark Cave_2","Day Care","Diglett's Cave","Diglett's Cave_Entrance Route 11","Diglett's Cave_Entrance Route 2","Dragon's Den","Dragon's Den_Dragon Shrine","Dragon's Den_Entrance","Dragon's Den_Lower Entrance","Ecruteak City","Ecruteak City_Ecruteak Gym Exterior","Ecruteak City_Ecruteak Gym","Fighting Dojo","Fighting Dojo_Exterior","Fuchsia City","Fuchsia City_Fuchsia Gym Exterior","Fuchsia City_Fuchsia Gym","Gate 10 Outside","Gate 11 Outside","Gate 2 Inside","Gate 2 Outside","Gate 7 Outside","Gate 8 Outside","Gate 9 1F","Gate 9 B1F","Gate Inside","Gate Outside","Glitter Lighthouse","Glitter Lighthouse_1F","Glitter Lighthouse_2F","Glitter Lighthouse_3F","Glitter Lighthouse_4F","Glitter Lighthouse_5F","Glitter Lighthouse_6F","Goldenrod Bike Shop_Exterior","Goldenrod City","Goldenrod City_Goldenrod Gym Exterior","Goldenrod City_Goldenrod Gym","Goldenrod City_J","Goldenrod City_JP","Goldenrod Department Store","Goldenrod Department Store_1F","Goldenrod Department Store_2F","Goldenrod Department Store_3F","Goldenrod Department Store_4F","Goldenrod Department Store_5F","Goldenrod Department Store_6F","Goldenrod Department Store_Basement GSC first","Goldenrod Department Store_Basement GSC second","Goldenrod Department Store_Basement GSC third","Goldenrod Department Store_Rooftop","Goldenrod Game Corner","Goldenrod Radio Tower","Goldenrod Radio Tower_1F","Goldenrod Radio Tower_2F","Goldenrod Radio Tower_3F","Goldenrod Radio Tower_4F","Goldenrod Radio Tower_5F","House of Memories_Interior","Ice Path_1F","Ice Path_B1F","Ice Path_B2F","Ice Path_B3F","Ilex Forest","Indigo Plateau","Kanto Poké Mart","Kanto Pokémon Center JP","Kanto Pokémon Center","Lake of Rage","Lake of Rage_Beta","Lavender Radio Tower","Lavender Radio Tower_1F","Lavender Town","Magnet Train","Mahogany Town","Mahogany Town_Mahogany Gym","Mahogany Town_Shop","Moomoo Farm","Moomoo Farm_Barn","Moomoo Farm_House","Mt. Moon_1F","Mt. Moon_Square","Mt. Mortar_Basement","Mt. Mortar_Entrance","Mt. Mortar_Lower Cave","Mt. Mortar_Upper Cave","Mt. Silver 1F","Mt. Silver 2F","Mt. Silver_2F Full Restore","Mt. Silver_Exterior","Mt. Silver_Summit","names.bat","names.txt","National Park","National Park_Horizontal Gate Interior","National Park_Inner Vertical Gate Exterior","National Park_Outer Horizontal Gate Exterior","National Park_Outer Vertical Gate Exterior","National Park_Vertical Gate Interior","New Bark Town","New Bark Town_Player House 1F","New Bark Town_Player House Exterior","New Bark Town_Player House","Olivine City","Olivine Gym Exterior","Olivine Gym","Pallet Town","Pallet Town_Professor Oak Lab Inside","Pallet Town_Red House 1F","Pallet Town_Red House 2F","Pallet Town_Red House Exterior","Pewter City","Pewter City_Pewter Gym Exterior","Pewter City_Pewter Gym","Pewter City_Pewter Museum of Science","Pokémon Center 2 JP","Pokémon Center 2","Pokémon Center 3","Pokémon Center 4","Pokémon Center 5 JP","Pokémon Center 5","Pokémon Center 6 JP","Pokémon Center 6","Pokémon Center 7 JP","Pokémon Center 7","Pokémon Center 8 JP","Pokémon Center 8","Pokémon Center 9 JP","Pokémon Center 9","Pokémon Center Inside","Pokémon Center JP","Pokémon Center","Pokémon Communication Center 1F","Pokémon Communication Center Administration Office","Pokémon Communication Center","Pokémon League_Bruno Room","Pokémon League_Champion Room","Pokémon League_Hall of Fame","Pokémon League_Karen Room","Pokémon League_Koga Room","Pokémon League_Lobby","Pokémon League_Reception Gate","Pokémon League_Will Room","Power Plant_Exterior","Power Plant_Interior","Rock Tunnel_1F","Rock Tunnel_B1F","Route 1","Route 10","Route 11","Route 12","Route 13","Route 14","Route 15","Route 16","Route 17","Route 18","Route 19","Route 19_Blocked","Route 2","Route 20","Route 21","Route 23_Beta","Route 26","Route 27","Route 28","Route 29","Route 3","Route 30","Route 31","Route 32","Route 33","Route 34","Route 35","Route 36","Route 37","Route 38","Route 39","Route 4","Route 40","Route 41","Route 42","Route 43","Route 44","Route 45","Route 46","Route 5","Route 6","Route 7","Route 8","Route 9","Ruins of Alph","Ruins of Alph_Cecond Chamber","Ruins of Alph_First Chamber","Ruins of Alph_Fourth Chamber","Ruins of Alph_Interior","Ruins of Alph_Item","Ruins of Alph_Puzzle","Ruins of Alph_Third Chamber","S.S. Aqua_1F Rooms","S.S. Aqua_1F","S.S. Aqua_B1F","S.S. Aqua_Captain Cabin","Safari Zone_unused","Saffron City","Saffron City_Copycat House 1F","Saffron City_Mr. Psychic's House","Saffron City_Saffron Gym Exterior","Saffron City_Saffron Gym","Silph Co","Silph Co._1F","Slowpoke Well","Slowpoke Well_B1F","Slowpoke Well_B2F","Sprout Tower","Sprout Tower_1F","Sprout Tower_3F","Team Rocket's Hideout_1F before Team Rocket","Team Rocket's Hideout_B1F","Team Rocket's Hideout_B2F","Team Rocket's Hideout_B3F","The Underground","The Underground_Basement","The Underground_Warehouse","Tin Tower","Tin Tower_1F","Tin Tower_2F","Tin Tower_3F","Tin Tower_4F","Tin Tower_5F","Tin Tower_6F","Tin Tower_7F","Tin Tower_8F","Tin Tower_9F","Tin Tower_Summit","Tohjo Falls","Trainer House_1F","Trainer House_B1F","Trainer House_Outside","Underground Path (Routes 5-6)","Underground Path (Routes 5-6)_1F","Underground Path (Routes 7-8)_Exterior 2","Union Cave_1F","Union Cave_B1F","Union Cave_B2F","Vermilion City","Vermilion City_Vermilion Gym Exterior","Vermilion City_Vermilion Gym","Vermillion City_Pokémon Fan Club Interior","Vermillion City_Pokémon Fan Club","Victory Road_1F","Victory Road_2F","Victory Road_3F","Violet City","Violet City_Beta","Violet City_Pokémon Academy Interior","Violet City_Violet Gym Exterior","Violet City_Violet Gym","Viridian City","Viridian City_Viridian Gym Exterior","Viridian City_Viridian Gym","Whirl Islands_1F NW","Whirl Islands_1F SE","Whirl Islands_1F SW","Whirl Islands_B1F Middle","Whirl Islands_B1F","Whirl Islands_B2F Inner","Whirl Islands_B2F","Whirl Islands_Basement"]
 }
 if(GameID == 7) {
 	JSONPath_PokédexEntry = "Ruby";
@@ -188,6 +193,7 @@ if(GameID == 12) {
 	JSONPath_Form = "Emerald";
 	MEDIAPath_Character_Battle = "Emerald";
 	JSONPath_Items = "Emerald";
+	MEDIAPath_LocationOverworld = "Emerald";
 }
 if(GameID == 13) {
 	JSONPath_PokédexEntry = "";
@@ -241,6 +247,7 @@ if(GameID == 16) {
 	JSONPath_Reference = "Platinum";
 	MEDIAPath_Character_Battle = "Platinum";
 	JSONPath_Items = "Platinum";
+	MEDIAPath_LocationOverworld = "Platinum";
 }
 if(GameID == 17) {
 	JSONPath_PokédexEntry = "HeartGold";
@@ -256,6 +263,7 @@ if(GameID == 19) {
 	JSONPath_LocationConnection = "Black";
 	JSONPath_LocationDescription = "Black";
     JSONPath_Location = "Black";
+	MEDIAPath_LocationOverworld = "Black";
 }
 if(GameID == 20) {
 	JSONPath_PokédexEntry = "White";
@@ -263,18 +271,21 @@ if(GameID == 20) {
 	JSONPath_LocationConnection = "White";
 	JSONPath_LocationDescription = "White";
     JSONPath_Location = "White";
+	MEDIAPath_LocationOverworld = "White";
 }
 if(GameID == 21) {
 	JSONPath_PokédexEntry = "Black 2";
 	JSONPath_Area = "Black 2";
 	JSONPath_LocationConnection = "Black 2";
 	JSONPath_LocationDescription = "Black 2";
+	MEDIAPath_LocationOverworld = "Black 2";
 }
 if(GameID == 22) {
 	JSONPath_PokédexEntry = "White 2";
 	JSONPath_Area = "White 2";
 	JSONPath_LocationConnection = "White 2";
 	JSONPath_LocationDescription = "White 2";
+	MEDIAPath_LocationOverworld = "White 2";
 }
 if(GameID == 23) {
 	JSONPath_PokédexEntry = "X";
@@ -347,6 +358,7 @@ if(GameID >= 1 && GameID <= 2) {
 	ImageType_Extension = ["PNG", "PNG", "PNG", "PNG"];
 	MEDIAPath_Character_Battle = "RB";
 	JSONPath_Items = "RB";
+	MEDIAPath_LocationOverworld = "RB";
 }
 if(GameID >= 1 && GameID <= 3) {
 	Generation = 1;
@@ -372,6 +384,7 @@ if(GameID >= 4 && GameID <= 5) {
 	MEDIAPath_Character_Battle = "GS";
 	JSONPath_Items = "GS";
 	JSONPath_Location = "GS";
+	MEDIAPath_LocationOverworld = "GS";
 }
 if(GameID >= 4 && GameID <= 6) {
 	Generation = 2;
@@ -404,6 +417,7 @@ if(GameID >= 7 && GameID <= 8) {
 	JSONPath_Reference = "RS";
 	MEDIAPath_Character_Battle = "RS";
 	JSONPath_Items = "RS";
+	MEDIAPath_LocationOverworld = "RS";
 }
 if(GameID >= 7 && GameID <= 13) {
 	Generation = 3;
@@ -456,6 +470,7 @@ if(GameID >= 10 && GameID <= 11) {
 	JSONPath_MoveTutor = "FRLG";
 	MEDIAPath_Character_Battle = "FRLG";
 	JSONPath_Items = "FRLG";
+	MEDIAPath_LocationOverworld = "FRLG";
 }
 if(GameID == 9 || GameID == 13) {
 	JSONPath_Pokédex = ["Strategy Memo (Alphabetical)_ColXD", "Strategy Memo (Heaviest)_ColXD", "Strategy Memo (Lightest)_ColXD", "Strategy Memo (Tallest)_ColXD", "Strategy Memo (Shortest)_ColXD", ];
@@ -492,6 +507,8 @@ if(GameID >= 14 && GameID <= 15) {
 	JSONPath_Reference = "DP";
 	MEDIAPath_Character_Battle = "DP";
 	JSONPath_Items = "DP";
+	MEDIAPath_LocationOverworld = "DP";
+	tempLocationImages = ["Acuity Lakefront","Amity Square","Battle Frontier_Entrance","Battle Park","Battle Tower","Battle Tower_Exterior","Canalave City","Canalave City_Canalave Gym 2F","Canalave City_Canalave Gym 3F","Canalave City_Canalave Gym 4F","Canalave City_Canalave Library 1F","Canalave City_Canalave Library 2F","Canalave City_Canalave Library 3F","Celestic Town","Contest Hall_Entrance","Day Care","Eterna City","Eterna City_Eterna Gym","Eterna City_Galactic Eterna Building 1F","Eterna City_Galactic Eterna Building 2F","Eterna City_Galactic Eterna Building 4F","Eterna Condominiums","Eterna Condominiums_1F","Eterna Condominiums_2F","Eterna Condominiums_3F","Eterna Forest","Eterna Forest_Exterior","Fight Area","Floaroma Flower Shop","Floaroma Flower Shop_Interior","Floaroma Town","Flower Paradise_Shaymin","Fuego Ironworks","Fuego Ironworks_Interior","Fullmoon Island","Fullmoon Island_Cresselia","Gate_Interior","Great Marsh","Great Marsh_Entrance 1F","Hall of Fame","Hall of Origin","Hearthome City","Hearthome City_Pokémon Fan Club Interior","Hearthome City_Pokémon Fan Club","Hearthome Gym","Hotel Grand Lake","Iron Island","Iron Island_1F","Iron Island_B1F L","Iron Island_B1F R","Iron Island_B2F L","Iron Island_B2F R","Iron Island_Exit","Jubilife City","Jubilife City_Global Trade Station Exterior","Jubilife City_Global Trade Station Interior","Jubilife City_Global Trade Station Trade Room","Jubilife City_Jubilife TV 1F","Jubilife City_Jubilife TV 2F","Jubilife City_Jubilife TV 3F","Jubilife City_Jubilife TV 4F","Jubilife City_Jubilife TV Elevator","Jubilife City_Jubilife TV Gallery","Jubilife City_Jubilife TV Global Ranking Room","Jubilife City_Jubilife TV Group Ranking Room","Jubilife City_Jubilife TV","Lake Acuity","Lake Acuity_Cavern","Lake Valor Cavern","Lake Valor","Lake Valor_Dry","Lake Verity","Lake Verity_Cavern","Lake Verity_Low","Lost Tower","Lost Tower_1F","Lost Tower_2F","Lost Tower_4F","Lost Tower_5F","Maniac Tunnel_0-9 Unown","Maniac Tunnel_10-25 Unown","Mt. Coronet_4F","Mt. Coronet_6F","Mt. Coronet_7F","Mt. Coronet_Snowy Area","Newmoon Island","Newmoon Island_Darkrai","Old Chateau_2F","Old Chateau_Dining Room","Old Chateau_Entrance","Oreburgh City","Oreburgh Gate_1F","Oreburgh Gate_B1F","Oreburgh Gym","Oreburgh Mine_B1F","Oreburgh Mine_B2F","Oreburgh Mining Museum","Oreburgh Mining Museum_Interior","Pal Park","Pal Park_Forest","Pastoria City","Pastoria Gym","Pokémon Center_Inside","Pokémon League","Pokémon League_Aaron room","Pokémon League_Bertha room","Pokémon League_Cynthia Room Entrance","Pokémon League_Cynthia room","Pokémon League_Elite Four Connecting Room","Pokémon League_Elite Four Entrance","Pokémon League_Flint room","Pokémon League_Lobby","Pokémon League_Lucian room","Pokémon League_Vista View","Pokémon Mansion_Exterior","Pokémon Mansion_Interior","Ravaged Path","Resort Area","Ribbon Syndicate_1F","Ribbon Syndicate_2F","Route 201","Route 202","Route 203","Route 204","Route 205","Route 206","Route 207","Route 208","Route 209","Route 210","Route 210_Café Cabin Interior","Route 210_Café Cabin","Route 211","Route 212","Route 213","Route 214","Route 215","Route 216","Route 217","Route 218","Route 219","Route 220","Route 221","Route 222","Route 223","Route 224","Route 224_Oaks Letter","Route 225","Route 226","Route 227","Route 228","Route 229","Route 230","Sandgem Town","Sandgem Town_Rowan Lab","Seabreak Path","Secret Base","Sendoff Spring","Seven Stars Restaurant","Snowpoint City","Snowpoint City_Snowpoint Gym","Snowpoint Temple","Snowpoint Temple_1F","Snowpoint Temple_B1F","Snowpoint Temple_B2F","Snowpoint Temple_B3F","Snowpoint Temple_B4F","Snowpoint Temple_B5F","Solaceon Ruins_1F","Solaceon Ruins_2F","Solaceon Ruins_B1F","Solaceon Ruins_B2F","Solaceon Ruins_B3F","Solaceon Ruins_Exterior","Solaceon Town","Spear Pillar","Spring Path","Stark Mountain_Entrance","Stark Mountain_Exterior","Stark Mountain_Heatran","Stark Mountain_Main Cavern","Sunyshore City","Sunyshore Gym","Sunyshore Gym_First Room","Sunyshore Gym_Second Room","Sunyshore Gym_Third Room","Sunyshore Market","Sunyshore Market_Interior","Super Contest Hall","Survival Area","Team Galactic HQ","Team Galactic HQ_1F","Team Galactic HQ_2F","Team Galactic HQ_3F","Team Galactic HQ_4F","Team Galactic HQ_Galactic Warehouse 1F","Team Galactic HQ_Galactic Warehouse B1F","Team Galactic HQ_Galactic Warehouse B2F","Team Galactic HQ_Galactic Warehouse Exterior","Team Galactic HQ_Lake Trio Room","Trainers' School","Trainers' School_Interior","Turnback Cave_Entrance","Turnback Cave_Giratina","Turnback Cave_No Pillar Random Rooms","Turnback Cave_One Pillar Random Rooms","Turnback Cave_Pillar Room","Turnback Cave_Two Pillar Random Rooms","Twinleaf Town","Twinleaf Town_Player House 1F","Twinleaf Town_Player House 2F","Twinleaf Town_Player House Exterior","Valley Windworks","Valley Windworks_Interior","Valor Lakefront","Veilstone City","Veilstone City_Veilstone Gym","Veilstone City_Veilstone Prize House","Veilstone Department Store","Veilstone Department Store_1F","Veilstone Department Store_2F","Veilstone Department Store_3F","Veilstone Department Store_4F","Veilstone Department Store_5F","Veilstone Department Store_Elevator","Veilstone Game Corner_Exterior","Veilstone Game Corner_Interior","Verity Lakefront","Victory Road_1F","Victory Road_2F","Victory Road_B1F Deep Entrance","Victory Road_B1F Deep Exit","Victory Road_B1F Deep","Victory Road_B1F","Vista Lighthouse","Vista Lighthouse_Elevator","Vista Lighthouse_Observation Deck","Wayward Cave_1F","Wayward Cave_B1F"];
 }
 if(GameID == 14 || GameID == 16) {
 	JSONPath_HeldItem = "DPt";
@@ -530,6 +547,7 @@ if(GameID >= 17 && GameID <= 18) {
 	JSONPath_Reference = "HGSS";
 	MEDIAPath_Character_Battle = "HGSS";
 	JSONPath_Items = "HGSS";
+	MEDIAPath_LocationOverworld = "HGSS";
 }
 if(GameID >= 19 && GameID <= 22) {
 	Generation = 5;
@@ -599,6 +617,7 @@ if(GameID >= 23 && GameID <= 24) {
 	JSONPath_Reference = "XY";
 	JSONPath_MoveReference = "XY";
 	JSONPath_Items = "XY";
+	MEDIAPath_LocationOverworld = "XY";
 }
 if(GameID >= 25 && GameID <= 28) {
 	JSONPath_CatchRate = "ORASSM";
@@ -622,6 +641,7 @@ if(GameID >= 25 && GameID <= 26) {
 	JSONPath_Reference = "ORAS";
 	JSONPath_MoveReference = "ORAS";
 	JSONPath_Items = "ORAS";
+	MEDIAPath_LocationOverworld = "ORAS";
 }
 if(GameID == 27 || GameID == 29) {
 	JSONPath_EvolutionMethod = "Sun,Ultra Sun";
@@ -665,6 +685,7 @@ if(GameID >= 27 && GameID <= 28) {
 	JSONPath_MoveReference = "SM";
 	MEDIAPath_Character_Battle = "SM";
 	JSONPath_Items = "SM";
+	MEDIAPath_LocationOverworld = "SM";
 }
 if(GameID >= 29 && GameID <= 30) {
 	JSONPath_Pokédex = ["Alola Pokédex_USUM", "Melemele Pokédex_USUM", "Akala Pokédex_USUM", "Ula'ula Pokédex_USUM", "Poni Pokédex_USUM", ];
@@ -686,6 +707,7 @@ if(GameID >= 29 && GameID <= 30) {
 	JSONPath_MoveReference = "USUM";
 	MEDIAPath_Character_Battle = "USUM";
 	JSONPath_Items = "USUM";
+	MEDIAPath_LocationOverworld = "USUM";
 }
 if(GameID >= 31 && GameID <= 32) {
 	JSONPath_Pokédex = ["Kanto Pokédex_LGPE"];
@@ -716,6 +738,7 @@ if(GameID >= 31 && GameID <= 32) {
 	MEDIAPath_Character_Battle = "LGPE";
 	JSONPath_Items = "LGPE";
 	JSONPath_MovePriority = "LGPE";
+	MEDIAPath_LocationOverworld = "LGPE";
 }
 if(GameID >= 33 && GameID <= 34) {
 	Generation = 8;
@@ -743,6 +766,7 @@ if(GameID >= 33 && GameID <= 34) {
 	JSONPath_MoveReference = "SwSh";
 	JSONPath_Items = "SwSh";
 	JSONPath_MovePriority = "SwSh";
+	MEDIAPath_LocationOverworld = "SwSh";
 }
 if(Generation >= 1 && Generation <= 2) {
 	JSONPath_Category = "1-2";
