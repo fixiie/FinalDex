@@ -525,7 +525,8 @@ function callPopUp(x, arr, type, style) {
 				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
 			}
 			img.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			if(result[u]["Pokémon"] == getPokémonName(getIntID("", x))) {
+
+			if(result[u]["Pokémon"] == getPokémonName(getIntID("", x)) || result[u]["Form"] == getPokémonName(getIntID("", x))) {
 				li.classList.add("select");
 			}
 			img.addEventListener("click", modalData);
@@ -752,15 +753,14 @@ function dataRedirect() {
     var z;
     var typevariant;
     var lock;
-    if(this.innerText != undefined && this.innerText != "") {
-        z = this.innerText;
-        x = (this.innerText).toLowerCase();
+    var notval = ["⮜","⮝","⮟","⮞"];
+
+    if (this.innerText != undefined && this.innerText != "" && this.firstElementChild == undefined && !notval.includes(this.innerText)) {
+        x = this.innerText;
     } else if(this.getAttribute("title") != undefined) {
-        z = this.getAttribute("title");
-        x = (this.getAttribute("title")).toLowerCase();
+        x = this.getAttribute("title");
     } else if(this.getAttribute("value") != undefined) {
-        z = this.getAttribute("value");
-        x = (this.getAttribute("value")).toLowerCase();
+        x = this.getAttribute("value");
     }
     if(type == "map") {
         typevariant = type;
@@ -773,26 +773,57 @@ function dataRedirect() {
     var input = document.querySelector('#navigation input[value="'+typevariant+'"]:checked');
     var modal = document.querySelector(".data-modal-outer.open");
 
+    if (x.includes(",")) {
+        var y;
+        y = x.split(",");
+
+        for (var q = 0; q < y.length; q++) {
+            var r = q + 1;
+            y[q] = r+". "+y[q];
+        }
+        y = y.join("\n")
+
+        var selection = prompt(type+"\nEnter Number:\n"+y,"");
+
+        y = y.split("\n");
+        
+        for (var q = 0; q < y.length; q++) {
+            var num = q + 1;
+            y[q] = y[q].split(num+". ")[1];
+        }
+
+        if (selection != null && selection != "" && parseInt(selection) != NaN && y[parseInt(selection)-1] != undefined) {
+            x = y[parseInt(selection)-1];
+        }
+        else {
+            alert("Returned an error.");
+            return;
+        }
+    }
+
+
     if (modal != null) {
-        lock = confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?");
+        lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
     }
     else {
         if (input == null) {
-            lock = confirm("Redirecting you to the "+type+" "+z+".\nDo you want to continue?");
+            lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
         }
         else {
             lock = true;
         }
     }
+    
 
 
     if (lock) {
+        var z = x.toLowerCase();
         if(document.querySelector(".data-modal-outer.open") != undefined) {
             document.querySelector(".data-modal-outer.open").classList.remove("open");
         }
-        document.querySelector("#navigation > input[value='" + typevariant + "']").click();
-        document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').click();
-        document.querySelector('#' + type + '-options > label[data-search-name="' + x + '"]').scrollIntoView();  
+        document.querySelector("#navigation > input[value='"+typevariant+"']").click();
+        document.querySelector('#'+type+'-options > label[data-search-name="'+z+'"]').click();
+        document.querySelector('#'+type+'-options > label[data-search-name="'+z+'"]').scrollIntoView();  
     }
 
 
@@ -1191,13 +1222,19 @@ function loadData() {
             helditem.parentElement.style.display = "flex";
         }
     }
+    if (formatCalcTypeAdvantage(calculateTypeAdvantage(i)) != undefined) {
+        type.setAttribute("title",formatCalcTypeAdvantage(calculateTypeAdvantage(i)));
+    }
+    else {
+        type.setAttribute("title","");
+    }
 	if(returnData(i, "Type", "")[0] != undefined) {
 		type.querySelector(":scope > span:first-child h3").style.display = "none";
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
 		type.querySelector(":scope > span:first-child h3").innerText = returnData(i, "Type", "")[0];
 		type.querySelector(":scope > span:first-child img").setAttribute("src", "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + returnData(i, "Type", "")[0] + ".png");
-		type.querySelector(":scope > span:first-child img").setAttribute("title", returnData(i, "Type", "")[0]);
+        type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i, "Type", "")[0]);
 	} else {
 		type.querySelector(":scope > span:first-child").classList.remove("active");
 		type.querySelector(":scope > span:first-child img").style.display = "none";
@@ -1208,7 +1245,7 @@ function loadData() {
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
 		type.querySelector(":scope > span:last-child h3").innerText = returnData(i, "Type", "")[1];
 		type.querySelector(":scope > span:last-child img").setAttribute("src", "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + returnData(i, "Type", "")[1] + ".png");
-		type.querySelector(":scope > span:last-child img").setAttribute("title", returnData(i, "Type", "")[1]);
+        type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i, "Type", "")[1]);
 	} else {
 		type.querySelector(":scope > span:last-child").classList.remove("active");
 		type.querySelector(":scope > span:last-child img").style.display = "none";
@@ -3884,20 +3921,22 @@ function trainerPokCycle(event) {
 
 
 function overviewMove() {
-    var base = findUpTag(this,"BASE").querySelector(":scope > div");
-    var tar = base.querySelector(':scope > div');
-    var span = base.querySelector(':scope > div span[name="'+this.value+'"]');
+    var base = findUpTag(this,"BASE");
+    var tar = base.querySelector(':scope > div > div');
+    var span = base.querySelector(':scope > div > div span[name="'+this.value+'"]');
     var buttons = base.querySelectorAll(":scope button")
     var x = parseInt(this.value);
     var y = parseInt(tar.lastChild.getAttribute("name"));
     var left = span.previousElementSibling;
     var right = span.nextElementSibling;
+    var header = base.querySelector(":scope > span h4");
 
     if (this.innerText == "‹") {
         x = parseInt(this.value) - 1;
         tar.style.transform = "translate(-"+x+"00%, 0)";
-        
+
         if (left != null) {
+            header.innerText = left.querySelector(":scope img").getAttribute("title");
             for (var q = 0; q < buttons.length; q++) {
                 buttons[q].value = left.getAttribute("name");
             }
@@ -3908,18 +3947,16 @@ function overviewMove() {
         tar.style.transform = "translate(-"+x+"00%, 0)";
 
         if (right != null) {
+            header.innerText = right.querySelector(":scope img").getAttribute("title");
             for (var q = 0; q < buttons.length; q++) {
                 buttons[q].value = right.getAttribute("name");
             }
         }
     }
 
-
     for (var q = 0; q < buttons.length; q++) {
         buttons[q].style.removeProperty("display");
     }
-
-
 
     if (x <= 0) {
         buttons[0].style.display = "none";
@@ -3933,19 +3970,507 @@ function overviewMove() {
     else {
         buttons[1].style.removeProperty("display");
     }
-
-
-
 }
 
 
-function mapMove() {
-    var base = this.parentElement;
 
-    if (base.classList.contains("open")) {
-        base.classList.remove("open");
+
+function fullscreenIMG(imgs,x) {
+    var imgs;
+    var x;
+    var base = document.querySelector("#fullscreen");
+    var ul = base.querySelector(":scope > div ul");
+
+    x = parseInt(x);
+    var y = x + 1;
+
+    var baseBox = base.querySelectorAll(":scope > div ul li");
+    for (var i = 0; i < baseBox.length; i++) {
+        baseBox[i].remove();
+    }
+
+    var buttons = base.querySelectorAll(":scope button p");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute("value",x);
+        buttons[i].style.display = "none";
+    }
+
+    for (var i = 0; i < imgs.length; i++) {
+        var imgBox = document.createElement("li");
+        var img = document.createElement("img");
+        img.src = imgs[i].src;
+        img.title = imgs[i].title;
+        imgBox.setAttribute("name",i);
+        base.querySelector(":scope > div ul").appendChild(imgBox)
+        imgBox.appendChild(img)
+    }
+ 
+    base.classList.add("open");
+    ul.style.transform = "translate(-"+x+"00%)";
+
+    if (x > 0) {
+        buttons[0].style.removeProperty("display");
+    }
+    if (y < imgs.length && imgs.length > 1) {
+        buttons[1].style.removeProperty("display");
+    }
+}
+
+
+function fullscreenMove() {
+    var base1 = this.parentElement.parentElement;
+    var base2 = document.querySelector('#map-description-oview');
+
+    var val = this.getAttribute("value");
+    var tar1 = base1.querySelector(':scope > div ul');
+    var tar2 = base2.querySelector(':scope > div > div');
+    var li = tar1.querySelector(':scope > li[name="'+val+'"]');
+    var buttons1 = base1.querySelectorAll(":scope button p");
+    var buttons2 = base2.querySelectorAll(":scope button");
+
+    var x = parseInt(val);
+    var y = parseInt(tar1.lastChild.getAttribute("name"));
+
+    var left = li.previousElementSibling;
+    var right = li.nextElementSibling;
+
+    if (this.innerText == "«") {
+        x = x - 1;
+        tar1.style.transform = "translate(-"+x+"00%, 0)";
+        tar2.style.transform = "translate(-"+x+"00%, 0)";
+
+        if (left != null) {
+            for (var q = 0; q < buttons1.length; q++) {
+                buttons1[q].setAttribute("value",left.getAttribute("name"));
+                buttons2[q].setAttribute("value",left.getAttribute("name"));
+            }
+        }
+    }
+    else if (this.innerText == "»") {
+        x = x + 1;
+        tar1.style.transform = "translate(-"+x+"00%, 0)";
+        tar2.style.transform = "translate(-"+x+"00%, 0)";
+
+        if (right != null) {
+            for (var q = 0; q < buttons1.length; q++) {
+                buttons1[q].setAttribute("value",right.getAttribute("name"));
+                buttons2[q].setAttribute("value",right.getAttribute("name"));
+            }
+        }
+    }
+
+    for (var q = 0; q < buttons1.length; q++) {
+        buttons1[q].style.removeProperty("display");
+        buttons2[q].style.removeProperty("display");
+    }
+
+    if (x <= 0) {
+        buttons1[0].style.display = "none";
+        buttons2[0].style.display = "none";
     }
     else {
-        base.classList.add("open");
+        buttons1[0].style.removeProperty("display");
+        buttons2[0].style.removeProperty("display");
     }
+    if (x >= y) {
+        buttons1[1].style.display = "none";
+        buttons2[1].style.display = "none";
+    }
+    else {
+        buttons1[1].style.removeProperty("display");
+        buttons2[1].style.removeProperty("display");
+    }
+}
+
+
+function exitFullscreen() {
+    this.parentElement.classList.remove("open");
+}
+
+
+function calculateTypeAdvantage(i) {
+    var i;
+    var primary = returnData(i, "Type", "")[0];
+    var secondary = returnData(i, "Type", "")[1];
+
+    var result = [];
+
+    var Normal = [];
+    var Weakness2x = [];
+    var Weakness4x = [];
+    var Strength2x = [];
+    var Strength4x = [];
+    var Immunity = [];
+
+    var primaryNormal = [];
+    var primary2xWeakness = [];
+    var primary2xStrength = [];
+    var primaryImmunity = [];
+    var secondaryNormal = [];
+    var secondary2xWeakness = [];
+    var secondary2xStrength = [];
+    var secondaryImmunity = [];
+
+
+    primaryNormal = returnTypeAdvantage(primary,"Defending")[0];
+    primary2xWeakness = returnTypeAdvantage(primary,"Defending")[1];
+    primary2xStrength = returnTypeAdvantage(primary,"Defending")[2];
+    primaryImmunity = returnTypeAdvantage(primary,"Defending")[3];
+
+    if (secondary != undefined) {
+        secondaryNormal = returnTypeAdvantage(secondary,"Defending")[0];
+        secondary2xWeakness = returnTypeAdvantage(secondary,"Defending")[1];
+        secondary2xStrength = returnTypeAdvantage(secondary,"Defending")[2];
+        secondaryImmunity = returnTypeAdvantage(secondary,"Defending")[3];
+    }
+
+
+    for (var q = 0; q < primaryNormal.length; q++) {
+        if (!Normal.includes(primaryNormal[q])){
+            Normal.push(primaryNormal[q]);
+        }
+    }
+    for (var q = 0; q < secondaryNormal.length; q++) {
+        if (!Normal.includes(secondaryNormal[q])){
+            Normal.push(secondaryNormal[q]);
+        }
+    }
+
+    for (var q = 0; q < primaryImmunity.length; q++) {
+        if (!Immunity.includes(primaryImmunity[q])){
+            Immunity.push(primaryImmunity[q]);
+        }
+    }
+    for (var q = 0; q < secondaryImmunity.length; q++) {
+        if (!Immunity.includes(secondaryImmunity[q])){
+            Immunity.push(secondaryImmunity[q]);
+        }
+    }
+
+    for (var q = 0; q < primary2xStrength.length; q++) {
+        if(secondary2xStrength.includes(primary2xStrength[q])) {
+            Strength4x.push(primary2xStrength[q]);
+        }
+        else {
+            Strength2x.push(primary2xStrength[q]);
+        }
+    }
+    for (var q = 0; q < secondary2xStrength.length; q++) {
+        if(!Strength2x.includes(secondary2xStrength[q]) && !Strength4x.includes(secondary2xStrength[q])) {
+            Strength2x.push(secondary2xStrength[q]);
+        }
+ 
+    }
+
+    for (var q = 0; q < primary2xWeakness.length; q++) {
+        if(secondary2xWeakness.includes(primary2xWeakness[q])) {
+            Weakness4x.push(primary2xWeakness[q]);
+        }
+        else {
+            Weakness2x.push(primary2xWeakness[q]);
+        }
+    }
+    for (var q = 0; q < secondary2xWeakness.length; q++) {
+        if(!Weakness2x.includes(secondary2xWeakness[q]) && !Weakness4x.includes(secondary2xWeakness[q])) {
+            Weakness2x.push(secondary2xWeakness[q]);
+        }
+    }
+
+    var arrs = [Normal,Weakness2x,Weakness4x,Strength2x,Strength4x,Immunity];
+    var arrsName = ["Normal","Weakness2x","Weakness4x","Strength2x","Strength4x","Immunity"];
+
+    var tempWeakness = [];
+    var tempStrength = [];
+
+    for (var q = 0; q < arrs.length; q++) {
+        for (var u = 0; u < arrs[q].length; u++) {
+            if (Weakness2x.includes(arrs[q][u]) && arrsName[q] != "Weakness2x" && arrsName[q] != "Immunity") {
+                var obj = new Object;
+                obj["Name"] = arrsName[q];
+                obj["Type"] = arrs[q][u];
+                obj["ID"] = q;
+                tempWeakness.push(obj)
+            }
+       
+            if (Strength2x.includes(arrs[q][u]) && arrsName[q] != "Strength2x" && arrsName[q] != "Immunity") {
+                var obj = new Object;
+                obj["Name"] = arrsName[q];
+                obj["Type"] = arrs[q][u];
+                obj["ID"] = q;
+                tempStrength.push(obj)
+            }
+  
+        }
+    }
+
+    for (var q = 0; q < tempStrength.length; q++) {
+        if (tempStrength[q]["Name"] == "Normal") {
+            Normal = Normal.filter(function(val) {return val != tempStrength[q]["Type"]})
+        }
+        if (tempStrength[q]["Name"] == "Weakness2x") {
+            Strength2x = Strength2x.filter(function(val) {return val != tempStrength[q]["Type"]})
+            Weakness2x = Weakness2x.filter(function(val) {return val != tempStrength[q]["Type"]})
+            if (!Normal.includes(tempStrength[q]["Type"])) {
+                Normal.push(tempStrength[q]["Type"]);
+            }
+        }
+    }
+
+    for (var q = 0; q < tempWeakness.length; q++) {
+        if (tempWeakness[q]["Name"] == "Normal") {
+            Normal = Normal.filter(function(val) {return val != tempWeakness[q]["Type"]})
+        }
+        if (tempWeakness[q]["Name"] == "Strength2x") {
+            Strength2x = Strength2x.filter(function(val) {return val != tempWeakness[q]["Type"]})
+            Weakness2x = Weakness2x.filter(function(val) {return val != tempWeakness[q]["Type"]})
+            if (!Normal.includes(tempWeakness[q]["Type"])) {
+                Normal.push(tempWeakness[q]["Type"]);
+            }
+        }
+    }
+    
+
+    for (var u = 0; u < Immunity.length; u++) {
+        Normal = Normal.filter(function(val) {return val != Immunity[u]})
+        Weakness2x = Weakness2x.filter(function(val) {return val != Immunity[u]})
+        Weakness4x = Weakness4x.filter(function(val) {return val != Immunity[u]})
+        Strength2x = Strength2x.filter(function(val) {return val != Immunity[u]})
+        Strength4x = Strength4x.filter(function(val) {return val != Immunity[u]})
+    }
+    
+    
+
+    var types = ["NORMAL","FIGHTING","FLYING","POISON","GROUND","ROCK","BUG","GHOST","STEEL","FIRE","WATER","GRASS","ELECTRIC","PSYCHIC","ICE","DRAGON","DARK","FAIRY"];
+    var FinalNormal = [];
+    var FinalWeakness2x = [];
+    var FinalWeakness4x = [];
+    var FinalStrength2x = [];
+    var FinalStrength4x = [];
+    var FinalImmunity = [];
+    
+
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Normal.length; u++) { 
+            if (Normal[u] == types[q]) {
+                FinalNormal[q] = Normal[u];
+            }
+        }
+    }
+
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Weakness2x.length; u++) { 
+            if (Weakness2x[u] == types[q]) {
+                FinalWeakness2x[q] = Weakness2x[u];
+            }
+        }
+    }
+
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Weakness4x.length; u++) { 
+            if (Weakness4x[u] == types[q]) {
+                FinalWeakness4x[q] = Weakness4x[u];
+            }
+        }
+    }
+    
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Strength2x.length; u++) { 
+            if (Strength2x[u] == types[q]) {
+                FinalStrength2x[q] = Strength2x[u];
+            }
+        }
+    }
+    
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Strength4x.length; u++) { 
+            if (Strength4x[u] == types[q]) {
+                FinalStrength4x[q] = Strength4x[u];
+            }
+        }
+    }
+    
+    for (var q = 0; q < types.length; q++) {
+        for (var u = 0; u < Immunity.length; u++) { 
+            if (Immunity[u] == types[q]) {
+                FinalImmunity[q] = Immunity[u];
+            }
+        }
+    }
+
+    FinalNormal = FinalNormal.filter(function(v) {return v != undefined;});
+    FinalWeakness2x = FinalWeakness2x.filter(function(v) {return v != undefined;});
+    FinalWeakness4x = FinalWeakness4x.filter(function(v) {return v != undefined;});
+    FinalStrength2x = FinalStrength2x.filter(function(v) {return v != undefined;});
+    FinalStrength4x = FinalStrength4x.filter(function(v) {return v != undefined;});
+    FinalImmunity = FinalImmunity.filter(function(v) {return v != undefined;});
+
+    result.push(FinalNormal);
+    result.push(FinalWeakness2x);
+    result.push(FinalWeakness4x);
+    result.push(FinalStrength2x);
+    result.push(FinalStrength4x);
+    result.push(FinalImmunity);
+
+
+    return result;
+}
+
+function formatCalcTypeAdvantage(arr) {
+    
+    var arr;
+    var result;
+    var tempArr = [];
+
+    var Normal;
+    var Weakness2x;
+    var Weakness4x;
+    var Strength2x;
+    var Strength4x;
+    var Immunity;
+
+    for (var q = 0; q < arr.length; q++) {
+        for (var u = 0; u < arr[q].length; u++) {
+            arr[q][u] = titleCase(arr[q][u]);
+        }
+    }
+
+
+    if (arr[0].length > 1) {
+        Normal = arr[0].join(" / ");
+    }
+    else {
+        Normal = arr[0][0];
+    }
+
+    if (arr[1].length > 1) {
+        Weakness2x = arr[1].join(" / ");
+    }
+    else {
+        Weakness2x = arr[1][0];
+    }
+
+    if (arr[2].length > 1) {
+        Weakness4x = arr[2].join(" / ");
+    }
+    else {
+        Weakness4x = arr[2][0];
+    }
+
+    if (arr[3].length > 1) {
+        Strength2x = arr[3].join(" / ");
+    }
+    else {
+        Strength2x = arr[3][0];
+    }
+
+    if (arr[4].length > 1) {
+        Strength4x = arr[4].join(" / ");
+    }
+    else {
+        Strength4x = arr[4][0];
+    }
+
+    if (arr[5].length > 1) {
+        Immunity = arr[5].join(" / ");
+    }
+    else {
+        Immunity = arr[5][0];
+    }
+
+    
+    if (Strength4x != undefined) {
+        tempArr.push("4×: "+Strength4x);
+    }
+    if (Strength2x != undefined) {
+        tempArr.push("2×: "+Strength2x);
+    }
+    if (Weakness2x != undefined) {
+        tempArr.push("½: "+Weakness2x);
+    }
+    if (Weakness4x != undefined) {
+        tempArr.push("¼: "+Weakness4x);
+    }
+    if (Immunity != undefined) {
+        tempArr.push("0×: "+Immunity);
+    }
+    result = tempArr.join("\n");
+    return result;
+}
+
+
+function returnTypeAdvantage(type,condition) {
+    var type;
+    var condition;
+    var arr = finaldataTypeChart;
+    var keys = [];
+    var result = [];
+    var weakness = [];
+    var strength = [];
+    var immunity = [];
+    var normal = [];
+    var types = [];
+
+    type = type.toUpperCase();
+
+    for (var q = 0; q < arr.length; q++) {
+        for (var u = 0; u < Object.keys(arr[q]).length; u++) {
+            if (!types.includes(Object.keys(arr[q])[u])) {
+                types.push(Object.keys(arr[q])[u]);
+            }
+        }
+    }
+
+    if (condition == "Defending") {
+        for (var q = 0; q < arr.length; q++) {
+            var keys = Object.keys(arr[q])
+
+            for (var u = 0; u < keys.length; u++) {
+                if (types[u] == type) {
+                    if (arr[q][keys[u]].includes("½")) {
+                        weakness.push(types[q])
+                    }
+                    else if (arr[q][keys[u]].includes("2")) {
+                        strength.push(types[q])
+                    }
+                    else if (arr[q][keys[u]].includes("0")) {
+                        immunity.push(types[q])
+                    }
+                    else if (arr[q][keys[u]].includes("1")) {
+                        normal.push(types[q])
+                    }
+                }
+            }
+        }
+    }
+    else if (condition == "Attacking") {
+        for (var q = 0; q < arr.length; q++) {
+            var keys = Object.keys(arr[q])
+ 
+            if (types[q] == type) {
+                for (var u = 0; u < keys.length; u++) {
+                    if (arr[q][keys[u]].includes("½")) {
+                        weakness.push(types[u])
+                    }
+                    else if (arr[q][keys[u]].includes("2")) {
+                        strength.push(types[u])
+                    }
+                    else if (arr[q][keys[u]].includes("0")) {
+                        immunity.push(types[u])
+                    }
+                    else if (arr[q][keys[u]].includes("1")) {
+                        normal.push(types[u])
+                    }
+                }
+            }
+        }
+    }
+
+    var result = [];
+    result.push(normal)
+    result.push(weakness);
+    result.push(strength);
+    result.push(immunity);
+
+    return result;
+
 }
