@@ -337,4 +337,3 @@ var mechanicContent1 = [fdataCatching, fdataExperience, fdataEvolution, fdataBre
 var mechanicContent2 = ["", "", "", "", "", ""];
 var mechanicOptionsTitle = [mechanicTitles1, mechanicTitles2];
 var mechanicOptions = [mechanicContent1, mechanicContent2];
-
