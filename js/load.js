@@ -245,7 +245,6 @@ function requestLoad(i,url) {
 			}
 		}
 
-
 		initialize();
 	}
 
@@ -315,7 +314,6 @@ function load() {
 	document.documentElement.scrollTop = 0;
 	load.className += "hidden";
 }
-
 
 
 
