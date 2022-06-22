@@ -1311,7 +1311,7 @@ function mapDescriptionSelector() {
 		mapDescriptionOuters[y].style.display = "none";
 	}
 	for(var y = 0; y < mapDescriptionOuter.length; y++) {
-		mapDescriptionOuter[y].style.display = "block";
+		mapDescriptionOuter[y].style.removeProperty("display");
 	}
 	mapSelectorVal.fill(i)
 	console.log(mapSelectorVal)
