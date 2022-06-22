@@ -1504,6 +1504,8 @@ input[type=radio] {
 #map-description-trainer {
 	height: 85%;
 	background: var(--color14);
+	display: flex;
+    flex-direction: column;
 }
 
 #map-description-pok,
@@ -1538,13 +1540,13 @@ input[type=radio] {
 	height: 100%;
 	box-shadow: 0 0 1px var(--border1);
 	background: var(--color13);
-	color: var(--font2);
+	color: var(--font1);
 	cursor:pointer;
 }
 
 .map-description-selector-outer input:checked + label {
 	background: var(--color11);
-	color: var(--font1);
+	color: var(--font2);
 }
 
 #map-options-outer {
@@ -8631,6 +8633,9 @@ span[name="Status"] {
     background: var(--color14);
 	display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 #map-description-oview > div {
@@ -8648,7 +8653,7 @@ span[name="Status"] {
 
 #map-description-oview > span:first-child {
 	width: 100%;
-    height: 5%;
+    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8664,7 +8669,7 @@ span[name="Status"] {
 
 #map-description-oview > span:last-child {
 	width: 100%;
-    height: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
 	z-index: 3;
