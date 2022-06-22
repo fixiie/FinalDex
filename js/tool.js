@@ -160,7 +160,7 @@ var createTool = function() {
 	var toolAside3RNGOptionsExecuteButton = document.createElement("button");
 	var toolAside3RNGResult = document.createElement("div");
 	toolAside3RNGOuter.classList.add("rng-outer");
-	toolAside3RNGOuter.setAttribute("name", "2");
+	toolAside3RNGOuter.setAttribute("name", "1");
 	toolAside3RNG.setAttribute("id", "rng");
 	toolAside3RNGResult.classList.add("result");
 	toolAside3RNGResult.classList.add("scroll");
@@ -199,7 +199,10 @@ var createTool = function() {
 	toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMax);
 	toolAside3RNGOptionsTitleMax.appendChild(toolAside3RNGOptionsTitleMaxText);
 	toolAside3RNGOptions.appendChild(toolAside3RNGOptionsUl);
-	var toolOptionsTitle = ["Timers", "Counter", "Random Number Generator", "Damage Calculator", "Catch Rate Calculator", "Shiny Odds Calculator", "IV Calculator", "Pokémon Finder", "Item Checklist", ];
+	var toolOptionsTitle = ["Timers","Random Number Generator"];
+
+	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, IV Calculator, Pokémon Finder, Item Checklist
+
 	for(var q = 0; q < toolOptionsTitle.length; q++) {
 		var toolAside1OptionsInput = document.createElement("input");
 		var toolAside1OptionsLabel = document.createElement("label");
@@ -216,9 +219,10 @@ var createTool = function() {
 		toolAside1OptionsInput.addEventListener("click", toolOptionsSelector);
 
 		function toolOptionsSelector() {
-			toolAside2Title.innerText = toolOptionsTitle[this.value];
+			var i = this.value;
+			toolAside2Title.innerText = toolOptionsTitle[i];
 			var toolContents = document.querySelectorAll("#tool-aside3 > div[name]");
-			var toolContent = document.querySelectorAll("#tool-aside3 > div[name='" + this.value + "']");
+			var toolContent = document.querySelectorAll("#tool-aside3 > div[name='"+i+"']");
 			for(var q = 0; q < toolContents.length; q++) {
 				toolContents[q].style.display = "none";
 			}
