@@ -4027,6 +4027,7 @@ function fullscreenMove() {
     var li = tar1.querySelector(':scope > li[name="'+val+'"]');
     var buttons1 = base1.querySelectorAll(":scope button p");
     var buttons2 = base2.querySelectorAll(":scope button");
+    var header = base2.querySelector(':scope > span:first-child h4')
 
     var x = parseInt(val);
     var y = parseInt(tar1.lastChild.getAttribute("name"));
@@ -4038,6 +4039,7 @@ function fullscreenMove() {
         x = x - 1;
         tar1.style.transform = "translate(-"+x+"00%, 0)";
         tar2.style.transform = "translate(-"+x+"00%, 0)";
+        header.innerText = left.querySelector(":scope img").getAttribute("title");
 
         if (left != null) {
             for (var q = 0; q < buttons1.length; q++) {
@@ -4050,6 +4052,7 @@ function fullscreenMove() {
         x = x + 1;
         tar1.style.transform = "translate(-"+x+"00%, 0)";
         tar2.style.transform = "translate(-"+x+"00%, 0)";
+        header.innerText = right.querySelector(":scope img").getAttribute("title");
 
         if (right != null) {
             for (var q = 0; q < buttons1.length; q++) {
