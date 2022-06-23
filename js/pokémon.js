@@ -62,7 +62,7 @@ var createPokémon = function() {
 			}
 		}
 	}
-	navigationSearchInput.setAttribute("title", " Search Options:" + "\n" + searchoptions.join("\n"));
+	navigationSearchInput.setAttribute("title", " Search Options:"+"\n"+searchoptions.join("\n"));
 	navigationSearchExit.setAttribute("id", "search-exit");
 	navigationCount.setAttribute("id", "count-outer");
 	navigationCountContent.setAttribute("id", "count");
@@ -72,7 +72,7 @@ var createPokémon = function() {
 	navigationCountSpan3.setAttribute("id", "count-total");
 	navigationGame.setAttribute("id", "gametitle-outer");
 	navigationGameContent.setAttribute("id", "gametitle");
-	navigationGameImg.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+	navigationGameImg.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
 	navigationSettings.setAttribute("id", "settings-outer");
 	navigationSettingsImg.src = "./media/Images/Misc/FinalDex/Cog.png";
 
@@ -82,7 +82,7 @@ var createPokémon = function() {
 	var navigationDexLabel = document.createElement("label");
 	navigationDexInput.setAttribute("type", "radio");
 	navigationDexInput.setAttribute("value", "1");
-	navigationDexInput.setAttribute("name", "finaldex-dexswitch-" + GameID);
+	navigationDexInput.setAttribute("name", "finaldex-dexswitch-"+GameID);
 	navigationDexInput.setAttribute("id", "dexswitch1");
 	navigationDexInput.setAttribute("autocomplete", "off");
 	navigationDexLabel.setAttribute("for", "dexswitch1");
@@ -96,15 +96,15 @@ var createPokémon = function() {
     navigationDexInput.addEventListener("click", dexSwitch);
 
 	for(var i = 0; i < JSONPath_Pokédex.length; i++) {
-		let x = i + 2;
+		let x = i+2;
 		var navigationDexInput = document.createElement("input");
 		var navigationDexLabel = document.createElement("label");
 		navigationDexInput.setAttribute("type", "radio");
 		navigationDexInput.setAttribute("value", x);
-		navigationDexInput.setAttribute("name", "finaldex-dexswitch-" + GameID);
-		navigationDexInput.setAttribute("id", "dexswitch" + x);
+		navigationDexInput.setAttribute("name", "finaldex-dexswitch-"+GameID);
+		navigationDexInput.setAttribute("id", "dexswitch"+x);
 		navigationDexInput.setAttribute("autocomplete", "off");
-		navigationDexLabel.setAttribute("for", "dexswitch" + x);
+		navigationDexLabel.setAttribute("for", "dexswitch"+x);
 		navigationDexLabel.setAttribute("name", JSONPath_Pokédex[i].split("_")[0]);
 		navigationDexLabel.innerText = JSONPath_Pokédex[i].split("_")[0];
 		navigationDexInner.appendChild(navigationDexInput);
@@ -786,8 +786,8 @@ var createPokémon = function() {
             settingsDefaultImgtypeOption.value = "Battle Models";
         }
         if (ImageType_Type[i].includes("Art")) {
-            settingsDefaultImgtypeOption.innerText = ImageType_Path[i] + " " + ImageType_Type[i];
-            settingsDefaultImgtypeOption.value = ImageType_Path[i] + " " + ImageType_Type[i];
+            settingsDefaultImgtypeOption.innerText = ImageType_Path[i]+" "+ImageType_Type[i];
+            settingsDefaultImgtypeOption.value = ImageType_Path[i]+" "+ImageType_Type[i];
         }
         if (ImageType_Path[i].includes("Recolor")) {
             settingsDefaultImgtypeOption.innerText = "Recolor Battle Sprites";
@@ -877,7 +877,7 @@ var createPokémon = function() {
     
 	var formopts = [];
 	for(var q = 0; q < finaldataPokémon.length; q++) {
-		if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_" + JSONPath_Area] != "Unobtainable") {
+		if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_"+JSONPath_Area] != "Unobtainable") {
 			formopts.push(finaldataPokémon[q]["Variant"]);
 		}
 	}
@@ -894,9 +894,9 @@ var createPokémon = function() {
 		var settingsVariantSpan = document.createElement("span");
 		settingsVariantInput.setAttribute("type", "checkbox");
 
-		settingsVariantInput.setAttribute("id", "settings-form-" + formopts[i] + "-" + i);
+		settingsVariantInput.setAttribute("id", "settings-form-"+formopts[i]+"-"+i);
 		settingsVariantInput.setAttribute("name",i);
-		settingsVariantLabel.setAttribute("for", "settings-form-" + formopts[i] + "-" + i);
+		settingsVariantLabel.setAttribute("for", "settings-form-"+formopts[i]+"-"+i);
 		settingsVariantLabel.innerText = formopts[i];
 		settingsVariantTop.appendChild(settingsVariantInput);
 		settingsVariantTop.appendChild(settingsVariantLabel);
@@ -977,20 +977,20 @@ function imgType() {
 			var dataType = imgType[i].getAttribute("data-type");
 			var dataPath = imgType[i].getAttribute("data-path");
 			var dataExtension = imgType[i].getAttribute("data-extension");
-			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>' + "<p>" + imgType[i].parentElement.innerText + "</p>" + '<div><img src="./media/Images/Misc/FinalDex/' + dataExtension + '.png" name="' + dataExtension + '" /></div>';
+			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/Misc/FinalDex/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
 			if(!dataType.includes("Art")) {
 				for(var q = 0; q < conimg.length; q++) {
 					if(conimg[q].getAttribute("id").includes("Shiny")) {
-						conimg[q].src = "./media/Images/Pokémon/" + dataType + "/" + dataExtension + "/Shiny/Front/" + dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
-						conimg[q].setAttribute("path", dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+						conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataExtension+"/Shiny/Front/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
+						conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
 					} else {
-						conimg[q].src = "./media/Images/Pokémon/" + dataType + "/" + dataExtension + "/Normal/Front/" + dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
-						conimg[q].setAttribute("path", dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+						conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataExtension+"/Normal/Front/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
+						conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
 					}
 				}
 			} else {
 				for(var q = 0; q < conimg.length; q++) {
-					conimg[q].src = "./media/Images/Pokémon/" + dataType + "/" + dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
+					conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
 				}
 			}
 		}
@@ -1015,9 +1015,9 @@ function resizeDiv() {
 	var name = document.querySelectorAll("#pokémon-outer > div main:last-child");
 	var sliderSwitch = 180;
 	for(i = 0; i < lis.length; i++) {
-		lis[i].style.width = slider.value + "px";
-		lis[i].style.height = slider.value + "px";
-		lis[i].style.fontSize = slider.value / 15 + "px";
+		lis[i].style.width = slider.value+"px";
+		lis[i].style.height = slider.value+"px";
+		lis[i].style.fontSize = slider.value / 15+"px";
 		if(slider.value <= sliderSwitch) {
 			id[i].style.display = "none";
 			img[i].style.height = "90%";
@@ -1031,7 +1031,7 @@ function resizeDiv() {
 			name[i].style.display = containNameDefaultDisplay;
 		}
 	}
-	output.innerText = Math.round((slider.value / sliderDefaultValue) * 100) + "%";
+	output.innerText = Math.round((slider.value / sliderDefaultValue) * 100)+"%";
 
     memory("Save","resize","site",document.getElementById("resize"))
 }
@@ -1066,23 +1066,23 @@ function search() {
 		} else if(searchVal.toLowerCase().includes("::") && searchVal.toLowerCase().includes(searchspec)) {
 			filterItems.addClass("hidden");
 			if(searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-				$("#pokémon-outer > div li[data-search-" + searchspec.split("::")[0].toLowerCase() + '="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass("hidden");
+				$("#pokémon-outer > div li[data-search-"+searchspec.split("::")[0].toLowerCase()+'="'+searchVal.split("::")[1].toLowerCase()+'"]').removeClass("hidden");
 			} else {
-				$("#pokémon-outer > div li[data-search-" + searchspec.split("::")[0].toLowerCase() + '*="' + searchVal.split("::")[1].toLowerCase() + '"]').removeClass("hidden");
+				$("#pokémon-outer > div li[data-search-"+searchspec.split("::")[0].toLowerCase()+'*="'+searchVal.split("::")[1].toLowerCase()+'"]').removeClass("hidden");
 			}
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes(":!") && searchVal.toLowerCase().includes(searchspec)) {
 			filterItems.addClass("hidden");
 			if(searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-				$("#pokémon-outer > div li:not([data-search-" + searchspec.split(":!")[0].toLowerCase() + '="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass("hidden");
+				$("#pokémon-outer > div li:not([data-search-"+searchspec.split(":!")[0].toLowerCase()+'="'+searchVal.split(":!")[1].toLowerCase()+'"])').removeClass("hidden");
 			} else {
-				$("#pokémon-outer > div li:not([data-search-" + searchspec.split(":!")[0].toLowerCase() + '*="' + searchVal.split(":!")[1].toLowerCase() + '"])').removeClass("hidden");
+				$("#pokémon-outer > div li:not([data-search-"+searchspec.split(":!")[0].toLowerCase()+'*="'+searchVal.split(":!")[1].toLowerCase()+'"])').removeClass("hidden");
 			}
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes(":>") && searchVal.toLowerCase().includes(searchspec)) {
 			for(var q = 0; q < filterItems.length; q++) {
 				filterItems[q].classList.add("hidden");
-				if(parseInt(filterItems[q].getAttribute("data-search-" + searchspec.split(":>")[0])) >= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
+				if(parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":>")[0])) >= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
 					filterItems[q].classList.remove("hidden");
 				}
 			}
@@ -1090,14 +1090,14 @@ function search() {
 		} else if(searchVal.toLowerCase().includes(":<") && searchVal.toLowerCase().includes(searchspec)) {
 			for(var q = 0; q < filterItems.length; q++) {
 				filterItems[q].classList.add("hidden");
-				if(parseInt(filterItems[q].getAttribute("data-search-" + searchspec.split(":<")[0])) <= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
+				if(parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":<")[0])) <= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
 					filterItems[q].classList.remove("hidden");
 				}
 			}
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase() != "") {
 			filterItems.addClass("hidden");
-			$('#pokémon-outer > div li[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+			$('#pokémon-outer > div li[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 		} else {
 			filterItems.removeClass("hidden");
 		}
@@ -1109,7 +1109,7 @@ function search() {
 			var filterItems = $("#ability-options label");
 			if(searchVal != "") {
 				filterItems.addClass("hidden");
-				$('#ability-options label[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+				$('#ability-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 			} else {
 				filterItems.removeClass("hidden");
 			}
@@ -1121,35 +1121,35 @@ function search() {
 		this.style.color = "var(--fontDark)";
 		if(searchVal.toLowerCase().includes("type::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-type*="' + searchVal.toLowerCase().split("type::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-type*="'+searchVal.toLowerCase().split("type::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("category::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-category*="' + searchVal.toLowerCase().split("category::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-category*="'+searchVal.toLowerCase().split("category::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("pp::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-pp="' + searchVal.toLowerCase().split("pp::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-pp="'+searchVal.toLowerCase().split("pp::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("power::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-power="' + searchVal.toLowerCase().split("power::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-power="'+searchVal.toLowerCase().split("power::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("accuracy::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-accuracy="' + searchVal.toLowerCase().split("accuracy::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-accuracy="'+searchVal.toLowerCase().split("accuracy::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("contact::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-contact*="' + searchVal.toLowerCase().split("contact::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-contact*="'+searchVal.toLowerCase().split("contact::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("tutor::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-tutor="' + searchVal.toLowerCase().split("tutor::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-tutor="'+searchVal.toLowerCase().split("tutor::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("machine::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-machine*="' + searchVal.toLowerCase().split("machine::")[1].replaceAll(" ", "") + '"]').removeClass("hidden");
+			$('#move-options label[data-search-machine*="'+searchVal.toLowerCase().split("machine::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
 			this.style.color = "var(--colorRed)";
 		} else if(searchVal.toLowerCase().includes("pp:>")) {
 			for(var i = 0; i < filterItems.length; i++) {
@@ -1201,7 +1201,7 @@ function search() {
 			this.style.color = "var(--colorRed)";
 		} else if(!searchVal == "" && !searchVal.toLowerCase().includes("::")) {
 			filterItems.addClass("hidden");
-			$('#move-options label[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+			$('#move-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 		} else {
 			filterItems.removeClass("hidden");
 		}
@@ -1211,7 +1211,7 @@ function search() {
 		var filterItems = $("#item-options label");
 		if(searchVal != "") {
 			filterItems.addClass("hidden");
-			$('#item-options label[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+			$('#item-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 		} else {
 			filterItems.removeClass("hidden");
 		}
@@ -1221,7 +1221,7 @@ function search() {
 		var filterItems = $("#map-options label");
 		if(searchVal != "") {
 			filterItems.addClass("hidden");
-			$('#map-options label[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+			$('#map-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 		} else {
 			filterItems.removeClass("hidden");
 		}
@@ -1231,7 +1231,7 @@ function search() {
 		var filterItems = $("#map-options label");
 		if(searchVal != "") {
 			filterItems.addClass("hidden");
-			$('#map-options label[data-search-name*="' + searchVal.toLowerCase() + '"]').removeClass("hidden");
+			$('#map-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
 		} else {
 			filterItems.removeClass("hidden");
 		}
@@ -1299,7 +1299,7 @@ function dexMove() {
 function dexSwitch() {
 	var divList = $("#pokémon-outer > div li");
 	var x = dexChecker[0];
-	if(x == JSONPath_Pokédex.length + 1) {
+	if(x == JSONPath_Pokédex.length+1) {
 		divList.sort(function(a, b) {
 			return $(a).data("national") - $(b).data("national");
 		});
@@ -1307,7 +1307,7 @@ function dexSwitch() {
 	} else {
 		for(q = 0; q < JSONPath_Pokédex.length; q++) {
 			divList.sort(function(a, b) {
-				return $(a).data("regional-" + x) - $(b).data("regional-" + x);
+				return $(a).data("regional-"+x) - $(b).data("regional-"+x);
 			});
 			$("#pokémon-outer > div ul").html(divList);
 		}
@@ -1343,30 +1343,30 @@ function dexCheck() {
 	      unobtainablediv[u].style.display = "none";
 	  }
 	  */
-	for(q = 0; q < [JSONPath_Pokédex.length + 1]; q++) {
-		var p = q + 1;
-		if(dexChecker == p && dexChecker != JSONPath_Pokédex.length + 1) {
-			let contreg = document.querySelectorAll(".contain-regionalID-" + p);
+	for(q = 0; q < [JSONPath_Pokédex.length+1]; q++) {
+		var p = q+1;
+		if(dexChecker == p && dexChecker != JSONPath_Pokédex.length+1) {
+			let contreg = document.querySelectorAll(".contain-regionalID-"+p);
 			for(u = 0; u < contreg.length; u++) {
 				contreg[u].style.display = "flex";
 			}
-			var contregdiv = document.querySelectorAll("#pokémon-outer > div li[data-regional-" + p + '=""]');
+			var contregdiv = document.querySelectorAll("#pokémon-outer > div li[data-regional-"+p+'=""]');
 			for(u = 0; u < contregdiv.length; u++) {
 				contregdiv[u].style.display = "none";
 			}
-			var regID = document.querySelectorAll(".data-regionalID-" + p);
+			var regID = document.querySelectorAll(".data-regionalID-"+p);
 			for(u = 0; u < regID.length; u++) {
 				regID[u].style.display = "unset";
 			}
-			var regPrevious = document.querySelectorAll(".data-previous button[name='regional" + p + "']");
+			var regPrevious = document.querySelectorAll(".data-previous button[name='regional"+p+"']");
 			for(u = 0; u < regPrevious.length; u++) {
 				regPrevious[u].style.display = "flex";
 			}
-			var regNext = document.querySelectorAll(".data-next button[name='regional" + p + "']");
+			var regNext = document.querySelectorAll(".data-next button[name='regional"+p+"']");
 			for(u = 0; u < regNext.length; u++) {
 				regNext[u].style.display = "flex";
 			}
-		} else if(dexChecker == p && dexChecker == JSONPath_Pokédex.length + 1) {
+		} else if(dexChecker == p && dexChecker == JSONPath_Pokédex.length+1) {
 			let contnat = document.querySelectorAll(".contain-nationalID");
 			for(u = 0; u < contnat.length; u++) {
 				contnat[u].style.display = "flex";
@@ -1438,12 +1438,12 @@ function createContain(condition) {
             }
         }
 
-        if(finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != "Unobtainable" || finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[i]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+        if(finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != "Unobtainable" || finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[i]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
             for (var q = 0; q < conditions.length; q++) {
                 if (conditions[q] == true) {
                     var ID = finaldataPokémon[i]["ID"];
                     var Name = finaldataPokémonForm[i]["Pokémon"];
-                    var formName = finaldataPokémonForm[i]["Form_" + JSONPath_Form];
+                    var formName = finaldataPokémonForm[i]["Form_"+JSONPath_Form];
                     var variant = finaldataPokémon[i]["Variant"];
                     var contentDiv = document.createElement("li");
                     var contentInput = document.createElement("input");
@@ -1458,8 +1458,8 @@ function createContain(condition) {
                     var contentName = document.createElement("p");
                     contentDiv.setAttribute("id",i);
 
-                    if(finaldataPokémonArea[i]["Filter_" + JSONPath_Area] != undefined) {
-                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_" + JSONPath_Area].replaceAll(" ", ""));
+                    if(finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != undefined) {
+                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_"+JSONPath_Area].replaceAll(" ", ""));
                     }
                     contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {
                         return v["Pokémon"];
@@ -1507,14 +1507,14 @@ function createContain(condition) {
 
                     contentDiv.setAttribute("data-search-variant", variant.toLowerCase());
                     contentInput.setAttribute("type", "checkbox");
-                    contentInput.setAttribute("id", "finaldex-" + GameID + "-" + i);
+                    contentInput.setAttribute("id", "finaldex-"+GameID+"-"+i);
                     contentInput.setAttribute("name",i);
-                    contentLabel.setAttribute("for", "finaldex-" + GameID + "-" + i);
+                    contentLabel.setAttribute("for", "finaldex-"+GameID+"-"+i);
                     contentButton.value = i;
                     contentButton.addEventListener("click", modalData);
                     contentButtonImg.src = "./media/Images/Misc/FinalDex/Location.png";
                     contentNationalID.classList.add("contain-nationalID");
-                    contentNationalID.innerText = "#" + ID;
+                    contentNationalID.innerText = "#"+ID;
                     contentImg.classList.add("contain-img");
                     contentImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
                     contentName.classList.add("contain-name");
@@ -1545,27 +1545,27 @@ function createContain(condition) {
 
 
                     for(q = 0; q < JSONPath_Pokédex.length; q++) {
-                        let y = q + 1;
+                        let y = q+1;
                         var contentMainRegionalID = document.createElement("caption");
                         if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] == undefined) {
                             if(finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
                                     return e.ID;
                                 }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
-                                contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                contentDiv.setAttribute("data-regional-"+y, finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
                                     return e.ID;
                                 }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]]);
-                                contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                contentMainRegionalID.innerText = "#"+finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
                                     return e.ID;
                                 }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]];
                             } else {
-                                contentDiv.setAttribute("data-regional-" + y, "");
+                                contentDiv.setAttribute("data-regional-"+y, "");
                                 contentMainRegionalID.innerText = "#";
                             }
                         } else {
-                            contentDiv.setAttribute("data-regional-" + y, finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]);
-                            contentMainRegionalID.innerText = "#" + finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
+                            contentDiv.setAttribute("data-regional-"+y, finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]);
+                            contentMainRegionalID.innerText = "#"+finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
                         }
-                        contentMainRegionalID.classList.add("contain-regionalID-" + y);
+                        contentMainRegionalID.classList.add("contain-regionalID-"+y);
                         contentMainUp.appendChild(contentMainRegionalID);
                     }
                     contentDiv.addEventListener("dragstart", dragStart);
