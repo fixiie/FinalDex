@@ -1314,7 +1314,6 @@ function mapDescriptionSelector() {
 		mapDescriptionOuter[y].style.removeProperty("display");
 	}
 	mapSelectorVal.fill(i)
-	console.log(mapSelectorVal)
 }
 
 
