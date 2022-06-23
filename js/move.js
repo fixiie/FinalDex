@@ -453,7 +453,7 @@ var createMove = function() {
 		}
 		var learnsetlevelarr = [];
 		for(var q = 0; q < finaldataLearnsetLevel.length; q++) {
-			if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetLevelLength[q] == true) {
+			if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetLevel[q]["Game"]) == true) {
 				var obj = new Object();
 				obj["Pokémon"] = finaldataLearnsetLevel[q]["Pokémon"];
 				if(finaldataLearnsetLevel[q]["Form"] != undefined) {
@@ -495,7 +495,7 @@ var createMove = function() {
 			moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
 		}
 		for(var q = 0; q < finaldataLearnsetEvolution.length; q++) {
-			if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetEvolutionLength[q] == true) {
+			if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetEvolution[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -543,7 +543,7 @@ var createMove = function() {
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetMachine.length; q++) {
-			if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetMachineLength[q] == true) {
+			if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetMachine[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -578,7 +578,7 @@ var createMove = function() {
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetBreed.length; q++) {
-			if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && finaldataLearnsetBreedLength[q] == true) {
+			if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetBreed[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
