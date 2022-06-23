@@ -64,7 +64,7 @@ var MEDIAPath_Encounter;
 var MEDIAPath_ExclusiveItem = [];
 var MEDIAPath_Item_Bag;
 var MEDIAPath_Map;
-var MEDIAPath_Pocket_Icon;
+var MEDIAPath_Item_Pocket;
 var MEDIAPath_Pokémon_Box;
 var MEDIAPath_Pokémon_Portrait;
 var MEDIAPath_Type_Category;
@@ -229,7 +229,7 @@ if(GameID == 16) {
 	JSONPath_PokédexEntry = "Platinum";
 	MEDIAPath_Item_Bag = "Platinum";
 	MEDIAPath_Encounter = "Platinum";
-	MEDIAPath_Pocket_Icon = "Platinum";
+	MEDIAPath_Item_Pocket = "Platinum";
 	ImageType_Path = ["Platinum", "Platinum", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
@@ -388,7 +388,7 @@ if(GameID >= 4 && GameID <= 6) {
 	JSONPath_HeldItem = "GSC";
 	JSONPath_HeldItemPercentage = ["2%", "23%"];
 	MEDIAPath_Map = "GSC";
-	MEDIAPath_Pocket_Icon = "GSC";
+	MEDIAPath_Item_Pocket = "GSC";
 	JSONPath_ExclusivePokémon = ["Gold", "Silver", "Crystal"];
 	JSONPath_ExclusiveItem = ["Gold", "Silver", "Crystal"];
 	MEDIAPath_ExclusiveItem = ["", "", ""];
@@ -486,7 +486,7 @@ if(GameID >= 14 && GameID <= 15) {
 	JSONPath_Pokédex = ["Sinnoh Pokédex_DP"];
 	MEDIAPath_Item_Bag = "DP";
 	MEDIAPath_Encounter = "DP";
-	MEDIAPath_Pocket_Icon = "DP";
+	MEDIAPath_Item_Pocket = "DP";
 	ImageType_Path = ["DP", "DP", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
@@ -524,7 +524,7 @@ if(GameID >= 17 && GameID <= 18) {
 	MEDIAPath_Item_Bag = "HGSS";
 	MEDIAPath_Map = "HGSS";
 	MEDIAPath_Encounter = "HGSS";
-	MEDIAPath_Pocket_Icon = "HGSS";
+	MEDIAPath_Item_Pocket = "HGSS";
 	ImageType_Path = ["HGSS", "HGSS", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
 	ImageType_Extension = ["PNG", "GIF", "PNG", "PNG"];
@@ -597,7 +597,7 @@ if(GameID >= 23 && GameID <= 24) {
 	MEDIAPath_Item_Bag = "XY";
 	MEDIAPath_Map = "XY";
 	MEDIAPath_Encounter = "XY";
-	MEDIAPath_Pocket_Icon = "XY";
+	MEDIAPath_Item_Pocket = "XY";
 	JSONPath_ExclusivePokémon = ["X", "Y"];
 	JSONPath_Location = "XY";
 	JSONPath_LocationConnection = "XY";
@@ -623,7 +623,7 @@ if(GameID >= 25 && GameID <= 26) {
 	MEDIAPath_Item_Bag = "ORAS";
 	MEDIAPath_Map = "ORAS";
 	MEDIAPath_Encounter = "ORAS";
-	MEDIAPath_Pocket_Icon = "ORAS";
+	MEDIAPath_Item_Pocket = "ORAS";
 	JSONPath_ExclusivePokémon = ["Alpha Sapphire", "Omega Ruby"];
 	JSONPath_LocationDescription = "ORAS";
 	JSONPath_LocationSlogan = "ORAS";
@@ -649,7 +649,7 @@ if(GameID >= 27 && GameID <= 32) {
 }
 if(GameID >= 27 && GameID <= 30) {
 	MEDIAPath_Encounter = "SMUSUM";
-	MEDIAPath_Pocket_Icon = "SMUSUM";
+	MEDIAPath_Item_Pocket = "SMUSUM";
 	MEDIAPath_Type_Text = "SMUSUM";
 	MEDIAPath_Pokémon_Box = "SMUSUM";
 	JSONPath_ExclusiveItem = ["Sun", "Moon", "Ultra Sun", "Ultra Moon"];
@@ -708,7 +708,7 @@ if(GameID >= 31 && GameID <= 32) {
 	MEDIAPath_Type_Text = "LGPE";
 	MEDIAPath_Map = "LGPE";
 	MEDIAPath_Encounter = "LGPE";
-	MEDIAPath_Pocket_Icon = "LGPE";
+	MEDIAPath_Item_Pocket = "LGPE";
 	MEDIAPath_Pokémon_Box = "LGPE";
 	JSONPath_HeldItem = "";
 	JSONPath_HeldItemPercentage = [];
@@ -737,7 +737,7 @@ if(GameID >= 33 && GameID <= 34) {
 	JSONPath_Pokédex = ["Galar Pokédex_SwSh", "Isle of Armor Pokédex_SwSh", "Crown Tundra Pokédex_SwSh", ];
 	JSONPath_HeldItem = "SwSh";
 	JSONPath_HeldItemPercentage = ["5%", "50%", "100%"];
-	MEDIAPath_Pocket_Icon = "SwSh";
+	MEDIAPath_Item_Pocket = "SwSh";
 	MEDIAPath_Type_Text = "SwSh";
 	ImageType_Path = ["SwSh", "SwSh", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
