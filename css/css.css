@@ -1693,9 +1693,6 @@ input[type=radio] {
 
 #item-options-title {
 	height: 15%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
 }
 #item-options label p {
 	width: 70%;
@@ -1743,7 +1740,7 @@ input[type=radio] {
 	position: relative;
 }
 #item-options-search {
-	height: 200%;
+	height: 66.66%;
 }
 
 #tool-options-search input,
@@ -1773,7 +1770,7 @@ input[type=radio] {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 33.33%;
 }
 #item-options-pocket label {
 	display: flex;
@@ -1790,14 +1787,14 @@ input[type=radio] {
 	display: none;
 }
 #item-options-pocket label img {
-	max-height: 70%;
-	max-width: 70%;
-	object-fit: scale-down;
-	image-rendering: -moz-crisp-edges;
-	image-rendering: -o-crisp-edges;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: crisp-edges;
-	-ms-interpolation-mode: nearest-neighbor;
+	max-height: 80%;
+    max-width: 80%;
+    object-fit: scale-down;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 
@@ -6848,7 +6845,9 @@ span[name="Status"] {
     box-shadow: 0 -1px 1px var(--border1);
 }
 .item-sidebar-price span[title] {
-	text-decoration:dotted;
+	text-decoration:underline;
+	font-style:italic;
+	cursor:help;
 }
 
 .item-sidebar-price > span {
