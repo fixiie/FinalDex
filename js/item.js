@@ -78,13 +78,13 @@ var createItem = function() {
 		itemAside1OptionsPocketInput.setAttribute("type","checkbox");
 		itemAside1OptionsPocketInput.setAttribute("name","item-options-pocket");
 		itemAside1OptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
+		itemAside1OptionsPocketInput.setAttribute("alt",pockets[q].toLowerCase());
 		itemAside1OptionsPocketInput.value = pockets[q];
 		itemAside1OptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
 		itemAside1OptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
 		itemAside1OptionsPocketLabelImage.title = pockets[q]+" Pocket";
 		itemAside1OptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
 		itemAside1OptionsPocketLabelText.innerText = pockets[q];
-
 		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketInput)
 		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketLabel)
 		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelImage)
@@ -93,7 +93,6 @@ var createItem = function() {
 		itemAside1OptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemAside1OptionsPocketOuter);});
 		itemAside1OptionsPocketInput.click();
 	}
-
 
     var itemAside2Game = document.createElement("span");
     var itemAside2GameImage = document.createElement("img");
