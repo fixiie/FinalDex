@@ -36,24 +36,18 @@ var finaldataLearnsetMachine = [];
 var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
-var finaldataLocationPokémonLength = [];
-var finaldataLocationItemsLength = [];
-var finaldataLocationTrainersLength = [];
-var finaldataLearnsetEvolutionLength = [];
-var finaldataLearnsetLevelLength = [];
-var finaldataLearnsetMachineLength = [];
-var finaldataLearnsetBreedLength = [];
 var finaldataItems = [];
+var finaldataItemsPrice = [];
+var finaldataItemsPriceExtra = [];
+var finaldataItemsDescription = [];
 var finaldataLocationPokémon = [];
 var finaldataLocationItems = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
 var finaldataMove = [];
-var finaldataMoveLength = [];
 var finaldataMoveDescription = [];
 var finaldataLocationTutor = [];
-var finaldataLocationTutorLength = [];
 var finaldataMoveMachine = [];
 var finaldataMoveRange = [];
 var finaldataMoveOtherMoves = [];
@@ -150,6 +144,15 @@ function requestLoad(i,url) {
 		if (loads[i] == "Items") {
 			for(var q = 0; q < Metadata["Reference"].length; q++) {
 				finaldataItems.push(Metadata["Reference"][q]);
+			}
+			for(var q = 0; q < Metadata["Price"].length; q++) {
+				finaldataItemsPrice.push(Metadata["Price"][q]);
+			}
+			for(var q = 0; q < Metadata["Price Extra"].length; q++) {
+				finaldataItemsPriceExtra.push(Metadata["Price Extra"][q]);
+			}
+			for(var q = 0; q < Metadata["Description"].length; q++) {
+				finaldataItemsDescription.push(Metadata["Description"][q]);
 			}
 		}
 		if (loads[i] == "Abilities") {
@@ -267,17 +270,6 @@ function initialize() {
 
 		config();
 
-		finaldataLearnsetLevelLength = Continuation(finaldataLearnsetLevel, "Game", "Single");
-		finaldataLearnsetMachineLength = Continuation(finaldataLearnsetMachine, "Game", "Single");
-		finaldataLearnsetBreedLength = Continuation(finaldataLearnsetBreed, "Game", "Single");
-		finaldataLearnsetEvolutionLength = Continuation(finaldataLearnsetEvolution, "Game", "Single");
-
-		finaldataLocationPokémonLength = Continuation(finaldataLocationPokémon, "Game", "Single");
-		finaldataLocationItemsLength = Continuation(finaldataLocationItems, "Game", "Single");
-		finaldataLocationTrainersLength = Continuation(finaldataLocationTrainers, "Game", "Single");
-
-		finaldataLocationTutorLength = Continuation(finaldataLocationTutor, "Game", "Single");
-		
 		createNav();
 		createPokémon();
 		createMechanic();
