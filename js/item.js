@@ -2,6 +2,7 @@ var createItem = function() {
 	var itemOuter = document.createElement("div");
 	var itemAside1 = document.createElement("aside");
 	var itemAside1OptionsTitleOuter = document.createElement("div");
+	var itemAside1OptionsPocketOuter = document.createElement("div");
 	var itemAside1OptionsSearchOuter = document.createElement("div");
 	var itemAside1OptionsSearch = document.createElement("input");
 	var itemAside1OptionsSearchExit = document.createElement("span");
@@ -24,6 +25,7 @@ var createItem = function() {
 	itemAside1.setAttribute("id", "item-aside1");
 	itemAside1OptionsTitleOuter.setAttribute("id", "item-options-title");
 	itemAside1OptionsSearchOuter.setAttribute("id", "item-options-search");
+	itemAside1OptionsPocketOuter.setAttribute("id", "item-options-pocket");
 	itemAside1OptionsSearch.setAttribute("type", "text");
 	itemAside1OptionsSearch.setAttribute("id", "item-search");
 	itemAside1OptionsSearch.setAttribute("placeholder", "Search Items...");
@@ -47,6 +49,7 @@ var createItem = function() {
 	itemAside1OptionsTitleOuter.appendChild(itemAside1OptionsSearchOuter);
 	itemAside1OptionsSearchOuter.appendChild(itemAside1OptionsSearchExit);
 	itemAside1OptionsSearchOuter.appendChild(itemAside1OptionsSearch);
+	itemAside1OptionsTitleOuter.appendChild(itemAside1OptionsPocketOuter);
 	itemAside1.appendChild(itemAside1OptionsOuter);
 	itemAside1OptionsOuter.appendChild(itemAside1Options);
 	itemOuter.appendChild(itemAside2);
@@ -62,6 +65,42 @@ var createItem = function() {
 	itemAside3Description.appendChild(itemAside3EffectText);
 	itemOuter.appendChild(itemAside4);
 
+
+	var pockets = [];
+	for (var q = 0; q < finaldataItems.length; q++) {
+		if(finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
+			pockets.push(finaldataItems[q]["Pocket_"+JSONPath_Items])
+		}
+
+	}
+	pockets = pockets.filter(function(v) {return v !== undefined;});
+	pockets = [...new Set(pockets)];
+	
+	for (var q = 0; q < pockets.length; q++) {
+		var itemAside1OptionsPocketInput = document.createElement("input");
+		var itemAside1OptionsPocketLabel = document.createElement("label");
+		var itemAside1OptionsPocketLabelImage = document.createElement("img");
+		var itemAside1OptionsPocketLabelText = document.createElement("p");
+		itemAside1OptionsPocketInput.setAttribute("type","checkbox");
+		itemAside1OptionsPocketInput.setAttribute("name","item-options-pocket");
+		itemAside1OptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
+		itemAside1OptionsPocketInput.value = pockets[q];
+		itemAside1OptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
+		itemAside1OptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
+		itemAside1OptionsPocketLabelImage.title = pockets[q]+" Pocket";
+		itemAside1OptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
+		itemAside1OptionsPocketLabelText.innerText = pockets[q];
+
+		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketInput)
+		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketLabel)
+		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelImage)
+		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelText)
+		itemAside1OptionsPocketInput.addEventListener("change",itemPockets);
+		itemAside1OptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemAside1OptionsPocketOuter);});
+		itemAside1OptionsPocketInput.click();
+	}
+
+
     var itemAside2Game = document.createElement("span");
     var itemAside2GameImage = document.createElement("img");
     itemAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
@@ -75,40 +114,40 @@ var createItem = function() {
 	var itemAside4SidebarTitleTopText = document.createElement("h4");
 	var itemAside4SidebarTitleBottom = document.createElement("li");
 	var itemAside4SidebarUl = document.createElement("ul");
-	var itemAside4SidebarValue = document.createElement("div");
-	var itemAside4SidebarPocket = document.createElement("div");
-	var itemAside4SidebarPocketImg = document.createElement("img");
-	var itemAside4SidebarValueTextOuter = document.createElement("div");
-	var itemAside4SidebarValueTitle = document.createElement("h4");
+	var itemAside4SidebarPrice = document.createElement("div");
+
 	itemAside4Sidebar.classList.add("item-sidebar");
 	itemAside4SidebarTitle.classList.add("item-sidebar-title");
 	itemAside4SidebarTitleTopText.innerText = "Acquisition";
-	itemAside4SidebarValue.classList.add("item-sidebar-value");
-	itemAside4SidebarPocketImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	itemAside4SidebarValueTitle.innerText = "Value";
+	itemAside4SidebarPrice.classList.add("item-sidebar-price");
 	itemAside4.appendChild(itemAside4Sidebar);
 	itemAside4Sidebar.appendChild(itemAside4SidebarTitle);
 	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleTop);
 	itemAside4SidebarTitleTop.appendChild(itemAside4SidebarTitleTopText);
 	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleBottom);
 	itemAside4Sidebar.appendChild(itemAside4SidebarUl);
-	itemAside4Sidebar.appendChild(itemAside4SidebarValue);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarPocket);
-	itemAside4SidebarPocket.appendChild(itemAside4SidebarPocketImg);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTextOuter);
-	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueTitle);
-	var sidebarItemValue = ["1000", "3000"];
-	for(var q = 0; q < sidebarItemValue.length; q++) {
-		var itemAside4SidebarValueTextContent = document.createElement("span");
-		var itemAside4SidebarValueImg = document.createElement("img");
-		var itemAside4SidebarValueText = document.createElement("p");
-		itemAside4SidebarValueImg.src = "./media/Images/Misc/Currency/" + MEDIAPath_Currency + "/" + "Pokémon Dollar" + ".png";
-		itemAside4SidebarValueImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-		itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueTextContent);
-		itemAside4SidebarValueTextContent.appendChild(itemAside4SidebarValueText);
-		itemAside4SidebarValueText.appendChild(itemAside4SidebarValueImg);
-		itemAside4SidebarValueText.innerHTML += sidebarItemValue[q];
-	}
+	itemAside4Sidebar.appendChild(itemAside4SidebarPrice);
+
+	var itemAside4SidebarCost = document.createElement("span");
+	var itemAside4SidebarCostTitle = document.createElement("h4");
+	var itemAside4SidebarCostText = document.createElement("span");
+	itemAside4SidebarCostTitle.innerText = "Cost";
+	itemAside4SidebarCost.setAttribute("name","Cost");
+	itemAside4SidebarPrice.appendChild(itemAside4SidebarCost);
+	itemAside4SidebarCost.appendChild(itemAside4SidebarCostTitle);
+	itemAside4SidebarCost.appendChild(itemAside4SidebarCostText);
+
+	var itemAside4SidebarValue = document.createElement("span");
+	var itemAside4SidebarValueTitle = document.createElement("h4");
+	var itemAside4SidebarValueText = document.createElement("span");
+	itemAside4SidebarValueTitle.innerText = "Value";
+	itemAside4SidebarValue.setAttribute("name","Value");
+	itemAside4SidebarPrice.appendChild(itemAside4SidebarValue);
+	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTitle);
+	itemAside4SidebarValue.appendChild(itemAside4SidebarValueText);
+
+
+
 	var sidebarItemList = ["Finite", "Repeatable"];
 	for(var q = 0; q < sidebarItemList.length; q++) {
 		var itemAside4SidebarTitleBottomText = document.createElement("h6");
@@ -127,12 +166,17 @@ var createItem = function() {
 			itemAside4SidebarLiTextOuter.appendChild(itemAside4SidebarLiText);
 		}
 	}
+
+
+
 	var firstiteration = true;
 	for(var q = 0; q < finaldataItems.length; q++) {
-
-		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined) {
+		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
 			var itemAside1OptionsInput = document.createElement("input");
 			var itemAside1OptionsLabel = document.createElement("label");
+			var itemAside1OptionsLabelImageOuter = document.createElement("span");
+			var itemAside1OptionsLabelImage = document.createElement("img");
+			var itemAside1OptionsLabelText = document.createElement("p");
 			itemAside1OptionsInput.setAttribute("type", "radio");
 			itemAside1OptionsInput.setAttribute("name", "item-options");
 			itemAside1OptionsInput.setAttribute("id", "item-options-" + q);
@@ -140,10 +184,16 @@ var createItem = function() {
 			itemAside1OptionsInput.value = q;
 			itemAside1OptionsLabel.setAttribute("for", "item-options-" + q);
 			itemAside1OptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+			itemAside1OptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
 			itemAside1OptionsLabel.setAttribute("name", "medium");
-			itemAside1OptionsLabel.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+			itemAside1OptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
+			itemAside1OptionsLabelImage.setAttribute("onerror","this.style.display='none';");
+			itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
 			itemAside1Options.appendChild(itemAside1OptionsInput);
 			itemAside1Options.appendChild(itemAside1OptionsLabel);
+			itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelImageOuter);
+			itemAside1OptionsLabelImageOuter.appendChild(itemAside1OptionsLabelImage);
+			itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelText);
 			itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
 
 			itemAside1OptionsLabel.setAttribute("tabindex",q+10);
@@ -164,18 +214,65 @@ var createItem = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
+		var item = finaldataItems[i]["Name_"+JSONPath_Items];
+
 		itemAside2TitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
 		itemAside2TitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
 
-		if (finaldataItems[i]["Pocket_"+JSONPath_Items] != undefined) {
-			itemAside4SidebarPocketImg.src = "./media/Images/Misc/Pocket/Icon/" + MEDIAPath_Pocket_Icon + "/" + finaldataItems[i]["Pocket_"+JSONPath_Items] + ".png";
-			itemAside4SidebarPocketImg.setAttribute("title",finaldataItems[i]["Pocket_"+JSONPath_Items]+" Pocket");
-			itemAside4SidebarPocketImg.style.removeProperty("display");
+		var destexts = itemAside3Description.querySelectorAll(":scope > p");
+		for(var q = 0; q < destexts.length; q++) {
+			destexts[q].remove();
 		}
-		else {
-			itemAside4SidebarPocketImg.src = "";
-			itemAside4SidebarPocketImg.setAttribute("title","");
-			itemAside4SidebarPocketImg.style.display = "none";
+
+		for(var q = 0; q < finaldataItemsDescription.length; q++) {
+			if (finaldataItemsDescription[q]["Item"] == item) {
+				if (getApplicable(finaldataItemsDescription[q]["Game"]) == true) {
+					var itemAside3DescriptionText = document.createElement("p");
+					itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
+					itemAside3Description.appendChild(itemAside3DescriptionText);
+				}
+			}
 		}
+
+
+
+		var valtexts = itemAside4SidebarPrice.querySelectorAll(":scope > div span p");
+		for(var q = 0; q < valtexts.length; q++) {
+			valtexts[q].remove();
+		}
+
+		for(var q = 0; q < finaldataItemsPrice.length; q++) {
+			if (finaldataItemsPrice[q]["Item"] == item) {
+				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
+					var itemAside4SidebarCostTextInner = document.createElement("p");
+					if (finaldataItemsPrice[q]["Buy"] != undefined) {
+						itemAside4SidebarCostTextInner.innerHTML = finaldataItemsPrice[q]["Buy"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+					}
+					else {
+						itemAside4SidebarCostTextInner.innerHTML = "N/A";
+					}
+					itemAside4SidebarCostText.appendChild(itemAside4SidebarCostTextInner);
+				}
+			}
+		}
+
+		for(var q = 0; q < finaldataItemsPrice.length; q++) {
+			if (finaldataItemsPrice[q]["Name"] == item) {
+				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
+					var itemAside4SidebarValueTextInner = document.createElement("p");
+					if (finaldataItemsPrice[q]["Sell"] != undefined) {
+						itemAside4SidebarValueTextInner.innerHTML = finaldataItemsPrice[q]["Sell"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+					}
+					else {
+						itemAside4SidebarValueTextInner.innerHTML = "N/A";
+					}
+					itemAside4SidebarValueText.appendChild(itemAside4SidebarValueTextInner);
+				}
+			}
+		}
+
+
+
+
 	}
 };
