@@ -1337,12 +1337,6 @@ function dexCheck() {
 	for(u = 0; u < nxt.length; u++) {
 		nxt[u].style.display = "none";
 	}
-	/*
-	  var unobtainablediv = document.querySelectorAll('#pokémon-outer > div li[data-filter="Unobtainable"]');
-	  for (u = 0; u < unobtainablediv.length; u++) {
-	      unobtainablediv[u].style.display = "none";
-	  }
-	  */
 	for(q = 0; q < [JSONPath_Pokédex.length+1]; q++) {
 		var p = q+1;
 		if(dexChecker == p && dexChecker != JSONPath_Pokédex.length+1) {
