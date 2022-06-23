@@ -16,9 +16,6 @@ var createItem = function() {
 	var itemAside2DebutText = document.createElement("h4");
 	var itemAside3 = document.createElement("aside");
 	var itemAside3Description = document.createElement("div");
-	var itemAside3DescriptionText = document.createElement("p");
-	var itemAside3EffectTitle = document.createElement("h3");
-	var itemAside3EffectText = document.createElement("p");
 	var itemAside4 = document.createElement("aside");
 	itemOuter.setAttribute("id", "item-outer");
 	itemOuter.setAttribute("name", "Items");
@@ -60,9 +57,6 @@ var createItem = function() {
 	itemAside2Debut.appendChild(itemAside2DebutText);
 	itemOuter.appendChild(itemAside3);
 	itemAside3.appendChild(itemAside3Description);
-	itemAside3Description.appendChild(itemAside3DescriptionText);
-	itemAside3Description.appendChild(itemAside3EffectTitle);
-	itemAside3Description.appendChild(itemAside3EffectText);
 	itemOuter.appendChild(itemAside4);
 
 
@@ -226,17 +220,20 @@ var createItem = function() {
 
 		for(var q = 0; q < finaldataItemsDescription.length; q++) {
 			if (finaldataItemsDescription[q]["Item"] == item) {
-				if (getApplicable(finaldataItemsDescription[q]["Game"]) == true) {
+				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
 					var itemAside3DescriptionText = document.createElement("p");
 					itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
 					itemAside3Description.appendChild(itemAside3DescriptionText);
+					if(finaldataItemsDescription[q]["Version"] != undefined) {
+						itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Version"];
+					}
 				}
 			}
 		}
 
 
 
-		var valtexts = itemAside4SidebarPrice.querySelectorAll(":scope > div span p");
+		var valtexts = itemAside4SidebarPrice.querySelectorAll(":scope > span p");
 		for(var q = 0; q < valtexts.length; q++) {
 			valtexts[q].remove();
 		}
@@ -254,9 +251,6 @@ var createItem = function() {
 					itemAside4SidebarCostText.appendChild(itemAside4SidebarCostTextInner);
 				}
 			}
-		}
-
-		for(var q = 0; q < finaldataItemsPrice.length; q++) {
 			if (finaldataItemsPrice[q]["Name"] == item) {
 				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
 					var itemAside4SidebarValueTextInner = document.createElement("p");
@@ -270,6 +264,8 @@ var createItem = function() {
 				}
 			}
 		}
+
+
 
 
 
