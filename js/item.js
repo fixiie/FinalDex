@@ -239,34 +239,44 @@ var createItem = function() {
 
 
 
-		var valtexts = itemAside4SidebarPrice.querySelectorAll(":scope > span p");
-		for(var q = 0; q < valtexts.length; q++) {
-			valtexts[q].remove();
-		}
+		itemAside4SidebarCostText.innerText = "N/A";
+		itemAside4SidebarCostText.title = "";
+		itemAside4SidebarValueText.innerText = "N/A";
+		itemAside4SidebarValueText.title = "";
 
 		for(var q = 0; q < finaldataItemsPrice.length; q++) {
 			if (finaldataItemsPrice[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
-					var itemAside4SidebarCostTextInner = document.createElement("p");
 					if (finaldataItemsPrice[q]["Buy"] != undefined) {
-						itemAside4SidebarCostTextInner.innerHTML = finaldataItemsPrice[q]["Buy"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+						itemAside4SidebarCostText.innerHTML = finaldataItemsPrice[q]["Buy"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+						if (finaldataItemsPrice[q]["Buy Information"] != undefined) {
+							itemAside4SidebarCostText.setAttribute("title",finaldataItemsPrice[q]["Buy Information"]);
+						}
 					}
-					else {
-						itemAside4SidebarCostTextInner.innerHTML = "N/A";
-					}
-					itemAside4SidebarCostText.appendChild(itemAside4SidebarCostTextInner);
 				}
 			}
-			if (finaldataItemsPrice[q]["Name"] == item) {
+			if (finaldataItemsPrice[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
-					var itemAside4SidebarValueTextInner = document.createElement("p");
 					if (finaldataItemsPrice[q]["Sell"] != undefined) {
-						itemAside4SidebarValueTextInner.innerHTML = finaldataItemsPrice[q]["Sell"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+						itemAside4SidebarValueText.innerHTML = finaldataItemsPrice[q]["Sell"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+						if(finaldataItemsPrice[q]["Sell Information"] != undefined) {
+							itemAside4SidebarValueText.setAttribute("title",finaldataItemsPrice[q]["Sell Information"]);
+						}
 					}
-					else {
-						itemAside4SidebarValueTextInner.innerHTML = "N/A";
+				}
+			}
+		}
+
+		
+		for(var q = 0; q < finaldataItemsPriceExtra.length; q++) {
+			if (finaldataItemsPriceExtra[q]["Item"] == item) {
+				if (getApplicable(finaldataItemsPriceExtra[q]["Game"])) {
+					if (finaldataItemsPrice[q]["Buy Extra"] != undefined) {
+						itemAside4SidebarCostText.title =+ finaldataItemsPrice[q]["Buy Extra"];
 					}
-					itemAside4SidebarValueText.appendChild(itemAside4SidebarValueTextInner);
+					if (finaldataItemsPrice[q]["Sell Extra"] != undefined) {
+						itemAside4SidebarValueText.title =+ finaldataItemsPrice[q]["Sell Extra"];
+					}
 				}
 			}
 		}
