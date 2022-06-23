@@ -240,9 +240,9 @@ var createItem = function() {
 
 
 		itemAside4SidebarCostText.innerText = "N/A";
-		itemAside4SidebarCostText.title = "";
+		itemAside4SidebarCostText.removeAttribute("title");
 		itemAside4SidebarValueText.innerText = "N/A";
-		itemAside4SidebarValueText.title = "";
+		itemAside4SidebarValueText.removeAttribute("title");
 
 		for(var q = 0; q < finaldataItemsPrice.length; q++) {
 			if (finaldataItemsPrice[q]["Item"] == item) {
@@ -271,11 +271,11 @@ var createItem = function() {
 		for(var q = 0; q < finaldataItemsPriceExtra.length; q++) {
 			if (finaldataItemsPriceExtra[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsPriceExtra[q]["Game"])) {
-					if (finaldataItemsPrice[q]["Buy Extra"] != undefined) {
-						itemAside4SidebarCostText.title =+ finaldataItemsPrice[q]["Buy Extra"];
+					if (finaldataItemsPriceExtra[q]["Buy Extra"] != undefined) {
+						itemAside4SidebarCostText.title += finaldataItemsPriceExtra[q]["Buy Extra"];
 					}
-					if (finaldataItemsPrice[q]["Sell Extra"] != undefined) {
-						itemAside4SidebarValueText.title =+ finaldataItemsPrice[q]["Sell Extra"];
+					if (finaldataItemsPriceExtra[q]["Sell Extra"] != undefined) {
+						itemAside4SidebarValueText.title += finaldataItemsPriceExtra[q]["Sell Extra"];
 					}
 				}
 			}
