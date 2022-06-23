@@ -221,11 +221,17 @@ var createItem = function() {
 		for(var q = 0; q < finaldataItemsDescription.length; q++) {
 			if (finaldataItemsDescription[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
-					var itemAside3DescriptionText = document.createElement("p");
-					itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
-					itemAside3Description.appendChild(itemAside3DescriptionText);
-					if(finaldataItemsDescription[q]["Version"] != undefined) {
-						itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Version"];
+					var check = true;
+					if (finaldataItemsDescription[q]["Index"] != undefined) {
+						check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index_"+JSONPath_Items];
+					}
+					if (check) {
+						var itemAside3DescriptionText = document.createElement("p");
+						itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
+						itemAside3Description.appendChild(itemAside3DescriptionText);
+						if(finaldataItemsDescription[q]["Version"] != undefined) {
+							itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Version"];
+						}
 					}
 				}
 			}
