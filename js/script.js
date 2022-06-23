@@ -732,11 +732,11 @@ function preventCheckboxZero(base) {
         
         if(event.target.nextElementSibling.tagName == "LABEL") {
             event.target.nextElementSibling.animate([
-                { transform: 'translateX(0%)'},
-                { transform: 'translateX(1%)'},
-                { transform: 'translateX(0%)'},
-                { transform: 'translateX(-1%)'},
-                { transform: 'translateX(0%)'}
+                { transform: 'translateX(0px)'},
+                { transform: 'translateX(2px)'},
+                { transform: 'translateX(0px)'},
+                { transform: 'translateX(-2px)'},
+                { transform: 'translateX(0px)'}
             ], {
                 duration: 200,
                 easing: "linear",
@@ -2389,14 +2389,11 @@ function deleteBox(element) {
 
 function returnMoveSet(int,additional) {
     var int;
-    var arre = finaldataLearnsetEvolution;
-    var arrl = finaldataLearnsetLevel;
-    var arrm = finaldataLearnsetMachine;
-    var arrb = finaldataLearnsetBreed;
-    var arrE = finaldataLearnsetEvolutionLength;
-    var arrlL = finaldataLearnsetLevelLength;
-    var arrmL = finaldataLearnsetMachineLength;
-    var arrbL = finaldataLearnsetBreedLength;
+    var arrE = finaldataLearnsetEvolution;
+    var arrL = finaldataLearnsetLevel;
+    var arrM = finaldataLearnsetMachine;
+    var arrB = finaldataLearnsetBreed;
+
     var additional;
 
     var name = getPokémonName2(int);
@@ -2407,83 +2404,83 @@ function returnMoveSet(int,additional) {
     var breres = [];
 
 
-    for(var i = 0; i < arre.length; i++) {
-		if(arre[i]["Pokémon"] == name && arrE[i] == true) {
+    for(var i = 0; i < arrE.length; i++) {
+		if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"]) == true) {
             var obj = new Object();
-            obj["Pokémon"] = arre[i]["Pokémon"];
-            obj["Form"] = arre[i]["Form"];
-            obj["Move"] = arre[i]["Move"];
-            obj["Evolution"] = arre[i]["Evolution"];
-            obj["Additional"] = arre[i]["Additional"];
-            obj["Game"] = arre[i]["Game"];
+            obj["Pokémon"] = arrE[i]["Pokémon"];
+            obj["Form"] = arrE[i]["Form"];
+            obj["Move"] = arrE[i]["Move"];
+            obj["Evolution"] = arrE[i]["Evolution"];
+            obj["Additional"] = arrE[i]["Additional"];
+            obj["Game"] = arrE[i]["Game"];
             obj["Type"] = "Prior Evolution";
             evores.push(obj)
 		}
 	}
     if (!evores.length > 0) {
-        for(var i = 0; i < arre.length; i++) {
-            if(arre[i]["Form"] == name && arrE[i] == true) {
+        for(var i = 0; i < arrE.length; i++) {
+            if(arrE[i]["Form"] == name && getApplicable(arrE[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arre[i]["Pokémon"];
-                obj["Form"] = arre[i]["Form"];
-                obj["Move"] = arre[i]["Move"];
-                obj["Evolution"] = arre[i]["Evolution"];
-                obj["Additional"] = arre[i]["Additional"];
-                obj["Game"] = arre[i]["Game"];
+                obj["Pokémon"] = arrE[i]["Pokémon"];
+                obj["Form"] = arrE[i]["Form"];
+                obj["Move"] = arrE[i]["Move"];
+                obj["Evolution"] = arrE[i]["Evolution"];
+                obj["Additional"] = arrE[i]["Additional"];
+                obj["Game"] = arrE[i]["Game"];
                 obj["Type"] = "Prior Evolution";
                 evores.push(obj)
             }
         }
     }
 
-    for(var i = 0; i < arrl.length; i++) {
-		if(arrl[i]["Pokémon"] == name && arrlL[i] == true) {
+    for(var i = 0; i < arrL.length; i++) {
+		if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"]) == true) {
             var obj = new Object();
-            obj["Pokémon"] = arrl[i]["Pokémon"];
-            obj["Form"] = arrl[i]["Form"];
-            obj["Factor"] = arrl[i]["Factor"];
-            obj["Move"] = arrl[i]["Move"];
-            obj["Game"] = arrl[i]["Game"];
+            obj["Pokémon"] = arrL[i]["Pokémon"];
+            obj["Form"] = arrL[i]["Form"];
+            obj["Factor"] = arrL[i]["Factor"];
+            obj["Move"] = arrL[i]["Move"];
+            obj["Game"] = arrL[i]["Game"];
             obj["Type"] = "Level Up";
             lvlres.push(obj)
 		}
 	}
     if (!lvlres.length > 0) {
-        for(var i = 0; i < arrl.length; i++) {
-            if(arrl[i]["Form"] == name && arrlL[i] == true) {
+        for(var i = 0; i < arrL.length; i++) {
+            if(arrL[i]["Form"] == name && getApplicable(arrL[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrl[i]["Pokémon"];
-                obj["Form"] = arrl[i]["Form"];
-                obj["Factor"] = arrl[i]["Factor"];
-                obj["Move"] = arrl[i]["Move"];
-                obj["Game"] = arrl[i]["Game"];
+                obj["Pokémon"] = arrL[i]["Pokémon"];
+                obj["Form"] = arrL[i]["Form"];
+                obj["Factor"] = arrL[i]["Factor"];
+                obj["Move"] = arrL[i]["Move"];
+                obj["Game"] = arrL[i]["Game"];
                 obj["Type"] = "Level Up";
                 lvlres.push(obj)
             }
         }
     }
 
-    for(var i = 0; i < arrm.length; i++) {
-		if(arrm[i]["Pokémon"] == name && arrmL[i] == true) {
+    for(var i = 0; i < arrM.length; i++) {
+		if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"]) == true) {
             var obj = new Object();
-            obj["Pokémon"] = arrm[i]["Pokémon"];
-            obj["Form"] = arrm[i]["Form"];
-            obj["Machine"] = arrm[i]["Machine"];
-            obj["Move"] = arrm[i]["Move"];
-            obj["Game"] = arrm[i]["Game"];
+            obj["Pokémon"] = arrM[i]["Pokémon"];
+            obj["Form"] = arrM[i]["Form"];
+            obj["Machine"] = arrM[i]["Machine"];
+            obj["Move"] = arrM[i]["Move"];
+            obj["Game"] = arrM[i]["Game"];
             obj["Type"] = "Machine";
             machres.push(obj)
 		}
 	}
     if (!machres.length > 0) {
-        for(var i = 0; i < arrm.length; i++) {
-            if(arrm[i]["Form"] == name && arrmL[i] == true) {
+        for(var i = 0; i < arrM.length; i++) {
+            if(arrM[i]["Form"] == name && getApplicable(arrM[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrm[i]["Pokémon"];
-                obj["Form"] = arrm[i]["Form"];
-                obj["Machine"] = arrm[i]["Machine"];
-                obj["Move"] = arrm[i]["Move"];
-                obj["Game"] = arrm[i]["Game"];
+                obj["Pokémon"] = arrM[i]["Pokémon"];
+                obj["Form"] = arrM[i]["Form"];
+                obj["Machine"] = arrM[i]["Machine"];
+                obj["Move"] = arrM[i]["Move"];
+                obj["Game"] = arrM[i]["Game"];
                 obj["Type"] = "Machine";
                 machres.push(obj)
             }
@@ -2491,32 +2488,32 @@ function returnMoveSet(int,additional) {
     }
 
 
-    for(var i = 0; i < arrb.length; i++) {
-		if(arrb[i]["Pokémon"] == name && arrbL[i] == true) {
+    for(var i = 0; i < arrB.length; i++) {
+		if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"]) == true) {
             var obj = new Object();
-            obj["Pokémon"] = arrb[i]["Pokémon"];
-            obj["Form"] = arrb[i]["Form"];
-            obj["Parent"] = arrb[i]["Parent"];
-            obj["Item"] = arrb[i]["Item"];
-            obj["Additional"] = arrb[i]["Additional"];
-            obj["Move"] = arrb[i]["Move"];
-            obj["Game"] = arrb[i]["Game"];
+            obj["Pokémon"] = arrB[i]["Pokémon"];
+            obj["Form"] = arrB[i]["Form"];
+            obj["Parent"] = arrB[i]["Parent"];
+            obj["Item"] = arrB[i]["Item"];
+            obj["Additional"] = arrB[i]["Additional"];
+            obj["Move"] = arrB[i]["Move"];
+            obj["Game"] = arrB[i]["Game"];
             obj["Type"] = "Breeding";
             breres.push(obj)
 		}
 	}
 
     if (!breres.length > 0) {
-        for(var i = 0; i < arrb.length; i++) {
-            if(arrb[i]["Form"] == name && arrbL[i] == true) {
+        for(var i = 0; i < arrB.length; i++) {
+            if(arrB[i]["Form"] == name && getApplicable(arrB[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrb[i]["Pokémon"];
-                obj["Form"] = arrb[i]["Form"];
-                obj["Parent"] = arrb[i]["Parent"];
-                obj["Item"] = arrb[i]["Item"];
-                obj["Additional"] = arrb[i]["Additional"];
-                obj["Move"] = arrb[i]["Move"];
-                obj["Game"] = arrb[i]["Game"];
+                obj["Pokémon"] = arrB[i]["Pokémon"];
+                obj["Form"] = arrB[i]["Form"];
+                obj["Parent"] = arrB[i]["Parent"];
+                obj["Item"] = arrB[i]["Item"];
+                obj["Additional"] = arrB[i]["Additional"];
+                obj["Move"] = arrB[i]["Move"];
+                obj["Game"] = arrB[i]["Game"];
                 obj["Type"] = "Breeding";
                 breres.push(obj)
             }
@@ -2528,15 +2525,15 @@ function returnMoveSet(int,additional) {
 
 
     if (!evores.length > 0) {
-        for(var i = 0; i < arre.length; i++) {
-            if(arre[i]["Pokémon"] == name && arrE[i] == true) {
+        for(var i = 0; i < arrE.length; i++) {
+            if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arre[i]["Pokémon"];
-                obj["Form"] = arre[i]["Form"];
-                obj["Move"] = arre[i]["Move"];
-                obj["Evolution"] = arre[i]["Evolution"];
-                obj["Additional"] = arre[i]["Additional"];
-                obj["Game"] = arre[i]["Game"];
+                obj["Pokémon"] = arrE[i]["Pokémon"];
+                obj["Form"] = arrE[i]["Form"];
+                obj["Move"] = arrE[i]["Move"];
+                obj["Evolution"] = arrE[i]["Evolution"];
+                obj["Additional"] = arrE[i]["Additional"];
+                obj["Game"] = arrE[i]["Game"];
                 obj["Type"] = "Prior Evolution";
                 evores.push(obj)
             }
@@ -2544,14 +2541,14 @@ function returnMoveSet(int,additional) {
     }
     
     if (!lvlres.length > 0) {
-        for(var i = 0; i < arrl.length; i++) {
-            if(arrl[i]["Pokémon"] == name && arrlL[i] == true) {
+        for(var i = 0; i < arrL.length; i++) {
+            if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrl[i]["Pokémon"];
-                obj["Form"] = arrl[i]["Form"];
-                obj["Factor"] = arrl[i]["Factor"];
-                obj["Move"] = arrl[i]["Move"];
-                obj["Game"] = arrl[i]["Game"];
+                obj["Pokémon"] = arrL[i]["Pokémon"];
+                obj["Form"] = arrL[i]["Form"];
+                obj["Factor"] = arrL[i]["Factor"];
+                obj["Move"] = arrL[i]["Move"];
+                obj["Game"] = arrL[i]["Game"];
                 obj["Type"] = "Level Up";
                 lvlres.push(obj)
             }
@@ -2559,14 +2556,14 @@ function returnMoveSet(int,additional) {
     }
 
     if (!machres.length > 0) {
-        for(var i = 0; i < arrm.length; i++) {
-            if(arrm[i]["Pokémon"] == name && arrmL[i] == true) {
+        for(var i = 0; i < arrM.length; i++) {
+            if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrm[i]["Pokémon"];
-                obj["Form"] = arrm[i]["Form"];
-                obj["Machine"] = arrm[i]["Machine"];
-                obj["Move"] = arrm[i]["Move"];
-                obj["Game"] = arrm[i]["Game"];
+                obj["Pokémon"] = arrM[i]["Pokémon"];
+                obj["Form"] = arrM[i]["Form"];
+                obj["Machine"] = arrM[i]["Machine"];
+                obj["Move"] = arrM[i]["Move"];
+                obj["Game"] = arrM[i]["Game"];
                 obj["Type"] = "Machine";
                 machres.push(obj)
             }
@@ -2574,16 +2571,16 @@ function returnMoveSet(int,additional) {
     }
 
     if (!breres.length > 0) {
-        for(var i = 0; i < arrb.length; i++) {
-            if(arrb[i]["Pokémon"] == name && arrbL[i] == true) {
+        for(var i = 0; i < arrB.length; i++) {
+            if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"]) == true) {
                 var obj = new Object();
-                obj["Pokémon"] = arrb[i]["Pokémon"];
-                obj["Form"] = arrb[i]["Form"];
-                obj["Parent"] = arrb[i]["Parent"];
-                obj["Item"] = arrb[i]["Item"];
-                obj["Additional"] = arrb[i]["Additional"];
-                obj["Move"] = arrb[i]["Move"];
-                obj["Game"] = arrb[i]["Game"];
+                obj["Pokémon"] = arrB[i]["Pokémon"];
+                obj["Form"] = arrB[i]["Form"];
+                obj["Parent"] = arrB[i]["Parent"];
+                obj["Item"] = arrB[i]["Item"];
+                obj["Additional"] = arrB[i]["Additional"];
+                obj["Move"] = arrB[i]["Move"];
+                obj["Game"] = arrB[i]["Game"];
                 obj["Type"] = "Egg Move";
                 breres.push(obj)
             }
@@ -4475,5 +4472,28 @@ function returnTypeAdvantage(type,condition) {
     result.push(immunity);
 
     return result;
+
+}
+
+
+function itemPockets() {
+
+
+    var vals = this.parentElement.querySelectorAll(":scope > input:checked");
+    var base = document.querySelector("#item-options");
+    var nodes = base.querySelectorAll(':scope > label');
+
+    for (var q = 0; q < nodes.length; q++) {
+        nodes[q].style.display = "none";
+    }
+
+    for (var i = 0; i < vals.length; i++) {
+        var val = (vals[i].value).toLowerCase();
+        var node = base.querySelectorAll(':scope > label[data-pocket="'+val+'"]');
+        for (var q = 0; q < node.length; q++) {
+            node[q].style.removeProperty("display");
+        }
+    }
+
 
 }
