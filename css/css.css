@@ -1608,7 +1608,7 @@ input[type=radio] {
 }
 
 #search-exit:active::after {
-	color: var(--color_80);
+	color: var(--colorRed);
 }
 
 #ability-options-search *,
@@ -1649,6 +1649,7 @@ input[type=radio] {
 	pointer-events: none;
 }
 
+
 #ability-search-exit::after,
 #move-search-exit::after,
 #item-search-exit::after,
@@ -1665,7 +1666,7 @@ input[type=radio] {
 #move-search-exit:active::after,
 #item-search-exit:active::after,
 #map-search-exit:active::after {
-	color: var(--font2);
+	color: var(--colorRed);
 }
 
 #ability-options label.hidden,
@@ -1681,13 +1682,37 @@ input[type=radio] {
 #tool-options-title,
 #ability-options-title,
 #move-options-title,
-#item-options-title,
-#map-options-title {
+#map-options-title,
+#item-options-title {
 	display: block;
 	width: 100%;
 	height: 10%;
 	z-index: 100;
 	border-bottom: 1px solid;
+}
+
+#item-options-title {
+	height: 15%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+#item-options label p {
+	width: 70%;
+}
+#item-options label span {
+	width: 30%;
+	position:relative;
+}
+#item-options label img {
+	max-height: 100%;
+	max-width:100%;
+	object-fit:scale-down;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
 }
 
 #mechanic-options-title h2,
@@ -1717,6 +1742,9 @@ input[type=radio] {
 	height: 100%;
 	position: relative;
 }
+#item-options-search {
+	height: 200%;
+}
 
 #tool-options-search input,
 #ability-options-search input,
@@ -1739,6 +1767,42 @@ input[type=radio] {
 	z-index: 4;
 }
 
+
+#item-options-pocket {
+	display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+#item-options-pocket label {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#item-options-pocket label p {
+	display: none;
+}
+#item-options-pocket label img {
+	max-height: 70%;
+	max-width: 70%;
+	object-fit: scale-down;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+
+#item-options-pocket input:not(:checked) + label img {
+	filter: brightness(0.9) grayscale(1);
+	transform: scale(0.8);
+}
 
 #tool-aside3 {
 	float: left;
@@ -3962,9 +4026,15 @@ a {
 #type-options-outer,
 #tool-options-outer,
 #ability-options-outer,
-#move-options-outer,
-#item-options-outer {
+#move-options-outer {
 	height: 90%;
+	width: 100%;
+	display: block;
+	z-index: 10;
+	overflow: auto;
+}
+#item-options-outer {
+	height: 85%;
 	width: 100%;
 	display: block;
 	z-index: 10;
@@ -6756,24 +6826,24 @@ span[name="Status"] {
 	padding: 10px;
 }
 
-.item-sidebar-value {
+.item-sidebar-price {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 20%;
-	position: relative;
-	background: var(--color15);
-	box-shadow: 0 -1px 1px var(--border1);
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 20%;
+    position: relative;
+    background: var(--color15);
+    box-shadow: 0 -1px 1px var(--border1);
 }
 
-.item-sidebar-value div:first-child {
+.item-sidebar-price > span {
 	position: absolute;
 	left: 10px;
 	top: 5px;
 }
 
-.item-sidebar-value div:first-child img {
+.item-sidebar-price > span img {
 	object-fit: scale-down;
 	image-rendering: -moz-crisp-edges;
     /* Firefox */
@@ -6786,35 +6856,27 @@ span[name="Status"] {
     /* IE (non-standard property) */;
 }
 
-.item-sidebar-value span,
-.item-sidebar-value h4 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5px 0;
+
+.item-sidebar-price span {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
-.item-sidebar-value span p {
-	position: relative;
-}
 
-.item-sidebar-value span p img,
-.item-sidebar-value span p {
-	display: inline-block;
-	font-size: 14px;
-}
 
-.item-sidebar-value span p img {
+
+.item-sidebar-price p img {
 	object-fit: scale-down;
 	image-rendering: -moz-crisp-edges;
-    /* Firefox */
 	image-rendering: -o-crisp-edges;
-    /* Opera */
 	image-rendering: -webkit-optimize-contrast;
-    /* Webkit (non-standard naming) */
 	image-rendering: crisp-edges;
 	-ms-interpolation-mode: nearest-neighbor;
-    /* IE (non-standard property) */
 	max-width: 10px;
 }
 
