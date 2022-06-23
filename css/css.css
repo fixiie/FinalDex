@@ -8726,7 +8726,7 @@ span[name="Status"] {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: var(--color_25);
+    background: var(--color_20);
     border-bottom: 1px solid;
 	z-index: 1;
 }
