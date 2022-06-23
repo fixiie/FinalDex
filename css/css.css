@@ -1782,6 +1782,8 @@ input[type=radio] {
     width: 100%;
     height: 100%;
     cursor: pointer;
+	text-align:center;
+	font-size: 80%;
 }
 
 #item-options-pocket label p {
@@ -1799,10 +1801,19 @@ input[type=radio] {
 }
 
 
+#item-options-pocket input:checked + label p {
+	color:var(--colorGreen);
+}
+
+#item-options-pocket input:not(:checked) + label p {
+	color:var(--colorRed);
+}
+
 #item-options-pocket input:not(:checked) + label img {
 	filter: brightness(0.9) grayscale(1);
 	transform: scale(0.8);
 }
+
 
 #tool-aside3 {
 	float: left;
@@ -6836,12 +6847,20 @@ span[name="Status"] {
     background: var(--color15);
     box-shadow: 0 -1px 1px var(--border1);
 }
+.item-sidebar-price span[title] {
+	text-decoration:dotted;
+}
 
 .item-sidebar-price > span {
-	position: absolute;
-	left: 10px;
-	top: 5px;
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+	text-align: center;
 }
+
 
 .item-sidebar-price > span img {
 	object-fit: scale-down;
@@ -6855,18 +6874,6 @@ span[name="Status"] {
 	-ms-interpolation-mode: nearest-neighbor;
     /* IE (non-standard property) */;
 }
-
-
-.item-sidebar-price span {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-}
-
 
 
 
