@@ -573,12 +573,11 @@ function getDefaultInt(i) {
 function getLocationTrainers(location) {
 
 	var arr = finaldataLocationTrainers;
-	var arrLength = finaldataLocationTrainersLength;
 	var location;
 	var result = [];
 
     for (var q = 0; q < arr.length; q++) {
-		if (arrLength[q] == true) {
+		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
 			}
@@ -593,12 +592,11 @@ function getLocationTrainers(location) {
 function getLocationItems(location) {
 
 	var arr = finaldataLocationItems;
-	var arrLength = finaldataLocationItemsLength;
 	var location;
 	var result = [];
 
     for (var q = 0; q < arr.length; q++) {
-		if (arrLength[q] == true) {
+		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
 			}
@@ -611,12 +609,11 @@ function getLocationItems(location) {
 function getLocationPokémon(location) {
 
 	var arr = finaldataLocationPokémon;
-	var arrLength = finaldataLocationPokémonLength;
 	var location;
 	var result = [];
 
     for (var q = 0; q < arr.length; q++) {
-		if (arrLength[q] == true) {
+		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
 			}
@@ -668,11 +665,10 @@ function getTutorData(val,column) {
 	var val;
 	var column;
 	var arr = finaldataLocationTutor;
-	var arrLength = finaldataLocationTutorLength;
 	var result = [];
 
 	for (var q = 0; q < arr.length; q++) {
-		if (arrLength[q] == true) {
+		if (getApplicable(arr[q]["Game"]) == true) {
 			if (arr[q][column] == val) {
 				result.push(arr[q])
 			}
@@ -680,4 +676,21 @@ function getTutorData(val,column) {
 	}
 
 	return result;
+}
+
+
+
+function getApplicable(val) {
+	var val;
+
+	if (val == GameName) {
+		return true;
+	}
+	else if (val.includes(GameName+",")) {
+		return true;
+	}
+	else if (val.includes(","+GameName)) {
+		return true;
+	}
+	return false;
 }
