@@ -10,7 +10,7 @@ var createItem = function() {
 	var itemAside1Options = document.createElement("div");
 	var itemAside2 = document.createElement("aside");
 	var itemAside2Title = document.createElement("span");
-	var itemAside2TitleID = document.createElement("h1");
+	var itemAside2TitleID = document.createElement("h4");
 	var itemAside2TitleName = document.createElement("h1");
 	var itemAside2Debut = document.createElement("span");
 	var itemAside2DebutText = document.createElement("h4");
@@ -141,8 +141,6 @@ var createItem = function() {
 		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
 			var itemAside1OptionsInput = document.createElement("input");
 			var itemAside1OptionsLabel = document.createElement("label");
-			var itemAside1OptionsLabelImageOuter = document.createElement("span");
-			var itemAside1OptionsLabelImage = document.createElement("img");
 			var itemAside1OptionsLabelText = document.createElement("p");
 			itemAside1OptionsInput.setAttribute("type", "radio");
 			itemAside1OptionsInput.setAttribute("name", "item-options");
@@ -151,15 +149,22 @@ var createItem = function() {
 			itemAside1OptionsInput.value = q;
 			itemAside1OptionsLabel.setAttribute("for", "item-options-" + q);
 			itemAside1OptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
-			itemAside1OptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
+			if (finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined) {
+				itemAside1OptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
+			}
 			itemAside1OptionsLabel.setAttribute("name", "medium");
-			itemAside1OptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
-			itemAside1OptionsLabelImage.setAttribute("onerror","this.style.display='none';");
+			if (finaldataItems[q]["Icon_"+JSONPath_Items] != undefined) {
+				var itemAside1OptionsLabelImageOuter = document.createElement("span");
+				var itemAside1OptionsLabelImage = document.createElement("img");
+				itemAside1OptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
+				itemAside1OptionsLabelImage.setAttribute("onerror","this.style.display='none';");
+				itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelImageOuter);
+				itemAside1OptionsLabelImageOuter.appendChild(itemAside1OptionsLabelImage);
+			}
 			itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
 			itemAside1Options.appendChild(itemAside1OptionsInput);
 			itemAside1Options.appendChild(itemAside1OptionsLabel);
-			itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelImageOuter);
-			itemAside1OptionsLabelImageOuter.appendChild(itemAside1OptionsLabelImage);
+
 			itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelText);
 			itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
 
@@ -269,10 +274,14 @@ var createItem = function() {
 					for(var u = 0; u < finaldataLocationItems[q]["Quantity"]; u++) {
 						var itemAside4SidebarItemImg = document.createElement("img");
 						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
-						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
 						itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
-						
+						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
 					}
+
+					var itemAside4SidebarItemText = document.createElement("p");
+					itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
 
 			
 				}
@@ -317,12 +326,16 @@ var createItem = function() {
 					itemAside4SidebarItem.setAttribute("name","Item");
 					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
 
-
-
 					var itemAside4SidebarItemImg = document.createElement("img");
 					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";')
 					itemAside4SidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+
+					var itemAside4SidebarItemText = document.createElement("p");
+					itemAside4SidebarItemText.innerText = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+
 		
 				}
 			}
