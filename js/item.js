@@ -103,7 +103,7 @@ var createItem = function() {
 
 	var itemAside4Sidebar = document.createElement("div");
 	var itemAside4SidebarTitle = document.createElement("div");
-	var itemAside4SidebarTitleText = document.createElement("h4");
+	var itemAside4SidebarTitleText = document.createElement("h2");
 
 	var itemAside4SidebarUl = document.createElement("ul");
 	var itemAside4SidebarPrice = document.createElement("div");
@@ -194,9 +194,6 @@ var createItem = function() {
 
 		for(var q = 0; q < finaldataItemsDescription.length; q++) {
 			if (finaldataItemsDescription[q]["Item"] == item) {
-				if (item == "Energy Root") {
-					console.log(getApplicable(finaldataItemsDescription[q]["Game"]))
-				}
 				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
 					var check = true;
 					if (finaldataItemsDescription[q]["Index"] != undefined) {
@@ -226,24 +223,22 @@ var createItem = function() {
 			if (getApplicable(finaldataLocationItems[q]["Game"])) {
 				if(finaldataLocationItems[q]["Item"] == item) {
 					var itemAside4SidebarLi = document.createElement("li");
+					itemAside4SidebarLi.setAttribute("name","Location")
 					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
 
-					var itemAside4SidebarItem = document.createElement("span");
-					itemAside4SidebarItem.setAttribute("name","Item");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+					var itemAside4SidebarArea = document.createElement("span");
+					itemAside4SidebarArea.setAttribute("name","Area");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarArea);
 
-					for(var u = 0; u < finaldataLocationItems[q]["Quantity"]; u++) {
-						var itemAside4SidebarItemImg = document.createElement("img");
-						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationItems[q]["Icon"]+".png";
-						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
-
-						if (finaldataLocationItems[q]["Quantity"] == "1") {
-							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
-						}
-						else {
-							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
-						}
+					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
+						var itemAside4SidebarAreaHeader = document.createElement("h4");
+						var itemAside4SidebarAreaText = document.createElement("p");
+						itemAside4SidebarAreaHeader.innerText = "Area:";
+						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaHeader);
+						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaText);
 					}
+
 
 					var itemAside4SidebarLocation = document.createElement("span");
 					var itemAside4SidebarLocationText = document.createElement("h3");
@@ -256,87 +251,83 @@ var createItem = function() {
 
 					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
 
-					if (finaldataLocationItems[q]["Area"] != undefined) {
-						var itemAside4SidebarArea = document.createElement("span");
-						var itemAside4SidebarAreaHeader = document.createElement("h4");
-						var itemAside4SidebarAreaText = document.createElement("p");
-						itemAside4SidebarArea.setAttribute("name","Area");
-						itemAside4SidebarAreaHeader.innerText = "Area:";
-						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
-						itemAside4SidebarLi.appendChild(itemAside4SidebarArea);
-						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaHeader);
-						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaText);
-					}
+					var itemAside4SidebarDescription = document.createElement("span");
+					itemAside4SidebarDescription.setAttribute("name","Description");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
 
 					if (finaldataLocationItems[q]["Description"] != undefined) {
-						var itemAside4SidebarDescription = document.createElement("span");
 						var itemAside4SidebarDescriptionText = document.createElement("p");
-						itemAside4SidebarDescription.setAttribute("name","Description");
 						itemAside4SidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
 						itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
-						itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
 						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
 					}
 
+					var itemAside4SidebarItem = document.createElement("span");
+					itemAside4SidebarItem.setAttribute("name","Item");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
 
-					if (finaldataLocationItems[q]["Additional"] != undefined) {
-						var itemAside4SidebarAdditional = document.createElement("span");
-						var itemAside4SidebarAdditionalText = document.createElement("p");
-						itemAside4SidebarAdditional.setAttribute("name","Additional");
-						itemAside4SidebarAdditionalText.innerText = finaldataLocationItems[q]["Additional"];
-						itemAside4SidebarLi.appendChild(itemAside4SidebarAdditional);
-						itemAside4SidebarAdditional.appendChild(itemAside4SidebarAdditionalText);
+					for(var u = 0; u < finaldataLocationItems[q]["Quantity"]; u++) {
+						var itemAside4SidebarItemImg = document.createElement("img");
+						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
+						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+						itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+						
 					}
 
-					if (finaldataLocationItems[q]["Requirement"] != undefined) {
-						var itemAside4SidebarRequirement = document.createElement("span");
-						var itemAside4SidebarRequirementHeader = document.createElement("h4");
-						var itemAside4SidebarRequirementText = document.createElement("p");
-						itemAside4SidebarRequirement.setAttribute("name","Requirement");
-						itemAside4SidebarRequirementHeader.innerText = "Requires:";
-						itemAside4SidebarRequirementText.innerText = finaldataLocationItems[q]["Requirement"];
-						itemAside4SidebarLi.appendChild(itemAside4SidebarRequirement);
-						itemAside4SidebarRequirement.appendChild(itemAside4SidebarRequirementHeader);
-						itemAside4SidebarRequirement.appendChild(itemAside4SidebarRequirementText);
-					}
-
-
-					if (finaldataLocationItems[q]["Machine"] != undefined) {
-						var itemAside4SidebarMachine = document.createElement("span");
-						itemAside4SidebarMachine.setAttribute("name","Machine");
-						itemAside4SidebarLi.appendChild(itemAside4SidebarMachine);
-						if (finaldataLocationItems[q]["Machine"].includes(",")) {
-							for(var u = 0; u < finaldataLocationItems[q]["Machine"].split(",").length; u++) {
-								var itemAside4SidebarMachineImage = document.createElement("img");
-								var itemAside4SidebarMachineText = document.createElement("p");
-								itemAside4SidebarMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getMachineIcon(finaldataLocationItems[q]["Machine"].split(",")[u])+".png";
-								itemAside4SidebarMachineImage.title = getMachineIcon(finaldataLocationItems[q]["Machine"].split(",")[u]);
-								itemAside4SidebarMachineText.innerText = finaldataLocationItems[q]["Machine"].split(",")[u];
-								itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineImage);
-								itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineText);
-							}
-						}
-						else {
-							var itemAside4SidebarMachineImage = document.createElement("img");
-							var itemAside4SidebarMachineText = document.createElement("p");
-							itemAside4SidebarMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getMachineIcon(finaldataLocationItems[q]["Machine"])+".png";
-							itemAside4SidebarMachineImage.title = getMachineIcon(finaldataLocationItems[q]["Machine"]);
-							itemAside4SidebarMachineText.innerText = finaldataLocationItems[q]["Machine"];
-							itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineImage);
-							itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineText);
-						}
-					}
-
-
-
-
-
-				
+			
 				}
 			}
 		}
 
-	
+
+		for(var q = 0; q < finaldataPokémonHeldItem.length; q++) {
+			for(var u = 0; u < JSONPath_HeldItemPercentage.length; u++) {
+				if(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem] == item) {
+
+					var itemAside4SidebarLi = document.createElement("li");
+					itemAside4SidebarLi.setAttribute("name","Held");
+					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+
+					var itemAside4SidebarPokémon = document.createElement("span");
+					itemAside4SidebarPokémon.setAttribute("name","Pokémon");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarPokémon);
+
+				
+					var itemAside4SidebarPokémonImg = document.createElement("img");
+					itemAside4SidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(q))+".png";
+					itemAside4SidebarPokémonImg.title = getPokémonName(q);
+					itemAside4SidebarPokémonImg.setAttribute("value",q);
+					itemAside4SidebarPokémon.appendChild(itemAside4SidebarPokémonImg);
+					itemAside4SidebarPokémonImg.addEventListener("click",modalData)
+
+
+
+					var itemAside4SidebarDescription = document.createElement("span");
+					itemAside4SidebarDescription.setAttribute("name","Description");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
+
+			
+					var itemAside4SidebarDescriptionText = document.createElement("p");
+					itemAside4SidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+getPokémonName(q)+".";
+					itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
+					itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+					
+
+					var itemAside4SidebarItem = document.createElement("span");
+					itemAside4SidebarItem.setAttribute("name","Item");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+
+
+
+					var itemAside4SidebarItemImg = document.createElement("img");
+					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+					itemAside4SidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+		
+				}
+			}
+			
+		}
 
 
 
