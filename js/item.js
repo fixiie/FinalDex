@@ -217,6 +217,11 @@ var createItem = function() {
 			destexts[q].remove();
 		}
 
+	console.log(finaldataItemsDescription[449])
+	console.log(finaldataItemsDescription[450])
+	console.log(finaldataItemsDescription[451])
+	console.log(finaldataItemsDescription[452])
+	console.log(finaldataItemsDescription[453])
 		for(var q = 0; q < finaldataItemsDescription.length; q++) {
 			if (finaldataItemsDescription[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
@@ -229,7 +234,7 @@ var createItem = function() {
 						itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
 						itemAside3Description.appendChild(itemAside3DescriptionText);
 						if(finaldataItemsDescription[q]["Version"] != undefined) {
-							itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Version"];
+							itemAside3DescriptionText.title = finaldataItemsDescription[q]["Version"];
 						}
 					}
 				}
