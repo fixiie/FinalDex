@@ -803,11 +803,21 @@ function dataRedirect() {
 
 
     if (modal != null) {
-        lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
+        if (type != "map") {
+            lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
+        }
+        else {
+            lock = confirm("Redirecting you to "+x+".\nDo you want to continue?");
+        }
     }
     else {
         if (input == null) {
-            lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
+            if (type != "map") {
+                lock = confirm("Redirecting you to the "+type+" "+x+".\nDo you want to continue?");
+            }
+            else {
+                lock = confirm("Redirecting you to "+x+".\nDo you want to continue?");
+            }
         }
         else {
             lock = true;
@@ -4572,4 +4582,9 @@ function testImage(url) {
     });
 
     return testImageResult;
+}
+
+function getMachineIcon(machine) {
+    var machine;
+    return "HM Water";
 }
