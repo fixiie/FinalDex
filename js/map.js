@@ -486,24 +486,69 @@ var createMap = function() {
 
 					for(var y = 0; y < items[u]["Quantity"]; y++) {
 						var mapAside4DescriptionItemIcon = document.createElement("img");
-						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+items[u]["Icon"]+".png";
+						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
 						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-						if (items[u]["Quantity"] == 1) {
-							mapAside4DescriptionItemIcon.setAttribute("title",items[u]["Item"]);
+						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
+
+						if (items[u]["Quantity"] > 1) {
+							mapAside4DescriptionItemIcon.title = items[u]["Quantity"]+"x "+getItemIcon(items[u]["Item"]);
 						}
 						else {
-							mapAside4DescriptionItemIcon.setAttribute("title",items[u]["Quantity"]+"x "+items[u]["Item"]);
+							mapAside4DescriptionItemIcon.title = getItemIcon(items[u]["Item"]);
 						}
+
+						if (items[u]["Additional"] == "Hidden") {
+							mapAside4DescriptionItemIcon.setAttribute("name","Hidden");
+							mapAside4DescriptionItemIcon.title += " (Hidden)";
+						}
+
 						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIcon);
 					}
+					var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
+					mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
+					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemDescriptionOuter);
 
-					if (items[u]["Location Description"] != undefined) {
-						var mapAside4DescriptionItemLocationOuter = document.createElement("span");
-						var mapAside4DescriptionItemLocation = document.createElement("p");
-						mapAside4DescriptionItemLocation.innerText = items[u]["Location Description"];
-						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemLocationOuter);
-						mapAside4DescriptionItemLocationOuter.appendChild(mapAside4DescriptionItemLocation);
+					if (items[u]["Description"] != undefined) {
+						var mapAside4DescriptionItemDescription = document.createElement("p");
+						mapAside4DescriptionItemDescription.innerText = items[u]["Description"];
+						mapAside4DescriptionItemDescriptionOuter.appendChild(mapAside4DescriptionItemDescription);
 					}
+					var mapAside4DescriptionItemMachineOuter = document.createElement("span");
+					mapAside4DescriptionItemMachineOuter.setAttribute("name","Machine");
+					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemMachineOuter);
+
+					if (items[u]["Machine"] != undefined) {
+						if (items[u]["Machine"].includes(",")) {
+							for(var y = 0; y < items[u]["Machine"].split(",").length; y++) {
+								var mapAside4DescriptionItemMachine = document.createElement("span");
+								var mapAside4DescriptionItemMachineImage = document.createElement("img");
+								var mapAside4DescriptionItemMachineText = document.createElement("p");
+								mapAside4DescriptionItemMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(getMoveMachine(items[u]["Machine"].split(",")[y]))+".png";
+								mapAside4DescriptionItemMachineImage.title = items[u]["Machine"].split(",")[y];
+								mapAside4DescriptionItemMachineText.innerText = items[u]["Machine"].split(",")[y];
+								mapAside4DescriptionItemMachineOuter.appendChild(mapAside4DescriptionItemMachine);
+								mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineImage);
+								mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineText);
+							}
+						}
+						else {
+							var mapAside4DescriptionItemMachine = document.createElement("span");
+							var mapAside4DescriptionItemMachineImage = document.createElement("img");
+							var mapAside4DescriptionItemMachineText = document.createElement("p");
+							mapAside4DescriptionItemMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(getMoveMachine(items[u]["Machine"]))+".png";
+							mapAside4DescriptionItemMachineImage.title = items[u]["Machine"];
+							mapAside4DescriptionItemMachineText.innerText = items[u]["Machine"];
+							mapAside4DescriptionItemMachineOuter.appendChild(mapAside4DescriptionItemMachine);
+							mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineImage);
+							mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineText);
+						}
+					}
+
+
+					if (items[u]["Requirement"] != undefined) {
+						mapAside4DescriptionItemDescription.title = items[u]["Requirement"];
+					}
+		
 				}
 			}
 		}
@@ -956,7 +1001,7 @@ var createMap = function() {
 		}
 
 		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = trainerReward;
-		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = mapAside4DescriptionTrainerUlTopTitleValue.innerHTML.replaceAll("PokéDollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" />');
+		mapAside4DescriptionTrainerUlTopTitleValue.innerHTML = mapAside4DescriptionTrainerUlTopTitleValue.innerHTML.replaceAll("PokéDollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
 		mapAside4DescriptionTrainerUlContent.setAttribute("id", "map-description-trainer-bottom");
 		mapAside4DescriptionTrainer.appendChild(mapAside4DescriptionTrainerUl);
 		mapAside4DescriptionTrainerUl.appendChild(mapAside4DescriptionTrainerUlTop);
@@ -1120,7 +1165,12 @@ var createMap = function() {
 					if (nature != undefined) {
 						var mapAside4DescriptionTrainerNature = document.createElement("p");
 						mapAside4DescriptionTrainerNature.innerText = nature;
-						mapAside4DescriptionTrainerNature.title = "Nature"+"\n"+getNatureTitle(nature);
+						if (getNatureTitle(nature) == "Neutral") {
+							mapAside4DescriptionTrainerNature.title = "Neutral Nature";
+						}
+						else {
+							mapAside4DescriptionTrainerNature.title = "Nature"+"\n"+getNatureTitle(nature);
+						}
 						mapAside4DescriptionTrainerNature.setAttribute("name","Nature");
 						mapAside4DescriptionTrainerAdditionalInner.appendChild(mapAside4DescriptionTrainerNature);
 					}
@@ -1161,10 +1211,10 @@ var createMap = function() {
 
 
 				var mapAside4DescriptionTrainerPokémon = document.createElement("div");
-				var mapAside4DescriptionTrainerPokémonImage = document.createElement("span");
+				var mapAside4DescriptionTrainerPokémonImageOuter = document.createElement("span");
 				mapAside4DescriptionTrainerPokémon.setAttribute("name", "Pokémon");
 				mapAside4DescriptionTrainerLi.appendChild(mapAside4DescriptionTrainerPokémon);
-				mapAside4DescriptionTrainerPokémon.appendChild(mapAside4DescriptionTrainerPokémonImage);
+				mapAside4DescriptionTrainerPokémon.appendChild(mapAside4DescriptionTrainerPokémonImageOuter);
 
 				if (item != undefined) {
 					var mapAside4DescriptionTrainerHeldItem = document.createElement("img");
@@ -1173,21 +1223,21 @@ var createMap = function() {
 					mapAside4DescriptionTrainerHeldItem.setAttribute("title",item);
 					mapAside4DescriptionTrainerHeldItem.setAttribute("name","Item");
 					mapAside4DescriptionTrainerHeldItem.setAttribute("value",item);
-					mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerHeldItem);
+					mapAside4DescriptionTrainerPokémonImageOuter.appendChild(mapAside4DescriptionTrainerHeldItem);
 					mapAside4DescriptionTrainerHeldItem.addEventListener("click", dataRedirect);
 				}
 
-				var mapAside4DescriptionTrainerPokémonImageMain = document.createElement("img");
-				mapAside4DescriptionTrainerPokémonImageMain.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageType_Path[0]+"/"+getPokémonMediaPath(pok)+".png";
-				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("title", pok);
-				mapAside4DescriptionTrainerPokémonImageMain.setAttribute("value",getPokémonInt(pok));
-				mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerPokémonImageMain);
-				mapAside4DescriptionTrainerPokémonImageMain.addEventListener("click", modalData);
+				var mapAside4DescriptionTrainerPokémonImage = document.createElement("img");
+				mapAside4DescriptionTrainerPokémonImage.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageType_Path[0]+"/"+getPokémonMediaPath(pok)+".png";
+				mapAside4DescriptionTrainerPokémonImage.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+				mapAside4DescriptionTrainerPokémonImage.setAttribute("title", pok);
+				mapAside4DescriptionTrainerPokémonImage.setAttribute("value",getPokémonInt(pok));
+				mapAside4DescriptionTrainerPokémonImageOuter.appendChild(mapAside4DescriptionTrainerPokémonImage);
+				mapAside4DescriptionTrainerPokémonImage.addEventListener("click", modalData);
 
 				var mapAside4DescriptionTrainerPokémonText = document.createElement("h5");
 				mapAside4DescriptionTrainerPokémonText.innerText = pok;
-				mapAside4DescriptionTrainerPokémonImage.appendChild(mapAside4DescriptionTrainerPokémonText);
+				mapAside4DescriptionTrainerPokémonImageOuter.appendChild(mapAside4DescriptionTrainerPokémonText);
 
 				if (move != undefined || iv != undefined || ev != undefined) {
 					var mapAside4DescriptionTrainerData = document.createElement("div");
