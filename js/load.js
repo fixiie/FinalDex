@@ -297,13 +297,16 @@ function initialize() {
 		variantSelector();
 		
 		load();
+
 	}
 }
+
 
 function load() {
 	const load = document.querySelector("#load");
 	document.body.style.overflowY = "unset";
 	document.documentElement.scrollTop = 0;
+	window.onbeforeunload = function() { return "Your work will be lost."; };
 	load.className += "hidden";
 }
 
