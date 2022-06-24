@@ -329,12 +329,14 @@ if(GameID == 31) {
 	JSONPath_Area = "Lets Go Pikachu";
 	JSONPath_MoveTutor = "Lets Go Pikachu";
 	JSONPath_Reference = "Lets Go Pikachu";
+	JSONPath_Items = "Lets Go Pikachu";
 }
 if(GameID == 32) {
 	JSONPath_PokédexEntry = "Lets Go Eevee";
 	JSONPath_Area = "Lets Go Eevee";
 	JSONPath_MoveTutor = "Lets Go Eevee";
 	JSONPath_Reference = "Lets Go Eevee";
+	JSONPath_Items = "Lets Go Eevee";
 }
 if(GameID == 33) {
 	JSONPath_PokédexEntry = "Sword";
@@ -728,7 +730,6 @@ if(GameID >= 31 && GameID <= 32) {
 	JSONPath_MoveID = "LGPE";
 	JSONPath_MoveReference = "LGPE";
 	MEDIAPath_Character_Battle = "LGPE";
-	JSONPath_Items = "LGPE";
 	JSONPath_MovePriority = "LGPE";
 	MEDIAPath_LocationOverworld = "LGPE";
 }
