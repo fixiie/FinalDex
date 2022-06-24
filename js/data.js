@@ -890,6 +890,7 @@ var createData = function(id, i) {
 	var dataAside2MetadataPopupList = document.createElement("ul");
 	dataAside2MetadataPopup.classList.add("data-popup");
 	dataAside2MetadataPopupListOuter.setAttribute("name", "list");
+	dataAside2MetadataPopupSpan1Icon.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'")
 	dataAside2MetadataPopupTitleExit1.innerHTML = "<p>«</p>";
 	dataAside2MetadataPopupTitleExit1.setAttribute("name", "up");
 	dataAside2MetadataPopupTitleExit2.innerHTML = "<p>»</p>";
