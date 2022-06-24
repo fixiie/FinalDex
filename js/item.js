@@ -217,13 +217,12 @@ var createItem = function() {
 			destexts[q].remove();
 		}
 
-	console.log(finaldataItemsDescription[449])
-	console.log(finaldataItemsDescription[450])
-	console.log(finaldataItemsDescription[451])
-	console.log(finaldataItemsDescription[452])
-	console.log(finaldataItemsDescription[453])
+
 		for(var q = 0; q < finaldataItemsDescription.length; q++) {
 			if (finaldataItemsDescription[q]["Item"] == item) {
+				if (item == "Energy Root") {
+					console.log(getApplicable(finaldataItemsDescription[q]["Game"]))
+				}
 				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
 					var check = true;
 					if (finaldataItemsDescription[q]["Index"] != undefined) {
