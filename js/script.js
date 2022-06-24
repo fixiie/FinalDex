@@ -3932,19 +3932,27 @@ function trainerPokCycle(event) {
 }
 
 
-function overviewMove() {
-    var base = findUpTag(this,"BASE");
-    var tar = base.querySelector(':scope > div > div');
-    var span = base.querySelector(':scope > div > div span[name="'+this.value+'"]');
-    var buttons = base.querySelectorAll(":scope button")
-    var x = parseInt(this.value);
+function overviewMove(base) {
+
+    var base;
+
+    if (base.innerText == undefined) {
+        base = this;
+    }
+
+    var trueBase = findUpTag(base,"BASE");
+
+    var tar = trueBase.querySelector(':scope > div > div');
+    var span = trueBase.querySelector(':scope > div > div span[name="'+base.value+'"]');
+    var buttons = trueBase.querySelectorAll(":scope button")
+    var x = parseInt(base.value);
     var y = parseInt(tar.lastChild.getAttribute("name"));
     var left = span.previousElementSibling;
     var right = span.nextElementSibling;
-    var header = base.querySelector(":scope > span h4");
+    var header = trueBase.querySelector(":scope > span h4");
 
-    if (this.innerText == "‹") {
-        x = parseInt(this.value) - 1;
+    if (base.innerText == "‹" && left != undefined) {
+        x = parseInt(base.value) - 1;
         tar.style.transform = "translate(-"+x+"00%, 0)";
 
         if (left != null) {
@@ -3953,9 +3961,20 @@ function overviewMove() {
                 buttons[q].value = left.getAttribute("name");
             }
         }
+
+        for (var q = 0; q < buttons.length; q++) {
+            buttons[q].style.removeProperty("display");
+        }
+
+        if (x <= 0) {
+            buttons[0].style.display = "none";
+        }
+        else {
+            buttons[0].style.removeProperty("display");
+        }
     }
-    else if (this.innerText == "›") {
-        x = parseInt(this.value) + 1;
+    else if (base.innerText == "›" && right != undefined) {
+        x = parseInt(base.value) + 1;
         tar.style.transform = "translate(-"+x+"00%, 0)";
 
         if (right != null) {
@@ -3964,24 +3983,20 @@ function overviewMove() {
                 buttons[q].value = right.getAttribute("name");
             }
         }
+
+        for (var q = 0; q < buttons.length; q++) {
+            buttons[q].style.removeProperty("display");
+        }
+
+        if (x >= y) {
+            buttons[1].style.display = "none";
+        }
+        else {
+            buttons[1].style.removeProperty("display");
+        }
     }
 
-    for (var q = 0; q < buttons.length; q++) {
-        buttons[q].style.removeProperty("display");
-    }
 
-    if (x <= 0) {
-        buttons[0].style.display = "none";
-    }
-    else {
-        buttons[0].style.removeProperty("display");
-    }
-    if (x >= y) {
-        buttons[1].style.display = "none";
-    }
-    else {
-        buttons[1].style.removeProperty("display");
-    }
 }
 
 
@@ -4014,12 +4029,17 @@ function fullscreenIMG(imgs,x) {
         img.title = imgs[i].title;
         imgBox.setAttribute("name",i);
         base.querySelector(":scope > div ul").appendChild(imgBox)
-        imgBox.appendChild(img)
+        imgBox.appendChild(img);        
+        
+        img.addEventListener("mousedown",function(event){if(event.button === 1){exitFullscreen()}});
     }
- 
+
     base.classList.add("open");
     ul.style.transform = "translate(-"+x+"00%)";
+    base.focus();
 
+
+    
     if (x > 0) {
         buttons[0].style.removeProperty("display");
     }
@@ -4027,6 +4047,11 @@ function fullscreenIMG(imgs,x) {
         buttons[1].style.removeProperty("display");
     }
 }
+
+
+
+
+
 
 
 function fullscreenMove(base) {
@@ -4053,7 +4078,8 @@ function fullscreenMove(base) {
     var left = li.previousElementSibling;
     var right = li.nextElementSibling;
 
-    if (base.innerText == "«") {
+
+    if (base.innerText == "«" && left != undefined) {
         x = x - 1;
         tar1.style.transform = "translate(-"+x+"00%, 0)";
         tar2.style.transform = "translate(-"+x+"00%, 0)";
@@ -4065,8 +4091,25 @@ function fullscreenMove(base) {
                 buttons2[q].setAttribute("value",left.getAttribute("name"));
             }
         }
+
+        for (var q = 0; q < buttons1.length; q++) {
+            buttons1[q].style.removeProperty("display");
+            buttons2[q].style.removeProperty("display");
+        }
+
+        if (x <= 0) {
+            buttons1[0].style.display = "none";
+            buttons2[0].style.display = "none";
+        }
+        else {
+            buttons1[0].style.removeProperty("display");
+            buttons2[0].style.removeProperty("display");
+        }
     }
-    else if (base.innerText == "»") {
+
+
+    
+    if (base.innerText == "»" && right != undefined) {
         x = x + 1;
         tar1.style.transform = "translate(-"+x+"00%, 0)";
         tar2.style.transform = "translate(-"+x+"00%, 0)";
@@ -4078,34 +4121,31 @@ function fullscreenMove(base) {
                 buttons2[q].setAttribute("value",right.getAttribute("name"));
             }
         }
+
+        for (var q = 0; q < buttons1.length; q++) {
+            buttons1[q].style.removeProperty("display");
+            buttons2[q].style.removeProperty("display");
+        }
+    
+        if (x >= y) {
+            buttons1[1].style.display = "none";
+            buttons2[1].style.display = "none";
+        }
+        else {
+            buttons1[1].style.removeProperty("display");
+            buttons2[1].style.removeProperty("display");
+        }
     }
 
-    for (var q = 0; q < buttons1.length; q++) {
-        buttons1[q].style.removeProperty("display");
-        buttons2[q].style.removeProperty("display");
-    }
+  
+   
 
-    if (x <= 0) {
-        buttons1[0].style.display = "none";
-        buttons2[0].style.display = "none";
-    }
-    else {
-        buttons1[0].style.removeProperty("display");
-        buttons2[0].style.removeProperty("display");
-    }
-    if (x >= y) {
-        buttons1[1].style.display = "none";
-        buttons2[1].style.display = "none";
-    }
-    else {
-        buttons1[1].style.removeProperty("display");
-        buttons2[1].style.removeProperty("display");
-    }
 }
 
 
-function exitFullscreen() {
-    this.parentElement.classList.remove("open");
+function exitFullscreen(base) {
+    var base = document.querySelector("#fullscreen");
+    base.classList.remove("open");
 }
 
 
