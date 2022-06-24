@@ -181,7 +181,7 @@ var createMap = function() {
 
 
 	var mapAside4DescriptionOviewSelector = document.createElement("div");
-	mapAside4DescriptionOviewSelector.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(!delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonLeftButton)}else if(delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonRightButton)}});
+	mapAside4DescriptionOviewSelector.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonLeftButton)}else if(!delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonRightButton)}});
 	mapAside4DescriptionOviewSelectorOuter.appendChild(mapAside4DescriptionOviewSelector);
 
 	var mapAside4DescriptionOviewButtonRight = document.createElement("span");
@@ -881,19 +881,19 @@ var createMap = function() {
 
 			if(name == location) {
 				if (north != undefined) {
-					mapTop.setAttribute("title",north);
+					mapTop.setAttribute("title",north.replaceAll(",","\n"));
 					mapTop.firstElementChild.setAttribute("value",north);
 				}
 				if (south != undefined) {
-					mapBottom.setAttribute("title",south);
+					mapBottom.setAttribute("title",south.replaceAll(",","\n"));
 					mapBottom.firstElementChild.setAttribute("value",south);
 				}
 				if (west != undefined) {
-					mapLeft.setAttribute("title",west);
+					mapLeft.setAttribute("title",west.replaceAll(",","\n"));
 					mapLeft.firstElementChild.setAttribute("value",west);
 				}
 				if (east != undefined) {
-					mapRight.setAttribute("title",east);
+					mapRight.setAttribute("title",east.replaceAll(",","\n"));
 					mapRight.firstElementChild.setAttribute("value",east);
 				}
 			}
