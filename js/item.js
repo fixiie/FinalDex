@@ -103,21 +103,18 @@ var createItem = function() {
 
 	var itemAside4Sidebar = document.createElement("div");
 	var itemAside4SidebarTitle = document.createElement("div");
-	var itemAside4SidebarTitleTop = document.createElement("li");
-	var itemAside4SidebarTitleTopText = document.createElement("h4");
-	var itemAside4SidebarTitleBottom = document.createElement("li");
+	var itemAside4SidebarTitleText = document.createElement("h4");
+
 	var itemAside4SidebarUl = document.createElement("ul");
 	var itemAside4SidebarPrice = document.createElement("div");
 
 	itemAside4Sidebar.classList.add("item-sidebar");
 	itemAside4SidebarTitle.classList.add("item-sidebar-title");
-	itemAside4SidebarTitleTopText.innerText = "Acquisition";
+	itemAside4SidebarTitleText.innerText = "Acquisition";
 	itemAside4SidebarPrice.classList.add("item-sidebar-price");
 	itemAside4.appendChild(itemAside4Sidebar);
 	itemAside4Sidebar.appendChild(itemAside4SidebarTitle);
-	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleTop);
-	itemAside4SidebarTitleTop.appendChild(itemAside4SidebarTitleTopText);
-	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleBottom);
+	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleText);
 	itemAside4Sidebar.appendChild(itemAside4SidebarUl);
 	itemAside4Sidebar.appendChild(itemAside4SidebarPrice);
 
@@ -138,29 +135,6 @@ var createItem = function() {
 	itemAside4SidebarPrice.appendChild(itemAside4SidebarValue);
 	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTitle);
 	itemAside4SidebarValue.appendChild(itemAside4SidebarValueText);
-
-
-
-	var sidebarItemList = ["Finite", "Repeatable"];
-	for(var q = 0; q < sidebarItemList.length; q++) {
-		var itemAside4SidebarTitleBottomText = document.createElement("h6");
-		itemAside4SidebarTitleBottomText.innerText = sidebarItemList[q];
-		itemAside4SidebarTitleBottom.appendChild(itemAside4SidebarTitleBottomText);
-	}
-	for(var i = 0; i < 0; i++) {
-		var itemAside4SidebarLi = document.createElement("li");
-		itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
-		for(var q = 0; q < sidebarItemList.length; q++) {
-			var itemAside4SidebarLiTextOuter = document.createElement("span");
-			var itemAside4SidebarLiText = document.createElement("p");
-			itemAside4SidebarLiText.innerText = "data";
-			itemAside4SidebarLiText.setAttribute("title", sidebarItemList[q]);
-			itemAside4SidebarLi.appendChild(itemAside4SidebarLiTextOuter);
-			itemAside4SidebarLiTextOuter.appendChild(itemAside4SidebarLiText);
-		}
-	}
-
-
 
 	var firstiteration = true;
 	for(var q = 0; q < finaldataItems.length; q++) {
@@ -239,6 +213,132 @@ var createItem = function() {
 				}
 			}
 		}
+
+		var lis = itemAside4SidebarUl.querySelectorAll(":scope li");
+		
+		for(var q = 0; q < lis.length; q++) {
+			lis[q].remove();
+		}
+
+
+
+		for(var q = 0; q < finaldataLocationItems.length; q++) {
+			if (getApplicable(finaldataLocationItems[q]["Game"])) {
+				if(finaldataLocationItems[q]["Item"] == item) {
+					var itemAside4SidebarLi = document.createElement("li");
+					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+
+					var itemAside4SidebarItem = document.createElement("span");
+					itemAside4SidebarItem.setAttribute("name","Item");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+
+					for(var u = 0; u < finaldataLocationItems[q]["Quantity"]; u++) {
+						var itemAside4SidebarItemImg = document.createElement("img");
+						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationItems[q]["Icon"]+".png";
+						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+
+						if (finaldataLocationItems[q]["Quantity"] == "1") {
+							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
+						}
+						else {
+							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+						}
+					}
+
+					var itemAside4SidebarLocation = document.createElement("span");
+					var itemAside4SidebarLocationText = document.createElement("h3");
+					itemAside4SidebarLocation.setAttribute("name","Location");
+					itemAside4SidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
+					itemAside4SidebarLocationText.setAttribute("name","Map")
+					itemAside4SidebarLocationText.setAttribute("title","Location");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarLocation);
+					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
+
+					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
+
+					if (finaldataLocationItems[q]["Area"] != undefined) {
+						var itemAside4SidebarArea = document.createElement("span");
+						var itemAside4SidebarAreaHeader = document.createElement("h4");
+						var itemAside4SidebarAreaText = document.createElement("p");
+						itemAside4SidebarArea.setAttribute("name","Area");
+						itemAside4SidebarAreaHeader.innerText = "Area:";
+						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+						itemAside4SidebarLi.appendChild(itemAside4SidebarArea);
+						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaHeader);
+						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaText);
+					}
+
+					if (finaldataLocationItems[q]["Description"] != undefined) {
+						var itemAside4SidebarDescription = document.createElement("span");
+						var itemAside4SidebarDescriptionText = document.createElement("p");
+						itemAside4SidebarDescription.setAttribute("name","Description");
+						itemAside4SidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
+						itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
+						itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
+						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+					}
+
+
+					if (finaldataLocationItems[q]["Additional"] != undefined) {
+						var itemAside4SidebarAdditional = document.createElement("span");
+						var itemAside4SidebarAdditionalText = document.createElement("p");
+						itemAside4SidebarAdditional.setAttribute("name","Additional");
+						itemAside4SidebarAdditionalText.innerText = finaldataLocationItems[q]["Additional"];
+						itemAside4SidebarLi.appendChild(itemAside4SidebarAdditional);
+						itemAside4SidebarAdditional.appendChild(itemAside4SidebarAdditionalText);
+					}
+
+					if (finaldataLocationItems[q]["Requirement"] != undefined) {
+						var itemAside4SidebarRequirement = document.createElement("span");
+						var itemAside4SidebarRequirementHeader = document.createElement("h4");
+						var itemAside4SidebarRequirementText = document.createElement("p");
+						itemAside4SidebarRequirement.setAttribute("name","Requirement");
+						itemAside4SidebarRequirementHeader.innerText = "Requires:";
+						itemAside4SidebarRequirementText.innerText = finaldataLocationItems[q]["Requirement"];
+						itemAside4SidebarLi.appendChild(itemAside4SidebarRequirement);
+						itemAside4SidebarRequirement.appendChild(itemAside4SidebarRequirementHeader);
+						itemAside4SidebarRequirement.appendChild(itemAside4SidebarRequirementText);
+					}
+
+
+					if (finaldataLocationItems[q]["Machine"] != undefined) {
+						var itemAside4SidebarMachine = document.createElement("span");
+						itemAside4SidebarMachine.setAttribute("name","Machine");
+						itemAside4SidebarLi.appendChild(itemAside4SidebarMachine);
+						if (finaldataLocationItems[q]["Machine"].includes(",")) {
+							for(var u = 0; u < finaldataLocationItems[q]["Machine"].split(",").length; u++) {
+								var itemAside4SidebarMachineImage = document.createElement("img");
+								var itemAside4SidebarMachineText = document.createElement("p");
+								itemAside4SidebarMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getMachineIcon(finaldataLocationItems[q]["Machine"].split(",")[u])+".png";
+								itemAside4SidebarMachineImage.title = getMachineIcon(finaldataLocationItems[q]["Machine"].split(",")[u]);
+								itemAside4SidebarMachineText.innerText = finaldataLocationItems[q]["Machine"].split(",")[u];
+								itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineImage);
+								itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineText);
+							}
+						}
+						else {
+							var itemAside4SidebarMachineImage = document.createElement("img");
+							var itemAside4SidebarMachineText = document.createElement("p");
+							itemAside4SidebarMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getMachineIcon(finaldataLocationItems[q]["Machine"])+".png";
+							itemAside4SidebarMachineImage.title = getMachineIcon(finaldataLocationItems[q]["Machine"]);
+							itemAside4SidebarMachineText.innerText = finaldataLocationItems[q]["Machine"];
+							itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineImage);
+							itemAside4SidebarMachine.appendChild(itemAside4SidebarMachineText);
+						}
+					}
+
+
+
+
+
+				
+				}
+			}
+		}
+
+	
+
+
 
 
 
