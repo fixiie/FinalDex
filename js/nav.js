@@ -62,7 +62,7 @@ var createNav = function() {
 
 
 	fullscreen.addEventListener("keyup",function(event){if(event.which === 37){fullscreenMove(fullscreenButtonLeftText)}else if(event.which === 39){fullscreenMove(fullscreenButtonRightText)}});
-	fullscreen.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(!delta.includes("-")){fullscreenMove(fullscreenButtonLeftText)}else if(delta.includes("-")){fullscreenMove(fullscreenButtonRightText)}});
+	fullscreen.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){fullscreenMove(fullscreenButtonLeftText)}else if(!delta.includes("-")){fullscreenMove(fullscreenButtonRightText)}});
 
 	fullscreenOverlay.addEventListener("click",exitFullscreen);
 	fullscreenButtonLeftText.addEventListener("click",fullscreenMove);
