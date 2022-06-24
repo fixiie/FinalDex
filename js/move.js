@@ -9,7 +9,7 @@ var createMove = function() {
 	var moveAside1Options = document.createElement("div");
 	var moveAside2 = document.createElement("aside");
 	var moveAside2Title = document.createElement("span");
-	var moveAside2TitleID = document.createElement("h1");
+	var moveAside2TitleID = document.createElement("h4");
 	var moveAside2TitleName = document.createElement("h1");
 	var moveAside2Debut = document.createElement("span");
 	var moveAside2DebutText = document.createElement("h4");
@@ -161,18 +161,16 @@ var createMove = function() {
 	moveAside4LearnsetTitleText.innerHTML = "Learnset";
 	moveAside4Learnset.appendChild(moveAside4LearnsetTitle);
 	moveAside4LearnsetTitle.appendChild(moveAside4LearnsetTitleText);
-	var MoveLearnsetOption = ["Level Up", "HM"];
+	
 	var moveAside4LearnsetContent = document.createElement("div");
-	var moveAside4LearnsetHeader = document.createElement("div");
 	var moveAside4LearnsetUl = document.createElement("ul");
 	moveAside4LearnsetContent.classList.add("move-learnset-content");
-	moveAside4LearnsetHeader.classList.add("move-learnset-header");
 	moveAside4Learnset.appendChild(moveAside4LearnsetContent);
-	moveAside4LearnsetContent.appendChild(moveAside4LearnsetHeader);
 	moveAside4LearnsetContent.appendChild(moveAside4LearnsetUl);
 	var moveAside4LearnsetPartyBox = document.createElement("div");
 	moveAside4LearnsetPartyBox.classList.add("learnset-partybox");
 	moveAside4Learnset.appendChild(moveAside4LearnsetPartyBox);
+
 
 	var parbo = ["Party","Box"];
 	for(var q = 0; q < parbo.length; q++) {
@@ -189,16 +187,7 @@ var createMove = function() {
 		moveAside4LearnsetInput.addEventListener("change",movePartyBoxLearnset);
 	}
 
-	
-	for(var q = 0; q < MoveLearnsetOption.length; q++) {
-		var moveAside4LearnsetHeaderText = document.createElement("h6");
-		if(q == 0) {
-			moveAside4LearnsetHeaderText.innerText = "Pokémon";
-		} else {
-			moveAside4LearnsetHeaderText.innerText = "Source";
-		}
-		moveAside4LearnsetHeader.appendChild(moveAside4LearnsetHeaderText);
-	}
+
 	var firstmoveiteration;
 	for(var q = 0; q < finaldataMove.length; q++) {
 		if(finaldataMove[q][JSONPath_MoveReference] == "true") {
