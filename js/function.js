@@ -694,3 +694,17 @@ function getApplicable(val) {
 	}
 	return false;
 }
+
+
+
+function getItemIcon(item) {
+    var item;
+	var arr = finaldataItems;
+
+	for (var q = 0; q < arr.length; q++) {
+		if (arr[q]["Name_"+JSONPath_Items] == item) {
+			return arr[q]["Icon_"+JSONPath_Items]
+		}
+	}
+    return;
+}
