@@ -12,16 +12,16 @@ function getPokémonData(arr, name, game) {
 			if(arr[q][game[i]] == name) {
 				if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 						return e.ID;
-					}).indexOf(arr[q]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+					}).indexOf(arr[q]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 					var obj = new Object();
 					obj["Pokémon"] = arr[q]["Pokémon"];
-					if(finaldataPokémonPath[q]["Folder_" + JSONPath_Path] == undefined) {
+					if(finaldataPokémonPath[q]["Folder_"+JSONPath_Path] == undefined) {
 						obj["Folder"] = "";
 					} else {
-						obj["Folder"] = finaldataPokémonPath[q]["Folder_" + JSONPath_Path];
+						obj["Folder"] = finaldataPokémonPath[q]["Folder_"+JSONPath_Path];
 					}
-					obj["File"] = finaldataPokémonPath[q]["File_" + JSONPath_Path];
-					obj["Form"] = finaldataPokémonForm[q]["Form_" + JSONPath_Form];
+					obj["File"] = finaldataPokémonPath[q]["File_"+JSONPath_Path];
+					obj["Form"] = finaldataPokémonForm[q]["Form_"+JSONPath_Form];
 					obj["Variant"] = arr[q]["Variant"];
 					for(var u = 0; u < game.length; u++) {
 						if(arr[q][game[u]] != undefined) {
@@ -40,7 +40,7 @@ function getPokémonData(arr, name, game) {
 function OpenExitPopUp(x, active) {
 	var x;
 	var active;
-	var popup = document.querySelector("#data-modal" + x + " .data-popup");
+	var popup = document.querySelector("#data-modal"+x+" .data-popup");
 	if(active == false) {
 		popup.classList.add("open");
 		popup.classList.remove("close");
@@ -54,7 +54,7 @@ function callPopUp(x, arr, type, style) {
 	var x;
 	var arr;
 	var type;
-	var popup = document.querySelector("#data-modal" + x + " .data-popup");
+	var popup = document.querySelector("#data-modal"+x+" .data-popup");
 	var ul = popup.querySelector(":scope ul");
 	var lis = popup.querySelectorAll(":scope li");
 	var idpath = popup.querySelector(":scope span > h4");
@@ -88,16 +88,16 @@ function callPopUp(x, arr, type, style) {
 		title = enhancetarget.getAttribute("title");
 	}
 	if(title.includes("  ")) {
-		title = title.replaceAll("  ", "");
+		title = title.replaceAll("  ","");
 	}
 	if(navChecker != 1) {
 		navChecker.fill(1);
-		document.querySelector("#data-modal" + x + " #data-navigation label:nth-child(2)").click();
+		document.querySelector("#data-modal"+x+" #data-navigation label:nth-child(2)").click();
 	}
 	ul.setAttribute("name", type);
 	if(type == "Ability") {
-		id = getAbilityData(title, "ID");
-		description = getAbilityData(title, "Flavor");
+		id = getAbilityData(title,"ID");
+		description = getAbilityData(title,"Flavor");
 	} else if(type == "Held Item") {
 		id = enhancetarget.getAttribute("name");
 	}
@@ -106,13 +106,13 @@ function callPopUp(x, arr, type, style) {
 	}
 	if(type == "Catch Rate") {
 		if(Generation == 1) {
-			formula = Math.round(((Math.min(parseInt(title) + 1, 256)) / 256 * (85 + 1 / 256) / 256 * 100) * 10) / 10 + "%";
+			formula = Math.round(((Math.min(parseInt(title)+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10+"%";
 		} else if(Generation == 2) {
-			formula = Math.round(((Math.max(parseInt(title) / 3, 1) + 1) / 256 * 100) * 10) / 10 + "%";
+			formula = Math.round(((Math.max(parseInt(title) / 3, 1)+1) / 256 * 100) * 10) / 10+"%";
 		} else if(Generation == 3 || Generation == 4) {
-			formula = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 4 * 100) * 10) / 10 + "%";
+			formula = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 4 * 100) * 10) / 10+"%";
 		} else if(Generation >= 5) {
-			formula = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 3 * 100) * 10) / 10 + "%";
+			formula = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 3 * 100) * 10) / 10+"%";
 		}
 	} else if(type == "Experience Yield") {
 		if(title >= 300) {
@@ -130,9 +130,9 @@ function callPopUp(x, arr, type, style) {
 		if(Generation == 2 || Generation == 7) {
 			formula = parseInt(title) * 256;
 		} else if(Generation == 3) {
-			formula = (parseInt(title) + 1) * 256;
+			formula = (parseInt(title)+1) * 256;
 		} else if(Generation == 4) {
-			formula = (parseInt(title) + 1) * 255;
+			formula = (parseInt(title)+1) * 255;
 		} else if(Generation == 5 || Generation == 6) {
 			formula = parseInt(title) * 257;
 		}
@@ -164,8 +164,8 @@ function callPopUp(x, arr, type, style) {
 		}
 	}
 	if(type == "Held Item") {
-		icon = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + target.title + ".png";
-		iconpath.setAttribute("name", "Item");
+		icon = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(target.title)+".png";
+		iconpath.setAttribute("name","Item");
 		iconpath.addEventListener("click", dataRedirect);
 	}
 	if(type == "Base Stats" && style == "Multiple" || type == "EV Yield" && style == "Multiple") {
@@ -185,72 +185,72 @@ function callPopUp(x, arr, type, style) {
 		additional = "Sp. Def";
 	}
 	if(additional != undefined) {
-		additional = additional.charAt(0).toUpperCase() + additional.slice(1);
+		additional = additional.charAt(0).toUpperCase()+additional.slice(1);
 	}
 	for(u = 0; u < lis.length; u++) {
 		lis[u].remove();
 	}
 	if(type == "Type") {
-		popup.querySelector(":scope > div").setAttribute("name", "type" + title);
+		popup.querySelector(":scope > div").setAttribute("name","type"+title);
 	} else if(type == "Egg Group") {
-		popup.querySelector(":scope > div").setAttribute("name", "egg" + title);
+		popup.querySelector(":scope > div").setAttribute("name","egg"+title);
 	} else if(type == "Base Stats" || type == "EV Yield") {
-		popup.querySelector(":scope > div").setAttribute("name", "stat" + additional);
+		popup.querySelector(":scope > div").setAttribute("name","stat"+additional);
 	} else {
 		popup.querySelector(":scope > div").removeAttribute("name");
 	}
 	if(type == "Ability") {
 		var jsonpath = JSONPath_Ability;
 		if(Generation <= 4) {
-			var json = ["Primary", "Secondary"];
+			var json = ["Primary","Secondary"];
 		} else {
-			var json = ["Primary", "Secondary", "Hidden"];
+			var json = ["Primary","Secondary","Hidden"];
 		}
-		json = json.map(i => i + "_" + jsonpath);
+		json = json.map(i => i+"_"+jsonpath);
 	} else if(type == "Egg Group") {
 		var jsonpath = JSONPath_EggGroup;
-		var json = ["Primary", "Secondary"];
-		json = json.map(i => i + "_" + jsonpath);
+		var json = ["Primary","Secondary"];
+		json = json.map(i => i+"_"+jsonpath);
 	} else if(type == "Catch Rate") {
-		var json = [JSONPath_CatchRate, "Percentage"];
+		var json = [JSONPath_CatchRate,"Percentage"];
 	} else if(type == "Hatch Rate") {
-		var json = ["Egg Cycle_" + JSONPath_HatchRateEggCycle, "Steps_" + JSONPath_HatchRateSteps];
+		var json = ["Egg Cycle_"+JSONPath_HatchRateEggCycle,"Steps_"+JSONPath_HatchRateSteps];
 	} else if(type == "Experience Yield") {
-		var json = [JSONPath_ExperienceYield, "Category"];
+		var json = [JSONPath_ExperienceYield,"Category"];
 	} else if(type == "Leveling Rate") {
 		var json = [JSONPath_LevelingRate];
 	} else if(type == "Type") {
 		var jsonpath = JSONPath_Type;
-		var json = ["Primary", "Secondary"];
-		json = json.map(i => i + "_" + jsonpath);
+		var json = ["Primary","Secondary"];
+		json = json.map(i => i+"_"+jsonpath);
 	} else if(type == "Gender Ratio") {
 		var jsonpath = JSONPath_GenderRatio;
-		var json = ["Male", "Female"];
-		json = json.map(i => i + "_" + jsonpath);
+		var json = ["Male","Female"];
+		json = json.map(i => i+"_"+jsonpath);
 	} else if(type == "Base Stats") {
 		if(Generation <= 1) {
 			var jsonpath = JSONPath_BaseStats;
-			var json = ["HP", "Attack", "Defense", "Special", "Speed", "Total"];
-			json = json.map(i => i + "_" + jsonpath);
+			var json = ["HP","Attack","Defense","Special","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
 		} else {
 			var jsonpath = JSONPath_BaseStats;
-			var json = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Total"];
-			json = json.map(i => i + "_" + jsonpath);
+			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
 		}
 	} else if(type == "EV Yield") {
 		if(Generation <= 1) {
 			var jsonpath = JSONPath_EVYield;
-			var json = ["HP", "Attack", "Defense", "Special", "Speed", "Total"];
-			json = json.map(i => i + "_" + jsonpath);
+			var json = ["HP","Attack","Defense","Special","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
 		} else {
 			var jsonpath = JSONPath_EVYield;
-			var json = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Total"];
-			json = json.map(i => i + "_" + jsonpath);
+			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
 		}
 	} else if(type == "Held Item") {
 		var jsonpath = JSONPath_HeldItem;
 		var json = JSONPath_HeldItemPercentage;
-		json = json.map(i => i + "_" + jsonpath);
+		json = json.map(i => i+"_"+jsonpath);
 	}
 	if(id == undefined) {
 		idpath.innerText = "";
@@ -259,21 +259,21 @@ function callPopUp(x, arr, type, style) {
 		idpath.innerText = id;
 		idpath.style.display = "unset";
 	} else {
-		idpath.innerText = "#" + id;
+		idpath.innerText = "#"+id;
 		idpath.style.display = "unset";
 	}
 	if(style == "Total") {
-		titlepath.innerHTML = type + "<br>" + title;
+		titlepath.innerHTML = type+"<br>"+title;
 	} else if(type == "Catch Rate" || type == "Experience Yield" || type == "Leveling Rate" || type == "Base Stats" || type == "EV Yield") {
 		if(additional == undefined) {
-			titlepath.innerHTML = type + "<br>" + title;
+			titlepath.innerHTML = type+"<br>"+title;
 		} else {
-			titlepath.innerHTML = type + " " + additional + "<br>" + title;
+			titlepath.innerHTML = type+" "+additional+"<br>"+title;
 		}
 	} else if(type == "Hatch Rate") {
-		titlepath.innerHTML = "Egg Cycles<br>" + title;
+		titlepath.innerHTML = "Egg Cycles<br>"+title;
 	} else if(type == "Gender Ratio") {
-		titlepath.innerHTML = type + "<br>" + "<span title='" + abbreviation + "'>" + alteration + "</span>";
+		titlepath.innerHTML = type+"<br>"+"<span title='"+abbreviation+"'>"+alteration+"</span>";
 	} else {
 		titlepath.innerText = title;
 	}
@@ -297,16 +297,16 @@ function callPopUp(x, arr, type, style) {
 				if(arr[u][json[q]] == title) {
 					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
 						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_" + JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_" + JSONPath_Path] == undefined) {
+						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
+						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
 							obj["Folder"] = "";
 						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_" + JSONPath_Path];
+							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
 						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
@@ -315,16 +315,16 @@ function callPopUp(x, arr, type, style) {
 						}
 						if(type == "Catch Rate") {
 							if(Generation == 1) {
-								obj["Percentage"] = Math.round(((Math.min(parseInt(arr[u][json[q]]) + 1, 256)) / 256 * (85 + 1 / 256) / 256 * 100) * 10) / 10 + "%";
+								obj["Percentage"] = Math.round(((Math.min(parseInt(arr[u][json[q]])+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10+"%";
 							}
 							if(Generation == 2) {
-								obj["Percentage"] = Math.round(((Math.max(parseInt(arr[u][json[q]]) / 3, 1) + 1) / 256 * 100) * 10) / 10 + "%";
+								obj["Percentage"] = Math.round(((Math.max(parseInt(arr[u][json[q]]) / 3, 1)+1) / 256 * 100) * 10) / 10+"%";
 							}
 							if(Generation == 3 || Generation == 4) {
-								obj["Percentage"] = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 4 * 100) * 10) / 10 + "%";
+								obj["Percentage"] = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 4 * 100) * 10) / 10+"%";
 							}
 							if(Generation >= 5) {
-								obj["Percentage"] = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 3 * 100) * 10) / 10 + "%";
+								obj["Percentage"] = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 3 * 100) * 10) / 10+"%";
 							}
 						}
 						result[u] = obj;
@@ -335,19 +335,19 @@ function callPopUp(x, arr, type, style) {
 	} else if(style == "Multiple") {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
-				if(arr[u][additional + "_" + jsonpath] == title) {
+				if(arr[u][additional+"_"+jsonpath] == title) {
 					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
 						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_" + JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_" + JSONPath_Path] == undefined) {
+						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
+						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
 							obj["Folder"] = "";
 						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_" + JSONPath_Path];
+							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
 						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
@@ -365,16 +365,16 @@ function callPopUp(x, arr, type, style) {
 				if(arr[u][json[q]] != undefined) {
 					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
 						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_" + JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_" + JSONPath_Path] == undefined) {
+						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
+						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
 							obj["Folder"] = "";
 						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_" + JSONPath_Path];
+							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
 						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
@@ -387,7 +387,7 @@ function callPopUp(x, arr, type, style) {
 			}
 		}
 		result.sort(function(a, b) {
-			return b[additional + "_" + jsonpath] - a[additional + "_" + jsonpath];
+			return b[additional+"_"+jsonpath] - a[additional+"_"+jsonpath];
 		});
 	} else if(style == "Custom1") {
 		for(var q = 0; q < json.length; q++) {
@@ -417,17 +417,17 @@ function callPopUp(x, arr, type, style) {
 				if(condition) {
 					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
 						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 						obj["Variant"] = arr[u]["Variant"];
 						obj["Category"] = abbreviation2;
-						obj["File"] = finaldataPokémon[u]["File_" + JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_" + JSONPath_Path] == undefined) {
+						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
+						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
 							obj["Folder"] = "";
 						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_" + JSONPath_Path];
+							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
 						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
@@ -475,18 +475,18 @@ function callPopUp(x, arr, type, style) {
 				if(alteration == alteration2) {
 					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
 							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_" + JSONPath_Area] != "Unobtainable") {
+						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
 						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 						obj["Variant"] = arr[u]["Variant"];
 						obj["Alteration"] = alteration2;
 						obj["Abbreviation"] = abbreviation2;
-						obj["File"] = finaldataPokémon[u]["File_" + JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_" + JSONPath_Path] == undefined) {
+						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
+						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
 							obj["Folder"] = "";
 						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_" + JSONPath_Path];
+							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
 						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
@@ -509,22 +509,22 @@ function callPopUp(x, arr, type, style) {
 			var span = document.createElement("span");
 			if(type == "Ability") {
 				if(Generation <= 4) {
-					li.setAttribute("name", "2");
+					li.setAttribute("name","2");
 				} else {
-					li.setAttribute("name", "3");
+					li.setAttribute("name","3");
 				}
 			}
 			var img = document.createElement("img");
 			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(result[u]["Form"]) + ".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"])+".png";
 				img.title = result[u]["Form"];
 				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
 			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(result[u]["Pokémon"]) + ".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"])+".png";
 				img.title = result[u]["Pokémon"];
 				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
 			}
-			img.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 
 			if(result[u]["Pokémon"] == getPokémonName(getIntID("", x)) || result[u]["Form"] == getPokémonName(getIntID("", x))) {
 				li.classList.add("select");
@@ -554,34 +554,34 @@ function callPopUp(x, arr, type, style) {
 						p.title = "Steps";
 					} else if(type == "Base Stats" || type == "EV Yield") {
 						p.title = json[q].split("_")[0];
-						p.setAttribute("name", "stat" + json[q].split("_")[0]);
+						p.setAttribute("name","stat"+json[q].split("_")[0]);
 					} else if(json[q].includes("_") && type != "Base Stats" || json[q].includes("_") && type != "EV Yield") {
-						p.title = json[q].split("_")[0] + " " + type;
+						p.title = json[q].split("_")[0]+" "+type;
 					} else if(type == "Catch Rate") {
 						if(q == 0) {
 							p.title = type;
 						} else {
 							if(result[u]["Form"] != undefined) {
-								p.title = "When thrown at a full health " + result[u]["Form"] + " with an ordinary Poké Ball.";
+								p.title = "When thrown at a full health "+result[u]["Form"]+" with an ordinary Poké Ball.";
 							} else {
-								p.title = "When thrown at a full health " + result[u]["Pokémon"] + " with an ordinary Poké Ball.";
+								p.title = "When thrown at a full health "+result[u]["Pokémon"]+" with an ordinary Poké Ball.";
 							}
 						}
 					} else if(type == "Experience Yield") {
 						if(q == 0) {
 							p.title = type;
 						} else {
-							p.title = type + " Category";
+							p.title = type+" Category";
 						}
 					} else {
 						p.title = type;
 					}
 					if(style == "Multiple") {
-						if(result[u][json[q]] == title && json[q] == additional + "_" + jsonpath) {
+						if(result[u][json[q]] == title && json[q] == additional+"_"+jsonpath) {
 							p.classList.add("select");
 						}
 					} else if(style == "Total") {
-						if(json[q] == additional + "_" + jsonpath) {
+						if(json[q] == additional+"_"+jsonpath) {
 							p.classList.add("select");
 						}
 					} else if(type == "Catch Rate" || type == "Hatch Rate" || type == "Experience Yield") {
@@ -597,7 +597,7 @@ function callPopUp(x, arr, type, style) {
 						if(type == "Egg Group") {
 							if(result[u][json[q]] != undefined) {
 								p.innerText = result[u][json[q]];
-								p.setAttribute("name", "egg" + result[u][json[q]]);
+								p.setAttribute("name","egg"+result[u][json[q]]);
 							} else {
 								p.innerText = "–";
 							}
@@ -605,7 +605,7 @@ function callPopUp(x, arr, type, style) {
 							if(result[u][json[q]] != undefined) {
 								p.innerText = result[u][json[q]];
 								if(type == "Ability") {
-									p.setAttribute("name", "Ability");
+									p.setAttribute("name","Ability");
 									p.addEventListener("click", dataRedirect);
 									p.classList.add("active");
 								}
@@ -616,8 +616,8 @@ function callPopUp(x, arr, type, style) {
 					} else {
 						var img2 = document.createElement("img");
 						if(result[u][json[q]] != undefined) {
-							img2.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + result[u][json[q]] + ".png";
-							img2.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+							img2.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+result[u][json[q]]+".png";
+							img2.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 						}
 						p.appendChild(img2);
 					}
@@ -631,19 +631,19 @@ function callPopUp(x, arr, type, style) {
 			var span = document.createElement("span");
 			var img = document.createElement("img");
 			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(result[u]["Form"]) + ".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"])+".png";
 				img.title = result[u]["Form"];
 				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
 			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(result[u]["Pokémon"]) + ".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"])+".png";
 				img.title = result[u]["Pokémon"];
 				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
 			}
 			if(type == "Held Item") {
 				li.setAttribute("name", json.length);
 			}
-			img.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			if(result[u]["Pokémon"] == getPokémonName(getIntID(x, ""))) {
+			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			if(result[u]["Pokémon"] == getPokémonName(getIntID(x,""))) {
 				img.classList.add("select");
 			}
 			img.addEventListener("click", modalData);
@@ -655,7 +655,7 @@ function callPopUp(x, arr, type, style) {
 				var span2 = document.createElement("span");
 				var pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
-					pimg.src = "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + result[u][json[q]] + ".png";
+					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+result[u][json[q]]+".png";
                     pimg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
@@ -663,7 +663,7 @@ function callPopUp(x, arr, type, style) {
 					} else {
 						span2.innerText = json[q];
 					}
-					pimg.setAttribute("name", "Item");
+					pimg.setAttribute("name","Item");
 					pimg.addEventListener("click", dataRedirect);
 					pimg.classList.add("active");
 				} else {
@@ -767,9 +767,9 @@ function dataRedirect() {
     } else if(type == "ability") {
         typevariant = "abilities";
     } else {
-        typevariant = type + "s";
+        typevariant = type+"s";
     }
-    typevariant = typevariant.charAt(0).toUpperCase() + typevariant.slice(1);
+    typevariant = typevariant.charAt(0).toUpperCase()+typevariant.slice(1);
     var input = document.querySelector('#navigation input[value="'+typevariant+'"]:checked');
     var modal = document.querySelector(".data-modal-outer.open");
 
@@ -778,7 +778,7 @@ function dataRedirect() {
         y = x.split(",");
 
         for (var q = 0; q < y.length; q++) {
-            var r = q + 1;
+            var r = q+1;
             y[q] = r+". "+y[q];
         }
         y = y.join("\n")
@@ -788,7 +788,7 @@ function dataRedirect() {
         y = y.split("\n");
         
         for (var q = 0; q < y.length; q++) {
-            var num = q + 1;
+            var num = q+1;
             y[q] = y[q].split(num+". ")[1];
         }
 
@@ -864,8 +864,8 @@ function returnData(int, type, additional) {
 	var result = [];
 	if(type.includes("Type")) {
 		arr = finaldataPokémonType;
-		column = ["Primary", "Secondary"];
-		column = column.map(i => i + "_" + JSONPath_Type);
+		column = ["Primary","Secondary"];
+		column = column.map(i => i+"_"+JSONPath_Type);
 	} else if(type.includes("Debut")) {
 		arr = finaldataPokémon;
 		column = ["Debut"];
@@ -878,25 +878,25 @@ function returnData(int, type, additional) {
 	} else if(type.includes("Ability")) {
 		arr = finaldataPokémonAbility;
 		if(Generation >= 5) {
-			column = ["Primary", "Secondary", "Hidden"];
+			column = ["Primary","Secondary","Hidden"];
 		} else {
-			column = ["Primary", "Secondary"];
+			column = ["Primary","Secondary"];
 		}
-		column = column.map(i => i + "_" + JSONPath_Ability);
+		column = column.map(i => i+"_"+JSONPath_Ability);
 	} else if(type.includes("Catch Rate")) {
 		arr = finaldataPokémonCatchRate;
 		column = JSONPath_CatchRate;
 	} else if(type.includes("Hatch Rate")) {
 		arr = finaldataPokémonHatchRate;
-		column = ["Egg Cycle_" + JSONPath_HatchRateEggCycle, "Steps_" + JSONPath_HatchRateSteps];
+		column = ["Egg Cycle_"+JSONPath_HatchRateEggCycle,"Steps_"+JSONPath_HatchRateSteps];
 	} else if(type.includes("Gender Ratio")) {
 		arr = finaldataPokémonGenderRatio;
-		column = ["Male", "Female"];
-		column = column.map(i => i + "_" + JSONPath_GenderRatio);
+		column = ["Male","Female"];
+		column = column.map(i => i+"_"+JSONPath_GenderRatio);
 	} else if(type.includes("Egg Group")) {
 		arr = finaldataPokémonEggGroup;
-		column = ["Primary", "Secondary"];
-		column = column.map(i => i + "_" + JSONPath_EggGroup);
+		column = ["Primary","Secondary"];
+		column = column.map(i => i+"_"+JSONPath_EggGroup);
 	} else if(type.includes("Experience Yield")) {
 		arr = finaldataPokémonExperienceYield;
 		column = JSONPath_ExperienceYield;
@@ -906,58 +906,58 @@ function returnData(int, type, additional) {
 	} else if(type.includes("Held Item")) {
 		arr = finaldataPokémonHeldItem;
 		column = JSONPath_HeldItemPercentage;
-		column = column.map(i => i + "_" + JSONPath_HeldItem);
+		column = column.map(i => i+"_"+JSONPath_HeldItem);
 	} else if(type.includes("Base Friendship")) {
 		arr = finaldataPokémonFriendship;
 		column = JSONPath_Friendship;
 	} else if(type.includes("Base Stats HP")) {
 		arr = finaldataPokémonBaseStats;
-		column = "HP" + "_" + JSONPath_BaseStats;
+		column = "HP"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Attack")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Attack" + "_" + JSONPath_BaseStats;
+		column = "Attack"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Defense")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Defense" + "_" + JSONPath_BaseStats;
+		column = "Defense"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Special")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Special" + "_" + JSONPath_BaseStats;
+		column = "Special"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Sp. Atk")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Sp. Atk" + "_" + JSONPath_BaseStats;
+		column = "Sp. Atk"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Sp. Def")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Sp. Def" + "_" + JSONPath_BaseStats;
+		column = "Sp. Def"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Speed")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Speed" + "_" + JSONPath_BaseStats;
+		column = "Speed"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("Base Stats Total")) {
 		arr = finaldataPokémonBaseStats;
-		column = "Total" + "_" + JSONPath_BaseStats;
+		column = "Total"+"_"+JSONPath_BaseStats;
 	} else if(type.includes("EV Yield HP")) {
 		arr = finaldataPokémonEVYield;
-		column = "HP" + "_" + JSONPath_EVYield;
+		column = "HP"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Attack")) {
 		arr = finaldataPokémonEVYield;
-		column = "Attack" + "_" + JSONPath_EVYield;
+		column = "Attack"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Defense")) {
 		arr = finaldataPokémonEVYield;
-		column = "Defense" + "_" + JSONPath_EVYield;
+		column = "Defense"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Special")) {
 		arr = finaldataPokémonEVYield;
-		column = "Special" + "_" + JSONPath_EVYield;
+		column = "Special"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Sp. Atk")) {
 		arr = finaldataPokémonEVYield;
-		column = "Sp. Atk" + "_" + JSONPath_EVYield;
+		column = "Sp. Atk"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Sp. Def")) {
 		arr = finaldataPokémonEVYield;
-		column = "Sp. Def" + "_" + JSONPath_EVYield;
+		column = "Sp. Def"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Speed")) {
 		arr = finaldataPokémonEVYield;
-		column = "Speed" + "_" + JSONPath_EVYield;
+		column = "Speed"+"_"+JSONPath_EVYield;
 	} else if(type.includes("EV Yield Total")) {
 		arr = finaldataPokémonEVYield;
-		column = "Total" + "_" + JSONPath_EVYield;
+		column = "Total"+"_"+JSONPath_EVYield;
 	}
 
 	for(var i = 0; i < arr.length; i++) {
@@ -1032,48 +1032,48 @@ function returnData(int, type, additional) {
 function loadData() {
 	var target = event.currentTarget;
 	var i = target.getAttribute("value");
-	var id = getIntID(i, "");
-	var portrait = document.querySelector("#data-modal" + id + " .data-portrait");
-	var category = document.querySelector("#data-modal" + id + " .data-category");
-	var debut = document.querySelector("#data-modal" + id + " .data-debut");
-	var name = document.querySelector("#data-modal" + id + " .data-name");
-	var type = document.querySelector("#data-modal" + id + " .data-type");
-	var description = document.querySelector("#data-modal" + id + " .data-description");
-	var basestats = document.querySelector("#data-modal" + id + " .data-stats ul[name='basestats']");
-	var evyield = document.querySelector("#data-modal" + id + " .data-stats ul[name='evyield']");
-	var ability = document.querySelector("#data-modal" + id + " .data-sidebar-ability");
-	var catchrate = document.querySelector("#data-modal" + id + " .data-sidebar-catchrate");
-	var hatchrate = document.querySelector("#data-modal" + id + " .data-sidebar-hatchrate");
-	var genderratio = document.querySelector("#data-modal" + id + " .data-sidebar-genderratio");
-	var egggroup = document.querySelector("#data-modal" + id + " .data-sidebar-egggroup");
-	var expyield = document.querySelector("#data-modal" + id + " .data-sidebar-expyield");
-	var levelrate = document.querySelector("#data-modal" + id + " .data-sidebar-levelrate");
-	var helditem = document.querySelector("#data-modal" + id + " .data-sidebar-helditem");
-	category.innerText = '"' + returnData(i, "Category", "")[0] + ' Pokémon"';
-	if(returnData(i, "Pokédex Entry", "")[0] != undefined) {
-		description.querySelector(':scope p').innerText = returnData(i, "Pokédex Entry", "")[0];
+	var id = getIntID(i,"");
+	var portrait = document.querySelector("#data-modal"+id+" .data-portrait");
+	var category = document.querySelector("#data-modal"+id+" .data-category");
+	var debut = document.querySelector("#data-modal"+id+" .data-debut");
+	var name = document.querySelector("#data-modal"+id+" .data-name");
+	var type = document.querySelector("#data-modal"+id+" .data-type");
+	var description = document.querySelector("#data-modal"+id+" .data-description");
+	var basestats = document.querySelector("#data-modal"+id+" .data-stats ul[name='basestats']");
+	var evyield = document.querySelector("#data-modal"+id+" .data-stats ul[name='evyield']");
+	var ability = document.querySelector("#data-modal"+id+" .data-sidebar-ability");
+	var catchrate = document.querySelector("#data-modal"+id+" .data-sidebar-catchrate");
+	var hatchrate = document.querySelector("#data-modal"+id+" .data-sidebar-hatchrate");
+	var genderratio = document.querySelector("#data-modal"+id+" .data-sidebar-genderratio");
+	var egggroup = document.querySelector("#data-modal"+id+" .data-sidebar-egggroup");
+	var expyield = document.querySelector("#data-modal"+id+" .data-sidebar-expyield");
+	var levelrate = document.querySelector("#data-modal"+id+" .data-sidebar-levelrate");
+	var helditem = document.querySelector("#data-modal"+id+" .data-sidebar-helditem");
+	category.innerText = '"'+returnData(i,"Category","")[0]+' Pokémon"';
+	if(returnData(i,"Pokédex Entry","")[0] != undefined) {
+		description.querySelector(':scope p').innerText = returnData(i,"Pokédex Entry","")[0];
 	}
-	if(returnData(i, "Debut", "")[0].includes("-")) {
-		debut.innerText = "Introduced in " + returnData(i, "Debut", "")[0].split("-")[0];
+	if(returnData(i,"Debut","")[0].includes("-")) {
+		debut.innerText = "Introduced in "+returnData(i,"Debut","")[0].split("-")[0];
 	} else {
-		debut.innerText = "Introduced in " + returnData(i, "Debut", "")[0];
+		debut.innerText = "Introduced in "+returnData(i,"Debut","")[0];
 	}
 	if(Ability.length >= 1) {
-		if(returnData(i, "Ability", "")[0] != undefined) {
-			ability.querySelector(':scope *[title="Primary Ability"]').innerText = returnData(i, "Ability", "")[0];
+		if(returnData(i,"Ability","")[0] != undefined) {
+			ability.querySelector(':scope *[title="Primary Ability"]').innerText = returnData(i,"Ability","")[0];
 			ability.querySelector(':scope *[title="Primary Ability"]').style.display = "flex";
 		} else {
 			ability.querySelector(':scope *[title="Primary Ability"]').style.display = "none";
 		}
-		if(returnData(i, "Ability", "")[1] != undefined) {
-			ability.querySelector(':scope *[title="Secondary Ability"]').innerText = returnData(i, "Ability", "")[1];
+		if(returnData(i,"Ability","")[1] != undefined) {
+			ability.querySelector(':scope *[title="Secondary Ability"]').innerText = returnData(i,"Ability","")[1];
 			ability.querySelector(':scope *[title="Secondary Ability"]').style.display = "flex";
 		} else {
 			ability.querySelector(':scope *[title="Secondary Ability"]').style.display = "none";
 		}
 		if(Ability.length >= 3) {
-			if(returnData(i, "Ability", "")[2] != undefined) {
-				ability.querySelector(':scope *[title="Hidden Ability"]').innerText = returnData(i, "Ability", "")[2];
+			if(returnData(i,"Ability","")[2] != undefined) {
+				ability.querySelector(':scope *[title="Hidden Ability"]').innerText = returnData(i,"Ability","")[2];
 				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.style.display = "flex";
 			} else {
 				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.style.display = "none";
@@ -1083,80 +1083,80 @@ function loadData() {
     if (Gender == true) {
         genderratio.querySelector(':scope > span').style.display = "unset";
 
-        if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "0") { // Always Male
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "100% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 0");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "7" && returnData(i, "Gender Ratio", "")[1] == "1") { // Very Often Male
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "87.5% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "12.5% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "7 : 1");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "3" && returnData(i, "Gender Ratio", "")[1] == "1") { // Often Male
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "75% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "25% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "3 : 1");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "1") { // Equal Ratio
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "50% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "50% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 1");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "3") { // Often Female
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "25% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "75% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 3");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "1" && returnData(i, "Gender Ratio", "")[1] == "7") { // Very Often Female
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "12.5% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "87.5% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "1 : 7");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "1") { // Always Female
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "100% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 1");
-        } else if(returnData(i, "Gender Ratio", "")[0] == "0" && returnData(i, "Gender Ratio", "")[1] == "0") { // Genderless
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title", "0% Male");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title", "0% Female");
-            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title", "Genderless");
-            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value", "0 : 0");
+        if(returnData(i,"Gender Ratio","")[0] == "1" && returnData(i,"Gender Ratio","")[1] == "0") { // Always Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","100% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","0% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","1 : 0");
+        } else if(returnData(i,"Gender Ratio","")[0] == "7" && returnData(i,"Gender Ratio","")[1] == "1") { // Very Often Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","87.5% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","12.5% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","7 : 1");
+        } else if(returnData(i,"Gender Ratio","")[0] == "3" && returnData(i,"Gender Ratio","")[1] == "1") { // Often Male
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","75% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","25% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","3 : 1");
+        } else if(returnData(i,"Gender Ratio","")[0] == "1" && returnData(i,"Gender Ratio","")[1] == "1") { // Equal Ratio
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","50% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","50% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","1 : 1");
+        } else if(returnData(i,"Gender Ratio","")[0] == "1" && returnData(i,"Gender Ratio","")[1] == "3") { // Often Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","25% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","75% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","1 : 3");
+        } else if(returnData(i,"Gender Ratio","")[0] == "1" && returnData(i,"Gender Ratio","")[1] == "7") { // Very Often Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","12.5% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","87.5% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","1 : 7");
+        } else if(returnData(i,"Gender Ratio","")[0] == "0" && returnData(i,"Gender Ratio","")[1] == "1") { // Always Female
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","0% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","100% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","0 : 1");
+        } else if(returnData(i,"Gender Ratio","")[0] == "0" && returnData(i,"Gender Ratio","")[1] == "0") { // Genderless
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","0% Male");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","0% Female");
+            genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="genderless"]').setAttribute("title","Genderless");
+            genderratio.querySelector(':scope *[dataname="value"]').setAttribute("value","0 : 0");
         }
     }
-	levelrate.querySelector(':scope *[dataname="value"]').innerText = returnData(i, "Leveling Rate", "")[0];
-	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, "Leveling Rate", "")[0]);
-	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("title", "Time approximated for " + getPokémonName(i) + " to Level Up.");
+	levelrate.querySelector(':scope *[dataname="value"]').innerText = returnData(i,"Leveling Rate","")[0];
+	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Leveling Rate","")[0]);
+	levelrate.querySelector(':scope *[dataname="value"]').setAttribute("title","Time approximated for "+getPokémonName(i)+" to Level Up.");
 	name.innerText = getPokémonName(i);
  
 
 	if(Egg == true) {
-        if(returnData(i, "Hatch Rate", "")[1] != undefined) {
-            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[1] + " Steps";
-            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Steps required to hatch an egg containing " + getPokémonName(i) + ".");
+        if(returnData(i,"Hatch Rate","")[1] != undefined) {
+            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i,"Hatch Rate","")[1]+" Steps";
+            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title","Steps required to hatch an egg containing "+getPokémonName(i)+".");
         } else {
-            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i, "Hatch Rate", "")[0] + " Egg Cycles";
-            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title", "Egg Cycles required to hatch an egg containing " + getPokémonName(i) + ".");
+            hatchrate.querySelector(':scope *[dataname="value"').innerText = returnData(i,"Hatch Rate","")[0]+" Egg Cycles";
+            hatchrate.querySelector(':scope *[dataname="value"').setAttribute("title","Egg Cycles required to hatch an egg containing "+getPokémonName(i)+".");
         }
-        hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value", returnData(i, "Hatch Rate", "")[0]);
+        hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value", returnData(i,"Hatch Rate","")[0]);
 
-		if(returnData(i, "Egg Group", "")[0] != undefined) {
+		if(returnData(i,"Egg Group","")[0] != undefined) {
 			egggroup.querySelector(':scope span[name="Primary"]').style.display = "flex";
-			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').setAttribute("name", "egg" + returnData(i, "Egg Group", "")[0]);
-			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i, "Egg Group", "")[0];
+			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').setAttribute("name","egg"+returnData(i,"Egg Group","")[0]);
+			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i,"Egg Group","")[0];
 		} else {
 			egggroup.querySelector(':scope span[name="Primary"]').style.display = "none";
 		}
-		if(returnData(i, "Egg Group", "")[1] != undefined) {
+		if(returnData(i,"Egg Group","")[1] != undefined) {
 			egggroup.querySelector(':scope span[name="Secondary"]').style.display = "flex";
-			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').setAttribute("name", "egg" + returnData(i, "Egg Group", "")[1]);
-			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i, "Egg Group", "")[1];
+			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').setAttribute("name","egg"+returnData(i,"Egg Group","")[1]);
+			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i,"Egg Group","")[1];
 		} else {
 			egggroup.querySelector(':scope span[name="Secondary"]').style.display = "none";
 		}
 	}
-	var baseev = ["Base Stats", "EV Yield"];
+	var baseev = ["Base Stats","EV Yield"];
 	var sts = [];
 	for(var y = 0; y < baseev.length; y++) {
 		for(var q = 0; q < Stats.length; q++) {
@@ -1169,72 +1169,72 @@ function loadData() {
 				var json = JSONPath_EVYield;
 				var taq = evyield;
 			}
-			var temp1 = baseev[y].toLowerCase().replace(" ", "").replace(".", "");
-			var temp2 = Stats[q].toLowerCase().replace(" ", "").replace(".", "");
+			var temp1 = baseev[y].toLowerCase().replace(" ","").replace(".","");
+			var temp2 = Stats[q].toLowerCase().replace(" ","").replace(".","");
 			for(var u = 0; u < finaldataPokémon.length; u++) {
 				if(finaldataPokémon[u][JSONPath_Reference] == "true") {
-					if(arr[u][Stats[q] + "_" + json] != undefined && arr[u][Stats[q] + "_" + json] != "") {
-						sts.push(parseInt(arr[u][Stats[q] + "_" + json]));
+					if(arr[u][Stats[q]+"_"+json] != undefined && arr[u][Stats[q]+"_"+json] != "") {
+						sts.push(parseInt(arr[u][Stats[q]+"_"+json]));
 					}
 				}
 			}
-			taq.querySelector(':scope .' + temp1 + '-' + temp2).querySelector(':scope *[dataname="value"]').innerHTML = returnData(i, baseev[y] + " " + Stats[q], "")[0] + "&nbsp;&nbsp;";
-			taq.querySelector(':scope .' + temp1 + '-' + temp2).querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, baseev[y] + " " + Stats[q], "")[0]);
-			taq.querySelector(':scope .' + temp1 + '-' + temp2).querySelector(':scope *[dataname="value"]').style.width = returnData(i, baseev[y] + " " + Stats[q], "")[0] / Math.max.apply(Math, sts) * 100 + "%";
+			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').innerHTML = returnData(i, baseev[y]+" "+Stats[q],"")[0]+"&nbsp;&nbsp;";
+			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, baseev[y]+" "+Stats[q],"")[0]);
+			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').style.width = returnData(i, baseev[y]+" "+Stats[q],"")[0] / Math.max.apply(Math, sts) * 100+"%";
 			sts = [];
 		}
 	}
-	if(returnData(i, "Experience Yield", "")[0] >= 300) {
+	if(returnData(i,"Experience Yield","")[0] >= 300) {
 		expyield.querySelector(':scope *[dataname="value"]').innerText = "Very High";
 	}
-	if(returnData(i, "Experience Yield", "")[0] >= 200 && returnData(i, "Experience Yield", "")[0] <= 299) {
+	if(returnData(i,"Experience Yield","")[0] >= 200 && returnData(i,"Experience Yield","")[0] <= 299) {
 		expyield.querySelector(':scope *[dataname="value"]').innerText = "High";
 	}
-	if(returnData(i, "Experience Yield", "")[0] >= 100 && returnData(i, "Experience Yield", "")[0] <= 199) {
+	if(returnData(i,"Experience Yield","")[0] >= 100 && returnData(i,"Experience Yield","")[0] <= 199) {
 		expyield.querySelector(':scope *[dataname="value"]').innerText = "Medium";
 	}
-	if(returnData(i, "Experience Yield", "")[0] >= 50 && returnData(i, "Experience Yield", "")[0] <= 99) {
+	if(returnData(i,"Experience Yield","")[0] >= 50 && returnData(i,"Experience Yield","")[0] <= 99) {
 		expyield.querySelector(':scope *[dataname="value"]').innerText = "Low";
 	}
-	if(returnData(i, "Experience Yield", "")[0] >= 0 && returnData(i, "Experience Yield", "")[0] <= 49) {
+	if(returnData(i,"Experience Yield","")[0] >= 0 && returnData(i,"Experience Yield","")[0] <= 49) {
 		expyield.querySelector(':scope *[dataname="value"]').innerText = "Very Low";
 	}
-	expyield.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, "Experience Yield", "")[0]);
-	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title", "Experience gained approximated upon defeating " + getPokémonName(i) + " in battle.");
+	expyield.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Experience Yield","")[0]);
+	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
 	if(getPokémonMediaPath(getPokémonName(i)) != undefined) {
-		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/" + getPokémonMediaPath(getPokémonName(i)) + ".png";
+		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/"+getPokémonMediaPath(getPokémonName(i))+".png";
 	}
-	if(returnData(i, "Catch Rate", "") != undefined) {
+	if(returnData(i,"Catch Rate","") != undefined) {
 		var catchRateFormula;
 		if(Generation == 1) {
-			catchRateFormula = Math.round(((Math.min(parseInt(returnData(i, "Catch Rate", "")) + 1, 256)) / 256 * (85 + 1 / 256) / 256 * 100) * 10) / 10;
+			catchRateFormula = Math.round(((Math.min(parseInt(returnData(i,"Catch Rate",""))+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10;
 		}
 		if(Generation == 2) {
-			catchRateFormula = Math.round(((Math.max(parseInt(returnData(i, "Catch Rate", "")) / 3, 1) + 1) / 256 * 100) * 10) / 10;
+			catchRateFormula = Math.round(((Math.max(parseInt(returnData(i,"Catch Rate","")) / 3, 1)+1) / 256 * 100) * 10) / 10;
 		}
 		if(Generation == 3 || Generation == 4) {
-			catchRateFormula = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(returnData(i, "Catch Rate", "")) / 3))) / 65536) ** 4 * 100) * 10) / 10;
+			catchRateFormula = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(returnData(i,"Catch Rate","")) / 3))) / 65536) ** 4 * 100) * 10) / 10;
 		}
 		if(Generation >= 5) {
-			catchRateFormula = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(returnData(i, "Catch Rate", "")) / 3))) / 65536) ** 3 * 100) * 10) / 10;
+			catchRateFormula = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(returnData(i,"Catch Rate","")) / 3))) / 65536) ** 3 * 100) * 10) / 10;
 		}
-		catchrate.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, "Catch Rate", ""));
-		catchrate.querySelector(':scope *[dataname="value"]').setAttribute("title", "When thrown at a full health " + getPokémonName(i) + " with an ordinary Poké Ball.");
-		catchrate.querySelector(':scope *[dataname="value"]').innerText = catchRateFormula + "%";
+		catchrate.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Catch Rate",""));
+		catchrate.querySelector(':scope *[dataname="value"]').setAttribute("title","When thrown at a full health "+getPokémonName(i)+" with an ordinary Poké Ball.");
+		catchrate.querySelector(':scope *[dataname="value"]').innerText = catchRateFormula+"%";
 	}
     if (HeldItem == true) {
         for(var q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
-            if(returnData(i, "Held Item", "")[q] != undefined) {
-                helditem.querySelector(':scope > div img[name="' + JSONPath_HeldItemPercentage[q] + '"]').setAttribute("src", "./media/Images/Item/Bag/" + MEDIAPath_Item_Bag + "/" + returnData(i, "Held Item", "")[q] + ".png");
-                helditem.querySelector(':scope > div img[name="' + JSONPath_HeldItemPercentage[q] + '"]').setAttribute("title", returnData(i, "Held Item", "")[q]);
-                helditem.querySelector(':scope > div img[name="' + JSONPath_HeldItemPercentage[q] + '"]').style.display = "unset";
+            if(returnData(i,"Held Item","")[q] != undefined) {
+                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
+                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("title", returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').style.display = "unset";
             } else {
-                helditem.querySelector(':scope > div img[name="' + JSONPath_HeldItemPercentage[q] + '"]').style.display = "none";
+                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').style.display = "none";
             }
         }
         var heldcheck;
-        for(var q = 0; q < returnData(i, "Held Item", "").length; q++) {
-            if(returnData(i, "Held Item", "")[q] == undefined) {
+        for(var q = 0; q < returnData(i,"Held Item","").length; q++) {
+            if(returnData(i,"Held Item","")[q] == undefined) {
                 heldcheck = false;
             } else {
                 heldcheck = true;
@@ -1253,36 +1253,36 @@ function loadData() {
     else {
         type.setAttribute("title","");
     }
-	if(returnData(i, "Type", "")[0] != undefined) {
+	if(returnData(i,"Type","")[0] != undefined) {
 		type.querySelector(":scope > span:first-child h3").style.display = "none";
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
-		type.querySelector(":scope > span:first-child h3").innerText = returnData(i, "Type", "")[0];
-		type.querySelector(":scope > span:first-child img").setAttribute("src", "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + returnData(i, "Type", "")[0] + ".png");
-        type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i, "Type", "")[0]);
+		type.querySelector(":scope > span:first-child h3").innerText = returnData(i,"Type","")[0];
+		type.querySelector(":scope > span:first-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[0]+".png");
+        type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i,"Type","")[0]);
 	} else {
 		type.querySelector(":scope > span:first-child").classList.remove("active");
 		type.querySelector(":scope > span:first-child img").style.display = "none";
 	}
-	if(returnData(i, "Type", "")[1] != undefined) {
+	if(returnData(i,"Type","")[1] != undefined) {
 		type.querySelector(":scope > span:last-child h3").style.display = "none";
 		type.querySelector(":scope > span:last-child").classList.add("active");
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
-		type.querySelector(":scope > span:last-child h3").innerText = returnData(i, "Type", "")[1];
-		type.querySelector(":scope > span:last-child img").setAttribute("src", "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + returnData(i, "Type", "")[1] + ".png");
-        type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i, "Type", "")[1]);
+		type.querySelector(":scope > span:last-child h3").innerText = returnData(i,"Type","")[1];
+		type.querySelector(":scope > span:last-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[1]+".png");
+        type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i,"Type","")[1]);
 	} else {
 		type.querySelector(":scope > span:last-child").classList.remove("active");
 		type.querySelector(":scope > span:last-child img").style.display = "none";
 	}
-	if(returnData(i, "Type", "")[0] != undefined && returnData(i, "Type", "")[1] != undefined) {
-		type.setAttribute("name", "2");
+	if(returnData(i,"Type","")[0] != undefined && returnData(i,"Type","")[1] != undefined) {
+		type.setAttribute("name","2");
 	} else {
 		type.removeAttribute("name");
 	}
-	var dataAside2LearnsetUl = document.querySelector("#data-modal" + id + " .data-learnset-option > ul");
-	var dataAside2LearnsetHeader = document.querySelectorAll("#data-modal" + id + " .data-learnset-option > h5 li p");
-	var dataAside2LearnsetList = document.querySelectorAll("#data-modal" + id + " .data-learnset-option > ul li");
+	var dataAside2LearnsetUl = document.querySelector("#data-modal"+id+" .data-learnset-option > ul");
+	var dataAside2LearnsetHeader = document.querySelectorAll("#data-modal"+id+" .data-learnset-option > h5 li p");
+	var dataAside2LearnsetList = document.querySelectorAll("#data-modal"+id+" .data-learnset-option > ul li");
 	for(u = 0; u < dataAside2LearnsetList.length; u++) {
 		dataAside2LearnsetList[u].remove();
 	}
@@ -1303,7 +1303,7 @@ function loadData() {
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p]) + '.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p])+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1311,7 +1311,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Evolution"]) + '.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"])+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1329,7 +1329,7 @@ function loadData() {
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Parent"].split(",")[p]) + '.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"].split(",")[p])+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1337,7 +1337,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/' + MEDIAPath_Pokémon_Box + '/' + getPokémonMediaPath(learnsetArr[u]["Parent"]) + '.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"])+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1352,50 +1352,50 @@ function loadData() {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
                     dataAside2LearnsetLiText.innerText = learnsetArr[u]["Move"];
-                    dataAside2LearnsetLiText.setAttribute("name", "move");
+                    dataAside2LearnsetLiText.setAttribute("name","move");
                     dataAside2LearnsetLiText.addEventListener("click", dataRedirect);
                 }
             }
             if(y == 2) {
                 dataAside2LearnsetLiText.title = "Type";
-                if(getMoveData(learnsetArr[u]["Move"], "Type") == undefined) {
+                if(getMoveData(learnsetArr[u]["Move"],"Type") == undefined) {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"], "Type");
+                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Type");
                 }
                 dataAside2LearnsetLiText.setAttribute("name", dataAside2LearnsetLiText.innerText);
             }
             if(y == 3) {
                 dataAside2LearnsetLiText.title = "Category";
-                if(getMoveData(learnsetArr[u]["Move"], "Category") == undefined) {
+                if(getMoveData(learnsetArr[u]["Move"],"Category") == undefined) {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"], "Category");
+                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Category");
                 }
                 dataAside2LearnsetLiText.setAttribute("name", dataAside2LearnsetLiText.innerText);
             }
             if(y == 4) {
                 dataAside2LearnsetLiText.title = "Power";
-                if(getMoveData(learnsetArr[u]["Move"], "Power") == undefined) {
+                if(getMoveData(learnsetArr[u]["Move"],"Power") == undefined) {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"], "Power");
+                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Power");
                 }
             }
             if(y == 5) {
                 dataAside2LearnsetLiText.title = "Accuracy";
-                if(getMoveData(learnsetArr[u]["Move"], "Accuracy") == undefined) {
+                if(getMoveData(learnsetArr[u]["Move"],"Accuracy") == undefined) {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"], "Accuracy");
+                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Accuracy");
                 }
             }
             if(y == 6) {
                 dataAside2LearnsetLiText.title = "PP";
-                if(getMoveData(learnsetArr[u]["Move"], "PP Min") == undefined) {
+                if(getMoveData(learnsetArr[u]["Move"],"PP Min") == undefined) {
                     dataAside2LearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerHTML = getMoveData(learnsetArr[u]["Move"], "PP Min") + " <span>(max. " + getMoveData(learnsetArr[u]["Move"], "PP Max") + ")</span>";
+                    dataAside2LearnsetLiText.innerHTML = getMoveData(learnsetArr[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(learnsetArr[u]["Move"],"PP Max")+")</span>";
                 }
             }
         }
@@ -1487,7 +1487,7 @@ function evInputMax() {
 
 
     for (i = 0; i < values.length; i++) {
-        combinedValues = combinedValues + values[i];
+        combinedValues = combinedValues+values[i];
     }
 
     valueVSlimit = totallimit - combinedValues;
@@ -1495,11 +1495,11 @@ function evInputMax() {
     var tempArr = [];
 
     for (i = 0; i < values.length; i++) {
-        if ((valueVSlimit + values[i]) >= limit) {
+        if ((valueVSlimit+values[i]) >= limit) {
             tempArr.push(limit)
         }
         else {
-            tempArr.push(valueVSlimit + values[i])
+            tempArr.push(valueVSlimit+values[i])
         }
     }
 
@@ -1626,22 +1626,22 @@ function imageType() {
 
         if(!dataType.includes("Art")) {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/Normal/Front/' + dataPath + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
-                conimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataExtension + '/Normal/Front/' + dataPath + '/' + getPokémonMediaPath(parimg[q].title) + "." + dataExtension;
-                parimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(parimg[q].title) + "." + dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title)+"."+dataExtension);
             }
         }
         else {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataPath + '/' + getPokémonMediaPath(conimg[q].id) + "." + dataExtension;
-                conimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(conimg[q].id) + "." + dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/' + dataType + '/' + dataPath + '/' + getPokémonMediaPath(parimg[q].title) + "." + dataExtension;
-                parimg[q].setAttribute("path",dataPath + "/" + getPokémonMediaPath(parimg[q].title) + "." + dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title)+"."+dataExtension);
             }
         }
     }
@@ -1891,91 +1891,91 @@ function createParty(base,data) {
         data = data.split("|")
         for (var q = 0; q < data.length; q++) {
             if (data[q].split(":")[0] == "pok") {
-                pok = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                pok = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "it") {
-                item = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                item = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ni") {
-                nick = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                nick = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "lv") {
-                level = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                level = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ge") {
-                gender = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                gender = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "mo") {
-                move = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                move = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ab") {
-                ability = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                ability = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "iv") {
-                iv = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                iv = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ev") {
-                ev = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                ev = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "na") {
-                nature = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                nature = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metlo") {
-                metlocation = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metlocation = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metlv") {
-                metlevel = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metlevel = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metda") {
-                metdate = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metdate = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "fr") {
-                friendship = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                friendship = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
         }
     }
     else {
         if (data.split(":")[0] == "pok") {
-            pok = data.replaceAll(data.split(":")[0] + ":","")
+            pok = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "it") {
-            item = data.replaceAll(data.split(":")[0] + ":","")
+            item = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ni") {
-            nick = data.replaceAll(data.split(":")[0] + ":","")
+            nick = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "lv") {
-            level = data.replaceAll(data.split(":")[0] + ":","")
+            level = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ge") {
-            gender = data.replaceAll(data.split(":")[0] + ":","")
+            gender = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "mo") {
-            move = data.replaceAll(data.split(":")[0] + ":","")
+            move = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ab") {
-            ability = data.replaceAll(data.split(":")[0] + ":","")
+            ability = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "iv") {
-            iv = data.replaceAll(data.split(":")[0] + ":","")
+            iv = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ev") {
-            ev = data.replaceAll(data.split(":")[0] + ":","")
+            ev = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "na") {
-            nature = data.replaceAll(data.split(":")[0] + ":","")
+            nature = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metlo") {
-            metlocation = data.replaceAll(data.split(":")[0] + ":","")
+            metlocation = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metlv") {
-            metlevel = data.replaceAll(data.split(":")[0] + ":","")
+            metlevel = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metda") {
-            metdate = data.replaceAll(data.split(":")[0] + ":","")
+            metdate = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "fr") {
-            friendship = data.replaceAll(data.split(":")[0] + ":","")
+            friendship = data.replaceAll(data.split(":")[0]+":","")
         }
     }
 
@@ -2008,8 +2008,8 @@ function createParty(base,data) {
     var imgtype = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select')
     var opt = imgtype.querySelector(':scope > option[value="'+imgtype.value+'"]');
     
-    var type1 = returnData(i, "Type", "undefined")[0];
-    var type2 = returnData(i, "Type", "undefined")[1];
+    var type1 = returnData(i,"Type","undefined")[0];
+    var type2 = returnData(i,"Type","undefined")[1];
 
     if (type2 != undefined) {
         $(baseBackground).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type2+"))"});
@@ -2118,7 +2118,7 @@ function createParty(base,data) {
     }
 
     if (Gender == true) {
-        var tempgender = returnData(i, "Gender Ratio", "undefined");
+        var tempgender = returnData(i,"Gender Ratio","undefined");
 
         var possibleGender = [];
         if (tempgender[0] == "0" && tempgender[1] == "0") {
@@ -2174,7 +2174,7 @@ function createParty(base,data) {
     var tempmoves = returnMoveSet(i,"onlymoves,noduplicate");
     tempmoves.unshift("Move");
     for (var u = 0; u < baseMoves.length; u++) {
-        var x = u + 1;
+        var x = u+1;
         for (var q = 0; q < tempmoves.length; q++) {
             var option = document.createElement("option");
             if (q == 0) {
@@ -2194,7 +2194,7 @@ function createParty(base,data) {
 
 
     if (Ability.length > 0) {
-        var abilities = returnData(i, "Ability", "");
+        var abilities = returnData(i,"Ability","");
 
         for (var q = 0; q < abilities.length; q++) {
             if (abilities[q] != undefined) {
@@ -2214,7 +2214,7 @@ function createParty(base,data) {
             }
         }
         if (getAbilityData(baseAbility.value,"Flavor") != undefined) {
-            baseAbility.setAttribute("title",getAbilityData(baseAbility.value, "Flavor"));
+            baseAbility.setAttribute("title",getAbilityData(baseAbility.value,"Flavor"));
         }
     }
 
@@ -2284,7 +2284,7 @@ function createParty(base,data) {
             tempmove = move.split(",");
         }
         for (var q = 0; q < tempmove.length; q++) {
-            var y = q + 1;
+            var y = q+1;
             if (tempmove[q] != "") {
                 if (tempmoves.includes(tempmove[q])) {
                     baseMove.querySelector(":scope > span:nth-child("+y+") select").value = tempmove[q];
@@ -2306,7 +2306,7 @@ function createParty(base,data) {
             tempiv = iv.split(",");
         }
         for (var q = 0; q < tempiv.length; q++) {
-            var y = q + 1;
+            var y = q+1;
             if (baseIV.querySelector(":scope input:nth-child("+y+")") != undefined) {
                 baseIV.querySelector(":scope input:nth-child("+y+")").value = tempiv[q];
             }
@@ -2318,7 +2318,7 @@ function createParty(base,data) {
             tempev = ev.split(",");
         }
         for (var q = 0; q < tempev.length; q++) {
-            var y = q + 1;
+            var y = q+1;
             if (baseEV.querySelector(":scope > input:nth-child("+y+")") != undefined) {
                 baseEV.querySelector(":scope > input:nth-child("+y+")").value = tempev[q];
             }
@@ -2339,8 +2339,8 @@ function createParty(base,data) {
         if (friendship != undefined) {
             baseFriendship.value = friendship;
         }
-        else if (returnData(i,"Base Friendship", "")[0] != undefined){
-            baseFriendship.value = returnData(i,"Base Friendship", "")[0];
+        else if (returnData(i,"Base Friendship","")[0] != undefined){
+            baseFriendship.value = returnData(i,"Base Friendship","")[0];
         }
     }
 
@@ -2692,8 +2692,8 @@ function selectModify(e) {
     }
 
     if (this.parentElement.getAttribute("name") == "Ability") {
-        if (getAbilityData(this.value, "Flavor") != undefined) {
-            this.setAttribute("title",getAbilityData(this.value, "Flavor"));
+        if (getAbilityData(this.value,"Flavor") != undefined) {
+            this.setAttribute("title",getAbilityData(this.value,"Flavor"));
         }
         this.setAttribute("name",this.querySelector(':scope > option[value="'+this.value+'"]').getAttribute("name"));
     }
@@ -2803,92 +2803,92 @@ function storeInBox(data) {
         data = data.split("|")
         for (var q = 0; q < data.length; q++) {
             if (data[q].split(":")[0] == "pok") {
-                pok = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                pok = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "it") {
-                item = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                item = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ni") {
-                nick = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                nick = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "lv") {
-                level = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                level = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ge") {
-                gender = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                gender = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "mo") {
-                move = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                move = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ab") {
-                ability = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                ability = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "iv") {
-                iv = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                iv = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "ev") {
-                ev = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                ev = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "na") {
-                nature = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                nature = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metlo") {
-                metlocation = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metlocation = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metlv") {
-                metlevel = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metlevel = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "metda") {
-                metdate = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                metdate = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
             if (data[q].split(":")[0] == "fr") {
-                friendship = data[q].replaceAll(data[q].split(":")[0] + ":","")
+                friendship = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
         }
 
     }
     else {
         if (data.split(":")[0] == "pok") {
-            pok = data.replaceAll(data.split(":")[0] + ":","")
+            pok = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "it") {
-            item = data.replaceAll(data.split(":")[0] + ":","")
+            item = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ni") {
-            nick = data.replaceAll(data.split(":")[0] + ":","")
+            nick = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "lv") {
-            level = data.replaceAll(data.split(":")[0] + ":","")
+            level = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ge") {
-            gender = data.replaceAll(data.split(":")[0] + ":","")
+            gender = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "mo") {
-            move = data.replaceAll(data.split(":")[0] + ":","")
+            move = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ab") {
-            ability = data.replaceAll(data.split(":")[0] + ":","")
+            ability = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "iv") {
-            iv = data.replaceAll(data.split(":")[0] + ":","")
+            iv = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "ev") {
-            ev = data.replaceAll(data.split(":")[0] + ":","")
+            ev = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "na") {
-            nature = data.replaceAll(data.split(":")[0] + ":","")
+            nature = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metlo") {
-            metlocation = data.replaceAll(data.split(":")[0] + ":","")
+            metlocation = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metlv") {
-            metlevel = data.replaceAll(data.split(":")[0] + ":","")
+            metlevel = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "metda") {
-            metdate = data.replaceAll(data.split(":")[0] + ":","")
+            metdate = data.replaceAll(data.split(":")[0]+":","")
         }
         if (data.split(":")[0] == "fr") {
-            friendship = data.replaceAll(data.split(":")[0] + ":","")
+            friendship = data.replaceAll(data.split(":")[0]+":","")
         }
     }
 
@@ -2898,7 +2898,7 @@ function storeInBox(data) {
     var shadow = document.createElement("span");
     var img = document.createElement("img");
     img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(i))+".png";
-    img.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+    img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
@@ -3213,7 +3213,7 @@ function getBoxData(base) {
 
 
 function partyAdd() {
-    var data = prompt("Enter Pokémon Data String:", "");
+    var data = prompt("Enter Pokémon Data String:","");
 
     if (data != null && data != "") {
         if (data.includes("pok:")) {
@@ -3561,7 +3561,7 @@ function changePartyEvolution(base,i) {
     })
 
     for (var q = 0; q < evos.length; q++) {
-        var x = q + 1;
+        var x = q+1;
         evos[q] = x+". "+evos[q];
     }
 
@@ -3633,7 +3633,7 @@ function changePartyForm(base,i) {
     })
 
     for (var q = 0; q < forms.length; q++) {
-        var x = q + 1;
+        var x = q+1;
         forms[q] = x+". "+forms[q];
     }
 
@@ -3984,7 +3984,7 @@ function overviewMove(base) {
         }
     }
     else if (base.innerText == "›" && right != undefined) {
-        x = parseInt(base.value) + 1;
+        x = parseInt(base.value)+1;
         tar.style.transform = "translate(-"+x+"00%, 0)";
 
         if (right != null) {
@@ -4019,7 +4019,7 @@ function fullscreenIMG(imgs,x) {
     var ul = base.querySelector(":scope > div ul");
 
     x = parseInt(x);
-    var y = x + 1;
+    var y = x+1;
 
     var baseBox = base.querySelectorAll(":scope > div ul li");
     for (var i = 0; i < baseBox.length; i++) {
@@ -4120,7 +4120,7 @@ function fullscreenMove(base) {
 
     
     if (base.innerText == "»" && right != undefined) {
-        x = x + 1;
+        x = x+1;
         tar1.style.transform = "translate(-"+x+"00%, 0)";
         tar2.style.transform = "translate(-"+x+"00%, 0)";
         header.innerText = right.querySelector(":scope img").getAttribute("title");
@@ -4161,8 +4161,8 @@ function exitFullscreen(base) {
 
 function calculateTypeAdvantage(i) {
     var i;
-    var primary = returnData(i, "Type", "")[0];
-    var secondary = returnData(i, "Type", "")[1];
+    var primary = returnData(i,"Type","")[0];
+    var secondary = returnData(i,"Type","")[1];
 
     var result = [];
 
@@ -4582,9 +4582,4 @@ function testImage(url) {
     });
 
     return testImageResult;
-}
-
-function getMachineIcon(machine) {
-    var machine;
-    return "HM Water";
 }
