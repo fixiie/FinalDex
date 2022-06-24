@@ -68,6 +68,8 @@ var createMap = function() {
 	mapOuter.appendChild(mapAside3);
 	mapAside3.appendChild(mapAside3MapOuter);
 
+	mapAside3Map.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapAside3MapImage],0)}});
+
 	var dir1 = ["Left","Top"];
 	for(var q = 0; q < dir1.length; q++) {
 		var mapAside3MapDirection = document.createElement("button");
@@ -179,6 +181,7 @@ var createMap = function() {
 
 
 	var mapAside4DescriptionOviewSelector = document.createElement("div");
+	mapAside4DescriptionOviewSelector.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(!delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonLeftButton)}else if(delta.includes("-")){overviewMove(mapAside4DescriptionOviewButtonRightButton)}});
 	mapAside4DescriptionOviewSelectorOuter.appendChild(mapAside4DescriptionOviewSelector);
 
 	var mapAside4DescriptionOviewButtonRight = document.createElement("span");
@@ -318,7 +321,7 @@ var createMap = function() {
 				DescriptionSelectorDown.appendChild(DescriptionSelectorLabel);
 			}
 
-			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);	  
 		}
 
 		var input = DescriptionSelector.querySelector(':scope div input[value="'+mapSelectorVal[0]+'"]');
@@ -342,7 +345,6 @@ var createMap = function() {
 		var area;
 		var locationImages = [];
 
-
 		for (var q = 0; q < tempLocationImages.length; q++) {
 			if (tempLocationImages[q].includes("_")) {
 				loc = tempLocationImages[q].split("_")[0];
@@ -356,7 +358,6 @@ var createMap = function() {
 			}
 		}
 
-		
 
 		var imgs = mapAside4DescriptionOviewSelector.querySelectorAll(":scope > span");
 		for (var q = 0; q < imgs.length; q++) {
@@ -406,7 +407,7 @@ var createMap = function() {
 		var locimgs = mapAside4DescriptionOviewSelector.querySelectorAll(":scope img");
 		var buttons = mapAside4DescriptionOviewSelectorOuter.querySelectorAll(":scope button");
 		for (var q = 0; q < locimgs.length; q++) {
-			locimgs[q].addEventListener("click", function() {fullscreenIMG(locimgs,buttons[0].getAttribute("value"));});
+			locimgs[q].addEventListener("mousedown", function(event) { if(event.button === 0 || event.button === 1) {fullscreenIMG(locimgs,buttons[0].getAttribute("value"))};});
 		}
 
 
@@ -428,8 +429,6 @@ var createMap = function() {
 			mapAside4DescriptionOviewButtonRightButton.style.removeProperty("display");
 		}
 	
-
-
 
 
 		for(var q = 0; q < items.length; q++) {
