@@ -4923,9 +4923,7 @@ a {
 	z-index: 10000;
 }
 
-#map img:active {
-	cursor: move;
-}
+
 
 #map[name="Kanto-1"],
 #map-panzoom[name="Kanto-1"] {
