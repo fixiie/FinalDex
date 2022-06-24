@@ -1299,13 +1299,29 @@ input[type=radio] {
 	justify-content: center;
 }
 
-#map-description-pok ul li span {
-	width: 30%;
-}
 
-#map-description-item ul li span {
+#map-description-item ul li span[name="Description"] {
 	width: 100%;
 }
+#map-description-item ul li span[name="Machine"] {
+	width: 40%;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+#map-description-item ul li span[name="Machine"] > * {
+	padding: 2px 0;
+}
+#map-description-item ul li p[title] {
+	cursor: help;
+}
+#map-description-item ul li p[title]:hover {
+	font-weight: bold;
+}
+
 
 #map-description-tutor ul li span {
 	text-align:center;
@@ -1393,7 +1409,7 @@ input[type=radio] {
 
 #map-description-item ul li div,
 #map-description-tutor ul li div {
-	width: 40%;
+	width: 20%;
 	display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
@@ -1402,13 +1418,17 @@ input[type=radio] {
 	cursor: pointer;
 }
 
+#map-description-item ul li div img[name="Hidden"] {
+	filter: brightness(0.4) contrast(0.6);
+}
+
 #map-description-pok ul li div img,
 #map-description-item ul li div img {
 	object-fit: scale-down;
 }
 
 #map-description-item ul li div img {
-	margin: 0 -75%;
+	margin: 0 -90%;
 }
 
 #map-description-pok ul li div:first-child img {
@@ -3570,6 +3590,8 @@ body {
 
 .data-popup > div:first-child img {
 	object-fit: scale-down;
+}
+.data-popup > div:first-child img[src] {
 	cursor: pointer;
 }
 
@@ -6819,26 +6841,41 @@ span[name="Status"] {
 
 .item-sidebar ul li span h3 {
 	cursor: pointer;
-	font-weight:normal
 }
 .item-sidebar ul li span h3:hover,
 .item-sidebar ul li span h3:active {
-	font-weight: bold;
+	filter:brightness(0.8);
+}
+.item-sidebar ul li span[name="Location"] {
+	align-items: flex-start;
 }
 
 
+.item-sidebar ul li[name="Location"] span[name="Description"] {
+	width: 100%;
+}
+.item-sidebar ul li[name="Location"] span[name="Location"] {
+	width: 50%;
+}
+.item-sidebar ul li span[name="Area"],
+.item-sidebar ul li span[name="Pokémon"],
 .item-sidebar ul li span[name="Item"] {
 	width: 20%;
 }
-.item-sidebar ul li span[name="Location"] {
-	width: 100%;
+
+.item-sidebar ul li[name="Held"] span[name="Description"] {
+	width: 150%;
 }
-.item-sidebar ul li span[name="Area"] {
-	width: 10%;
-}	
-.item-sidebar ul li span[name="Additional"] {
-	width: 30%;
+
+.item-sidebar ul li span[name="Pokémon"] img {
+	cursor:pointer;
 }
+
+.item-sidebar ul li span[name="Pokémon"] img:hover {
+	filter: brightness(1.1);
+}
+
+
 
 
 .item-sidebar-price {
