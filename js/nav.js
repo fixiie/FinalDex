@@ -51,6 +51,7 @@ var createNav = function() {
 	fullscreenButtonLeftText.value = 0;
 	fullscreenButtonRightText.value = 0;
 	var fullscreen = document.querySelector("#fullscreen");
+    fullscreen.setAttribute("tabindex","0");
 	fullscreen.appendChild(fullscreenButtonLeft);
 	fullscreenButtonLeft.appendChild(fullscreenButtonLeftText);
 	fullscreen.appendChild(fullscreenOverlay);
@@ -58,6 +59,10 @@ var createNav = function() {
 	fullscreenDiv.appendChild(fullscreenUl);
 	fullscreen.appendChild(fullscreenButtonRight);
 	fullscreenButtonRight.appendChild(fullscreenButtonRightText);
+
+
+	fullscreen.addEventListener("keyup",function(event){if(event.which === 37){fullscreenMove(fullscreenButtonLeftText)}else if(event.which === 39){fullscreenMove(fullscreenButtonRightText)}});
+	fullscreen.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(!delta.includes("-")){fullscreenMove(fullscreenButtonLeftText)}else if(delta.includes("-")){fullscreenMove(fullscreenButtonRightText)}});
 
 	fullscreenOverlay.addEventListener("click",exitFullscreen);
 	fullscreenButtonLeftText.addEventListener("click",fullscreenMove);
