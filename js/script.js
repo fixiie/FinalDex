@@ -792,13 +792,16 @@ function dataRedirect() {
             y[q] = y[q].split(num+". ")[1];
         }
 
-        if (selection != null && selection != "" && parseInt(selection) != NaN && y[parseInt(selection)-1] != undefined) {
-            x = y[parseInt(selection)-1];
+        if (selection != null && selection != "") {
+            if (parseInt(selection) != NaN && y[parseInt(selection)-1] != undefined) {
+                x = y[parseInt(selection)-1];
+            }
+            else {
+                alert("Returned an error.");
+                return;
+            }
         }
-        else {
-            alert("Returned an error.");
-            return;
-        }
+      
     }
 
 
