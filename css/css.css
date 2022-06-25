@@ -3084,67 +3084,64 @@ body {
 
 #data-map-contain {
 	width: 100%;
-	height: 55%;
-	overflow: hidden;
-	position: relative;
-	z-index: 5;
-	margin: 0 auto;
-	background: var(--color_5);
-	box-shadow: 0 0 1px var(--border1);
+    height: 55%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    background: var(--color_5);
+    flex-wrap: wrap;
+	z-index: 10;
 }
 
 #data-map {
-	height: 100% !important;
-	width: 100%;
-	overflow: unset !important;
-	display: flex;
-	position: relative;
-	margin: 0 auto;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
-}
-
-#data-map-contain.fullscreen {
-	width: 100%;
 	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 10000000000000000 !important;
-}
-
-#data-map img:active {
-	cursor: move;
-}
-
-#data-map-contain.fullscreen .data-img-main {
-	max-height: 100vh;
-}
-
-.data-img-main {
-	max-height: 38vh;
-	image-rendering: -moz-crisp-edges;
-    /* Firefox */
-	image-rendering: -o-crisp-edges;
-    /* Opera */
-	image-rendering: -webkit-optimize-contrast;
-    /* Webkit (non-standard naming) */
-	image-rendering: crisp-edges;
-	-ms-interpolation-mode: nearest-neighbor;
-    /* IE (non-standard property) */;
-}
-
-#data-map-panzoom {
-	cursor: default !important;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
+#data-map img {
+	object-fit: scale-down;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+    user-select: none;
+}
+#data-map div img {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    pointer-events: none;
+    filter: invert(20%) sepia(91%) saturate(7452%) hue-rotate(358deg) brightness(104%) contrast(117%);
+    -moz-animation: blinkOpacity0 normal 2s infinite ease-in-out;
+    -webkit-animation: blinkOpacity0 normal 2s infinite ease-in-out;
+    -ms-animation: blinkOpacity0 normal 2s infinite ease-in-out;
+    animation: blinkOpacity0 normal 2s infinite ease-in-out;
+}
 
-.data-zoom-in,
-.data-zoom-out,
-.data-zoom-fullscreen,
-.data-zoom-reset {
+#data-map > img {
+	max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+
+
+.data-in,
+.data-out,
+.data-fullscreen,
+.data-reset {
 	width: 32px;
 	height: 32px;
 	position: absolute;
@@ -3155,18 +3152,18 @@ body {
 	background-repeat: no-repeat !important;
 }
 
-.data-zoom-in {
+.data-in {
 	right: 5px;
 	background: url('../media/Images/Misc/FinalDex/Zoom-In.png');
 	transform: scaleX(-1);
 }
 
-.data-zoom-out {
+.data-out {
 	left: 5px;
 	background: url('../media/Images/Misc/FinalDex/Zoom-Out.png');
 }
 
-.data-zoom-fullscreen {
+.data-fullscreen {
 	width: 24px;
 	height: 24px;
 	top: unset;
@@ -3175,34 +3172,34 @@ body {
 	background: url('../media/Images/Misc/FinalDex/Fullscreen.png');
 }
 
-.data-zoom-reset {
+.data-reset {
 	top: unset;
 	bottom: 10px;
 	left: 5px;
 	background: url('../media/Images/Misc/FinalDex/Zoom-Reset.png');
 }
 
-.data-zoom-in:active {
+.data-in:active {
 	background: url('../media/Images/Misc/FinalDex/Zoom-In-Pressed.png');
 }
 
-.data-zoom-out:active {
+.data-out:active {
 	background: url('../media/Images/Misc/FinalDex/Zoom-Out-Pressed.png');
 }
 
-.data-zoom-fullscreen:active {
+.data-fullscreen:active {
 	background: url('../media/Images/Misc/FinalDex/Fullscreen-Pressed.png');
 }
 
-.data-zoom-reset:active {
+.data-reset:active {
 	background: url('../media/Images/Misc/FinalDex/Zoom-Reset-Pressed.png');
 }
 
-.data-zoom-fullscreen.fullscreen {
+.data-fullscreen.fullscreen {
 	background: url('../media/Images/Misc/FinalDex/Fullscreen-Pressed.png');
 }
 
-.data-zoom-fullscreen.fullscreen:active {
+.data-fullscreen.fullscreen:active {
 	background: url('../media/Images/Misc/FinalDex/Fullscreen.png');
 }
 
@@ -9000,6 +8997,28 @@ span[name="Status"] {
 }
 .data-area-content li > span[name="Encounter"] {
 	width: 20%;
+}
+
+
+.data-area-content li > span[name="Rate"] p {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.data-area-content li span img[title="Morning"] {
+	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
+	max-width: 40px;
+}
+.data-area-content li span img[title="Day"] {
+	filter: invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
+	max-width: 40px;
+}
+.data-area-content li span img[title="Night"] {
+	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
+	max-width: 40px;
 }
 
 
