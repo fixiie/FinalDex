@@ -6,12 +6,8 @@ var createData = function(id, i) {
 	var dataDivContent = document.createElement("div");
 	var dataNavigation = document.createElement("section");
 	var dataAside2MapContain = document.createElement("div");
-	var dataAside2MapZoomReset = document.createElement("span");
-	var dataAside2MapZoomOut = document.createElement("span");
-	var dataAside2MapZoomIn = document.createElement("span");
-	var dataAside2MapZoomFullscreen = document.createElement("span");
+	var dataAside2MapFullscreen = document.createElement("span");
 	var dataAside2Map = document.createElement("div");
-	var dataAside2MapPanzoom = document.createElement("div");
 	var dataAside2MapImage = document.createElement("img");
 	var dataAside2MapMark = document.createElement("div");
 	var dataAside2MapMarkImage = document.createElement("img");
@@ -157,14 +153,9 @@ var createData = function(id, i) {
 	dataAside1TypeSecondary.appendChild(dataAside1TypeSecondaryText);
 	dataAside2.classList.add("data-aside2");
 	dataAside2MapContain.setAttribute("id", "data-map-contain");
-	dataAside2MapZoomReset.classList.add("data-zoom-reset");
-	dataAside2MapZoomOut.classList.add("data-zoom-out");
-	dataAside2MapZoomIn.classList.add("data-zoom-in");
-	dataAside2MapZoomFullscreen.classList.add("data-zoom-fullscreen");
+	dataAside2MapFullscreen.classList.add("data-fullscreen");
 	dataAside2Map.setAttribute("id", "data-map");
 	dataAside2Map.setAttribute("name", Region + "-" + MEDIAPath_Map);
-	dataAside2MapPanzoom.setAttribute("id", "data-map-panzoom-" + id);
-	dataAside2MapPanzoom.setAttribute("name", Region + "-" + MEDIAPath_Map);
 	dataAside2MapImage.src = "./media/Images/Location/Map/" + MEDIAPath_Map + "/Map.png";
 	dataAside2MapImage.onload = function() {
 		dataAside2MapImage.setAttribute("width", dataAside2MapImage.width + "px");
@@ -799,14 +790,10 @@ var createData = function(id, i) {
 	dataAside1DebutCategoryOuter.appendChild(dataAside1Type);
 	dataDivContent.appendChild(dataAside2);
 	dataAside2AreaDiv.appendChild(dataAside2MapContain);
-	dataAside2MapContain.appendChild(dataAside2MapZoomReset);
-	dataAside2MapContain.appendChild(dataAside2MapZoomOut);
-	dataAside2MapContain.appendChild(dataAside2MapZoomIn);
-	dataAside2MapContain.appendChild(dataAside2MapZoomFullscreen);
+	dataAside2MapContain.appendChild(dataAside2MapFullscreen);
 	dataAside2MapContain.appendChild(dataAside2Map);
-	dataAside2Map.appendChild(dataAside2MapPanzoom);
-	dataAside2MapPanzoom.appendChild(dataAside2MapImage);
-	dataAside2MapPanzoom.appendChild(dataAside2MapMark);
+	dataAside2Map.appendChild(dataAside2MapImage);
+	dataAside2Map.appendChild(dataAside2MapMark);
 	dataAside2MapMark.appendChild(dataAside2MapMarkImage);
 	dataDivContent.appendChild(dataAside2);
 	dataAside2.appendChild(dataNavigation);
@@ -814,6 +801,11 @@ var createData = function(id, i) {
 	dataAside2Metadata.appendChild(dataAside2DescriptionOuter);
 	dataAside2DescriptionOuter.appendChild(dataAside2Description);
 	dataAside2MetadataSidebarOuter.appendChild(dataAside2MetadataStats);
+
+	dataAside2MapFullscreen.addEventListener("click", function() {fullscreenIMG([dataAside2MapImage],0)});
+	dataAside2Map.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([dataAside2MapImage],0)}});
+
+
 	var dataAside2MetadataPopup = document.createElement("div");
 	var dataAside2MetadataPopupOuter = document.createElement("div");
 	var dataAside2MetadataPopupSpan1 = document.createElement("span");
@@ -1050,10 +1042,7 @@ function navKeeper(id) {
 	}
 }
 
-function resetZoom(id) {
-	var Zoom = document.querySelector("#data-modal" + id + " .data-zoom-reset");
-	Zoom.click();
-}
+
 
 function modalData() {
 	var int;
@@ -1083,7 +1072,6 @@ function modalData() {
 		currentWindow = document.querySelector("#data-modal" + id);
 		if(currentWindow == null) {
 			createData(id, int);
-			panZoomModal(id);
 		}
 
         if(int != undefined) {
@@ -1105,46 +1093,11 @@ function modalData() {
 			currentWindow.classList.add("open");
 		}
 		navKeeper(id);
-		resetZoom(id);
 	}
 	dexCheck();
 }
 
-function panZoomModal(x) {
-	$("#data-map-panzoom-" + x).panzoom({
-		$zoomIn: $(".data-zoom-in"),
-		$zoomOut: $(".data-zoom-out"),
-		$reset: $(".data-zoom-reset"),
-		startTransform: "scale(1)",
-		duration: 200,
-		easing: "ease-in-out",
-		increment: 0.5,
-		minScale: 1,
-		contain: "invert",
-	});
-	$("#data-modal" + x + " .data-zoom-fullscreen").click(function(e) {
-		$("#data-modal" + x + " #data-map-contain").toggleClass("fullscreen");
-		$("#data-modal" + x + " .data-zoom-fullscreen").toggleClass("fullscreen");
-	});
-	$("#data-map-panzoom-" + x).keydown(function(keyPressed) {
-		if(keyPressed.keyCode == 27) {
-			$("#data-modal" + x + " .data-zoom-fullscreen").removeClass("fullscreen");
-		}
-	});
-	$("#data-map-panzoom-" + x).mousedown(function(b) {
-		if(b.which == 1) {} else if(b.which == 2) {
-			$("#data-modal" + x + " #data-map-contain").toggleClass("fullscreen");
-			$("#data-modal" + x + " .data-zoom-fullscreen").toggleClass("fullscreen");
-		} else if(b.which == 3) {}
-	});
-	$("#data-map-panzoom-" + x).mousedown(doubleClicker(function(b, e) {
-		if(b.which == 1) {
-			$("#data-modal" + x + " .data-zoom-in").click();
-		} else if(b.which == 2) {} else if(b.which == 3) {
-			$("#data-modal" + x + " .data-zoom-out").click();
-		}
-	}));
-}
+
 
 function doubleClicker(handler) {
 	var timeout = 0,
