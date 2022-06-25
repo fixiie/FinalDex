@@ -58,6 +58,7 @@ var finaldataMoveCategory = [];
 var finaldataMoveID = [];
 var finaldataMoveType = [];
 var finaldataMovePriority = [];
+var finaldataPokémonOffspring = []
 var drag;
 var savedtar;
 var saveddrag;
@@ -245,6 +246,7 @@ function requestLoad(i,url) {
 				finaldataPokémonPokédexEntry.push(Metadata["Pokédex Entry"][q]);
 				finaldataPokémonPokédexID.push(Metadata["Pokédex ID"][q]);
 				finaldataPokémonType.push(Metadata["Type"][q]);
+				finaldataPokémonOffspring.push(Metadata["Offspring"][q]);
 			}
 		}
 
@@ -296,7 +298,6 @@ function initialize() {
 		variantSelector();
 		
 		load();
-
 	}
 }
 
