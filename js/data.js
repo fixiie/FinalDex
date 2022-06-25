@@ -93,9 +93,7 @@ var createData = function(id, i) {
 	var dataAside2MetadataSidebarExpYieldTitle = document.createElement("h5");
 	var dataAside2MetadataSidebarExpYield = document.createElement("h3");
 	var dataAside2AreaDiv = document.createElement("div");
-	var dataAside2Area = document.createElement("div");
-	var dataAside2AreaTitle = document.createElement("h4");
-	var dataAside2AreaText = document.createElement("p");
+	var dataAside2Area = document.createElement("ul");
 	dataDiv.setAttribute("id", "data-modal" + id);
 	dataDiv.classList.add("data-modal-outer");
 	dataDivOverlay.classList.add("data-modal-overlay");
@@ -211,67 +209,7 @@ var createData = function(id, i) {
 	dataAside2AreaDiv.classList.add("data-area");
 	dataAside2AreaDiv.setAttribute("id", "data-area" + id);
 	dataAside2Area.classList.add("data-area-content");
-	dataAside2AreaTitle.classList.add("data-area-title");
-	dataAside2AreaText.classList.add("data-area-text");
-	dataAside2AreaText.classList.add("scroll");
-	/*
-	  dataAside2AreaTitle.setAttribute("name",finaldataPokémonArea[i]["Filter_"+JSONPath_Area]);
-	  
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Catchable") {
-	      dataAside2AreaTitle.title = "Pokémon caught in the Wild";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Snaggable") {
-	      dataAside2AreaTitle.title = "Shadow Pokémon caught from Trainers";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Evolve") {
-	      dataAside2AreaTitle.title = "Pokémon obtained via Evolution";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Trade Evolution") {
-	      dataAside2AreaTitle.title = "Pokémon obtained via Evolution by Trade";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Breed") {
-	      dataAside2AreaTitle.title = "Pokémon obtained through Breeding";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Gift") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly obtained by Receival";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Choice") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly obtained by choosing between it or another";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Swarm") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly caught during a Swarm";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Max Raid Battle") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly caught during a Max Raid Battle";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Poké Radar") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly caught with the Poké Radar";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "The Underground") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly caught with association to The Underground";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "White Forest") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly caught in the White Forest";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Unique") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly with a limited amount of encounters";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Event") {
-	      dataAside2AreaTitle.title = "Pokémon exclusivly encountered during an In-Game Event";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Unavailable") {
-	      dataAside2AreaTitle.title = "Pokémon not available";
-	  }
-	  if (finaldataPokémonArea[i]["Filter_"+JSONPath_Area] == "Unobtainable") {
-	      dataAside2AreaTitle.title = "Pokémon unobtainable";
-	  }
-	  
-	  dataAside2AreaTitle.innerText = finaldataPokémonArea[i]["Filter_"+JSONPath_Area];
-	  dataAside2AreaText.innerHTML = finaldataPokémonArea[i]["Area_"+JSONPath_Area];
-	  
-	  
-	  
-	  */
+
 	for(q = 0; q < JSONPath_Pokédex.length; q++) {
 		var dataAside1IDRegional = document.createElement("span");
 		dataAside1IDRegional.classList.add("data-regionalID-" + [q + 1]);
@@ -983,8 +921,6 @@ var createData = function(id, i) {
 	}
 	dataAside2.appendChild(dataAside2AreaDiv);
 	dataAside2AreaDiv.appendChild(dataAside2Area);
-	dataAside2Area.appendChild(dataAside2AreaTitle);
-	dataAside2Area.appendChild(dataAside2AreaText);
 	if(HeldItem == true) {
 		var dataAside2MetadataSidebarRow5 = document.createElement("div");
 		var dataAside2MetadataSidebarHeldItemOuter = document.createElement("span");
