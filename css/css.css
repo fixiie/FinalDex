@@ -8962,3 +8962,61 @@ span[name="Status"] {
 #fullscreen button:active {
 	font-weight: bold;
 }
+
+
+.data-area-content li {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom: 1px dotted;
+	background: var(--color16);
+}
+
+
+.data-area-content li > span {
+	width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 80%;
+	flex-direction: column;
+}
+
+.data-area-content li > span[name="Area"] {
+	width: 20%;
+}
+.data-area-content li > span[name="Location"] {
+	width: 100%;
+}
+.data-area-content li > span[name="Level"] {
+	width: 40%;
+}
+.data-area-content li > span[name="Rate"] {
+	width: 40%;
+}
+.data-area-content li > span[name="Encounter"] {
+	width: 20%;
+}
+
+
+.data-area-content li span h3 {
+	cursor:pointer;
+}
+
+.data-area-content li span h3:hover {
+	filter:brightness(0.8);
+}
+
+.data-area-content li span img {
+	max-width: 100%;
+    object-fit: scale-down;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
