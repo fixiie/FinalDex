@@ -335,7 +335,7 @@ var createItem = function() {
 
 			
 					var itemAside4SidebarDescriptionText = document.createElement("p");
-					itemAside4SidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+getPokémonName(q)+".";
+					itemAside4SidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
 					itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
 					itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
 					
