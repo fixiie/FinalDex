@@ -657,8 +657,8 @@ var createMap = function() {
 
 					var mapAside4DescriptionPokType = document.createElement("span");
 					var mapAside4DescriptionPokTypeImage = document.createElement("img");
-					mapAside4DescriptionPokTypeImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Type Icon"]+".png";
-					mapAside4DescriptionPokTypeImage.title = poks[u]["Type Name"];
+					mapAside4DescriptionPokTypeImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter Icon"]+".png";
+					mapAside4DescriptionPokTypeImage.title = poks[u]["Encounter"];
 					mapAside4DescriptionPokTypeImage.setAttribute("onerror", "this.style.display='none'");
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
 					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeImage);
