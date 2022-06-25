@@ -68,6 +68,8 @@ var createMove = function() {
 	moveAside3Description.appendChild(moveAside3EffectText);
 	moveOuter.appendChild(moveAside4);
 
+	moveAside1OptionsSearch.addEventListener("keyup", function() {search("Move");});
+	moveAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Move");});
 
     var moveAside2Game = document.createElement("span");
     var moveAside2GameImage = document.createElement("img");
@@ -262,7 +264,21 @@ var createMove = function() {
 		}
 	}
 
-
+	var searchLis = document.querySelectorAll("#move-options > label");
+    searchMoveAttributes = [];
+    for(q = 0; q < searchLis.length; q++) {
+        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+                if (!searchMoveAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+                    searchMoveAttributes.push(searchLis[q].getAttributeNames()[u]);
+                }
+            }
+        }
+    }
+	searchMoveAttributes = searchMoveAttributes.filter(function(v) {return v !== "data-search-name";});
+    for(q = 0; q < searchMoveAttributes.length; q++) {
+        searchMoveAttributes[q] = searchMoveAttributes[q].replaceAll("data-search-","")
+    }
 
 	function moveOptionsSelector(i) {
 		var i;
