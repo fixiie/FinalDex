@@ -24,20 +24,20 @@ var createData = function(id, i) {
 			var dataFormLabel = document.createElement("label");
 			var dataFormImg = document.createElement("img");
 			dataFormInput.setAttribute("type", "radio");
-			dataFormInput.setAttribute("name", "data-form-selector" + id);
-			dataFormInput.setAttribute("id", "data-form-selector-" + u);
+			dataFormInput.setAttribute("name", "data-form-selector"+id);
+			dataFormInput.setAttribute("id", "data-form-selector-"+u);
 			dataFormInput.value = u;
-			dataFormLabel.setAttribute("for", "data-form-selector-" + u);
+			dataFormLabel.setAttribute("for", "data-form-selector-"+u);
 			dataFormImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
-			if(finaldataPokémonForm[u]["Form_" + JSONPath_Form] == undefined) {
-				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataPokémonForm[u]["Pokémon"]) + ".png";
+			if(finaldataPokémonForm[u]["Form_"+JSONPath_Form] == undefined) {
+				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Pokémon"],"Box")+".png";
 				dataFormLabel.title = finaldataPokémonForm[u]["Pokémon"];
 			} else {
-				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataPokémonForm[u]["Form_" + JSONPath_Form]) + ".png";
-				dataFormLabel.title = finaldataPokémonForm[u]["Form_" + JSONPath_Form];
+				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Form_"+JSONPath_Form],"Box")+".png";
+				dataFormLabel.title = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
 			}
 			if(!variant.length >= 2) {
 				dataFormInput.setAttribute("checked", "");
@@ -90,7 +90,7 @@ var createData = function(id, i) {
 	var dataAside2MetadataSidebarExpYield = document.createElement("h3");
 	var dataAside2AreaDiv = document.createElement("div");
 	var dataAside2Area = document.createElement("ul");
-	dataDiv.setAttribute("id", "data-modal" + id);
+	dataDiv.setAttribute("id", "data-modal"+id);
 	dataDiv.classList.add("data-modal-outer");
 	dataDivOverlay.classList.add("data-modal-overlay");
 	dataDivContent.classList.add("data-modal");
@@ -103,14 +103,14 @@ var createData = function(id, i) {
 		var dataNavigationInput = document.createElement("input");
 		var dataNavigationLabel = document.createElement("label");
 		dataNavigationInput.setAttribute("type", "radio");
-		dataNavigationInput.setAttribute("name", "data-navigation" + id);
-		dataNavigationInput.setAttribute("id", "data-navigation-" + navz[q] + id);
-		dataNavigationInput.classList.add("data-navigation-" + navz[q]);
-		dataNavigationInput.setAttribute("value", q + 1);
+		dataNavigationInput.setAttribute("name", "data-navigation"+id);
+		dataNavigationInput.setAttribute("id", "data-navigation-"+navz[q]+id);
+		dataNavigationInput.classList.add("data-navigation-"+navz[q]);
+		dataNavigationInput.setAttribute("value", q+1);
 		if(q == 0) {
 			dataNavigationInput.setAttribute("checked", "");
 		}
-		dataNavigationLabel.setAttribute("for", "data-navigation-" + navz[q] + id);
+		dataNavigationLabel.setAttribute("for", "data-navigation-"+navz[q]+id);
 		dataNavigationLabel.innerText = navztitles[q];
 		dataNavigation.appendChild(dataNavigationInput);
 		dataNavigation.appendChild(dataNavigationLabel);
@@ -119,12 +119,12 @@ var createData = function(id, i) {
 	dataAside1DivPortrait.classList.add("data-portrait");
 	dataAside1DivPortraitContent.classList.add("data-portrait-content");
 	dataAside1Portrait.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	dataAside1Portrait.setAttribute("id", "data-portrait-img-" + id);
+	dataAside1Portrait.setAttribute("id", "data-portrait-img-"+id);
 	dataAside1StatsEVSelector.classList.add("data-baseev-selector");
 	dataAside1DivIdNameOuter.classList.add("data-idname-outer");
 	dataAside1DivIdName.classList.add("data-idname");
 	dataAside1IDNational.classList.add("data-nationalID");
-	dataAside1IDNational.innerText = "#" + id;
+	dataAside1IDNational.innerText = "#"+id;
 	dataAside1Name.classList.add("data-name");
 	dataAside1DebutCategoryOuter.classList.add("data-debutcategorytype-outer");
 	dataAside1DebutCategory.classList.add("data-debutcategory");
@@ -155,23 +155,23 @@ var createData = function(id, i) {
 	dataAside2MapContain.setAttribute("id", "data-map-contain");
 	dataAside2MapFullscreen.classList.add("data-fullscreen");
 	dataAside2Map.setAttribute("id", "data-map");
-	dataAside2Map.setAttribute("name", Region + "-" + MEDIAPath_Map);
-	dataAside2MapImage.src = "./media/Images/Location/Map/" + MEDIAPath_Map + "/Map.png";
+	dataAside2Map.setAttribute("name", Region+"-"+MEDIAPath_Map);
+	dataAside2MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
 	dataAside2MapImage.onload = function() {
-		dataAside2MapImage.setAttribute("width", dataAside2MapImage.width + "px");
-		dataAside2MapImage.setAttribute("height", dataAside2MapImage.height + "px");
+		dataAside2MapImage.setAttribute("width", dataAside2MapImage.width+"px");
+		dataAside2MapImage.setAttribute("height", dataAside2MapImage.height+"px");
 	};
 	dataAside2MapImage.classList.add("data-img-main");
-	dataAside2MapImage.setAttribute("name", Region + "-" + MEDIAPath_Map);
+	dataAside2MapImage.setAttribute("name", Region+"-"+MEDIAPath_Map);
 	dataAside2MapMark.classList.add("data-img-mark-outer");
 	dataAside2MapMarkImage.classList.add("data-img-mark");
 	dataAside2Metadata.classList.add("data");
-	dataAside2Metadata.setAttribute("id", "data" + id);
+	dataAside2Metadata.setAttribute("id", "data"+id);
 	dataAside2DescriptionOuter.classList.add("data-description");
 	dataAside2DescriptionOuter.classList.add("scroll");
 	dataAside2MetadataSidebarOuter.setAttribute("id", "data-sidebar-outer");
 	dataAside2MetadataSidebar.setAttribute("id", "data-sidebar");
-	dataAside2MetadataSidebar.setAttribute("name", Generation + "-" + GameID);
+	dataAside2MetadataSidebar.setAttribute("name", Generation+"-"+GameID);
 	dataAside2MetadataStats.classList.add("data-stats");
 	dataAside2MetadataSidebarCatchRateOuter.classList.add("data-sidebar-catchrate");
 	dataAside2MetadataSidebarCatchRateOuter.setAttribute("name", "Catch Rate");
@@ -198,14 +198,14 @@ var createData = function(id, i) {
 	dataAside2MetadataSidebarExpYield.setAttribute("dataname", "value");
 	dataAside2MetadataSidebarExpYield.setAttribute("value", "");
 	dataAside2AreaDiv.classList.add("data-area");
-	dataAside2AreaDiv.setAttribute("id", "data-area" + id);
+	dataAside2AreaDiv.setAttribute("id", "data-area"+id);
 	dataAside2Area.classList.add("data-area-content");
 
 	for(q = 0; q < JSONPath_Pokédex.length; q++) {
 		var dataAside1IDRegional = document.createElement("span");
-		dataAside1IDRegional.classList.add("data-regionalID-" + [q + 1]);
+		dataAside1IDRegional.classList.add("data-regionalID-"+[q+1]);
 		if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] != null) {
-			dataAside1IDRegional.innerText = "#" + finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
+			dataAside1IDRegional.innerText = "#"+finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
 		}
 		dataAside1DivIdName.appendChild(dataAside1IDRegional);
 	}
@@ -348,8 +348,8 @@ var createData = function(id, i) {
         dataPreviousNational.setAttribute("id","data-previous-national");
         dataPreviousNational.setAttribute("name","national");
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
-        dataPreviousNational.title = "#" + (parseInt(getIntID(d,"")) - 1) + "\n" + finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
-        dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) - 1)))) + ".png";
+        dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
+        dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) - 1))),"Box")+".png";
         dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
         
         dataPrevious.appendChild(dataPreviousNational);
@@ -358,15 +358,15 @@ var createData = function(id, i) {
         dataPreviousNational.addEventListener("click",modalData);
 	  }
 
-	  if (finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) + 1))][JSONPath_Reference] == "true") {
+	  if (finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))][JSONPath_Reference] == "true") {
         var dataNextNational = document.createElement("button");
         var dataNextNationalImg = document.createElement("img");
         
         dataNextNational.setAttribute("id","data-next-national");
         dataNextNational.setAttribute("name","national");
-        dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) + 1)));
-        dataNextNational.title = "#" + (parseInt(getIntID(d,"")) + 1) + "\n" + finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) + 1))]["Pokémon"];
-        dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) + 1)))) + ".png";
+        dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
+        dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
+        dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,""))+1))),"Box")+".png";
         dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
         
         dataNext.appendChild(dataNextNational);
@@ -377,7 +377,7 @@ var createData = function(id, i) {
 	  
 
 	  for (q = 0; q < JSONPath_Pokédex.length; q++) {
-	      var y = q + 1;
+	      var y = q+1;
 	      var previousID = getRegionalID("-",getIntID(d,""),JSONPath_Pokédex[q]);
 	      var nextID = getRegionalID("+",getIntID(d,""),JSONPath_Pokédex[q]);
 
@@ -385,11 +385,11 @@ var createData = function(id, i) {
 	          var dataPreviousRegional = document.createElement("button");
 	          var dataPreviousRegionalImg = document.createElement("img");
 	  
-	          dataPreviousRegional.setAttribute("id","data-previous-regional" + y);
-	          dataPreviousRegional.setAttribute("name","regional" + y);
+	          dataPreviousRegional.setAttribute("id","data-previous-regional"+y);
+	          dataPreviousRegional.setAttribute("name","regional"+y);
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
-	          dataPreviousRegional.title = "#" + finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]] + "\n" + finaldataPokémon[getIntID("",previousID)]["Pokémon"];
-	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",previousID))) + ".png";
+	          dataPreviousRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",previousID)]["Pokémon"];
+	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",previousID)),"Box")+".png";
 	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataPrevious.appendChild(dataPreviousRegional);
@@ -401,11 +401,11 @@ var createData = function(id, i) {
 	          var dataNextRegional = document.createElement("button");
 	          var dataNextRegionalImg = document.createElement("img");
 	  
-	          dataNextRegional.setAttribute("id","data-next-regional" + y); 
-	          dataNextRegional.setAttribute("name","regional" + y);
+	          dataNextRegional.setAttribute("id","data-next-regional"+y); 
+	          dataNextRegional.setAttribute("name","regional"+y);
 	          dataNextRegional.setAttribute("value",getIntID("",nextID));
-	          dataNextRegional.title = "#" + finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]] + "\n" + finaldataPokémon[getIntID("",nextID)]["Pokémon"];
-	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonName(getIntID("",nextID))) + ".png";
+	          dataNextRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",nextID)]["Pokémon"];
+	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",nextID)),"Box")+".png";
 	          dataNextRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataNext.appendChild(dataNextRegional);
@@ -415,359 +415,7 @@ var createData = function(id, i) {
 	      }
 	  }
 	  
-
-	  /*
-	  var PokémonStage = finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage];
-	  var FamilyStage = finaldataPokémonEvolutionStage[i]["Family Stage_"+JSONPath_EvolutionStage];
 	  
-	  var Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
-	  var Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
-	  
-	  var PreviousPrevious;
-	  var PreviousNext;
-	  var NextPrevious;
-	  
-	  
-	  if (Next != undefined) {
-	      NextPrevious = finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Next)) - 1]["Previous_"+JSONPath_EvolutionSpecie].split(",");
-	      var NextTypeMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Next)) - 1]["Type_"+JSONPath_EvolutionMethod];
-	      var NextFactorMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Next)) - 1]["Factor_"+JSONPath_EvolutionMethod];
-	      var NextAdditionalMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Next)) - 1]["Additional_"+JSONPath_EvolutionMethod];
-	      var NextFormMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Next)) - 1]["Form_"+JSONPath_EvolutionMethod];
-	  }
-	  else {
-	      NextPrevious = [];
-	  }
-	  
-	  if (Previous != undefined) {
-	      PreviousNext = finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Previous)) - 1]["Next_"+JSONPath_EvolutionSpecie];
-	      PreviousPrevious = finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Previous)) - 1]["Previous_"+JSONPath_EvolutionSpecie];
-	  
-	      var PreviousTypeMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Previous)) - 1]["Type_"+JSONPath_EvolutionMethod];
-	      var PreviousFactorMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Previous)) - 1]["Factor_"+JSONPath_EvolutionMethod];
-	      var PreviousAdditionalMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Previous)) - 1]["Additional_"+JSONPath_EvolutionMethod];
-	      var PreviousFormMethod = finaldataPokémonEvolutionMethod[parseInt(getPokémonID(Previous)) - 1]["Form_"+JSONPath_EvolutionMethod];
-	  }
-	  else {
-	      PreviousNext = [];
-	  }
-	  
-	  
-	  var evoprevious;
-	  
-	  if (finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie] != undefined) {
-	      var evoprevious = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie].split(",").length;
-	  }
-	  else {
-	      var evoprevious = 0;
-	  }
-	  
-	  
-	  var evonext;
-	  
-	  if (finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie] != undefined) {
-	      var evonext = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",").length;
-	  }
-	  else {
-	      var evonext = 0;
-	  }
-	  
-	  
-	  
-	  
-	  if (evoprevious != 0 || evonext != 0) {
-	  
-	      var EggArr1;
-	  
-	      if (PokémonStage == "First-Stage" && FamilyStage == "Two-Stage") { // 1/2 
-	          EggArr1 = finaldataPokémonEvolutionSpecie[i]["Pokémon"]+","+finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",");
-	      }
-	      else if (PokémonStage == "First-Stage" && FamilyStage == "Three-Stage") { // 1/3
-	          EggArr1 = finaldataPokémonEvolutionSpecie[i]["Pokémon"]+","+finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",")+","+finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Next)) - 1]["Next_"+JSONPath_EvolutionSpecie].split(",");
-	      }
-	      else if (PokémonStage == "Second-Stage" && FamilyStage == "Two-Stage") { // 2/2
-	          EggArr1 = Previous+","+finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Previous)) - 1]["Next_"+JSONPath_EvolutionSpecie].split(",");
-	      }
-	      else if (PokémonStage == "Second-Stage" && FamilyStage == "Three-Stage") { // 2/3
-	          EggArr1 = Previous+","+finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Previous)) - 1]["Next_"+JSONPath_EvolutionSpecie].split(",")+","+finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",");
-	      }
-	      else if (PokémonStage == "Third-Stage" && FamilyStage == "Three-Stage") { // 3/3
-	          EggArr1 = PreviousPrevious+","+finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(PreviousPrevious)) - 1]["Next_"+JSONPath_EvolutionSpecie].split(",")+","+finaldataPokémonEvolutionSpecie[parseInt(getPokémonID(Previous)) - 1]["Next_"+JSONPath_EvolutionSpecie].split(",");
-	      }
-	  
-	      
-	      var EggArr2 = [];
-	      for (var q = 0; q < EggArr1.split(",").length; q++) {
-	          var ze = getPokémonID(EggArr1.split(",")[q]);
-	  
-	          if (finaldataPokémonEggGroup[parseInt(ze) - 1]["Primary_"+JSONPath_EggGroup] == finaldataEggGroup[i]["Primary_"+JSONPath_EggGroup] && finaldataPokémonEggGroup[parseInt(ze) - 1]["Secondary_"+JSONPath_EggGroup] == finaldataEggGroup[i]["Secondary_"+JSONPath_EggGroup]) {
-	              EggArr2.push(finaldataPokémonEggGroup[parseInt(ze) - 1]["Primary_"+JSONPath_EggGroup] + "," + finaldataPokémonEggGroup[parseInt(ze) - 1]["Secondary_"+JSONPath_EggGroup])
-	          }
-	          else {
-	              EggArr2.push(finaldataPokémonEggGroup[parseInt(ze) - 1]["Primary_"+JSONPath_EggGroup] + "," + finaldataPokémonEggGroup[parseInt(ze) - 1]["Secondary_"+JSONPath_EggGroup])
-	          }
-	         
-	      }
-	  
-	      EggArr1 = EggArr1.split(",")
-	  
-	      for (var q = 0; q < EggArr1.length; q++) {
-	          if (EggArr1[q] == Previous) {
-	              EggArr1.splice(q,1);
-	          }
-	      }
-	  
-	      for (var q = 0; q < EggArr2.length; q++) {
-	          EggArr2[q] = EggArr2[q].replaceAll(",undefined","");
-	          EggArr2[q] = EggArr2[q].replaceAll("undefined,","");
-	          EggArr2[q] = EggArr2[q].replaceAll("undefined","");
-	          EggArr2[q] = EggArr2[q].replaceAll(",",", ");
-	          EggArr2[q] = EggArr2[q].replace(/,([^,]*)$/, " or " + "$1");
-	      }
-	  
-	      EggArrTemp = [...new Set(EggArr2)];
-	  
-	      EggArr3 = EggArrTemp.filter(function(item, pos) {
-	          return EggArrTemp.indexOf(item) == pos;
-	      })
-	  
-	      var EggArr4 = [];
-	  
-	      for (var q = 0; q < EggArr3.length; q++) {
-	          for (var u = 0; u < EggArr1.length; u++) {
-	              if (EggArr2[u] == EggArr3[q]) {
-	                  EggArr4[q] += EggArr1[u] + ",";
-	              }
-	          }
-	      }
-	  
-	  
-	      for (var q = 0; q < EggArr4.length; q++) {
-	          EggArr4[q] = EggArr4[q].replace(/,([^,]*)$/, "");
-	          EggArr4[q] = EggArr4[q].replace(/,([^,]*)$/, " or " + "$1");
-	          EggArr4[q] = EggArr4[q].replaceAll(",",", ");
-	          EggArr4[q] = EggArr4[q].replaceAll("undefined","");
-	  
-	      }
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	      if (PreviousTypeMethod == undefined) {
-	          PreviousTypeMethod = "";
-	      }
-	      else if (PreviousTypeMethod == "Item") {
-	          PreviousTypeMethod = " with ";
-	      }
-	      else {
-	          PreviousTypeMethod = " by "+PreviousTypeMethod;
-	      }
-	  
-	      if (NextTypeMethod == undefined) {
-	          NextTypeMethod = "";
-	      }
-	      else if (NextTypeMethod == "Item") {
-	          NextTypeMethod = " with ";
-	      }
-	      else {
-	          NextTypeMethod = " by "+NextTypeMethod;
-	      }
-	  
-	  
-	  
-	      if (PreviousFactorMethod == undefined) {
-	          PreviousFactorMethod = "";
-	      }
-	      else if (PreviousFactorMethod == "Special Level Up") {
-	          PreviousFactorMethod = "Level Up";
-	      }
-	      else if(!isNaN(parseInt(PreviousFactorMethod))) {
-	          PreviousFactorMethod = " ("+PreviousFactorMethod+")";
-	      }
-	      else {
-	          PreviousFactorMethod = " "+PreviousFactorMethod;
-	      }
-	  
-	  
-	      if (NextFactorMethod == undefined) {
-	          NextFactorMethod = "";
-	      }
-	      else if (NextFactorMethod == "Special Level Up") {
-	          NextFactorMethod = "Level Up";
-	      }
-	      else if(!isNaN(parseInt(NextFactorMethod))) {
-	          NextFactorMethod = " ("+NextFactorMethod+")";
-	      }
-	      else {
-	          NextFactorMethod = " "+NextFactorMethod;
-	      }
-	  
-	  
-	  
-	      if (PreviousAdditionalMethod == undefined) {
-	          PreviousAdditionalMethod = "";
-	      }
-	      else {
-	          PreviousAdditionalMethod = " "+PreviousAdditionalMethod+".";
-	      }
-	   
-	  
-	      if (NextAdditionalMethod == undefined) {
-	          NextAdditionalMethod = "";
-	      }
-	      else {
-	          NextAdditionalMethod = " "+NextAdditionalMethod+".";
-	      }
-	  
-	  
-	      if (PreviousFormMethod == undefined || NextFormMethod == undefined) {
-	          PreviousFormMethod = "";
-	          NextFormMethod = "";
-	      }
-	      else {
-	          PreviousFormMethod = " "+PreviousFormMethod;
-	          NextFormMethod = " "+NextFormMethod;
-	      }
-	  
-	   
-	  
-	      var egggroups;
-	  
-	      if (finaldataEggGroup[i]["Secondary_"+JSONPath_EggGroup] != undefined) {
-	          egggroups = finaldataEggGroup[i]["Primary_"+JSONPath_EggGroup]+" or "+finaldataEggGroup[i]["Secondary_"+JSONPath_EggGroup];
-	      }
-	      else {
-	          egggroups = finaldataEggGroup[i]["Primary_"+JSONPath_EggGroup];
-	      }
-	  }
-	  
-	  
-	  for (var q = 0; q < evoprevious; q++) {
-	  
-	  
-	      var prv = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie].split(",")[q];
-	  
-	     
-	      var dataEvolutionPrevious = document.createElement("div");
-	      var dataEvolutionPreviousContent = document.createElement("div");
-	      var dataEvolutionPreviousMain = document.createElement("main");
-	      var dataEvolutionPreviousButton = document.createElement("button");
-	      var dataEvolutionPreviousDescription = document.createElement("p");
-	      var dataEvolutionPreviousIDNational = document.createElement("h6");
-	      var dataEvolutionPreviousName = document.createElement("h4");
-	      var dataEvolutionPreviousToggle = document.createElement("div");
-	      var dataEvolutionPreviousImg = document.createElement("img");
-	  
-	  
-	      dataEvolutionPrevious.classList.add("data-evolution");
-	      dataEvolutionPrevious.setAttribute("name","previous-" + (q+1) + "/" + evoprevious);
-	      dataEvolutionPreviousContent.classList.add("data-evolution-content");
-	      dataEvolutionPreviousMain
-	      dataEvolutionPreviousButton.classList.add("data-modal-close-open")
-	      dataEvolutionPreviousButton.value = getPokémonID(prv);
-	      dataEvolutionPreviousImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonID(prv) + ".png";
-	      dataEvolutionPreviousImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	      dataEvolutionPreviousIDNational.innerText = "#" + getPokémonID(prv);
-	      dataEvolutionPreviousName.classList.add("data-evolution-name");
-	      dataEvolutionPreviousName.innerText = prv;
-	      dataEvolutionPreviousToggle.classList.add("data-evolution-toggle");
-	      dataEvolutionPreviousToggle.setAttribute("onclick","this.previousElementSibling.classList.toggle('active');");
-	  
-	      for (var u = 0; u < EggArr4.length; u++) {
-	          if (u == 0) {
-	          dataEvolutionPreviousDescription.innerHTML = "Breed " + EggArr4[u] + " with " + EggArr3[u];
-	          }
-	          else {
-	              dataEvolutionPreviousDescription.innerHTML += "<br>Breed " + EggArr4[u] + " with " + EggArr3[u];
-	          }
-	      }
-	  
-	  
-	      dataEvolutionPreviousButton.appendChild(dataEvolutionPreviousIDNational);
-	      dataDivContent.appendChild(dataEvolutionPrevious);
-	      dataEvolutionPrevious.appendChild(dataEvolutionPreviousContent);
-	      dataEvolutionPreviousContent.appendChild(dataEvolutionPreviousMain);
-	      dataEvolutionPreviousMain.appendChild(dataEvolutionPreviousButton);
-	      dataEvolutionPreviousMain.appendChild(dataEvolutionPreviousDescription);
-	      dataEvolutionPreviousButton.appendChild(dataEvolutionPreviousName);
-	      dataEvolutionPreviousContent.appendChild(dataEvolutionPreviousToggle);
-	      dataEvolutionPreviousToggle.appendChild(dataEvolutionPreviousImg);
-	  
-	      
-	   
-	  
-	  }
-	  
-	  
-	  
-	  for (var q = 0; q < evonext; q++) {
-	  
-	      var dataEvolutionNext = document.createElement("div");
-	      var dataEvolutionNextContent = document.createElement("div");
-	      var dataEvolutionNextMain = document.createElement("main");
-	      var dataEvolutionNextButton = document.createElement("button");
-	      var dataEvolutionNextIDNational = document.createElement("h6");
-	      var dataEvolutionNextName = document.createElement("h4");
-	      var dataEvolutionNextDescription = document.createElement("p");
-	      var dataEvolutionNextToggle = document.createElement("div");
-	      var dataEvolutionNextImg = document.createElement("img");
-	     
-	     
-	      dataEvolutionNext.classList.add("data-evolution");
-	      dataEvolutionNext.setAttribute("name","next-" + (q+1) + "/" + evonext)
-	      dataEvolutionNextContent.classList.add("data-evolution-content");
-	      dataEvolutionNextMain
-	      dataEvolutionNextButton.classList.add("data-modal-close-open")
-	      dataEvolutionNextButton.value = getPokémonID(Next);
-	      dataEvolutionNextImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonID(Next) + ".png";
-	      dataEvolutionNextImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	     
-	      dataEvolutionNextIDNational.innerText = "#" + getPokémonID(Next);
-	      
-	      dataEvolutionNextName.classList.add("data-evolution-name");
-	      dataEvolutionNextName.innerText = Next;
-	      dataEvolutionNextToggle.classList.add("data-evolution-toggle");
-	      dataEvolutionNextToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active');");
-	  
-	  
-	      if (PreviousNext != "") {
-	          if(PreviousNext.length >= 1) {
-	              for (var u = 0; u < PreviousNext.split(",").length; u++) {
-	                  dataEvolutionNextDescription.innerHTML += "Evolve "+PreviousNext.split(",")[u]+NextFormMethod+NextTypeMethod+NextFactorMethod+NextAdditionalMethod+"<br>";
-	              }
-	          }
-	          else {
-	              for (var u = 0; u < 1; u++) {
-	                  dataEvolutionNextDescription.innerHTML += "Evolve "+NextPrevious.split(",")[u]+NextFormMethod+NextTypeMethod+NextFactorMethod+NextAdditionalMethod+"<br>";
-	              }
-	          }
-	      }
-	      else {
-	          dataEvolutionNextDescription.innerHTML = "Evolve "+NextPrevious+NextFormMethod+NextTypeMethod+NextFactorMethod+NextAdditionalMethod;
-	      }
-	        
-	  
-	      dataEvolutionNextButton.appendChild(dataEvolutionNextIDNational);
-	     
-	      dataDivContent.appendChild(dataEvolutionNext);
-	      dataEvolutionNext.appendChild(dataEvolutionNextContent);
-	      dataEvolutionNextContent.appendChild(dataEvolutionNextToggle);
-	      dataEvolutionNextToggle.appendChild(dataEvolutionNextImg);
-	  
-	      dataEvolutionNextContent.appendChild(dataEvolutionNextMain);
-	      dataEvolutionNextMain.appendChild(dataEvolutionNextButton);
-	      dataEvolutionNextButton.appendChild(dataEvolutionNextName);
-	      dataEvolutionNextMain.appendChild(dataEvolutionNextDescription);
-	  
-	  
-	  }
-	  
-	  
-	  */
 	document.getElementById("data").appendChild(dataDiv);
 	dataDiv.appendChild(dataDivOverlay);
 	dataDiv.appendChild(dataDivContent);
@@ -858,12 +506,12 @@ var createData = function(id, i) {
 		var dataAside1StatsEVSelectorInput = document.createElement("input");
 		var dataAside1StatsEVSelectorLabel = document.createElement("label");
 		dataAside1StatsEVSelectorInput.setAttribute("type", "radio");
-		dataAside1StatsEVSelectorInput.setAttribute("name", "data-baseev-" + id);
-		dataAside1StatsEVSelectorInput.setAttribute("id", "data-baseev-" + id + "-" + baseev[q].toLowerCase().replace(" ", ""));
+		dataAside1StatsEVSelectorInput.setAttribute("name", "data-baseev-"+id);
+		dataAside1StatsEVSelectorInput.setAttribute("id", "data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ", ""));
 		dataAside1StatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ", ""));
 		dataAside1StatsEVSelectorInput.setAttribute("value", q);
 		dataAside1StatsEVSelectorInput.setAttribute("onclick", "var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
-		dataAside1StatsEVSelectorLabel.setAttribute("for", "data-baseev-" + id + "-" + baseev[q].toLowerCase().replace(" ", ""));
+		dataAside1StatsEVSelectorLabel.setAttribute("for", "data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ", ""));
 		dataAside1StatsEVSelectorLabel.innerText = baseev[q];
 		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorInput);
 		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorLabel);
@@ -880,7 +528,7 @@ var createData = function(id, i) {
 			dataAside1StatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ", "").replace(".", ""));
 			dataAside1StatEV.innerText = Stats[u];
 			dataAside1StatEV.setAttribute("dataname", "value");
-			dataAside1StatEVValue.classList.add(baseev[q].toLowerCase().replace(" ", "") + "-" + Stats[u].toLowerCase().replace(" ", "").replace(".", ""));
+			dataAside1StatEVValue.classList.add(baseev[q].toLowerCase().replace(" ", "")+"-"+Stats[u].toLowerCase().replace(" ", "").replace(".", ""));
 			dataAside1StatsEVSpan.setAttribute("dataname", "value");
 			dataAside1StatsEVSpan.setAttribute("value", "");
 			dataAside1StatsEVUl.appendChild(dataAside1StatEV);
@@ -891,7 +539,7 @@ var createData = function(id, i) {
 	var dataAside2LearnsetDiv = document.createElement("div");
 	var dataAside2Learnset = document.createElement("div");
 	dataAside2LearnsetDiv.classList.add("data-learnset");
-	dataAside2LearnsetDiv.setAttribute("id", "data-learnset" + id);
+	dataAside2LearnsetDiv.setAttribute("id", "data-learnset"+id);
 	dataAside2Learnset.classList.add("data-learnset-content");
 	dataAside2.appendChild(dataAside2LearnsetDiv);
 	dataAside2LearnsetDiv.appendChild(dataAside2Learnset);
@@ -963,14 +611,14 @@ var createData = function(id, i) {
     }
 	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield, "Experience Yield", "Custom1");});
 	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate, "Leveling Rate", "Single");});
-	var helditm = document.querySelectorAll("#data-modal" + id + " .data-sidebar-helditem-img-outer > img");
+	var helditm = document.querySelectorAll("#data-modal"+id+" .data-sidebar-helditem-img-outer > img");
 	for(q = 0; q < helditm.length; q++) {
 		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem, "Held Item", "Single");});
 	}
 	dataAside2MetadataPopupTitleExit1.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, false);});
 	dataAside2MetadataPopupTitleExit2.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, true);});
 	showMetadataLearnsetArea();
-	var baseEV = document.querySelectorAll("#data-modal" + id + " .data-stats > ul li span");
+	var baseEV = document.querySelectorAll("#data-modal"+id+" .data-stats > ul li span");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
 			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Multiple");});
@@ -978,7 +626,7 @@ var createData = function(id, i) {
 			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Multiple");});
 		}
 	}
-	var baseEVTotal = document.querySelectorAll("#data-modal" + id + " .data-stats > ul div");
+	var baseEVTotal = document.querySelectorAll("#data-modal"+id+" .data-stats > ul div");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
 			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Total");});
@@ -1028,9 +676,9 @@ function showMetadataLearnsetArea() {
 }
 
 function navKeeper(id) {
-	var MetadataButton = document.querySelector("#data-modal" + id + ' #data-navigation input[value="1"]');
-	var LearnsetButton = document.querySelector("#data-modal" + id + ' #data-navigation input[value="2"]');
-	var AreaButton = document.querySelector("#data-modal" + id + ' #data-navigation input[value="3"]');
+	var MetadataButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="1"]');
+	var LearnsetButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="2"]');
+	var AreaButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="3"]');
 	if(navChecker == 1) {
 		MetadataButton.click();
 	}
@@ -1069,14 +717,14 @@ function modalData() {
 		var currentWindow;
 		var formSpec;
 		var formFirst;
-		currentWindow = document.querySelector("#data-modal" + id);
+		currentWindow = document.querySelector("#data-modal"+id);
 		if(currentWindow == null) {
 			createData(id, int);
 		}
 
         if(int != undefined) {
-            formSpec = document.querySelector("#data-modal" + id + " .data-form > input[value='" + int + "'");
-            formFirst = document.querySelector("#data-modal" + id + " .data-form > input:first-child");
+            formSpec = document.querySelector("#data-modal"+id+" .data-form > input[value='"+int+"'");
+            formFirst = document.querySelector("#data-modal"+id+" .data-form > input:first-child");
             if(def == false) {
                 if(formSpec != null) {
                     formSpec.click();
@@ -1088,7 +736,7 @@ function modalData() {
             }
         }
 
-		currentWindow = document.querySelector("#data-modal" + id);
+		currentWindow = document.querySelector("#data-modal"+id);
 		if(currentWindow != null) {
 			currentWindow.classList.add("open");
 		}
