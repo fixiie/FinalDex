@@ -110,6 +110,10 @@ var createAbility = function() {
 		abilityAside3Description.appendChild(abilityAside3EffectText);
 		abilityOuter.appendChild(abilityAside4);
 
+		abilityAside1OptionsSearch.addEventListener("keyup", function() {search("Ability");});
+		abilityAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Ability");});
+
+
         var abilityAside2Game = document.createElement("span");
         var abilityAside2GameImage = document.createElement("img");
         abilityAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
@@ -146,6 +150,22 @@ var createAbility = function() {
 					}
 				}
 			}
+		}
+	
+		var searchLis = document.querySelectorAll("#ability-options > label");
+		searchAbilityAttributes = [];
+		for(q = 0; q < searchLis.length; q++) {
+			for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+				if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+					if (!searchAbilityAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+						searchAbilityAttributes.push(searchLis[q].getAttributeNames()[u]);
+					}
+				}
+			}
+		}
+		searchAbilityAttributes = searchAbilityAttributes.filter(function(v) {return v !== "data-search-name";});
+		for(q = 0; q < searchAbilityAttributes.length; q++) {
+			searchAbilityAttributes[q] = searchAbilityAttributes[q].replaceAll("data-search-","");
 		}
 	}
 
