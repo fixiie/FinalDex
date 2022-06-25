@@ -1,7 +1,7 @@
 var createPokémon = function() {
 	var contentOuter = document.createElement("div");
-	contentOuter.setAttribute("id", "pokémon-outer");
-	contentOuter.setAttribute("name", "Pokémon");
+	contentOuter.setAttribute("id","pokémon-outer");
+	contentOuter.setAttribute("name","Pokémon");
 	document.querySelector("#contain").appendChild(contentOuter);
 	var navigation = document.createElement("nav");
 	var navigationContent = document.createElement("ul");
@@ -22,18 +22,18 @@ var createPokémon = function() {
 	var navigationSettings = document.createElement("li");
 	var navigationSettingsImg = document.createElement("img");
 
-	navigationDex.setAttribute("id", "dexswitch-outer");
-	navigationDexContent.setAttribute("id", "dexswitch");
-	navigationSearch.setAttribute("id", "search-outer");
-	navigationSearchContent.setAttribute("id", "search");
-	navigationSearchInput.setAttribute("id", "searchbar");
-	navigationSearchInput.setAttribute("type", "text");
-	navigationSearchInput.setAttribute("placeholder", "Search...");
-	navigationSearchInput.setAttribute("onfocus", "this.placeholder = ''");
-	navigationSearchInput.setAttribute("onblur", "this.placeholder = 'Search...'");
-	navigationSearchInput.setAttribute("autocomplete", "off");
-	navigationSearchInput.setAttribute("tabindex", "0");
-	var searchoptions = ["checked:: [true/false]", "catchable:: [wild/gift/...]", "evolution:: [charizard/slowbro/...]", "type:: [normal/fighting/...]", "ability:: [static/shadow tag/...]", "catchrate:: [value]", "eggcycle:: [value]", "genderratio:: [7:1/3:1/...]", "egggroup:: [field/human-like/...]", "expyield:: [value]", "expyieldcategory:: [very high/medium/...]", "levelrate:: [value]","learnset:: [leech seed/surf/...]","helditem:: [silver powder/sitrus berry/...]","variant:: [default/form/...]", "statshp:: [value]", "...", "evyieldhp:: [value]", "..."];
+	navigationDex.setAttribute("id","dexswitch-outer");
+	navigationDexContent.setAttribute("id","dexswitch");
+	navigationSearch.setAttribute("id","search-outer");
+	navigationSearchContent.setAttribute("id","search");
+	navigationSearchInput.setAttribute("id","searchbar");
+	navigationSearchInput.setAttribute("type","text");
+	navigationSearchInput.setAttribute("placeholder","Search...");
+	navigationSearchInput.setAttribute("onfocus","this.placeholder = ''");
+	navigationSearchInput.setAttribute("onblur","this.placeholder = 'Search...'");
+	navigationSearchInput.setAttribute("autocomplete","off");
+	navigationSearchInput.setAttribute("tabindex","0");
+	var searchoptions = ["evolution:: [charizard/slowbro/...]","type:: [normal/fighting/...]","ability:: [static/shadow tag/...]","catchrate:: [value]","eggcycle:: [value]","genderratio:: [7:1/3:1/...]","egggroup:: [field/human-like/...]","expyield:: [value]","expyieldcategory:: [very high/medium/...]","levelrate:: [value]","learnset:: [leech seed/surf/...]","helditem:: [silver powder/sitrus berry/...]","variant:: [default/form/...]","statshp:: [value]","...","evhp:: [value]","..."];
 	if(Ability.length <= 0) {
 		for(var q = 0; q < searchoptions.length; q++) {
 			if(searchoptions[q].includes("ability")) {
@@ -62,31 +62,31 @@ var createPokémon = function() {
 			}
 		}
 	}
-	navigationSearchInput.setAttribute("title", " Search Options:"+"\n"+searchoptions.join("\n"));
-	navigationSearchExit.setAttribute("id", "search-exit");
-	navigationCount.setAttribute("id", "count-outer");
-	navigationCountContent.setAttribute("id", "count");
-	navigationCountSpan1.setAttribute("id", "count-current");
-	navigationCountSpan2.setAttribute("id", "count-slash");
+	navigationSearchInput.setAttribute("title"," Search Options:"+"\n"+searchoptions.join("\n"));
+	navigationSearchExit.setAttribute("id","search-exit");
+	navigationCount.setAttribute("id","count-outer");
+	navigationCountContent.setAttribute("id","count");
+	navigationCountSpan1.setAttribute("id","count-current");
+	navigationCountSpan2.setAttribute("id","count-slash");
 	navigationCountSpan2.innerText = "/";
-	navigationCountSpan3.setAttribute("id", "count-total");
-	navigationGame.setAttribute("id", "gametitle-outer");
-	navigationGameContent.setAttribute("id", "gametitle");
-	navigationGameImg.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
-	navigationSettings.setAttribute("id", "settings-outer");
+	navigationCountSpan3.setAttribute("id","count-total");
+	navigationGame.setAttribute("id","gametitle-outer");
+	navigationGameContent.setAttribute("id","gametitle");
+	navigationGameImg.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","")+".png";
+	navigationSettings.setAttribute("id","settings-outer");
 	navigationSettingsImg.src = "./media/Images/Misc/FinalDex/Cog.png";
 
     var navigationDexOuter = document.createElement("span");
     var navigationDexInner = document.createElement("span");
 	var navigationDexInput = document.createElement("input");
 	var navigationDexLabel = document.createElement("label");
-	navigationDexInput.setAttribute("type", "radio");
-	navigationDexInput.setAttribute("value", "1");
-	navigationDexInput.setAttribute("name", "finaldex-dexswitch-"+GameID);
-	navigationDexInput.setAttribute("id", "dexswitch1");
-	navigationDexInput.setAttribute("autocomplete", "off");
-	navigationDexLabel.setAttribute("for", "dexswitch1");
-	navigationDexLabel.setAttribute("name", "National Pokédex");
+	navigationDexInput.setAttribute("type","radio");
+	navigationDexInput.setAttribute("value","1");
+	navigationDexInput.setAttribute("name","finaldex-dexswitch-"+GameID);
+	navigationDexInput.setAttribute("id","dexswitch1");
+	navigationDexInput.setAttribute("autocomplete","off");
+	navigationDexLabel.setAttribute("for","dexswitch1");
+	navigationDexLabel.setAttribute("name","National Pokédex");
 	navigationDexLabel.innerText = "National Pokédex";
     navigationDexContent.appendChild(navigationDexOuter);
     navigationDexOuter.appendChild(navigationDexInner);
@@ -99,12 +99,12 @@ var createPokémon = function() {
 		let x = i+2;
 		var navigationDexInput = document.createElement("input");
 		var navigationDexLabel = document.createElement("label");
-		navigationDexInput.setAttribute("type", "radio");
+		navigationDexInput.setAttribute("type","radio");
 		navigationDexInput.setAttribute("value", x);
-		navigationDexInput.setAttribute("name", "finaldex-dexswitch-"+GameID);
-		navigationDexInput.setAttribute("id", "dexswitch"+x);
-		navigationDexInput.setAttribute("autocomplete", "off");
-		navigationDexLabel.setAttribute("for", "dexswitch"+x);
+		navigationDexInput.setAttribute("name","finaldex-dexswitch-"+GameID);
+		navigationDexInput.setAttribute("id","dexswitch"+x);
+		navigationDexInput.setAttribute("autocomplete","off");
+		navigationDexLabel.setAttribute("for","dexswitch"+x);
 		navigationDexLabel.setAttribute("name", JSONPath_Pokédex[i].split("_")[0]);
 		navigationDexLabel.innerText = JSONPath_Pokédex[i].split("_")[0];
 		navigationDexInner.appendChild(navigationDexInput);
@@ -130,6 +130,10 @@ var createPokémon = function() {
 	navigationGameContent.appendChild(navigationGameImg);
 	navigationContent.appendChild(navigationSettings);
 	navigationSettings.appendChild(navigationSettingsImg);
+
+    navigationSearch.addEventListener("keyup", function() {search("Pokémon");});
+    navigationSearchExit.addEventListener("click", function() {exitSearch("Pokémon");});
+
 
     var team = document.createElement("main");
     var teamNav = document.createElement("section");
@@ -200,7 +204,7 @@ var createPokémon = function() {
         teamImg.setAttribute("value","");
         teamImg.setAttribute("title","");
         teamImg.addEventListener("click", modalData);
-        teamImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        teamImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 
         teamGrab.innerText = "⋮⋮⋮";
         teamStatsButton.innerText = "⟲";
@@ -264,7 +268,7 @@ var createPokémon = function() {
 
             var teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
-            teamHeldItemImage.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error.png'");
+            teamHeldItemImage.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
             teamHeldItemImage.setAttribute("name","Item");
             teamHeldItemImage.setAttribute("title","");
             teamImgOuter.appendChild(teamHeldItemImage);
@@ -850,10 +854,10 @@ var createPokémon = function() {
 
     settingsDefaultCheckbox.setAttribute("name","Checkbox");
 	settingsDefaultCheckboxCheck.innerText = "Check All";
-	settingsDefaultCheckboxCheck.setAttribute("title", "Applies to current filters only");
+	settingsDefaultCheckboxCheck.setAttribute("title","Applies to current filters only");
 	settingsDefaultCheckboxCheck.addEventListener("click", CheckAll);
 	settingsDefaultCheckboxUncheck.innerText = "Uncheck All";
-	settingsDefaultCheckboxUncheck.setAttribute("title", "Applies to current filters only");
+	settingsDefaultCheckboxUncheck.setAttribute("title","Applies to current filters only");
 	settingsDefaultCheckboxUncheck.addEventListener("click", UncheckAll);
 
     settings.appendChild(settingsDefaultCheckbox);
@@ -867,7 +871,7 @@ var createPokémon = function() {
     var settingsVariantTop = document.createElement("span");
     var settingsVariantBottom = document.createElement("span");
     var settingsVariantButton = document.createElement("button");
-	settingsVariant.setAttribute("name", "Variant");
+	settingsVariant.setAttribute("name","Variant");
     settingsVariantButton.innerText = "Apply";
     settings.appendChild(settingsVariant);
     settingsVariant.appendChild(settingsVariantTop);
@@ -883,20 +887,20 @@ var createPokémon = function() {
 	}
 	formopts = formopts.filter((item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
 	for(var q = 0; q < formopts.length; q++) {
-		formopts[q] = formopts[q].replace("Alolan", "Regional Form");
-		formopts[q] = formopts[q].replace("Galarian", "Regional Form");
-		formopts[q] = formopts[q].replace("Mega", "Mega Evolution");
+		formopts[q] = formopts[q].replace("Alolan","Regional Form");
+		formopts[q] = formopts[q].replace("Galarian","Regional Form");
+		formopts[q] = formopts[q].replace("Mega","Mega Evolution");
 	}
 	formopts = [...new Set(formopts)];
 	for(var i = 0; i < formopts.length; i++) {
 		var settingsVariantInput = document.createElement("input");
 		var settingsVariantLabel = document.createElement("label");
 		var settingsVariantSpan = document.createElement("span");
-		settingsVariantInput.setAttribute("type", "checkbox");
+		settingsVariantInput.setAttribute("type","checkbox");
 
-		settingsVariantInput.setAttribute("id", "settings-form-"+formopts[i]+"-"+i);
+		settingsVariantInput.setAttribute("id","settings-form-"+formopts[i]+"-"+i);
 		settingsVariantInput.setAttribute("name",i);
-		settingsVariantLabel.setAttribute("for", "settings-form-"+formopts[i]+"-"+i);
+		settingsVariantLabel.setAttribute("for","settings-form-"+formopts[i]+"-"+i);
 		settingsVariantLabel.innerText = formopts[i];
 		settingsVariantTop.appendChild(settingsVariantInput);
 		settingsVariantTop.appendChild(settingsVariantLabel);
@@ -1036,253 +1040,8 @@ function resizeDiv() {
     memory("Save","resize","site",document.getElementById("resize"))
 }
 
-function search() {
-	$("#searchbar").on("keyup", function() {
-		var searchVal = $(this).val();
-		var filterItems = $("#pokémon-outer > div li");
-		this.style.color = "var(--fontDark)";
-		var uncheck = document.querySelectorAll(".filterby input:checked");
-		for(var i = 0; i < uncheck.length; i++) {
-			uncheck[i].checked = false;
-		}
-		var searchoptions = ["evolution::", "evolution:!", "type::", "type:!", "ability::", "ability:!", "catchrate::", "catchrate:!", "catchrate:>", "catchrate:<", "eggcycle::", "eggcycle:!", "eggcycle:>", "eggcycle:<", "genderratio::", "genderratio:!", "egggroup::", "egggroup:!", "expyield::", "expyield:!", "expyield:>", "expyield:<", "expyieldcategory::", "expyieldcategory:!", "levelrate::", "levelrate:!", "levelrate:>", "levelrate:<", "helditem::", "helditem:!", "statshp::", "statshp:!", "statshp:>", "statshp:<", "statsattack::", "statsattack:!", "statsattack:>", "statsattack:<", "statsdefense::", "statsdefense:!", "statsdefense:>", "statsdefense:<", "statsspatk::", "statsspatk:!", "statsspatk:>", "statsspatk:<", "statsspdef::", "statsspdef:!", "statsspdef:>", "statsspdef:<", "statsspeed::", "statsspeed:!", "statsspeed:>", "statsspeed:<", "statstotal::", "statstotal:!", "statstotal:>", "statstotal:<", "evyieldhp::", "evyieldhp:!", "evyieldhp:>", "evyieldhp:<", "evyieldatk::", "evyieldatk:!", "evyieldatk:>", "evyieldatk:<", "evyielddef::", "evyielddef:!", "evyielddef:>", "evyielddef:<", "evyieldspatk::", "evyieldspatk:!", "evyieldspatk:>", "evyieldspatk:<", "evyieldspdef::", "evyieldspdef:!", "evyieldspdef:>", "evyieldspdef:<", "evyieldspeed::", "evyieldspeed:!", "evyieldspeed:>", "evyieldspeed:<", "evyieldtotal::", "evyieldtotal:!", "evyieldtotal:>", "evyieldtotal:<", "variant::", "variant:!", "checked::","learnset::","learnset:!"];
-		if(Generation <= 2 || GameID == 31 || GameID == 32) {
-			searchoptions = searchoptions.filter((item) => !item.includes("ability"));
-		}
-		var searchspec;
-		for(var i = 0; i < searchoptions.length; i++) {
-			if(searchVal.includes(searchoptions[i])) {
-				searchspec = searchoptions[i];
-			}
-		}
-		if(searchVal.toLowerCase().includes("checked::true") && searchVal.toLowerCase().includes(searchspec)) {
-			filterItems.addClass("hidden");
-			$("#pokémon-outer > div input:checked").parent().removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("checked::false") && searchVal.toLowerCase().includes(searchspec)) {
-			filterItems.addClass("hidden");
-			$("#pokémon-outer > div input:not(:checked)").parent().removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("::") && searchVal.toLowerCase().includes(searchspec)) {
-			filterItems.addClass("hidden");
-			if(searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-				$("#pokémon-outer > div li[data-search-"+searchspec.split("::")[0].toLowerCase()+'="'+searchVal.split("::")[1].toLowerCase()+'"]').removeClass("hidden");
-			} else {
-				$("#pokémon-outer > div li[data-search-"+searchspec.split("::")[0].toLowerCase()+'*="'+searchVal.split("::")[1].toLowerCase()+'"]').removeClass("hidden");
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes(":!") && searchVal.toLowerCase().includes(searchspec)) {
-			filterItems.addClass("hidden");
-			if(searchspec.includes("stats") || searchspec.includes("evyield") || searchspec.includes("catchrate") || searchspec.includes("eggcycle") || searchspec.includes("expyield") || searchspec.includes("levelrate")) {
-				$("#pokémon-outer > div li:not([data-search-"+searchspec.split(":!")[0].toLowerCase()+'="'+searchVal.split(":!")[1].toLowerCase()+'"])').removeClass("hidden");
-			} else {
-				$("#pokémon-outer > div li:not([data-search-"+searchspec.split(":!")[0].toLowerCase()+'*="'+searchVal.split(":!")[1].toLowerCase()+'"])').removeClass("hidden");
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes(":>") && searchVal.toLowerCase().includes(searchspec)) {
-			for(var q = 0; q < filterItems.length; q++) {
-				filterItems[q].classList.add("hidden");
-				if(parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":>")[0])) >= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
-					filterItems[q].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes(":<") && searchVal.toLowerCase().includes(searchspec)) {
-			for(var q = 0; q < filterItems.length; q++) {
-				filterItems[q].classList.add("hidden");
-				if(parseInt(filterItems[q].getAttribute("data-search-"+searchspec.split(":<")[0])) <= parseInt(searchVal.toLowerCase().split(searchspec)[1])) {
-					filterItems[q].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase() != "") {
-			filterItems.addClass("hidden");
-			$('#pokémon-outer > div li[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-		} else {
-			filterItems.removeClass("hidden");
-		}
-		count();
-	});
-	if(Ability.length >= 1) {
-		$("#ability-options-search input").on("keyup", function() {
-			var searchVal = $(this).val();
-			var filterItems = $("#ability-options label");
-			if(searchVal != "") {
-				filterItems.addClass("hidden");
-				$('#ability-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-			} else {
-				filterItems.removeClass("hidden");
-			}
-		});
-	}
-	$("#move-options-search input").on("keyup", function() {
-		var searchVal = $(this).val();
-		var filterItems = $("#move-options label");
-		this.style.color = "var(--fontDark)";
-		if(searchVal.toLowerCase().includes("type::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-type*="'+searchVal.toLowerCase().split("type::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("category::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-category*="'+searchVal.toLowerCase().split("category::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("pp::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-pp="'+searchVal.toLowerCase().split("pp::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("power::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-power="'+searchVal.toLowerCase().split("power::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("accuracy::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-accuracy="'+searchVal.toLowerCase().split("accuracy::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("contact::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-contact*="'+searchVal.toLowerCase().split("contact::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("tutor::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-tutor="'+searchVal.toLowerCase().split("tutor::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("machine::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-machine*="'+searchVal.toLowerCase().split("machine::")[1].replaceAll(" ", "")+'"]').removeClass("hidden");
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("pp:>")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-pp")) >= parseInt(searchVal.toLowerCase().split("pp:>")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("pp:<")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-pp")) <= parseInt(searchVal.toLowerCase().split("pp:<")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("power:>")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-power")) >= parseInt(searchVal.toLowerCase().split("power:>")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("power:<")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-power")) <= parseInt(searchVal.toLowerCase().split("power:<")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("accuracy:>")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-accuracy").replaceAll("%", "")) >= parseInt(searchVal.toLowerCase().split("accuracy:>")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(searchVal.toLowerCase().includes("accuracy:<")) {
-			for(var i = 0; i < filterItems.length; i++) {
-				filterItems[i].classList.add("hidden");
-				if(parseInt(filterItems[i].getAttribute("data-search-accuracy").replaceAll("%", "")) <= parseInt(searchVal.toLowerCase().split("accuracy:<")[1].replaceAll(" ", ""))) {
-					filterItems[i].classList.remove("hidden");
-				}
-			}
-			this.style.color = "var(--colorRed)";
-		} else if(!searchVal == "" && !searchVal.toLowerCase().includes("::")) {
-			filterItems.addClass("hidden");
-			$('#move-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-		} else {
-			filterItems.removeClass("hidden");
-		}
-	});
-	$("#item-options-search input").on("keyup", function() {
-		var searchVal = $(this).val();
-		var filterItems = $("#item-options label");
-		if(searchVal != "") {
-			filterItems.addClass("hidden");
-			$('#item-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-		} else {
-			filterItems.removeClass("hidden");
-		}
-	});
-	$("#map-options-search input").on("keyup", function() {
-		var searchVal = $(this).val();
-		var filterItems = $("#map-options label");
-		if(searchVal != "") {
-			filterItems.addClass("hidden");
-			$('#map-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-		} else {
-			filterItems.removeClass("hidden");
-		}
-	});
-	$("#map-options-search input").on("keyup", function() {
-		var searchVal = $(this).val();
-		var filterItems = $("#map-options label");
-		if(searchVal != "") {
-			filterItems.addClass("hidden");
-			$('#map-options label[data-search-name*="'+searchVal.toLowerCase()+'"]').removeClass("hidden");
-		} else {
-			filterItems.removeClass("hidden");
-		}
-	});
-	document.querySelector("#search-exit").addEventListener("click", exitSearch);
 
-	function exitSearch() {
-		var filters = document.querySelectorAll(".filterby input:checked");
-		var search = document.getElementById("searchbar");
-		if(filters.length == 0) {
-			search.value = "";
-			$("#pokémon-outer > div li").removeClass("hidden");
-			search.focus();
-			count();
-		}
-	}
-	if(Ability.length >= 1) {
-		document.querySelector("#ability-search-exit").addEventListener("click", exitAbilitySearch);
 
-		function exitAbilitySearch() {
-			var search = document.getElementById("ability-search");
-			search.value = "";
-			$("#ability-options label").removeClass("hidden");
-			search.focus();
-		}
-	}
-	document.querySelector("#move-search-exit").addEventListener("click", exitMoveSearch);
-
-	function exitMoveSearch() {
-		var search = document.getElementById("move-search");
-		search.value = "";
-		$("#move-options label").removeClass("hidden");
-		search.focus();
-	}
-	document.querySelector("#item-search-exit").addEventListener("click", exitItemSearch);
-
-	function exitItemSearch() {
-		var search = document.getElementById("item-search");
-		search.value = "";
-		$("#item-options label").removeClass("hidden");
-		search.focus();
-	}
-	document.querySelector("#map-search-exit").addEventListener("click", exitMapSearch);
-
-	function exitMapSearch() {
-		var search = document.getElementById("map-search");
-		search.value = "";
-		$("#map-options label").removeClass("hidden");
-		search.focus();
-	}
-}
 
 function dexMove() {
 	var x = parseInt(this.value);
@@ -1400,7 +1159,7 @@ function CheckAll() {
 }
 
 
-
+var searchPokémonAttributes = [];
 
 
 function createContain(condition) {
@@ -1453,46 +1212,46 @@ function createContain(condition) {
                     contentDiv.setAttribute("id",i);
 
                     if(finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != undefined) {
-                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_"+JSONPath_Area].replaceAll(" ", ""));
+                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_"+JSONPath_Area].replaceAll(" ",""));
                     }
                     contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {
                         return v["Pokémon"];
                     }).join(",").toLowerCase());
-                    contentDiv.setAttribute("data-search-type", returnData(i, "Type", "lower,undefined"));
-                    contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate", "lower,undefined"));
+                    contentDiv.setAttribute("data-search-type", returnData(i, "Type","lower,undefined"));
+                    contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate","lower,undefined"));
 
                     if (Ability.length > 0) {
-                        contentDiv.setAttribute("data-search-ability", returnData(i, "Ability", "lower,undefined"));
+                        contentDiv.setAttribute("data-search-ability", returnData(i, "Ability","lower,undefined"));
                     }
 
                     if (Gender == true) {
-                        contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio", "lower,undefined").join(":"));
+                        contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio","lower,undefined").join(":"));
                     }
                     if (Egg == true) {
-                        contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate", "lower,undefined")[0]);
-                        contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group", "lower,undefined"));
+                        contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate","lower,undefined")[0]);
+                        contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group","lower,undefined"));
                     }
-                    contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield", "lower,undefined"));
+                    contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield","lower,undefined"));
                     if (HeldItem == true) {
-                        contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item", "lower,undefined"));
+                        contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item","lower,undefined"));
                     }
                     contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
 
-                    if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 300) {
-                        contentDiv.setAttribute("data-search-expyieldcategory", "Very High".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 299) {
-                        contentDiv.setAttribute("data-search-expyieldcategory", "High".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 100 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 199) {
-                        contentDiv.setAttribute("data-search-expyieldcategory", "Medium".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 50 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 99) {
-                        contentDiv.setAttribute("data-search-expyieldcategory", "Low".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield", "lower,undefined")) >= 0 && parseInt(returnData(i, "Experience Yield", "lower,undefined")) <= 49) {
-                        contentDiv.setAttribute("data-search-expyieldcategory", "Very Low".toLowerCase());
+                    if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 300) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Very High".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 299) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","High".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 100 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 199) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Medium".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 50 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 99) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Low".toLowerCase());
+                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 0 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 49) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Very Low".toLowerCase());
                     }
-                    contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate", "lower,undefined"));
+                    contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate","lower,undefined"));
 
                     var statsevL = ["Base Stats","EV Yield"];
-                    var statsevS = ["stats","evyield"];
+                    var statsevS = ["base","ev"];
                     for(var q = 0; q < statsevL.length; q++) {
                         for(var u = 0; u < Stats.length; u++) {
                             contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined"));
@@ -1500,17 +1259,17 @@ function createContain(condition) {
                     }
 
                     contentDiv.setAttribute("data-search-variant", variant.toLowerCase());
-                    contentInput.setAttribute("type", "checkbox");
-                    contentInput.setAttribute("id", "finaldex-"+GameID+"-"+i);
+                    contentInput.setAttribute("type","checkbox");
+                    contentInput.setAttribute("id","finaldex-"+GameID+"-"+i);
                     contentInput.setAttribute("name",i);
-                    contentLabel.setAttribute("for", "finaldex-"+GameID+"-"+i);
+                    contentLabel.setAttribute("for","finaldex-"+GameID+"-"+i);
                     contentButton.value = i;
                     contentButton.addEventListener("click", modalData);
                     contentButtonImg.src = "./media/Images/Misc/FinalDex/Location.png";
                     contentNationalID.classList.add("contain-nationalID");
                     contentNationalID.innerText = "#"+ID;
                     contentImg.classList.add("contain-img");
-                    contentImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+                    contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
                     contentName.classList.add("contain-name");
                     if(formName != undefined) {
                         contentName.innerText = formName;
@@ -1570,4 +1329,21 @@ function createContain(condition) {
         }
         conditions = [];
 	}
+
+    var searchLis = document.querySelectorAll("#pokémon-outer > div li");
+    searchPokémonAttributes = [];
+    for(q = 0; q < searchLis.length; q++) {
+        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+                if (!searchPokémonAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+                    searchPokémonAttributes.push(searchLis[q].getAttributeNames()[u]);
+                }
+            }
+        }
+    }
+    searchPokémonAttributes = searchPokémonAttributes.filter(function(v) {return v !== "data-search-name";});
+    for(q = 0; q < searchPokémonAttributes.length; q++) {
+        searchPokémonAttributes[q] = searchPokémonAttributes[q].replaceAll("data-search-","")
+    }
+
 }
