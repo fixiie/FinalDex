@@ -281,7 +281,6 @@ function initialize() {
 		createType();
 		createMove();
 
-		search();
 		countdown();
 		stopwatch();
 		typeSwitch("NORMAL");
