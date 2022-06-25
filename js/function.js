@@ -708,3 +708,199 @@ function getItemIcon(item) {
 	}
     return;
 }
+
+
+var searchPokémonAttributes = [];
+var searchMoveAttributes = [];
+var searchAbilityAttributes = [];
+var searchItemAttributes = [];
+var searchMapAttributes = [];
+
+function search(type) {
+    var type;
+	var tag;
+
+    if (type == "Pokémon") {
+        base = document.querySelector("#pokémon-outer > div ul");
+        searchAttributes = searchPokémonAttributes;
+		tag = "li";
+    }
+    else if (type == "Move") {
+        base = document.querySelector("#move-options");
+        searchAttributes = searchMoveAttributes;
+		tag = "label";
+    }
+    else if (type == "Ability") {
+        base = document.querySelector("#ability-options");
+        searchAttributes = searchAbilityAttributes;
+		tag = "label";
+    }
+    else if (type == "Item") {
+        base = document.querySelector("#item-options");
+        searchAttributes = searchItemAttributes;
+		tag = "label";
+    }
+    else if (type == "Map") {
+        base = document.querySelector("#map-options");
+        searchAttributes = searchMapAttributes;
+		tag = "label";
+    }
+
+	var tar = event.target
+    var searchValue = (tar.value).toLowerCase();
+    var searchPositive = [];
+    var searchNegative = [];
+    var searchGreater = [];
+    var searchLower = [];
+	var searchVar = [];
+
+
+    if (searchValue.includes("::") && searchAttributes.includes(searchValue.split("::")[0])) {
+        searchPositive = searchValue.split("::");
+		searchVar = searchValue.split("::");
+    }
+    else if (searchValue.includes(":!") && searchAttributes.includes(searchValue.split(":!")[0])) {
+        searchNegative = searchValue.split(":!");
+		searchVar = searchValue.split(":!");
+    }
+    else if (searchValue.includes(":>") && searchAttributes.includes(searchValue.split(":>")[0])) {
+        searchGreater = searchValue.split(":>");
+		searchVar = searchValue.split(":>");
+    }
+    else if (searchValue.includes(":<") && searchAttributes.includes(searchValue.split(":<")[0])) {
+        searchLower = searchValue.split(":<");
+		searchVar = searchValue.split(":<");
+    }
+    else {
+        var searchName = event.target.value;
+    }
+
+	var tags =  base.querySelectorAll(':scope > '+tag);
+	for(i = 0; i < tags.length; i++) {
+		tags[i].classList.remove("hidden");
+	}
+
+    tar.style.color = "var(--fontDark)";
+
+
+	var check;
+
+	if (searchVar.length > 0) {
+		if (tags[0].getAttribute('data-search-'+searchVar[0]).match(/[a-z]/g) ) {
+			check = false;
+		}
+		else {
+			check = true;
+		}
+	}
+    if (searchPositive.length > 0 && searchAttributes.includes(searchPositive[0])) {
+        if (parseInt(searchPositive[1]) != NaN) {
+            var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'*="'+searchPositive[1]+'"])');
+			for(i = 0; i < tags.length; i++) {
+				tags[i].classList.add("hidden");
+			}
+        }
+        else {
+            var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'="'+searchPositive[1]+'"])');
+			for(i = 0; i < tags.length; i++) {
+				tags[i].classList.add("hidden");
+			}
+        }
+        tar.style.color = "var(--colorRed)";
+    }
+    else if (searchNegative.length > 0 && searchAttributes.includes(searchNegative[0])) {
+        if (parseInt(searchNegative[1]) != NaN) {
+            var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'*="'+searchNegative[1]+'"]');
+			for(i = 0; i < tags.length; i++) {
+				tags[i].classList.add("hidden");
+			}
+        }
+        else {
+            var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'="'+searchNegative[1]+'"]');
+			for(i = 0; i < tags.length; i++) {
+				tags[i].classList.add("hidden");
+			}
+        }
+        tar.style.color = "var(--colorRed)";
+    }
+	else if (searchLower.length > 0 && searchAttributes.includes(searchLower[0]) && check) {
+        var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchLower[0]+']');
+		for(i = 0; i < tags.length; i++) {
+			tags[i].classList.add("hidden");
+		}
+        for(i = 0; i < tags.length; i++) {
+			if (tags[i].getAttribute("data-search-"+searchLower[0]) != "") {
+				if (parseInt(tags[i].getAttribute("data-search-"+searchLower[0])) <= parseInt(searchLower[1])) {
+					tags[i].classList.remove("hidden");
+				}
+			}
+        }
+        tar.style.color = "var(--colorRed)";
+    }
+    else if (searchGreater.length > 0 && searchAttributes.includes(searchGreater[0]) && check) {
+        var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchGreater[0]+']');
+		for(i = 0; i < tags.length; i++) {
+			tags[i].classList.add("hidden");
+		}
+        for(i = 0; i < tags.length; i++) {
+			if (tags[i].getAttribute("data-search-"+searchGreater[0]) != "") {
+				if (parseInt(tags[i].getAttribute("data-search-"+searchGreater[0])) >= parseInt(searchGreater[1])) {
+					tags[i].classList.remove("hidden");
+				}
+			}
+        }
+        tar.style.color = "var(--colorRed)";
+    }
+    else if (event.target.value.length > 0) {
+        var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-name*="'+searchName+'"])');
+		for(i = 0; i < tags.length; i++) {
+			tags[i].classList.add("hidden");
+		}
+        tar.style.color = "var(--fontDark)";
+    }
+	else {
+		for(i = 0; i < tags.length; i++) {
+			tags[i].classList.remove("hidden");
+		}
+		tar.style.color = "var(--fontDark)";
+	}
+	
+    count();
+}
+function exitSearch(base) {
+    var base;
+	var tag;
+	var tar = event.target;
+
+    if (base == "Pokémon") {
+        base = document.querySelector("#pokémon-outer > div ul");
+		tag = "li";
+    }
+    if (base == "Move") {
+        base = document.querySelector("#move-options");
+		tag = "label";
+    }
+    if (base == "Ability") {
+        base = document.querySelector("#ability-options");
+		tag = "label";
+    }
+    if (base == "Item") {
+        base = document.querySelector("#item-options");
+		tag = "label";
+    }
+    if (base == "Map") {
+        base = document.querySelector("#map-options");
+		tag = "label";
+		
+    }
+    
+    var items = base.querySelectorAll(":scope > "+tag);
+    for (i = 0; i < items.length; i++) {
+        items[i].classList.remove("hidden");
+    }
+
+    var search = tar.nextElementSibling;
+	search.style.color = "var(--fontDark)";
+    search.value = "";
+    search.focus();
+}
