@@ -51,7 +51,8 @@ var JSONPath_MovePower;
 var JSONPath_MovePP;
 var JSONPath_MoveTutor;
 var JSONPath_MoveType;
-var JSONPath_Path;
+var JSONPath_BattlePath;
+var JSONPath_BoxPath;
 var JSONPath_Pokédex = [];
 var JSONPath_PokédexEntry;
 var JSONPath_Reference;
@@ -73,11 +74,13 @@ var MEDIAPath_Type_Symbol;
 var MEDIAPath_Type_Text;
 var JSONPath_Items;
 var JSONPath_MovePriority;
+var JSONPath_Offspring;
 var Stats = [];
 var Natures = [];
 var JSONPath_MoveReference;
 var tempLocationImages = [];
 var MEDIAPath_LocationOverworld;
+
 if(GameID == 1) {
 	JSONPath_PokédexEntry = "Red";
 	JSONPath_Area = "Red";
@@ -164,13 +167,13 @@ if(GameID == 9) {
 if(GameID == 10) {
 	JSONPath_PokédexEntry = "FireRed";
 	JSONPath_Area = "FireRed";
-	JSONPath_Path = "FireRed";
+	JSONPath_BattlePath = "FireRed";
 	JSONPath_Form = "FireRed";
 }
 if(GameID == 11) {
 	JSONPath_PokédexEntry = "LeafGreen";
 	JSONPath_Area = "LeafGreen";
-	JSONPath_Path = "LeafGreen";
+	JSONPath_BattlePath = "LeafGreen";
 	JSONPath_Form = "LeafGreen";
 }
 if(GameID == 12) {
@@ -187,7 +190,7 @@ if(GameID == 12) {
 	JSONPath_LocationNavigation = "Emerald";
 	JSONPath_MoveDescription = "Emerald";
 	JSONPath_MoveTutor = "Emerald";
-	JSONPath_Path = "Emerald";
+	JSONPath_BattlePath = "Emerald";
 	JSONPath_Form = "Emerald";
 	MEDIAPath_Character_Battle = "Emerald";
 	JSONPath_Items = "Emerald";
@@ -808,6 +811,9 @@ if(Generation >= 5 && Generation <= 6) {
 	JSONPath_EVYield = "5-6";
 	JSONPath_EvolutionMethod = "5-6";
 }
+if(Generation >= 5 && Generation <= 8) {
+	JSONPath_Offspring = "5-8";
+}
 if(Generation >= 6 && Generation <= 7) {
 	ImageType_Path = ["VI-VII", "VI-VII", "Official", "HOME"];
 	ImageType_Type = ["Battle", "Battle", "Art", "Art"];
@@ -841,13 +847,13 @@ if(Generation >= 1 && Generation <= 8) {
 	MEDIAPath_Type_Icon = "SwSh";
 	MEDIAPath_Type_Symbol = "SwSh";
 	MEDIAPath_Pokémon_Portrait = "HOME";
+	JSONPath_BoxPath = "1-8";
 }
 if(Generation == 2 || Generation == 7) {
 	JSONPath_HatchRateSteps = "2+7";
 }
-if(
-	(Generation >= 1 && Generation <= 2) || (GameID >= 7 && GameID <= 9) || (GameID >= 12 && GameID <= 13) || (Generation >= 4 && Generation <= 8)) {
-	JSONPath_Path = "1-2+RSEColXD+4-8";
+if((Generation >= 1 && Generation <= 2) || (GameID >= 7 && GameID <= 9) || (GameID >= 12 && GameID <= 13) || (Generation >= 4 && Generation <= 8)) {
+	JSONPath_BattlePath = "1-2+RSEColXD+4-8";
 	JSONPath_Form = "1-2+RSEColXD+4-8";
 }
 if(Generation >= 2) {
@@ -916,6 +922,7 @@ if(Generation == 2) {
     JSONPath_EVYield = "2";
     JSONPath_Friendship = "2";
 	JSONPath_MovePriority = "2";
+	JSONPath_Offspring = "2";
 }
 if(Generation == 3) {
 	JSONPath_HatchRateSteps = "3";
@@ -928,6 +935,7 @@ if(Generation == 3) {
 	JSONPath_MovePP = "3";
     JSONPath_EVYield = "3";
 	JSONPath_MovePriority = "3";
+	JSONPath_Offspring = "3";
 }
 if(Generation == 4) {
 	JSONPath_HatchRateSteps = "4";
@@ -941,6 +949,7 @@ if(Generation == 4) {
 	JSONPath_MoveID = "4";
 	JSONPath_MoveReference = "4";
 	JSONPath_MovePriority = "4";
+	JSONPath_Offspring = "4";
 }
 if(Generation == 5) {
 	JSONPath_Type = "5";
