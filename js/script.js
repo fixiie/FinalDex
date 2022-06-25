@@ -516,11 +516,11 @@ function callPopUp(x, arr, type, style) {
 			}
 			var img = document.createElement("img");
 			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"])+".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"],"Box")+".png";
 				img.title = result[u]["Form"];
 				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
 			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"])+".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"],"Box")+".png";
 				img.title = result[u]["Pokémon"];
 				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
 			}
@@ -631,11 +631,11 @@ function callPopUp(x, arr, type, style) {
 			var span = document.createElement("span");
 			var img = document.createElement("img");
 			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"])+".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"],"Box")+".png";
 				img.title = result[u]["Form"];
 				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
 			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"])+".png";
+				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"],"Box")+".png";
 				img.title = result[u]["Pokémon"];
 				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
 			}
@@ -1036,31 +1036,115 @@ function loadData() {
 	var target = event.currentTarget;
 	var i = target.getAttribute("value");
 	var id = getIntID(i,"");
-	var portrait = document.querySelector("#data-modal"+id+" .data-portrait");
-	var category = document.querySelector("#data-modal"+id+" .data-category");
-	var debut = document.querySelector("#data-modal"+id+" .data-debut");
-	var name = document.querySelector("#data-modal"+id+" .data-name");
-	var type = document.querySelector("#data-modal"+id+" .data-type");
-	var description = document.querySelector("#data-modal"+id+" .data-description");
-	var basestats = document.querySelector("#data-modal"+id+" .data-stats ul[name='basestats']");
-	var evyield = document.querySelector("#data-modal"+id+" .data-stats ul[name='evyield']");
-	var ability = document.querySelector("#data-modal"+id+" .data-sidebar-ability");
-	var catchrate = document.querySelector("#data-modal"+id+" .data-sidebar-catchrate");
-	var hatchrate = document.querySelector("#data-modal"+id+" .data-sidebar-hatchrate");
-	var genderratio = document.querySelector("#data-modal"+id+" .data-sidebar-genderratio");
-	var egggroup = document.querySelector("#data-modal"+id+" .data-sidebar-egggroup");
-	var expyield = document.querySelector("#data-modal"+id+" .data-sidebar-expyield");
-	var levelrate = document.querySelector("#data-modal"+id+" .data-sidebar-levelrate");
-	var helditem = document.querySelector("#data-modal"+id+" .data-sidebar-helditem");
-    var area = document.querySelector("#data-modal"+id+" .data-area ul");
+    var base = document.querySelector("#data-modal"+id);
+	var portrait = base.querySelector(":scope .data-portrait");
+	var category = base.querySelector(":scope .data-category");
+	var debut = base.querySelector(":scope .data-debut");
+	var name = base.querySelector(":scope .data-name");
+	var type = base.querySelector(":scope .data-type");
+	var description = base.querySelector(":scope .data-description");
+	var basestats = base.querySelector(":scope .data-stats ul[name='basestats']");
+	var evyield = base.querySelector(":scope .data-stats ul[name='evyield']");
+	var ability = base.querySelector(":scope .data-sidebar-ability");
+	var catchrate = base.querySelector(":scope .data-sidebar-catchrate");
+	var hatchrate = base.querySelector(":scope .data-sidebar-hatchrate");
+	var genderratio = base.querySelector(":scope .data-sidebar-genderratio");
+	var egggroup = base.querySelector(":scope .data-sidebar-egggroup");
+	var expyield = base.querySelector(":scope .data-sidebar-expyield");
+	var levelrate = base.querySelector(":scope .data-sidebar-levelrate");
+	var helditem = base.querySelector(":scope .data-sidebar-helditem");
+    var area = base.querySelector(":scope .data-area ul");
+    var evolution = base.querySelector(":scope .data-modal");
 
+    if (evolution != undefined) {
+
+
+        var evos = evolution.querySelectorAll(":scope .data-evolution");
+        for(var q = 0; q < evos.length; q++) {
+            evos[q].remove();
+        }
+
+        var previous = getEvolutionData(i,"Previous");
+        var next = getEvolutionData(i,"Next");
+        var evoArr = [previous,next];
+        var evoArrName = ["previous","next"];
+
+        console.log(next)
+        
+
+        for(var q = 0; q < evoArr.length; q++) {
+            for(var u = 0; u < evoArr[q].length; u++) {
+                var x = u + 1;
+                var evo = document.createElement("div");
+                var evoContent = document.createElement("div");
+                var evoToggle = document.createElement("button");
+                var evoImg = document.createElement("img");
+                var evoMain = document.createElement("main");
+                var evoButton = document.createElement("button");
+                var evoDescription = document.createElement("p");
+                var evoID = document.createElement("span");
+                var evoNationalID = document.createElement("h6");
+                var evoName = document.createElement("h4");
+
+                evo.classList.add("data-evolution");
+                evo.setAttribute("name",evoArrName[q]+"-"+x+"/"+evoArr[q].length)
+         
+                evoButton.setAttribute("value",getPokémonInt(evoArr[q][u]["Pokémon"]));
+                evoImg.src = './media/Images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(evoArr[q][u]["Pokémon"],"Box")+'.png'
+                evoImg.title = evoArr[q][u]["Pokémon"];
+
+                evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/III-V/0.png'");
+                evoNationalID.innerText = "#"+getPokémonID(evoArr[q][u]["Pokémon"]);
+                evoNationalID.setAttribute("name","0");
+                evoName.innerText = evoArr[q][u]["Pokémon"];
+
+
+                evolution.appendChild(evo);
+                evo.appendChild(evoContent);
+                if (q == 0){
+                    evoContent.appendChild(evoMain);
+                    evoContent.appendChild(evoToggle);
+                    evoToggle.setAttribute("onclick","this.previousElementSibling.classList.toggle('active')");
+                    evoDescription.innerText = formatEvolutionText(i,evoArr[q][u],"Previous");
+                }
+                else if (q == 1) {
+                    evoContent.appendChild(evoToggle);
+                    evoContent.appendChild(evoMain);
+                    evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
+                    evoDescription.innerText = formatEvolutionText(i,evoArr[q][u],"Next");
+                }
+                evoToggle.appendChild(evoImg);
+                evoMain.appendChild(evoButton);
+                evoMain.appendChild(evoDescription);
+                evoButton.appendChild(evoID);
+                evoID.appendChild(evoNationalID);
+                evoButton.appendChild(evoName);
+                evoButton.addEventListener("click",modalData)
+
+
+
+                for(y = 0; y < JSONPath_Pokédex.length; y++) {
+                    var z = y+1;
+                    var ID = getRegionalID("=",getPokémonID(evoArr[q][u]["Pokémon"]),JSONPath_Pokédex[y]);
+                    var evoRegionalID = document.createElement("h6");
+                    if (ID != undefined) {
+                        evoRegionalID.innerText = "#"+ID;
+                    }
+                    evoRegionalID.setAttribute("name",z);
+                    evoID.appendChild(evoRegionalID);
+                }
+
+      
+            }
+        }
+        
+    }
 
     if (area != undefined) {
         var arealis = area.querySelectorAll(':scope > li');
         for(var q = 0; q < arealis.length; q++) {
             arealis[q].remove();
         }
-        console.log(finaldataLocationPokémon[0])
         for(var q = 0; q < finaldataLocationPokémon.length; q++) {
             if (getApplicable(finaldataLocationPokémon[q]["Game"])) {
                 if (finaldataLocationPokémon[q]["Pokémon"] == finaldataPokémon[i]["Pokémon"]) {
@@ -1286,7 +1370,7 @@ function loadData() {
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Experience Yield","")[0]);
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
 	if(getPokémonMediaPath(getPokémonName(i)) != undefined) {
-		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/"+getPokémonMediaPath(getPokémonName(i))+".png";
+		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/"+getPokémonMediaPath(getPokémonName(i),"Battle")+".png";
 	}
 	if(returnData(i,"Catch Rate","") != undefined) {
 		var catchRateFormula;
@@ -1387,7 +1471,7 @@ function loadData() {
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p])+'.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p],"Box")+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1395,7 +1479,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"])+'.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"],"Box")+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1413,7 +1497,7 @@ function loadData() {
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"].split(",")[p])+'.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"].split(",")[p],"Box")+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1421,7 +1505,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"])+'.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"],"Box")+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1710,22 +1794,22 @@ function imageType() {
 
         if(!dataType.includes("Art")) {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title)+"."+dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension);
             }
         }
         else {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title)+"."+dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension);
             }
         }
     }
@@ -2105,10 +2189,10 @@ function createParty(base,data) {
     }
 
     if (opt.getAttribute("data-type") != "Art") {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-extension")+"/Normal/Front/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i))+"."+opt.getAttribute("data-extension");
+        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-extension")+"/Normal/Front/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i),opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
     }
     else {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i))+"."+opt.getAttribute("data-extension");
+        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i),opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
     }
     basePok.setAttribute("value",i);
     basePok.title = getPokémonName(i);
@@ -2981,7 +3065,7 @@ function storeInBox(data) {
     var li = document.createElement("li");
     var shadow = document.createElement("span");
     var img = document.createElement("img");
-    img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(i))+".png";
+    img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(i),"Box")+".png";
     img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
     img.setAttribute("value",i);
     box.appendChild(li)
