@@ -982,21 +982,11 @@ function imgType() {
 			var dataPath = imgType[i].getAttribute("data-path");
 			var dataExtension = imgType[i].getAttribute("data-extension");
 			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/Misc/FinalDex/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
-			if(!dataType.includes("Art")) {
-				for(var q = 0; q < conimg.length; q++) {
-					if(conimg[q].getAttribute("id").includes("Shiny")) {
-						conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataExtension+"/Shiny/Front/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
-						conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
-					} else {
-						conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataExtension+"/Normal/Front/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
-						conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension);
-					}
-				}
-			} else {
-				for(var q = 0; q < conimg.length; q++) {
-					conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id)+"."+dataExtension;
-				}
-			}
+		
+            for(var q = 0; q < conimg.length; q++) {
+                conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
+            }
 		}
 	}
 }
