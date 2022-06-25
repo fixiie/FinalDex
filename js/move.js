@@ -73,7 +73,7 @@ var createMove = function() {
 
     var moveAside2Game = document.createElement("span");
     var moveAside2GameImage = document.createElement("img");
-    moveAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    moveAside2GameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
     moveAside2GameImage.setAttribute("onerror","this.display='none'");
     moveAside2.appendChild(moveAside2Game);
     moveAside2Game.appendChild(moveAside2GameImage);
@@ -197,38 +197,38 @@ var createMove = function() {
 			var moveAside1OptionsLabel = document.createElement("label");
 			moveAside1OptionsInput.setAttribute("type", "radio");
 			moveAside1OptionsInput.setAttribute("name", "move-options");
-			moveAside1OptionsInput.setAttribute("id", "move-options-" + q);
+			moveAside1OptionsInput.setAttribute("id", "move-options-"+q);
 			moveAside1OptionsInput.setAttribute("autocomplete", "off");
 			moveAside1OptionsInput.value = q;
-			moveAside1OptionsLabel.setAttribute("for", "move-options-" + q);
+			moveAside1OptionsLabel.setAttribute("for", "move-options-"+q);
 			moveAside1OptionsLabel.setAttribute("name", "medium");
-			if(finaldataMove[q]["Name" + "_" + JSONPath_MoveName] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name" + "_" + JSONPath_MoveName].toLowerCase());
+			if(finaldataMove[q]["Name"+"_"+JSONPath_MoveName] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-name", "");
 			}
-			if(finaldataMoveType[q]["Type_" + JSONPath_MoveType] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_" + JSONPath_MoveType].toLowerCase());
+			if(finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-type", "");
 			}
-			if(finaldataMoveCategory[q]["Category_" + JSONPath_MoveCategory] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-category", finaldataMoveCategory[q]["Category_" + JSONPath_MoveCategory].toLowerCase());
+			if(finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-category", finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-category", "");
 			}
-			if(finaldataMovePP[q]["PP Min_" + JSONPath_MovePP] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-pp", finaldataMovePP[q]["PP Min_" + JSONPath_MovePP].toLowerCase());
+			if(finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-pp", finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-pp", "");
 			}
-			if(finaldataMovePower[q]["Power_" + JSONPath_MovePower] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-power", finaldataMovePower[q]["Power_" + JSONPath_MovePower].toLowerCase());
+			if(finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-power", finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-power", "");
 			}
-			if(finaldataMoveAccuracy[q]["Accuracy_" + JSONPath_MoveAccuracy] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-accuracy", finaldataMoveAccuracy[q]["Accuracy_" + JSONPath_MoveAccuracy].toLowerCase());
+			if(finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-accuracy", finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "");
 			}
@@ -240,17 +240,17 @@ var createMove = function() {
 				moveAside1OptionsLabel.setAttribute("data-search-contact", "");
 			}
 
-			if(getTutorData(finaldataMove[q]["Name" + "_" + JSONPath_MoveName],"Move").length > 0) {
+			if(getTutorData(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
 				moveAside1OptionsLabel.setAttribute("data-search-tutor", "y");
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-tutor", "n");
 			}
-			if(finaldataMoveMachine[q]["Machine_" + JSONPath_MoveMachine] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_" + JSONPath_MoveMachine].toLowerCase());
+			if(finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-machine", "");
 			}
-			moveAside1OptionsLabel.innerText = finaldataMove[q]["Name" + "_" + JSONPath_MoveName];
+			moveAside1OptionsLabel.innerText = finaldataMove[q]["Name"+"_"+JSONPath_MoveName];
 			moveAside1Options.appendChild(moveAside1OptionsInput);
 			moveAside1Options.appendChild(moveAside1OptionsLabel);
 			moveAside1OptionsLabel.setAttribute("tabindex",q+10);
@@ -286,63 +286,63 @@ var createMove = function() {
 			i = this.value;
 		}
 		
-		moveAside2TitleName.innerText = finaldataMove[i]["Name" + "_" + JSONPath_MoveName];
-		moveAside2TitleID.innerText = "#" + finaldataMoveID[i]["ID" + "_" + JSONPath_MoveID];
+		moveAside2TitleName.innerText = finaldataMove[i]["Name"+"_"+JSONPath_MoveName];
+		moveAside2TitleID.innerText = "#"+finaldataMoveID[i]["ID"+"_"+JSONPath_MoveID];
 		if(finaldataMoveID[i]["ID Type"] != undefined) {
-			moveAside2TitleID.title = finaldataMoveID[i]["ID Type"] + " Index number";
+			moveAside2TitleID.title = finaldataMoveID[i]["ID Type"]+" Index number";
 		} else {
 			moveAside2TitleID.title = "Index number";
 		}
-		moveAside2DebutText.innerText = "Introduced in " + finaldataMove[i]["Debut"].split("-")[0];
-		if (finaldataMoveDescription[i]["Description_" + JSONPath_MoveDescription] != undefined) {
-			moveAside3DescriptionText.innerText = finaldataMoveDescription[i]["Description_" + JSONPath_MoveDescription];
+		moveAside2DebutText.innerText = "Introduced in "+finaldataMove[i]["Debut"].split("-")[0];
+		if (finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription] != undefined) {
+			moveAside3DescriptionText.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
 		}
 		moveAside3SidebarTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-		moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataMoveType[i]["Type_" + JSONPath_MoveType] + ".png";
-		moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[i]["Type_" + JSONPath_MoveType]);
-		if(finaldataMoveType[i]["Type_" + JSONPath_MoveType] == undefined) {
+		moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+finaldataMoveType[i]["Type_"+JSONPath_MoveType]+".png";
+		moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[i]["Type_"+JSONPath_MoveType]);
+		if(finaldataMoveType[i]["Type_"+JSONPath_MoveType] == undefined) {
 			moveAside3SidebarTypeTextImg.style.display = "none";
 			moveAside3SidebarTypeTextText.style.display = "block";
 		} else {
 			moveAside3SidebarTypeTextImg.style.display = "block";
 			moveAside3SidebarTypeTextText.style.display = "none";
 		}
-		moveAside3SidebarTypeTextText.innerText = finaldataMoveType[i]["Type_" + JSONPath_MoveType];
+		moveAside3SidebarTypeTextText.innerText = finaldataMoveType[i]["Type_"+JSONPath_MoveType];
 		var cate = moveAside3SidebarTypeMove.querySelectorAll(":scope > *");
 		for(var u = 0; u < cate.length; u++) {
 			cate[u].remove();
 		}
-		for(var u = 0; u < finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",").length; u++) {
+		for(var u = 0; u < finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
 			var moveAside3SidebarTypeMoveImg = document.createElement("img");
 			moveAside3SidebarTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/" + MEDIAPath_Type_Category + "/" + finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u] + ".png";
-			moveAside3SidebarTypeMoveImg.setAttribute("title", finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u]);
+			moveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]+".png";
+			moveAside3SidebarTypeMoveImg.setAttribute("title", finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]);
 			moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveImg);
 			var moveAside3SidebarTypeMoveText = document.createElement("h4");
-			moveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[i]["Category_" + JSONPath_MoveCategory].split(",")[u];
+			moveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u];
 			moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveText);
 		}
-		if(finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] == undefined) {
+		if(finaldataMovePP[i]["PP Min_"+JSONPath_MovePP] == undefined) {
 			moveAside3SidebarAttributePowerPointsText.innerHTML = "–";
-		} else if(finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] != undefined && finaldataMovePP[i]["PP Max_" + JSONPath_MovePP] == undefined) {
-			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_" + JSONPath_MovePP];
+		} else if(finaldataMovePP[i]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[i]["PP Max_"+JSONPath_MovePP] == undefined) {
+			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP];
 		} else {
-			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_" + JSONPath_MovePP] + " <span>(max. " + finaldataMovePP[i]["PP Max_" + JSONPath_MovePP] + ")</span>";
+			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[i]["PP Max_"+JSONPath_MovePP]+")</span>";
 		}
-		if(finaldataMovePower[i]["Power_" + JSONPath_MovePower] == undefined) {
+		if(finaldataMovePower[i]["Power_"+JSONPath_MovePower] == undefined) {
 			moveAside3SidebarAttributePowerText.innerText = "–";
 		} else {
-			moveAside3SidebarAttributePowerText.innerText = finaldataMovePower[i]["Power_" + JSONPath_MovePower];
+			moveAside3SidebarAttributePowerText.innerText = finaldataMovePower[i]["Power_"+JSONPath_MovePower];
 		}
-		if(finaldataMoveAccuracy[i]["Accuracy_" + JSONPath_MoveAccuracy] == undefined) {
+		if(finaldataMoveAccuracy[i]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
 			moveAside3SidebarAttributeAccuracyText.innerText = "–";
 		} else {
-			moveAside3SidebarAttributeAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_" + JSONPath_MoveAccuracy];
+			moveAside3SidebarAttributeAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_"+JSONPath_MoveAccuracy];
 		}
-		if(finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == undefined) {
+		if(finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == undefined) {
 			moveAside3SidebarAttributePriorityText.innerText = "–";
 		} else {
-			if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == "0" || finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority] == undefined) {
+			if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == "0" || finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == undefined) {
 				moveAside3SidebarAttributePriority.style.display = "none";
 			}
 			else {
@@ -350,14 +350,14 @@ var createMove = function() {
 			}
 
 
-			if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].includes("-")) {
-				moveAside3SidebarAttributePriorityText.innerText = "-"+finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].replaceAll("-","");
+			if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].includes("-")) {
+				moveAside3SidebarAttributePriorityText.innerText = "-"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("-","");
 			}
-			else if (finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].includes("+")) {
-				moveAside3SidebarAttributePriorityText.innerText = "+"+finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority].replaceAll("+","");
+			else if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].includes("+")) {
+				moveAside3SidebarAttributePriorityText.innerText = "+"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("+","");
 			}
 			else {
-				moveAside3SidebarAttributePriorityText.innerText = finaldataMovePriority[i]["Priority_" + JSONPath_MovePriority];
+				moveAside3SidebarAttributePriorityText.innerText = finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority];
 			}
 		}
 		if(finaldataMoveOtherMoves[i]["Contact"] == "Makes contact") {
@@ -395,10 +395,10 @@ var createMove = function() {
 				var moveAside3SidebarOtherText = document.createElement("p");
 				moveAside3SidebarOther.classList.add("move-sidebar-description-other");
 				for(var q = 0; q < othermove.length; q++) {
-					if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by " + othermove[q]) {
-						moveAside3SidebarOtherText.innerHTML = "Affected by <b>" + othermove[q] + "</b>";
-					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by " + othermove[q]) {
-						moveAside3SidebarOtherText.innerHTML = "Not affected by <b>" + othermove[q] + "</b>";
+					if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by "+othermove[q]) {
+						moveAside3SidebarOtherText.innerHTML = "Affected by <b>"+othermove[q]+"</b>";
+					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by "+othermove[q]) {
+						moveAside3SidebarOtherText.innerHTML = "Not affected by <b>"+othermove[q]+"</b>";
 					}
 				}
 				if(finaldataMoveOtherMoves[i][othermove[u]] == "Usable outside of battle") {
@@ -420,7 +420,7 @@ var createMove = function() {
 				}
 			}
 		}
-		if(finaldataMoveMachine[i]["Machine_" + JSONPath_MoveMachine] != undefined) {
+		if(finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
 			var moveAside3SidebarHMTM = document.createElement("div");
 			var moveAside3SidebarHMTMOuter = document.createElement("span");
 			var moveAside3SidebarHMTMContent = document.createElement("span");
@@ -428,14 +428,14 @@ var createMove = function() {
 			var moveAside3SidebarHMTMText = document.createElement("p");
 			moveAside3SidebarHMTM.classList.add("move-sidebar-description-hmtm");
 			moveAside3SidebarHMTMTitle.innerText = "Machine";
-			moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[i]["Machine_" + JSONPath_MoveMachine];
+			moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine];
 			moveAside3SidebarRight.appendChild(moveAside3SidebarHMTM);
 			moveAside3SidebarHMTM.appendChild(moveAside3SidebarHMTMOuter);
 			moveAside3SidebarHMTMOuter.appendChild(moveAside3SidebarHMTMContent);
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
 		}
-		if(getTutorData(finaldataMove[i]["Name" + "_" + JSONPath_MoveName],"Move").length > 0) {
+		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
 			var moveAside3SidebarTutor = document.createElement("div");
 			var moveAside3SidebarTutorOuter = document.createElement("span");
 			var moveAside3SidebarTutorContent = document.createElement("span");
@@ -443,7 +443,7 @@ var createMove = function() {
 			var moveAside3SidebarTutorText = document.createElement("p");
 			moveAside3SidebarTutor.classList.add("move-sidebar-description-tutor");
 			moveAside3SidebarTutorTitle.innerText = "Move Tutor";
-			moveAside3SidebarTutorText.innerText = getTutorData(finaldataMove[i]["Name" + "_" + JSONPath_MoveName],"Move")[0]["Location"];
+			moveAside3SidebarTutorText.innerText = getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"];
 			moveAside3SidebarTutorText.setAttribute("name","Map");
 			moveAside3SidebarRight.appendChild(moveAside3SidebarTutor);
 			moveAside3SidebarTutor.appendChild(moveAside3SidebarTutorOuter);
@@ -482,13 +482,13 @@ var createMove = function() {
 			var moveAside4LearnsetLiSourceOuter = document.createElement("span");
 			var moveAside4LearnsetLiSource = document.createElement("p");
 			moveAside4LearnsetLiSourceOuter.title = "Level Up";
-			moveAside4LearnsetLiSource.innerHTML = "Level Up: " + "<b>" + learnsetlevelarr[q]["Factor"] + "</b>";
+			moveAside4LearnsetLiSource.innerHTML = "Level Up: "+"<b>"+learnsetlevelarr[q]["Factor"]+"</b>";
 			if(learnsetlevelarr[q]["Form"] == undefined) {
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Pokémon"]) + ".png";
+				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(learnsetlevelarr[q]["Pokémon"],"Box")+".png";
 				moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
 				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
 			} else {
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(learnsetlevelarr[q]["Form"]) + ".png";
+				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(learnsetlevelarr[q]["Form"],"Box")+".png";
 				moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Form"];
 				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Form"]));
 			}
@@ -500,7 +500,7 @@ var createMove = function() {
 			moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
 		}
 		for(var q = 0; q < finaldataLearnsetEvolution.length; q++) {
-			if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetEvolution[q]["Game"]) == true) {
+			if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetEvolution[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -513,7 +513,7 @@ var createMove = function() {
 				if(finaldataLearnsetEvolution[q]["Evolution"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetEvolution[q]["Evolution"].split(",").length; r++) {
 						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]) + ".png";
+						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r],"Box")+".png";
 						moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"].split(",")[r];
 						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]))
 						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
@@ -523,18 +523,18 @@ var createMove = function() {
 					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetEvolution[q]["Evolution"];
 				} else {
 					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"]) + ".png";
+					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"],"Box")+".png";
 					moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
 					moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]))
 					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
 					moveAside4LearnsetLiSource.addEventListener("click", modalData);
 				}
 				if(finaldataLearnsetEvolution[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Pokémon"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Pokémon"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
 				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetEvolution[q]["Form"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Form"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Form"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Form"]));
 				}
@@ -548,7 +548,7 @@ var createMove = function() {
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetMachine.length; q++) {
-			if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetMachine[q]["Game"]) == true) {
+			if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetMachine[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -556,21 +556,21 @@ var createMove = function() {
 				var moveAside4LearnsetLiSourceOuter = document.createElement("span");
 				var moveAside4LearnsetLiSource = document.createElement("p");
 				if(finaldataLearnsetMachine[q]["Machine"].includes("HM")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>" + finaldataLearnsetMachine[q]["Machine"] + "</b>";
+					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.title = "HM";
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TM")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>" + finaldataLearnsetMachine[q]["Machine"] + "</b>";
+					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.title = "TM";
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TR")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>" + finaldataLearnsetMachine[q]["Machine"] + "</b>";
+					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.title = "TR";
 				}
 				if(finaldataLearnsetMachine[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Pokémon"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetMachine[q]["Pokémon"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
 				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetMachine[q]["Form"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetMachine[q]["Form"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Form"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Form"]));
 				}
@@ -583,7 +583,7 @@ var createMove = function() {
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetBreed.length; q++) {
-			if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name" + "_" + JSONPath_MoveName] && getApplicable(finaldataLearnsetBreed[q]["Game"]) == true) {
+			if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetBreed[q]["Game"]) == true) {
 				var moveAside4LearnsetLi = document.createElement("li");
 				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
 				var moveAside4LearnsetLiImgOuter = document.createElement("div");
@@ -596,7 +596,7 @@ var createMove = function() {
 				if(finaldataLearnsetBreed[q]["Parent"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetBreed[q]["Parent"].split(",").length; r++) {
 						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"].split(",")[r]) + ".png";
+						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"].split(",")[r],"Box")+".png";
 						moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
 						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]))
 						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
@@ -606,16 +606,16 @@ var createMove = function() {
 					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetBreed[q]["Parent"];
 				} else {
 					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"]) + ".png";
+					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"],"Box")+".png";
 					moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"];
 					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
 				}
 				if(finaldataLearnsetBreed[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Pokémon"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Pokémon"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
 				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataLearnsetBreed[q]["Form"]) + ".png";
+					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Form"],"Box")+".png";
 					moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Form"];
 					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Form"]));
 				}
