@@ -41,7 +41,6 @@ var createMap = function() {
 	mapAside3MapOuter.setAttribute("id", "map-contain");
 	mapAside3MapZoomFullscreen.classList.add("zoom-fullscreen");
 
-
 	mapAside3Map.setAttribute("id", "map");
 	mapAside3MapMark.classList.add("map-img-mark-outer");
 	mapAside3MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
@@ -68,6 +67,8 @@ var createMap = function() {
 	mapOuter.appendChild(mapAside3);
 	mapAside3.appendChild(mapAside3MapOuter);
 
+	mapAside1OptionsSearch.addEventListener("keyup", function() {search("Map");});
+	mapAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Map");});
 	mapAside3Map.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapAside3MapImage],0)}});
 
 	var dir1 = ["Left","Top"];
@@ -247,6 +248,22 @@ var createMap = function() {
 			mapAside1OptionsLabel.click();
 		}
 	}
+
+	var searchLis = document.querySelectorAll("#map-options > label");
+    searchMapAttributes = [];
+    for(q = 0; q < searchLis.length; q++) {
+        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+                if (!searchMapAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+                    searchMapAttributes.push(searchLis[q].getAttributeNames()[u]);
+                }
+            }
+        }
+    }
+	searchMapAttributes = searchMapAttributes.filter(function(v) {return v !== "data-search-name";});
+    for(q = 0; q < searchMapAttributes.length; q++) {
+        searchMapAttributes[q] = searchMapAttributes[q].replaceAll("data-search-","")
+    }
 
 	function mapOptionsSelector(i) {
 		var i;
