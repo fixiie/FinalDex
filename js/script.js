@@ -1069,6 +1069,7 @@ function loadData() {
 
                     var pokArea = document.createElement("span");
                     pokArea.setAttribute("name","Area");
+                    pokArea.setAttribute("title","Area");
                     pokLi.appendChild(pokArea);
 
                     if (finaldataLocationPokémon[q]["Area"] != undefined && finaldataLocationPokémon[q]["Area"] != finaldataLocationPokémon[q]["Location"]) {
@@ -1080,20 +1081,22 @@ function loadData() {
                         pokArea.appendChild(pokAreaText);
                     }
              
-
-
                     var pokLocation = document.createElement("span");
                     pokLocation.setAttribute("name","Location");
+                    pokLocation.setAttribute("title","Location");
                     pokLi.appendChild(pokLocation);
 
                     if (finaldataLocationPokémon[q]["Location"] != undefined) {
                         var pokLocationText = document.createElement("h3");
                         pokLocationText.innerText = finaldataLocationPokémon[q]["Location"];
+                        pokLocationText.setAttribute("name","Map");
                         pokLocation.appendChild(pokLocationText);
+                        pokLocationText.addEventListener("click",dataRedirect)
                     }
 
                     var pokLevel = document.createElement("span");
                     pokLevel.setAttribute("name","Level");
+                    pokLevel.setAttribute("title","Level");
                     pokLi.appendChild(pokLevel);
 
                     if (finaldataLocationPokémon[q]["Level"] != undefined) {
@@ -1104,11 +1107,12 @@ function loadData() {
 
                     var pokRate = document.createElement("span");
                     pokRate.setAttribute("name","Rate");
+                    pokArea.setAttribute("title","Rate");
                     pokLi.appendChild(pokRate);
 
                     if (finaldataLocationPokémon[q]["Rate"] != undefined) {
                         var pokRateText = document.createElement("p");
-                        pokRateText.innerText = finaldataLocationPokémon[q]["Rate"];
+                        pokRateText.innerHTML = finaldataLocationPokémon[q]["Rate"].replaceAll(",","\n").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">');;
                         pokRate.appendChild(pokRateText);
                     }
 
@@ -1119,7 +1123,7 @@ function loadData() {
                     if (finaldataLocationPokémon[q]["Encounter"] != undefined) {
                         var pokEncounterInner = document.createElement("span");
                         var pokEncounterImage = document.createElement("img");
-                        pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter Icon"]+".png";
+                        pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+finaldataLocationPokémon[q]["Encounter Icon"]+".png";
                         pokEncounterImage.title = finaldataLocationPokémon[q]["Encounter"];
                         pokEncounter.appendChild(pokEncounterInner);
                         pokEncounterInner.appendChild(pokEncounterImage);
