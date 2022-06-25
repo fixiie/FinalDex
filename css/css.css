@@ -850,14 +850,14 @@ input[type=radio] {
 	right: 0;
 }
 
-.data-evolution[name*="previous"] .data-evolution-toggle,
-.data-evolution[name*="previous"] .data-evolution-toggle img {
+.data-evolution[name*="previous"] div > button,
+.data-evolution[name*="previous"] div > button img {
 	border-top-right-radius: 9vh;
 	border-bottom-right-radius: 9vh;
 }
 
-.data-evolution[name*="next"] .data-evolution-toggle,
-.data-evolution[name*="next"] .data-evolution-toggle img {
+.data-evolution[name*="next"] div > button,
+.data-evolution[name*="next"] div > button img {
 	border-top-left-radius: 9vh;
 	border-bottom-left-radius: 9vh;
 }
@@ -874,22 +874,21 @@ input[type=radio] {
 	padding: 2px 0;
 }
 
-.data-evolution-content {
+.data-evolution > div {
 	position: relative;
 	height: 100%;
+	display: flex;
+    flex-direction: row;
 }
 
 .data-evolution main {
 	display: inline-block;
-	width: 0vw;
-	height: 100%;
-	text-align: center;
-	background: var(--color_60);
-	transform-origin: left;
-	transition: width 0.5s ease;
+    width: 0vw;
+    height: 100%;
+    text-align: center;
+    background: var(--color_60);
+    transition: width 0.5s ease;
 	font-size: 0;
-	overflow: hidden;
-	overflow-y: auto;
 }
 
 .data-evolution main button {
@@ -902,18 +901,15 @@ input[type=radio] {
 	color: var(--font2);
 }
 
-.data-evolution-toggle {
-	display: inline-flex;
-	justify-content: center;
-	height: 100%;
-	width: 4vw;
-	border-color: none;
-	background: var(--color_60);
-	cursor: pointer;
-	overflow: hidden;
+.data-evolution div > button {
+	display: inline-block;
+    height: 100%;
+    width: 4vw;
+    background: var(--color_60);
+    cursor: pointer;
 }
 
-.data-evolution-toggle img {
+.data-evolution div > button img {
 	object-fit: scale-down;
 	cursor: pointer;
 	image-rendering: -moz-crisp-edges;
