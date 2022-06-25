@@ -321,7 +321,7 @@ var createItem = function() {
 
 				
 					var itemAside4SidebarPokémonImg = document.createElement("img");
-					itemAside4SidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(q))+".png";
+					itemAside4SidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(q),"Box")+".png";
 					itemAside4SidebarPokémonImg.title = getPokémonName(q);
 					itemAside4SidebarPokémonImg.setAttribute("value",q);
 					itemAside4SidebarPokémon.appendChild(itemAside4SidebarPokémonImg);
