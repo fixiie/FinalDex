@@ -59,6 +59,8 @@ var createItem = function() {
 	itemAside3.appendChild(itemAside3Description);
 	itemOuter.appendChild(itemAside4);
 
+	itemAside1OptionsSearch.addEventListener("keyup", function() {search("Item");});
+	itemAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
 
 	var pockets = [];
 	for (var q = 0; q < finaldataItems.length; q++) {
@@ -180,6 +182,22 @@ var createItem = function() {
 
 	}
 
+
+	var searchLis = document.querySelectorAll("#item-options > label");
+    searchItemAttributes = [];
+    for(q = 0; q < searchLis.length; q++) {
+        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+                if (!searchItemAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+                    searchItemAttributes.push(searchLis[q].getAttributeNames()[u]);
+                }
+            }
+        }
+    }
+	searchItemAttributes = searchItemAttributes.filter(function(v) {return v !== "data-search-name";});
+    for(q = 0; q < searchItemAttributes.length; q++) {
+        searchItemAttributes[q] = searchItemAttributes[q].replaceAll("data-search-","")
+    }
 	
 	function itemOptionsSelector(i) {
 		var i;
