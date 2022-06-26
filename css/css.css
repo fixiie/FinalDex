@@ -889,6 +889,7 @@ input[type=radio] {
     background: var(--color_60);
     transition: width 0.5s ease;
 	font-size: 0;
+	overflow: auto;
 }
 
 .data-evolution main button {
@@ -924,12 +925,12 @@ input[type=radio] {
 }
 
 .data-evolution h6 {
-	padding: 5px 0 0;
 	cursor: pointer;
+	display:none;
 }
 
 .data-evolution h4 {
-	padding: 5px 0;
+	padding: 2px 0;
 	cursor: pointer;
 }
 
@@ -958,6 +959,13 @@ input[type=radio] {
 .data-evolution main.active p {
 	transition: opacity 0.5s ease 0.5s;
 	opacity: 1;
+}
+
+.data-evolution main p span[name] {
+	cursor:pointer;
+}
+.data-evolution main p span[name]:hover {
+	font-weight:bold;
 }
 
 .data-previous,
@@ -3471,6 +3479,105 @@ body {
 	background: var(--color_20);
 	color: var(--fontLight);
 }
+
+
+
+
+
+
+
+[name="eggTextMonster"],
+[name="eggTextMonster"] * {
+	color: #D25064;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextWater 1"],
+[name="eggTextWater 1"] * {
+	color: #97B5FD;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextBug"],
+[name="eggTextBug"] * {
+	color: #AAC22A;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextFlying"],
+[name="eggTextFlying"] * {
+	color: #B29AFA;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextField"],
+[name="eggTextField"] * {
+	color: #E0C068;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextFairy"],
+[name="eggTextFairy"] * {
+	color: #FFC8F0;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextGrass"],
+[name="eggTextGrass"] * {
+	color: #82D25A;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextHuman-Like"],
+[name="eggTextHuman-Like"] * {
+	color: #D29682;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextWater 3"],
+[name="eggTextWater 3"] * {
+	color: #5876BE;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextMineral"],
+[name="eggTextMineral"] * {
+	color: #7A6252;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextAmorphous"],
+[name="eggTextAmorphous"] * {
+	color: #8A8A8A;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextWater 2"],
+[name="eggTextWater 2"] * {
+	color: #729AFA;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextDitto"],
+[name="eggTextDitto"] * {
+	color: #A664BF;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextDragon"],
+[name="eggTextDragon"] * {
+	color: #7A42FF;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="eggTextUndiscovered"],
+[name="eggTextUndiscovered"] * {
+	color: var(--color_20);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+
+
 
 .data-sidebar-egggroup b:active {
 	color: var(--fontDark);
