@@ -23,24 +23,20 @@ var createData = function(id, i) {
 			var dataFormInput = document.createElement("input");
 			var dataFormLabel = document.createElement("label");
 			var dataFormImg = document.createElement("img");
-			dataFormInput.setAttribute("type", "radio");
-			dataFormInput.setAttribute("name", "data-form-selector"+id);
-			dataFormInput.setAttribute("id", "data-form-selector-"+u);
+			dataFormInput.setAttribute("type","radio");
+			dataFormInput.setAttribute("name","data-form-selector"+id);
+			dataFormInput.setAttribute("id","data-form-selector-"+u);
 			dataFormInput.value = u;
-			dataFormLabel.setAttribute("for", "data-form-selector-"+u);
-			dataFormImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			dataFormLabel.setAttribute("for","data-form-selector-"+u);
+			dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(u,"Box")+".png";
+			dataFormLabel.title = getPokémonName(u);
+			dataFormImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
-			if(finaldataPokémonForm[u]["Form_"+JSONPath_Form] == undefined) {
-				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Pokémon"],"Box")+".png";
-				dataFormLabel.title = finaldataPokémonForm[u]["Pokémon"];
-			} else {
-				dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataPokémonForm[u]["Form_"+JSONPath_Form],"Box")+".png";
-				dataFormLabel.title = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-			}
+	
 			if(!variant.length >= 2) {
-				dataFormInput.setAttribute("checked", "");
+				dataFormInput.setAttribute("checked","");
 			}
 			dataFormInput.addEventListener("click", loadData);
 		}
@@ -90,27 +86,27 @@ var createData = function(id, i) {
 	var dataAside2MetadataSidebarExpYield = document.createElement("h3");
 	var dataAside2AreaDiv = document.createElement("div");
 	var dataAside2Area = document.createElement("ul");
-	dataDiv.setAttribute("id", "data-modal"+id);
+	dataDiv.setAttribute("id","data-modal"+id);
 	dataDiv.classList.add("data-modal-outer");
 	dataDivOverlay.classList.add("data-modal-overlay");
 	dataDivContent.classList.add("data-modal");
-	dataNavigation.setAttribute("id", "data-navigation");
+	dataNavigation.setAttribute("id","data-navigation");
 	dataDivOverlay.addEventListener("click", modalData);
 	dataForm.classList.add("data-form");
-	var navz = ["metadata", "learnset", "area"];
-	var navztitles = ["Data", "Learnset", "Area"];
+	var navz = ["metadata","learnset","area"];
+	var navztitles = ["Data","Learnset","Area"];
 	for(var q = 0; q < navz.length; q++) {
 		var dataNavigationInput = document.createElement("input");
 		var dataNavigationLabel = document.createElement("label");
-		dataNavigationInput.setAttribute("type", "radio");
-		dataNavigationInput.setAttribute("name", "data-navigation"+id);
-		dataNavigationInput.setAttribute("id", "data-navigation-"+navz[q]+id);
+		dataNavigationInput.setAttribute("type","radio");
+		dataNavigationInput.setAttribute("name","data-navigation"+id);
+		dataNavigationInput.setAttribute("id","data-navigation-"+navz[q]+id);
 		dataNavigationInput.classList.add("data-navigation-"+navz[q]);
 		dataNavigationInput.setAttribute("value", q+1);
 		if(q == 0) {
-			dataNavigationInput.setAttribute("checked", "");
+			dataNavigationInput.setAttribute("checked","");
 		}
-		dataNavigationLabel.setAttribute("for", "data-navigation-"+navz[q]+id);
+		dataNavigationLabel.setAttribute("for","data-navigation-"+navz[q]+id);
 		dataNavigationLabel.innerText = navztitles[q];
 		dataNavigation.appendChild(dataNavigationInput);
 		dataNavigation.appendChild(dataNavigationLabel);
@@ -118,8 +114,8 @@ var createData = function(id, i) {
 	dataAside1.classList.add("data-aside1");
 	dataAside1DivPortrait.classList.add("data-portrait");
 	dataAside1DivPortraitContent.classList.add("data-portrait-content");
-	dataAside1Portrait.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-	dataAside1Portrait.setAttribute("id", "data-portrait-img-"+id);
+	dataAside1Portrait.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+	dataAside1Portrait.setAttribute("id","data-portrait-img-"+id);
 	dataAside1StatsEVSelector.classList.add("data-baseev-selector");
 	dataAside1DivIdNameOuter.classList.add("data-idname-outer");
 	dataAside1DivIdName.classList.add("data-idname");
@@ -135,8 +131,8 @@ var createData = function(id, i) {
 	var dataAside1TypePrimary = document.createElement("span");
 	var dataAside1TypePrimaryImg = document.createElement("img");
 	var dataAside1TypePrimaryText = document.createElement("h3");
-	dataAside1TypePrimaryImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block';");
-	dataAside1TypePrimaryImg.setAttribute("dataname", "value");
+	dataAside1TypePrimaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+	dataAside1TypePrimaryImg.setAttribute("dataname","value");
 	dataAside1Type.appendChild(dataAside1TypePrimaryOuter);
 	dataAside1TypePrimaryOuter.appendChild(dataAside1TypePrimary);
 	dataAside1TypePrimary.appendChild(dataAside1TypePrimaryImg);
@@ -145,16 +141,16 @@ var createData = function(id, i) {
 	var dataAside1TypeSecondary = document.createElement("span");
 	var dataAside1TypeSecondaryImg = document.createElement("img");
 	var dataAside1TypeSecondaryText = document.createElement("h3");
-	dataAside1TypeSecondaryImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block';");
-	dataAside1TypeSecondaryImg.setAttribute("dataname", "value");
+	dataAside1TypeSecondaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+	dataAside1TypeSecondaryImg.setAttribute("dataname","value");
 	dataAside1Type.appendChild(dataAside1TypeSecondaryOuter);
 	dataAside1TypeSecondaryOuter.appendChild(dataAside1TypeSecondary);
 	dataAside1TypeSecondary.appendChild(dataAside1TypeSecondaryImg);
 	dataAside1TypeSecondary.appendChild(dataAside1TypeSecondaryText);
 	dataAside2.classList.add("data-aside2");
-	dataAside2MapContain.setAttribute("id", "data-map-contain");
+	dataAside2MapContain.setAttribute("id","data-map-contain");
 	dataAside2MapFullscreen.classList.add("data-fullscreen");
-	dataAside2Map.setAttribute("id", "data-map");
+	dataAside2Map.setAttribute("id","data-map");
 	dataAside2Map.setAttribute("name", Region+"-"+MEDIAPath_Map);
 	dataAside2MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
 	dataAside2MapImage.onload = function() {
@@ -166,39 +162,39 @@ var createData = function(id, i) {
 	dataAside2MapMark.classList.add("data-img-mark-outer");
 	dataAside2MapMarkImage.classList.add("data-img-mark");
 	dataAside2Metadata.classList.add("data");
-	dataAside2Metadata.setAttribute("id", "data"+id);
+	dataAside2Metadata.setAttribute("id","data"+id);
 	dataAside2DescriptionOuter.classList.add("data-description");
 	dataAside2DescriptionOuter.classList.add("scroll");
-	dataAside2MetadataSidebarOuter.setAttribute("id", "data-sidebar-outer");
-	dataAside2MetadataSidebar.setAttribute("id", "data-sidebar");
+	dataAside2MetadataSidebarOuter.setAttribute("id","data-sidebar-outer");
+	dataAside2MetadataSidebar.setAttribute("id","data-sidebar");
 	dataAside2MetadataSidebar.setAttribute("name", Generation+"-"+GameID);
 	dataAside2MetadataStats.classList.add("data-stats");
 	dataAside2MetadataSidebarCatchRateOuter.classList.add("data-sidebar-catchrate");
-	dataAside2MetadataSidebarCatchRateOuter.setAttribute("name", "Catch Rate");
+	dataAside2MetadataSidebarCatchRateOuter.setAttribute("name","Catch Rate");
 	dataAside2MetadataSidebarCatchRateToggle.classList.add("data-sidebar-catchrate-toggle");
 	dataAside2MetadataSidebarCatchRateContent.classList.add("data-sidebar-catchrate-content");
 	dataAside2MetadataSidebarCatchRateTitle.innerText = "Catch Rate";
-	dataAside2MetadataSidebarCatchRate.setAttribute("id", "data-sidebar-catchrate");
-	dataAside2MetadataSidebarCatchRate.setAttribute("dataname", "value");
-	dataAside2MetadataSidebarCatchRate.setAttribute("value", "");
+	dataAside2MetadataSidebarCatchRate.setAttribute("id","data-sidebar-catchrate");
+	dataAside2MetadataSidebarCatchRate.setAttribute("dataname","value");
+	dataAside2MetadataSidebarCatchRate.setAttribute("value","");
 	dataAside2MetadataSidebarLevelRateOuter.classList.add("data-sidebar-levelrate");
-	dataAside2MetadataSidebarLevelRateOuter.setAttribute("name", "Leveling Rate");
+	dataAside2MetadataSidebarLevelRateOuter.setAttribute("name","Leveling Rate");
 	dataAside2MetadataSidebarLevelRateToggle.classList.add("data-sidebar-levelrate-toggle");
 	dataAside2MetadataSidebarLevelRateContent.classList.add("data-sidebar-levelrate-content");
 	dataAside2MetadataSidebarLevelRateTitle.innerText = "Leveling Rate";
-	dataAside2MetadataSidebarLevelRate.setAttribute("id", "data-sidebar-levelrate");
-	dataAside2MetadataSidebarLevelRate.setAttribute("dataname", "value");
-	dataAside2MetadataSidebarLevelRate.setAttribute("value", "");
+	dataAside2MetadataSidebarLevelRate.setAttribute("id","data-sidebar-levelrate");
+	dataAside2MetadataSidebarLevelRate.setAttribute("dataname","value");
+	dataAside2MetadataSidebarLevelRate.setAttribute("value","");
 	dataAside2MetadataSidebarExpYieldOuter.classList.add("data-sidebar-expyield");
-	dataAside2MetadataSidebarExpYieldOuter.setAttribute("name", "Experience Yield");
+	dataAside2MetadataSidebarExpYieldOuter.setAttribute("name","Experience Yield");
 	dataAside2MetadataSidebarExpYieldToggle.classList.add("data-sidebar-expyield-toggle");
 	dataAside2MetadataSidebarExpYieldContent.classList.add("data-sidebar-expyield-content");
 	dataAside2MetadataSidebarExpYieldTitle.innerText = "Experience Yield";
-	dataAside2MetadataSidebarExpYield.setAttribute("id", "data-sidebar-expyield");
-	dataAside2MetadataSidebarExpYield.setAttribute("dataname", "value");
-	dataAside2MetadataSidebarExpYield.setAttribute("value", "");
+	dataAside2MetadataSidebarExpYield.setAttribute("id","data-sidebar-expyield");
+	dataAside2MetadataSidebarExpYield.setAttribute("dataname","value");
+	dataAside2MetadataSidebarExpYield.setAttribute("value","");
 	dataAside2AreaDiv.classList.add("data-area");
-	dataAside2AreaDiv.setAttribute("id", "data-area"+id);
+	dataAside2AreaDiv.setAttribute("id","data-area"+id);
 	dataAside2Area.classList.add("data-area-content");
 
 	for(q = 0; q < JSONPath_Pokédex.length; q++) {
@@ -219,23 +215,23 @@ var createData = function(id, i) {
 		var dataAside2MetadataSidebarAbilityPrimarySecondaryOuter = document.createElement("span");
 		dataAside2MetadataSidebarAbilityOuter.appendChild(dataAside2MetadataSidebarAbilityPrimarySecondaryOuter);
 		var dataAside2MetadataSidebarAbilityPrimary = document.createElement("h5");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("id", "data-sidebar-ability-primary");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("title", "Primary Ability");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("dataname", "value");
+		dataAside2MetadataSidebarAbilityPrimary.setAttribute("id","data-sidebar-ability-primary");
+		dataAside2MetadataSidebarAbilityPrimary.setAttribute("title","Primary Ability");
+		dataAside2MetadataSidebarAbilityPrimary.setAttribute("dataname","value");
 		dataAside2MetadataSidebarAbilityPrimary.innerText = "Primary Ability";
 		dataAside2MetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarAbilityPrimary);
 		var dataAside2MetadataSidebarAbilitySecondary = document.createElement("h5");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("id", "data-sidebar-ability-secondary");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("title", "Secondary Ability");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("dataname", "value");
+		dataAside2MetadataSidebarAbilitySecondary.setAttribute("id","data-sidebar-ability-secondary");
+		dataAside2MetadataSidebarAbilitySecondary.setAttribute("title","Secondary Ability");
+		dataAside2MetadataSidebarAbilitySecondary.setAttribute("dataname","value");
 		dataAside2MetadataSidebarAbilitySecondary.innerText = "Secondary Ability";
 		dataAside2MetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarAbilitySecondary);
 		if(Ability.length >= 3) {
 			var dataAside2MetadataSidebarAbilityHiddenOuter = document.createElement("span");
 			var dataAside2MetadataSidebarAbilityHidden = document.createElement("h5");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("id", "data-sidebar-ability-hidden");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("title", "Hidden Ability");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("dataname", "value");
+			dataAside2MetadataSidebarAbilityHidden.setAttribute("id","data-sidebar-ability-hidden");
+			dataAside2MetadataSidebarAbilityHidden.setAttribute("title","Hidden Ability");
+			dataAside2MetadataSidebarAbilityHidden.setAttribute("dataname","value");
 			dataAside2MetadataSidebarAbilityHidden.innerText = "Hidden Ability";
 			dataAside2MetadataSidebarAbilityOuter.appendChild(dataAside2MetadataSidebarAbilityHiddenOuter);
 			dataAside2MetadataSidebarAbilityHiddenOuter.appendChild(dataAside2MetadataSidebarAbilityHidden);
@@ -260,13 +256,13 @@ var createData = function(id, i) {
 		var dataAside2MetadataSidebarHatchRateTitle = document.createElement("h5");
 		var dataAside2MetadataSidebarHatchRate = document.createElement("h3");
 		dataAside2MetadataSidebarHatchRateOuter.classList.add("data-sidebar-hatchrate");
-		dataAside2MetadataSidebarHatchRateOuter.setAttribute("name", "Hatch Rate");
+		dataAside2MetadataSidebarHatchRateOuter.setAttribute("name","Hatch Rate");
 		dataAside2MetadataSidebarHatchRateToggle.classList.add("data-sidebar-hatchrate-toggle");
 		dataAside2MetadataSidebarHatchRateContent.classList.add("data-sidebar-hatchrate-content");
 		dataAside2MetadataSidebarHatchRateTitle.innerText = "Hatch Rate";
-		dataAside2MetadataSidebarHatchRate.setAttribute("id", "data-sidebar-hatchrate");
-		dataAside2MetadataSidebarHatchRate.setAttribute("dataname", "value");
-		dataAside2MetadataSidebarHatchRate.setAttribute("value", "");
+		dataAside2MetadataSidebarHatchRate.setAttribute("id","data-sidebar-hatchrate");
+		dataAside2MetadataSidebarHatchRate.setAttribute("dataname","value");
+		dataAside2MetadataSidebarHatchRate.setAttribute("value","");
 		dataAside2MetadataSidebarRow2.appendChild(dataAside2MetadataSidebarHatchRateOuter);
 		dataAside2MetadataSidebarHatchRateOuter.appendChild(dataAside2MetadataSidebarHatchRateToggle);
 		dataAside2MetadataSidebarHatchRateToggle.appendChild(dataAside2MetadataSidebarHatchRateContent);
@@ -283,15 +279,15 @@ var createData = function(id, i) {
 		var dataAside2MetadataSidebarGenderRatioFemale = document.createElement("span");
 		var dataAside2MetadataSidebarGenderRatioGenderless = document.createElement("span");
 		dataAside2MetadataSidebarGenderRatioOuter.classList.add("data-sidebar-genderratio");
-		dataAside2MetadataSidebarGenderRatioOuter.setAttribute("name", "Gender Ratio");
+		dataAside2MetadataSidebarGenderRatioOuter.setAttribute("name","Gender Ratio");
 		dataAside2MetadataSidebarGenderRatioTitle.innerText = "Gender ratio";
 		dataAside2MetadataSidebarGenderRatioBar.classList.add("data-sidebar-genderratio-bar");
 		dataAside2MetadataSidebarGenderRatioToggle.classList.add("data-sidebar-genderratio-toggle");
-		dataAside2MetadataSidebarGenderRatioToggle.setAttribute("dataname", "value");
-		dataAside2MetadataSidebarGenderRatioMale.setAttribute("name", "male");
-		dataAside2MetadataSidebarGenderRatioFemale.setAttribute("name", "female");
-		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("name", "genderless");
-		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("title", "");
+		dataAside2MetadataSidebarGenderRatioToggle.setAttribute("dataname","value");
+		dataAside2MetadataSidebarGenderRatioMale.setAttribute("name","male");
+		dataAside2MetadataSidebarGenderRatioFemale.setAttribute("name","female");
+		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("name","genderless");
+		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("title","");
 		dataAside2MetadataSidebarGenderRatioBar.style.display = "none";
 		dataAside2MetadataSidebarGenderRatioOuter.appendChild(dataAside2MetadataSidebarGenderRatioTitle);
 		dataAside2MetadataSidebarGenderRatioOuter.appendChild(dataAside2MetadataSidebarGenderRatioBar);
@@ -310,16 +306,16 @@ var createData = function(id, i) {
 		var dataAside2MetadataSidebarEggGroupSecondaryOuter = document.createElement("span");
 		var dataAside2MetadataSidebarEggGroupSecondary = document.createElement("b");
 		dataAside2MetadataSidebarEggGroupOuter.classList.add("data-sidebar-egggroup");
-		dataAside2MetadataSidebarEggGroupOuter.setAttribute("name", "Egg Group");
+		dataAside2MetadataSidebarEggGroupOuter.setAttribute("name","Egg Group");
 		dataAside2MetadataSidebarEggGroupTitle.innerText = "Egg Group";
-		dataAside2MetadataSidebarEggGroupPrimaryOuter.setAttribute("name", "Primary");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("id", "data-sidebar-egggroup1");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("title", "Primary Egg Group");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("dataname", "value");
-		dataAside2MetadataSidebarEggGroupSecondaryOuter.setAttribute("name", "Secondary");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("id", "data-sidebar-egggroup2");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("title", "Secondary Egg Group");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("dataname", "value");
+		dataAside2MetadataSidebarEggGroupPrimaryOuter.setAttribute("name","Primary");
+		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("id","data-sidebar-egggroup1");
+		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("title","Primary Egg Group");
+		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("dataname","value");
+		dataAside2MetadataSidebarEggGroupSecondaryOuter.setAttribute("name","Secondary");
+		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("id","data-sidebar-egggroup2");
+		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("title","Secondary Egg Group");
+		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("dataname","value");
 		dataAside2MetadataSidebarEggGroupPrimaryOuter.style.display = "none";
 		dataAside2MetadataSidebarEggGroupSecondaryOuter.style.display = "none";
 		dataAside2MetadataSidebarRow3.appendChild(dataAside2MetadataSidebarEggGroupOuter);
@@ -349,7 +345,7 @@ var createData = function(id, i) {
         dataPreviousNational.setAttribute("name","national");
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
-        dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,"")) - 1))),"Box")+".png";
+        dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",(parseInt(getIntID(d,"")) - 1)),"Box")+".png";
         dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
         
         dataPrevious.appendChild(dataPreviousNational);
@@ -366,7 +362,7 @@ var createData = function(id, i) {
         dataNextNational.setAttribute("name","national");
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
-        dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",(parseInt(getIntID(d,""))+1))),"Box")+".png";
+        dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",(parseInt(getIntID(d,""))+1)),"Box")+".png";
         dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
         
         dataNext.appendChild(dataNextNational);
@@ -389,7 +385,7 @@ var createData = function(id, i) {
 	          dataPreviousRegional.setAttribute("name","regional"+y);
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
 	          dataPreviousRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",previousID)]["Pokémon"];
-	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",previousID)),"Box")+".png";
+	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",previousID),"Box")+".png";
 	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataPrevious.appendChild(dataPreviousRegional);
@@ -405,7 +401,7 @@ var createData = function(id, i) {
 	          dataNextRegional.setAttribute("name","regional"+y);
 	          dataNextRegional.setAttribute("value",getIntID("",nextID));
 	          dataNextRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",nextID)]["Pokémon"];
-	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(getIntID("",nextID)),"Box")+".png";
+	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",nextID),"Box")+".png";
 	          dataNextRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 	          
 	          dataNext.appendChild(dataNextRegional);
@@ -467,12 +463,12 @@ var createData = function(id, i) {
 	var dataAside2MetadataPopupListOuter = document.createElement("div");
 	var dataAside2MetadataPopupList = document.createElement("ul");
 	dataAside2MetadataPopup.classList.add("data-popup");
-	dataAside2MetadataPopupListOuter.setAttribute("name", "list");
+	dataAside2MetadataPopupListOuter.setAttribute("name","list");
 	dataAside2MetadataPopupSpan1Icon.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'")
 	dataAside2MetadataPopupTitleExit1.innerHTML = "<p>«</p>";
-	dataAside2MetadataPopupTitleExit1.setAttribute("name", "up");
+	dataAside2MetadataPopupTitleExit1.setAttribute("name","up");
 	dataAside2MetadataPopupTitleExit2.innerHTML = "<p>»</p>";
-	dataAside2MetadataPopupTitleExit2.setAttribute("name", "down");
+	dataAside2MetadataPopupTitleExit2.setAttribute("name","down");
 	dataAside2Metadata.appendChild(dataAside2MetadataPopup);
 	dataAside2MetadataPopup.appendChild(dataAside2MetadataPopupOuter);
 	dataAside2MetadataPopupOuter.appendChild(dataAside2MetadataPopupSpan1);
@@ -501,36 +497,36 @@ var createData = function(id, i) {
 	dataAside2MetadataSidebarLevelRateToggle.appendChild(dataAside2MetadataSidebarLevelRateContent);
 	dataAside2MetadataSidebarLevelRateContent.appendChild(dataAside2MetadataSidebarLevelRateTitle);
 	dataAside2MetadataSidebarLevelRateContent.appendChild(dataAside2MetadataSidebarLevelRate);
-	var baseev = ["Base Stats", "EV Yield"];
+	var baseev = ["Base Stats","EV Yield"];
 	for(var q = 0; q < baseev.length; q++) {
 		var dataAside1StatsEVSelectorInput = document.createElement("input");
 		var dataAside1StatsEVSelectorLabel = document.createElement("label");
-		dataAside1StatsEVSelectorInput.setAttribute("type", "radio");
-		dataAside1StatsEVSelectorInput.setAttribute("name", "data-baseev-"+id);
-		dataAside1StatsEVSelectorInput.setAttribute("id", "data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ", ""));
-		dataAside1StatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ", ""));
+		dataAside1StatsEVSelectorInput.setAttribute("type","radio");
+		dataAside1StatsEVSelectorInput.setAttribute("name","data-baseev-"+id);
+		dataAside1StatsEVSelectorInput.setAttribute("id","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
+		dataAside1StatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ",""));
 		dataAside1StatsEVSelectorInput.setAttribute("value", q);
-		dataAside1StatsEVSelectorInput.setAttribute("onclick", "var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
-		dataAside1StatsEVSelectorLabel.setAttribute("for", "data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ", ""));
+		dataAside1StatsEVSelectorInput.setAttribute("onclick","var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
+		dataAside1StatsEVSelectorLabel.setAttribute("for","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
 		dataAside1StatsEVSelectorLabel.innerText = baseev[q];
 		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorInput);
 		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorLabel);
 		if(q == 0) {
-			dataAside1StatsEVSelectorInput.setAttribute("checked", "");
+			dataAside1StatsEVSelectorInput.setAttribute("checked","");
 		}
 		var dataAside1StatsEVUl = document.createElement("ul");
-		dataAside1StatsEVUl.setAttribute("name", baseev[q].toLowerCase().replace(" ", ""));
+		dataAside1StatsEVUl.setAttribute("name", baseev[q].toLowerCase().replace(" ",""));
 		dataAside2MetadataStats.appendChild(dataAside1StatsEVUl);
 		for(var u = 0; u < Stats.length; u++) {
 			var dataAside1StatEV = document.createElement("div");
 			var dataAside1StatEVValue = document.createElement("li");
 			var dataAside1StatsEVSpan = document.createElement("span");
-			dataAside1StatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ", "").replace(".", ""));
+			dataAside1StatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ","").replace(".",""));
 			dataAside1StatEV.innerText = Stats[u];
-			dataAside1StatEV.setAttribute("dataname", "value");
-			dataAside1StatEVValue.classList.add(baseev[q].toLowerCase().replace(" ", "")+"-"+Stats[u].toLowerCase().replace(" ", "").replace(".", ""));
-			dataAside1StatsEVSpan.setAttribute("dataname", "value");
-			dataAside1StatsEVSpan.setAttribute("value", "");
+			dataAside1StatEV.setAttribute("dataname","value");
+			dataAside1StatEVValue.classList.add(baseev[q].toLowerCase().replace(" ","")+"-"+Stats[u].toLowerCase().replace(" ","").replace(".",""));
+			dataAside1StatsEVSpan.setAttribute("dataname","value");
+			dataAside1StatsEVSpan.setAttribute("value","");
 			dataAside1StatsEVUl.appendChild(dataAside1StatEV);
 			dataAside1StatsEVUl.appendChild(dataAside1StatEVValue);
 			dataAside1StatEVValue.appendChild(dataAside1StatsEVSpan);
@@ -539,7 +535,7 @@ var createData = function(id, i) {
 	var dataAside2LearnsetDiv = document.createElement("div");
 	var dataAside2Learnset = document.createElement("div");
 	dataAside2LearnsetDiv.classList.add("data-learnset");
-	dataAside2LearnsetDiv.setAttribute("id", "data-learnset"+id);
+	dataAside2LearnsetDiv.setAttribute("id","data-learnset"+id);
 	dataAside2Learnset.classList.add("data-learnset-content");
 	dataAside2.appendChild(dataAside2LearnsetDiv);
 	dataAside2LearnsetDiv.appendChild(dataAside2Learnset);
@@ -547,13 +543,13 @@ var createData = function(id, i) {
 	var dataAside2LearnsetUl = document.createElement("ul");
 	var dataAside2LearnsetTitle = document.createElement("h5");
 	var dataAside2LearnsetTitleLi = document.createElement("li");
-	dataAside2LearnsetOuter.setAttribute("id", "data-learnset-option");
+	dataAside2LearnsetOuter.setAttribute("id","data-learnset-option");
 	dataAside2LearnsetOuter.classList.add("data-learnset-option");
 	dataAside2Learnset.appendChild(dataAside2LearnsetOuter);
 	dataAside2LearnsetOuter.appendChild(dataAside2LearnsetTitle);
 	dataAside2LearnsetTitle.appendChild(dataAside2LearnsetTitleLi);
 	dataAside2LearnsetOuter.appendChild(dataAside2LearnsetUl);
-	var categoriez = ["Source", "Move", "Type", "Category", "Power", "Accuracy", "PP", ];
+	var categoriez = ["Source","Move","Type","Category","Power","Accuracy","PP", ];
 	for(u = 0; u < categoriez.length; u++) {
 		var dataAside2LearnsetTitleLiText = document.createElement("p");
 		dataAside2LearnsetTitleLiText.innerText = categoriez[u];
@@ -566,7 +562,7 @@ var createData = function(id, i) {
 		var dataAside2MetadataSidebarHeldItemOuter = document.createElement("span");
 		var dataAside2MetadataSidebarHeldItemTitle = document.createElement("h5");
 		dataAside2MetadataSidebarHeldItemOuter.classList.add("data-sidebar-helditem");
-		dataAside2MetadataSidebarHeldItemOuter.setAttribute("name", "Held Item");
+		dataAside2MetadataSidebarHeldItemOuter.setAttribute("name","Held Item");
 		dataAside2MetadataSidebarHeldItemTitle.innerText = "Held Item";
 		dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow5);
 		dataAside2MetadataSidebarRow5.appendChild(dataAside2MetadataSidebarHeldItemOuter);
@@ -579,41 +575,40 @@ var createData = function(id, i) {
 			dataAside2MetadataSidebarHeldItemImg.src = "";
 			dataAside2MetadataSidebarHeldItemImg.title = "";
 			dataAside2MetadataSidebarHeldItemImg.setAttribute("name", JSONPath_HeldItemPercentage[q]);
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error.png'");
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("dataname", "value");
+			dataAside2MetadataSidebarHeldItemImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+			dataAside2MetadataSidebarHeldItemImg.setAttribute("dataname","value");
 			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemImg);
 		}
 	}
-    dataAside1TypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
-	dataAside1TypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
+    dataAside1TypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataAside1TypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
 
-	dataAside1TypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
-	dataAside1TypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType, "Type", "Single");});
+	dataAside1TypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataAside1TypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
 	
 	if(Ability.length >= 1) {
-		dataAside2MetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
-		dataAside2MetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
+		dataAside2MetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+		dataAside2MetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
 		if(Ability.length >= 3) {
-			dataAside2MetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility, "Ability", "Single");});
+			dataAside2MetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
 		}
 	}
 	if(Egg == true) {
-		dataAside2MetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");
-		});
-		dataAside2MetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup, "Egg Group", "Single");});
+		dataAside2MetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+		dataAside2MetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
 	}
-	dataAside2MetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate, "Catch Rate", "Single");});
+	dataAside2MetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate,"Catch Rate","Single");});
 	if(Egg == true) {
-		dataAside2MetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate, "Hatch Rate", "Single");});
+		dataAside2MetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate,"Hatch Rate","Single");});
 	}
     if(Gender == true) {
-        dataAside2MetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio, "Gender Ratio", "Custom2");});
+        dataAside2MetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio,"Gender Ratio","Custom2");});
     }
-	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield, "Experience Yield", "Custom1");});
-	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate, "Leveling Rate", "Single");});
+	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield,"Experience Yield","Custom1");});
+	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate,"Leveling Rate","Single");});
 	var helditm = document.querySelectorAll("#data-modal"+id+" .data-sidebar-helditem-img-outer > img");
 	for(q = 0; q < helditm.length; q++) {
-		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem, "Held Item", "Single");});
+		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem,"Held Item","Single");});
 	}
 	dataAside2MetadataPopupTitleExit1.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, false);});
 	dataAside2MetadataPopupTitleExit2.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, true);});
@@ -621,17 +616,17 @@ var createData = function(id, i) {
 	var baseEV = document.querySelectorAll("#data-modal"+id+" .data-stats > ul li span");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
-			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Multiple");});
+			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Multiple");});
 		} else if(baseEV[q].parentElement.parentElement.getAttribute("name") == "evyield") {
-			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Multiple");});
+			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield,"EV Yield","Multiple");});
 		}
 	}
 	var baseEVTotal = document.querySelectorAll("#data-modal"+id+" .data-stats > ul div");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
-			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats, "Base Stats", "Total");});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Total");});
 		} else if(baseEVTotal[q].parentElement.getAttribute("name") == "evyield") {
-			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield, "EV Yield", "Total");});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield,"EV Yield","Total");});
 		}
 	}
 };
