@@ -461,9 +461,6 @@ var createMove = function() {
 			if(finaldataLearnsetLevel[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetLevel[q]["Game"]) == true) {
 				var obj = new Object();
 				obj["Pokémon"] = finaldataLearnsetLevel[q]["Pokémon"];
-				if(finaldataLearnsetLevel[q]["Form"] != undefined) {
-					obj["Form"] = finaldataLearnsetLevel[q]["Form"];
-				}
 				obj["Factor"] = finaldataLearnsetLevel[q]["Factor"];
 				learnsetlevelarr.push(obj);
 			}
@@ -483,15 +480,9 @@ var createMove = function() {
 			var moveAside4LearnsetLiSource = document.createElement("p");
 			moveAside4LearnsetLiSourceOuter.title = "Level Up";
 			moveAside4LearnsetLiSource.innerHTML = "Level Up: "+"<b>"+learnsetlevelarr[q]["Factor"]+"</b>";
-			if(learnsetlevelarr[q]["Form"] == undefined) {
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(learnsetlevelarr[q]["Pokémon"],"Box")+".png";
-				moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
-				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
-			} else {
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(learnsetlevelarr[q]["Form"],"Box")+".png";
-				moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Form"];
-				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Form"]));
-			}
+			moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]),"Box")+".png";
+			moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
+			moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
 			moveAside4LearnsetLiImg.addEventListener("click", modalData);
 			moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
@@ -513,7 +504,7 @@ var createMove = function() {
 				if(finaldataLearnsetEvolution[q]["Evolution"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetEvolution[q]["Evolution"].split(",").length; r++) {
 						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r],"Box")+".png";
+						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]),"Box")+".png";
 						moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"].split(",")[r];
 						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]))
 						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
@@ -523,21 +514,19 @@ var createMove = function() {
 					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetEvolution[q]["Evolution"];
 				} else {
 					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Evolution"],"Box")+".png";
+					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]),"Box")+".png";
 					moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
 					moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]))
 					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
 					moveAside4LearnsetLiSource.addEventListener("click", modalData);
 				}
-				if(finaldataLearnsetEvolution[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Pokémon"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
-				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetEvolution[q]["Form"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Form"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Form"]));
-				}
+		
+				
+				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]),"Box")+".png";
+				moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
+				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
+				
+
 				moveAside4LearnsetLiImg.addEventListener("click", modalData);
 				moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
@@ -565,15 +554,11 @@ var createMove = function() {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.title = "TR";
 				}
-				if(finaldataLearnsetMachine[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetMachine[q]["Pokémon"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
-				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetMachine[q]["Form"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Form"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Form"]));
-				}
+
+				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]),"Box")+".png";
+				moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
+				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
+				
 				moveAside4LearnsetLiImg.addEventListener("click", modalData);
 				moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
@@ -596,7 +581,7 @@ var createMove = function() {
 				if(finaldataLearnsetBreed[q]["Parent"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetBreed[q]["Parent"].split(",").length; r++) {
 						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"].split(",")[r],"Box")+".png";
+						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]),"Box")+".png";
 						moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
 						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]))
 						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
@@ -606,19 +591,15 @@ var createMove = function() {
 					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetBreed[q]["Parent"];
 				} else {
 					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Parent"],"Box")+".png";
+					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"]),"Box")+".png";
 					moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"];
 					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
 				}
-				if(finaldataLearnsetBreed[q]["Form"] == undefined) {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Pokémon"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
-				} else {
-					moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(finaldataLearnsetBreed[q]["Form"],"Box")+".png";
-					moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Form"];
-					moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Form"]));
-				}
+
+				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]),"Box")+".png";
+				moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
+				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
+				
 				moveAside4LearnsetLiImg.addEventListener("click", modalData);
 				moveAside4LearnsetLiImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
