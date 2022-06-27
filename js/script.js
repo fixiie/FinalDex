@@ -14,15 +14,7 @@ function getPokémonData(arr, name, game) {
 						return e.ID;
 					}).indexOf(arr[q]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 					var obj = new Object();
-					obj["Pokémon"] = arr[q]["Pokémon"];
-					if(finaldataPokémonPath[q]["Folder_"+JSONPath_Path] == undefined) {
-						obj["Folder"] = "";
-					} else {
-						obj["Folder"] = finaldataPokémonPath[q]["Folder_"+JSONPath_Path];
-					}
-					obj["File"] = finaldataPokémonPath[q]["File_"+JSONPath_Path];
-					obj["Form"] = finaldataPokémonForm[q]["Form_"+JSONPath_Form];
-					obj["Variant"] = arr[q]["Variant"];
+					obj["Integer"] = q;
 					for(var u = 0; u < game.length; u++) {
 						if(arr[q][game[u]] != undefined) {
 							obj[game[u]] = arr[q][game[u]];
@@ -299,15 +291,7 @@ function callPopUp(x, arr, type, style) {
 							return e.ID;
 						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
-						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
-							obj["Folder"] = "";
-						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
-						}
+						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
@@ -340,15 +324,7 @@ function callPopUp(x, arr, type, style) {
 							return e.ID;
 						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
-						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
-							obj["Folder"] = "";
-						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
-						}
+						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
@@ -367,15 +343,7 @@ function callPopUp(x, arr, type, style) {
 							return e.ID;
 						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
-						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-						obj["Variant"] = arr[u]["Variant"];
-						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
-							obj["Folder"] = "";
-						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
-						}
+						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
@@ -419,16 +387,8 @@ function callPopUp(x, arr, type, style) {
 							return e.ID;
 						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
-						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-						obj["Variant"] = arr[u]["Variant"];
+						obj["Integer"] = u;
 						obj["Category"] = abbreviation2;
-						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
-							obj["Folder"] = "";
-						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
-						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
@@ -477,17 +437,9 @@ function callPopUp(x, arr, type, style) {
 							return e.ID;
 						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
 						var obj = new Object();
-						obj["Pokémon"] = arr[u]["Pokémon"];
-						obj["Form"] = finaldataPokémonForm[u]["Form_"+JSONPath_Form];
-						obj["Variant"] = arr[u]["Variant"];
+						obj["Integer"] = u;
 						obj["Alteration"] = alteration2;
 						obj["Abbreviation"] = abbreviation2;
-						obj["File"] = finaldataPokémon[u]["File_"+JSONPath_Path];
-						if(finaldataPokémon[u]["Folder_"+JSONPath_Path] == undefined) {
-							obj["Folder"] = "";
-						} else {
-							obj["Folder"] = finaldataPokémon[u]["Folder_"+JSONPath_Path];
-						}
 						for(var y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
@@ -505,6 +457,9 @@ function callPopUp(x, arr, type, style) {
 	result = result.filter(value => Object.keys(value).length !== 0);
 	if(icon == undefined) {
 		for(u = 0; u < result.length; u++) {
+            var int = result[u]["Integer"];
+            var name = getPokémonName(int);
+
 			var li = document.createElement("li");
 			var span = document.createElement("span");
 			if(type == "Ability") {
@@ -515,20 +470,15 @@ function callPopUp(x, arr, type, style) {
 				}
 			}
 			var img = document.createElement("img");
-			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"],"Box")+".png";
-				img.title = result[u]["Form"];
-				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
-			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"],"Box")+".png";
-				img.title = result[u]["Pokémon"];
-				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
-			}
+            img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+            img.title = name;
+            img.setAttribute("value",int);
 			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 
-			if(result[u]["Pokémon"] == getPokémonName(getIntID("", x)) || result[u]["Form"] == getPokémonName(getIntID("", x))) {
+			if(getIntID(int,"") == x) {
 				li.classList.add("select");
 			}
+
 			img.addEventListener("click", modalData);
 			ul.appendChild(li);
 			li.appendChild(span);
@@ -561,11 +511,7 @@ function callPopUp(x, arr, type, style) {
 						if(q == 0) {
 							p.title = type;
 						} else {
-							if(result[u]["Form"] != undefined) {
-								p.title = "When thrown at a full health "+result[u]["Form"]+" with an ordinary Poké Ball.";
-							} else {
-								p.title = "When thrown at a full health "+result[u]["Pokémon"]+" with an ordinary Poké Ball.";
-							}
+                            p.title = "When thrown at a full health "+name+" with an ordinary Poké Ball.";
 						}
 					} else if(type == "Experience Yield") {
 						if(q == 0) {
@@ -627,23 +573,22 @@ function callPopUp(x, arr, type, style) {
 		}
 	} else {
 		for(u = 0; u < result.length; u++) {
+            var int = result[u]["Integer"];
+            var name = getPokémonName(int);
+
 			var li = document.createElement("li");
 			var span = document.createElement("span");
 			var img = document.createElement("img");
-			if(result[u]["Form"] != undefined) {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Form"],"Box")+".png";
-				img.title = result[u]["Form"];
-				img.setAttribute("value",getPokémonInt(result[u]["Form"]));
-			} else {
-				img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(result[u]["Pokémon"],"Box")+".png";
-				img.title = result[u]["Pokémon"];
-				img.setAttribute("value",getPokémonInt(result[u]["Pokémon"]));
-			}
+	
+            img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+            img.title = name;
+            img.setAttribute("value",int);
+			
 			if(type == "Held Item") {
 				li.setAttribute("name", json.length);
 			}
 			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
-			if(result[u]["Pokémon"] == getPokémonName(getIntID(x,""))) {
+			if(getIntID(int,"") == x) {
 				img.classList.add("select");
 			}
 			img.addEventListener("click", modalData);
@@ -1057,8 +1002,6 @@ function loadData() {
     var evolution = base.querySelector(":scope .data-modal");
 
     if (evolution != undefined) {
-
-
         var evos = evolution.querySelectorAll(":scope .data-evolution");
         for(var q = 0; q < evos.length; q++) {
             evos[q].remove();
@@ -1069,11 +1012,11 @@ function loadData() {
         var evoArr = [previous,next];
         var evoArrName = ["previous","next"];
 
-        console.log(next)
-        
 
         for(var q = 0; q < evoArr.length; q++) {
             for(var u = 0; u < evoArr[q].length; u++) {
+                var int = getPokémonInt(evoArr[q][u]["Pokémon"]);
+
                 var x = u + 1;
                 var evo = document.createElement("div");
                 var evoContent = document.createElement("div");
@@ -1090,12 +1033,13 @@ function loadData() {
                 evo.setAttribute("name",evoArrName[q]+"-"+x+"/"+evoArr[q].length)
          
                 evoButton.setAttribute("value",getPokémonInt(evoArr[q][u]["Pokémon"]));
-                evoImg.src = './media/Images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(evoArr[q][u]["Pokémon"],"Box")+'.png'
+                evoImg.src = './media/Images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(int,"Box")+'.png'
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
                 evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/III-V/0.png'");
                 evoNationalID.innerText = "#"+getPokémonID(evoArr[q][u]["Pokémon"]);
-                evoNationalID.setAttribute("name","0");
+                evoNationalID.setAttribute("name","national");
+                evoNationalID.setAttribute("value",0);
                 evoName.innerText = evoArr[q][u]["Pokémon"];
 
 
@@ -1105,22 +1049,39 @@ function loadData() {
                     evoContent.appendChild(evoMain);
                     evoContent.appendChild(evoToggle);
                     evoToggle.setAttribute("onclick","this.previousElementSibling.classList.toggle('active')");
-                    evoDescription.innerText = formatEvolutionText(i,evoArr[q][u],"Previous");
+
+      
+                    if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
+                        evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Previous");
+                    }
+                    else {
+                        evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Previous");
+                    }
+
+   
+                    evoDescription.innerHTML = evoDescription.innerHTML.replaceAll(' Monster',' <span name="eggTextMonster">Monster</span>').replaceAll(' Water 1',' <span name="eggTextWater 1">Water 1</span>').replaceAll(' Bug',' <span name="eggTextBug">Bug</span>').replaceAll(' Flying',' <span name="eggTextFlying">Flying</span>').replaceAll(' Field',' <span name="eggTextField">Field</span>').replaceAll(' Fairy',' <span name="eggTextFairy">Fairy</span>').replaceAll(' Grass',' <span name="eggTextGrass">Grass</span>').replaceAll(' Human-Like',' <span name="eggTextHuman-Like">Human-Like</span>').replaceAll(' Water 3',' <span name="eggTextWater 3">Water 3</span>').replaceAll(' Mineral',' <span name="eggTextMineral">Mineral</span>').replaceAll(' Amorphous',' <span name="eggTextAmorphous">Amorphous</span>').replaceAll(' Water 2',' <span name="eggTextWater 2">Water 2</span>').replaceAll(' Ditto',' <span name="eggTextDitto">Ditto</span>').replaceAll(' Dragon',' <span name="eggTextDragon">Dragon</span>').replaceAll(' Undiscovered',' <span name="eggTextUndiscovered">Undiscovered</span>');
+                    
                 }
                 else if (q == 1) {
                     evoContent.appendChild(evoToggle);
                     evoContent.appendChild(evoMain);
                     evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
-                    evoDescription.innerText = formatEvolutionText(i,evoArr[q][u],"Next");
+                    evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Next");
                 }
+
                 evoToggle.appendChild(evoImg);
                 evoMain.appendChild(evoButton);
                 evoMain.appendChild(evoDescription);
                 evoButton.appendChild(evoID);
                 evoID.appendChild(evoNationalID);
                 evoButton.appendChild(evoName);
-                evoButton.addEventListener("click",modalData)
+                evoButton.addEventListener("click",modalData);
 
+                var spans = evoDescription.querySelectorAll(":scope span[name]");
+                for(y = 0; y < spans.length; y++) {
+                    spans[y].setAttribute("dataname","value")
+                    spans[y].addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+                }
 
 
                 for(y = 0; y < JSONPath_Pokédex.length; y++) {
@@ -1130,7 +1091,8 @@ function loadData() {
                     if (ID != undefined) {
                         evoRegionalID.innerText = "#"+ID;
                     }
-                    evoRegionalID.setAttribute("name",z);
+                    evoRegionalID.setAttribute("name","regional");
+                    evoRegionalID.setAttribute("value",z);
                     evoID.appendChild(evoRegionalID);
                 }
 
@@ -1369,8 +1331,8 @@ function loadData() {
 	}
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Experience Yield","")[0]);
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
-	if(getPokémonMediaPath(getPokémonName(i)) != undefined) {
-		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/"+getPokémonMediaPath(getPokémonName(i),"Battle")+".png";
+	if(getPokémonMediaPath(i,"Battle") != undefined) {
+		portrait.querySelector(":scope img").src = "./media/Images/Pokémon/Art/HOME/"+getPokémonMediaPath(i,"Battle")+".png";
 	}
 	if(returnData(i,"Catch Rate","") != undefined) {
 		var catchRateFormula;
@@ -1471,7 +1433,7 @@ function loadData() {
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"].split(",")[p],"Box")+'.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]),"Box")+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1479,7 +1441,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Evolution"],"Box")+'.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"]),"Box")+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1497,7 +1459,7 @@ function loadData() {
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
                             var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"].split(",")[p],"Box")+'.png');
+                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]),"Box")+'.png');
                             dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"].split(",")[p]);
                             dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
                             dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1505,7 +1467,7 @@ function loadData() {
                         }
                     } else {
                         var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(learnsetArr[u]["Parent"],"Box")+'.png');
+                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"]),"Box")+'.png');
                         dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Parent"]);
                         dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
                         dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
@@ -1794,22 +1756,22 @@ function imageType() {
 
         if(!dataType.includes("Art")) {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension);
             }
         }
         else {
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
+                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].title,dataType)+"."+dataExtension);
+                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension);
             }
         }
     }
@@ -2189,10 +2151,10 @@ function createParty(base,data) {
     }
 
     if (opt.getAttribute("data-type") != "Art") {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-extension")+"/Normal/Front/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i),opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
+        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-extension")+"/Normal/Front/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(i,opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
     }
     else {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(getPokémonName(i),opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
+        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(i,opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
     }
     basePok.setAttribute("value",i);
     basePok.title = getPokémonName(i);
@@ -2598,10 +2560,9 @@ function returnMoveSet(int,additional) {
 
 
     for(var i = 0; i < arrE.length; i++) {
-		if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"]) == true) {
+		if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"])) {
             var obj = new Object();
             obj["Pokémon"] = arrE[i]["Pokémon"];
-            obj["Form"] = arrE[i]["Form"];
             obj["Move"] = arrE[i]["Move"];
             obj["Evolution"] = arrE[i]["Evolution"];
             obj["Additional"] = arrE[i]["Additional"];
@@ -2610,27 +2571,11 @@ function returnMoveSet(int,additional) {
             evores.push(obj)
 		}
 	}
-    if (!evores.length > 0) {
-        for(var i = 0; i < arrE.length; i++) {
-            if(arrE[i]["Form"] == name && getApplicable(arrE[i]["Game"]) == true) {
-                var obj = new Object();
-                obj["Pokémon"] = arrE[i]["Pokémon"];
-                obj["Form"] = arrE[i]["Form"];
-                obj["Move"] = arrE[i]["Move"];
-                obj["Evolution"] = arrE[i]["Evolution"];
-                obj["Additional"] = arrE[i]["Additional"];
-                obj["Game"] = arrE[i]["Game"];
-                obj["Type"] = "Prior Evolution";
-                evores.push(obj)
-            }
-        }
-    }
 
     for(var i = 0; i < arrL.length; i++) {
-		if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"]) == true) {
+		if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"])) {
             var obj = new Object();
             obj["Pokémon"] = arrL[i]["Pokémon"];
-            obj["Form"] = arrL[i]["Form"];
             obj["Factor"] = arrL[i]["Factor"];
             obj["Move"] = arrL[i]["Move"];
             obj["Game"] = arrL[i]["Game"];
@@ -2638,26 +2583,11 @@ function returnMoveSet(int,additional) {
             lvlres.push(obj)
 		}
 	}
-    if (!lvlres.length > 0) {
-        for(var i = 0; i < arrL.length; i++) {
-            if(arrL[i]["Form"] == name && getApplicable(arrL[i]["Game"]) == true) {
-                var obj = new Object();
-                obj["Pokémon"] = arrL[i]["Pokémon"];
-                obj["Form"] = arrL[i]["Form"];
-                obj["Factor"] = arrL[i]["Factor"];
-                obj["Move"] = arrL[i]["Move"];
-                obj["Game"] = arrL[i]["Game"];
-                obj["Type"] = "Level Up";
-                lvlres.push(obj)
-            }
-        }
-    }
 
     for(var i = 0; i < arrM.length; i++) {
-		if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"]) == true) {
+		if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"])) {
             var obj = new Object();
             obj["Pokémon"] = arrM[i]["Pokémon"];
-            obj["Form"] = arrM[i]["Form"];
             obj["Machine"] = arrM[i]["Machine"];
             obj["Move"] = arrM[i]["Move"];
             obj["Game"] = arrM[i]["Game"];
@@ -2665,27 +2595,11 @@ function returnMoveSet(int,additional) {
             machres.push(obj)
 		}
 	}
-    if (!machres.length > 0) {
-        for(var i = 0; i < arrM.length; i++) {
-            if(arrM[i]["Form"] == name && getApplicable(arrM[i]["Game"]) == true) {
-                var obj = new Object();
-                obj["Pokémon"] = arrM[i]["Pokémon"];
-                obj["Form"] = arrM[i]["Form"];
-                obj["Machine"] = arrM[i]["Machine"];
-                obj["Move"] = arrM[i]["Move"];
-                obj["Game"] = arrM[i]["Game"];
-                obj["Type"] = "Machine";
-                machres.push(obj)
-            }
-        }
-    }
-
 
     for(var i = 0; i < arrB.length; i++) {
-		if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"]) == true) {
+		if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
             var obj = new Object();
             obj["Pokémon"] = arrB[i]["Pokémon"];
-            obj["Form"] = arrB[i]["Form"];
             obj["Parent"] = arrB[i]["Parent"];
             obj["Item"] = arrB[i]["Item"];
             obj["Additional"] = arrB[i]["Additional"];
@@ -2696,33 +2610,14 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    if (!breres.length > 0) {
-        for(var i = 0; i < arrB.length; i++) {
-            if(arrB[i]["Form"] == name && getApplicable(arrB[i]["Game"]) == true) {
-                var obj = new Object();
-                obj["Pokémon"] = arrB[i]["Pokémon"];
-                obj["Form"] = arrB[i]["Form"];
-                obj["Parent"] = arrB[i]["Parent"];
-                obj["Item"] = arrB[i]["Item"];
-                obj["Additional"] = arrB[i]["Additional"];
-                obj["Move"] = arrB[i]["Move"];
-                obj["Game"] = arrB[i]["Game"];
-                obj["Type"] = "Breeding";
-                breres.push(obj)
-            }
-        }
-    }
-
-
     var name = getPokémonName2([finaldataPokémon.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[int]["ID"])]);
 
 
     if (!evores.length > 0) {
         for(var i = 0; i < arrE.length; i++) {
-            if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"]) == true) {
+            if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"])) {
                 var obj = new Object();
                 obj["Pokémon"] = arrE[i]["Pokémon"];
-                obj["Form"] = arrE[i]["Form"];
                 obj["Move"] = arrE[i]["Move"];
                 obj["Evolution"] = arrE[i]["Evolution"];
                 obj["Additional"] = arrE[i]["Additional"];
@@ -2735,10 +2630,9 @@ function returnMoveSet(int,additional) {
     
     if (!lvlres.length > 0) {
         for(var i = 0; i < arrL.length; i++) {
-            if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"]) == true) {
+            if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"])) {
                 var obj = new Object();
                 obj["Pokémon"] = arrL[i]["Pokémon"];
-                obj["Form"] = arrL[i]["Form"];
                 obj["Factor"] = arrL[i]["Factor"];
                 obj["Move"] = arrL[i]["Move"];
                 obj["Game"] = arrL[i]["Game"];
@@ -2750,10 +2644,9 @@ function returnMoveSet(int,additional) {
 
     if (!machres.length > 0) {
         for(var i = 0; i < arrM.length; i++) {
-            if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"]) == true) {
+            if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"])) {
                 var obj = new Object();
                 obj["Pokémon"] = arrM[i]["Pokémon"];
-                obj["Form"] = arrM[i]["Form"];
                 obj["Machine"] = arrM[i]["Machine"];
                 obj["Move"] = arrM[i]["Move"];
                 obj["Game"] = arrM[i]["Game"];
@@ -2765,10 +2658,9 @@ function returnMoveSet(int,additional) {
 
     if (!breres.length > 0) {
         for(var i = 0; i < arrB.length; i++) {
-            if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"]) == true) {
+            if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
                 var obj = new Object();
                 obj["Pokémon"] = arrB[i]["Pokémon"];
-                obj["Form"] = arrB[i]["Form"];
                 obj["Parent"] = arrB[i]["Parent"];
                 obj["Item"] = arrB[i]["Item"];
                 obj["Additional"] = arrB[i]["Additional"];
@@ -3065,7 +2957,7 @@ function storeInBox(data) {
     var li = document.createElement("li");
     var shadow = document.createElement("span");
     var img = document.createElement("img");
-    img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonName(i),"Box")+".png";
+    img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(i,"Box")+".png";
     img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
     img.setAttribute("value",i);
     box.appendChild(li)
