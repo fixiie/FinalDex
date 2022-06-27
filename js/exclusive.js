@@ -78,7 +78,7 @@ var createExclusive = function() {
 				if(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]] != undefined) {
 					var Exclusive = document.createElement("li");
 					var ExclusiveImg = document.createElement("img");
-					ExclusiveImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]],"Box") + ".png";
+					ExclusiveImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonInt(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]),"Box") + ".png";
 					ExclusiveImg.setAttribute("title", finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]);
 					ExclusiveImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 					exclusiveAside3PokContent.appendChild(Exclusive);
