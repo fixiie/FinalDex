@@ -984,8 +984,8 @@ function imgType() {
 			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/Misc/FinalDex/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
 		
             for(var q = 0; q < conimg.length; q++) {
-                conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(conimg[q].id,dataType)+"."+dataExtension);
+                conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
+                conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
             }
 		}
 	}
@@ -1097,10 +1097,17 @@ function dexCheck() {
 			for(u = 0; u < contregdiv.length; u++) {
 				contregdiv[u].style.display = "none";
 			}
-			var regID = document.querySelectorAll(".data-regionalID-"+p);
+
+            var regID = document.querySelectorAll(".data-regionalID-"+p);
 			for(u = 0; u < regID.length; u++) {
 				regID[u].style.display = "unset";
 			}
+
+			var regEvoID = document.querySelectorAll('.data-evolution h6[name="regional"][value="'+p+'"]');
+			for(u = 0; u < regEvoID.length; u++) {
+				regEvoID[u].style.display = "unset";
+			}
+
 			var regPrevious = document.querySelectorAll(".data-previous button[name='regional"+p+"']");
 			for(u = 0; u < regPrevious.length; u++) {
 				regPrevious[u].style.display = "flex";
@@ -1114,9 +1121,14 @@ function dexCheck() {
 			for(u = 0; u < contnat.length; u++) {
 				contnat[u].style.display = "flex";
 			}
-			var natID = document.querySelectorAll(".data-nationalID");
+
+            var natID = document.querySelectorAll(".data-nationalID");
 			for(u = 0; u < natID.length; u++) {
 				natID[u].style.display = "unset";
+			}
+			var natEvoID = document.querySelectorAll('.data-evolution h6[name="national"][value="0"]');
+			for(u = 0; u < natEvoID.length; u++) {
+				natEvoID[u].style.display = "unset";
 			}
 			var natPrevious = document.querySelectorAll(".data-previous button[name='national']");
 			for(u = 0; u < natPrevious.length; u++) {
