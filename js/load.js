@@ -298,9 +298,61 @@ function initialize() {
 		variantSelector();
 		
 		load();
+
+		console.log(finaldataLearnsetMachine)
+		console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
+		
+		var tempArr = [{Pokémon:"Charmander",Primary:"Monster",Secondary:"Dragon"},{Pokémon:"Charizard",Primary:"Dragon",Secondary:"Monster"},{Pokémon:"Blastoise",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Fearow",Primary:"Drake",Secondary:"Water"},{Pokémon:"Wartortle",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Squirtle",Primary:"Drake",Secondary:"Worgen"},{Pokémon:"Clefairy",Primary:"Fish",Secondary:"Water"},{Pokémon:"Psyduck",Primary:"Monster",Secondary:"Dragon"}]
+		console.log(checkReturnDifferences(tempArr,["Primary","Secondary"],["Pokémon"]))
 	}
 }
 
+function checkReturnDifferences(arr,include,exclude) {
+	var arr;
+	var include;
+
+	var one = include[0];
+	var two = include[1];
+	var exclude = exclude[0];
+
+	var tempArr1 = [];
+	for(var q = 0; q < arr.length; q++) {
+		tempArr1.push(arr[q][one]+","+arr[q][two]);
+	}
+	tempArr1 = [...new Set(tempArr1)];
+
+	var tempArr2 = [];
+	for(var q = 0; q < tempArr1.length; q++) {
+		tempArr2.push([])
+	}
+
+	for(var i = 0; i < arr.length; i++) {
+		for(var q = 0; q < tempArr2.length; q++) {
+			if(!tempArr2[q].includes(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]) && tempArr1[q] == arr[i][one]+","+arr[i][two]) {
+				tempArr2[q].push(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]);
+			}
+		}
+	}
+
+	var result = [];
+	for(var i = 0; i < tempArr2.length; i++) {
+		result.push([]);
+	}
+
+	for(var i = 0; i < tempArr2.length; i++) {
+		for(var q = 0; q < tempArr2[i].length; q++) {
+			var splitter = tempArr2[i][q].split(",");
+			var obj = new Object();
+			obj[exclude] = splitter[0];
+			obj[one] = splitter[1];
+			obj[two] = splitter[2];
+			result[i].push(obj);
+		}
+	}
+
+	return result
+	
+}
 
 function load() {
 	const load = document.querySelector("#load");
