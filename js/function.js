@@ -93,11 +93,10 @@ function getIntID(int, id) {
 	}
 }
 
-function getPokémonMediaPath(pok,type) {
-	var pok;
+function getPokémonMediaPath(int,type) {
+	var int;
 	var type;
 	var arr = finaldataPokémonPath;
-	var arr2 = finaldataPokémonForm;
 	var result;
 
 	if(type == "Battle" || type == "Art") {
@@ -108,13 +107,7 @@ function getPokémonMediaPath(pok,type) {
 	}
 
 	for(i = 0; i < arr.length; i++) {
-		if(arr2[i]["Form_"+JSONPath_Form] == pok) {
-			if(arr[i][type+" Folder_"+json] == undefined) {
-				result = arr[i][type+" File_"+json];
-			} else {
-				result = arr[i][type+" Folder_"+json]+arr[i][type+" File_"+json];
-			}
-		} else if(arr[i]["Pokémon"] == pok) {
+		if(i == int) {
 			if(arr[i][type+" Folder_"+json] == undefined) {
 				result = arr[i][type+" File_"+json];
 			} else {
@@ -918,73 +911,130 @@ function exitSearch(base) {
     search.focus();
 }
 
+function joinObj(arr, attr,type){
+	var arr;
+	var attr;
+	var type;
 
+	var result = [];
+  
+	for (var i = 0; i < arr.length; i++){
+		result.push(arr[i][attr]);
+	}
+  
+	return result.join(type);
+  }
 function getEvolutionData(i,column) {
 	var i;
 	var column;
 	var arrName = finaldataPokémonEvolutionSpecie;
-	var arrOffspring = finaldataPokémonOffspring;
 	var arrStage = finaldataPokémonEvolutionStage;
 	var arrMethod = finaldataPokémonEvolutionMethod;
 
 	var result = [];
-
+	
 	if (column == "Previous") {
 		var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
-		var offspring = arrOffspring[getPokémonInt(pokémon)]["Offspring_"+JSONPath_Offspring];
-		var factor = arrOffspring[getPokémonInt(pokémon)]["Factor_"+JSONPath_Offspring];
+		var offspring = joinObj(getOffspringData(pokémon),"Integer",",");
 
 		if (pokémon == undefined) {
 			pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
 		}
 		if (offspring == undefined) {
-			offspring = arrOffspring[getPokémonInt(pokémon)]["Offspring_"+JSONPath_Offspring];
-		}
-		if (factor == undefined) {
-			factor = arrOffspring[getPokémonInt(pokémon)]["Factor_"+JSONPath_Offspring];
+			offspring = joinObj(getOffspringData(pokémon),"Integer",",");
 		}
 
-		var obj = new Object();
-		obj["Pokémon"] = pokémon;
-		obj["Offspring"] = offspring;
-		obj["Factor"] = factor;
-		result.push(obj)
+
+		if (pokémon != undefined) {
+			var obj = new Object();
+			obj["Pokémon"] = pokémon;
+			obj["Offspring"] = offspring;
+			obj["Factor"] = factor;
+			result.push(obj)
+		}
 	} 
 	else if (column == "Next") {
 		var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
-		var stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
-		var method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];
-		var factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
-		var additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
-		var gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
 
-		if (pokémon == undefined) {
-			pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
-		}
-		if (stage == undefined) {
-			stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
-		}
-		if (method == undefined) {
-			method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];	
-		}
-		if (factor == undefined) {
-			factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
-		}
-		if (additional == undefined) {
-			additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
-		}
-		if (gender == undefined) {
-			gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
-		}
+		if (pokémon != undefined) {
+			if (pokémon.includes(",")) {
+				pokémon = pokémon.split(",");
+				for(q = 0; q < pokémon.length; q++) {
+					var stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
+					var method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];
+					var factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
+					var additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
+					var gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
+			
+					if (pokémon[q] == undefined) {
+						pokémon[q] = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+					}
+					if (stage == undefined) {
+						stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
+					}
+					if (method == undefined) {
+						method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];	
+					}
+					if (factor == undefined) {
+						factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
+					}
+					if (additional == undefined) {
+						additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
+					}
+					if (gender == undefined) {
+						gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
+					}
 
-		var obj = new Object();
-		obj["Pokémon"] = pokémon;
-		obj["Stage"] = stage;
-		obj["Method"] = method;
-		obj["Factor"] = factor;
-		obj["Additional"] = additional;
-		obj["Gender"] = gender;
-		result.push(obj)	
+					if (pokémon != undefined) {
+						var obj = new Object();
+						obj["Pokémon"] = pokémon[q];
+						obj["Stage"] = stage;
+						obj["Method"] = method;
+						obj["Factor"] = factor;
+						obj["Additional"] = additional;
+						obj["Gender"] = gender;
+						result.push(obj);
+					}
+				}
+			}
+			else {
+				var stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+				var method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];
+				var factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+				var additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+				var gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+		
+				if (pokémon == undefined) {
+					pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+				}
+				if (stage == undefined) {
+					stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+				}
+				if (method == undefined) {
+					method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];	
+				}
+				if (factor == undefined) {
+					factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+				}
+				if (additional == undefined) {
+					additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+				}
+				if (gender == undefined) {
+					gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+				}
+		
+				if (pokémon != undefined) {
+					var obj = new Object();
+					obj["Pokémon"] = pokémon;
+					obj["Stage"] = stage;
+					obj["Method"] = method;
+					obj["Factor"] = factor;
+					obj["Additional"] = additional;
+					obj["Gender"] = gender;
+					result.push(obj);
+				}
+			}
+		}		
 	}
 	
 
@@ -996,6 +1046,36 @@ function getEvolutionData(i,column) {
 
 
 
+function getOffspringData(pok) {
+	var pok;
+	var arr = finaldataPokémonOffspring;
+	var result = [];
+
+	for(q = 0; q < arr.length; q++) {
+		if (arr[q]["Offspring_"+JSONPath_Offspring] != undefined) {
+			if(arr[q]["Offspring_"+JSONPath_Offspring].includes(",")) {
+				var tempArr = arr[q]["Offspring_"+JSONPath_Offspring].split(",");
+				for(u = 0; u < tempArr.length; u++) {
+					if(tempArr[u] == pok) {
+						var obj = new Object();
+						obj["Integer"] = q;
+						result.push(obj)
+					}
+				}
+			}
+			else {
+				if (arr[q]["Offspring_"+JSONPath_Offspring] == pok) {
+					var obj = new Object();
+					obj["Integer"] = q;
+					result.push(obj)
+				}
+			}
+		}
+	}
+	
+	return result;
+}
+
 
 function formatEvolutionText(i,obj,type) {
 	var i;
@@ -1003,15 +1083,109 @@ function formatEvolutionText(i,obj,type) {
 	var type;
 	var result = "";
 	var pokémon = getPokémonName(i);
+ 
+
+
+	if (type == "Previous" && finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
+		for(var name in obj) {
+			if (obj[name] == undefined) {
+				obj[name] = "";
+			}
+		}
+
+		var breed = obj["Offspring"];
+		var breedResult = [];
+		var breedGroup = [];
+		var breedName;
+
+		if (breed.includes(",")) {
+			breed = breed.split(",");
+			for (var q = 0; q < breed.length; q++){
+				var int = breed[q];
+				var obj = new Object();
+				obj["Pokémon"] = getPokémonName(int);
+				obj["Primary"] = returnData(int,"Egg Group","")[0];
+				obj["Secondary"] = returnData(int,"Egg Group","")[1];
+				breedResult.push(obj)
+			}
+		}
+		
+
+
+		breedName = joinObj(breedResult,"Pokémon",", ").replace(/,([^,]*)$/, ' or $1');
+
+		var groupPrimary = joinObj(breedResult,"Primary",",");
+		var groupSecondary = joinObj(breedResult,"Secondary",",");
+		
 	
-	console.log(obj)
-	console.log(i)
+		groupPrimary = groupPrimary.split(",");
+		groupSecondary = groupSecondary.split(",");
 
-	if (type == "Previous") {
+		groupPrimary = [...new Set(groupPrimary)];
+		groupSecondary = [...new Set(groupSecondary)];
 
+
+		if (groupPrimary != undefined) {
+			for (var q = 0; q < groupPrimary.length; q++){
+				breedGroup.push(groupPrimary[q]);
+			}
+		}
+		if (groupSecondary != undefined) {
+			for (var q = 0; q < groupSecondary.length; q++){
+				breedGroup.push(groupSecondary[q]);
+			}
+		}
+
+		if (breedGroup.length > 1) {
+			breedGroup = breedGroup.join(", ");
+		}
+		else {
+			breedGroup = breedGroup[0];
+		}
+
+		breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
+
+		var breedRes = checkReturnDifferences(breedResult,["Primary","Secondary"],["Pokémon"]);
+
+
+		for (var q = 0; q < breedRes.length; q++){
+			var breedName = [];
+			var breedGroup;
+
+			if (breedRes[q][0]["Secondary"] != "undefined") {
+				breedGroup = breedRes[q][0]["Primary"]+" or "+breedRes[q][0]["Secondary"]
+			}
+			else {
+				breedGroup = breedRes[q][0]["Primary"];
+			}
+			for (var u = 0; u < breedRes[q].length; u++){
+
+				var tempArr = getEvolutionData(i,"Previous");
+				var check = true;
+				for (var y = 0; y < tempArr.length; y++){
+					if(tempArr[y]["Pokémon"] == breedRes[q][u]["Pokémon"]) {
+						check = false;
+					}
+				}
+				if(check) {
+					breedName.push(breedRes[q][u]["Pokémon"]);
+				}
+
+				if (u+1 == breedRes[q].length) {
+					result += "\nBreed "+breedName.join(", ").replace(/,([^,]*)$/, ' or $1')+" with "+breedGroup+".";
+				}
+			
+			}
+		}
 	}
-	if (type == "Next") {
+	else if (type == "Previous") {
+		for(q = 0; q < pokémon.length; q++) {
+		}
+	}
+	else if (type == "Previous") {
 
+		console.log(obj)
+		console.log(breed)
 
 		for(var name in obj) {
 			if (obj[name] == undefined) {
@@ -1031,7 +1205,7 @@ function formatEvolutionText(i,obj,type) {
 			}
 		}
 
-		if (obj["Method"] == "Level Up" && obj["Method"] == "Trade") {
+		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
 			result = "Evolve "+obj["Gender"]+" "+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 		}
 		else if (obj["Method"] == "Item") {
@@ -1043,7 +1217,38 @@ function formatEvolutionText(i,obj,type) {
 		else if (obj["Method"] == "Unavailable") {
 			result = "Evolution Unavailable."
 		}
-	
+	}
+	if (type == "Next") {
+		for(var name in obj) {
+			if (obj[name] == undefined) {
+				obj[name] = "";
+			}
+			if (name == "Factor" && obj[name] != "" && obj["Method"] != "Item") {
+				obj[name] = "("+obj[name]+")"
+			}
+			if (obj[name] == "Special Level Up") {
+				obj[name] = "Level Up";
+			}
+			if (obj[name] == "Special Trade") {
+				obj[name] = "Trade";
+			}
+			if (name == "Additional" && obj[name] != "") {
+				obj[name] = obj[name]+".";
+			}
+		}
+
+		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
+			result = "Evolve "+obj["Gender"]+" "+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
+		}
+		else if (obj["Method"] == "Item") {
+			result = "Evolve "+obj["Gender"]+" "+pokémon+ " with "+obj["Factor"]+" "+obj["Additional"];
+		}
+		else if(obj["Method"] == "Unique") {
+			result = "Evolve "+obj["Gender"]+" "+pokémon+obj["Factor"]+" "+obj["Additional"];
+		}
+		else if (obj["Method"] == "Unavailable") {
+			result = "Evolution Unavailable."
+		}
 	}
 
 	result = result.replaceAll("  "," ");
