@@ -1300,3 +1300,26 @@ function formatEvolutionText(i,obj,type) {
 
 	return result;
 }
+
+
+function getItemData(item,type) {
+	var item;
+	var type;
+	var arr;
+	var column;
+	var result = [];
+	if (type == "Description") {
+		arr = finaldataItemsDescription;
+		column = "Description";
+	}
+
+	for (var q = 0; q < arr.length; q++) {
+		if(getApplicable(arr[q]["Game"])) {
+			if(arr[q]["Item"] == item) {
+				result.push(arr[q][column])
+			}
+		}
+	}
+
+	return result;
+}
