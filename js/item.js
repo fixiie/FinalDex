@@ -92,7 +92,7 @@ var createItem = function() {
 		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelImage)
 		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelText)
 		itemAside1OptionsPocketInput.addEventListener("change",itemPockets);
-		itemAside1OptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemAside1OptionsPocketOuter);});
+		//itemAside1OptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemAside1OptionsPocketOuter);});
 		itemAside1OptionsPocketInput.click();
 	}
 
