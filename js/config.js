@@ -809,7 +809,6 @@ if(Generation >= 4 && Generation <= 6) {
 if(Generation >= 5 && Generation <= 6) {
 	JSONPath_HatchRateSteps = "5-6";
 	JSONPath_EVYield = "5-6";
-	JSONPath_EvolutionMethod = "5-6";
 }
 if(Generation >= 5 && Generation <= 8) {
 	JSONPath_Offspring = "5-8";
@@ -968,6 +967,7 @@ if(Generation == 5) {
 	JSONPath_MoveType = "5";
 	JSONPath_MoveReference = "5";
 	JSONPath_MovePriority = "5";
+	JSONPath_EvolutionMethod = "5";
 }
 if(Generation == 6) {
 	JSONPath_Ability = "6";
@@ -982,6 +982,7 @@ if(Generation == 6) {
 	JSONPath_MovePower = "6";
 	JSONPath_MovePP = "6";
 	JSONPath_MovePriority = "6";
+	JSONPath_EvolutionMethod = "6";
 }
 if(Generation == 7) {
 	JSONPath_Ability = "7";
