@@ -783,7 +783,11 @@ function dataRedirect() {
 
         searchExit.click();
 
+        console.log(z)
+        console.log(tar)
+        console.log(type)
         if (type == "item") {
+
             var pocket = tar.getAttribute("data-pocket");
             var pocketInput = document.querySelector('#item-options-pocket input[alt="'+pocket+'"]');
             if (pocketInput.checked == false) {
@@ -1052,21 +1056,18 @@ function loadData() {
 
       
                     if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-                        evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Previous");
+                        evoDescription.innerHTML = formatEvolutionText(i,getOffspringData(evoArr[q][u]["Integer"]),"Previous")
                     }
                     else {
-                        evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Previous");
+                        evoDescription.innerHTML = formatEvolutionText(i,evoArr[q][u],"Previous");
                     }
 
-   
-                    evoDescription.innerHTML = evoDescription.innerHTML.replaceAll(' Monster',' <span name="eggTextMonster">Monster</span>').replaceAll(' Water 1',' <span name="eggTextWater 1">Water 1</span>').replaceAll(' Bug',' <span name="eggTextBug">Bug</span>').replaceAll(' Flying',' <span name="eggTextFlying">Flying</span>').replaceAll(' Field',' <span name="eggTextField">Field</span>').replaceAll(' Fairy',' <span name="eggTextFairy">Fairy</span>').replaceAll(' Grass',' <span name="eggTextGrass">Grass</span>').replaceAll(' Human-Like',' <span name="eggTextHuman-Like">Human-Like</span>').replaceAll(' Water 3',' <span name="eggTextWater 3">Water 3</span>').replaceAll(' Mineral',' <span name="eggTextMineral">Mineral</span>').replaceAll(' Amorphous',' <span name="eggTextAmorphous">Amorphous</span>').replaceAll(' Water 2',' <span name="eggTextWater 2">Water 2</span>').replaceAll(' Ditto',' <span name="eggTextDitto">Ditto</span>').replaceAll(' Dragon',' <span name="eggTextDragon">Dragon</span>').replaceAll(' Undiscovered',' <span name="eggTextUndiscovered">Undiscovered</span>');
-                    
                 }
                 else if (q == 1) {
                     evoContent.appendChild(evoToggle);
                     evoContent.appendChild(evoMain);
                     evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
-                    evoDescription.innerText = formatEvolutionText(getDefaultInt(i),evoArr[q][u],"Next");
+                    evoDescription.innerHTML = formatEvolutionText(i,evoArr[q][u],"Next");
                 }
 
                 evoToggle.appendChild(evoImg);
@@ -1077,10 +1078,21 @@ function loadData() {
                 evoButton.appendChild(evoName);
                 evoButton.addEventListener("click",modalData);
 
-                var spans = evoDescription.querySelectorAll(":scope span[name]");
-                for(y = 0; y < spans.length; y++) {
-                    spans[y].setAttribute("dataname","value")
-                    spans[y].addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+                var eggSpan = evoDescription.querySelectorAll(':scope span[name*="egg"]');
+                for(y = 0; y < eggSpan.length; y++) {
+                    eggSpan[y].setAttribute("dataname","value")
+                    eggSpan[y].addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+                }
+
+                var pokSpan = evoDescription.querySelectorAll(':scope span[name="Pokémon"]');
+                for(y = 0; y < pokSpan.length; y++) {
+                    pokSpan[y].setAttribute("value",getPokémonInt(pokSpan[y].innerText))
+                    pokSpan[y].addEventListener("click", modalData);
+                }
+
+                var itmSpan = evoDescription.querySelectorAll(':scope span[name="Item"]');
+                for(y = 0; y < itmSpan.length; y++) {
+                    itmSpan[y].addEventListener("click", dataRedirect);
                 }
 
 
@@ -1531,7 +1543,7 @@ function loadData() {
         }
 		
 	}
-
+    dexCheck();
 }
 
 
