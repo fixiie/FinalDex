@@ -882,20 +882,26 @@ input[type=radio] {
 }
 
 .data-evolution main {
-	display: inline-block;
+	display: inline-flex;
     width: 0vw;
     height: 100%;
     text-align: center;
     background: var(--color_60);
     transition: width 0.5s ease;
-	font-size: 0;
-	overflow: auto;
+    font-size: 0;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+	flex-direction: column;
 }
 
 .data-evolution main button {
 	border: none;
 	outline: none;
 	background: none;
+	height: 50%;
 }
 
 .data-evolution main button:hover * {
@@ -935,7 +941,7 @@ input[type=radio] {
 }
 
 .data-evolution p {
-	padding: 5px;
+	height: 50%;
 	font-size: 80%;
 }
 
@@ -961,10 +967,14 @@ input[type=radio] {
 	opacity: 1;
 }
 
-.data-evolution main p span[name] {
+.data-evolution main p span[name="Pokémon"],
+.data-evolution main p span[name="Item"],
+.data-evolution main p span[name*="egg"]  {
 	cursor:pointer;
 }
-.data-evolution main p span[name]:hover {
+.data-evolution main p span[name="Pokémon"]:hover,
+.data-evolution main p span[name="Item"]:hover,
+.data-evolution main p span[name*="egg"]:hover {
 	font-weight:bold;
 }
 
@@ -1837,7 +1847,8 @@ input[type=radio] {
 }
 
 #item-options-pocket input:not(:checked) + label p {
-	color:var(--colorRed);
+	color: var(--color_50);
+    transform: scale(0.8);
 }
 
 #item-options-pocket input:not(:checked) + label img {
@@ -2611,7 +2622,8 @@ body {
 	flex-wrap: wrap;
 }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-#pokémon-outer > div main caption:nth-child(3) {
+
+.contain-nationalID {
 	display: flex;
 }
 
