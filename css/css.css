@@ -943,6 +943,7 @@ input[type=radio] {
 .data-evolution p {
 	height: 50%;
 	font-size: 80%;
+	padding: 0 10px;
 }
 
 .data-evolution-toggle:hover img {
@@ -3674,6 +3675,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 80%;
 }
 
 .data-popup > div:first-child button {
@@ -3814,6 +3816,10 @@ body {
 .data-popup div ul[name="Ability"] li p.active,
 .data-popup div ul[name="Held Item"] li p img.active {
 	cursor: pointer;
+}
+
+.data-popup div ul[name="Held Item"] li p img:hover {
+    filter: brightness(1.1);
 }
 
 .data-popup div ul[name="Ability"] li p.active:hover {
@@ -7034,6 +7040,7 @@ span[name="Status"] {
 
 
 .item-sidebar-price > span img {
+	max-width: 12px;
 	object-fit: scale-down;
 	image-rendering: -moz-crisp-edges;
     /* Firefox */
