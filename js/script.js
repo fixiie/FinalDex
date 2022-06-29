@@ -92,6 +92,7 @@ function callPopUp(x, arr, type, style) {
 		description = getAbilityData(title,"Flavor");
 	} else if(type == "Held Item") {
 		id = enhancetarget.getAttribute("name");
+        description = getItemData(title,"Description").join("\n");
 	}
 	if(title.includes(" : ")) {
 		title = title.split(" : ");
@@ -600,7 +601,7 @@ function callPopUp(x, arr, type, style) {
 				var span2 = document.createElement("span");
 				var pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
-					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+result[u][json[q]]+".png";
+					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(result[u][json[q]])+".png";
                     pimg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
@@ -783,24 +784,26 @@ function dataRedirect() {
 
         searchExit.click();
 
-        console.log(z)
-        console.log(tar)
-        console.log(type)
-        if (type == "item") {
+        if (tar != null) {
+            if (type == "item") {
 
-            var pocket = tar.getAttribute("data-pocket");
-            var pocketInput = document.querySelector('#item-options-pocket input[alt="'+pocket+'"]');
-            if (pocketInput.checked == false) {
-                pocketInput.click();
+                var pocket = tar.getAttribute("data-pocket");
+                var pocketInput = document.querySelector('#item-options-pocket input[alt="'+pocket+'"]');
+                if (pocketInput.checked == false) {
+                    pocketInput.click();
+                }
             }
+        
+            if(modalOpen != undefined) {
+                modalOpen.classList.remove("open");
+            }
+            navInput.click();
+            tar.click();
+            tar.scrollIntoView();
         }
-    
-        if(modalOpen != undefined) {
-            modalOpen.classList.remove("open");
+        else {
+            alert("Could not find "+type+".")
         }
-        navInput.click();
-        tar.click();
-        tar.scrollIntoView();  
     }
 
 
