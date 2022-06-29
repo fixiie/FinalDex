@@ -299,11 +299,15 @@ function initialize() {
 		
 		load();
 
-		console.log(finaldataLearnsetMachine)
-		console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
+		//console.log(finaldataLearnsetMachine)
+		//console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
 		
-		var tempArr = [{Pokémon:"Charmander",Primary:"Monster",Secondary:"Dragon"},{Pokémon:"Charizard",Primary:"Dragon",Secondary:"Monster"},{Pokémon:"Blastoise",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Fearow",Primary:"Drake",Secondary:"Water"},{Pokémon:"Wartortle",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Squirtle",Primary:"Drake",Secondary:"Worgen"},{Pokémon:"Clefairy",Primary:"Fish",Secondary:"Water"},{Pokémon:"Psyduck",Primary:"Monster",Secondary:"Dragon"}]
-		console.log(checkReturnDifferences(tempArr,["Primary","Secondary"],["Pokémon"]))
+		//var tempArr = [{Pokémon:"Charmander",Primary:"Monster",Secondary:"Dragon"},{Pokémon:"Charizard",Primary:"Dragon",Secondary:"Monster"},{Pokémon:"Blastoise",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Fearow",Primary:"Drake",Secondary:"Water"},{Pokémon:"Wartortle",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Squirtle",Primary:"Drake",Secondary:"Worgen"},{Pokémon:"Clefairy",Primary:"Fish",Secondary:"Water"},{Pokémon:"Psyduck",Primary:"Monster",Secondary:"Dragon"}]
+		///console.log(checkReturnDifferences(tempArr,["Primary","Secondary"],["Pokémon"]))
+
+
+
+
 	}
 }
 
@@ -313,11 +317,12 @@ function checkReturnDifferences(arr,include,exclude) {
 
 	var one = include[0];
 	var two = include[1];
+	var three = include[2];
 	var exclude = exclude[0];
 
 	var tempArr1 = [];
 	for(var q = 0; q < arr.length; q++) {
-		tempArr1.push(arr[q][one]+","+arr[q][two]);
+		tempArr1.push(arr[q][one]+","+arr[q][two]+","+arr[q][three]);
 	}
 	tempArr1 = [...new Set(tempArr1)];
 
@@ -328,8 +333,8 @@ function checkReturnDifferences(arr,include,exclude) {
 
 	for(var i = 0; i < arr.length; i++) {
 		for(var q = 0; q < tempArr2.length; q++) {
-			if(!tempArr2[q].includes(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]) && tempArr1[q] == arr[i][one]+","+arr[i][two]) {
-				tempArr2[q].push(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]);
+			if(!tempArr2[q].includes(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]+","+arr[i][three]) && tempArr1[q] == arr[i][one]+","+arr[i][two]+","+arr[q][three]) {
+				tempArr2[q].push(arr[i][exclude]+","+arr[i][one]+","+arr[i][two]+","+arr[q][three]);
 			}
 		}
 	}
@@ -346,11 +351,12 @@ function checkReturnDifferences(arr,include,exclude) {
 			obj[exclude] = splitter[0];
 			obj[one] = splitter[1];
 			obj[two] = splitter[2];
+			obj[three] = splitter[3];
 			result[i].push(obj);
 		}
 	}
 
-	return result
+	return result;
 	
 }
 
