@@ -29,24 +29,23 @@ function getEvolutionFamily(i) {
 	specie = finaldataPokémonEvolutionSpecie;
 	var result = [];
 	result.push(finaldataPokémon[i]["Pokémon"])
+
 	for(var q = 0; q < 10; q++) {
 		Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
 		Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
-		if(Previous != undefined) {
+		if(Previous != undefined && Previous != "None") {
 			result.push(Previous);
 			Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
 		}
-		if(Next != undefined) {
-			if(finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie] != undefined) {
-				if(finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].includes(",")) {
-					for(var y = 0; y < finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",").length; y++) {
-						Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",")[y];
-						result.push(Next);
-					}
-				} else {
-					Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
+		if(Next != undefined && Next != "None") {
+			if(finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].includes(",")) {
+				for(var y = 0; y < finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",").length; y++) {
+					Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",")[y];
 					result.push(Next);
 				}
+			} else {
+				Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
+				result.push(Next);
 			}
 		}
 		result = [...new Set(result)];
@@ -924,6 +923,9 @@ function joinObj(arr, attr,type){
   
 	return result.join(type);
   }
+
+
+
 function getEvolutionData(i,column) {
 	var i;
 	var column;
@@ -932,100 +934,47 @@ function getEvolutionData(i,column) {
 	var arrMethod = finaldataPokémonEvolutionMethod;
 
 	var result = [];
-	
-	if (column == "Previous") {
-		var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
-		var offspring = joinObj(getOffspringData(pokémon),"Integer",",");
+	var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
 
-		if (pokémon == undefined) {
-			pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
-		}
-		if (offspring == undefined) {
-			offspring = joinObj(getOffspringData(pokémon),"Integer",",");
-		}
+	if (pokémon == undefined) {
+		i = getDefaultInt(i);
+		pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
+	}
 
 
-		if (pokémon != undefined) {
-			var obj = new Object();
-			obj["Pokémon"] = pokémon;
-			obj["Offspring"] = offspring;
-			obj["Factor"] = factor;
-			result.push(obj)
-		}
-	} 
-	else if (column == "Next") {
-		var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
-
-		if (pokémon != undefined) {
-			if (pokémon.includes(",")) {
-				pokémon = pokémon.split(",");
-				for(q = 0; q < pokémon.length; q++) {
-					var stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
-					var method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];
-					var factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
-					var additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
-					var gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
-			
-					if (pokémon[q] == undefined) {
-						pokémon[q] = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
-					}
-					if (stage == undefined) {
-						stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
-					}
-					if (method == undefined) {
-						method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];	
-					}
-					if (factor == undefined) {
-						factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
-					}
-					if (additional == undefined) {
-						additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
-					}
-					if (gender == undefined) {
-						gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
-					}
-
-					if (pokémon != undefined) {
-						var obj = new Object();
-						obj["Pokémon"] = pokémon[q];
-						obj["Stage"] = stage;
-						obj["Method"] = method;
-						obj["Factor"] = factor;
-						obj["Additional"] = additional;
-						obj["Gender"] = gender;
-						result.push(obj);
-					}
-				}
-			}
-			else {
-				var stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
-				var method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];
-				var factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
-				var additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
-				var gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+	if (pokémon != undefined && pokémon != "None") {
+		if (pokémon.includes(",")) {
+			pokémon = pokémon.split(",");
+			for(q = 0; q < pokémon.length; q++) {
+				var stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
+				var method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];
+				var factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
+				var additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
+				var gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
 		
-				if (pokémon == undefined) {
-					pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+				if (pokémon[q] == undefined) {
+					pokémon[q] = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
 				}
 				if (stage == undefined) {
-					stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+					stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
 				}
 				if (method == undefined) {
-					method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];	
+					method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];	
 				}
 				if (factor == undefined) {
-					factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+					factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
 				}
 				if (additional == undefined) {
-					additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+					additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
 				}
 				if (gender == undefined) {
-					gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+					gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
 				}
-		
+
 				if (pokémon != undefined) {
 					var obj = new Object();
-					obj["Pokémon"] = pokémon;
+					obj["Integer"] = getPokémonInt(pokémon[q]);
+					obj["Pokémon"] = pokémon[q];
 					obj["Stage"] = stage;
 					obj["Method"] = method;
 					obj["Factor"] = factor;
@@ -1034,10 +983,48 @@ function getEvolutionData(i,column) {
 					result.push(obj);
 				}
 			}
-		}		
+		}
+		else {
+			var stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+			var method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];
+			var factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+			var additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+			var gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+	
+			if (pokémon == undefined) {
+				pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+			}
+			if (stage == undefined) {
+				stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+			}
+			if (method == undefined) {
+				method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];	
+			}
+			if (factor == undefined) {
+				factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+			}
+			if (additional == undefined) {
+				additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+			}
+			if (gender == undefined) {
+				gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+			}
+	
+			if (pokémon != undefined) {
+				var obj = new Object();
+				obj["Integer"] = getPokémonInt(pokémon);
+				obj["Pokémon"] = pokémon;
+				obj["Stage"] = stage;
+				obj["Method"] = method;
+				obj["Factor"] = factor;
+				obj["Additional"] = additional;
+				obj["Gender"] = gender;
+				result.push(obj);
+			}
+		}
 	}
 	
-
+	console.log(result)
 	return result;
 }
 
@@ -1046,19 +1033,26 @@ function getEvolutionData(i,column) {
 
 
 
-function getOffspringData(pok) {
-	var pok;
+function getOffspringData(i) {
+	var i;
 	var arr = finaldataPokémonOffspring;
 	var result = [];
+
+	var pok = getPokémonName(i);
 
 	for(q = 0; q < arr.length; q++) {
 		if (arr[q]["Offspring_"+JSONPath_Offspring] != undefined) {
 			if(arr[q]["Offspring_"+JSONPath_Offspring].includes(",")) {
-				var tempArr = arr[q]["Offspring_"+JSONPath_Offspring].split(",");
-				for(u = 0; u < tempArr.length; u++) {
-					if(tempArr[u] == pok) {
+				var tempArr1 = arr[q]["Offspring_"+JSONPath_Offspring].split(",");
+	
+				for(u = 0; u < tempArr1.length; u++) {
+					if(tempArr1[u] == pok) {
 						var obj = new Object();
 						obj["Integer"] = q;
+						obj["Pokémon"] = getPokémonName(q);
+						if (arr[q]["Factor_"+JSONPath_Offspring] != undefined) {
+							obj["Factor"] = arr[q]["Factor_"+JSONPath_Offspring].split(",")[u];
+						}
 						result.push(obj)
 					}
 				}
@@ -1067,6 +1061,10 @@ function getOffspringData(pok) {
 				if (arr[q]["Offspring_"+JSONPath_Offspring] == pok) {
 					var obj = new Object();
 					obj["Integer"] = q;
+					obj["Pokémon"] = getPokémonName(q);
+					if (arr[q]["Factor_"+JSONPath_Offspring] != undefined) {
+						obj["Factor"] = arr[q]["Factor_"+JSONPath_Offspring];
+					}
 					result.push(obj)
 				}
 			}
@@ -1082,110 +1080,130 @@ function formatEvolutionText(i,obj,type) {
 	var obj;
 	var type;
 	var result = "";
-	var pokémon = getPokémonName(i);
- 
 
 
-	if (type == "Previous" && finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-		for(var name in obj) {
-			if (obj[name] == undefined) {
-				obj[name] = "";
-			}
-		}
 
-		var breed = obj["Offspring"];
-		var breedResult = [];
-		var breedGroup = [];
-		var breedName;
+	if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
+		if (type == "Previous") {
 
-		if (breed.includes(",")) {
-			breed = breed.split(",");
-			for (var q = 0; q < breed.length; q++){
-				var int = breed[q];
-				var obj = new Object();
-				obj["Pokémon"] = getPokémonName(int);
-				obj["Primary"] = returnData(int,"Egg Group","")[0];
-				obj["Secondary"] = returnData(int,"Egg Group","")[1];
-				breedResult.push(obj)
-			}
-		}
-		
-
-
-		breedName = joinObj(breedResult,"Pokémon",", ").replace(/,([^,]*)$/, ' or $1');
-
-		var groupPrimary = joinObj(breedResult,"Primary",",");
-		var groupSecondary = joinObj(breedResult,"Secondary",",");
-		
 	
-		groupPrimary = groupPrimary.split(",");
-		groupSecondary = groupSecondary.split(",");
-
-		groupPrimary = [...new Set(groupPrimary)];
-		groupSecondary = [...new Set(groupSecondary)];
-
-
-		if (groupPrimary != undefined) {
-			for (var q = 0; q < groupPrimary.length; q++){
-				breedGroup.push(groupPrimary[q]);
-			}
-		}
-		if (groupSecondary != undefined) {
-			for (var q = 0; q < groupSecondary.length; q++){
-				breedGroup.push(groupSecondary[q]);
-			}
-		}
-
-		if (breedGroup.length > 1) {
-			breedGroup = breedGroup.join(", ");
-		}
-		else {
-			breedGroup = breedGroup[0];
-		}
-
-		breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
-
-		var breedRes = checkReturnDifferences(breedResult,["Primary","Secondary"],["Pokémon"]);
-
-
-		for (var q = 0; q < breedRes.length; q++){
-			var breedName = [];
-			var breedGroup;
-
-			if (breedRes[q][0]["Secondary"] != "undefined") {
-				breedGroup = breedRes[q][0]["Primary"]+" or "+breedRes[q][0]["Secondary"]
-			}
-			else {
-				breedGroup = breedRes[q][0]["Primary"];
-			}
-			for (var u = 0; u < breedRes[q].length; u++){
-
-				var tempArr = getEvolutionData(i,"Previous");
-				var check = true;
-				for (var y = 0; y < tempArr.length; y++){
-					if(tempArr[y]["Pokémon"] == breedRes[q][u]["Pokémon"]) {
-						check = false;
+	
+				for(var name in obj) {
+					if (obj[name] == undefined) {
+						obj[name] = "";
 					}
 				}
-				if(check) {
-					breedName.push(breedRes[q][u]["Pokémon"]);
-				}
+	
+				var breed = obj;
+				var breedResult = [];
+				var breedGroup = [];
+				var breedName;
+	
 
-				if (u+1 == breedRes[q].length) {
-					result += "\nBreed "+breedName.join(", ").replace(/,([^,]*)$/, ' or $1')+" with "+breedGroup+".";
-				}
+
+				
 			
-			}
-		}
-	}
-	else if (type == "Previous") {
-		for(q = 0; q < pokémon.length; q++) {
-		}
-	}
-	else if (type == "Previous") {
+					for (var q = 0; q < breed.length; q++){
+						var int = breed[q]["Integer"];
+						var obj = new Object();
+						if (finaldataPokémon[int][JSONPath_Reference] == "true") {
+							obj["Pokémon"] = getPokémonName(int);
+							obj["Primary"] = returnData(int,"Egg Group","")[0];
+							obj["Secondary"] = returnData(int,"Egg Group","")[1];
+							obj["Factor"] = breed[q]["Factor"];
+							breedResult.push(obj)
+						}
+					}
+					
+		
+					breedName = joinObj(breedResult,"Pokémon",",").replace(/,([^,]*)$/, ' or $1');
+	
+					var groupPrimary = joinObj(breedResult,"Primary",",");
+					var groupSecondary = joinObj(breedResult,"Secondary",",");
+					
+				
+					groupPrimary = groupPrimary.split(",");
+					groupSecondary = groupSecondary.split(",");
+	
+					groupPrimary = [...new Set(groupPrimary)];
+					groupSecondary = [...new Set(groupSecondary)];
+	
+	
+					if (groupPrimary != undefined) {
+						for (var q = 0; q < groupPrimary.length; q++){
+							breedGroup.push(groupPrimary[q]);
+						}
+					}
+					if (groupSecondary != undefined) {
+						for (var q = 0; q < groupSecondary.length; q++){
+							breedGroup.push(groupSecondary[q]);
+						}
+					}
+	
+					if (breedGroup.length > 1) {
+						breedGroup = breedGroup.join(", ");
+					}
+					else {
+						breedGroup = breedGroup[0];
+					}
+	
+					breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
+	
+					console.log(breedResult)
+					var breedRes = checkReturnDifferences(breedResult,["Primary","Secondary","Factor"],["Pokémon"]);
+					console.log(breedRes)
 
-		console.log(obj)
-		console.log(breed)
+					var resTemp = []
+					for (var q = 0; q < breedRes.length; q++){
+						var breedName = [];
+						var breedGroup;
+						var breedFactor;
+	
+						if (breedRes[q][0]["Secondary"] != "undefined") {
+							breedGroup = breedRes[q][0]["Primary"]+" or "+breedRes[q][0]["Secondary"]
+						}
+						else {
+							breedGroup = breedRes[q][0]["Primary"];
+						}
+						if (breedRes[q][0]["Factor"] != "undefined") {
+							breedFactor = breedRes[q][0]["Factor"];
+						}
+						else {
+							breedFactor = "";
+						}
+
+
+						for (var u = 0; u < breedRes[q].length; u++){
+	
+							var tempArr = getEvolutionData(i,"Previous");
+							var check = true;
+							for (var y = 0; y < tempArr.length; y++){
+								if(tempArr[y]["Pokémon"] == breedRes[q][u]["Pokémon"]) {
+									check = false;
+								}
+							}
+							if(check) {
+								if (breedRes[q][u]["Pokémon"] != getPokémonName(i)) {
+									breedName.push('<span name="Pokémon">'+breedRes[q][u]["Pokémon"]+'</span>');
+								}
+								else {
+									breedName.push(breedRes[q][u]["Pokémon"]);
+								}
+							}
+	
+							if (u+1 == breedRes[q].length) {
+								resTemp.push("Breed "+breedName.join(", ").replace(/,([^,]*)$/, ' or $1')+" "+breedFactor+" with "+breedGroup+".");
+							}
+						
+						}
+
+						result = resTemp.join("<br>");
+					}
+				
+			
+		}
+	}
+	else if (type == "Previous") {
 
 		for(var name in obj) {
 			if (obj[name] == undefined) {
@@ -1203,22 +1221,35 @@ function formatEvolutionText(i,obj,type) {
 			if (name == "Additional" && obj[name] != "") {
 				obj[name] = obj[name]+".";
 			}
+			if (name == "Gender" && obj[name] == "♂") {
+				obj[name] = '<span name="Male">'+obj[name]+"</span>";
+			}
+			if (name == "Gender" && obj[name] == "♀") {
+				obj[name] = '<span name="Female">'+obj[name]+"</span>";
+			}
 		}
+		var pokprev = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
 
-		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
-		}
-		else if (obj["Method"] == "Item") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+ " with "+obj["Factor"]+" "+obj["Additional"];
-		}
-		else if(obj["Method"] == "Unique") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+obj["Factor"]+" "+obj["Additional"];
-		}
-		else if (obj["Method"] == "Unavailable") {
-			result = "Evolution Unavailable."
+		if(pokprev.length > 0) {
+			var pokémon = '<span name="Pokémon">'+pokprev[0]["Pokémon"]+'</span>';
+			if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
+				result = "Evolve "+obj["Gender"]+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
+			}
+			else if (obj["Method"] == "Item") {
+				result = "Evolve "+obj["Gender"]+" "+pokémon+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
+			}
+			else if(obj["Method"] == "Unique") {
+				result = "Evolve "+obj["Gender"]+pokémon+obj["Factor"]+" "+obj["Additional"];
+			}
+			else if (obj["Method"] == "Unavailable") {
+				result = "Evolution Unavailable."
+			}
 		}
 	}
+
+
 	if (type == "Next") {
+
 		for(var name in obj) {
 			if (obj[name] == undefined) {
 				obj[name] = "";
@@ -1235,13 +1266,22 @@ function formatEvolutionText(i,obj,type) {
 			if (name == "Additional" && obj[name] != "") {
 				obj[name] = obj[name]+".";
 			}
+			if (name == "Gender" && obj[name] == "♂") {
+				obj[name] = '<span name="Male">'+obj[name]+"</span>";
+			}
+			if (name == "Gender" && obj[name] == "♀") {
+				obj[name] = '<span name="Female">'+obj[name]+"</span>";
+			}
 		}
+
+		var pokémon = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous")[0]["Pokémon"];
+		
 
 		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
 			result = "Evolve "+obj["Gender"]+" "+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 		}
 		else if (obj["Method"] == "Item") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+ " with "+obj["Factor"]+" "+obj["Additional"];
+			result = "Evolve "+obj["Gender"]+" "+pokémon+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
 		}
 		else if(obj["Method"] == "Unique") {
 			result = "Evolve "+obj["Gender"]+" "+pokémon+obj["Factor"]+" "+obj["Additional"];
@@ -1252,5 +1292,11 @@ function formatEvolutionText(i,obj,type) {
 	}
 
 	result = result.replaceAll("  "," ");
+
+	var eggGroups = ["Monster","Water 1","Bug","Flying","Field","Fairy","Grass","Human-Like","Water 3","Mineral","Amorphous","Water 2","Ditto","Dragon","Undiscovered"];
+	for (var q = 0; q < eggGroups.length; q++){
+		result = result.replaceAll(' '+eggGroups[q],' <span name="eggText'+eggGroups[q]+'">'+eggGroups[q]+'</span>');
+	}
+
 	return result;
 }
