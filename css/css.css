@@ -902,6 +902,7 @@ input[type=radio] {
 	outline: none;
 	background: none;
 	height: 50%;
+	cursor:pointer;
 }
 
 .data-evolution main button:hover * {
@@ -931,13 +932,11 @@ input[type=radio] {
 }
 
 .data-evolution h6 {
-	cursor: pointer;
 	display:none;
 }
 
 .data-evolution h4 {
 	padding: 2px 0;
-	cursor: pointer;
 }
 
 .data-evolution p {
@@ -1233,7 +1232,7 @@ input[type=radio] {
 	cursor: default;
 }
 
-#map-description-trainer-bottom li > div[name="Additional"] *:not([name="Ability"])[title] {
+#map-description-trainer-bottom li > div[name="Additional"] p:not([name="Ability"])[title] {
 	cursor: help;
 }
 
@@ -1447,7 +1446,7 @@ input[type=radio] {
 }
 
 #map-description-item ul li div {
-	width: 30%;
+	width: 40%;
     cursor: pointer;
     text-align: center;
     display: flex;
@@ -1478,7 +1477,7 @@ input[type=radio] {
 }
 
 #map-description-item ul li div img {
-	margin: 0 -90%;
+	margin: 0 -80%;
 }
 
 #map-description-item ul li div h6 {
@@ -6925,6 +6924,13 @@ span[name="Status"] {
 	padding: 10px;
 }
 
+.item-description p span[name] {
+	cursor:pointer;
+}
+.item-description p span[name]:hover {
+	font-weight:bold;
+} 
+
 .item-description h3 {
 	padding: 2px 10px;
 }
@@ -7023,6 +7029,8 @@ span[name="Status"] {
 
 .item-sidebar ul li[name="Location"] span[name="Description"] {
 	width: 200%;
+	align-items: flex-start;
+	text-align:left;
 }
 .item-sidebar ul li[name="Location"] span[name="Location"] {
 	width: 100%;
@@ -8593,11 +8601,11 @@ span[name="Status"] {
 
 
 
-#pokémon-outer > main section[name="Party"] div aside > span[name*="Values"] > span:nth-child(2){
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2){
 	flex-direction:row;
 }
 
-#pokémon-outer > main section[name="Party"] div aside > span[name*="Values"] > span:nth-child(2) > span {
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span {
 	display: flex;
     flex-direction: column;
     align-content: center;
@@ -8605,17 +8613,45 @@ span[name="Status"] {
     align-items: center;
 }
 
-#pokémon-outer > main section[name="Party"] div aside > span[name*="Values"] > span:nth-child(2) > span:first-child {
-	width: 80%;
-}
-
-#pokémon-outer > main section[name="Party"] div aside > span[name*="Values"] > span:nth-child(2) > span:last-child {
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span {
 	width: 20%;
 }
 
-#pokémon-outer > main section[name="Party"] div aside > span[name*="Values"] > span:nth-child(2) > span:last-child input {
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span[name="IV"],
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span[name="EV"] {
+	width: 25%;
+}
+
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:first-child {
+	width: 30%;
+}
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:first-child input {
+	text-align:right;
+}
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:first-child input::placeholder {
+	font-style:normal;
+}
+
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span input[disabled] {
 	cursor: default;
 }
+
+
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:last-child input {
+	font-weight: bold;
+    text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+
+#pokémon-outer > main section[name="Party"] div aside[name="Ice"] > span[name="Stats"] > span:nth-child(2) > span:last-child input,
+#pokémon-outer > main section[name="Party"] div aside[name="Electric"] > span[name="Stats"] > span:nth-child(2) > span:last-child input,
+#pokémon-outer > main section[name="Party"] div aside[name*=",Electric"] > span[name="Stats"] > span:nth-child(2) > span:last-child input,
+#pokémon-outer > main section[name="Party"] div aside[name*=",Ice"] > span[name="Stats"] > span:nth-child(2) > span:last-child input  {
+	text-shadow: 1px 1px 1px var(--color_60);
+}
+
+
+
 
 
 #pokémon-outer > main section[name="Party"] div aside > span:last-child > button {
@@ -8772,6 +8808,8 @@ span[name="Status"] {
 	opacity: 1;
 }
 
+
+
 #pokémon-outer > main section[name="Party"] div aside > span[name="Additional"] > span label[name] select,
 #pokémon-outer > main section[name="Party"] div aside > span[name="Additional"] > span label[name] input {
 	margin: 2px;
@@ -8780,7 +8818,7 @@ span[name="Status"] {
 	cursor: pointer;
 	margin: 5px 0;
 }
-#pokémon-outer > main section[name="Party"] div aside[name="Electric"] > span[name="Additional"] > span label[name="Date"] input,
+#pokémon-outer > main section[name="Party"] div aside[name="Ice"] > span[name="Additional"] > span label[name="Date"] input,
 #pokémon-outer > main section[name="Party"] div aside[name="Electric"] > span[name="Additional"] > span label[name="Date"] input,
 #pokémon-outer > main section[name="Party"] div aside[name*=",Electric"] > span[name="Additional"] > span label[name="Date"] input,
 #pokémon-outer > main section[name="Party"] div aside[name*=",Ice"] > span[name="Additional"] > span label[name="Date"] input  {
@@ -8890,8 +8928,7 @@ span[name="Status"] {
 	text-align: center;
 }
 
-#map-description-trainer-bottom li div[name="Individual Values"],
-#map-description-trainer-bottom li div[name="Effort Values"] {
+#map-description-trainer-bottom li div[name="Stats"] {
 	display: none;
 }
 
