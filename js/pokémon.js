@@ -318,20 +318,14 @@ var createPokémon = function() {
         teamExport.addEventListener("change", selectModify);
 
 
-        if (GameID >= 31 && GameID <= 32) {
-            var dataOptions = ["Moves","Individual Values","Awakening Values","Additional"];
-        }
-        else {
-            var dataOptions = ["Moves","Individual Values","Effort Values","Additional"];
-        }
+        var dataOptions = ["Moves","Stats","Additional"];
+    
+      
         for (var u = 0; u < dataOptions.length; u++) {
             var teamData = document.createElement("span");
-            if (dataOptions[u] == "Awakening Values") {
-                teamData.setAttribute("name","Effort Values");
-            }
-            else {
-                teamData.setAttribute("name",dataOptions[u]);
-            }
+     
+            teamData.setAttribute("name",dataOptions[u]);
+            
             teamData.classList.add("scroll");
             teamAside1.appendChild(teamData);
 
@@ -339,13 +333,13 @@ var createPokémon = function() {
                 var teamDataInner = document.createElement("span");
                 teamData.appendChild(teamDataInner);
 
-                if (y == 2 && dataOptions[u].includes("Values") && natureTemp.length > 0) {
+                if (y == 2 && dataOptions[u] == "Stats" && natureTemp.length > 0) {
                     teamDataInner.setAttribute("name","Nature");
                 }
                 if (y == 2 && dataOptions[u] == "Moves" && Ability.length > 0) {
                     teamDataInner.setAttribute("name","Ability");
                 }
-                if (y == 2 && dataOptions[u].includes("Values") && natureTemp.length < 1) {
+                if (y == 2 && dataOptions[u] == "Stats" && natureTemp.length < 1) {
                     teamDataInner.remove();
                 }
                 if (y == 2 && dataOptions[u] == "Moves" && Ability.length < 1) {
@@ -362,8 +356,11 @@ var createPokémon = function() {
                     teamDataInner.appendChild(teamDataTitle);
                 }
 
-                else if (y == 1 && u >= 1 && u <= 2) {
-                    for (var r = 0; r < 2; r++) {
+                else if (y == 1 && dataOptions[u] == "Stats") {
+                    
+                    
+               
+                    for (var r = 0; r < 4; r++) {
                         var teamDataStats = document.createElement("span");
                         teamDataInner.appendChild(teamDataStats);
                         for (var q = 0; q < Stats.length; q++) {
@@ -371,8 +368,11 @@ var createPokémon = function() {
                                 var teamDataInput = document.createElement("input");
                                 teamDataInput.setAttribute("type","number");
 
-                                if (u == 1 && r == 0) {
-                                    teamDataInput.setAttribute("placeholder",Stats[q]+" IV");
+                                if (r == 1) {
+                                    teamDataStats.setAttribute("name","IV");
+
+                                    teamDataInput.setAttribute("placeholder","IV");
+                                    teamDataInput.setAttribute("title",Stats[q]+" Individual Value");
                                     if (Generation >= 1 && Generation <= 2) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","15");
@@ -383,30 +383,36 @@ var createPokémon = function() {
                                     }
                                     teamDataInput.addEventListener("change", inputMinMax);
                                 }
-                                else if (u == 2 && r == 0) {
+                                else if (r == 2) {
+                                    teamDataStats.setAttribute("name","EV");
+
                                     if (Generation >= 1 && Generation <= 2) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","65535");
-                                        teamDataInput.setAttribute("placeholder",Stats[q]+" EV");
+                                        teamDataInput.setAttribute("placeholder","EV");
+                                        teamDataInput.setAttribute("title",Stats[q]+" Effort Value");
                                     }
                                     else if (GameID >= 31 && GameID <= 32) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","200");
-                                        teamDataInput.setAttribute("placeholder",Stats[q]+" AV");
+                                        teamDataInput.setAttribute("placeholder","AV");
+                                        teamDataInput.setAttribute("title",Stats[q]+" Awakening Value");
                                     }
                                     else if (Generation >= 3) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","255");
-                                        teamDataInput.setAttribute("placeholder",Stats[q]+" EV");
+                                        teamDataInput.setAttribute("placeholder","EV");
+                                        teamDataInput.setAttribute("title",Stats[q]+" Effort Value");
                                         teamDataInput.addEventListener("blur", evInputMax);
                                         teamDataInput.addEventListener("focus", evInputMax);
                                         teamDataInput.addEventListener("change", evInputMax);
                                     }
                                     teamDataInput.addEventListener("change", inputMinMax);
                                 }
-                                if (r == 1) {
+                                else {
                                     teamDataInput.setAttribute("min","0");
                                     teamDataInput.setAttribute("max","0");
+                                    teamDataInput.setAttribute("placeholder",Stats[q]+":")
                                     teamDataInput.addEventListener("change", inputMinMax);
                                     teamDataInput.setAttribute("title",Stats[q]);
                                     teamDataInput.setAttribute("disabled","");
@@ -420,7 +426,7 @@ var createPokémon = function() {
                     }
                 }
 
-                else if (y == 1 && u == 3) {
+                else if (y == 1 && dataOptions[u] == "Additional") {
                     var teamDataAddOuter = document.createElement("span");
                     teamDataInner.appendChild(teamDataAddOuter);
                     
