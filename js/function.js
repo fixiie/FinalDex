@@ -688,14 +688,16 @@ function getTutorData(val,column) {
 function getApplicable(val) {
 	var val;
 
-	if (val == GameName) {
-		return true;
-	}
-	else if (val.includes(GameName+",")) {
-		return true;
-	}
-	else if (val.includes(","+GameName)) {
-		return true;
+	if (val != undefined) {
+		if (val == GameName) {
+			return true;
+		}
+		else if (val.includes(GameName+",")) {
+			return true;
+		}
+		else if (val.includes(","+GameName)) {
+			return true;
+		}
 	}
 	return false;
 }
