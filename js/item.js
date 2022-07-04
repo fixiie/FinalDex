@@ -163,7 +163,12 @@ var createItem = function() {
 				itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelImageOuter);
 				itemAside1OptionsLabelImageOuter.appendChild(itemAside1OptionsLabelImage);
 			}
-			itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+			if (getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items]) != undefined) {
+				itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items]+" ("+getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items])+")";
+			}
+			else {
+				itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+			}
 			itemAside1Options.appendChild(itemAside1OptionsInput);
 			itemAside1Options.appendChild(itemAside1OptionsLabel);
 
@@ -214,20 +219,27 @@ var createItem = function() {
 			destexts[q].remove();
 		}
 
-
-		for(var q = 0; q < finaldataItemsDescription.length; q++) {
-			if (finaldataItemsDescription[q]["Item"] == item) {
-				if (getApplicable(finaldataItemsDescription[q]["Game"])) {
-					var check = true;
-					if (finaldataItemsDescription[q]["Index"] != undefined) {
-						check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index_"+JSONPath_Items];
-					}
-					if (check) {
-						var itemAside3DescriptionText = document.createElement("p");
-						itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
-						itemAside3Description.appendChild(itemAside3DescriptionText);
-						if(finaldataItemsDescription[q]["Version"] != undefined) {
-							itemAside3DescriptionText.title = finaldataItemsDescription[q]["Version"];
+		if (getMachineMove(item) != undefined) {
+			var itemAside3DescriptionText = document.createElement("p");
+			itemAside3DescriptionText.innerHTML = item+" contains the move <span name='Move'>"+getMachineMove(item)+"</span>.";
+			itemAside3Description.appendChild(itemAside3DescriptionText);
+			itemAside3DescriptionText.querySelector(":scope span").addEventListener("click",dataRedirect);
+		}
+		else {
+			for(var q = 0; q < finaldataItemsDescription.length; q++) {
+				if (finaldataItemsDescription[q]["Item"] == item) {
+					if (getApplicable(finaldataItemsDescription[q]["Game"])) {
+						var check = true;
+						if (finaldataItemsDescription[q]["Index"] != undefined) {
+							check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index_"+JSONPath_Items];
+						}
+						if (check) {
+							var itemAside3DescriptionText = document.createElement("p");
+							itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
+							itemAside3Description.appendChild(itemAside3DescriptionText);
+							if(finaldataItemsDescription[q]["Version"] != undefined) {
+								itemAside3DescriptionText.title = finaldataItemsDescription[q]["Version"];
+							}
 						}
 					}
 				}
