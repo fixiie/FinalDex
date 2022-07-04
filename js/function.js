@@ -689,14 +689,18 @@ function getApplicable(val) {
 	var val;
 
 	if (val != undefined) {
-		if (val == GameName) {
-			return true;
+		if (val.includes(",")) {
+			var valArr = val.split(",");
+			for (var q = 0; q < valArr.length; q++) {
+				if (valArr[q] == GameName) {
+					return true;
+				}
+			}
 		}
-		else if (val.includes(GameName+",")) {
-			return true;
-		}
-		else if (val.includes(","+GameName)) {
-			return true;
+		else {
+			if (val == GameName) {
+				return true;
+			}
 		}
 	}
 	return false;
