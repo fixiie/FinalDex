@@ -240,79 +240,7 @@ var createItem = function() {
 			lis[q].remove();
 		}
 
-
-
-		for(var q = 0; q < finaldataLocationItems.length; q++) {
-			if (getApplicable(finaldataLocationItems[q]["Game"])) {
-				if(finaldataLocationItems[q]["Item"] == item) {
-					var itemAside4SidebarLi = document.createElement("li");
-					itemAside4SidebarLi.setAttribute("name","Location")
-					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
-
-					var quantity = finaldataLocationItems[q]["Quantity"];
-
-					if (quantity == undefined) {
-						quantity = 1;
-					}
-					if (quantity > 10) {
-						quantity = 10;
-					}
-
-					var itemAside4SidebarLocation = document.createElement("span");
-					var itemAside4SidebarLocationText = document.createElement("h3");
-					itemAside4SidebarLocation.setAttribute("name","Location");
-					itemAside4SidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
-					itemAside4SidebarLocationText.setAttribute("name","Map")
-					itemAside4SidebarLocationText.setAttribute("title","Location");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarLocation);
-					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
-
-					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
-
-
-					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
-						var itemAside4SidebarAreaText = document.createElement("h6");
-						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
-						itemAside4SidebarLocation.appendChild(itemAside4SidebarAreaText);
-					}
-
-					var itemAside4SidebarDescription = document.createElement("span");
-					itemAside4SidebarDescription.setAttribute("name","Description");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
-
-					if (finaldataLocationItems[q]["Description"] != undefined) {
-						var itemAside4SidebarDescriptionText = document.createElement("p");
-						itemAside4SidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
-						itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
-						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
-					}
-
-					var itemAside4SidebarItem = document.createElement("span");
-					itemAside4SidebarItem.setAttribute("name","Item");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
-
-					for(var u = 0; u < quantity; u++) {
-						var itemAside4SidebarItemImg = document.createElement("img");
-						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
-						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
-						if (quantity != 1) { 
-							itemAside4SidebarItemImg.title = quantity+"x "+finaldataLocationItems[q]["Item"];
-						}
-						else {
-							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
-						}
-						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
-					}
-
-					var itemAside4SidebarItemText = document.createElement("p");
-					itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
-
-			
-				}
-			}
-		}
-
+		
 
 		for(var q = 0; q < finaldataPokémonHeldItem.length; q++) {
 			for(var u = 0; u < JSONPath_HeldItemPercentage.length; u++) {
@@ -353,19 +281,91 @@ var createItem = function() {
 
 					var itemAside4SidebarItemImg = document.createElement("img");
 					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
-					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";')
+					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
 					itemAside4SidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
 					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
-
-					var itemAside4SidebarItemText = document.createElement("p");
-					itemAside4SidebarItemText.innerText = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
-
 		
 				}
 			}
 			
 		}
+
+
+		for(var q = 0; q < finaldataLocationItems.length; q++) {
+			if (getApplicable(finaldataLocationItems[q]["Game"])) {
+				if(finaldataLocationItems[q]["Item"] == item) {
+					var itemAside4SidebarLi = document.createElement("li");
+					itemAside4SidebarLi.setAttribute("name","Location")
+					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+
+					var quantity = finaldataLocationItems[q]["Quantity"];
+
+					if (quantity == undefined) {
+						quantity = 1;
+					}
+					if (quantity > 10) {
+						quantity = 10;
+					}
+
+					var itemAside4SidebarLocation = document.createElement("span");
+					var itemAside4SidebarLocationText = document.createElement("h3");
+					itemAside4SidebarLocation.setAttribute("name","Location");
+					itemAside4SidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
+					itemAside4SidebarLocationText.setAttribute("name","Map")
+					itemAside4SidebarLocationText.setAttribute("title","Location");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarLocation);
+					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
+
+					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
+
+
+					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
+						var itemAside4SidebarAreaText = document.createElement("h6");
+						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+						itemAside4SidebarLocation.appendChild(itemAside4SidebarAreaText);
+					}
+
+
+
+					if (finaldataLocationItems[q]["Description"] != undefined) {
+						var itemAside4SidebarDescription = document.createElement("span");
+						itemAside4SidebarDescription.setAttribute("name","Description");
+						itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
+						var itemAside4SidebarDescriptionText = document.createElement("p");
+						itemAside4SidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
+						itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
+						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+					}
+
+					var itemAside4SidebarItem = document.createElement("span");
+					itemAside4SidebarItem.setAttribute("name","Item");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+
+					for(var u = 0; u < quantity; u++) {
+						var itemAside4SidebarItemImg = document.createElement("img");
+						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
+						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
+						if (quantity != 1) { 
+							itemAside4SidebarItemImg.title = quantity+"x "+finaldataLocationItems[q]["Item"];
+						}
+						else {
+							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
+						}
+						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+					}
+
+					var itemAside4SidebarItemText = document.createElement("p");
+					if (quantity != 1) { 
+						itemAside4SidebarItemText.innerText = quantity+"x";
+					}
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+
+			
+				}
+			}
+		}
+
+
 
 
 
