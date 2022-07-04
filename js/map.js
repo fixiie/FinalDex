@@ -517,7 +517,7 @@ var createMap = function() {
 					for(var y = 0; y < quantity; y++) {
 						var mapAside4DescriptionItemIcon = document.createElement("img");
 						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
-						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';this.parentElement.nextElementSibling.style.display = 'unset';");
+						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';");
 						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
 
 
@@ -536,7 +536,7 @@ var createMap = function() {
 						mapAside4DescriptionItemIconInner.appendChild(mapAside4DescriptionItemIcon);
 					}
 
-					var mapAside4DescriptionItemText = document.createElement("h5");
+					var mapAside4DescriptionItemText = document.createElement("h6");
 					mapAside4DescriptionItemText.innerText = items[u]["Item"];
 					mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
 		
