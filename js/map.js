@@ -501,11 +501,16 @@ var createMap = function() {
 					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemIconOuter);
 					mapAside4DescriptionItemIconOuter.addEventListener("click",dataRedirect)
 
+					if (items[u]["Quantity"] == undefined) {
+						items[u]["Quantity"] = 1;
+					}
 					for(var y = 0; y < items[u]["Quantity"]; y++) {
 						var mapAside4DescriptionItemIcon = document.createElement("img");
+						var mapAside4DescriptionItemText = document.createElement("h5");
 						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
-						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display = 'unset';");
 						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
+						mapAside4DescriptionItemText.innerText = items[u]["Item"];
 
 						if (items[u]["Quantity"] > 1) {
 							mapAside4DescriptionItemIcon.title = items[u]["Quantity"]+"x "+getItemIcon(items[u]["Item"]);
@@ -520,6 +525,7 @@ var createMap = function() {
 						}
 
 						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIcon);
+						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
 					}
 					var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
 					mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
