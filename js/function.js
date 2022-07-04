@@ -97,20 +97,23 @@ function getPokémonMediaPath(int,type) {
 	var type;
 	var arr = finaldataPokémonPath;
 	var result;
+	var column;
 
 	if(type == "Battle" || type == "Art") {
 		json = JSONPath_BattlePath;
+		column = "Battle";
 	}
 	else if (type == "Box") {
 		json = JSONPath_BoxPath;
+		column = "Box";
 	}
 
 	for(i = 0; i < arr.length; i++) {
 		if(i == int) {
-			if(arr[i][type+" Folder_"+json] == undefined) {
-				result = arr[i][type+" File_"+json];
+			if(arr[i][column+" Folder_"+json] == undefined) {
+				result = arr[i][column+" File_"+json];
 			} else {
-				result = arr[i][type+" Folder_"+json]+arr[i][type+" File_"+json];
+				result = arr[i][column+" Folder_"+json]+arr[i][column+" File_"+json];
 			}
 		}
 	}
