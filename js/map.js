@@ -493,6 +493,8 @@ var createMap = function() {
 
 			for(var u = 0; u < items.length; u++) {
 				if (items[u]["Area"] == itemArea[q]) {
+					var quantity = items[u]["Quantity"];
+
 					var mapAside4DescriptionItemLi = document.createElement("li");
 					var mapAside4DescriptionItemIconOuter = document.createElement("div");
 					mapAside4DescriptionItemIconOuter.setAttribute("name","Item");
@@ -501,19 +503,26 @@ var createMap = function() {
 					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemIconOuter);
 					mapAside4DescriptionItemIconOuter.addEventListener("click",dataRedirect)
 
-					if (items[u]["Quantity"] == undefined) {
-						items[u]["Quantity"] = 1;
+					if (quantity == undefined) {
+						quantity = 1;
 					}
-					for(var y = 0; y < items[u]["Quantity"]; y++) {
-						var mapAside4DescriptionItemIcon = document.createElement("img");
-						var mapAside4DescriptionItemText = document.createElement("h5");
-						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
-						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display = 'unset';");
-						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
-						mapAside4DescriptionItemText.innerText = items[u]["Item"];
+					if (quantity > 10) {
+						quantity = 10;
+					}
 
-						if (items[u]["Quantity"] > 1) {
-							mapAside4DescriptionItemIcon.title = items[u]["Quantity"]+"x "+getItemIcon(items[u]["Item"]);
+
+					var mapAside4DescriptionItemIconInner = document.createElement("span");
+					mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIconInner);
+
+					for(var y = 0; y < quantity; y++) {
+						var mapAside4DescriptionItemIcon = document.createElement("img");
+						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
+						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';this.parentElement.nextElementSibling.style.display = 'unset';");
+						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
+
+
+						if (quantity > 1) {
+							mapAside4DescriptionItemIcon.title = quantity+"x "+getItemIcon(items[u]["Item"]);
 						}
 						else {
 							mapAside4DescriptionItemIcon.title = getItemIcon(items[u]["Item"]);
@@ -524,23 +533,28 @@ var createMap = function() {
 							mapAside4DescriptionItemIcon.title += " (Hidden)";
 						}
 
-						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemIcon);
-						mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
+						mapAside4DescriptionItemIconInner.appendChild(mapAside4DescriptionItemIcon);
 					}
-					var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
-					mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
-					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemDescriptionOuter);
+
+					var mapAside4DescriptionItemText = document.createElement("h5");
+					mapAside4DescriptionItemText.innerText = items[u]["Item"];
+					mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
+		
 
 					if (items[u]["Description"] != undefined) {
+						var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
+						mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
+						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemDescriptionOuter);
 						var mapAside4DescriptionItemDescription = document.createElement("p");
 						mapAside4DescriptionItemDescription.innerText = items[u]["Description"];
 						mapAside4DescriptionItemDescriptionOuter.appendChild(mapAside4DescriptionItemDescription);
 					}
-					var mapAside4DescriptionItemMachineOuter = document.createElement("span");
-					mapAside4DescriptionItemMachineOuter.setAttribute("name","Machine");
-					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemMachineOuter);
+	
 
 					if (items[u]["Machine"] != undefined) {
+						var mapAside4DescriptionItemMachineOuter = document.createElement("span");
+						mapAside4DescriptionItemMachineOuter.setAttribute("name","Machine");
+						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemMachineOuter);
 						if (items[u]["Machine"].includes(",")) {
 							for(var y = 0; y < items[u]["Machine"].split(",").length; y++) {
 								var mapAside4DescriptionItemMachine = document.createElement("span");
