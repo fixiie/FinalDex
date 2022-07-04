@@ -1321,6 +1321,9 @@ input[type=radio] {
 #map-description-item ul li span[name="Description"] {
 	width: 100%;
 }
+#map-description-item ul li span[name="Description"] p {
+	padding: 0 10px;
+}
 #map-description-item ul li span[name="Machine"] {
 	width: 40%;
 	display: flex;
@@ -1432,7 +1435,7 @@ input[type=radio] {
 	justify-content: center;
 }
 
-#map-description-item ul li div,
+
 #map-description-tutor ul li div {
 	width: 20%;
 	display: flex;
@@ -1441,6 +1444,28 @@ input[type=radio] {
     justify-content: space-evenly;
 	overflow: auto;
 	cursor: pointer;
+}
+
+#map-description-item ul li div {
+	width: 20%;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+
+#map-description-item ul li div span {
+	width: 100%;
+	overflow: auto;
+	display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
 }
 
 #map-description-item ul li div img[name="Hidden"] {
@@ -1458,7 +1483,7 @@ input[type=radio] {
 
 #map-description-item ul li div h5 {
 	display:none;
-	text-align:center;
+	padding: 0 10px;
 }
 
 #map-description-pok ul li div:first-child img {
@@ -6985,8 +7010,9 @@ span[name="Status"] {
 .item-sidebar ul li span h3:active {
 	filter:brightness(0.8);
 }
-.item-sidebar ul li span[name="Location"] {
-	align-items: flex-start;
+.item-sidebar ul li span[name="Location"] h6 {
+	text-transform: uppercase;
+    padding-top: 5px;
 }
 
 
@@ -6996,10 +7022,10 @@ span[name="Status"] {
 .item-sidebar ul li[name="Location"] span[name="Location"] {
 	width: 50%;
 }
-.item-sidebar ul li span[name="Area"],
+
 .item-sidebar ul li span[name="Pokémon"],
 .item-sidebar ul li span[name="Item"] {
-	width: 20%;
+	width: 40%;
 }
 
 .item-sidebar ul li[name="Held"] span[name="Description"] {
