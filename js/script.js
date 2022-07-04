@@ -1691,7 +1691,7 @@ function partyDataSwitchAll() {
         var base2 = base[u].querySelectorAll(':scope > aside > span[name]');
         var base3 = base[u].querySelector(':scope > aside > span:last-child button');
 
-        var tempArr = ["Moves","Individual Values","Effort Values","Additional",""];
+        var tempArr = ["Moves","Stats","Additional",""];
         for (i = 0; i < tempArr.length; i++) {
             var base4 = base[u].querySelector(':scope > aside > span[name="'+tempArr[i]+'"]');
 
@@ -1920,11 +1920,8 @@ function partyDefault(base) {
     }
 
     if (Natures.length > 0) {
-        var baseStats1 = base.querySelector(':scope span[name="Individual Values"] > span:nth-child(2) > span:last-child');
-        var baseStats2 = base.querySelector(':scope span[name="Effort Values"] > span:nth-child(2) > span:last-child');
-        
-        baseStats1.removeAttribute("name");
-        baseStats2.removeAttribute("name");
+        var baseStats = base.querySelector(':scope span[name="Stats"] > span:nth-child(2) > span:last-child');
+        baseStats.removeAttribute("name");
     }
 
 }
@@ -2147,10 +2144,9 @@ function createParty(base,data) {
     var baseMoves = base.querySelectorAll(':scope span[name="Moves"] > span:nth-child(2) select');
     var baseAbility = base.querySelector(':scope span[name="Ability"] select');
     var baseNature = base.querySelectorAll(':scope span[name="Nature"] select');
-    var baseIV = base.querySelector(':scope span[name="Individual Values"] > span:nth-child(2) > span:first-child');
-    var baseEV = base.querySelector(':scope span[name="Effort Values"] > span:nth-child(2) > span:first-child');
-    var baseStats1 = base.querySelector(':scope span[name="Individual Values"] > span:nth-child(2) > span:last-child');
-    var baseStats2 = base.querySelector(':scope span[name="Effort Values"] > span:nth-child(2) > span:last-child');
+    var baseIV = base.querySelector(':scope span[name="Stats"] > span:nth-child(2) > span[name="IV"]');
+    var baseEV = base.querySelector(':scope span[name="Stats"] > span:nth-child(2) > span[name="EV"]');
+    var baseStats = base.querySelector(':scope span[name="Stats"] > span:nth-child(2) > span:last-child');
     var baseMetLocation = base.querySelector(':scope span[name="Additional"] label[name="Location"] select');
     var baseMetLevel = base.querySelector(':scope span[name="Additional"] label[name="Level"] input');
     var baseMetDate = base.querySelector(':scope span[name="Additional"] label[name="Date"] input');
@@ -2273,17 +2269,25 @@ function createParty(base,data) {
         var tempgender = returnData(i,"Gender Ratio","undefined");
 
         var possibleGender = [];
-        if (tempgender[0] == "0" && tempgender[1] == "0") {
-            possibleGender = ["☿"];
-        }
-        else if (tempgender[0] == "0") {
-            possibleGender = ["♀"];
-        }
-        else if (tempgender[1] == "0") {
+        if (getPokémonName(i).includes("Male")) {
             possibleGender = ["♂"];
         }
+        else if (getPokémonName(i).includes("Female")) {
+            possibleGender = ["♀"];
+        }
         else {
-            possibleGender = ["♂","♀"];
+            if (tempgender[0] == "0" && tempgender[1] == "0") {
+                possibleGender = ["☿"];
+            }
+            else if (tempgender[0] == "0") {
+                possibleGender = ["♀"];
+            }
+            else if (tempgender[1] == "0") {
+                possibleGender = ["♂"];
+            }
+            else {
+                possibleGender = ["♂","♀"];
+            }
         }
 
         if (possibleGender[0] == "♂") {
@@ -2423,8 +2427,7 @@ function createParty(base,data) {
             baseNature[q].value = nature;
         }
 
-        baseStats1.setAttribute("name",nature);
-        baseStats2.setAttribute("name",nature);
+        baseStats.setAttribute("name",nature);
     }
 
 
@@ -2488,11 +2491,13 @@ function createParty(base,data) {
         baseMetDate.style.color = null;
     }
     if (Friendship == true) {
-        if (friendship != undefined) {
-            baseFriendship.value = friendship;
-        }
-        else if (returnData(i,"Base Friendship","")[0] != undefined){
-            baseFriendship.value = returnData(i,"Base Friendship","")[0];
+        if (baseFriendship != null) {
+            if (friendship != undefined) {
+                baseFriendship.value = friendship;
+            }
+            else if (returnData(i,"Base Friendship","")[0] != undefined){
+                baseFriendship.value = returnData(i,"Base Friendship","")[0];
+            }
         }
     }
 
@@ -2769,8 +2774,7 @@ function selectModify(e) {
 
     if (this.parentElement.getAttribute("name") == "Nature") {
         var base = this.parentElement.parentElement.parentElement;
-        base.querySelector(':scope span[name="Individual Values"] > span:nth-child(2) > span:last-child').setAttribute("name",this.value);
-        base.querySelector(':scope span[name="Effort Values"] > span:nth-child(2) > span:last-child').setAttribute("name",this.value);
+        base.querySelector(':scope span[name="Stats"] > span:nth-child(2) > span:last-child').setAttribute("name",this.value);
     }
 
     if (this.parentElement.getAttribute("name") == "Ability") {
@@ -3086,8 +3090,8 @@ function getPartyData(base) {
 
     var nature = base.querySelectorAll(':scope > aside:first-child > span > span[name="Nature"] > select');
     var move = base.querySelectorAll(':scope > aside:first-child > span[name="Moves"] > span:nth-child(2) > span select');
-    var iv = base.querySelectorAll(':scope > aside:first-child > span[name="Individual Values"] > span:nth-child(2) > span:first-child > input');
-    var ev = base.querySelectorAll(':scope > aside:first-child > span[name="Effort Values"] > span:nth-child(2) > span:first-child > input');
+    var iv = base.querySelectorAll(':scope > aside:first-child > span[name="Stats"] > span:nth-child(2) > span[name="IV"] > input');
+    var ev = base.querySelectorAll(':scope > aside:first-child > span[name="Stats"] > span:nth-child(2) > span[name="EV"] > input');
 
     var metlocation = base.querySelector(':scope > aside:first-child > span[name="Additional"] label[name="Location"] select');
     var metlvl = base.querySelector(':scope > aside:first-child > span[name="Additional"] label[name="Level"] input');
@@ -3505,61 +3509,60 @@ function calcPartyStat(divBase) {
 
     var int = getPokémonInt(div.querySelector(':scope span[name="Pokémon"] img[value]').title)
     var level = div.querySelector(':scope aside > span:first-child input[type="number"]')
-    var ivs = div.querySelectorAll(':scope aside > span[name="Individual Values"] > span:nth-child(2) > span:first-child input[type="number"]');
-    var evs = div.querySelectorAll(':scope aside > span[name="Effort Values"] > span:nth-child(2) > span:first-child input[type="number"]');
+    var ivs = div.querySelectorAll(':scope aside > span[name="Stats"] > span:nth-child(2) > span[name="IV"] input[type="number"]');
+    var evs = div.querySelectorAll(':scope aside > span[name="Stats"] > span:nth-child(2) > span[name="EV"] input[type="number"]');
     var natures = div.querySelectorAll(':scope aside span[name="Nature"] select');
     var friendships = div.querySelector(':scope aside label[name="Friendship"] input');
+ 
+    var res = div.querySelectorAll(':scope aside > span[name="Stats"] > span:nth-child(2) > span:last-child input[type="number"]');
 
-    var ivev = ["Individual Values","Effort Values"];
 
-    for (var q = 0; q < ivev.length; q++) {
-        var res = div.querySelectorAll(':scope aside > span[name="'+ivev[q]+'"] > span:nth-child(2) > span:last-child input[type="number"]');
+    for (var i = 0; i < res.length; i++) {
 
-        for (var i = 0; i < res.length; i++) {
+        var stat = Stats[i];
+ 
 
-            var stat = evs[i].placeholder.replaceAll(" EV","");
+        var lvl = level.value;
+        var base = returnData(int,"Base Stats "+stat,"")[0];
+        var iv = ivs[i].value
+        var ev = evs[i].value
+        var nature;
+        var friendship;
 
-            var lvl = level.value;
-            var base = returnData(int,"Base Stats "+stat,"")[0];
-            var iv = ivs[i].value
-            var ev = evs[i].value
-            var nature;
-            var friendship;
+        if (Natures.length > 0) {
+            nature = natureModifier(stat,natures[0].value);
+        }
+        else {
+            nature = 1;
+        }
 
-            if (Natures.length > 0) {
-                nature = natureModifier(stat,natures[0].value);
+        if (Friendship == true) {
+            if (friendships.value != undefined && friendships.value != "") {
+                friendship = friendshipModifer(friendships.value);
             }
             else {
-                nature = 1;
-            }
-
-            if (Friendship == true) {
-                if (friendships.value != undefined && friendships.value != "") {
-                    friendship = friendshipModifer(friendships.value);
-                }
-                else {
-                    friendship = 1;
-                }
-            }
-
-            if (lvl != "") {
-                if (iv == "") {
-                    iv = 0;
-                }
-                if (ev == "") {
-                    ev = 0;
-                }
-                res[i].setAttribute("min",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-                res[i].setAttribute("max",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-                res[i].value = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
-            }
-            else {
-                res[i].setAttribute("min","0");
-                res[i].setAttribute("max","0");
-                res[i].value = 0;
+                friendship = 1;
             }
         }
+
+        if (lvl != "") {
+            if (iv == "") {
+                iv = 0;
+            }
+            if (ev == "") {
+                ev = 0;
+            }
+            res[i].setAttribute("min",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
+            res[i].setAttribute("max",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
+            res[i].value = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
+        }
+        else {
+            res[i].setAttribute("min","0");
+            res[i].setAttribute("max","0");
+            res[i].value = 0;
+        }
     }
+    
 
 
 
