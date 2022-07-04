@@ -1456,6 +1456,11 @@ input[type=radio] {
 	margin: 0 -90%;
 }
 
+#map-description-item ul li div h5 {
+	display:none;
+	text-align:center;
+}
+
 #map-description-pok ul li div:first-child img {
 	cursor:pointer;
 }
@@ -6939,7 +6944,7 @@ span[name="Status"] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 4px 0;
+    padding: 15px 0;
     border-bottom: 1px dotted;
 }
 
