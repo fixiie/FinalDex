@@ -801,8 +801,13 @@ function dataRedirect() {
             tar.click();
             tar.scrollIntoView();
         }
-        else {
-            alert("Could not find "+type+".")
+        else if (!notval.includes(this.innerText)) {
+            if (type == "map") {
+                alert("Could not find location.")
+            }
+            else {
+                alert("Could not find "+type+".")
+            }
         }
     }
 
