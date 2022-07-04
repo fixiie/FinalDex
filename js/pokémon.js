@@ -372,7 +372,7 @@ var createPokémon = function() {
                                     teamDataStats.setAttribute("name","IV");
 
                                     teamDataInput.setAttribute("placeholder","IV");
-                                    teamDataInput.setAttribute("title",Stats[q]+" Individual Value");
+                                    teamDataInput.setAttribute("title","Individual Value"+"\n"+Stats[q]);
                                     if (Generation >= 1 && Generation <= 2) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","15");
@@ -390,19 +390,19 @@ var createPokémon = function() {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","65535");
                                         teamDataInput.setAttribute("placeholder","EV");
-                                        teamDataInput.setAttribute("title",Stats[q]+" Effort Value");
+                                        teamDataInput.setAttribute("title","Effort Value"+"\n"+Stats[q]);
                                     }
                                     else if (GameID >= 31 && GameID <= 32) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","200");
                                         teamDataInput.setAttribute("placeholder","AV");
-                                        teamDataInput.setAttribute("title",Stats[q]+" Awakening Value");
+                                        teamDataInput.setAttribute("title","Awakening Value"+"\n"+Stats[q]);
                                     }
                                     else if (Generation >= 3) {
                                         teamDataInput.setAttribute("min","0");
                                         teamDataInput.setAttribute("max","255");
                                         teamDataInput.setAttribute("placeholder","EV");
-                                        teamDataInput.setAttribute("title",Stats[q]+" Effort Value");
+                                        teamDataInput.setAttribute("title","Effort Value"+"\n"+Stats[q]);
                                         teamDataInput.addEventListener("blur", evInputMax);
                                         teamDataInput.addEventListener("focus", evInputMax);
                                         teamDataInput.addEventListener("change", evInputMax);
