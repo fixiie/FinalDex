@@ -249,19 +249,14 @@ var createItem = function() {
 					itemAside4SidebarLi.setAttribute("name","Location")
 					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
 
-					var itemAside4SidebarArea = document.createElement("span");
-					itemAside4SidebarArea.setAttribute("name","Area");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarArea);
+					var quantity = finaldataLocationItems[q]["Quantity"];
 
-					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
-						var itemAside4SidebarAreaHeader = document.createElement("h4");
-						var itemAside4SidebarAreaText = document.createElement("p");
-						itemAside4SidebarAreaHeader.innerText = "Area:";
-						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
-						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaHeader);
-						itemAside4SidebarArea.appendChild(itemAside4SidebarAreaText);
+					if (quantity == undefined) {
+						quantity = 1;
 					}
-
+					if (quantity > 10) {
+						quantity = 10;
+					}
 
 					var itemAside4SidebarLocation = document.createElement("span");
 					var itemAside4SidebarLocationText = document.createElement("h3");
@@ -273,6 +268,13 @@ var createItem = function() {
 					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
 
 					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
+
+
+					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
+						var itemAside4SidebarAreaText = document.createElement("h6");
+						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+						itemAside4SidebarLocation.appendChild(itemAside4SidebarAreaText);
+					}
 
 					var itemAside4SidebarDescription = document.createElement("span");
 					itemAside4SidebarDescription.setAttribute("name","Description");
@@ -289,11 +291,16 @@ var createItem = function() {
 					itemAside4SidebarItem.setAttribute("name","Item");
 					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
 
-					for(var u = 0; u < finaldataLocationItems[q]["Quantity"]; u++) {
+					for(var u = 0; u < quantity; u++) {
 						var itemAside4SidebarItemImg = document.createElement("img");
 						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
 						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
-						itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+						if (quantity != 1) { 
+							itemAside4SidebarItemImg.title = quantity+"x "+finaldataLocationItems[q]["Item"];
+						}
+						else {
+							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
+						}
 						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
 					}
 
