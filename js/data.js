@@ -464,7 +464,7 @@ var createData = function(id, i) {
 	var dataAside2MetadataPopupList = document.createElement("ul");
 	dataAside2MetadataPopup.classList.add("data-popup");
 	dataAside2MetadataPopupListOuter.setAttribute("name","list");
-	dataAside2MetadataPopupSpan1Icon.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'")
+	dataAside2MetadataPopupSpan1Icon.setAttribute("onerror","this.style.display='none'")
 	dataAside2MetadataPopupTitleExit1.innerHTML = "<p>«</p>";
 	dataAside2MetadataPopupTitleExit1.setAttribute("name","up");
 	dataAside2MetadataPopupTitleExit2.innerHTML = "<p>»</p>";
@@ -571,13 +571,19 @@ var createData = function(id, i) {
 		dataAside2MetadataSidebarHeldItem.classList.add("data-sidebar-helditem-img-outer");
 		dataAside2MetadataSidebarHeldItemOuter.appendChild(dataAside2MetadataSidebarHeldItem);
 		for(q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
+			var dataAside2MetadataSidebarHeldItemIcon = document.createElement("span");
 			var dataAside2MetadataSidebarHeldItemImg = document.createElement("img");
+			var dataAside2MetadataSidebarHeldItemText = document.createElement("h5");
+			dataAside2MetadataSidebarHeldItemIcon.setAttribute("name", JSONPath_HeldItemPercentage[q]);
+			dataAside2MetadataSidebarHeldItemIcon.setAttribute("dataname","value");
 			dataAside2MetadataSidebarHeldItemImg.src = "";
 			dataAside2MetadataSidebarHeldItemImg.title = "";
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("name", JSONPath_HeldItemPercentage[q]);
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("dataname","value");
-			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemImg);
+			dataAside2MetadataSidebarHeldItemImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+			dataAside2MetadataSidebarHeldItemText.innerText = "";
+			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemIcon);
+			dataAside2MetadataSidebarHeldItemIcon.appendChild(dataAside2MetadataSidebarHeldItemImg);
+			dataAside2MetadataSidebarHeldItemIcon.appendChild(dataAside2MetadataSidebarHeldItemText);
+
 		}
 	}
     dataAside1TypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
@@ -606,7 +612,7 @@ var createData = function(id, i) {
     }
 	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield,"Experience Yield","Custom1");});
 	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate,"Leveling Rate","Single");});
-	var helditm = document.querySelectorAll("#data-modal"+id+" .data-sidebar-helditem-img-outer > img");
+	var helditm = document.querySelectorAll("#data-modal"+id+" .data-sidebar-helditem-img-outer > span");
 	for(q = 0; q < helditm.length; q++) {
 		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem,"Held Item","Single");});
 	}
