@@ -157,7 +157,7 @@ function callPopUp(x, arr, type, style) {
 		}
 	}
 	if(type == "Held Item") {
-		icon = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(target.title)+".png";
+		icon = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(target.getAttribute("value"))+".png";
 		iconpath.setAttribute("name","Item");
 		iconpath.addEventListener("click", dataRedirect);
 	}
@@ -1375,11 +1375,13 @@ function loadData() {
     if (HeldItem == true) {
         for(var q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
             if(returnData(i,"Held Item","")[q] != undefined) {
-                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
-                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("title", returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').style.display = "unset";
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').setAttribute("title", returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "unset";
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] h5').innerText = returnData(i,"Held Item","")[q];
             } else {
-                helditem.querySelector(':scope > div img[name="'+JSONPath_HeldItemPercentage[q]+'"]').style.display = "none";
+                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "none";
             }
         }
         var heldcheck;
@@ -4122,6 +4124,7 @@ function fullscreenIMG(imgs,x) {
         imgBox.appendChild(img);        
         
         img.addEventListener("mousedown",function(event){if(event.button === 1){exitFullscreen()}});
+        img.addEventListener("click",function(event){classSwitches("zoom",base.querySelectorAll(":scope img"))});
     }
 
     base.classList.add("open");
