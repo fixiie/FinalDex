@@ -446,25 +446,33 @@ var createMap = function() {
 			mapAside4DescriptionOviewButtonRightButton.style.removeProperty("display");
 		}
 	
-
-
 		for(var q = 0; q < items.length; q++) {
-			if (items[q]["Area"] == undefined) {
-				items[q]["Area"] = "a";
+			if (items[q]["Area"] != undefined && items[q]["Title"] != undefined) {
+				items[q]["Sort"] = items[q]["Area"]+" "+items[q]["Title"];
+			}
+			else if (items[q]["Area"] == undefined && items[q]["Title"] != undefined) {
+				items[q]["Sort"] = items[q]["Title"];
+			}
+			else if (items[q]["Area"] != undefined && items[q]["Title"] == undefined) {
+				items[q]["Sort"] = items[q]["Area"];
+			}
+			else {
+				items[q]["Sort"] = "a";
 			}
 		}
 
-		items = sortObjectArray(items, "Area");
+
+		items = sortObjectArray(items, "Sort");
 
 		for(var q = 0; q < items.length; q++) {
-			if (items[q]["Area"] == "a") {
-				items[q]["Area"] = location;
+			if (items[q]["Sort"] == "a") {
+				items[q]["Sort"] = location;
 			}
 		}
 
 		var itemArea = [];
 		for(var q = 0; q < items.length; q++) {
-			itemArea.push(items[q]["Area"]);
+			itemArea.push(items[q]["Sort"]);
 		}
 		itemArea = [...new Set(itemArea)];
 
@@ -492,7 +500,7 @@ var createMap = function() {
 			ul = mapAside4DescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
 
 			for(var u = 0; u < items.length; u++) {
-				if (items[u]["Area"] == itemArea[q]) {
+				if (items[u]["Sort"] == itemArea[q]) {
 					var quantity = items[u]["Quantity"];
 
 					var mapAside4DescriptionItemLi = document.createElement("li");
@@ -522,13 +530,13 @@ var createMap = function() {
 
 
 						if (quantity > 1) {
-							mapAside4DescriptionItemIcon.title = quantity+"x "+getItemIcon(items[u]["Item"]);
+							mapAside4DescriptionItemIcon.title = quantity+"x "+items[u]["Item"];
 						}
 						else {
-							mapAside4DescriptionItemIcon.title = getItemIcon(items[u]["Item"]);
+							mapAside4DescriptionItemIcon.title = items[u]["Item"];
 						}
 
-						if (items[u]["Additional"] == "Hidden") {
+						if (items[u]["Hidden"] == "Hidden") {
 							mapAside4DescriptionItemIcon.setAttribute("name","Hidden");
 							mapAside4DescriptionItemIcon.title += " (Hidden)";
 						}
@@ -1186,7 +1194,12 @@ var createMap = function() {
 				var mapAside4DescriptionTrainerLi = document.createElement("li");
 				mapAside4DescriptionTrainerUlContent.appendChild(mapAside4DescriptionTrainerLi);
 
-				mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall"+datas.length+".png";
+				if (datas.length > 6) {
+					mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall6.png";
+				}
+				else {
+					mapAside4DescriptionTrainerUlTopTitleCountImg.src = "./media/Images/Misc/FinalDex/TrainerBall"+datas.length+".png";
+				}
 				
 				if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
 					var mapAside4DescriptionTrainerAdditional = document.createElement("div");
