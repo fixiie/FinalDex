@@ -707,6 +707,33 @@ function getApplicable(val) {
 }
 
 
+function classSwitches(cla,tar) {
+	var cla;
+	var tar;
+
+	for (var q = 0; q < tar.length; q++) {
+		if(tar[q].classList.contains(cla)) {
+			tar[q].classList.remove(cla);
+		}
+		else {
+			tar[q].classList.add(cla);
+		}
+	}
+}
+
+function classSwitch(cla) {
+	var cla;
+	var tar = event.target;
+
+	if(tar.classList.contains(cla)) {
+		tar.classList.remove(cla);
+	}
+	else {
+		tar.classList.add(cla);
+	}
+	
+}
+
 
 function getItemIcon(item) {
     var item;
