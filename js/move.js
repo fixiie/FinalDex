@@ -26,11 +26,6 @@ var createMove = function() {
 	moveAside1OptionsSearchOuter.setAttribute("id", "move-options-search");
 	moveAside1OptionsSearch.setAttribute("type", "text");
 	moveAside1OptionsSearch.setAttribute("id", "move-search");
-	if(Generation == 8) {
-		moveAside1OptionsSearch.setAttribute("title", "Search options:\ntype:: [normal/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00/TR00]\ncontact:: [y/n]\ntutor:: [y/n]");
-	} else {
-		moveAside1OptionsSearch.setAttribute("title", "Search options:\ntype:: [normal/flying/...]\ncategory:: [physical/special/status]\npp:: [value]\npp:> [value]\npp:< [value]\npower:: [value]\npower:> [value]\npower:< [value]\naccuracy:: [value]\naccuracy:> [value]\naccuracy:< [value]\nmachine:: [TM00/HM00]\ncontact:: [y/n]\ntutor:: [y/n]");
-	}
 	moveAside1OptionsSearch.setAttribute("placeholder", "Search Moves...");
 	moveAside1OptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	moveAside1OptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
@@ -207,6 +202,20 @@ var createMove = function() {
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-name", "");
 			}
+			var moveset = returnMoveLearnset(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"");
+			if (moveset.length > 0) {
+				moveAside1OptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
+			}
+			else {
+				moveAside1OptionsLabel.setAttribute("data-search-learnset", "");
+			}
+
+			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].toLowerCase());
+			} else {
+				moveAside1OptionsLabel.setAttribute("data-search-priority", "");
+			}
+
 			if(finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
 			} else {
@@ -232,6 +241,12 @@ var createMove = function() {
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "");
 			}
+			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
+				moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].toLowerCase());
+			} else {
+				moveAside1OptionsLabel.setAttribute("data-search-priority", "");
+			}
+
 			if(finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
 				moveAside1OptionsLabel.setAttribute("data-search-contact", "y");
 			} else if(finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
@@ -263,6 +278,8 @@ var createMove = function() {
 			}
 		}
 	}
+
+	moveAside1OptionsSearch.title = searchOptionsTitle(moveAside1Options);
 
 	var searchLis = document.querySelectorAll("#move-options > label");
     searchMoveAttributes = [];
