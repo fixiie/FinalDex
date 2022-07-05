@@ -275,12 +275,10 @@ function initialize() {
 		createNav();
 		createPokémon();
 		createMechanic();
-		createExclusive();
 		createTool();
 		createMap();
 		createAbility();
 		createItem();
-		createType();
 		createMove();
 
 		countdown();
@@ -304,8 +302,6 @@ function initialize() {
 		
 		//var tempArr = [{Pokémon:"Charmander",Primary:"Monster",Secondary:"Dragon"},{Pokémon:"Charizard",Primary:"Dragon",Secondary:"Monster"},{Pokémon:"Blastoise",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Fearow",Primary:"Drake",Secondary:"Water"},{Pokémon:"Wartortle",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Squirtle",Primary:"Drake",Secondary:"Worgen"},{Pokémon:"Clefairy",Primary:"Fish",Secondary:"Water"},{Pokémon:"Psyduck",Primary:"Monster",Secondary:"Dragon"}]
 		///console.log(checkReturnDifferences(tempArr,["Primary","Secondary"],["Pokémon"]))
-
-
 
 
 	}
