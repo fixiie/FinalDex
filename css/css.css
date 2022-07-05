@@ -4738,7 +4738,8 @@ a {
 }
 
 #typechart-matrix .typechart thead tr th:nth-child(1) {
-	background: var(--color_70);
+	/*background: var(--color_70);*/
+	background: var(--color7);
 }
 
 .typechart th[title=""] {
@@ -4751,8 +4752,13 @@ a {
 }
 
 .typechart td[title="Normal Effectiveness"] {
+	/*
 	background: var(--color_90);
 	color: var(--fontDark);
+	*/
+
+	background: var(--color13);
+    color: var(--font1);
 }
 
 .typechart td[title="Super Effective"] {
@@ -5764,12 +5770,16 @@ a {
 #stopwatch-outer button,
 #countdown-outer button {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	color: var(--font2);
-	font-size: 1em;
-	border-top: 1px solid;
+    /* display: inline-block; */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--font2);
+    /* font-size: 1em; */
+    border-top: 1px solid;
+
+    /* color: var(--fontLight); */
+    
 }
 
 #stopwatch-set input,
@@ -5793,28 +5803,33 @@ a {
 
 #stopwatch-start-stop,
 #countdown-start-stop {
-	float: left;
 	height: 40%;
 	width: 100%;
-	font-size: 1.5em !important;
+	font-size: 2em;
+	color:var(--fontDark);
 }
 
-#stopwatch-laps,
-#countdown-laps {
-	float: left;
+#stopwatch-start-stop:active,
+#countdown-start-stop:active {
+	color:var(--fontLight);
 }
 
-#stopwatch-reset,
-#countdown-reset {
-	float: right;
-}
+
 
 #stopwatch-reset,
 #stopwatch-laps,
 #countdown-reset,
 #countdown-laps {
-	height: 10%;
-	width: 50%;
+	height: 100%;
+	width: 10%;
+	font-size: 80%;
+}
+
+#stopwatch-reset:active p,
+#stopwatch-laps:active p,
+#countdown-reset:active p,
+#countdown-laps:active p {
+	transform:scale(0.9);
 }
 
 #stopwatch-start-stop[title="Start"],
@@ -5832,32 +5847,39 @@ a {
 	color: var(--fontDark);
 }
 
-#stopwatch-laps,
-#countdown-laps {
-	background: var(--colorBlue);
-}
-
-#stopwatch-reset,
-#countdown-reset {
-	background: var(--colorBlue);
-}
 
 #stopwatch-time,
 #stopwatch-set,
 #countdown-time,
 #countdown-set {
 	font-size: 2em;
-	text-align: center;
-	width: 100%;
-	height: 60%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+
+#stopwatch-set > span,
+#countdown-set > span {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}	
+
+#stopwatch-set > span,
+#countdown-set > span {
+	width: 80%;
 }
 
 #stopwatch-time,
 #countdown-time {
 	display: none;
+	width: 80%;
+	font-size: 100%;
 }
 
 #stopwatch,
@@ -5871,7 +5893,7 @@ a {
 #stopwatch-list,
 #countdown-list {
 	width: 100%;
-	height: 60%;
+	height: 70%;
 	overflow-y: auto;
 	color: var(--font2);
 	list-style: none;
@@ -8631,6 +8653,10 @@ span[name="Status"] {
 #pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span[name="IV"],
 #pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span[name="EV"] {
 	width: 25%;
+}
+
+#pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:last-child input {
+	cursor:help;
 }
 
 #pokémon-outer > main section[name="Party"] div aside > span[name="Stats"] > span:nth-child(2) > span:first-child {
