@@ -33,36 +33,6 @@ var createPokémon = function() {
 	navigationSearchInput.setAttribute("onblur","this.placeholder = 'Search...'");
 	navigationSearchInput.setAttribute("autocomplete","off");
 	navigationSearchInput.setAttribute("tabindex","0");
-	var searchoptions = ["evolution:: [charizard/slowbro/...]","type:: [normal/fighting/...]","ability:: [static/shadow tag/...]","catchrate:: [value]","eggcycle:: [value]","genderratio:: [7:1/3:1/...]","egggroup:: [field/human-like/...]","expyield:: [value]","expyieldcategory:: [very high/medium/...]","levelrate:: [value]","learnset:: [leech seed/surf/...]","helditem:: [silver powder/sitrus berry/...]","variant:: [default/form/...]","statshp:: [value]","...","evhp:: [value]","..."];
-	if(Ability.length <= 0) {
-		for(var q = 0; q < searchoptions.length; q++) {
-			if(searchoptions[q].includes("ability")) {
-				searchoptions.splice(q, 1);
-			}
-		}
-	}
-	if(Egg != true) {
-		for(var q = 0; q < searchoptions.length; q++) {
-			if(searchoptions[q].includes("egg")) {
-				searchoptions.splice(q, 1);
-			}
-		}
-	}
-	if(Gender != true) {
-		for(var q = 0; q < searchoptions.length; q++) {
-			if(searchoptions[q].includes("gender")) {
-				searchoptions.splice(q, 1);
-			}
-		}
-	}
-	if(HeldItem != true) {
-		for(var q = 0; q < searchoptions.length; q++) {
-			if(searchoptions[q].includes("item")) {
-				searchoptions.splice(q, 1);
-			}
-		}
-	}
-	navigationSearchInput.setAttribute("title"," Search Options:"+"\n"+searchoptions.join("\n"));
 	navigationSearchExit.setAttribute("id","search-exit");
 	navigationCount.setAttribute("id","count-outer");
 	navigationCountContent.setAttribute("id","count");
@@ -1337,6 +1307,8 @@ function createContain(condition) {
         }
         conditions = [];
 	}
+
+    document.querySelector("#searchbar").title = searchOptionsTitle(document.querySelector("#pokémon-outer > div ul"));
 
     var searchLis = document.querySelectorAll("#pokémon-outer > div li");
     searchPokémonAttributes = [];
