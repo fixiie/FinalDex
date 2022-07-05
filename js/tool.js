@@ -44,162 +44,833 @@ var createTool = function() {
   toolAside2.appendChild(toolAside2Game);
   toolAside2Game.appendChild(toolAside2GameImage);
 
-	function capitalizeFirstLetter(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-	var stopwatchcountdown = ["stopwatch", "countdown"];
-	for(var q = 0; q < stopwatchcountdown.length; q++) {
-		var toolAside3TimerOuter = document.createElement("div");
-		var toolAside3Timer = document.createElement("div");
-		var toolAside3TimerPausePlay = document.createElement("button");
-		var toolAside3TimerTime = document.createElement("div");
-		var toolAside3TimerSet = document.createElement("div");
-		var toolAside3TimerSetSpan = document.createElement("span");
-		var toolAside3TimerSetInputHours = document.createElement("input");
-		var toolAside3TimerSetInputMinutes = document.createElement("input");
-		var toolAside3TimerSetInputSeconds = document.createElement("input");
-		var toolAside3TimerSetInputMilliseconds = document.createElement("input");
-		var toolAside3TimerList = document.createElement("ul");
-		var toolAside3TimerLaps = document.createElement("button");
-		var toolAside3TimerReset = document.createElement("button");
-		toolAside3TimerOuter.setAttribute("id", stopwatchcountdown[q] + "-outer");
-		toolAside3Timer.setAttribute("id", stopwatchcountdown[q]);
-		toolAside3TimerPausePlay.setAttribute("id", stopwatchcountdown[q] + "-start-stop");
-		toolAside3TimerPausePlay.setAttribute("title", "Start");
-		toolAside3TimerPausePlay.innerText = "\u23F5";
-		toolAside3TimerTime.setAttribute("id", stopwatchcountdown[q] + "-time");
-		toolAside3TimerSet.setAttribute("id", stopwatchcountdown[q] + "-set");
-		toolAside3TimerSetSpan;
-		toolAside3TimerSetInputHours.setAttribute("type", "number");
-		toolAside3TimerSetInputHours.setAttribute("min", "0");
-		toolAside3TimerSetInputHours.setAttribute("max", "9999");
-		toolAside3TimerSetInputHours.setAttribute("autocomplete", "off");
-		toolAside3TimerSetInputHours.setAttribute("placeholder", "00");
-		toolAside3TimerSetInputHours.setAttribute("title", "Hours");
-		toolAside3TimerSetInputHours.classList.add(stopwatchcountdown[q] + "-hours");
-		toolAside3TimerSetInputMinutes.setAttribute("type", "number");
-		toolAside3TimerSetInputMinutes.setAttribute("min", "0");
-		toolAside3TimerSetInputMinutes.setAttribute("max", "59");
-		toolAside3TimerSetInputMinutes.setAttribute("autocomplete", "off");
-		toolAside3TimerSetInputMinutes.setAttribute("placeholder", "00");
-		toolAside3TimerSetInputMinutes.setAttribute("title", "Minutes");
-		toolAside3TimerSetInputMinutes.classList.add(stopwatchcountdown[q] + "-minutes");
-		toolAside3TimerSetInputSeconds.setAttribute("type", "number");
-		toolAside3TimerSetInputSeconds.setAttribute("min", "0");
-		toolAside3TimerSetInputSeconds.setAttribute("max", "59");
-		toolAside3TimerSetInputSeconds.setAttribute("autocomplete", "off");
-		toolAside3TimerSetInputSeconds.setAttribute("placeholder", "00");
-		toolAside3TimerSetInputSeconds.setAttribute("title", "Seconds");
-		toolAside3TimerSetInputSeconds.classList.add(stopwatchcountdown[q] + "-seconds");
-		toolAside3TimerSetInputMilliseconds.setAttribute("type", "number");
-		toolAside3TimerSetInputMilliseconds.setAttribute("min", "0");
-		toolAside3TimerSetInputMilliseconds.setAttribute("max", "99");
-		toolAside3TimerSetInputMilliseconds.setAttribute("autocomplete", "off");
-		toolAside3TimerSetInputMilliseconds.setAttribute("placeholder", "00");
-		toolAside3TimerSetInputMilliseconds.setAttribute("title", "Milliseconds");
-		toolAside3TimerSetInputMilliseconds.classList.add(stopwatchcountdown[q] + "-milliseconds");
-		toolAside3TimerList.setAttribute("id", stopwatchcountdown[q] + "-list");
-		toolAside3TimerLaps.setAttribute("id", stopwatchcountdown[q] + "-laps");
-		toolAside3TimerLaps.setAttribute("title", "Laps");
-		toolAside3TimerLaps.innerText = "\u23F6";
-		toolAside3TimerReset.setAttribute("id", stopwatchcountdown[q] + "-reset");
-		toolAside3TimerReset.setAttribute("title", "Reset");
-		toolAside3TimerReset.innerText = "\u23F9";
-		toolAside3TimersOuter.appendChild(toolAside3TimerOuter);
-		toolAside3TimerOuter.appendChild(toolAside3Timer);
-		toolAside3Timer.appendChild(toolAside3TimerPausePlay);
-		toolAside3Timer.appendChild(toolAside3TimerTime);
-		toolAside3Timer.appendChild(toolAside3TimerSet);
-		toolAside3TimerSet.appendChild(toolAside3TimerSetSpan);
-		toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputHours);
-		toolAside3TimerSetSpan.innerHTML += ":";
-		toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMinutes);
-		toolAside3TimerSetSpan.innerHTML += ":";
-		toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputSeconds);
-		toolAside3TimerSetSpan.innerHTML += ":";
-		toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMilliseconds);
-		toolAside3TimerOuter.appendChild(toolAside3TimerList);
-		toolAside3TimerOuter.appendChild(toolAside3TimerLaps);
-		toolAside3TimerOuter.appendChild(toolAside3TimerReset);
-	}
-	for(var q = 0; q < stopwatchcountdown.length; q++) {
-		var x = q + 1;
-		var toolAside3TimerSelector = document.createElement("div");
-		var toolAside3TimerSelectorInput = document.createElement("input");
-		var toolAside3TimerSelectorLabel = document.createElement("label");
-		toolAside3TimerSelector.setAttribute("id", "timer-selector");
-		toolAside3TimerSelectorInput.setAttribute("type", "radio");
-		toolAside3TimerSelectorInput.setAttribute("id", "timerselector" + x);
-		toolAside3TimerSelectorInput.setAttribute("name", "timerselector");
-		toolAside3TimerSelectorInput.setAttribute("autocomplete", "off");
-		toolAside3TimerSelectorLabel.setAttribute("for", "timerselector" + x);
-		toolAside3TimerSelectorLabel.innerText = capitalizeFirstLetter(stopwatchcountdown[q]);
-		toolAside3TimerSelectorOuter.appendChild(toolAside3TimerSelector);
-		toolAside3TimerSelector.appendChild(toolAside3TimerSelectorInput);
-		toolAside3TimerSelector.appendChild(toolAside3TimerSelectorLabel);
-		if(q == 0) {
-			toolAside3TimerSelectorLabel.click();
+
+
+
+
+
+
+
+
+
+	function createTimer() {
+		var stopwatchcountdown = ["stopwatch", "countdown"];
+		for(var q = 0; q < stopwatchcountdown.length; q++) {
+			var toolAside3TimerOuter = document.createElement("div");
+			var toolAside3Timer = document.createElement("div");
+			var toolAside3TimerPausePlay = document.createElement("button");
+			var toolAside3TimerTime = document.createElement("div");
+			var toolAside3TimerSet = document.createElement("div");
+			var toolAside3TimerSetSpan = document.createElement("span");
+			var toolAside3TimerSetInputHours = document.createElement("input");
+			var toolAside3TimerSetInputMinutes = document.createElement("input");
+			var toolAside3TimerSetInputSeconds = document.createElement("input");
+			var toolAside3TimerSetInputMilliseconds = document.createElement("input");
+			var toolAside3TimerList = document.createElement("ul");
+			var toolAside3TimerLaps = document.createElement("button");
+			var toolAside3TimerReset = document.createElement("button");
+			toolAside3TimerOuter.setAttribute("id", stopwatchcountdown[q] + "-outer");
+			toolAside3Timer.setAttribute("id", stopwatchcountdown[q]);
+			toolAside3TimerPausePlay.setAttribute("id", stopwatchcountdown[q] + "-start-stop");
+			toolAside3TimerPausePlay.setAttribute("title", "Start");
+			toolAside3TimerPausePlay.innerText = "\u23F5";
+			toolAside3TimerTime.setAttribute("id", stopwatchcountdown[q] + "-time");
+			toolAside3TimerSet.setAttribute("id", stopwatchcountdown[q] + "-set");
+			toolAside3TimerSetSpan;
+			toolAside3TimerSetInputHours.setAttribute("type", "number");
+			toolAside3TimerSetInputHours.setAttribute("min", "0");
+			toolAside3TimerSetInputHours.setAttribute("max", "9999");
+			toolAside3TimerSetInputHours.setAttribute("autocomplete", "off");
+			toolAside3TimerSetInputHours.setAttribute("placeholder", "00");
+			toolAside3TimerSetInputHours.setAttribute("title", "Hours");
+			toolAside3TimerSetInputHours.classList.add(stopwatchcountdown[q] + "-hours");
+			toolAside3TimerSetInputMinutes.setAttribute("type", "number");
+			toolAside3TimerSetInputMinutes.setAttribute("min", "0");
+			toolAside3TimerSetInputMinutes.setAttribute("max", "59");
+			toolAside3TimerSetInputMinutes.setAttribute("autocomplete", "off");
+			toolAside3TimerSetInputMinutes.setAttribute("placeholder", "00");
+			toolAside3TimerSetInputMinutes.setAttribute("title", "Minutes");
+			toolAside3TimerSetInputMinutes.classList.add(stopwatchcountdown[q] + "-minutes");
+			toolAside3TimerSetInputSeconds.setAttribute("type", "number");
+			toolAside3TimerSetInputSeconds.setAttribute("min", "0");
+			toolAside3TimerSetInputSeconds.setAttribute("max", "59");
+			toolAside3TimerSetInputSeconds.setAttribute("autocomplete", "off");
+			toolAside3TimerSetInputSeconds.setAttribute("placeholder", "00");
+			toolAside3TimerSetInputSeconds.setAttribute("title", "Seconds");
+			toolAside3TimerSetInputSeconds.classList.add(stopwatchcountdown[q] + "-seconds");
+			toolAside3TimerSetInputMilliseconds.setAttribute("type", "number");
+			toolAside3TimerSetInputMilliseconds.setAttribute("min", "0");
+			toolAside3TimerSetInputMilliseconds.setAttribute("max", "99");
+			toolAside3TimerSetInputMilliseconds.setAttribute("autocomplete", "off");
+			toolAside3TimerSetInputMilliseconds.setAttribute("placeholder", "00");
+			toolAside3TimerSetInputMilliseconds.setAttribute("title", "Milliseconds");
+			toolAside3TimerSetInputMilliseconds.classList.add(stopwatchcountdown[q] + "-milliseconds");
+			toolAside3TimerList.setAttribute("id", stopwatchcountdown[q] + "-list");
+			toolAside3TimerLaps.setAttribute("id", stopwatchcountdown[q] + "-laps");
+			toolAside3TimerLaps.setAttribute("title", "Laps");
+			toolAside3TimerLaps.innerText = "\u23F6";
+			toolAside3TimerReset.setAttribute("id", stopwatchcountdown[q] + "-reset");
+			toolAside3TimerReset.setAttribute("title", "Reset");
+			toolAside3TimerReset.innerText = "\u23F9";
+			toolAside3TimersOuter.appendChild(toolAside3TimerOuter);
+			toolAside3TimerOuter.appendChild(toolAside3Timer);
+			toolAside3Timer.appendChild(toolAside3TimerPausePlay);
+			toolAside3Timer.appendChild(toolAside3TimerTime);
+			toolAside3Timer.appendChild(toolAside3TimerSet);
+			toolAside3TimerSet.appendChild(toolAside3TimerSetSpan);
+			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputHours);
+			toolAside3TimerSetSpan.innerHTML += ":";
+			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMinutes);
+			toolAside3TimerSetSpan.innerHTML += ":";
+			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputSeconds);
+			toolAside3TimerSetSpan.innerHTML += ":";
+			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMilliseconds);
+			toolAside3TimerOuter.appendChild(toolAside3TimerList);
+			toolAside3TimerOuter.appendChild(toolAside3TimerLaps);
+			toolAside3TimerOuter.appendChild(toolAside3TimerReset);
 		}
-		toolAside3TimerSelectorInput.addEventListener("click", timerSelector);
+		for(var q = 0; q < stopwatchcountdown.length; q++) {
+			var x = q + 1;
+			var toolAside3TimerSelector = document.createElement("div");
+			var toolAside3TimerSelectorInput = document.createElement("input");
+			var toolAside3TimerSelectorLabel = document.createElement("label");
+			toolAside3TimerSelector.setAttribute("id", "timer-selector");
+			toolAside3TimerSelectorInput.setAttribute("type", "radio");
+			toolAside3TimerSelectorInput.setAttribute("id", "timerselector" + x);
+			toolAside3TimerSelectorInput.setAttribute("name", "timerselector");
+			toolAside3TimerSelectorInput.setAttribute("autocomplete", "off");
+			toolAside3TimerSelectorLabel.setAttribute("for", "timerselector" + x);
+			toolAside3TimerSelectorLabel.innerText = titleCase(stopwatchcountdown[q]);
+			toolAside3TimerSelectorOuter.appendChild(toolAside3TimerSelector);
+			toolAside3TimerSelector.appendChild(toolAside3TimerSelectorInput);
+			toolAside3TimerSelector.appendChild(toolAside3TimerSelectorLabel);
+			if(q == 0) {
+				toolAside3TimerSelectorLabel.click();
+			}
+			toolAside3TimerSelectorInput.addEventListener("click", timerSelector);
+		}
 	}
-	var toolAside3RNGOuter = document.createElement("div");
-	var toolAside3RNG = document.createElement("div");
-	var toolAside3RNGOptions = document.createElement("div");
-	var toolAside3RNGOptionsIterations = document.createElement("div");
-	var toolAside3RNGOptionsIterationsText = document.createElement("p");
-	var toolAside3RNGOptionsIterationsInput = document.createElement("input");
-	var toolAside3RNGOptionsTitle = document.createElement("div");
-	var toolAside3RNGOptionsTitleIterations = document.createElement("div");
-	var toolAside3RNGOptionsTitleIterationsText = document.createElement("p");
-	var toolAside3RNGOptionsTitleMin = document.createElement("div");
-	var toolAside3RNGOptionsTitleMinText = document.createElement("p");
-	var toolAside3RNGOptionsTitleMax = document.createElement("div");
-	var toolAside3RNGOptionsTitleMaxText = document.createElement("p");
-	var toolAside3RNGOptionsUl = document.createElement("ul");
-	var toolAside3RNGOptionsExecute = document.createElement("div");
-	var toolAside3RNGOptionsExecuteButton = document.createElement("button");
-	var toolAside3RNGResult = document.createElement("div");
-	toolAside3RNGOuter.classList.add("rng-outer");
-	toolAside3RNGOuter.setAttribute("name", "1");
-	toolAside3RNG.setAttribute("id", "rng");
-	toolAside3RNGResult.classList.add("result");
-	toolAside3RNGResult.classList.add("scroll");
-	toolAside3RNGOptions.classList.add("options");
-	toolAside3RNGOptionsIterations.classList.add("iterations");
-	toolAside3RNGOptionsIterationsText.innerText = "Iterations";
-	toolAside3RNGOptionsIterationsInput.setAttribute("type", "number");
-	toolAside3RNGOptionsIterationsInput.setAttribute("min", "1");
-	toolAside3RNGOptionsIterationsInput.setAttribute("max", "1000");
-	toolAside3RNGOptionsIterationsInput.setAttribute("value", "1");
-	toolAside3RNGOptionsIterationsInput.setAttribute("autocomplete", "off");
-	toolAside3RNGOptionsTitle.classList.add("title");
-	toolAside3RNGOptionsTitleIterations.classList.add("it");
-	toolAside3RNGOptionsTitleIterationsText.innerText = "#";
-	toolAside3RNGOptionsTitleMin.classList.add("min");
-	toolAside3RNGOptionsTitleMinText.innerText = "Min";
-	toolAside3RNGOptionsTitleMax.classList.add("max");
-	toolAside3RNGOptionsTitleMaxText.innerText = "Max";
-	toolAside3RNGOptionsUl.classList.add("scroll");
-	toolAside3RNGOptionsExecute.classList.add("execute");
-	toolAside3RNGOptionsExecuteButton.innerText = "Generate Random Numbers";
-	toolAside3.appendChild(toolAside3RNGOuter);
-	toolAside3RNGOuter.appendChild(toolAside3RNG);
-	toolAside3RNG.appendChild(toolAside3RNGResult);
-	toolAside3RNG.appendChild(toolAside3RNGOptions);
-	toolAside3RNGOptions.appendChild(toolAside3RNGOptionsExecute);
-	toolAside3RNGOptionsExecute.appendChild(toolAside3RNGOptionsExecuteButton);
-	toolAside3RNGOptions.appendChild(toolAside3RNGOptionsIterations);
-	toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsText);
-	toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsInput);
-	toolAside3RNGOptions.appendChild(toolAside3RNGOptionsTitle);
-	toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleIterations);
-	toolAside3RNGOptionsTitleIterations.appendChild(toolAside3RNGOptionsTitleIterationsText);
-	toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMin);
-	toolAside3RNGOptionsTitleMin.appendChild(toolAside3RNGOptionsTitleMinText);
-	toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMax);
-	toolAside3RNGOptionsTitleMax.appendChild(toolAside3RNGOptionsTitleMaxText);
-	toolAside3RNGOptions.appendChild(toolAside3RNGOptionsUl);
-	var toolOptionsTitle = ["Timers","Random Number Generator"];
+
+	function createRNG() {
+		var toolAside3RNGOuter = document.createElement("div");
+		var toolAside3RNG = document.createElement("div");
+		var toolAside3RNGOptions = document.createElement("div");
+		var toolAside3RNGOptionsIterations = document.createElement("div");
+		var toolAside3RNGOptionsIterationsText = document.createElement("p");
+		var toolAside3RNGOptionsIterationsInput = document.createElement("input");
+		var toolAside3RNGOptionsTitle = document.createElement("div");
+		var toolAside3RNGOptionsTitleIterations = document.createElement("div");
+		var toolAside3RNGOptionsTitleIterationsText = document.createElement("p");
+		var toolAside3RNGOptionsTitleMin = document.createElement("div");
+		var toolAside3RNGOptionsTitleMinText = document.createElement("p");
+		var toolAside3RNGOptionsTitleMax = document.createElement("div");
+		var toolAside3RNGOptionsTitleMaxText = document.createElement("p");
+		var toolAside3RNGOptionsUl = document.createElement("ul");
+		var toolAside3RNGOptionsExecute = document.createElement("div");
+		var toolAside3RNGOptionsExecuteButton = document.createElement("button");
+		var toolAside3RNGResult = document.createElement("div");
+		toolAside3RNGOuter.classList.add("rng-outer");
+		toolAside3RNGOuter.setAttribute("name", "1");
+		toolAside3RNG.setAttribute("id", "rng");
+		toolAside3RNGResult.classList.add("result");
+		toolAside3RNGResult.classList.add("scroll");
+		toolAside3RNGOptions.classList.add("options");
+		toolAside3RNGOptionsIterations.classList.add("iterations");
+		toolAside3RNGOptionsIterationsText.innerText = "Iterations";
+		toolAside3RNGOptionsIterationsInput.setAttribute("type", "number");
+		toolAside3RNGOptionsIterationsInput.setAttribute("min", "1");
+		toolAside3RNGOptionsIterationsInput.setAttribute("max", "1000");
+		toolAside3RNGOptionsIterationsInput.setAttribute("value", "1");
+		toolAside3RNGOptionsIterationsInput.setAttribute("autocomplete", "off");
+		toolAside3RNGOptionsTitle.classList.add("title");
+		toolAside3RNGOptionsTitleIterations.classList.add("it");
+		toolAside3RNGOptionsTitleIterationsText.innerText = "#";
+		toolAside3RNGOptionsTitleMin.classList.add("min");
+		toolAside3RNGOptionsTitleMinText.innerText = "Min";
+		toolAside3RNGOptionsTitleMax.classList.add("max");
+		toolAside3RNGOptionsTitleMaxText.innerText = "Max";
+		toolAside3RNGOptionsUl.classList.add("scroll");
+		toolAside3RNGOptionsExecute.classList.add("execute");
+		toolAside3RNGOptionsExecuteButton.innerText = "Generate Random Numbers";
+		toolAside3.appendChild(toolAside3RNGOuter);
+		toolAside3RNGOuter.appendChild(toolAside3RNG);
+		toolAside3RNG.appendChild(toolAside3RNGResult);
+		toolAside3RNG.appendChild(toolAside3RNGOptions);
+		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsExecute);
+		toolAside3RNGOptionsExecute.appendChild(toolAside3RNGOptionsExecuteButton);
+		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsIterations);
+		toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsText);
+		toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsInput);
+		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsTitle);
+		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleIterations);
+		toolAside3RNGOptionsTitleIterations.appendChild(toolAside3RNGOptionsTitleIterationsText);
+		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMin);
+		toolAside3RNGOptionsTitleMin.appendChild(toolAside3RNGOptionsTitleMinText);
+		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMax);
+		toolAside3RNGOptionsTitleMax.appendChild(toolAside3RNGOptionsTitleMaxText);
+		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsUl);
+	}
+	function createType() {
+
+
+		var typeOuter = document.createElement("div");
+		var typeTitle = document.createElement("div");
+
+		var typeContent = document.createElement("div");
+		var typeContentTypechartMatrix = document.createElement("div");
+		var typeContentTypechartEffectiveness = document.createElement("div");
+		var typeContentTypechartIneffectiveness = document.createElement("div");
+		var typeContentTypechartImmunity = document.createElement("div");
+		var typeSidebar = document.createElement("div");
+		var typeSidebarDescription = document.createElement("div");
+		var typeSidebarDescriptionSelector = document.createElement("div");
+		var typeSidebarDescriptionTitleOuter = document.createElement("div");
+		var typeSidebarDescriptionTitleTitle = document.createElement("h1");
+		var typeSidebarDescriptionTitleImageOuter = document.createElement("div");
+		var typeSidebarDescriptionTitleImage = document.createElement("img");
+		var typeSidebarDescriptionAgainstOpposed = document.createElement("div");
+		var typeSidebarDescriptionAgainst = document.createElement("div");
+		var typeSidebarDescriptionAgainstEffective = document.createElement("div");
+		var typeSidebarDescriptionAgainstEffectiveTitle = document.createElement("h4");
+		var typeSidebarDescriptionAgainstEffectiveContain = document.createElement("data");
+		var typeSidebarDescriptionAgainstIneffective = document.createElement("div");
+		var typeSidebarDescriptionAgainstIneffectiveTitle = document.createElement("h4");
+		var typeSidebarDescriptionAgainstIneffectiveContain = document.createElement("data");
+		var typeSidebarDescriptionAgainstImmune = document.createElement("div");
+		var typeSidebarDescriptionAgainstImmuneTitle = document.createElement("h4");
+		var typeSidebarDescriptionAgainstImmuneContain = document.createElement("data");
+		var typeSidebarDescriptionAgainstDefault = document.createElement("div");
+		var typeSidebarDescriptionAgainstDefaultTitle = document.createElement("h4");
+		var typeSidebarDescriptionAgainstDefaultContain = document.createElement("data");
+		var typeSidebarDescriptionOpposed = document.createElement("div");
+		var typeSidebarDescriptionOpposedEffective = document.createElement("div");
+		var typeSidebarDescriptionOpposedEffectiveTitle = document.createElement("h4");
+		var typeSidebarDescriptionOpposedEffectiveContain = document.createElement("data");
+		var typeSidebarDescriptionOpposedIneffective = document.createElement("div");
+		var typeSidebarDescriptionOpposedIneffectiveTitle = document.createElement("h4");
+		var typeSidebarDescriptionOpposedIneffectiveContain = document.createElement("data");
+		var typeSidebarDescriptionOpposedImmune = document.createElement("div");
+		var typeSidebarDescriptionOpposedImmuneTitle = document.createElement("h4");
+		var typeSidebarDescriptionOpposedImmuneContain = document.createElement("data");
+		var typeSidebarDescriptionOpposedDefault = document.createElement("div");
+		var typeSidebarDescriptionOpposedDefaultTitle = document.createElement("h4");
+		var typeSidebarDescriptionOpposedDefaultContain = document.createElement("data");
+		typeOuter.setAttribute("id", "type-outer");
+		typeOuter.setAttribute("name", "2");
+
+
+		typeTitle.setAttribute("name", "Title");
+
+		typeContent.setAttribute("name", "Content");
+		typeContentTypechartMatrix.setAttribute("id", "typechart-matrix");
+		typeContentTypechartMatrix.setAttribute("name", "0");
+		typeContentTypechartMatrix.classList.add("scroll");
+		typeContentTypechartEffectiveness.setAttribute("id", "typechart-effective");
+		typeContentTypechartEffectiveness.setAttribute("name", "1");
+		typeContentTypechartEffectiveness.classList.add("scroll");
+		typeContentTypechartIneffectiveness.setAttribute("id", "typechart-ineffective");
+		typeContentTypechartIneffectiveness.setAttribute("name", "2");
+		typeContentTypechartIneffectiveness.classList.add("scroll");
+		typeContentTypechartImmunity.setAttribute("id", "typechart-immunity");
+		typeContentTypechartImmunity.setAttribute("name", "3");
+		typeContentTypechartImmunity.classList.add("scroll");
+		
+		typeSidebar.setAttribute("name", "Sidebar");
+		typeSidebarDescription.classList.add("type-description");
+		typeSidebarDescriptionSelector.classList.add("type-selector");
+		typeSidebarDescriptionTitleOuter.classList.add("type-description-title");
+		typeSidebarDescriptionTitleTitle;
+		typeSidebarDescriptionTitleImageOuter.classList.add("type-symbol-outer");
+		typeSidebarDescriptionTitleImage.classList.add("type-symbol");
+		typeSidebarDescriptionTitleImage.setAttribute("onerror", "this.style.display='none';");
+		typeSidebarDescriptionTitleImage.setAttribute("alt", MEDIAPath_Type_Icon);
+		typeSidebarDescriptionAgainstOpposed.classList.add("type-againstopposed");
+		typeSidebarDescriptionAgainst.classList.add("type-against");
+		typeSidebarDescriptionAgainst.classList.add("scroll");
+		typeSidebarDescriptionAgainstEffective.classList.add("type-effective");
+		typeSidebarDescriptionAgainstEffectiveTitle.setAttribute("title", "Super Effective when used by a Move with with following types:");
+		typeSidebarDescriptionAgainstEffectiveTitle.innerText = "Super Effective";
+		typeSidebarDescriptionAgainstEffectiveContain.classList.add("type-effective-content");
+		typeSidebarDescriptionAgainstEffectiveContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionAgainstIneffective.classList.add("type-ineffective");
+		typeSidebarDescriptionAgainstIneffectiveTitle.setAttribute("title", "Not Very Effective when used by a Move with with following types:");
+		typeSidebarDescriptionAgainstIneffectiveTitle.innerText = "Not Very Effective";
+		typeSidebarDescriptionAgainstIneffectiveContain.classList.add("type-ineffective-content");
+		typeSidebarDescriptionAgainstIneffectiveContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionAgainstImmune.classList.add("type-immune");
+		typeSidebarDescriptionAgainstImmuneTitle.setAttribute("title", "No Effect when used by a Move with following types:");
+		typeSidebarDescriptionAgainstImmuneTitle.innerText = "No Effect";
+		typeSidebarDescriptionAgainstImmuneContain.classList.add("type-immune-content");
+		typeSidebarDescriptionAgainstImmuneContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionAgainstDefault.classList.add("type-normal");
+		typeSidebarDescriptionAgainstDefaultTitle.setAttribute("title", "Normal Effectiveness when used by a Move with following types:");
+		typeSidebarDescriptionAgainstDefaultTitle.innerText = "Normal Effectiveness";
+		typeSidebarDescriptionAgainstDefaultContain.classList.add("type-default-content");
+		typeSidebarDescriptionAgainstDefaultContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionOpposed.classList.add("type-opposed");
+		typeSidebarDescriptionOpposed.classList.add("scroll");
+		typeSidebarDescriptionOpposedEffective.classList.add("type-effective");
+		typeSidebarDescriptionOpposedEffectiveTitle.setAttribute("title", "Super Effective when used against an opposing Pokémon with following types:");
+		typeSidebarDescriptionOpposedEffectiveTitle.innerText = "Super Effective";
+		typeSidebarDescriptionOpposedEffectiveContain.classList.add("type-effective-content");
+		typeSidebarDescriptionOpposedEffectiveContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionOpposedIneffective.classList.add("type-ineffective");
+		typeSidebarDescriptionOpposedIneffectiveTitle.setAttribute("title", "Not Very Effective when used against an opposing Pokémon with following types:");
+		typeSidebarDescriptionOpposedIneffectiveTitle.innerText = "Not Very Effective";
+		typeSidebarDescriptionOpposedIneffectiveContain.classList.add("type-ineffective-content");
+		typeSidebarDescriptionOpposedIneffectiveContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionOpposedImmune.classList.add("type-immune");
+		typeSidebarDescriptionOpposedImmuneTitle.setAttribute("title", "No Effect when used against an opposing Pokémon with following types:");
+		typeSidebarDescriptionOpposedImmuneTitle.innerText = "No Effect";
+		typeSidebarDescriptionOpposedImmuneContain.classList.add("type-immune-content");
+		typeSidebarDescriptionOpposedImmuneContain.value = MEDIAPath_Type_Text;
+		typeSidebarDescriptionOpposedDefault.classList.add("type-normal");
+		typeSidebarDescriptionOpposedDefaultTitle.setAttribute("title", "Normal Effectiveness when used against an opposing Pokémon with following types:");
+		typeSidebarDescriptionOpposedDefaultTitle.innerText = "Normal Effectiveness";
+		typeSidebarDescriptionOpposedDefaultContain.classList.add("type-default-content");
+		typeSidebarDescriptionOpposedDefaultContain.value = MEDIAPath_Type_Text;
+
+		toolAside3.appendChild(typeOuter);
+
+		typeOuter.appendChild(typeTitle);
+
+		typeOuter.appendChild(typeSidebar);
+
+		typeOuter.appendChild(typeContent);
+		typeContent.appendChild(typeContentTypechartMatrix);
+		typeContent.appendChild(typeContentTypechartEffectiveness);
+		typeContent.appendChild(typeContentTypechartIneffectiveness);
+		typeContent.appendChild(typeContentTypechartImmunity);
+
+
+
+
+		typeSidebar.appendChild(typeSidebarDescription);
+		typeSidebarDescription.appendChild(typeSidebarDescriptionTitleOuter);
+		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleTitle);
+		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleImageOuter);
+		typeSidebarDescriptionTitleImageOuter.appendChild(typeSidebarDescriptionTitleImage);
+		typeSidebarDescription.appendChild(typeSidebarDescriptionAgainstOpposed);
+		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionSelector);
+		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionAgainst);
+		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstEffective);
+		typeSidebarDescriptionAgainstEffective.appendChild(typeSidebarDescriptionAgainstEffectiveTitle);
+		typeSidebarDescriptionAgainstEffective.appendChild(typeSidebarDescriptionAgainstEffectiveContain);
+		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstIneffective);
+		typeSidebarDescriptionAgainstIneffective.appendChild(typeSidebarDescriptionAgainstIneffectiveTitle);
+		typeSidebarDescriptionAgainstIneffective.appendChild(typeSidebarDescriptionAgainstIneffectiveContain);
+		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstImmune);
+		typeSidebarDescriptionAgainstImmune.appendChild(typeSidebarDescriptionAgainstImmuneTitle);
+		typeSidebarDescriptionAgainstImmune.appendChild(typeSidebarDescriptionAgainstImmuneContain);
+		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstDefault);
+		typeSidebarDescriptionAgainstDefault.appendChild(typeSidebarDescriptionAgainstDefaultTitle);
+		typeSidebarDescriptionAgainstDefault.appendChild(typeSidebarDescriptionAgainstDefaultContain);
+		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionOpposed);
+		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedEffective);
+		typeSidebarDescriptionOpposedEffective.appendChild(typeSidebarDescriptionOpposedEffectiveTitle);
+		typeSidebarDescriptionOpposedEffective.appendChild(typeSidebarDescriptionOpposedEffectiveContain);
+		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedIneffective);
+		typeSidebarDescriptionOpposedIneffective.appendChild(typeSidebarDescriptionOpposedIneffectiveTitle);
+		typeSidebarDescriptionOpposedIneffective.appendChild(typeSidebarDescriptionOpposedIneffectiveContain);
+		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedImmune);
+		typeSidebarDescriptionOpposedImmune.appendChild(typeSidebarDescriptionOpposedImmuneTitle);
+		typeSidebarDescriptionOpposedImmune.appendChild(typeSidebarDescriptionOpposedImmuneContain);
+		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedDefault);
+		typeSidebarDescriptionOpposedDefault.appendChild(typeSidebarDescriptionOpposedDefaultTitle);
+		typeSidebarDescriptionOpposedDefault.appendChild(typeSidebarDescriptionOpposedDefaultContain);
+	
+		for(var i = 0; i < 2; i++) {
+			var typeSidebarDescriptionSelectorInput = document.createElement("input");
+			var typeSidebarDescriptionSelectorLabel = document.createElement("label");
+			typeSidebarDescriptionSelectorInput.setAttribute("type", "radio");
+			typeSidebarDescriptionSelectorInput.setAttribute("value", i);
+			typeSidebarDescriptionSelectorInput.setAttribute("name", "type-selector");
+			typeSidebarDescriptionSelectorInput.setAttribute("id", "type-selector" + i);
+			typeSidebarDescriptionSelectorInput.setAttribute("autocomplete", "off");
+			typeSidebarDescriptionSelectorLabel.setAttribute("for", "type-selector" + i);
+			if(i == 0) {
+				typeSidebarDescriptionSelectorInput.setAttribute("checked", "");
+				typeSidebarDescriptionSelectorInput.setAttribute("onclick", "this.parentElement.nextElementSibling.style.display='block';this.parentElement.nextElementSibling.nextElementSibling.style.display='none'");
+				typeSidebarDescriptionSelectorLabel.innerText = "Defending";
+			}
+			if(i == 1) {
+				typeSidebarDescriptionSelectorInput.setAttribute("onclick", "this.parentElement.nextElementSibling.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block'");
+				typeSidebarDescriptionSelectorLabel.innerText = "Attacking";
+			}
+			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorInput);
+			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorLabel);
+		}
+		var typeContentTypeChartMatrixTable = document.createElement("table");
+		var typeContentTypeChartMatrixTableHead = document.createElement("thead");
+		var typeContentTypeChartMatrixTableBody = document.createElement("tbody");
+		typeContentTypeChartMatrixTable.setAttribute("id", "typechart-matrix-table");
+		typeContentTypeChartMatrixTable.setAttribute("name", MEDIAPath_Type_Icon);
+		typeContentTypeChartMatrixTable.classList.add("typechart");
+		var typeContentTypeChartMatrixTableTR = document.createElement("tr");
+		for(var i = 0; i < finaldataTypeChart.length + 1; i++) {
+			var typeContentTypeChartMatrixTableCol = document.createElement("colgroup");
+			typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableCol);
+		}
+		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableHead);
+		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableBody);
+		typeContentTypeChartMatrixTableHead.appendChild(typeContentTypeChartMatrixTableTR);
+		var typeContentTypeChartMatrixTableTH0 = document.createElement("th");
+		typeContentTypeChartMatrixTableTH0.setAttribute("title", "");
+		typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH0);
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			var typeContentTypeChartMatrixTableTH = document.createElement("th");
+			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
+			typeContentTypeChartMatrixTableTH.innerText = finaldataTypeChartTitle[i];
+			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
+			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
+		}
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			var typeContentTypeChartMatrixTableTR = document.createElement("tr");
+			var typeContentTypeChartMatrixTableTH = document.createElement("th");
+			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
+			typeContentTypeChartMatrixTableBody.appendChild(typeContentTypeChartMatrixTableTR);
+			typeContentTypeChartMatrixTableTH.innerText = finaldataTypeChartTitle[i];
+			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				var typeContentTypeChartMatrixTableTD = document.createElement("td");
+				typeContentTypeChartMatrixTableTD.innerText = finaldataTypeChart[i][finaldataTypeChartTitle[q]];
+				typeContentTypeChartMatrixTableTD.setAttribute("title", finaldataTypeChart[i][finaldataTypeChartTitle[q]]);
+				typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTD);
+			}
+			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
+		}
+		typeContentTypechartMatrix.appendChild(typeContentTypeChartMatrixTable);
+		var TypeChartNormal = document.querySelectorAll('.typechart td[title="1×"]');
+		var TypeChartMatrix = document.querySelectorAll('.typechart td[title="2×"]');
+		var TypeChartInmatrix = document.querySelectorAll('.typechart td[title="½×"]');
+		var TypeChartImmune = document.querySelectorAll('.typechart td[title="0×"]');
+		for(var i = 0; i < TypeChartNormal.length; i++) {
+			TypeChartNormal[i].setAttribute("title", "Normal Effectiveness");
+		}
+		for(var i = 0; i < TypeChartMatrix.length; i++) {
+			TypeChartMatrix[i].setAttribute("title", "Super Effective");
+		}
+		for(var i = 0; i < TypeChartInmatrix.length; i++) {
+			TypeChartInmatrix[i].setAttribute("title", "Not Very Effective");
+		}
+		for(var i = 0; i < TypeChartImmune.length; i++) {
+			TypeChartImmune[i].setAttribute("title", "No Effect");
+		}
+		var typeContentTypeChartEffectivenessTable = document.createElement("table");
+		typeContentTypeChartEffectivenessTable.setAttribute("id", "typechart-effectiveness-table");
+		typeContentTypeChartEffectivenessTable.setAttribute("name", MEDIAPath_Type_Icon);
+		typeContentTypeChartEffectivenessTable.classList.add("typechart");
+		var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
+		typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
+		var tempEffectivenessArrLeft = [];
+		var tempEffectivenessArrLeftCount = {};
+		var tempEffectivenessArrRight = [];
+		var tempEffectivenessArrRightCount = {};
+		var tempEffectivenessArrLeftMax = [];
+		var tempEffectivenessArrLeftMaxCount = {};
+		var tempEffectivenessArrLeftMaxResult = [];
+		var tempEffectivenessArrRightMax = [];
+		var tempEffectivenessArrRightMaxCount = {};
+		var tempEffectivenessArrRightMaxResult = [];
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+					tempEffectivenessArrLeftMax.push(i);
+				}
+			}
+			for(var num of tempEffectivenessArrLeftMax) {
+				tempEffectivenessArrLeftMaxCount[num] = tempEffectivenessArrLeftMaxCount[num] ? tempEffectivenessArrLeftMaxCount[num] + 1 : 1;
+			}
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+					tempEffectivenessArrRightMax.push(i);
+				}
+			}
+			for(var num of tempEffectivenessArrRightMax) {
+				tempEffectivenessArrRightMaxCount[num] = tempEffectivenessArrRightMaxCount[num] ? tempEffectivenessArrRightMaxCount[num] + 1 : 1;
+			}
+			if(tempEffectivenessArrLeftMaxCount[i] != undefined) {
+				tempEffectivenessArrLeftMaxResult.push(tempEffectivenessArrLeftMaxCount[i]);
+			}
+			if(tempEffectivenessArrRightMaxCount[i] != undefined) {
+				tempEffectivenessArrRightMaxResult.push(tempEffectivenessArrRightMaxCount[i]);
+			}
+		}
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
+			var typeContentTypeChartEffectivenessTableTH = document.createElement("th");
+			var typeContentTypeChartEffectivenessTableTHIMG = document.createElement("img");
+			typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+					tempEffectivenessArrLeft.push(i);
+				}
+			}
+			for(var num of tempEffectivenessArrLeft) {
+				tempEffectivenessArrLeftCount[num] = tempEffectivenessArrLeftCount[num] ? tempEffectivenessArrLeftCount[num] + 1 : 1;
+			}
+			if(tempEffectivenessArrLeftCount[i] == undefined) {
+				tempEffectivenessArrLeftCount[i] = 0;
+			}
+			for(var q = 0; q < Math.max.apply(Math, tempEffectivenessArrLeftMaxResult) - tempEffectivenessArrLeftCount[i]; q++) {
+				var typeContentTypeChartEffectivenessTableTDLeft = document.createElement("td");
+				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeft);
+			}
+			typeContentTypeChartEffectivenessTableTH.innerText = finaldataTypeChartTitle[i];
+			typeContentTypeChartEffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartEffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			typeContentTypeChartEffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartEffectivenessTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+					var typeContentTypeChartEffectivenessTableTHLeft = document.createElement("th");
+					var typeContentTypeChartEffectivenessTableTHLeftIMG = document.createElement("img");
+					typeContentTypeChartEffectivenessTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartEffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartEffectivenessTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHLeft);
+					typeContentTypeChartEffectivenessTableTHLeft.appendChild(typeContentTypeChartEffectivenessTableTHLeftIMG);
+				}
+			}
+			var typeContentTypeChartEffectivenessTableTDLeftArrow = document.createElement("td");
+			if(tempEffectivenessArrLeftCount[i] != 0) {
+				typeContentTypeChartEffectivenessTableTDLeftArrow.innerText = "→";
+			}
+			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrow);
+			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTH);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+					tempEffectivenessArrRight.push(i);
+				}
+			}
+			for(var num of tempEffectivenessArrRight) {
+				tempEffectivenessArrRightCount[num] = tempEffectivenessArrRightCount[num] ? tempEffectivenessArrRightCount[num] + 1 : 1;
+			}
+			if(tempEffectivenessArrRightCount[i] == undefined) {
+				tempEffectivenessArrRightCount[i] = 0;
+			}
+			var typeContentTypeChartEffectivenessTableTDRightArrow = document.createElement("td");
+			if(tempEffectivenessArrRightCount[i] != 0) {
+				typeContentTypeChartEffectivenessTableTDRightArrow.innerText = "→";
+			}
+			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRightArrow);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+					var typeContentTypeChartEffectivenessTableTHRight = document.createElement("th");
+					var typeContentTypeChartEffectivenessTableTHRightIMG = document.createElement("img");
+					typeContentTypeChartEffectivenessTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartEffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartEffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartEffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartEffectivenessTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHRight);
+					typeContentTypeChartEffectivenessTableTHRight.appendChild(typeContentTypeChartEffectivenessTableTHRightIMG);
+				}
+			}
+			typeContentTypeChartEffectivenessTableTH.appendChild(typeContentTypeChartEffectivenessTableTHIMG);
+			for(var q = 0; q < Math.max.apply(Math, tempEffectivenessArrRightMaxResult) - tempEffectivenessArrRightCount[i]; q++) {
+				var typeContentTypeChartEffectivenessTableTDRight = document.createElement("td");
+				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRight);
+			}
+		}
+		typeContentTypechartEffectiveness.appendChild(typeContentTypeChartEffectivenessTable);
+		var typeContentTypeChartIneffectivenessTable = document.createElement("table");
+		typeContentTypeChartIneffectivenessTable.setAttribute("id", "typechart-ineffectiveness-table");
+		typeContentTypeChartIneffectivenessTable.setAttribute("name", MEDIAPath_Type_Icon);
+		typeContentTypeChartIneffectivenessTable.classList.add("typechart");
+		var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
+		typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
+		var tempIneffectivenessArrLeft = [];
+		var tempIneffectivenessArrLeftCount = {};
+		var tempIneffectivenessArrRight = [];
+		var tempIneffectivenessArrRightCount = {};
+		var tempIneffectivenessArrLeftMax = [];
+		var tempIneffectivenessArrLeftMaxCount = {};
+		var tempIneffectivenessArrLeftMaxResult = [];
+		var tempIneffectivenessArrRightMax = [];
+		var tempIneffectivenessArrRightMaxCount = {};
+		var tempIneffectivenessArrRightMaxResult = [];
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+					tempIneffectivenessArrLeftMax.push(i);
+				}
+			}
+			for(var num of tempIneffectivenessArrLeftMax) {
+				tempIneffectivenessArrLeftMaxCount[num] = tempIneffectivenessArrLeftMaxCount[num] ? tempIneffectivenessArrLeftMaxCount[num] + 1 : 1;
+			}
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+					tempIneffectivenessArrRightMax.push(i);
+				}
+			}
+			for(var num of tempIneffectivenessArrRightMax) {
+				tempIneffectivenessArrRightMaxCount[num] = tempIneffectivenessArrRightMaxCount[num] ? tempIneffectivenessArrRightMaxCount[num] + 1 : 1;
+			}
+			if(tempIneffectivenessArrLeftMaxCount[i] != undefined) {
+				tempIneffectivenessArrLeftMaxResult.push(tempIneffectivenessArrLeftMaxCount[i]);
+			}
+			if(tempIneffectivenessArrRightMaxCount[i] != undefined) {
+				tempIneffectivenessArrRightMaxResult.push(tempIneffectivenessArrRightMaxCount[i]);
+			}
+		}
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
+			var typeContentTypeChartIneffectivenessTableTH = document.createElement("th");
+			var typeContentTypeChartIneffectivenessTableTHIMG = document.createElement("img");
+			typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+					tempIneffectivenessArrLeft.push(i);
+				}
+			}
+			for(var num of tempIneffectivenessArrLeft) {
+				tempIneffectivenessArrLeftCount[num] = tempIneffectivenessArrLeftCount[num] ? tempIneffectivenessArrLeftCount[num] + 1 : 1;
+			}
+			if(tempIneffectivenessArrLeftCount[i] == undefined) {
+				tempIneffectivenessArrLeftCount[i] = 0;
+			}
+			for(var q = 0; q < Math.max.apply(Math, tempIneffectivenessArrLeftMaxResult) - tempIneffectivenessArrLeftCount[i]; q++) {
+				var typeContentTypeChartIneffectivenessTableTDLeft = document.createElement("td");
+				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeft);
+			}
+			typeContentTypeChartIneffectivenessTableTH.innerText = finaldataTypeChartTitle[i];
+			typeContentTypeChartIneffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartIneffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			typeContentTypeChartIneffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartIneffectivenessTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+					var typeContentTypeChartIneffectivenessTableTHLeft = document.createElement("th");
+					var typeContentTypeChartIneffectivenessTableTHLeftIMG = document.createElement("img");
+					typeContentTypeChartIneffectivenessTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartIneffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartIneffectivenessTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHLeft);
+					typeContentTypeChartIneffectivenessTableTHLeft.appendChild(typeContentTypeChartIneffectivenessTableTHLeftIMG);
+				}
+			}
+			var typeContentTypeChartIneffectivenessTableTDLeftArrow = document.createElement("td");
+			if(tempIneffectivenessArrLeftCount[i] != 0) {
+				typeContentTypeChartIneffectivenessTableTDLeftArrow.innerText = "→";
+			}
+			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrow);
+			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTH);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+					tempIneffectivenessArrRight.push(i);
+				}
+			}
+			for(var num of tempIneffectivenessArrRight) {
+				tempIneffectivenessArrRightCount[num] = tempIneffectivenessArrRightCount[num] ? tempIneffectivenessArrRightCount[num] + 1 : 1;
+			}
+			if(tempIneffectivenessArrRightCount[i] == undefined) {
+				tempIneffectivenessArrRightCount[i] = 0;
+			}
+			var typeContentTypeChartIneffectivenessTableTDRightArrow = document.createElement("td");
+			if(tempIneffectivenessArrRightCount[i] != 0) {
+				typeContentTypeChartIneffectivenessTableTDRightArrow.innerText = "→";
+			}
+			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrow);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+					var typeContentTypeChartIneffectivenessTableTHRight = document.createElement("th");
+					var typeContentTypeChartIneffectivenessTableTHRightIMG = document.createElement("img");
+					typeContentTypeChartIneffectivenessTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartIneffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartIneffectivenessTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHRight);
+					typeContentTypeChartIneffectivenessTableTHRight.appendChild(typeContentTypeChartIneffectivenessTableTHRightIMG);
+				}
+			}
+			typeContentTypeChartIneffectivenessTableTH.appendChild(typeContentTypeChartIneffectivenessTableTHIMG);
+			for(var q = 0; q < Math.max.apply(Math, tempIneffectivenessArrRightMaxResult) - tempIneffectivenessArrRightCount[i]; q++) {
+				var typeContentTypeChartIneffectivenessTableTDRight = document.createElement("td");
+				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRight);
+			}
+		}
+		typeContentTypechartIneffectiveness.appendChild(typeContentTypeChartIneffectivenessTable);
+		var typeContentTypeChartImmunityTable = document.createElement("table");
+		typeContentTypeChartImmunityTable.setAttribute("id", "typechart-immunity-table");
+		typeContentTypeChartImmunityTable.setAttribute("name", MEDIAPath_Type_Icon);
+		typeContentTypeChartImmunityTable.classList.add("typechart");
+		var typeContentTypeChartImmunityTableTR = document.createElement("tr");
+		typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
+		var tempImmunityArrLeft = [];
+		var tempImmunityArrLeftCount = {};
+		var tempImmunityArrRight = [];
+		var tempImmunityArrRightCount = {};
+		var tempImmunityArrLeftMax = [];
+		var tempImmunityArrLeftMaxCount = {};
+		var tempImmunityArrLeftMaxResult = [];
+		var tempImmunityArrRightMax = [];
+		var tempImmunityArrRightMaxCount = {};
+		var tempImmunityArrRightMaxResult = [];
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+					tempImmunityArrLeftMax.push(i);
+				}
+			}
+			for(var num of tempImmunityArrLeftMax) {
+				tempImmunityArrLeftMaxCount[num] = tempImmunityArrLeftMaxCount[num] ? tempImmunityArrLeftMaxCount[num] + 1 : 1;
+			}
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+					tempImmunityArrRightMax.push(i);
+				}
+			}
+			for(var num of tempImmunityArrRightMax) {
+				tempImmunityArrRightMaxCount[num] = tempImmunityArrRightMaxCount[num] ? tempImmunityArrRightMaxCount[num] + 1 : 1;
+			}
+			if(tempImmunityArrLeftMaxCount[i] != undefined) {
+				tempImmunityArrLeftMaxResult.push(tempImmunityArrLeftMaxCount[i]);
+			}
+			if(tempImmunityArrRightMaxCount[i] != undefined) {
+				tempImmunityArrRightMaxResult.push(tempImmunityArrRightMaxCount[i]);
+			}
+		}
+		for(var i = 0; i < finaldataTypeChart.length; i++) {
+			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+			var typeContentTypeChartImmunityTableTR = document.createElement("tr");
+			var typeContentTypeChartImmunityTableTH = document.createElement("th");
+			var typeContentTypeChartImmunityTableTHIMG = document.createElement("img");
+			typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+					tempImmunityArrLeft.push(i);
+				}
+			}
+			for(var num of tempImmunityArrLeft) {
+				tempImmunityArrLeftCount[num] = tempImmunityArrLeftCount[num] ? tempImmunityArrLeftCount[num] + 1 : 1;
+			}
+			if(tempImmunityArrLeftCount[i] == undefined) {
+				tempImmunityArrLeftCount[i] = 0;
+			}
+			for(var q = 0; q < Math.max.apply(Math, tempImmunityArrLeftMaxResult) - tempImmunityArrLeftCount[i]; q++) {
+				var typeContentTypeChartImmunityTableTDLeft = document.createElement("td");
+				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeft);
+			}
+			typeContentTypeChartImmunityTableTH.innerText = finaldataTypeChartTitle[i];
+			typeContentTypeChartImmunityTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartImmunityTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			typeContentTypeChartImmunityTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartImmunityTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+					var typeContentTypeChartImmunityTableTHLeft = document.createElement("th");
+					var typeContentTypeChartImmunityTableTHLeftIMG = document.createElement("img");
+					typeContentTypeChartImmunityTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartImmunityTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartImmunityTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartImmunityTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartImmunityTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHLeft);
+					typeContentTypeChartImmunityTableTHLeft.appendChild(typeContentTypeChartImmunityTableTHLeftIMG);
+				}
+			}
+			var typeContentTypeChartImmunityTableTDLeftArrow = document.createElement("td");
+			if(tempImmunityArrLeftCount[i] != 0) {
+				typeContentTypeChartImmunityTableTDLeftArrow.innerText = "→";
+			}
+			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeftArrow);
+			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTH);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+					tempImmunityArrRight.push(i);
+				}
+			}
+			for(var num of tempImmunityArrRight) {
+				tempImmunityArrRightCount[num] = tempImmunityArrRightCount[num] ? tempImmunityArrRightCount[num] + 1 : 1;
+			}
+			if(tempImmunityArrRightCount[i] == undefined) {
+				tempImmunityArrRightCount[i] = 0;
+			}
+			var typeContentTypeChartImmunityTableTDRightArrow = document.createElement("td");
+			if(tempImmunityArrRightCount[i] != 0) {
+				typeContentTypeChartImmunityTableTDRightArrow.innerText = "→";
+			}
+			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRightArrow);
+			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+					var typeContentTypeChartImmunityTableTHRight = document.createElement("th");
+					var typeContentTypeChartImmunityTableTHRightIMG = document.createElement("img");
+					typeContentTypeChartImmunityTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartImmunityTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartImmunityTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
+					typeContentTypeChartImmunityTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartImmunityTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHRight);
+					typeContentTypeChartImmunityTableTHRight.appendChild(typeContentTypeChartImmunityTableTHRightIMG);
+				}
+			}
+			typeContentTypeChartImmunityTableTH.appendChild(typeContentTypeChartImmunityTableTHIMG);
+			for(var q = 0; q < Math.max.apply(Math, tempImmunityArrRightMaxResult) - tempImmunityArrRightCount[i]; q++) {
+				var typeContentTypeChartImmunityTableTDRight = document.createElement("td");
+				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRight);
+			}
+		}
+		typeContentTypechartImmunity.appendChild(typeContentTypeChartImmunityTable);
+		
+		var typeOptionsTitle = ["Matrix", "Effectiveness", "Ineffectiveness", "Immunity", ];
+		for(var q = 0; q < typeOptionsTitle.length; q++) {
+			var typeTitleOptionsInput = document.createElement("input");
+			var typeTitleOptionsLabel = document.createElement("label");
+			typeTitleOptionsInput.setAttribute("type", "radio");
+			typeTitleOptionsInput.setAttribute("name", "type-options");
+			typeTitleOptionsInput.setAttribute("id", "type-options-" + q);
+			typeTitleOptionsInput.setAttribute("autocomplete", "off");
+			typeTitleOptionsInput.value = q;
+			typeTitleOptionsLabel.setAttribute("for", "type-options-" + q);
+			typeTitleOptionsLabel.innerText = typeOptionsTitle[q];
+			typeTitle.appendChild(typeTitleOptionsInput);
+			typeTitle.appendChild(typeTitleOptionsLabel);
+			typeTitleOptionsInput.addEventListener("click", typeOptionsSelector);
+	
+			function typeOptionsSelector() {
+				var typechartContents = document.querySelectorAll("#type-outer > div[name='Content'] div[name]");
+				var typechartContent = document.querySelectorAll("#type-outer > div[name='Content'] div[name='" + this.value + "']");
+				for(var q = 0; q < typechartContents.length; q++) {
+					typechartContents[q].style.display = "none";
+				}
+				for(var q = 0; q < typechartContent.length; q++) {
+					typechartContent[q].style.display = "flex";
+				}
+			}
+			if(q == 0) {
+				typeTitleOptionsLabel.click();
+			}
+		}
+		
+	};
+
+	createTimer();
+	createRNG();
+	createType();
+
+
+	var toolOptionsTitle = ["Timers","Random Number Generator","Type Advantage"];
 
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, IV Calculator, Pokémon Finder, Item Checklist
 
@@ -234,6 +905,8 @@ var createTool = function() {
 			toolAside1OptionsLabel.click();
 		}
 	}
+
+
 };
 
 function countdown() {
@@ -1201,3 +1874,219 @@ function timerSelector() {
 		document.querySelector("#stopwatch-reset").click();
 	}
 }
+
+
+
+
+
+function typeSwitch(type) {
+	var type;
+	var typeTitle = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
+	var img = document.querySelectorAll(".type-againstopposed data img");
+	for(var i = 0; i < img.length; i++) {
+		img[i].remove();
+	}
+	var brk = document.querySelectorAll(".type-againstopposed data br");
+	for(var i = 0; i < brk.length; i++) {
+		brk[i].remove();
+	}
+	var spn = document.querySelectorAll(".type-againstopposed data span");
+	for(var i = 0; i < spn.length; i++) {
+		spn[i].remove();
+	}
+	let typetitle = document.querySelector(".type-description-title h1");
+	let typeicon = document.querySelector(".type-symbol");
+	let againstEffective = document.querySelector(".type-against .type-effective-content");
+	let againstIneffective = document.querySelector(".type-against .type-ineffective-content");
+	let againstImmune = document.querySelector(".type-against .type-immune-content");
+	let againstDefault = document.querySelector(".type-against .type-default-content");
+	let opposedEffective = document.querySelector(".type-opposed .type-effective-content");
+	let opposedIneffective = document.querySelector(".type-opposed .type-ineffective-content");
+	let opposedImmune = document.querySelector(".type-opposed .type-immune-content");
+	let opposedDefault = document.querySelector(".type-opposed .type-default-content");
+	typetitle.innerText = typeTitle;
+	typeicon.src = "./media/Images/Misc/Type/Symbol/" + typeicon.alt + "/" + typeTitle + ".png";
+	typeicon.title = typetitle.innerText;
+	var againstEffectiveBreak = document.createElement("br");
+	var againstIneffectiveBreak = document.createElement("br");
+	var againstImmuneBreak = document.createElement("br");
+	var againstDefaultBreak = document.createElement("br");
+	var opposedEffectiveBreak = document.createElement("br");
+	var opposedIneffectiveBreak = document.createElement("br");
+	var opposedImmuneBreak = document.createElement("br");
+	var opposedDefaultBreak = document.createElement("br");
+	var selectors = document.querySelectorAll(".type-selector label");
+	for(var i = 0; i < selectors.length; i++) {
+		if(i == 0) {
+			selectors[i].setAttribute("title", "When used on a " + typeTitle + "-type Pokémon");
+		}
+		if(i == 1) {
+			selectors[i].setAttribute("title", "When used by a " + typeTitle + "-type Move");
+		}
+	}
+	againstEffective.appendChild(againstEffectiveBreak);
+	againstIneffective.appendChild(againstIneffectiveBreak);
+	againstImmune.appendChild(againstImmuneBreak);
+	againstDefault.appendChild(againstDefaultBreak);
+	opposedEffective.appendChild(opposedEffectiveBreak);
+	opposedIneffective.appendChild(opposedIneffectiveBreak);
+	opposedImmune.appendChild(opposedImmuneBreak);
+	opposedDefault.appendChild(opposedDefaultBreak);
+	var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[0]).toString().split(",");
+	var index = finaldataTypeChartTitle.indexOf(type);
+	for(var i = 0; i < finaldataTypeChart.length; i++) {
+		if(finaldataTypeChart[i][type] == "0×") {
+			var ImmunityType = document.createElement("img");
+			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			ImmunityType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			againstImmune.appendChild(ImmunityType);
+			var ImmunityTypeText = document.createElement("span");
+			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			againstImmune.appendChild(ImmunityTypeText);
+			againstImmuneBreak.remove();
+		}
+		if(finaldataTypeChart[i][type] == "½×") {
+			var IneffectivenessType = document.createElement("img");
+			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			IneffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			againstIneffective.appendChild(IneffectivenessType);
+			var IneffectivenessTypeText = document.createElement("span");
+			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			againstIneffective.appendChild(IneffectivenessTypeText);
+			againstIneffectiveBreak.remove();
+		}
+		if(finaldataTypeChart[i][type] == "1×") {
+			var DefaultType = document.createElement("img");
+			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			DefaultType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			againstDefault.appendChild(DefaultType);
+			var DefaultTypeText = document.createElement("span");
+			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			againstDefault.appendChild(DefaultTypeText);
+			againstDefaultBreak.remove();
+		}
+		if(finaldataTypeChart[i][type] == "2×") {
+			var EffectivenessType = document.createElement("img");
+			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			EffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			againstEffective.appendChild(EffectivenessType);
+			var EffectivenessTypeText = document.createElement("span");
+			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			againstEffective.appendChild(EffectivenessTypeText);
+			againstEffectiveBreak.remove();
+		}
+	}
+	for(var i = 0; i < finaldataTypeChart.length; i++) {
+		if(finaldataTypeChart[index][
+				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+			] == "0×") {
+			var ImmunityType = document.createElement("img");
+			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			ImmunityType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			opposedImmune.appendChild(ImmunityType);
+			var ImmunityTypeText = document.createElement("span");
+			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			opposedImmune.appendChild(ImmunityTypeText);
+			opposedImmuneBreak.remove();
+		}
+		if(finaldataTypeChart[index][
+				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+			] == "½×") {
+			var IneffectivenessType = document.createElement("img");
+			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			IneffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			opposedIneffective.appendChild(IneffectivenessType);
+			var IneffectivenessTypeText = document.createElement("span");
+			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			opposedIneffective.appendChild(IneffectivenessTypeText);
+			opposedIneffectiveBreak.remove();
+		}
+		if(finaldataTypeChart[index][
+				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+			] == "1×") {
+			var DefaultType = document.createElement("img");
+			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			DefaultType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			opposedDefault.appendChild(DefaultType);
+			var DefaultTypeText = document.createElement("span");
+			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			opposedDefault.appendChild(DefaultTypeText);
+			opposedDefaultBreak.remove();
+		}
+		if(finaldataTypeChart[index][
+				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+			] == "2×") {
+			var EffectivenessType = document.createElement("img");
+			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			EffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
+			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			opposedEffective.appendChild(EffectivenessType);
+			var EffectivenessTypeText = document.createElement("span");
+			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			opposedEffective.appendChild(EffectivenessTypeText);
+			opposedEffectiveBreak.remove();
+		}
+	}
+}
+
+function switchTypeChartMatrix() {
+	const typeChartMatrixText = document.querySelectorAll(".typechart th");
+	const typeChartMatrixImg = document.querySelectorAll(".typechart th img");
+	const check1 = document.getElementById("typechart-title-switch-1");
+	const check2 = document.getElementById("typechart-title-switch-2");
+	const checklabel1 = document.querySelector("#typechart-title-switch-1 ~ label");
+	const checklabel2 = document.querySelector("#typechart-title-switch-2 ~ label");
+	if(check1.checked == true) {
+		for(var i = 0; i < typeChartMatrixText.length; i++) {
+			typeChartMatrixText[i].style.fontSize = "0.5vw";
+		}
+		for(var i = 0; i < typeChartMatrixImg.length; i++) {
+			typeChartMatrixImg[i].style.display = "none";
+		}
+		checklabel1.parentElement.style.fontSize = "unset";
+		checklabel1.style.display = "none";
+		checklabel2.style.display = "block";
+	}
+	if(check2.checked == true) {
+		for(var i = 0; i < typeChartMatrixText.length; i++) {
+			typeChartMatrixText[i].style.fontSize = "0%";
+		}
+		for(var i = 0; i < typeChartMatrixImg.length; i++) {
+			typeChartMatrixImg[i].style.display = "block";
+		}
+		checklabel1.parentElement.style.fontSize = "unset";
+		checklabel1.style.display = "block";
+		checklabel2.style.display = "none";
+	}
+}
+
+
+$("#typechart-matrix-table td").bind("mouseover mouseleave", function(e) {
+	var index = this.cellIndex;
+	if(e.type == "mouseover") {
+		$(this).parent().addClass("highlight");
+		$(this).parents("table").find("tr").each(function() {
+			$(this).find("th").eq(index).addClass("highlight");
+		});
+	} else {
+		$(this).parent().removeClass("highlight");
+		$(this).parents("table").find("tr").each(function() {
+			$(this).find("th").eq(index).removeClass("highlight");
+		});
+	}
+});
