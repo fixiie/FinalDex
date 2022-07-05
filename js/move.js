@@ -202,6 +202,7 @@ var createMove = function() {
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-name", "");
 			}
+			/*
 			var moveset = returnMoveLearnset(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"");
 			if (moveset.length > 0) {
 				moveAside1OptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
@@ -209,6 +210,7 @@ var createMove = function() {
 			else {
 				moveAside1OptionsLabel.setAttribute("data-search-learnset", "");
 			}
+			*/
 
 			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].toLowerCase());
