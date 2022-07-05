@@ -813,7 +813,7 @@ function search(type) {
 		searchVar = searchValue.split(":<");
     }
     else {
-        var searchName = event.target.value;
+        var searchName = (event.target.value).toLowerCase();
     }
 
 	var tags =  base.querySelectorAll(':scope > '+tag);
@@ -1358,4 +1358,51 @@ function getItemData(item,type) {
 	}
 
 	return result;
+}
+
+
+
+function returnMoveLearnset(move,conditions) {
+	var move;
+	var conditions;
+	var arr1 = finaldataLearnsetLevel;
+	var arr2 = finaldataLearnsetEvolution;
+	var arr3 = finaldataLearnsetMachine;
+	var arr4 = finaldataLearnsetBreed;
+
+	var result = [];
+
+	for (var i = 0; i < arr1.length; i++) {
+		if (getApplicable(arr1[i]["Game"])) {
+			if(arr1[i]["Move"] == move) {
+				result.push(arr1[i]["Pokémon"]);
+			}
+		}
+	}
+	for (var i = 0; i < arr2.length; i++) {
+		if (getApplicable(arr2[i]["Game"])) {
+			if(arr2[i]["Move"] == move) {
+				result.push(arr2[i]["Pokémon"]);
+			}
+		}
+	}
+	for (var i = 0; i < arr3.length; i++) {
+		if (getApplicable(arr3[i]["Game"])) {
+			if(arr3[i]["Move"] == move) {
+				result.push(arr3[i]["Pokémon"]);
+			}
+		}
+	}
+	for (var i = 0; i < arr4.length; i++) {
+		if (getApplicable(arr4[i]["Game"])) {
+			if(arr4[i]["Move"] == move) {
+				result.push(arr4[i]["Pokémon"]);
+			}
+		}
+	}
+
+	result = [...new Set(result)];
+
+	return result;
+	
 }
