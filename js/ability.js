@@ -152,6 +152,9 @@ var createAbility = function() {
 			}
 		}
 	
+
+		abilityAside1OptionsSearch.title = searchOptionsTitle(abilityAside1Options);
+		
 		var searchLis = document.querySelectorAll("#ability-options > label");
 		searchAbilityAttributes = [];
 		for(q = 0; q < searchLis.length; q++) {
