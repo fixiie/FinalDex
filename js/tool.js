@@ -59,7 +59,7 @@ var createTool = function() {
 			var toolAside3TimerOuter = document.createElement("div");
 			var toolAside3Timer = document.createElement("div");
 			var toolAside3TimerPausePlay = document.createElement("button");
-			var toolAside3TimerTime = document.createElement("div");
+			var toolAside3TimerTime = document.createElement("p");
 			var toolAside3TimerSet = document.createElement("div");
 			var toolAside3TimerSetSpan = document.createElement("span");
 			var toolAside3TimerSetInputHours = document.createElement("input");
@@ -108,15 +108,16 @@ var createTool = function() {
 			toolAside3TimerList.setAttribute("id", stopwatchcountdown[q] + "-list");
 			toolAside3TimerLaps.setAttribute("id", stopwatchcountdown[q] + "-laps");
 			toolAside3TimerLaps.setAttribute("title", "Laps");
-			toolAside3TimerLaps.innerText = "\u23F6";
+			toolAside3TimerLaps.innerHTML = "<p>\u23F7</p>";
 			toolAside3TimerReset.setAttribute("id", stopwatchcountdown[q] + "-reset");
 			toolAside3TimerReset.setAttribute("title", "Reset");
-			toolAside3TimerReset.innerText = "\u23F9";
+			toolAside3TimerReset.innerHTML = "<p>\u23F9</p>";
 			toolAside3TimersOuter.appendChild(toolAside3TimerOuter);
 			toolAside3TimerOuter.appendChild(toolAside3Timer);
 			toolAside3Timer.appendChild(toolAside3TimerPausePlay);
-			toolAside3Timer.appendChild(toolAside3TimerTime);
 			toolAside3Timer.appendChild(toolAside3TimerSet);
+			toolAside3TimerSet.appendChild(toolAside3TimerReset);
+			toolAside3TimerSet.appendChild(toolAside3TimerTime);
 			toolAside3TimerSet.appendChild(toolAside3TimerSetSpan);
 			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputHours);
 			toolAside3TimerSetSpan.innerHTML += ":";
@@ -126,8 +127,8 @@ var createTool = function() {
 			toolAside3TimerSetSpan.innerHTML += ":";
 			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMilliseconds);
 			toolAside3TimerOuter.appendChild(toolAside3TimerList);
-			toolAside3TimerOuter.appendChild(toolAside3TimerLaps);
-			toolAside3TimerOuter.appendChild(toolAside3TimerReset);
+
+			toolAside3TimerSet.appendChild(toolAside3TimerLaps);
 		}
 		for(var q = 0; q < stopwatchcountdown.length; q++) {
 			var x = q + 1;
@@ -1022,7 +1023,7 @@ function countdown() {
 			countdownLapDidChange(null, true);
 			if(countdown.countdownRunning()) {
 				document.getElementById("countdown-time").style.display = "none";
-				document.getElementById("countdown-set").style.display = "flex";
+				document.querySelector("#countdown-set > span").style.display = "flex";
 				replaceClass(countdownStartStopButton, "countdown-stop", "countdown-start");
 				countdownStartStopButton.innerHTML = "⏵︎";
 				countdownStartStopButton.setAttribute("title", "Start");
@@ -1048,23 +1049,23 @@ function countdown() {
 			if(a + b + c + d > 0) {
 				if(!countdown.countdownRunning()) {
 					document.getElementById("countdown-time").style.display = "flex";
-					document.getElementById("countdown-set").style.display = "none";
+					document.querySelector("#countdown-set > span").style.display = "none";
 				} else {
 					document.getElementById("countdown-time").style.display = "none";
-					document.getElementById("countdown-set").style.display = "flex";
+					document.querySelector("#countdown-set > span").style.display = "flex";
 				}
 			} else {
 				document.querySelector("#countdown-set span").animate(
 					[{
-						transform: "translateX(0%)"
+						transform: "translateX(0px)"
 					}, {
-						transform: "translateX(1%)"
+						transform: "translateX(2px)"
 					}, {
-						transform: "translateX(0%)"
+						transform: "translateX(0px)"
 					}, {
-						transform: "translateX(-1%)"
+						transform: "translateX(-2px)"
 					}, {
-						transform: "translateX(0%)"
+						transform: "translateX(0px)"
 					}, ], {
 						duration: 200,
 						easing: "linear",
@@ -1117,6 +1118,26 @@ function countdown() {
 					}
 				}
 			}
+
+
+			var hours = document.querySelector(".countdown-hours").value;
+			var minutes = document.querySelector(".countdown-minutes").value;
+			var second = document.querySelector(".countdown-seconds").value;
+			var millisecond = document.querySelector(".countdown-milliseconds").value;
+
+			if (hours == "") {
+				hours = "00";
+			}
+			if (minutes == "") {
+				minutes = "00";
+			}
+			if (second == "") {
+				second = "00";
+			}
+			if (millisecond == "") {
+				millisecond = "00";
+			}
+			document.querySelector("#countdown-time").innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
 		}
 		var countdownRunning = false;
 		var countdownLaps = [];
@@ -1208,7 +1229,7 @@ function countdown() {
 				var countdownCompletedAudio = new Audio("./media/Sounds/FinalDex/Complete.wav");
 				countdownCompletedAudio.play();
 				document.getElementById("countdown-time").style.display = "none";
-				document.getElementById("countdown-set").style.display = "flex";
+				document.querySelector("#countdown-set > span").style.display = "flex";
 				var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
 				document.querySelector(".countdown-hours").value = "";
 				document.querySelector(".countdown-minutes").value = "";
@@ -1284,6 +1305,7 @@ function countdown() {
 	};
 	window.countdownUpdateLap = function(countdownLapSplitString, countdownIsReset) {
 		if(countdownIsReset) {
+			document.querySelector("#countdown-time").innerHTML = "";
 			countdownLapContainer.innerHTML = "";
 			countdownLapCount = 0;
 		} else {
@@ -1331,12 +1353,15 @@ function countdown() {
 		}
 	};
 	var countdownResetButtonEvent = function() {
+		var watch = document.querySelector("#countdown-time");
 		if(!countdown.countdownRunning()) {} else {
+			watch.innerHTML = "";
 			countdown.reset();
 		}
 	};
 	var countdownLapsButtonEvent = function() {
-		if(!countdown.countdownRunning()) {} else {
+		var watch = document.querySelector("#countdown-time");
+		if (watch.innerHTML != "00:00:00:00" && watch.innerHTML != "") {
 			countdown.countdownAddLap();
 		}
 	};
@@ -1462,8 +1487,8 @@ function stopwatch() {
 			stopwatchLaps = [];
 			stopwatchLapDidChange(null, true);
 			if(stopwatch.stopwatchRunning()) {
-				document.getElementById("stopwatch-time").style.display = "none";
-				document.getElementById("stopwatch-set").style.display = "flex";
+				document.querySelector("#stopwatch-time").style.display = "none";
+				document.querySelector("#stopwatch-set > span").style.display = "flex";
 				replaceClass(stopwatchStartStopButton, "stopwatch-stop", "stopwatch-start");
 				stopwatchStartStopButton.innerHTML = "⏵︎";
 				stopwatchStartStopButton.setAttribute("title", "Start");
@@ -1480,10 +1505,10 @@ function stopwatch() {
 			];
 			if(!stopwatch.stopwatchRunning()) {
 				document.getElementById("stopwatch-time").style.display = "flex";
-				document.getElementById("stopwatch-set").style.display = "none";
+				document.querySelector("#stopwatch-set > span").style.display = "none";
 			} else {
 				document.getElementById("stopwatch-time").style.display = "none";
-				document.getElementById("stopwatch-set").style.display = "flex";
+				document.querySelector("#stopwatch-set > span").style.display = "flex";
 			}
 		}
 
@@ -1531,6 +1556,25 @@ function stopwatch() {
 					}
 				}
 			}
+
+			var hours = document.querySelector(".stopwatch-hours").value;
+			var minutes = document.querySelector(".stopwatch-minutes").value;
+			var second = document.querySelector(".stopwatch-seconds").value;
+			var millisecond = document.querySelector(".stopwatch-milliseconds").value;
+
+			if (hours == "") {
+				hours = "00";
+			}
+			if (minutes == "") {
+				minutes = "00";
+			}
+			if (second == "") {
+				second = "00";
+			}
+			if (millisecond == "") {
+				millisecond = "00";
+			}
+			document.querySelector("#stopwatch-time").innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
 		}
 		var stopwatchRunning = false;
 		var stopwatchLaps = [];
@@ -1679,6 +1723,7 @@ function stopwatch() {
 	};
 	window.stopwatchUpdateLap = function(stopwatchLapSplitString, stopwatchIsReset) {
 		if(stopwatchIsReset) {
+			document.querySelector("#stopwatch-time").innerHTML = "";
 			stopwatchLapContainer.innerHTML = "";
 			stopwatchLapCount = 0;
 		} else {
@@ -1718,12 +1763,15 @@ function stopwatch() {
 		}
 	};
 	var stopwatchResetButtonEvent = function() {
+		var watch = document.querySelector("#stopwatch-time");
 		if(!stopwatch.stopwatchRunning()) {} else {
+			watch.innerHTML = "";
 			stopwatch.reset();
 		}
 	};
 	var stopwatchLapsButtonEvent = function() {
-		if(!stopwatch.stopwatchRunning()) {} else {
+		var watch = document.querySelector("#stopwatch-time");
+		if (watch.innerHTML != "00:00:00:00" && watch.innerHTML != "") {
 			stopwatch.stopwatchAddLap();
 		}
 	};
