@@ -124,6 +124,8 @@ function memory(action,name,suffix,element) {
 function memoryDexSwitch() {
 	var radio = document.getElementsByName("finaldex-dexswitch-" + GameID);
 	var val = localStorage.getItem("finaldex-dexswitch-" + GameID);
+
+
 	for(var i = 0; i < radio.length; i++) {
 		if(radio[i].value == val) {
 			radio[i].click();
@@ -134,4 +136,9 @@ function memoryDexSwitch() {
 	$('input[name="finaldex-dexswitch-' + GameID + '"]').on("change", function() {
 		localStorage.setItem("finaldex-dexswitch-" + GameID, $(this).val());
 	});
+
+	if (val == null) {
+		console.log(radio[0].nextElementSibling)
+		radio[0].nextElementSibling.click();
+	}
 }
