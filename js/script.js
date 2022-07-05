@@ -4669,3 +4669,53 @@ function testImage(url) {
 
     return testImageResult;
 }
+
+
+
+function searchOptionsTitle(base) {
+
+    var base;
+    var searches = base.querySelectorAll(':scope > *:not(input)');
+    var tempArr = [];
+    var result = "";
+    var exclude = ["name","attack","defense","spatk","spdef","speed","total"];
+
+    for (var i = 0; i < searches.length; i++) {
+        var search = searches[i].getAttributeNames()
+        for (var q = 0; q < search.length; q++) {
+            if (search[q].includes("data-search-")) {
+                var check;
+                for (var u = 0; u < exclude.length; u++) {
+                    if (search[q].includes(exclude[u])) {
+                        check = false
+                        break;
+                    }
+                    else {
+                        check = true;
+                    }
+                }
+                if (check) {
+                    if (!isNaN(parseInt(searches[i].getAttribute(search[q])))) {
+                        tempArr.push(search[q].split("data-search-")[1]+":>");
+                        tempArr.push(search[q].split("data-search-")[1]+":<");
+                        tempArr.push(search[q].split("data-search-")[1]+"::");
+                        tempArr.push(search[q].split("data-search-")[1]+":!");
+                    }
+                    else {
+                        tempArr.push(search[q].split("data-search-")[1]+"::");
+                        tempArr.push(search[q].split("data-search-")[1]+":!");
+                    }
+                }
+            }
+        }
+    }
+
+
+    tempArr = [...new Set(tempArr)];
+
+    if (tempArr.length > 0) {
+        result = "Search Options:"+"\n"+tempArr.join("\n");
+    }
+
+    return result;
+}
