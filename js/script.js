@@ -2206,7 +2206,7 @@ function createParty(base,data) {
                         var teamItemOption = document.createElement("option");
                         teamItemOption.value = items[q]["Name_"+JSONPath_Items];
                         teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
-                        teamItemSelect.appendChild(teamItemOption);
+                        baseItem.appendChild(teamItemOption);
 
                         if (items[q]["Icon_"+JSONPath_Items] != undefined) {
                             teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
@@ -2234,7 +2234,7 @@ function createParty(base,data) {
                         var teamItemOption = document.createElement("option");
                         teamItemOption.value = items[q]["Name_"+JSONPath_Items];
                         teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
-                        teamItemSelect.appendChild(teamItemOption);
+                        baseItem.appendChild(teamItemOption);
 
                         if (items[q]["Icon_"+JSONPath_Items] != undefined) {
                             teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
@@ -2756,7 +2756,7 @@ function selectModify(e) {
         this.style.color = "var(--fontDark)";
     }
 
-    if (this.firstElementChild.value.includes("Move") || this.firstElementChild.value == "Item") {
+    if (this.firstElementChild.value.includes("Move")) {
         if (this.value == this.firstElementChild.value) {
             this.style.fontStyle = "italic";
         }
@@ -2764,6 +2764,16 @@ function selectModify(e) {
             this.style.fontStyle = "unset";
         }
     }
+    
+    if (this.firstElementChild.value.includes("Item")) {
+        if (this.value == "Item") {
+            this.style.fontStyle = "italic";
+        }
+        else {
+            this.style.fontStyle = "unset";
+        }
+    }
+
 
 
     if (this.firstElementChild.value == "Item") {
