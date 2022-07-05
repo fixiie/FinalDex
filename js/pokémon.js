@@ -1213,7 +1213,7 @@ function createContain(condition) {
                     if (HeldItem == true) {
                         contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item","lower,undefined"));
                     }
-                    contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
+                    //contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
 
                     if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 300) {
                         contentDiv.setAttribute("data-search-expyieldcategory","Very High".toLowerCase());
