@@ -188,6 +188,8 @@ var createItem = function() {
 	}
 
 
+	itemAside1OptionsSearch.title = searchOptionsTitle(itemAside1Options);
+
 	var searchLis = document.querySelectorAll("#item-options > label");
     searchItemAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
