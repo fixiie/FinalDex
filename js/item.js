@@ -334,7 +334,7 @@ var createItem = function() {
 
 
 					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
-						var itemAside4SidebarAreaText = document.createElement("h6");
+						var itemAside4SidebarAreaText = document.createElement("h5");
 						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
 						itemAside4SidebarLocation.appendChild(itemAside4SidebarAreaText);
 					}
@@ -360,7 +360,7 @@ var createItem = function() {
 						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
 						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
 						if (quantity != 1) { 
-							itemAside4SidebarItemImg.title = quantity+"x "+finaldataLocationItems[q]["Item"];
+							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
 						}
 						else {
 							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
@@ -370,7 +370,7 @@ var createItem = function() {
 
 					var itemAside4SidebarItemText = document.createElement("p");
 					if (quantity != 1) { 
-						itemAside4SidebarItemText.innerText = quantity+"x";
+						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Quantity"]+"x";
 					}
 					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
 
