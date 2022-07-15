@@ -124,14 +124,16 @@ var createItem = function() {
 
 	var itemAside4SidebarValue = document.createElement("span");
 	var itemAside4SidebarValueTitle = document.createElement("h4");
-	var itemAside4SidebarValueText = document.createElement("span");
+	var itemAside4SidebarValueTextOuter = document.createElement("span");
+	var itemAside4SidebarValueText = document.createElement("p");
 	var itemAside4SidebarValueCurrencyImg = document.createElement("img");
 	itemAside4SidebarValueTitle.innerText = "Value";
 	itemAside4SidebarValue.setAttribute("name","Value");
 	itemAside4SidebarPrice.appendChild(itemAside4SidebarValue);
 	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTitle);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueText);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueCurrencyImg);
+	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTextOuter);
+	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueCurrencyImg);
+	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueText);
 
 
 	var firstiteration = true;
@@ -355,20 +357,32 @@ var createItem = function() {
 						var itemAside4SidebarItemImg = document.createElement("img");
 						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
 						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
-						if (quantity != 1) { 
-							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
-						}
-						else {
-							itemAside4SidebarItemImg.title = finaldataLocationItems[q]["Item"];
-						}
 						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
 					}
 
+					if (quantity != 1) { 
+						itemAside4SidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+					}
+					else {
+						itemAside4SidebarItem.title = finaldataLocationItems[q]["Item"];
+					}
+
+
+
+
 					var itemAside4SidebarItemText = document.createElement("p");
 					if (quantity != 1) { 
-						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Quantity"]+"x";
+						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+					}
+					else {
+						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
 					}
 					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+
+					if (finaldataLocationItems[q]["Hidden"] == "Hidden") {
+						itemAside4SidebarLi.classList.add("hidden");
+						itemAside4SidebarItem.title += " (Hidden)";
+					}
 
 			
 				}
