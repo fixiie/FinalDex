@@ -349,6 +349,117 @@ var createItem = function() {
 						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
 					}
 
+					var itemAside4SidebarRequirementOuter = document.createElement("span");
+					itemAside4SidebarRequirementOuter.setAttribute("name","Requirement");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarRequirementOuter);
+
+					if (finaldataLocationItems[q]["Field"] != undefined) {
+	
+						var itemAside4SidebarRequirementTitle = document.createElement("h5");
+						itemAside4SidebarRequirementTitle.innerText = "Requires:";
+						itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarRequirementTitle);
+
+
+						if (finaldataLocationItems[q]["Field"].includes("/")) {
+							for(var y = 0; y < finaldataLocationItems[q]["Field"].split("/").length; y++) {
+								var itemIcon;
+								var itm;
+								if (getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]));
+									itm = getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]);
+								}
+								else if (getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
+									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]);
+									itm = finaldataLocationItems[q]["Field"].split("/")[y];
+								}
+
+								var itemAside4SidebarField = document.createElement("span");
+								var itemAside4SidebarFieldText = document.createElement("p");
+								itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
+								itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+								if (itemIcon != undefined) {
+									var itemAside4SidebarFieldImage = document.createElement("img");
+									itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
+									itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+									itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+	
+									itemAside4SidebarField.setAttribute("name","Item");
+									itemAside4SidebarField.setAttribute("value",itm);
+									itemAside4SidebarField.addEventListener("click",dataRedirect);
+								}
+								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+								if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
+									var itemAside4SidebarFieldSpace = document.createElement("p");
+									itemAside4SidebarFieldSpace.innerText = " or ";
+									itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarFieldSpace)
+								}
+							}
+						}
+						else if (finaldataLocationItems[q]["Field"].includes(",")) {
+							for(var y = 0; y < finaldataLocationItems[q]["Field"].split(",").length; y++) {
+								var itemIcon;
+								var itm;
+								if (getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]));
+									itm = getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]);
+								}
+								else if (getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
+									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]);
+									itm = finaldataLocationItems[q]["Field"].split(",")[y];
+								}
+
+								var itemAside4SidebarField = document.createElement("span");
+								var itemAside4SidebarFieldText = document.createElement("p");
+								itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
+								itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+								if (itemIcon != undefined) {
+									var itemAside4SidebarFieldImage = document.createElement("img");
+									itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
+									itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+									itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+	
+									itemAside4SidebarField.setAttribute("name","Item");
+									itemAside4SidebarField.setAttribute("value",itm);
+									itemAside4SidebarField.addEventListener("click",dataRedirect);
+								}
+								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+							}
+						}
+						else {
+							var itemIcon;
+							var itm;
+							if (getMoveMachine(finaldataLocationItems[q]["Field"]) != undefined) {
+								itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"]));
+								itm = getMoveMachine(finaldataLocationItems[q]["Field"]);
+							}
+							else if (getItemIcon(finaldataLocationItems[q]["Field"]) != undefined) {
+								itemIcon = getItemIcon(finaldataLocationItems[q]["Field"]);
+								itm = finaldataLocationItems[q]["Field"];
+							}
+
+							var itemAside4SidebarField = document.createElement("span");
+							var itemAside4SidebarFieldText = document.createElement("p");
+							itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
+							itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+							if (itemIcon != undefined) {
+								var itemAside4SidebarFieldImage = document.createElement("img");
+								itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+								itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"];
+								itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+								itemAside4SidebarFieldImage.setAttribute("name","Item");
+								itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+
+								itemAside4SidebarField.setAttribute("name","Item");
+								itemAside4SidebarField.setAttribute("value",itm);
+								itemAside4SidebarField.addEventListener("click",dataRedirect);
+							}
+							itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+
+						}
+					}
+
 					var itemAside4SidebarItem = document.createElement("span");
 					itemAside4SidebarItem.setAttribute("name","Item");
 					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
@@ -356,7 +467,7 @@ var createItem = function() {
 					for(var u = 0; u < quantity; u++) {
 						var itemAside4SidebarItemImg = document.createElement("img");
 						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
-						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.nextElementSibling.style.display = "unset";');
+						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
 					}
 
@@ -372,10 +483,10 @@ var createItem = function() {
 
 					var itemAside4SidebarItemText = document.createElement("p");
 					if (quantity != 1) { 
-						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+						itemAside4SidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
 					}
 					else {
-						itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
+						itemAside4SidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
 					}
 					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
 
