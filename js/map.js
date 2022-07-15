@@ -10,15 +10,7 @@ var createMap = function() {
 	var mapAside2TitleText = document.createElement("h1");
 	var mapAside2Flavor = document.createElement("span");
 	var mapAside2FlavorText = document.createElement("h5");
-	var mapAside3 = document.createElement("aside");
-	var mapAside3MapOuter = document.createElement("div");
-	var mapAside3MapInner = document.createElement("span");
-	var mapAside3MapZoomFullscreen = document.createElement("span");
 
-	var mapAside3Map = document.createElement("div");
-	var mapAside3MapMark = document.createElement("div");
-	var mapAside3MapImage = document.createElement("img");
-	var mapAside3MapCordinateOuter = document.createElement("map");
 	var mapAside4 = document.createElement("aside");
 	mapOuter.setAttribute("id", "map-outer");
 	mapOuter.setAttribute("name", "Map");
@@ -37,21 +29,7 @@ var createMap = function() {
 	mapAside2TitleText.innerText = "Map of "+Region.replaceAll(","," & ");
 	mapAside2Flavor.setAttribute("id", "map-flavor");
 	mapAside2Flavor.setAttribute("title", "Slogan")
-	mapAside3.setAttribute("id", "map-aside3");
-	mapAside3MapOuter.setAttribute("id", "map-contain");
-	mapAside3MapZoomFullscreen.classList.add("zoom-fullscreen");
 
-	mapAside3Map.setAttribute("id", "map");
-	mapAside3MapMark.classList.add("map-img-mark-outer");
-	mapAside3MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
-	mapAside3MapImage.onload = function() {
-		mapAside3MapImage.setAttribute("width", mapAside3MapImage.width+"px");
-		mapAside3MapImage.setAttribute("height", mapAside3MapImage.height+"px");
-	}
-	mapAside3MapImage.classList.add("map-img-main");
-	mapAside3MapImage.setAttribute("usemap", "#"+Region+"-"+MEDIAPath_Map+"-map");
-	mapAside3MapCordinateOuter.setAttribute("id", Region+"-"+MEDIAPath_Map+"-map");
-	mapAside3MapCordinateOuter.setAttribute("name", Region+"-"+MEDIAPath_Map+"-map");
 	mapAside4.setAttribute("id", "map-aside4");
 	document.querySelector("#contain").appendChild(mapOuter);
 	mapOuter.appendChild(mapAside1);
@@ -64,12 +42,35 @@ var createMap = function() {
 	mapAside2Title.appendChild(mapAside2TitleText);
 	mapAside2.appendChild(mapAside2Flavor);
 	mapAside2Flavor.appendChild(mapAside2FlavorText);
+
+
+
+
+
+	var mapAside3 = document.createElement("aside");
+	var mapAside3MapOuter = document.createElement("div");
+	var mapAside3MapOuter2 = document.createElement("div");
+	var mapAside3MapInner = document.createElement("div");
+	var mapAside3MapInner2 = document.createElement("div");
+	var mapAside3MapZoomReset = document.createElement("span");
+	var mapAside3MapZoomIn = document.createElement("span");
+	var mapAside3MapFullscreen = document.createElement("span");
+	var mapAside3MapImg = document.createElement("img");
+	var mapAside3Map = document.createElement("map");
+	mapAside3.setAttribute("id","map-aside3")
+	mapAside3MapOuter.setAttribute("id","map-contain");
+	mapAside3MapOuter2.classList.add("map-inner");
+	mapAside3MapZoomReset.setAttribute("name","reset");
+	mapAside3MapZoomIn.setAttribute("name","zoom");
+	mapAside3MapFullscreen.setAttribute("name","fullscreen");
+	mapAside3MapImg.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
+	mapAside3MapImg.classList.add("map-img");
+	mapAside3MapImg.setAttribute("usemap","#map");
+	mapAside3Map.setAttribute("name","map");
+	mapAside3Map.setAttribute("id","map");
 	mapOuter.appendChild(mapAside3);
 	mapAside3.appendChild(mapAside3MapOuter);
 
-	mapAside1OptionsSearch.addEventListener("keyup", function() {search("Map");});
-	mapAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Map");});
-	mapAside3Map.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapAside3MapImage],0)}});
 
 	var dir1 = ["Left","Top"];
 	for(var q = 0; q < dir1.length; q++) {
@@ -83,20 +84,41 @@ var createMap = function() {
 		}
 		else if (dir1[q] == "Top") {
 			mapAside3MapDirectionText.innerText = "⮝";
-			mapAside3MapInner.appendChild(mapAside3MapDirection);
+			mapAside3MapOuter2.appendChild(mapAside3MapDirection);
 		}
 		mapAside3MapDirection.appendChild(mapAside3MapDirectionText);
 		mapAside3MapDirectionText.addEventListener("click", dataRedirect);
 	}
 
-	mapAside3MapOuter.appendChild(mapAside3MapInner);
-	mapAside3MapInner.appendChild(mapAside3Map);
-	mapAside3Map.appendChild(mapAside3MapZoomFullscreen);
-	mapAside3Map.appendChild(mapAside3MapMark);
-	mapAside3Map.appendChild(mapAside3MapImage);
-	mapAside3Map.appendChild(mapAside3MapCordinateOuter);
 
-	mapAside3MapZoomFullscreen.addEventListener("click", function() {fullscreenIMG([mapAside3MapImage],0);});
+	mapAside3MapOuter.appendChild(mapAside3MapOuter2);
+
+
+
+
+
+
+	mapAside3MapOuter2.appendChild(mapAside3MapInner);
+	mapAside3MapInner.appendChild(mapAside3MapZoomReset);
+	mapAside3MapInner.appendChild(mapAside3MapZoomIn);
+	mapAside3MapInner.appendChild(mapAside3MapFullscreen);
+	mapAside3MapInner.appendChild(mapAside3MapInner2);
+	mapAside3MapInner2.appendChild(mapAside3MapImg);
+	mapAside3MapInner2.appendChild(mapAside3Map);
+
+
+
+
+
+
+	mapAside1OptionsSearch.addEventListener("keyup", function() {search("Map");});
+	mapAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Map");});
+	mapAside3MapInner2.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapAside3MapImg],0)}});
+
+
+
+
+
 
 	var dir2 = ["Bottom","Right"];
 	for(var q = 0; q < dir2.length; q++) {
@@ -106,7 +128,7 @@ var createMap = function() {
 		mapAside3MapDirectionText.setAttribute("name","Map");
 		if (dir2[q] == "Bottom") {
 			mapAside3MapDirectionText.innerText = "⮟";
-			mapAside3MapInner.appendChild(mapAside3MapDirection);
+			mapAside3MapOuter2.appendChild(mapAside3MapDirection);
 		}
 		else if (dir2[q] == "Right") {
 			mapAside3MapDirectionText.innerText = "⮞";
@@ -115,6 +137,14 @@ var createMap = function() {
 		mapAside3MapDirection.appendChild(mapAside3MapDirectionText);
 		mapAside3MapDirectionText.addEventListener("click", dataRedirect);
 	}
+
+
+
+
+
+
+
+
 
 
 
@@ -244,9 +274,6 @@ var createMap = function() {
 		mapAside1OptionsInput.addEventListener("click", mapOptionsSelector);
 		mapAside1OptionsLabel.setAttribute("tabindex",q+10);
 		mapAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
-		if(q == 0) {
-			mapAside1OptionsLabel.click();
-		}
 	}
 
 	var searchLis = document.querySelectorAll("#map-options > label");
@@ -264,6 +291,24 @@ var createMap = function() {
     for(q = 0; q < searchMapAttributes.length; q++) {
         searchMapAttributes[q] = searchMapAttributes[q].replaceAll("data-search-","")
     }
+	
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	function mapOptionsSelector(i) {
 		var i;
@@ -279,6 +324,12 @@ var createMap = function() {
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
 
+		var mapImg = document.querySelector(".map-inner img[usemap]");
+
+		if (mapImg.classList.contains("mapify")) {
+			mapBlink(mapAside3MapOuter,[location]);
+		}
+		
 
 		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Trainers", "Move Tutor"];
 
@@ -358,54 +409,56 @@ var createMap = function() {
 
 
 
-		var loc;
-		var area;
-		var locationImages = [];
-
-		for (var q = 0; q < tempLocationImages.length; q++) {
-			if (tempLocationImages[q].includes("_")) {
-				loc = tempLocationImages[q].split("_")[0];
-				area = tempLocationImages[q].replaceAll(loc+"_","")
-			}
-			else {
-				loc = tempLocationImages[q];
-			}
-			if (loc == location) {
-				locationImages.push(tempLocationImages[q])
-			}
-		}
-
-
 		var imgs = mapAside4DescriptionOviewSelector.querySelectorAll(":scope > span");
 		for (var q = 0; q < imgs.length; q++) {
 			imgs[q].remove();
 		}
+
+
 		mapAside4DescriptionOviewHeaderText.innerText = "";
 		mapAside4DescriptionOviewSelector.style.removeProperty("transform");
 		mapAside4DescriptionOviewButtonLeftButton.value = 0;
 		mapAside4DescriptionOviewButtonRightButton.value = 0;
 
-		for (var q = 0; q < locationImages.length; q++) {
-			if (locationImages[q].includes("_")) {
-				loc = locationImages[q].split("_")[0];
-				area = locationImages[q].replaceAll(loc+"_","")
+
+
+		var loadLocation;
+		var loadArea;
+		var loadImages = [];
+
+		for (var q = 0; q < tempLoadImages.length; q++) {
+			if (tempLoadImages[q].includes("_")) {
+				loadLocation = tempLoadImages[q].split("_")[0];
+				loadArea = tempLoadImages[q].replaceAll(loadLocation+"_","")
 			}
 			else {
-				loc = locationImages[q];
-				area = undefined;
+				loadLocation = tempLoadImages[q];
+			}
+			if (loadLocation == location) {
+				loadImages.push(tempLoadImages[q])
+			}
+		}
+
+		for (var q = 0; q < loadImages.length; q++) {
+			if (loadImages[q].includes("_")) {
+				loadLocation = loadImages[q].split("_")[0];
+				loadArea = loadImages[q].replaceAll(loadLocation+"_","")
+			}
+			else {
+				loadLocation = loadImages[q];
+				loadArea = undefined;
 			}
 
 			var mapAside4DescriptionOviewImageInner = document.createElement("span");
 			var mapAside4DescriptionOviewImage = document.createElement("img");
-			mapAside4DescriptionOviewImageInner.setAttribute("name",q);
-			mapAside4DescriptionOviewImage.src = "./media/Images/Location/Overworld/"+MEDIAPath_LocationOverworld+"/"+locationImages[q]+".png";
+			mapAside4DescriptionOviewImage.src = "./media/Images/Location/Load/"+MEDIAPath_LocationLoad+"/"+loadImages[q]+".png";
 			mapAside4DescriptionOviewSelector.appendChild(mapAside4DescriptionOviewImageInner);
 			mapAside4DescriptionOviewImageInner.appendChild(mapAside4DescriptionOviewImage);
 
 			//mapAside4DescriptionOviewImage.setAttribute("onerror","this.parentElement.remove()")
 
-			if (area != undefined) {
-				mapAside4DescriptionOviewImage.setAttribute("title",area);
+			if (loadArea != undefined) {
+				mapAside4DescriptionOviewImage.setAttribute("title",loadArea);
 			}
 			else {
 				mapAside4DescriptionOviewImage.setAttribute("title",location);
@@ -413,22 +466,89 @@ var createMap = function() {
 
 			if (q == 0) {
 				mapAside4DescriptionOviewImageInner.classList.add("open")
-				if (area != undefined) {
-					mapAside4DescriptionOviewHeaderText.innerText = area;
+				if (loadArea != undefined) {
+					mapAside4DescriptionOviewHeaderText.innerText = loadArea;
 				}
 				else {
 					mapAside4DescriptionOviewHeaderText.innerText = location;
 				}
 			}
 		}
+
+
+
+
+
+		var overviewLocation;
+		var overviewArea;
+		var overviewImages = [];
+
+		for (var q = 0; q < tempOverviewImages.length; q++) {
+			if (tempOverviewImages[q].includes("_")) {
+				overviewLocation = tempOverviewImages[q].split("_")[0];
+				overviewArea = tempOverviewImages[q].replaceAll(overviewLocation+"_","")
+			}
+			else {
+				overviewLocation = tempOverviewImages[q];
+			}
+			if (overviewLocation == location) {
+				overviewImages.push(tempOverviewImages[q])
+			}
+		}
+
+		for (var q = 0; q < overviewImages.length; q++) {
+			if (overviewImages[q].includes("_")) {
+				overviewLocation = overviewImages[q].split("_")[0];
+				overviewArea = overviewImages[q].replaceAll(overviewLocation+"_","")
+			}
+			else {
+				overviewLocation = overviewImages[q];
+				overviewArea = undefined;
+			}
+
+			var mapAside4DescriptionOviewImageInner = document.createElement("span");
+			var mapAside4DescriptionOviewImage = document.createElement("img");
+			mapAside4DescriptionOviewImage.src = "./media/Images/Location/Overview/"+MEDIAPath_LocationOverview+"/"+overviewImages[q]+".png";
+			mapAside4DescriptionOviewSelector.appendChild(mapAside4DescriptionOviewImageInner);
+			mapAside4DescriptionOviewImageInner.appendChild(mapAside4DescriptionOviewImage);
+
+			//mapAside4DescriptionOviewImage.setAttribute("onerror","this.parentElement.remove()")
+
+			if (overviewArea != undefined) {
+				mapAside4DescriptionOviewImage.setAttribute("title",overviewArea);
+			}
+			else {
+				mapAside4DescriptionOviewImage.setAttribute("title",location);
+			}
+
+			if (q == 0) {
+				mapAside4DescriptionOviewImageInner.classList.add("open")
+				if (overviewArea != undefined) {
+					mapAside4DescriptionOviewHeaderText.innerText = overviewArea;
+				}
+				else {
+					mapAside4DescriptionOviewHeaderText.innerText = location;
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
 		var locimgs = mapAside4DescriptionOviewSelector.querySelectorAll(":scope img");
 		var buttons = mapAside4DescriptionOviewSelectorOuter.querySelectorAll(":scope button");
 		for (var q = 0; q < locimgs.length; q++) {
+			locimgs[q].parentElement.setAttribute("name",q);
 			locimgs[q].addEventListener("mousedown", function(event) { if(event.button === 0 || event.button === 1) {fullscreenIMG(locimgs,buttons[0].getAttribute("value"))};});
 		}
 
 
-		if (locationImages.length == 0) {
+		if (locimgs.length == 0) {
 			mapAside4DescriptionOviewHeader.style.display = "none";
 			mapAside4DescriptionOviewSelectorOuter.style.display = "none";
 		}
@@ -437,11 +557,11 @@ var createMap = function() {
 			mapAside4DescriptionOviewSelectorOuter.style.removeProperty("display");
 		}
 
-		if (locationImages.length < 2) {
+		if (locimgs.length < 2) {
 			mapAside4DescriptionOviewButtonLeftButton.style.display = "none";
 			mapAside4DescriptionOviewButtonRightButton.style.display = "none";
 		}
-		else if (locationImages.length > 1) {
+		else if (locimgs.length > 1) {
 			mapAside4DescriptionOviewButtonLeftButton.style.display = "none";
 			mapAside4DescriptionOviewButtonRightButton.style.removeProperty("display");
 		}
@@ -526,74 +646,202 @@ var createMap = function() {
 						var mapAside4DescriptionItemIcon = document.createElement("img");
 						mapAside4DescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
 						mapAside4DescriptionItemIcon.setAttribute("onerror", "this.style.display='none';");
-						mapAside4DescriptionItemIcon.setAttribute("title",getItemIcon(items[u]["Item"]));
-
-
-						if (quantity > 1) {
-							mapAside4DescriptionItemIcon.title = quantity+"x "+items[u]["Item"];
-						}
-						else {
-							mapAside4DescriptionItemIcon.title = items[u]["Item"];
-						}
-
-						if (items[u]["Hidden"] == "Hidden") {
-							mapAside4DescriptionItemIcon.setAttribute("name","Hidden");
-							mapAside4DescriptionItemIcon.title += " (Hidden)";
-						}
-
 						mapAside4DescriptionItemIconInner.appendChild(mapAside4DescriptionItemIcon);
 					}
+
+					if (quantity > 1) {
+						mapAside4DescriptionItemIconOuter.title = items[u]["Quantity"]+"x "+items[u]["Item"];
+					}
+					else {
+						mapAside4DescriptionItemIconOuter.title = items[u]["Item"];
+					}
+
+					if (items[u]["Hidden"] == "Hidden") {
+						mapAside4DescriptionItemIconOuter.title += " (Hidden)";
+						mapAside4DescriptionItemIconOuter.classList.add("hidden");
+					}
+
 
 					var mapAside4DescriptionItemText = document.createElement("h6");
 					mapAside4DescriptionItemText.innerText = items[u]["Item"];
 					mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
 		
 
-					if (items[u]["Description"] != undefined) {
-						var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
-						mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
-						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemDescriptionOuter);
-						var mapAside4DescriptionItemDescription = document.createElement("p");
-						mapAside4DescriptionItemDescription.innerText = items[u]["Description"];
-						mapAside4DescriptionItemDescriptionOuter.appendChild(mapAside4DescriptionItemDescription);
-					}
-	
+					var mapAside4DescriptionItemDescriptionOuter = document.createElement("span");
+					mapAside4DescriptionItemDescriptionOuter.setAttribute("name","Description");
+					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemDescriptionOuter);
+					var mapAside4DescriptionItemDescription = document.createElement("p");
+					mapAside4DescriptionItemDescription.innerText = items[u]["Description"];
+					mapAside4DescriptionItemDescriptionOuter.appendChild(mapAside4DescriptionItemDescription);
+				
 
-					if (items[u]["Machine"] != undefined) {
-						var mapAside4DescriptionItemMachineOuter = document.createElement("span");
-						mapAside4DescriptionItemMachineOuter.setAttribute("name","Machine");
-						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemMachineOuter);
-						if (items[u]["Machine"].includes(",")) {
-							for(var y = 0; y < items[u]["Machine"].split(",").length; y++) {
-								var mapAside4DescriptionItemMachine = document.createElement("span");
-								var mapAside4DescriptionItemMachineImage = document.createElement("img");
-								var mapAside4DescriptionItemMachineText = document.createElement("p");
-								mapAside4DescriptionItemMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(getMoveMachine(items[u]["Machine"].split(",")[y]))+".png";
-								mapAside4DescriptionItemMachineImage.title = items[u]["Machine"].split(",")[y];
-								mapAside4DescriptionItemMachineText.innerText = items[u]["Machine"].split(",")[y];
-								mapAside4DescriptionItemMachineOuter.appendChild(mapAside4DescriptionItemMachine);
-								mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineImage);
-								mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineText);
+					var itemTime = "";
+					var itemDay = [];
+					var itemSeason = [];
+
+					var itemTimeResult = [];
+	
+					if (items[u]["Time"] != undefined) {
+						itemTime = items[u]["Time"];
+					}
+
+					if (items[u]["Day"] != undefined) {
+						if (items[u]["Day"].includes(",")) {
+							var daySplit = items[u]["Day"].split(",");
+							for(var y = 0; y < daySplit.length; y++) {
+								itemDay.push(daySplit[y]);
 							}
 						}
 						else {
-							var mapAside4DescriptionItemMachine = document.createElement("span");
-							var mapAside4DescriptionItemMachineImage = document.createElement("img");
-							var mapAside4DescriptionItemMachineText = document.createElement("p");
-							mapAside4DescriptionItemMachineImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(getMoveMachine(items[u]["Machine"]))+".png";
-							mapAside4DescriptionItemMachineImage.title = items[u]["Machine"];
-							mapAside4DescriptionItemMachineText.innerText = items[u]["Machine"];
-							mapAside4DescriptionItemMachineOuter.appendChild(mapAside4DescriptionItemMachine);
-							mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineImage);
-							mapAside4DescriptionItemMachine.appendChild(mapAside4DescriptionItemMachineText);
+							itemDay.push(items[u]["Day"])
 						}
 					}
 
-
-					if (items[u]["Requirement"] != undefined) {
-						mapAside4DescriptionItemDescription.title = items[u]["Requirement"];
+					if (items[u]["Season"] != undefined) {
+						if (items[u]["Season"].includes(",")) {
+							var seasonSplit = items[u]["Season"].split(",");
+							for(var y = 0; y < seasonSplit.length; y++) {
+								itemSeason.push(seasonSplit[y]);
+							}
+						}
+						else {
+							itemSeason.push(items[u]["Season"])
+						}
+						
 					}
-		
+
+
+					for(var y = 0; y < itemSeason.length; y++) {
+						itemTimeResult.push(itemSeason[y]);
+					}
+
+					for(var y = 0; y < itemDay.length; y++) {
+						itemTimeResult.push(itemDay[y]);
+					}
+
+					itemTimeResult = itemTimeResult.map(i => "("+i+" "+itemTime+")");
+					itemTimeResult = itemTimeResult.map(i => i.replaceAll(" )",")"));
+					var itemTimeResultFinish = "";
+
+					for(var y = 0; y < itemTimeResult.length; y++) {
+						itemTimeResultFinish += " "+itemTimeResult[y];
+					}
+					itemTimeResultFinish = itemTimeResultFinish.replaceAll(") (",", ");
+					itemTimeResultFinish = itemTimeResultFinish.replace(/,([^,]*)$/, ' and $1');
+
+
+					mapAside4DescriptionItemDescription.innerText += itemTimeResultFinish;
+					
+			
+
+					if (items[u]["Field"] != undefined) {
+						var mapAside4DescriptionItemRequirementOuter = document.createElement("span");
+						var mapAside4DescriptionItemRequirementTitle = document.createElement("h5");
+						mapAside4DescriptionItemRequirementOuter.setAttribute("name","Requirement");
+						mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemRequirementOuter);
+						mapAside4DescriptionItemRequirementOuter.appendChild(mapAside4DescriptionItemRequirementTitle);
+
+						mapAside4DescriptionItemRequirementTitle.innerText = "Requires:";
+
+
+						if (items[u]["Field"].includes("/")) {
+							for(var y = 0; y < items[u]["Field"].split("/").length; y++) {
+								var itemIcon;
+								var itm;
+								if (getMoveMachine(items[u]["Field"].split("/")[y]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(items[u]["Field"].split("/")[y]));
+									itm = getMoveMachine(items[u]["Field"].split("/")[y]);
+								}
+								else if (getItemIcon(items[u]["Field"].split("/")[y]) != undefined) {
+									itemIcon = getItemIcon(items[u]["Field"].split("/")[y]);
+									itm = items[u]["Field"].split("/")[y];
+								}
+
+								var mapAside4DescriptionItemField = document.createElement("span");
+								var mapAside4DescriptionItemFieldText = document.createElement("p");
+								mapAside4DescriptionItemFieldText.innerText = items[u]["Field"].split("/")[y];
+								mapAside4DescriptionItemRequirementOuter.appendChild(mapAside4DescriptionItemField);
+								if (itemIcon != undefined) {
+									var mapAside4DescriptionItemFieldImage = document.createElement("img");
+									mapAside4DescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									mapAside4DescriptionItemFieldImage.title = items[u]["Field"].split("/")[y];
+									mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldImage);
+	
+									mapAside4DescriptionItemField.setAttribute("name","Item");
+									mapAside4DescriptionItemField.setAttribute("value",itm);
+									console.log(mapAside4DescriptionItemField)
+									mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+								}
+								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
+								if (y != items[u]["Field"].split("/").length - 1) {
+									var mapAside4DescriptionItemFieldSpace = document.createElement("p");
+									mapAside4DescriptionItemFieldSpace.innerText = " or ";
+									mapAside4DescriptionItemRequirementOuter.appendChild(mapAside4DescriptionItemFieldSpace)
+								}
+							}
+						}
+						else if (items[u]["Field"].includes(",")) {
+							for(var y = 0; y < items[u]["Field"].split(",").length; y++) {
+								var itemIcon;
+								var itm;
+								if (getMoveMachine(items[u]["Field"].split(",")[y]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(items[u]["Field"].split(",")[y]));
+									itm = getMoveMachine(items[u]["Field"].split(",")[y]);
+								}
+								else if (getItemIcon(items[u]["Field"].split(",")[y]) != undefined) {
+									itemIcon = getItemIcon(items[u]["Field"].split(",")[y]);
+									itm = items[u]["Field"].split(",")[y];
+								}
+
+								var mapAside4DescriptionItemField = document.createElement("span");
+								var mapAside4DescriptionItemFieldText = document.createElement("p");
+								mapAside4DescriptionItemFieldText.innerText = items[u]["Field"].split(",")[y];
+								mapAside4DescriptionItemRequirementOuter.appendChild(mapAside4DescriptionItemField);
+								if (itemIcon != undefined) {
+									var mapAside4DescriptionItemFieldImage = document.createElement("img");
+									mapAside4DescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									mapAside4DescriptionItemFieldImage.title = items[u]["Field"].split(",")[y];
+									mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldImage);
+	
+									mapAside4DescriptionItemField.setAttribute("name","Item");
+									mapAside4DescriptionItemField.setAttribute("value",itm);
+									mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+								}
+								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
+							}
+						}
+						else {
+							var itemIcon;
+							var itm;
+							if (getMoveMachine(items[u]["Field"]) != undefined) {
+								itemIcon = getItemIcon(getMoveMachine(items[u]["Field"]));
+								itm = getMoveMachine(items[u]["Field"]);
+							}
+							else if (getItemIcon(items[u]["Field"]) != undefined) {
+								itemIcon = getItemIcon(items[u]["Field"]);
+								itm = items[u]["Field"];
+							}
+
+							var mapAside4DescriptionItemField = document.createElement("span");
+							var mapAside4DescriptionItemFieldText = document.createElement("p");
+							mapAside4DescriptionItemFieldText.innerText = items[u]["Field"];
+							mapAside4DescriptionItemRequirementOuter.appendChild(mapAside4DescriptionItemField);
+							if (itemIcon != undefined) {
+								var mapAside4DescriptionItemFieldImage = document.createElement("img");
+								mapAside4DescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+								mapAside4DescriptionItemFieldImage.title = items[u]["Field"];
+								mapAside4DescriptionItemFieldImage.setAttribute("name","Item");
+								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldImage);
+
+								mapAside4DescriptionItemField.setAttribute("name","Item");
+								mapAside4DescriptionItemField.setAttribute("value",itm);
+								mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+							}
+							mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
+
+						}
+					}
+
 				}
 			}
 		}
@@ -802,10 +1050,15 @@ var createMap = function() {
 						var mapAside4DescriptionTutorCostHeader = document.createElement("h5");
 						var mapAside4DescriptionTutorCostText = document.createElement("p");
 						mapAside4DescriptionTutorCostHeader.innerText = "Cost:";
-						mapAside4DescriptionTutorCostText.innerHTML = tutors[u]["Cost"].replaceAll(",","\n").replaceAll(" Yellow Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Yellow Shard.png">').replaceAll(" Red Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Red Shard.png">').replaceAll(" Blue Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Blue Shard.png">').replaceAll(" Green Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Green Shard.png">');
+						mapAside4DescriptionTutorCostText.innerHTML = tutors[u]["Cost"].replaceAll(",","\n").replaceAll(" Yellow Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Yellow Shard.png" name="Item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Red Shard.png" name="Item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Blue Shard.png" name="Item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Green Shard.png" name="Item" title="Green Shard">');
 						mapAside4DescriptionTutorAdditional.appendChild(mapAside4DescriptionTutorCost);
 						mapAside4DescriptionTutorCost.appendChild(mapAside4DescriptionTutorCostHeader);
 						mapAside4DescriptionTutorCost.appendChild(mapAside4DescriptionTutorCostText);
+						
+						var costImages = mapAside4DescriptionTutorCost.querySelectorAll(":scope img");
+						for(var y = 0; y < costImages.length; y++) {
+							costImages[y].addEventListener("click",dataRedirect);
+						}
 					}
 
 
@@ -820,10 +1073,7 @@ var createMap = function() {
 
 		mapAside2TitleText.innerText = location;
 		mapAside2FlavorText.innerText = "";
-		var imgz = document.querySelectorAll(".map-img-mark-outer img");
-		for(var q = 0; q < imgz.length; q++) {
-			imgz[q].remove();
-		}
+	
 
 		
 		for(var q = 0; q < finaldataLocationSlogan.length; q++) {
@@ -945,11 +1195,6 @@ var createMap = function() {
 		}
 		
 
-		var mapAside3MapMarkImg = document.createElement("img");
-		mapAside3MapMarkImg.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Mark/"+location+".png";
-		mapAside3MapMarkImg.classList.add("map-img-mark");
-		mapAside3MapMarkImg.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Error2.png';this.classList.remove('map-img-mark');this.classList.add('map-img-error');");
-		mapAside3MapMark.appendChild(mapAside3MapMarkImg);
 
 
 
@@ -1452,13 +1697,3 @@ $('body').click(function(event) {
 });
 
 
-function mapCancel() {
-	var mapCancelInput = document.querySelectorAll('#map-options input:checked');
-	for(var q = 0; q < mapCancelInput.length; q++) {
-		mapCancelInput[q].checked = false;
-	}
-	var mapMark = document.querySelectorAll('.info-img-mark');
-	for(var q = 0; q < mapMark.length; q++) {
-		mapMark[q].style.display = "none";
-	}
-}
