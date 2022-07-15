@@ -6826,6 +6826,14 @@ span[name="Status"] {
 	filter: brightness(1.1);
 }
 
+.item-sidebar ul li.hidden span[name="Item"] {
+	filter: brightness(0.4) contrast(0.6);
+}
+
+.item-sidebar ul li.hidden span[name="Item"]:hover {
+	filter: unset;
+}
+
 
 
 
@@ -6854,9 +6862,17 @@ span[name="Status"] {
     flex-direction: column;
 	text-align: center;
 }
+.item-sidebar-price > span > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
+.item-sidebar-price > span p {
+	display: inline;
+}
 .item-sidebar-price > span img {
+	padding: 0 2px;
 	max-width: 12px;
 	object-fit: scale-down;
 	image-rendering: -moz-crisp-edges;
