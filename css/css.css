@@ -6735,7 +6735,7 @@ span[name="Status"] {
 .item-sidebar ul {
 	display: block;
 	width: 100%;
-	height: 65%;
+	height: 75%;
 	background: var(--color17);
 	overflow: auto;
 }
@@ -6834,7 +6834,7 @@ span[name="Status"] {
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 20%;
+    height: 10%;
     position: relative;
     background: var(--color15);
     box-shadow: 0 -1px 1px var(--border1);
