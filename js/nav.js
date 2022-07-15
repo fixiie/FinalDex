@@ -198,13 +198,13 @@ function mapifyMap() {
 			mapAside3MapInner2.style.transitionDuration = duration+"s";
 			mapAside3MapInner2.style.transitionProperty = "transform";
 			
-			var activeZoom = false;
+			var activeZoom;
 		
 			mapAside3MapZoomIn.addEventListener("click",function() {zoomIn(true)});
 			mapAside3MapZoomReset.addEventListener("click",function() {zoomReset(false)});
 			mapAside3MapOuter2.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoomIn(true)}else if(!delta.includes("-")){zoomReset(false)}});
 			mapAside3MapOuter2.addEventListener("mouseleave", function() {zoomReset(undefined)});
-			mapAside3MapOuter2.addEventListener("mouseenter", function() {zoomIn(true)});
+			mapAside3MapOuter2.addEventListener("mouseenter", function() {zoomIn(undefined)});
 			mapAside3MapOuter2.addEventListener("mousemove", function() {zoomPan()});
 
 
