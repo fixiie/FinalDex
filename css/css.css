@@ -6758,15 +6758,25 @@ span[name="Status"] {
 	text-align:center;
 	font-size: 80%;
 }
-.item-sidebar ul li span[name="Item"] p {
+.item-sidebar ul li > span[name="Item"] p {
 	display: none;
 	cursor:default;
 }
 
-.item-sidebar ul li span:not([name="Item"]) {
+.item-sidebar ul li > span:not([name="Item"]) {
 	flex-direction: column;
 }
-.item-sidebar ul li span[name="Item"] img {
+
+.item-sidebar ul li span[name="Requirement"] > span {
+	cursor:pointer;
+}
+.item-sidebar ul li span[name="Requirement"] > span:active {
+	font-weight: bold;
+}
+.item-sidebar ul li span[name="Requirement"] img:hover {
+	filter:brightness(1.1);
+}
+.item-sidebar ul li > span[name="Item"] img {
 	margin: 0 -8px;
 }
 .item-sidebar ul li span img {
@@ -6826,11 +6836,11 @@ span[name="Status"] {
 	filter: brightness(1.1);
 }
 
-.item-sidebar ul li.hidden span[name="Item"] {
+.item-sidebar ul li.hidden > span[name="Item"] {
 	filter: brightness(0.4) contrast(0.6);
 }
 
-.item-sidebar ul li.hidden span[name="Item"]:hover {
+.item-sidebar ul li.hidden > span[name="Item"]:hover {
 	filter: unset;
 }
 
