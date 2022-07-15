@@ -376,6 +376,7 @@ var createItem = function() {
 		}
 
 		itemAside4SidebarValueCurrencyImg.src = "";
+		itemAside4SidebarValueCurrencyImg.title = "";
 		itemAside4SidebarValueCurrencyImg.style.display = "none";
 		itemAside4SidebarValueText.innerText = "N/A";
 		itemAside4SidebarValueText.removeAttribute("title");
@@ -383,13 +384,15 @@ var createItem = function() {
 		for(var q = 0; q < finaldataItemsPrice.length; q++) {
 			if (finaldataItemsPrice[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
+					console.log(finaldataItemsPrice[q]["Sell Amount"])
 					if (finaldataItemsPrice[q]["Sell Amount"] != undefined) {
-						if (finaldataItemsPrice[q]["Sell Currency"] == "Pokémon Dollar") {
-							itemAside4SidebarValueCurrencyImg.src = './media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png';
+						if (finaldataItemsPrice[q]["Sell Currency"] != undefined) {
+							itemAside4SidebarValueCurrencyImg.src = './media/Images/Misc/Currency/'+MEDIAPath_Currency+'/'+finaldataItemsPrice[q]["Sell Currency"]+'.png';
 							itemAside4SidebarValueCurrencyImg.style.display = "unset";
+							itemAside4SidebarValueCurrencyImg.title = finaldataItemsPrice[q]["Sell Currency"];
 						}
 
-						itemAside4SidebarValueText.innerHTML = finaldataItemsPrice[q]["Sell"].replaceAll("Pokémon Dollar ",'<img src="./media/Images/Misc/Currency/'+MEDIAPath_Currency+'/Pokémon Dollar.png" title="Pokémon Dollar">');
+						itemAside4SidebarValueText.innerText = finaldataItemsPrice[q]["Sell Amount"];
 						
 						if(finaldataItemsPrice[q]["Sell Additional"] != undefined) {
 							itemAside4SidebarValueText.setAttribute("title",finaldataItemsPrice[q]["Sell Additional"]);
