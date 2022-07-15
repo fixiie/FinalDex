@@ -694,19 +694,24 @@ function preventCheckboxZero(base) {
 }
 
 function dataRedirect() {
-    var type = (this.getAttribute("name")).toLowerCase();
+    var tar = this;
+    if (tar.tagName == undefined) {
+        tar = event.target;
+    }
+
+    var type = (tar.getAttribute("name")).toLowerCase();
     var x;
     var z;
     var typevariant;
     var lock;
     var notval = ["⮜","⮝","⮟","⮞"];
 
-    if (this.innerText != undefined && this.innerText != "" && this.firstElementChild == undefined && !notval.includes(this.innerText)) {
-        x = this.innerText;
-    } else if(this.getAttribute("title") != undefined) {
-        x = this.getAttribute("title");
-    } else if(this.getAttribute("value") != undefined) {
-        x = this.getAttribute("value");
+    if (tar.innerText != undefined && tar.innerText != "" && tar.firstElementChild == undefined && !notval.includes(tar.innerText)) {
+        x = tar.innerText;
+    } else if(tar.getAttribute("value") != undefined) {
+        x = tar.getAttribute("value");
+    } else if(tar.getAttribute("title") != undefined) {
+        x = tar.getAttribute("title");
     }
     if(type == "map") {
         typevariant = type;
@@ -801,7 +806,7 @@ function dataRedirect() {
             tar.click();
             tar.scrollIntoView();
         }
-        else if (!notval.includes(this.innerText)) {
+        else if (!notval.includes(tar.innerText)) {
             if (type == "map") {
                 alert("Could not find location.")
             }
@@ -4726,6 +4731,185 @@ function searchOptionsTitle(base) {
     if (tempArr.length > 0) {
         result = "Search Options:"+"\n"+tempArr.join("\n");
     }
+
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mapBlink(base,area) {
+  var area;
+  var base;
+  var folder = base.querySelector(":scope .mapify-svg");
+  var img = base.querySelector(":scope .map-img");
+  var points;
+  var coords = [];
+  for (var i = 0; i < area.length; i++) {
+    coords.push([]);
+  }
+
+  for (var i = 0; i < area.length; i++) {
+    coords[i].push(getMapCoords(area[i]).split(","))
+  }
+
+  for (var i = 0; i < area.length; i++) {
+    for (var key in coords[i]) { // Convert percentage coordinates back to pixel coordinates relative to the image size
+        if (key % 2 == 0) {  // X
+          points += ($(img).width() * (coords[key] / 100));
+        } else { // Y
+          points += ',' + ($(img).height() * (coords[key] / 100)) + ' ';
+        }
+    }
+  }
+  var polys = base.querySelectorAll(':scope polygon[name="active"]');
+  for (var i = 0; i < polys.length; i++) {
+    polys[i].remove();
+  }
+
+  for (var i = 0; i < area.length; i++) {
+    var polygon =  document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    polygon.setAttribute("fill","none");
+    polygon.classList.add("mapify-polygon");
+    polygon.setAttribute("points",coords[i]);
+    polygon.setAttribute("name","active");
+    folder.appendChild(polygon)
+  }
+}
+
+
+function getMapCoords(area) {
+  var area;
+
+  for (var i = 0; i < MapArea.length; i++) {
+    if (MapArea[i]["id"].includes("<br>")) {
+      var brk = MapArea[i]["id"].split("<br>");
+      var check = false;
+      for (var q = 0; q < brk.length; q++) {
+        if (brk[q] == area) {
+          check = true;
+        }
+      }
+      if (check) {
+        return MapArea[i]["coords"];
+      }
+    }
+    else if (MapArea[i]["id"] == area) {
+      return MapArea[i]["coords"];
+    }
+  }
+  return "";
+}
+
+
+
+
+
+
+
+function excludeDuplicateAreas(arr) {
+    var arr;
+    var exclude = [];
+    var broken = [];
+
+    var arr1 = JSON.parse(JSON.stringify(arr));
+
+    if ((GameID >= 7 && GameID <= 8) || GameID == 12) {
+        broken = ["Marine Cave","Battle Tent","Terra Cave"];
+    }
+    if (GameID == 8) {
+        exclude.push("Team Aqua Hideout");
+    }
+    if (GameID == 7 || GameID == 12) {
+        exclude.push("Team Magma Hideout")
+    }
+    if (GameID >= 7 && GameID <= 8) {
+        exclude.push("Altering Cave");
+        exclude.push("Artisan Cave");
+        exclude.push("Battle Arena");
+        exclude.push("Battle Dome");
+        exclude.push("Battle Factory");
+        exclude.push("Battle Frontier");
+        exclude.push("Battle Palace");
+        exclude.push("Battle Pike");
+        exclude.push("Battle Pyramid");
+        exclude.push("Battle Tent");
+        exclude.push("Birth Island");
+        exclude.push("Desert Underpass");
+        exclude.push("Faraway Island");
+        exclude.push("Magma Hideout");
+        exclude.push("Marine Cave");
+        exclude.push("Mirage Tower");
+        exclude.push("Navel Rock");
+        exclude.push("Terra Cave");
+        exclude.push("Trainer Hill");
+    }
+
+    var del = [];
+
+    for (var i = 0; i < arr1.length; i++) {
+        for (var q = 0; q < exclude.length; q++) {
+            if (arr1[i]["id"].includes("<br>")) {
+                var ids = arr1[i]["id"].split("<br>");
+                for (var u = 0; u < ids.length; u++) {
+                    if (ids[u] == exclude[q]) {
+                        del.push(i);
+                        break
+                    }
+                }
+            }
+            else if (arr1[i]["id"] == exclude[q]) {
+                del.push(i);
+            }
+        }
+        for (var q = 0; q < broken.length; q++) {
+            if (arr1[i]["id"] == broken[q]) {
+                del.push(i);
+            }
+        }
+    }
+    
+    var arrResult = [];
+    for (var i = 0; i < arr1.length; i++) {
+        if (!del.includes(i)) {
+            arrResult.push(arr1[i]);
+        }
+    }
+
+    var arr2 = JSON.parse(JSON.stringify(arrResult));
+    var tempArr = [{}]
+    for (var i = 0; i < arr2.length; i++) {
+        var check = false;
+        for (var q = 0; q < tempArr.length; q++) {
+            if (tempArr[q]["coords"] == arr2[i]["coords"] && tempArr[q]["id"] != arr2[i]["id"]) {
+                tempArr[q]["id"] += "<br>"+arr2[i]["id"];
+                check = false;
+                break
+            }
+            else {
+                check = true;
+            }
+        }
+        if (check) {
+            tempArr.push(arr2[i])
+        }
+    }
+
+    tempArr.splice(0, 1)
+
+    var result = [];
+    result = JSON.parse(JSON.stringify(tempArr));
 
     return result;
 }
