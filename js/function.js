@@ -1060,7 +1060,6 @@ function getEvolutionData(i,column) {
 		}
 	}
 	
-	console.log(result)
 	return result;
 }
 
@@ -1185,9 +1184,8 @@ function formatEvolutionText(i,obj,type) {
 	
 					breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
 	
-					console.log(breedResult)
 					var breedRes = checkReturnDifferences(breedResult,["Primary","Secondary","Factor"],["Pokémon"]);
-					console.log(breedRes)
+	
 
 					var resTemp = []
 					for (var q = 0; q < breedRes.length; q++){
