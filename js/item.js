@@ -384,7 +384,7 @@ var createItem = function() {
 		for(var q = 0; q < finaldataItemsPrice.length; q++) {
 			if (finaldataItemsPrice[q]["Item"] == item) {
 				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
-					console.log(finaldataItemsPrice[q]["Sell Amount"])
+					console.log(finaldataItemsPrice[q])
 					if (finaldataItemsPrice[q]["Sell Amount"] != undefined) {
 						if (finaldataItemsPrice[q]["Sell Currency"] != undefined) {
 							itemAside4SidebarValueCurrencyImg.src = './media/Images/Misc/Currency/'+MEDIAPath_Currency+'/'+finaldataItemsPrice[q]["Sell Currency"]+'.png';
