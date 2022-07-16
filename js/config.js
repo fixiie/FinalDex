@@ -3,6 +3,8 @@ function config() {
 	GameName = finaldataGame[GameID - 1]["Name"];
 	Region = finaldataGame[GameID - 1]["Region"];
 	document.title = GameID + ": " + GameFullName;
+	document.body.setAttribute("Game",GameName);
+	document.body.setAttribute("Generation",Generation);
 }
 var Ability = [];
 var Egg;
