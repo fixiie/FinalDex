@@ -42,6 +42,7 @@ var finaldataItemsPriceExtra = [];
 var finaldataItemsDescription = [];
 var finaldataLocationPokémon = [];
 var finaldataLocationItems = [];
+var finaldataLocationPickup = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
@@ -126,6 +127,9 @@ function requestLoad(i,url) {
 		if (loads[i] == "Location Items") {
 			for(var q = 0; q < Metadata["Items"].length; q++) {
 				finaldataLocationItems.push(Metadata["Items"][q]);
+			}
+			for(var q = 0; q < Metadata["Pickup"].length; q++) {
+				finaldataLocationPickup.push(Metadata["Pickup"][q]);
 			}
 		}
 		if (loads[i] == "Learnset") {
