@@ -303,6 +303,9 @@ var createItem = function() {
 		}
 
 
+
+
+
 		for(var q = 0; q < finaldataLocationItems.length; q++) {
 			if (getApplicable(finaldataLocationItems[q]["Game"])) {
 				if(finaldataLocationItems[q]["Item"] == item) {
@@ -499,6 +502,91 @@ var createItem = function() {
 				}
 			}
 		}
+
+
+
+		for(var q = 0; q < finaldataLocationPickup.length; q++) {
+			if (getApplicable(finaldataLocationPickup[q]["Game"])) {
+				if(finaldataLocationPickup[q]["Item"] == item) {
+					var itemAside4SidebarLi = document.createElement("li");
+					itemAside4SidebarLi.setAttribute("name","Pickup");
+					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+
+			
+					var itemAside4SidebarPickup = document.createElement("span");
+					var itemAside4SidebarPickupTitle = document.createElement("h5");
+					var itemAside4SidebarPickupText = document.createElement("h3");
+					itemAside4SidebarPickup.setAttribute("name","Ability");
+					itemAside4SidebarPickupTitle.innerText = "Ability";
+					itemAside4SidebarPickupText.innerText = "Pickup";
+					itemAside4SidebarPickupText.title = "Pickup";
+					itemAside4SidebarPickupText.setAttribute("name","Ability");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarPickup);
+					itemAside4SidebarPickup.appendChild(itemAside4SidebarPickupTitle);
+					itemAside4SidebarPickup.appendChild(itemAside4SidebarPickupText);
+
+
+					itemAside4SidebarPickupText.addEventListener("click",dataRedirect)
+
+	
+
+					var itemAside4SidebarDescription = document.createElement("span");
+					itemAside4SidebarDescription.setAttribute("name","Description");
+					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
+					var itemAside4SidebarDescriptionText = document.createElement("p");
+					itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
+					itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+
+
+					var PickupText;
+					var PickupLevel = "";
+					var PickupRate = "";
+					var PickupLocation = "";
+					var PickupAdditional = "";
+
+	
+
+					if (finaldataLocationPickup[q]["Level"] != undefined) {
+						PickupLevel = 'Level '+finaldataLocationPickup[q]["Level"];
+					}
+					if (finaldataLocationPickup[q]["Rate"] != undefined) {
+						PickupRate = finaldataLocationPickup[q]["Rate"];
+					}
+					if (finaldataLocationPickup[q]["Location"] != undefined) {
+						PickupLocation = 'at <span name="Map" title="'+finaldataLocationPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationPickup[q]["Location"]+'</span>';
+					}
+					if (finaldataLocationPickup[q]["Additional"] != undefined) {
+						PickupAdditional = 'on '+finaldataLocationPickup[q]["Additional"];
+					}
+
+					PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <span name="Ability" title="Pickup" onclick="dataRedirect()">Pickup</span>';
+
+					PickupText = PickupText.replaceAll("  "," ");
+
+					itemAside4SidebarDescriptionText.innerHTML = PickupText;
+
+
+					var itemAside4SidebarItem = document.createElement("span");
+					itemAside4SidebarItem.setAttribute("name","Item");
+					itemAside4SidebarItem.title = finaldataLocationPickup[q]["Item"];
+					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+
+			
+					var itemAside4SidebarItemImg = document.createElement("img");
+					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationPickup[q]["Item"])+".png";
+					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+
+					var itemAside4SidebarItemText = document.createElement("p");
+					itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
+					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+
+					
+				}
+			}
+		}
+
+
 
 		itemAside4SidebarValueCurrencyImg.src = "";
 		itemAside4SidebarValueCurrencyImg.title = "";
