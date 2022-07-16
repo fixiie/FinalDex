@@ -6735,7 +6735,7 @@ span[name="Status"] {
 .item-sidebar ul {
 	display: block;
 	width: 100%;
-	height: 75%;
+	height: 70%;
 	background: var(--color17);
 	overflow: auto;
 }
@@ -6749,7 +6749,7 @@ span[name="Status"] {
     border-bottom: 1px dotted;
 }
 
-.item-sidebar ul li span {
+.item-sidebar ul li > span {
 	width: 50%;
     display: flex;
     align-items: center;
@@ -6762,6 +6762,14 @@ span[name="Status"] {
 	display: none;
 	cursor:default;
 }
+.item-sidebar ul li > span[name="Description"] p span {
+	cursor:pointer;
+}
+.item-sidebar ul li > span[name="Description"] p span:hover {
+	font-weight:bold;
+}
+
+
 
 .item-sidebar ul li > span:not([name="Item"]) {
 	flex-direction: column;
@@ -6801,7 +6809,19 @@ span[name="Status"] {
     padding-top: 5px;
 }
 
+.item-sidebar ul li[name="Held"] span[name="Description"],
+.item-sidebar ul li[name="Pickup"] span[name="Description"] {
+	width: 250%;
+}
+.item-sidebar ul li[name="Held"] span[name="Pokémon"],
+.item-sidebar ul li[name="Pickup"] span[name="Ability"] {
+	width: 100%;
+}
 
+.item-sidebar ul li[name="Held"] span[name="Description"] {
+	align-items: flex-start;
+    text-align: left;
+}
 .item-sidebar ul li[name="Location"] span[name="Description"] {
 	width: 200%;
 	align-items: flex-start;
@@ -6811,9 +6831,7 @@ span[name="Status"] {
 	width: 100%;
 }
 
-.item-sidebar ul li span[name="Pokémon"] {
-	width: 100%;
-}
+
 .item-sidebar ul li span[name="Item"] {
 	width: 30%;
 }
@@ -6824,9 +6842,7 @@ span[name="Status"] {
 	max-width:unset;
 }
 
-.item-sidebar ul li[name="Held"] span[name="Description"] {
-	width: 150%;
-}
+
 
 .item-sidebar ul li span[name="Pokémon"] img {
 	cursor:pointer;
@@ -6852,7 +6868,7 @@ span[name="Status"] {
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 10%;
+    height: 15%;
     position: relative;
     background: var(--color15);
     box-shadow: 0 -1px 1px var(--border1);
