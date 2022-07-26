@@ -664,6 +664,11 @@ var createMap = function() {
 
 					var mapAside4DescriptionItemText = document.createElement("h6");
 					mapAside4DescriptionItemText.innerText = items[u]["Item"];
+
+					if (getMachineMove(items[u]["Item"]) != undefined) {
+						mapAside4DescriptionItemText.innerText += " ("+getMachineMove(items[u]["Item"])+")";
+					}
+		
 					mapAside4DescriptionItemIconOuter.appendChild(mapAside4DescriptionItemText);
 		
 
