@@ -10,9 +10,7 @@ function getPokémonData(arr, name, game) {
 	for(var i = 0; i < game.length; i++) {
 		for(var q = 0; q < arr.length; q++) {
 			if(arr[q][game[i]] == name) {
-				if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-						return e.ID;
-					}).indexOf(arr[q]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+				if(finaldataPokémon[q][JSONPath_Reference] == "true") {
 					var obj = new Object();
 					obj["Integer"] = q;
 					for(var u = 0; u < game.length; u++) {
@@ -183,15 +181,7 @@ function callPopUp(x, arr, type, style) {
 	for(u = 0; u < lis.length; u++) {
 		lis[u].remove();
 	}
-	if(type == "Type") {
-		popup.querySelector(":scope > div").setAttribute("name","type"+title);
-	} else if(type == "Egg Group") {
-		popup.querySelector(":scope > div").setAttribute("name","egg"+title);
-	} else if(type == "Base Stats" || type == "EV Yield") {
-		popup.querySelector(":scope > div").setAttribute("name","stat"+additional);
-	} else {
-		popup.querySelector(":scope > div").removeAttribute("name");
-	}
+	
 	if(type == "Ability") {
 		var jsonpath = JSONPath_Ability;
 		if(Generation <= 4) {
@@ -267,7 +257,9 @@ function callPopUp(x, arr, type, style) {
 		titlepath.innerHTML = "Egg Cycles<br>"+title;
 	} else if(type == "Gender Ratio") {
 		titlepath.innerHTML = type+"<br>"+"<span title='"+abbreviation+"'>"+alteration+"</span>";
-	} else {
+	} else if (type == "Egg Group") {
+        titlepath.innerHTML = type+"<br>"+"<span name='eggText"+title+"'>"+title+"</span>";
+    } else {
 		titlepath.innerText = title;
 	}
 	if(icon != undefined) {
@@ -288,9 +280,7 @@ function callPopUp(x, arr, type, style) {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][json[q]] == title) {
-					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 						var obj = new Object();
 						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
@@ -321,9 +311,7 @@ function callPopUp(x, arr, type, style) {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][additional+"_"+jsonpath] == title) {
-					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 						var obj = new Object();
 						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
@@ -340,9 +328,7 @@ function callPopUp(x, arr, type, style) {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][json[q]] != undefined) {
-					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 						var obj = new Object();
 						obj["Integer"] = u;
 						for(var y = 0; y < json.length; y++) {
@@ -384,9 +370,7 @@ function callPopUp(x, arr, type, style) {
 					abbreviation2 = "Very Low";
 				}
 				if(condition) {
-					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 						var obj = new Object();
 						obj["Integer"] = u;
 						obj["Category"] = abbreviation2;
@@ -434,9 +418,7 @@ function callPopUp(x, arr, type, style) {
 					abbreviation2 = "Genderless";
 				}
 				if(alteration == alteration2) {
-					if(finaldataPokémon[u][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {
-							return e.ID;
-						}).indexOf(arr[u]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 						var obj = new Object();
 						obj["Integer"] = u;
 						obj["Alteration"] = alteration2;
@@ -544,7 +526,7 @@ function callPopUp(x, arr, type, style) {
 						if(type == "Egg Group") {
 							if(result[u][json[q]] != undefined) {
 								p.innerText = result[u][json[q]];
-								p.setAttribute("name","egg"+result[u][json[q]]);
+								p.setAttribute("name","eggText"+result[u][json[q]]);
 							} else {
 								p.innerText = "–";
 							}
@@ -633,7 +615,8 @@ function callPopUp(x, arr, type, style) {
 	ul.querySelector(":scope > li.select").scrollIntoView();
 }
 
-var variantRotation;
+var variantIteration;
+variantIteration = 0;
 
 function variantSelector() {
 
@@ -651,6 +634,9 @@ function variantSelector() {
         else {
             tempStr = tempArr[0];
         }
+
+        searchFilter(document.getElementById("searchbar"),document.querySelector("#pokémon-outer > div ul"),"Remove");
+
         createContain(tempStr);
 
         memory("Save","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
@@ -662,7 +648,13 @@ function variantSelector() {
 		dexSwitch();
 
 		document.getElementById("searchbar").value = "";
-        
+
+
+        if (variantIteration != 0) {
+            consoleText("Variants changed to "+tempStr.replace(/,([^,]*)$/, ' and $1').replaceAll(",",", ")+".");
+        }
+
+        variantIteration = variantIteration + 1;
 	}
     
 
@@ -748,7 +740,7 @@ function dataRedirect() {
                 x = y[parseInt(selection)-1];
             }
             else {
-                alert("Returned an error.");
+                consoleText("Returned an error.");
                 return;
             }
         }
@@ -808,10 +800,10 @@ function dataRedirect() {
         }
         else if (!notval.includes(tar.innerText)) {
             if (type == "map") {
-                alert("Could not find location.")
+                consoleText("Could not find location.")
             }
             else {
-                alert("Could not find "+type+".")
+                consoleText("Could not find "+type+".")
             }
         }
     }
@@ -2004,18 +1996,21 @@ function dragDrop(e) {
             if (base.length > 0) {
                 createParty(base[0],"pok:"+drag);
                 partyShow(base[0]);
+                consoleText("Added "+drag+" to Party.");
             }
             else {
-                alert("Party is full!")
+                consoleText("Party is full!")
             }
         }
         else if (e.target.innerText == "Box") {
             storeInBox("pok:"+drag);
+            consoleText("Added "+drag+" to Box.");
         }
         else if (e.target.innerText == "+") {
             var base = e.target.parentElement.parentElement;
             createParty(base,"pok:"+drag);
             partyShow(base);
+            consoleText("Added "+drag+" to Party.");
         }
     }
 }
@@ -2807,20 +2802,22 @@ function selectModify(e) {
 
         if (this.value == "Add Copy to Box") {
             storeInBox(getPartyData(tar));
+            consoleText("Copy added to Box.");
         }
         else if (this.value == "Add Copy to Party") {
             if (base.length > 0) {
                 createParty(base[0],getPartyData(tar));
                 partyShow(base[0]);
+                consoleText("Copy added to Party.");
             }
             else {
-                alert("Party is full!")
+                consoleText("Party is full!")
             }
         }
         else if (this.value == "Export Pokémon Data String") {
             navigator.clipboard.writeText(getPartyData(tar));
             console.log(getPartyData(tar));
-            alert("Copied!");
+            consoleText("Copied!");
         }
         else if (this.value == "Change Evolution") {
             changePartyEvolution(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
@@ -2833,13 +2830,15 @@ function selectModify(e) {
     if (this.firstElementChild.value == "❌") {
         var tar = this.parentElement.parentElement.parentElement;
         if (this.value == "Delete") {
-            partyHide(this.parentElement.parentElement.parentElement);
-            partyDefault(this.parentElement.parentElement.parentElement);
+            partyHide(tar);
+            partyDefault(tar);
+            consoleText("Pokémon deleted.");
         }
         else if (this.value == "Send to Box") {
-            storeInBox(getPartyData(this.parentElement.parentElement.parentElement));
-            partyHide(this.parentElement.parentElement.parentElement);
-            partyDefault(this.parentElement.parentElement.parentElement);
+            consoleText("Sent "+getPartyData(tar).split("|")[0].split("pok:")[1]+" to Box.");
+            storeInBox(getPartyData(tar));
+            partyHide(tar);
+            partyDefault(tar);
         }
         this.value = "❌";
     }
@@ -3336,17 +3335,18 @@ function partyAdd() {
                 if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
                     createParty(this.parentElement.parentElement,data)
                     partyShow(this.parentElement.parentElement);
+                    consoleText("Added "+getPokémonName(tempstr)+" to Party.")
                 }
                 else {
-                    alert("Pokémon Unavailable.")
+                    consoleText("Pokémon Unavailable.")
                 }
             }
             else {
-                alert("Data returned an error.")
+                consoleText("Data returned an error.")
             }
         }
         else {
-            alert("Data returned an error.")
+            consoleText("Data returned an error.")
         }
     }
 }
@@ -3708,9 +3708,10 @@ function changePartyEvolution(base,i) {
         if (num.includes(reply)) {
             createParty(base,data)
             partyShow(base);
+            consoleText("Evolution updated.");
         }
         else {
-            alert("Number returned an error.")
+            consoleText("Number returned an error.")
         }
 
         
@@ -3777,9 +3778,10 @@ function changePartyForm(base,i) {
         if (num.includes(reply)) {
             createParty(base,data)
             partyShow(base);
+            consoleText("Form updated.");
         }
         else {
-            alert("Number returned an error.")
+            consoleText("Number returned an error.")
         }
         
     }
@@ -4000,7 +4002,7 @@ function abilityPartyBoxLearnset() {
 function trainerPokExport() {
     var data = this.value;
     navigator.clipboard.writeText(data);
-    alert("Copied Data String!");
+    consoleText("Copied Data String!");
 }
 
 
@@ -4729,7 +4731,7 @@ function searchOptionsTitle(base) {
     tempArr = [...new Set(tempArr)];
 
     if (tempArr.length > 0) {
-        result = "Search Options:"+"\n"+tempArr.join("\n");
+        result = "Search Options:\n"+tempArr.join("\n")+"\n[Enter] = Add Filter\n[Escape] = Remove Filters";
     }
 
     return result;
@@ -4752,45 +4754,100 @@ function searchOptionsTitle(base) {
 function mapBlink(base,area) {
   var area;
   var base;
-  var folder = base.querySelector(":scope .mapify-svg");
+
+  console.log(area)
+
+  var holder = base.querySelector(":scope .mapify-holder");
+
   var img = base.querySelector(":scope .map-img");
-  var points;
+
   var coords = [];
   for (var i = 0; i < area.length; i++) {
     coords.push([]);
   }
 
   for (var i = 0; i < area.length; i++) {
-    coords[i].push(getMapCoords(area[i]).split(","))
+    coords[i].push(getMapCoords(area[i]))
   }
+  console.log(coords)
+  /*
+  for (var i = 0; i < coords.length; i++) {
+    for (var q = 0; q < coords[i].length; q++) {
+        var polys = coords[i][q].split(",");
+        console.log(polys)
 
-  for (var i = 0; i < area.length; i++) {
-    for (var key in coords[i]) { // Convert percentage coordinates back to pixel coordinates relative to the image size
-        if (key % 2 == 0) {  // X
-          points += ($(img).width() * (coords[key] / 100));
-        } else { // Y
-          points += ',' + ($(img).height() * (coords[key] / 100)) + ' ';
+        for (var key in polys) { // Convert percentage coordinates back to pixel coordinates relative to the image size
+            if (key % 2 == 0) {  // X
+                polys[key] = ($(img).width() * (polys[key] / 100));
+            } else { // Y
+                polys[key] = ',' + ($(img).height() * (polys[key] / 100)) + ' ';
+            }
         }
+        coords[i][q] = polys.join("");
     }
-  }
+}
+*/
+  console.log(coords)
+
+
+
   var polys = base.querySelectorAll(':scope polygon[name="active"]');
   for (var i = 0; i < polys.length; i++) {
     polys[i].remove();
   }
 
+  var svgbase = base.querySelector(':scope .mapify-svg[name="Mark"]');
+
+    if (svgbase == null) {
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.classList.add("mapify-svg");
+        svg.setAttribute("name","Mark");
+        holder.appendChild(svg)
+    }
+
+    svgbase = base.querySelector(':scope .mapify-svg[name="Mark"]');
+
+console.log(coords)
   for (var i = 0; i < area.length; i++) {
     var polygon =  document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     polygon.setAttribute("fill","none");
     polygon.classList.add("mapify-polygon");
-    polygon.setAttribute("points",coords[i]);
+    polygon.setAttribute("points",coords[0][i]);
     polygon.setAttribute("name","active");
-    folder.appendChild(polygon)
+    if (svgbase == null) {
+        svg.appendChild(polygon)
+    }
+    else {
+        svgbase.appendChild(polygon)
+    }
   }
 }
 
 
+function resizeMap() {
+
+    var options = document.querySelector("#map-options")
+    var checked = options.querySelectorAll(':scope input:checked')
+    var contain = document.querySelector("#map-contain");
+    var mapImg = document.querySelector(".map-inner img[usemap]");
+
+    var result = [];
+    for (var i = 0; i < checked.length; i++) {
+        var name = checked[i].nextElementSibling.innerText;
+        result.push(name)
+    }
+
+    if (mapImg.classList.contains("mapify")) {
+        if (result.length > 0) {
+            mapBlink(contain,result);
+        }
+    }
+}
+
 function getMapCoords(area) {
   var area;
+
+  var result = "";
 
   for (var i = 0; i < MapArea.length; i++) {
     if (MapArea[i]["id"].includes("<br>")) {
@@ -4802,14 +4859,16 @@ function getMapCoords(area) {
         }
       }
       if (check) {
-        return MapArea[i]["coords"];
+        result = MapArea[i]["coords"];
+        break;
       }
     }
     else if (MapArea[i]["id"] == area) {
-      return MapArea[i]["coords"];
+      result = MapArea[i]["coords"];
     }
   }
-  return "";
+
+  return result;
 }
 
 
@@ -4828,51 +4887,41 @@ function excludeDuplicateAreas(arr) {
     if ((GameID >= 7 && GameID <= 8) || GameID == 12) {
         broken = ["Marine Cave","Battle Tent","Terra Cave"];
     }
-    if (GameID == 8) {
-        exclude.push("Team Aqua Hideout");
+    if (GameID >= 14 && GameID <= 16) {
+        broken = ["S.S. Spiral"];
     }
-    if (GameID == 7 || GameID == 12) {
-        exclude.push("Team Magma Hideout")
-    }
-    if (GameID >= 7 && GameID <= 8) {
-        exclude.push("Altering Cave");
-        exclude.push("Artisan Cave");
-        exclude.push("Battle Arena");
-        exclude.push("Battle Dome");
-        exclude.push("Battle Factory");
-        exclude.push("Battle Frontier");
-        exclude.push("Battle Palace");
-        exclude.push("Battle Pike");
-        exclude.push("Battle Pyramid");
-        exclude.push("Battle Tent");
-        exclude.push("Birth Island");
-        exclude.push("Desert Underpass");
-        exclude.push("Faraway Island");
-        exclude.push("Magma Hideout");
-        exclude.push("Marine Cave");
-        exclude.push("Mirage Tower");
-        exclude.push("Navel Rock");
-        exclude.push("Terra Cave");
-        exclude.push("Trainer Hill");
-    }
+
+    var list = finaldataLocation;
+
+
+
+
 
     var del = [];
 
     for (var i = 0; i < arr1.length; i++) {
-        for (var q = 0; q < exclude.length; q++) {
+
+        var listboo = true;
+        for (var q = 0; q < list.length; q++) {
             if (arr1[i]["id"].includes("<br>")) {
                 var ids = arr1[i]["id"].split("<br>");
                 for (var u = 0; u < ids.length; u++) {
-                    if (ids[u] == exclude[q]) {
-                        del.push(i);
-                        break
+                    if (ids[u] == list[q][JSONPath_Location+"_"+"Name"]) {
+                        listboo = false;
+                        break;
                     }
                 }
             }
-            else if (arr1[i]["id"] == exclude[q]) {
-                del.push(i);
+            else if (arr1[i]["id"] == list[q][JSONPath_Location+"_"+"Name"]) {
+                listboo = false;
+                break;
             }
         }
+
+        if (listboo) {
+            del.push(i)
+        }
+       
         for (var q = 0; q < broken.length; q++) {
             if (arr1[i]["id"] == broken[q]) {
                 del.push(i);
@@ -4913,3 +4962,76 @@ function excludeDuplicateAreas(arr) {
 
     return result;
 }
+
+
+
+
+function searchFilter(bar,base,condition) {
+    var bar;
+    var base;
+    var list = base.querySelectorAll(':scope > *:not(input)');
+    var hidden = base.querySelectorAll(':scope > *:not(input).hidden');
+    var filter = base.querySelectorAll(':scope > *:not(input).filtered');
+
+
+    if (condition == "Add") {
+        if (hidden.length > 0 || filter.length > 0) {
+            if (hidden.length != list.length) {
+                if (bar.value != "") {
+                    bar.value = "";
+                    bar.style.color = "var(--fontDark)";
+                    for (var i = 0; i < hidden.length; i++) {
+                        hidden[i].classList.add("filtered");
+                    }
+                    consoleText("Filter added...");
+
+                    bar.style.setProperty("outline-color","var(--colorRed)","important");
+                    bar.style.setProperty("border-color","var(--colorRed)","important");
+                    bar.style.setProperty("border-style","solid");
+                }
+            }
+        }
+    }
+    else if (condition == "Remove") {
+
+        if (filter.length > 0) {
+            bar.value = "";
+            bar.style.color = "var(--fontDark)";
+
+            for (var i = 0; i < list.length; i++) {
+                list[i].classList.remove("filtered");
+                list[i].classList.remove("hidden");
+            }
+
+            consoleText("Filters removed...");
+
+            bar.style.removeProperty("outline-color");
+            bar.style.removeProperty("border-color");
+            bar.style.removeProperty("border-style");
+        }
+    }
+}
+
+
+function consoleText(text) {
+    var text;
+    var base = document.querySelector("#console")
+
+    var p = document.createElement("p");
+    p.innerText = text;
+    base.appendChild(p);
+
+    p.style.opacity = "1";
+
+    setInterval(function() {
+        p.style.opacity = "0";
+            setTimeout(function () {
+                p.remove();
+            }, 1000);
+    }, 1000);
+
+
+}
+
+
+
