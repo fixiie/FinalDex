@@ -213,7 +213,16 @@ var createMove = function() {
 			*/
 
 			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].toLowerCase());
+				
+				if (finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].includes("-")) {
+					moveAside1OptionsLabel.setAttribute("data-search-priority", "-"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("-",""));
+				}
+				else if (finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].includes("+")) {
+					moveAside1OptionsLabel.setAttribute("data-search-priority", "+"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("+",""));
+				}
+				else {
+					moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority]);
+				}
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-priority", "");
 			}
@@ -243,11 +252,7 @@ var createMove = function() {
 			} else {
 				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "");
 			}
-			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].toLowerCase());
-			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-priority", "");
-			}
+	
 
 			if(finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
 				moveAside1OptionsLabel.setAttribute("data-search-contact", "y");
@@ -448,11 +453,13 @@ var createMove = function() {
 			moveAside3SidebarHMTM.classList.add("move-sidebar-description-hmtm");
 			moveAside3SidebarHMTMTitle.innerText = "Machine";
 			moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine];
+			moveAside3SidebarHMTMText.setAttribute("name","Item");
 			moveAside3SidebarRight.appendChild(moveAside3SidebarHMTM);
 			moveAside3SidebarHMTM.appendChild(moveAside3SidebarHMTMOuter);
 			moveAside3SidebarHMTMOuter.appendChild(moveAside3SidebarHMTMContent);
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
+			moveAside3SidebarHMTMText.addEventListener("click",dataRedirect)
 		}
 		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
 			var moveAside3SidebarTutor = document.createElement("div");
