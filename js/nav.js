@@ -126,9 +126,9 @@ function mapifyMap() {
 				var coords = MapArea[i]["coords"].split(",");
 				var coordNew = [];
 				for (var q = 0; q < coords.length; q++) {
-				var coord = parseInt(coords[q].replaceAll(" ",""));
-				coordNew.push(coord/relative);
-				MapArea[i]["coords"].split(",")[q] = coord;
+					var coord = parseInt(coords[q].replaceAll(" ",""));
+					coordNew.push(coord/relative);
+					MapArea[i]["coords"].split(",")[q] = coord;
 				}
 				MapArea[i]["coords"] = coordNew.join(",");
 			}
