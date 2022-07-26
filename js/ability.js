@@ -22,15 +22,12 @@ var createAbility = function() {
 		var abilityAside4 = document.createElement("aside");
 		var abilityAside4Sidebar = document.createElement("div");
 		var abilityAside4SidebarTitle = document.createElement("div");
-		var abilityAside4SidebarTitleLiTop = document.createElement("li");
-		var abilityAside4SidebarTitleLiBottom = document.createElement("li");
+
 		var abilityAside4SidebarUl = document.createElement("ul");
 		abilityAside4Sidebar.classList.add("ability-sidebar");
 		abilityAside4SidebarTitle.classList.add("ability-sidebar-title");
 		abilityAside4.appendChild(abilityAside4Sidebar);
 		abilityAside4Sidebar.appendChild(abilityAside4SidebarTitle);
-		abilityAside4SidebarTitle.appendChild(abilityAside4SidebarTitleLiTop);
-		abilityAside4SidebarTitle.appendChild(abilityAside4SidebarTitleLiBottom);
 		abilityAside4Sidebar.appendChild(abilityAside4SidebarUl);
 
 		var abilityAside4LearnsetPartyBox = document.createElement("div");
@@ -56,18 +53,15 @@ var createAbility = function() {
 
 
 		var abilityAside4SidebarTitleLiTopText = document.createElement("h4");
-		abilityAside4SidebarTitleLiTop.appendChild(abilityAside4SidebarTitleLiTopText);
+		abilityAside4SidebarTitle.appendChild(abilityAside4SidebarTitleLiTopText);
+		
 		if(Generation <= 4) {
-			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability", ];
+			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
 		}
 		if(Generation >= 5) {
-			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability", ];
+			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
 		}
-		for(var q = 0; q < sidebarAbilityList.length; q++) {
-			var abilityAside4SidebarTitleLiBottomText = document.createElement("h6");
-			abilityAside4SidebarTitleLiBottomText.innerText = sidebarAbilityList[q];
-			abilityAside4SidebarTitleLiBottom.appendChild(abilityAside4SidebarTitleLiBottomText);
-		}
+
 		abilityOuter.setAttribute("id","ability-outer");
 		abilityOuter.setAttribute("name","Abilities");
 		abilityAside1.setAttribute("id","ability-aside1");
