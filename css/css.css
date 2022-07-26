@@ -5,6 +5,10 @@ html {
 	scroll-behavior: smooth;
 }
 
+.filtered {
+	display:none !important;
+}
+
 .filterby input:checked ~ label {
 	transition: .5s ease;
 	transition-property: background-color;
@@ -828,7 +832,6 @@ input[type=radio] {
     background: var(--color_60);
     transition: width 0.5s ease;
     font-size: 0;
-    overflow: auto;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -904,6 +907,10 @@ input[type=radio] {
 .data-evolution main.active p {
 	transition: opacity 0.5s ease 0.5s;
 	opacity: 1;
+}
+
+.data-evolution main p {
+	overflow:auto;
 }
 
 .data-evolution main p span[name="Pokémon"],
@@ -1367,6 +1374,7 @@ input[type=radio] {
     flex-wrap: nowrap;
     flex-direction: row;
     align-content: center;
+	flex-direction:column;
 }
 
 #map-description-pok ul li p > img {
@@ -1382,13 +1390,13 @@ input[type=radio] {
 
 
 #map-description-pok ul li p > img[title="Morning"] {
-	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
+	filter: brightness(0) saturate(100%) invert(87%) sepia(49%) saturate(212%) hue-rotate(357deg) brightness(109%) contrast(101%);
 }
 #map-description-pok ul li p > img[title="Day"] {
-	filter: invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
+	filter: brightness(0) saturate(100%) invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
 }
 #map-description-pok ul li p > img[title="Night"] {
-	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
+	filter: brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
 }
 
 
@@ -2764,6 +2772,7 @@ body {
 	background: var(--color14);
 	text-align: center;
 	font-size: 14px;
+	overflow:hidden;
 }
 
 #data-navigation {
@@ -3230,11 +3239,9 @@ body {
 	height: 95%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	position: inherit;
 	width: 80%;
 	margin: 0 auto;
-	box-shadow: 0 0 100px var(--color14);
 	flex-wrap: wrap;
 	flex-direction: column;
 	position: relative;
@@ -3261,7 +3268,7 @@ body {
 }
 
 .data-description {
-	height: 100%;
+	height: 85%;
 }
 
 .data-popup.open {
@@ -3583,7 +3590,7 @@ body {
 
 [name="eggTextUndiscovered"],
 [name="eggTextUndiscovered"] * {
-	color: var(--color_20);
+	color: var(--color_50);
 	text-shadow: 1px 1px 1px var(--fontDark);
 }
 
@@ -3708,6 +3715,11 @@ body {
 
 .data-popup > div:first-child h2 {
 	text-align: center;
+}
+.data-popup > div:first-child h2 span[title] {
+	color:unset;
+	font-family:unset;
+	font-weight:unset;
 }
 
 .data-popup > div:first-child img {
@@ -4166,7 +4178,7 @@ body {
 #timers-outer input,
 #timers-outer input::placeholder {
 	border-color: var(--border2) !important;
-	background: var(--color_85) !important;
+	background: var(--color_95) !important;
 	color: var(--fontDark) !important;
 }
 
@@ -4739,7 +4751,7 @@ a {
 }
 
 .typechart td[title="No Effect"] {
-	background: var(--color_10);
+	background: var(--color_20);
 }
 
 .typechart[name="SwSh"] th[title="Normal"] {
@@ -4897,7 +4909,6 @@ a {
 }
 
 .type-symbol {
-	cursor: help;
 	height: 80%;
 }
 
@@ -5399,6 +5410,17 @@ a {
 	}
 }
 
+@keyframes fadeOpacity {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+
 @-webkit-keyframes blinkOpacity0 {
 	0% {
 		opacity: 1;
@@ -5502,16 +5524,10 @@ a {
 #stopwatch-outer button,
 #countdown-outer button {
 	display: flex;
-    /* display: inline-block; */
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--font2);
-    /* font-size: 1em; */
-    border-top: 1px solid;
-
-    /* color: var(--fontLight); */
-    
 }
 
 #stopwatch-set input,
@@ -5567,6 +5583,8 @@ a {
 #stopwatch-start-stop[title="Start"],
 #countdown-start-stop[title="Start"] {
 	background: var(--colorGreen);
+	border-bottom: 1px solid;
+    border-top: 1px solid;
 }
 
 #stopwatch-start-stop[title="Pause"],
@@ -6140,48 +6158,16 @@ span[name="Status"] {
 }
 
 .ability-sidebar-title {
-	display: block;
 	width: 100%;
 	height: 15%;
 	border-bottom: 1px solid;
 	background: var(--color13);
-}
-
-.ability-sidebar-title li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
 }
 
-.ability-sidebar-title li:first-child {
-	height: 70%;
-}
 
-.ability-sidebar-title li:last-child {
-	height: 30%;
-}
-
-.ability-sidebar-title li h4 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0 10px;
-}
-
-.ability-sidebar-title li h6 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 50%;
-	height: 100%;
-	padding: 0 10px;
-	box-shadow: 0 0 1px var(--border1);
-}
-
-.ability-sidebar-title li h6:first-child {
-	width: 20%;
-}
 
 .ability-sidebar ul {
 	display: block;
@@ -6777,6 +6763,8 @@ span[name="Status"] {
 
 .item-sidebar ul li span[name="Requirement"] > span {
 	cursor:pointer;
+	display: flex;
+    justify-content: center;
 }
 .item-sidebar ul li span[name="Requirement"] > span:active {
 	font-weight: bold;
@@ -7256,6 +7244,57 @@ span[name="Status"] {
 	color: var(--fontDark);
 }
 
+
+
+[name="statTextHP"] *,
+[name="statTextHP"] {
+	color: var(--statHP);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextAttack"] *,
+[name="statTextAttack"] {
+	color: var(--statAtk);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextDefense"] *,
+[name="statTextDefense"] {
+	color: var(--statDef);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextSpecial"] *,
+[name="statTextSpecial"] {
+	color: var(--statSpecial);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextSp. Atk"] *,
+[name="statTextSp. Atk"] {
+	color: var(--statSpAtk);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextSp. Def"] *,
+[name="statTextSp. Def"] {
+	color: var(--statSpDef);
+	text-shadow: 1px 1px 1px var(--fontDark);
+
+}
+
+[name="statTextSpeed"] *,
+[name="statTextSpeed"] {
+	color: var(--statSpeed);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+[name="statTextTotal"] *,
+[name="statTextTotal"] {
+	color: var(--color__65);
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
 .data-popup div button p:active {
 	font-weight: bold;
 }
@@ -7500,12 +7539,10 @@ span[name="Status"] {
 #pokémon-outer > main section:not([name]){
     width: 100px;
     border-left: 1px solid;
+	display:flex
 }
 
-#pokémon-outer > main section[name] {
-    width: 80%;
-	display: none;
-}
+
 
 
 #pokémon-outer > main section[name] * {
@@ -8807,14 +8844,14 @@ span[name="Status"] {
 	width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-	z-index: 3;
+    z-index: 3;
+    flex-direction: column;
+    overflow: auto;
 }
 #map-description-oview > span p {
 	padding: 10px 15px;
-	font-size: 80%;
-	line-height: 120%;
-	width: 100%;
+    font-size: 80%;
+    line-height: 120%;
     text-align: center;
 }
 
@@ -8916,7 +8953,7 @@ span[name="Status"] {
     object-fit: contain;
     cursor: zoom-out;
     max-height: 95%;
-	max-width: 95%;
+	max-width: 90%;
 }
 #fullscreen > div {
 	width: 100%;
@@ -9288,8 +9325,8 @@ span[name="Status"] {
 }
 .mapify-polygon[name="active"],
 .mapify-hover{
-  /*stroke: red;*/
-	fill:red;
+	fill: var(--colorRed);
+    /*stroke: var(--color1);*/
 }
 
 .mapify-popOver button {
@@ -9306,4 +9343,39 @@ span[name="Status"] {
 }
 .mapify-to-right {
   margin-left: -160px !important;
+}
+
+#pokémon-outer > main section {
+	width: 80%;
+	display: none;
+}
+
+#console {
+	position: fixed;
+    bottom: 25px;
+    right: 50px;
+    z-index: 1000;
+	cursor:default;
+	display: flex;
+    flex-direction: column-reverse;
+	pointer-events:none;
+}
+#console p {
+	padding: 5px 20px;
+    background: rgba(0,0,0,0.5);
+	transition: 1s ease opacity 0.5s;
+	opacity: 0;
+}
+
+
+#map-description-trainer ul li div[name="Data"] > div[name]:not([name="Moves"]) {
+	display:none;
+}
+
+
+.move-sidebar-description-hmtm p {
+	cursor:pointer;
+}
+.move-sidebar-description-hmtm p:hover {
+	font-weight:bold;
 }
