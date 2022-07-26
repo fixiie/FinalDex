@@ -575,6 +575,7 @@ var createPokémon = function() {
             drop: function(e, ui) {
                 if (saveddrag != undefined) {
                     deleteBox(saveddrag);
+                    consoleText("Pokémon deleted.");
                 }
             }
         });
@@ -593,6 +594,7 @@ var createPokémon = function() {
                         deleteBox(saveddrag);
                         createParty(tar[0],data);
                         partyShow(tar[0]);
+                        consoleText("Sent "+saveddrag.getAttribute("data-pok")+" to Party.")
                     }
                     else {
                         alert("Party is full!")
@@ -857,7 +859,7 @@ var createPokémon = function() {
     
 	var formopts = [];
 	for(var q = 0; q < finaldataPokémon.length; q++) {
-		if(finaldataPokémon[q][JSONPath_Reference] == "true" && finaldataPokémonArea[q]["Filter_"+JSONPath_Area] != "Unobtainable") {
+		if(finaldataPokémon[q][JSONPath_Reference] == "true") {
 			formopts.push(finaldataPokémon[q]["Variant"]);
 		}
 	}
@@ -909,13 +911,13 @@ var createPokémon = function() {
 function count() {
 	function showChecked() {
 		sleep(10).then(() => {
-			document.querySelector("#count-current").innerText = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden) input:checked').length;
+			document.querySelector("#count-current").innerText = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:checked').length;
 		});
 	}
 
 	function showTotal() {
 		sleep(10).then(() => {
-			document.querySelector("#count-total").innerText = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden)').length;
+			document.querySelector("#count-total").innerText = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden):not(.filtered)').length;
 		});
 	}
 	showChecked();
@@ -1038,6 +1040,7 @@ function dexSwitch() {
 		}
 	}
 	dexCheck();
+    searchFilter(document.querySelector("#searchbar"),document.querySelector("#pokémon-outer > div ul"),"Remove");
 	count();
 }
 
@@ -1120,20 +1123,22 @@ function dexCheck() {
 
 function UncheckAll() {
 	count();
-	var uncheck = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden) input:checked');
+	var uncheck = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:checked');
 	for(var i = 0; i < uncheck.length; i++) {
 		uncheck[i].click();
 	}
     memory("Save","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));
+    consoleText("Unchecked all in the current filter.")
 }
 
 function CheckAll() {
 	count();
-	var check = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden) input:not(:checked)');
+	var check = document.querySelectorAll('#pokémon-outer > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:not(:checked)');
 	for(var i = 0; i < check.length; i++) {
 		check[i].click();
 	}
     memory("Save","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));
+    consoleText("Checked all in the current filter.")
 }
 
 
@@ -1169,7 +1174,7 @@ function createContain(condition) {
             }
         }
 
-        if(finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != "Unobtainable" || finaldataPokémon[i][JSONPath_Reference] == "true" && finaldataPokémonArea[finaldataPokémonArea.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[i]["ID"])]["Filter_"+JSONPath_Area] != "Unobtainable") {
+        if(finaldataPokémon[i][JSONPath_Reference] == "true" || finaldataPokémon[i][JSONPath_Reference] == "true") {
             for (var q = 0; q < conditions.length; q++) {
                 if (conditions[q] == true) {
                     var ID = finaldataPokémon[i]["ID"];
@@ -1189,12 +1194,14 @@ function createContain(condition) {
                     var contentName = document.createElement("p");
                     contentDiv.setAttribute("id",i);
 
-                    if(finaldataPokémonArea[i]["Filter_"+JSONPath_Area] != undefined) {
-                        contentDiv.setAttribute("data-filter", finaldataPokémonArea[i]["Filter_"+JSONPath_Area].replaceAll(" ",""));
+                   
+                    if (getEvolutionFamily(i).map(function(v) {return v["Pokémon"]}).length == 1) {
+                        contentDiv.setAttribute("data-search-evolution", "none");
                     }
-                    contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {
-                        return v["Pokémon"];
-                    }).join(",").toLowerCase());
+                    else {
+                        contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {return v["Pokémon"];}).join(",").toLowerCase());
+                    }
+         
                     contentDiv.setAttribute("data-search-type", returnData(i, "Type","lower,undefined"));
                     contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate","lower,undefined"));
 
@@ -1203,8 +1210,26 @@ function createContain(condition) {
                     }
 
                     if (Gender == true) {
-                        contentDiv.setAttribute("data-search-genderratio", returnData(i, "Gender Ratio","lower,undefined").join(":"));
+                        var ratio = returnData(i, "Gender Ratio","lower,undefined");
+                        if(ratio[0] == "1" && ratio[1] == "0") { // Always Male
+                            contentDiv.setAttribute("data-search-genderratio", "always male");
+                        } else if(ratio[0] == "7" && ratio[1] == "1") { // Very Often Male
+                            contentDiv.setAttribute("data-search-genderratio", "very often male");
+                        } else if(ratio[0] == "3" && ratio[1] == "1") { // Often Male
+                            contentDiv.setAttribute("data-search-genderratio", "often male");
+                        } else if(ratio[0] == "1" && ratio[1] == "1") { // Equal Ratio
+                            contentDiv.setAttribute("data-search-genderratio", "equal ratio");
+                        } else if(ratio[0] == "1" && ratio[1] == "3") { // Often Female
+                            contentDiv.setAttribute("data-search-genderratio", "often female");
+                        } else if(ratio[0] == "1" && ratio[1] == "7") { // Very Often Female
+                            contentDiv.setAttribute("data-search-genderratio", "very often female");
+                        } else if(ratio[0] == "0" && ratio[1] == "1") { // Always Female
+                            contentDiv.setAttribute("data-search-genderratio", "always female");
+                        } else if(ratio[0] == "0" && ratio[1] == "0") { // Genderless
+                            contentDiv.setAttribute("data-search-genderratio", "genderless");
+                        }
                     }
+
                     if (Egg == true) {
                         contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate","lower,undefined")[0]);
                         contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group","lower,undefined"));
