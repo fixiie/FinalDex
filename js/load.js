@@ -4,7 +4,6 @@ var finaldataPokémonForm = [];
 var finaldataPokémonFormItem = [];
 var finaldataPokémonAbility = [];
 var finaldataPokémonFriendship = [];
-var finaldataPokémonArea = [];
 var finaldataPokémonBaseStats = [];
 var finaldataPokémonCatchRate = [];
 var finaldataPokémonCategory = [];
@@ -233,7 +232,6 @@ function requestLoad(i,url) {
 				finaldataPokémonFormItem.push(Metadata["Form Item"][q]);
 				finaldataPokémonAbility.push(Metadata["Ability"][q]);
 				finaldataPokémonFriendship.push(Metadata["Base Friendship"][q]);
-				finaldataPokémonArea.push(Metadata["Area"][q]);
 				finaldataPokémonBaseStats.push(Metadata["Base Stats"][q]);
 				finaldataPokémonCatchRate.push(Metadata["Catch Rate"][q]);
 				finaldataPokémonCategory.push(Metadata["Category"][q]);
@@ -290,6 +288,8 @@ function initialize() {
 		typeSwitch("NORMAL");
 		RNG();
 
+		window.addEventListener('resize', resizeMap);
+
 		boxMemory("Restore")
 		partyMemory("Restore");
 		memoryDexSwitch();
@@ -298,8 +298,9 @@ function initialize() {
 		memory("Restore","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
 
 		variantSelector();
-		
+
 		load();
+
 
 		//console.log(finaldataLearnsetMachine)
 		//console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
