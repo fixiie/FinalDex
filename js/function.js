@@ -756,6 +756,7 @@ var searchMoveAttributes = [];
 var searchAbilityAttributes = [];
 var searchItemAttributes = [];
 var searchMapAttributes = [];
+var searchNotFirst = false;
 
 function search(type) {
     var type;
@@ -787,7 +788,7 @@ function search(type) {
 		tag = "label";
     }
 
-	var tar = event.target
+	var tar = event.target;
     var searchValue = (tar.value).toLowerCase();
     var searchPositive = [];
     var searchNegative = [];
@@ -905,45 +906,65 @@ function search(type) {
 		}
 		tar.style.color = "var(--fontDark)";
 	}
-	
+
+
+	if (event.target.title != "") {
+		if (event.code == "Enter") {
+			searchFilter(event.target,base,"Add");
+			count();
+		}
+		
+		if (event.code == "Escape") {
+			searchFilter(event.target,base,"Remove");
+			exitSearch(type);
+			count();
+		}
+	}
+	else {
+		if (event.code == "Escape") {
+			exitSearch(type);
+		}
+	}
+
+
+
     count();
 }
 function exitSearch(base) {
     var base;
-	var tag;
 	var tar = event.target;
 
     if (base == "Pokémon") {
         base = document.querySelector("#pokémon-outer > div ul");
-		tag = "li";
     }
     if (base == "Move") {
         base = document.querySelector("#move-options");
-		tag = "label";
     }
     if (base == "Ability") {
         base = document.querySelector("#ability-options");
-		tag = "label";
     }
     if (base == "Item") {
         base = document.querySelector("#item-options");
-		tag = "label";
     }
     if (base == "Map") {
         base = document.querySelector("#map-options");
-		tag = "label";
-		
     }
     
-    var items = base.querySelectorAll(":scope > "+tag);
+    var items = base.querySelectorAll(":scope > *:not(input)");
     for (i = 0; i < items.length; i++) {
         items[i].classList.remove("hidden");
     }
 
-    var search = tar.nextElementSibling;
+    var search = tar.parentElement.querySelector(':scope > input[type="text"]');
+
 	search.style.color = "var(--fontDark)";
+	search.style.removeProperty("outline-color");
+	search.style.removeProperty("border-color");
+	search.style.removeProperty("border-style");
     search.value = "";
     search.focus();
+
+	searchFilter(event.target,base,"Remove");
 }
 
 function joinObj(arr, attr,type){
