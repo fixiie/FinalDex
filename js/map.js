@@ -224,9 +224,10 @@ var createMap = function() {
 	mapAside4DescriptionOviewButtonRightButton.addEventListener("click", overviewMove);
 
 	var mapAside4DescriptionOviewDescription = document.createElement("span");
-	var mapAside4DescriptionOviewDescriptionText = document.createElement("p");
+
 	mapAside4DescriptionOview.appendChild(mapAside4DescriptionOviewDescription);
-	mapAside4DescriptionOviewDescription.appendChild(mapAside4DescriptionOviewDescriptionText);
+
+
 
 
 	var mapAside4DescriptionPok = document.createElement("base");
@@ -426,22 +427,24 @@ var createMap = function() {
 		if(input != undefined) {
 			input.click();
 		}
+		var descs = mapAside4DescriptionOviewDescription.querySelectorAll(":scope > *");
+		for(var q = 0; q < descs.length; q++) {
+			descs[q].remove();
+		}
 
-
-		mapAside4DescriptionOviewDescriptionText.innerText = "";
+		
+		var desc = [];
 		for(var q = 0; q < finaldataLocationDescription.length; q++) {
 			if (finaldataLocationDescription[q][JSONPath_LocationDescription+"_Name"] == location) {
-				mapAside4DescriptionOviewDescriptionText.innerText = finaldataLocationDescription[q][JSONPath_LocationDescription+"_Description"];
-				break;
+				desc.push(finaldataLocationDescription[q][JSONPath_LocationDescription+"_Description"]);
 			}
 		}
 
-
-		var spans = mapAside4DescriptionOviewDescription.querySelectorAll(":scope > span");
-		for(var q = 0; q < spans.length; q++) {
-			spans[q].remove();
+		for(var q = 0; q < desc.length; q++) {
+			var mapAside4DescriptionOviewDescriptionText = document.createElement("p");
+			mapAside4DescriptionOviewDescriptionText.innerText = desc[q];
+			mapAside4DescriptionOviewDescription.appendChild(mapAside4DescriptionOviewDescriptionText);
 		}
-
 
 		var poi = [];
 		for(var q = 0; q < finaldataLocationPointOfInterest.length; q++) {
