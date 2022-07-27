@@ -8849,11 +8849,20 @@ span[name="Status"] {
     overflow: auto;
 }
 #map-description-oview > span p {
-	padding: 10px 15px;
     font-size: 80%;
-    line-height: 120%;
-    text-align: center;
 }
+
+#map-description-oview > span > p,
+#map-description-oview > span > span {
+	padding: 10px 15px;
+    line-height: 120%;
+}
+
+#map-description-oview > span > p {
+    text-align: center;
+	padding: 10px 15px 20px;
+}
+
 
 
 #map-description-oview > div > div {
