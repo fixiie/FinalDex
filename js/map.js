@@ -268,6 +268,35 @@ var createMap = function() {
 		mapAside1OptionsLabel.setAttribute("for", "map-options-"+q);
 		mapAside1OptionsLabel.setAttribute("name", "medium");
 		mapAside1OptionsLabel.setAttribute("data-search-name", finaldataLocation[q][JSONPath_Location+"_"+"Name"].toLowerCase());
+		var poi = [];
+		for(var u = 0; u < finaldataLocationPointOfInterest.length; u++) {
+			if (getApplicable(finaldataLocationPointOfInterest[u]["Game"])) {
+				if (finaldataLocationPointOfInterest[u]["Location"] == finaldataLocation[q][JSONPath_Location+"_"+"Name"]) {
+					poi.push(finaldataLocationPointOfInterest[u]["Point of Interest"]);
+				}
+			}
+		}
+		if (poi.length > 0) {
+			mapAside1OptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
+		}
+		else {
+			mapAside1OptionsLabel.setAttribute("data-search-pointofinterest","");
+		}
+
+
+		var nav = [];
+		for(var u = 0; u < finaldataLocationNavigation.length; u++) {
+			if (finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Name"] == finaldataLocation[q][JSONPath_Location+"_"+"Name"]) {
+				nav.push(finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Navigation"]);
+			}
+		}
+		if (nav.length > 0) {
+			mapAside1OptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
+		}
+		else {
+			mapAside1OptionsLabel.setAttribute("data-search-navigation","");
+		}
+
 		mapAside1OptionsLabel.innerText = finaldataLocation[q][JSONPath_Location+"_"+"Name"];
 		mapAside1Options.appendChild(mapAside1OptionsInput);
 		mapAside1Options.appendChild(mapAside1OptionsLabel);
@@ -406,6 +435,59 @@ var createMap = function() {
 				break;
 			}
 		}
+
+
+		var spans = mapAside4DescriptionOviewDescription.querySelectorAll(":scope > span");
+		for(var q = 0; q < spans.length; q++) {
+			spans[q].remove();
+		}
+
+
+		var poi = [];
+		for(var q = 0; q < finaldataLocationPointOfInterest.length; q++) {
+			if (getApplicable(finaldataLocationPointOfInterest[q]["Game"])) {
+				if (finaldataLocationPointOfInterest[q]["Location"] == location) {
+					var areadesc = [];
+					var pointdesc = [];
+					if (finaldataLocationPointOfInterest[q]["Area Description"] != undefined) {
+						areadesc.push(finaldataLocationPointOfInterest[q]["Area Description"]);
+					}
+					if (finaldataLocationPointOfInterest[q]["Point Description"] != undefined) {
+						pointdesc.push(finaldataLocationPointOfInterest[q]["Point Description"]);
+					}
+
+					var obj = new Object();
+					obj["Header"] = finaldataLocationPointOfInterest[q]["Point of Interest"];
+					if (areadesc.length > 0) {
+						obj["Area Description"] = areadesc.join("\n");
+					}
+					if (pointdesc.length > 0) {
+						obj["Point Description"] = pointdesc.join("\n");
+					}
+					poi.push(obj);
+				}
+			}
+		}
+
+		for(var q = 0; q < poi.length; q++) {
+			if (poi[q]["Point Description"] != undefined) {
+				var description = [];
+				if (poi[q]["Area Description"] != undefined) {
+					description.push(poi[q]["Area Description"]);
+				}
+				description.push(poi[q]["Point Description"]);
+
+				var span = document.createElement("span");
+				var header = document.createElement("h4");
+				var desc = document.createElement("p");
+				header.innerText = obj["Header"];
+				desc.innerHTML = description.join("<br>");
+				mapAside4DescriptionOviewDescription.appendChild(span)
+				span.appendChild(header)
+				span.appendChild(desc)
+			}
+		}
+
 
 
 
@@ -1637,6 +1719,26 @@ var createMap = function() {
 			}
 		}
 	}
+
+
+	mapAside1OptionsSearch.title = searchOptionsTitle(mapAside1Options);
+
+	var searchLis = document.querySelectorAll("#map-options > label");
+    searchMapAttributes = [];
+    for(q = 0; q < searchLis.length; q++) {
+        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
+            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
+                if (!searchMapAttributes.includes(searchLis[q].getAttributeNames()[u])) {
+                    searchMapAttributes.push(searchLis[q].getAttributeNames()[u]);
+                }
+            }
+        }
+    }
+	searchMapAttributes = searchMapAttributes.filter(function(v) {return v !== "data-search-name";});
+    for(q = 0; q < searchMapAttributes.length; q++) {
+        searchMapAttributes[q] = searchMapAttributes[q].replaceAll("data-search-","")
+    }
+
 
 	function mapDescriptionTrainerSelector() {
 		var i = this.name;
