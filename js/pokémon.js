@@ -1142,9 +1142,6 @@ function CheckAll() {
 }
 
 
-var searchPokémonAttributes = [];
-
-
 function createContain(condition) {
 
     var condition;
