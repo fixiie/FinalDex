@@ -59,6 +59,7 @@ var finaldataMoveID = [];
 var finaldataMoveType = [];
 var finaldataMovePriority = [];
 var finaldataPokémonOffspring = []
+var finaldataLocationPointOfInterest = []
 var drag;
 var savedtar;
 var saveddrag;
@@ -111,6 +112,9 @@ function requestLoad(i,url) {
 			}
 			for(var q = 0; q < Metadata["Move Tutor"].length; q++) {
 				finaldataLocationTutor.push(Metadata["Move Tutor"][q]);
+			}
+			for(var q = 0; q < Metadata["Point of Interest"].length; q++) {
+				finaldataLocationPointOfInterest.push(Metadata["Point of Interest"][q]);
 			}
 		}
 		if (loads[i] == "Location Trainers") {
@@ -300,7 +304,6 @@ function initialize() {
 		variantSelector();
 
 		load();
-
 
 		//console.log(finaldataLearnsetMachine)
 		//console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
