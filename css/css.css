@@ -8855,7 +8855,10 @@ span[name="Status"] {
 #map-description-oview > span > p,
 #map-description-oview > span > span {
 	padding: 10px 15px;
-    line-height: 120%;
+    line-height: 110%;
+}
+#map-description-oview > span > span h4 {
+	line-height: 160%;
 }
 
 #map-description-oview > span > p {
