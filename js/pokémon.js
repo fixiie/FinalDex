@@ -1190,20 +1190,32 @@ function createContain(condition) {
                     var contentMainDown = document.createElement("main");
                     var contentName = document.createElement("p");
                     contentDiv.setAttribute("id",i);
-
+                    var evo = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
                    
-                    if (getEvolutionFamily(i).map(function(v) {return v["Pokémon"]}).length == 1) {
-                        contentDiv.setAttribute("data-search-evolution", "none");
+                    if (evo.length > 1) {
+                        contentDiv.setAttribute("data-search-evolution", evo.join(",").toLowerCase());
                     }
                     else {
-                        contentDiv.setAttribute("data-search-evolution", getEvolutionFamily(i).map(function(v) {return v["Pokémon"];}).join(",").toLowerCase());
+                        contentDiv.setAttribute("data-search-evolution", "none");
                     }
-         
-                    contentDiv.setAttribute("data-search-type", returnData(i, "Type","lower,undefined"));
-                    contentDiv.setAttribute("data-search-catchrate", returnData(i, "Catch Rate","lower,undefined"));
+                    var typ = returnData(i, "Type","lower,undefined");
+                    var cr = returnData(i, "Catch Rate","lower,undefined");
+
+                    if (typ == "") {
+                        typ = "none";
+                    }
+                    if (cr == "") {
+                        cr = "none";
+                    }
+                    contentDiv.setAttribute("data-search-type", typ);
+                    contentDiv.setAttribute("data-search-catchrate", cr);
 
                     if (Ability.length > 0) {
-                        contentDiv.setAttribute("data-search-ability", returnData(i, "Ability","lower,undefined"));
+                        var ab = returnData(i, "Ability","lower,undefined");
+                        if (ab == "") {
+                            ab = "none";
+                        }
+                        contentDiv.setAttribute("data-search-ability", ab);
                     }
 
                     if (Gender == true) {
@@ -1224,37 +1236,79 @@ function createContain(condition) {
                             contentDiv.setAttribute("data-search-genderratio", "always female");
                         } else if(ratio[0] == "0" && ratio[1] == "0") { // Genderless
                             contentDiv.setAttribute("data-search-genderratio", "genderless");
+                        } else {
+                            contentDiv.setAttribute("data-search-genderratio", "none");
                         }
                     }
 
                     if (Egg == true) {
-                        contentDiv.setAttribute("data-search-eggcycle", returnData(i, "Hatch Rate","lower,undefined")[0]);
-                        contentDiv.setAttribute("data-search-egggroup", returnData(i, "Egg Group","lower,undefined"));
+                        var hr = returnData(i, "Hatch Rate","lower,undefined")[0];
+                        var eg = returnData(i, "Egg Group","lower,undefined");
+                        if (hr == "") {
+                            hr = "none";
+                        }
+                        if (eg == "") {
+                            eg = "none";
+                        }
+                 
+                        contentDiv.setAttribute("data-search-eggcycle", hr);
+                        contentDiv.setAttribute("data-search-egggroup", eg);
                     }
-                    contentDiv.setAttribute("data-search-expyield", returnData(i, "Experience Yield","lower,undefined"));
+                
                     if (HeldItem == true) {
-                        contentDiv.setAttribute("data-search-helditem", returnData(i, "Held Item","lower,undefined"));
+                        var hld = returnData(i, "Held Item","lower,undefined");
+                        if (hld == "") {
+                            hld = "none";
+                        }
+                        contentDiv.setAttribute("data-search-helditem", hld);
                     }
                     //contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
 
-                    if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 300) {
-                        contentDiv.setAttribute("data-search-expyieldcategory","Very High".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 200 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 299) {
-                        contentDiv.setAttribute("data-search-expyieldcategory","High".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 100 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 199) {
-                        contentDiv.setAttribute("data-search-expyieldcategory","Medium".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 50 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 99) {
-                        contentDiv.setAttribute("data-search-expyieldcategory","Low".toLowerCase());
-                    } else if(parseInt(returnData(i, "Experience Yield","lower,undefined")) >= 0 && parseInt(returnData(i, "Experience Yield","lower,undefined")) <= 49) {
-                        contentDiv.setAttribute("data-search-expyieldcategory","Very Low".toLowerCase());
+                    var xpyd = returnData(i, "Experience Yield","lower,undefined");
+                    if (xpyd == "") {
+                        xpyd = "none";
                     }
-                    contentDiv.setAttribute("data-search-levelrate", returnData(i, "Leveling Rate","lower,undefined"));
+                    contentDiv.setAttribute("data-search-expyield", xpyd);
+
+                    var xpydc = returnData(i, "Experience Yield","lower,undefined");
+                    if (xpydc != "") {
+                        xpydc = parseInt(xpyd);
+                    }
+                    else {
+                        xpydc = "none";
+                    }
+
+                    if(xpydc >= 300) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Very High".toLowerCase());
+                    } else if(xpydc >= 200 && xpydc <= 299) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","High".toLowerCase());
+                    } else if(xpydc >= 100 && xpydc <= 199) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Medium".toLowerCase());
+                    } else if(xpydc >= 50 && xpydc <= 99) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Low".toLowerCase());
+                    } else if(xpydc >= 0 && xpydc <= 49) {
+                        contentDiv.setAttribute("data-search-expyieldcategory","Very Low".toLowerCase());
+                    } else {
+                        contentDiv.setAttribute("data-search-expyieldcategory",xpydc);
+                    }
+
+                    var lvlr = returnData(i, "Leveling Rate","lower,undefined");
+                    if (lvlr == "") {
+                        lvlr = "none";
+                    }
+                   
+                    contentDiv.setAttribute("data-search-levelrate", lvlr);
+                    
 
                     var statsevL = ["Base Stats","EV Yield"];
                     var statsevS = ["base","ev"];
                     for(var q = 0; q < statsevL.length; q++) {
                         for(var u = 0; u < Stats.length; u++) {
-                            contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined"));
+                            var dat = returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined");
+                            if (dat == "") {
+                                dat = "none";
+                            }
+                            contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), dat);
                         }
                     }
 
