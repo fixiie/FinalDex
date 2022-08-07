@@ -281,7 +281,7 @@ var createMap = function() {
 			mapAside1OptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
 		}
 		else {
-			mapAside1OptionsLabel.setAttribute("data-search-pointofinterest","");
+			mapAside1OptionsLabel.setAttribute("data-search-pointofinterest","none");
 		}
 
 
@@ -295,7 +295,7 @@ var createMap = function() {
 			mapAside1OptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
 		}
 		else {
-			mapAside1OptionsLabel.setAttribute("data-search-navigation","");
+			mapAside1OptionsLabel.setAttribute("data-search-navigation","none");
 		}
 
 		mapAside1OptionsLabel.innerText = finaldataLocation[q][JSONPath_Location+"_"+"Name"];
