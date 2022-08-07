@@ -200,7 +200,7 @@ var createMove = function() {
 			if(finaldataMove[q]["Name"+"_"+JSONPath_MoveName] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-name", "");
+				moveAside1OptionsLabel.setAttribute("data-search-name", "none");
 			}
 			/*
 			var moveset = returnMoveLearnset(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"");
@@ -208,7 +208,7 @@ var createMove = function() {
 				moveAside1OptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
 			}
 			else {
-				moveAside1OptionsLabel.setAttribute("data-search-learnset", "");
+				moveAside1OptionsLabel.setAttribute("data-search-learnset", "none");
 			}
 			*/
 
@@ -224,33 +224,33 @@ var createMove = function() {
 					moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority]);
 				}
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-priority", "");
+				moveAside1OptionsLabel.setAttribute("data-search-priority", "none");
 			}
 
 			if(finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-type", "");
+				moveAside1OptionsLabel.setAttribute("data-search-type", "none");
 			}
 			if(finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-category", finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-category", "");
+				moveAside1OptionsLabel.setAttribute("data-search-category", "none");
 			}
 			if(finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-pp", finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-pp", "");
+				moveAside1OptionsLabel.setAttribute("data-search-pp", "none");
 			}
 			if(finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-power", finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-power", "");
+				moveAside1OptionsLabel.setAttribute("data-search-power", "none");
 			}
 			if(finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-accuracy", finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "");
+				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "none");
 			}
 	
 
@@ -259,7 +259,7 @@ var createMove = function() {
 			} else if(finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
 				moveAside1OptionsLabel.setAttribute("data-search-contact", "n");
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-contact", "");
+				moveAside1OptionsLabel.setAttribute("data-search-contact", "none");
 			}
 
 			if(getTutorData(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
@@ -270,7 +270,7 @@ var createMove = function() {
 			if(finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
 				moveAside1OptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-machine", "");
+				moveAside1OptionsLabel.setAttribute("data-search-machine", "none");
 			}
 			moveAside1OptionsLabel.innerText = finaldataMove[q]["Name"+"_"+JSONPath_MoveName];
 			moveAside1Options.appendChild(moveAside1OptionsInput);
