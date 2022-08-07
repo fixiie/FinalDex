@@ -6769,11 +6769,15 @@ span[name="Status"] {
 .item-sidebar ul li span[name="Requirement"] > span:active {
 	font-weight: bold;
 }
+
+.item-sidebar ul li span[name="Requirement"] > span > p {
+	font-size: 80%;
+}
 .item-sidebar ul li span[name="Requirement"] img:hover {
 	filter:brightness(1.1);
 }
 .item-sidebar ul li > span[name="Item"] img {
-	margin: 0 -8px;
+	margin: -2px -8px;
 }
 .item-sidebar ul li span img {
 	max-width: 100%;
@@ -8848,11 +8852,13 @@ span[name="Status"] {
     flex-direction: column;
     overflow: auto;
 }
-#map-description-oview > span p {
-    font-size: 80%;
+#map-description-oview > span > p {
+	padding: 10px 15px;
+    font-variant: all-small-caps;
+	line-height: 100%;
 }
 
-#map-description-oview > span > p,
+
 #map-description-oview > span > span {
 	padding: 10px 15px;
     line-height: 110%;
@@ -8861,11 +8867,14 @@ span[name="Status"] {
 	line-height: 160%;
 }
 
-#map-description-oview > span > p {
-    text-align: center;
-	padding: 10px 15px 20px;
+#map-description-oview > span > span p {
+	font-size: 80%;
 }
-
+#map-description-oview > span > p br {
+	content: "";
+    display: block;
+    padding: 3px 0;
+}
 
 
 #map-description-oview > div > div {
@@ -9332,10 +9341,15 @@ span[name="Status"] {
 	stroke: transparent;
   stroke-width: 2px;
 }
+svg[name="Mark"] .mapify-polygon[name="active"] {
+	fill: var(--colorGreen);
+	stroke: var(--color1);
+}
+
 .mapify-polygon[name="active"] {
   animation: blinkOpacity0 normal 2.5s infinite ease-in-out;
 }
-.mapify-polygon[name="active"],
+
 .mapify-hover{
 	fill: var(--colorRed);
     /*stroke: var(--color1);*/
