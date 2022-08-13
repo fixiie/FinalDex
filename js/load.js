@@ -58,8 +58,9 @@ var finaldataMoveCategory = [];
 var finaldataMoveID = [];
 var finaldataMoveType = [];
 var finaldataMovePriority = [];
-var finaldataPokémonOffspring = []
-var finaldataLocationPointOfInterest = []
+var finaldataPokémonOffspring = [];
+var finaldataPokémonFormChange = [];
+var finaldataLocationPointOfInterest = [];
 var drag;
 var savedtar;
 var saveddrag;
@@ -253,6 +254,7 @@ function requestLoad(i,url) {
 				finaldataPokémonPokédexID.push(Metadata["Pokédex ID"][q]);
 				finaldataPokémonType.push(Metadata["Type"][q]);
 				finaldataPokémonOffspring.push(Metadata["Offspring"][q]);
+				finaldataPokémonFormChange.push(Metadata["Form Change"][q]);
 			}
 		}
 
