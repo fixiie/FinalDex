@@ -18,18 +18,26 @@ var createData = function(id, i) {
 			variant.push(finaldataPokémon[u]["Pokémon"]);
 		}
 	}
+
 	for(var u = 0; u < finaldataPokémon.length; u++) {
 		if(finaldataPokémon[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
+			console.log(finaldataPokémonFormChange[u][JSONPath_FormChange] == undefined)
 			var dataFormInput = document.createElement("input");
 			var dataFormLabel = document.createElement("label");
 			var dataFormImg = document.createElement("img");
 			dataFormInput.setAttribute("type","radio");
 			dataFormInput.setAttribute("name","data-form-selector"+id);
 			dataFormInput.setAttribute("id","data-form-selector-"+u);
+			dataFormLabel.title = getPokémonName(u);
+			if (finaldataPokémonFormChange[u][JSONPath_FormChange] == undefined) {
+				dataFormLabel.title += "\n"+getPokémonName(u)+" cannot change form.";
+			}
+			else {
+				dataFormLabel.title += "\n"+finaldataPokémonFormChange[u][JSONPath_FormChange];
+			}
 			dataFormInput.value = u;
 			dataFormLabel.setAttribute("for","data-form-selector-"+u);
 			dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(u,"Box")+".png";
-			dataFormLabel.title = getPokémonName(u);
 			dataFormImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
