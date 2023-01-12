@@ -138,7 +138,6 @@ function memoryDexSwitch() {
 	});
 
 	if (val == null) {
-		console.log(radio[0].nextElementSibling)
 		radio[0].nextElementSibling.click();
 	}
 }
