@@ -797,8 +797,9 @@ function dataRedirect() {
             navInput.click();
             tar.click();
             tar.scrollIntoView();
+
         }
-        else if (!notval.includes(tar.innerText)) {
+        else if (!notval.includes(this.innerText)) {
             if (type == "map") {
                 consoleText("Could not find location.")
             }
@@ -1046,7 +1047,13 @@ function loadData() {
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
                 evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/III-V/0.png'");
-                evoNationalID.innerText = "#"+getPokémonID(evoArr[q][u]["Pokémon"]);
+                if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
+                    evoNationalID.innerText = "#"+getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"]))));
+                }
+                else {
+                    evoNationalID.innerText = "#"+getPokémonID(evoArr[q][u]["Pokémon"]);
+                }
+                
                 evoNationalID.setAttribute("name","national");
                 evoNationalID.setAttribute("value",0);
                 evoName.innerText = evoArr[q][u]["Pokémon"];
@@ -1107,6 +1114,9 @@ function loadData() {
                     var evoRegionalID = document.createElement("h6");
                     if (ID != undefined) {
                         evoRegionalID.innerText = "#"+ID;
+                    }
+                    else if (getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))) != undefined) {
+                        evoRegionalID.innerText = "#"+getRegionalID("=",getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))),JSONPath_Pokédex[y]);
                     }
                     evoRegionalID.setAttribute("name","regional");
                     evoRegionalID.setAttribute("value",z);
@@ -1446,6 +1456,7 @@ function loadData() {
             var dataAside2LearnsetLiText = document.createElement("span");
             dataAside2LearnsetLi.appendChild(dataAside2LearnsetLiText);
             if(y == 0) {
+
                 dataAside2LearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 
                 if (learnsetArr[u]["Type"] == "Prior Evolution") {
@@ -1470,6 +1481,9 @@ function loadData() {
 
                 if (learnsetArr[u]["Type"] == "Level Up") {
                     dataAside2LearnsetLiText.innerText = learnsetArr[u]["Factor"];
+                    if (learnsetArr[u]["Factor"] == "Evolution") {
+                        dataAside2LearnsetLiText.title = "via Evolution Trigger";
+                    }
                 }
                 else if (learnsetArr[u]["Type"] == "Machine") {
                     dataAside2LearnsetLiText.innerText = learnsetArr[u]["Machine"];
@@ -4755,7 +4769,6 @@ function mapBlink(base,area) {
   var area;
   var base;
 
-  console.log(area)
 
   var holder = base.querySelector(":scope .mapify-holder");
 
@@ -4769,7 +4782,7 @@ function mapBlink(base,area) {
   for (var i = 0; i < area.length; i++) {
     coords[i].push(getMapCoords(area[i]))
   }
-  console.log(coords)
+
   /*
   for (var i = 0; i < coords.length; i++) {
     for (var q = 0; q < coords[i].length; q++) {
@@ -4787,7 +4800,7 @@ function mapBlink(base,area) {
     }
 }
 */
-  console.log(coords)
+
 
 
 
@@ -4807,7 +4820,7 @@ function mapBlink(base,area) {
 
     svgbase = base.querySelector(':scope .mapify-svg[name="Mark"]');
 
-console.log(coords)
+
   for (var i = 0; i < area.length; i++) {
     var polygon =  document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     polygon.setAttribute("fill","none");
