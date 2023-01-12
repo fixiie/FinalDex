@@ -419,20 +419,76 @@ var createMove = function() {
 				var moveAside3SidebarOtherText = document.createElement("p");
 				moveAside3SidebarOther.classList.add("move-sidebar-description-other");
 				for(var q = 0; q < othermove.length; q++) {
+			
 					if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by "+othermove[q]) {
-						moveAside3SidebarOtherText.innerHTML = "Affected by <b>"+othermove[q]+"</b>";
+
+				
+						moveAside3SidebarOtherText.innerHTML = "Affected by ";
+
+				
+						moveAside3SidebarOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
+
+						if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
+							if (othermove[q] != "King's Rock") {
+								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
+							}
+							else {
+								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
+							}
+							moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+						}
+						
 					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by "+othermove[q]) {
-						moveAside3SidebarOtherText.innerHTML = "Not affected by <b>"+othermove[q]+"</b>";
+			
+						moveAside3SidebarOtherText.innerHTML = "Not affected by";
+						
+					
+							moveAside3SidebarOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
+
+							if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
+								if (othermove[q] != "King's Rock") {
+									moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
+								}
+								else {
+									moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
+								}
+								moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+							}
+						
 					}
 				}
 				if(finaldataMoveOtherMoves[i][othermove[u]] == "Usable outside of battle") {
 					moveAside3SidebarOtherText.innerHTML = "Usable <b>outside of battle</b>";
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Is a sound-based move") {
 					moveAside3SidebarOtherText.innerHTML = "Is a <b>sound-based</b> move";
+				} else if (finaldataMoveOtherMoves[i][othermove[u]] == "Affected by Magic Coat") {
+					moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat</b>";
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
-					moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat and Magic Bounce</b>";
+					moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat</b> and <b>Magic Bounce</b>";
+
+					var applicables = moveAside3SidebarOtherText.querySelectorAll(":scope > b")
+					for(var r = 0; r < applicables.length; r++) {
+						applicables[r].setAttribute("name","Move");
+						applicables[r].addEventListener("click",dataRedirect);
+					}
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat") {
 					moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
+					moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
+					moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+				}
+				else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat or Magic Bounce") { 
+					moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
+
+					var applicables = moveAside3SidebarOtherText.querySelectorAll(":scope > b")
+					for(var r = 0; r < applicables.length; r++) {
+						if (r == 0) {
+							applicables[r].setAttribute("name","Move");
+						}
+						else {
+							applicables[r].setAttribute("name","Ability");
+						}
+						applicables[r].addEventListener("click",dataRedirect);
+					}
 				}
 				moveAside3SidebarRight.appendChild(moveAside3SidebarOther);
 				moveAside3SidebarOther.appendChild(moveAside3SidebarOtherContent);
@@ -572,14 +628,21 @@ var createMove = function() {
 				var moveAside4LearnsetLiSource = document.createElement("p");
 				if(finaldataLearnsetMachine[q]["Machine"].includes("HM")) {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.title = "HM";
+					moveAside4LearnsetLiSource.setAttribute("name","HM");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TM")) {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.title = "TM";
+					moveAside4LearnsetLiSource.setAttribute("name","TM");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TR")) {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.title = "TR";
+					moveAside4LearnsetLiSource.setAttribute("name","TR");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
+					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
 				}
+				
 
 				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]),"Box")+".png";
 				moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
