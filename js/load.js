@@ -65,14 +65,11 @@ var drag;
 var savedtar;
 var saveddrag;
 var boxDrag;
-var loads = ["Pokémon","Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics","Game"];
+var loads = ["Game","Pokémon","Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics"];
 var baseurl = "https://raw.githubusercontent.com/fixiie/FinalDex/main/data/";
 var baseextension = ".json";
 var baseextra = " Metadata"
 
-if (!Ability.length > 0) {
-	loads = loads.filter((v) => v != "Abilities");
-}
 
 var initStart = 1;
 var initLength = loads.length;
@@ -84,6 +81,7 @@ for(var i = 0; i < loads.length; i++) {
 }
 
 function requestLoad(i,url) {
+	
 	var i;
 	var url;
 	var request = new XMLHttpRequest();
@@ -164,7 +162,8 @@ function requestLoad(i,url) {
 				finaldataItemsDescription.push(Metadata["Description"][q]);
 			}
 		}
-		if (loads[i] == "Abilities") {
+		if (loads[i] == "Abilities" && Ability.length > 0) {
+
 			for(var q = 0; q < Metadata["Reference"].length; q++) {
 				if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
 					finaldataAbility.push(Metadata["Reference"][q]);
@@ -216,6 +215,13 @@ function requestLoad(i,url) {
 			for(var q = 0; q < Metadata["Reference"].length; q++) {
 				finaldataGame.push(Metadata["Reference"][q]);
 			}
+
+			var urlgame = "file:///C:/Users/Avaris/Web/Github/FinalDex/Game.html"
+			var urlid = location.href.replaceAll("%20"," ")
+			var urlselect = urlid.replaceAll(urlgame+"#","");
+			GameID = getGameName("",urlselect);
+			define();
+
 			for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
 				finaldataTypeChart.push(Metadata["Type Chart_" + JSONPath_Typechart][q]);
 			}
@@ -228,6 +234,11 @@ function requestLoad(i,url) {
 			for(var q = 0; q < Metadata["Exclusive Feature"].length; q++) {
 				finaldataExclusiveFeature.push(Metadata["Exclusive Feature"][q]);
 			}
+
+		
+				
+			
+
 		}
 		if (loads[i] == "Pokémon") {
 			for(var q = 0; q < Metadata["Reference"].length; q++) {
@@ -369,11 +380,44 @@ function load() {
 	const load = document.querySelector("#load");
 	document.body.style.overflowY = "unset";
 	document.documentElement.scrollTop = 0;
-	window.onbeforeunload = function() { return "Your work will be lost."; };
 	load.className += "hidden";
 }
 
+function getGameName(id,name) {
+	var id;
+	var name = name;
+	var ran;
+	var arr = finaldataGame;
 
+	if (name.toLowerCase() == "random") {
+		ran = Math.floor(Math.random() * arr.length-2) + 1;
+		id = ran;
+	}	
+	else if (id != "") {
+		for(var q = 0; q < arr.length; q++) {
+			var x = q + 1;
+			if(x == id) {
+				return arr[q]["Full Name"];
+			}
+		}
+	}
+	else if (name != "") {
+		for(var q = 0; q < arr.length; q++) {
+			var x = q + 1;
+			if(arr[q]["Full Name"] == name) {
+				return x;
+			}
+			else if(arr[q]["Name"] == name) {
+				return x;
+			}
+		}
+	}
+	if (ran == undefined) {
+		id = 1;
+	}
+
+	return getGameName("",getGameName(id,""));
+}
 
 
 // temp data
