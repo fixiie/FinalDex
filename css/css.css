@@ -2370,7 +2370,6 @@ body {
 	padding: 10px 0;
 	flex-direction: column;
 	position: relative;
-	cursor: help;
 }
 
 .data-type > span {
@@ -6575,6 +6574,12 @@ span[name="Status"] {
 	flex-wrap: wrap;
 	flex-direction: column;
 }
+*[name="Ability"],
+*[name="Move"],
+*[name="Item"]/*,
+*[name="Map"]*/ {
+	cursor: pointer;
+}
 
 .move-learnset-content ul li > span span {
 	text-align:center;
@@ -7408,7 +7413,7 @@ span[name="Status"] {
 }
 
 .data-popup div[name="list"] ul li p img {
-	max-width: 90%;
+	max-width: 50%;
 }
 
 #pokémon-outer > main {
