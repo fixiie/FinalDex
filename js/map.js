@@ -483,7 +483,7 @@ var createMap = function() {
 				var span = document.createElement("span");
 				var header = document.createElement("h4");
 				var desc = document.createElement("p");
-				header.innerText = obj["Header"];
+				header.innerText = poi[q]["Header"];
 				desc.innerHTML = description.join("<br>");
 				mapAside4DescriptionOviewDescription.appendChild(span)
 				span.appendChild(header)
