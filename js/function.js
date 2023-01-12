@@ -441,6 +441,7 @@ function getPokémonName(int) {
 	}
 }
 
+
 function getPokémonName2(int) {
 	var int;
 	var arr = finaldataPokémonForm;
@@ -1288,13 +1289,13 @@ function formatEvolutionText(i,obj,type) {
 		if(pokprev.length > 0) {
 			var pokémon = '<span name="Pokémon">'+pokprev[0]["Pokémon"]+'</span>';
 			if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-				result = "Evolve "+obj["Gender"]+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
+				result = "Evolve "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 			}
 			else if (obj["Method"] == "Item") {
-				result = "Evolve "+obj["Gender"]+" "+pokémon+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
+				result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
 			}
 			else if(obj["Method"] == "Unique") {
-				result = "Evolve "+obj["Gender"]+pokémon+obj["Factor"]+" "+obj["Additional"];
+				result = "Evolve "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
 			}
 			else if (obj["Method"] == "Unavailable") {
 				result = "Evolution Unavailable."
@@ -1333,13 +1334,13 @@ function formatEvolutionText(i,obj,type) {
 		
 
 		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
+			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 		}
 		else if (obj["Method"] == "Item") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
+			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
 		}
 		else if(obj["Method"] == "Unique") {
-			result = "Evolve "+obj["Gender"]+" "+pokémon+obj["Factor"]+" "+obj["Additional"];
+			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
 		}
 		else if (obj["Method"] == "Unavailable") {
 			result = "Evolution Unavailable."
