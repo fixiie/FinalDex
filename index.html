@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
 
     <script src="./js/lib/jquery-1.10.2.js"></script>
+    <script src="./js/lib/mousewheel-3.1.13.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -16,6 +17,10 @@
     <link rel="stylesheet" href="./media/Fonts/Roboto.ttf">
     <link rel="stylesheet" href="./media/Fonts/BebasNeue.ttf">
 <style>
+    body {
+        scroll-behavior: smooth;
+        overflow:hidden
+    }
 
     img {
         -webkit-user-drag: none;
@@ -83,7 +88,6 @@
     }
     #navigation > span > h1 {
         text-align: center;
-        cursor: default;
         font-size: 0;
         transition: .2s ease font-size;
     }
@@ -104,19 +108,20 @@
         opacity: 1;
     }
 
-    #navigation > span > a {
-        background-image: url("./media/Images/Misc/FinalDex/FinalDex.png");
-        width: 50px;
-        height: 100%; 
+    #navigation > span > button {
+        background-image: url(./media/Images/Misc/FinalDex/FinalDex.png);
+        width: 100%;
+        height: 100%;
         background-repeat: no-repeat;
         background-position: center;
-        background-size: cover;
-        margin: 5px;
+        background-size: contain;
+        object-fit: scale-down;
+        cursor: pointer;
     }
-    #navigation > span > a:hover {
+    #navigation > span > button:hover {
         filter:brightness(1.1);
     }
-    #navigation > span > a:active {
+    #navigation > span > button:active {
         background-image: url("./media/Images/Misc/FinalDex/FinalDex2.png");
     }
     #navigation > div {
@@ -130,6 +135,8 @@
    
     #navigation > div > button {
         cursor: pointer;
+        width: 100%;
+        height:100%;
     }
     #navigation > div > button:hover {
         text-decoration: underline;
@@ -148,22 +155,42 @@
         position: absolute;
         top: 100%;
         width: 100%;
-        background: blue;
     }
     #navigation > div > div.active {
         display: flex;
     }
-
-
-    #gameslist {
+    #Home,
+    #FAQ,
+    #Bug,
+    #Changelog,
+    #Sources {
+        width: 100%;
+        height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Roboto;
+        font-weight: bold;
+        background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
+    }
+    #Games,
+    #FAQ,
+    #Bug,
+    #Changelog,
+    #Sources {
         width: 100%;
         height: 95vh;
         display: flex;
         align-items: center;
         overflow-x: auto;
         position: relative;
+        overflow:auto;
+        flex-direction: column;
     }
-    #gameslist > span {
+    #Games {
+        flex-direction: row;
+    }
+    #Games > span {
         position: absolute;
         top: 1vh;
         left: 1vw;
@@ -174,24 +201,23 @@
         font-size: 40px;
         font-family:Verdana, Geneva, Tahoma, sans-serif;
         z-index: 10;
-        cursor: pointer;
         transition: none;
         transition-delay: none;
         opacity: 0;
         user-select: none;
     }
-    #gameslist > span.inactive {
+    #Games > span.inactive {
         opacity: 0;
     }
-    #gameslist > span.active {
+    #Games > span.active {
         opacity: 1;
         transition: 1s ease opacity;
         transition-delay: 3s;
     }
-    #gameslist > span:hover {
+    #Games > span:hover {
         color: white;
     }
-    #gameslist > button {
+    #Games > button {
         width: 10vw;
         height: 100%;
         display: flex;
@@ -205,94 +231,79 @@
         min-width: 50px;
         
     }
-    #gameslist > button:not(.active) {
-        cursor: pointer;
-    }
-    #gameslist > button.active,
-    #gameslist > button.inactive {
+
+    #Games > button.active,
+    #Games > button.inactive {
         transition: 1s ease width;
         transition-delay: 2s;
         min-width: unset;
     }
-    #gameslist > button.active {
-        width: 100%;
-    }
-    #gameslist > button.inactive {
-        width: 0;
-    }
+  
+  
 
-    #gameslist > button.active > img:not([name]) {
+    #Games > button.active img:not([name]) {
         animation: blinks 0.5s normal linear;
         animation-delay: 0.5s;
     }
-    #gameslist > button > span {
-        background: black;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        opacity: 0.2;
-        transition: 0.2s ease opacity;
+    #Games > button > a {
+        z-index: 1;
     }
-    
-    #gameslist > button > img:not([name="Art"]) {
+    img {
+        -webkit-user-select: none; /* Safari 3.1+ */ -moz-user-select: none; /* Firefox 2+ */ -ms-user-select: none; /* IE 10+ */ user-select: none; /* Standard syntax */ user-drag: none;  -webkit-user-drag: none;
+    }
+    #Games > button > a:active {
+        transform:scale(0.8);
+    }
+
+    #Games > button img:not([name="Art"]) {
         width: 90%;
         object-fit: scale-down;
         z-index: 5;
         max-width: 20vw;
         max-height: 40vh;
+        cursor:pointer;
     }
-    #gameslist > button > img[name*="Art"] {
+    #Games > button img[name*="Art"] {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
         opacity: 0.5;
     }
-    #gameslist > button > img[name*="Art-Extra"] {
+    #Games > button img[name*="Art-Extra"] {
         opacity: 0.7;
         z-index: 4;
     }
-    #gameslist > button > p {
-        display: none;
-        text-align: center;
-        opacity: 0;
-        transition: none;
-        transition-delay: none;
-        z-index: 5;
-        width: 30%;
-    }
-    #gameslist > button.active > p {
-        display: block;
-        opacity: 1;
-        transition: 1s ease opacity;
-        transition-delay: 4s;
-    }
-    #gameslist > button.inactive > p {
-        opacity: 0;
-    }
-    
-  
-    #gameslist > button:not(.active,.progress,.inactive):hover,
-    #gameslist > button:not(.active,.progress,.inactive):focus {
-        width: 50%;
-    }
 
-    #gameslist > button:not(.active):hover > span {
-        opacity: 0;
+    #Games > button.miss {
+        background: radial-gradient(circle, var(--color8) 10%, transparent 11%),radial-gradient(circle at bottom left, var(--color8) 5%, transparent 6%),radial-gradient(circle at bottom right, var(--color8) 5%, transparent 6%),radial-gradient(circle at top left, var(--color8) 5%, transparent 6%),radial-gradient(circle at top right, var(--color8) 5%, transparent 6%);
+        background-size: 1em 1em;
+        background-color: var(--color10);
     }
-    #gameslist > button:not(.active):hover > img:not([name*="Art"]) {
-        animation: opafade 1s infinite linear;
+  
+    #Games > button:not(.active,.progress,.inactive):hover,
+    #Games > button:not(.active,.progress,.inactive):focus {
+        width: 50%;
+    }   
+
+    #Games > button:not(.active) img:not([name*="Art"]):hover {
+        animation: opafade 1.5s infinite ease-in-out;
     }
 
     @keyframes opafade {
         0% {
             transform: scale(1);
+            filter:contrast(1.2);
         }
+      
         50% {
-            transform: scale(0.98);
+            transform: scale(0.97);
+            filter:contrast(1);
         }
+
         100% {
             transform: scale(1);
+            filter:contrast(1.2);
         }
     }
   
@@ -309,44 +320,37 @@
     }
   
 
-#home {
+#Home {
     margin-top: 5vh;
-    width: 100%;
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Roboto;
-    font-weight: bold;
     flex-direction: column;
-    background:gainsboro;
     box-shadow: 0 0 1px #000;
     font-size: 20px;
     position: relative;
-    background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
-
 }
-#home > h5 {
+#Home > h5 {
     padding: 10px 0;
-    font-weight: normal
+    /* font-weight: normal; */
+    font-size: .8em;
+    text-shadow: 1px 1px black;
+    color: var(--color18);
+    font-family: Roboto;
 }
-#home > h1,
-#home > h5 {
-    transition: 5s ease opacity;
-    opacity: 0;
+
+[onclick] {
+    cursor:pointer;
 }
-#home.active > h1,
-#home.active > h5 {
-    opacity: 1;
-}
-#home > h1 {
+#Home > h1 {
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
     font-size: 80px;
 }
-#home > h1,
+#Home > h1:hover {
+    opacity: 0.8;
+}
+
+#Home > h1,
 #navigation > span > h1 > p {
     background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
@@ -357,14 +361,237 @@
     background-clip: text;
     -webkit-background-clip: text;
 }
-#home > span {
+#Home > span {
     font-weight: normal;
     font-size: 12px;
     position: absolute;
     bottom: 2px;
     right: 15px;
 }
+#Sources span,
+#Changelog span,
+#FAQ span {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: auto;
+    max-height: 90%;
+    justify-content: flex-end;
+}
 
+#Bug form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: space-around;
+}
+#Bug form span {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    max-height: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#FAQ ul li:nth-child(2) {
+    font-weight:normal;
+    list-style-type: circle;
+}
+#Sources ul {
+    padding: 5px 0;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+#FAQ ul {
+    padding: 10px 0;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+#Sources h1,
+#FAQ h1 {
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#Changelog h1 {
+    padding: 10px 0;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Changelog ul {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#Changelog li {
+    padding: 2px 0;
+    font-size: 0.8em;
+    list-style-type: square;
+}
+
+#Bug h1 {
+    width: 100%;
+    text-align: center;
+}
+#Bug select {
+    padding: 10px 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 30%;
+    width: 40%;
+    text-align: left;
+}
+#Bug textarea {
+    width: 80%;
+    padding: 10px 20px;
+    display: block;
+    min-height: 100px;
+    min-width: 100px;
+    margin-bottom: 10px;
+}
+
+
+#Bug div b {
+    padding: 10px 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    /* width: 20%; */
+    background: indianred;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 10px 40%;
+    font-family: Roboto;
+    color: white;
+    border-color: black;
+    text-align: center;
+}
+#Bug div button {
+    padding: 10px 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    cursor: pointer;
+    display: block;
+    width: 20%;
+    background: skyblue;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 10px 40%;
+    font-family: Roboto;
+    color:black;
+    border-color:black;
+}
+#Bug div b:active,
+#Bug div button:active {
+    transform:scale(0.95)
+}
+a:active {
+    color: -webkit-activelink;
+}
+a {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+#hp {
+    display: none !important;
+}
+#Bug select option[disabled] {
+    display: none;
+}
+#Bug select {
+    font-weight: normal;
+}
+#Bug option {
+    font-weight: bold;
+    font-size: 1em;
+}
+#Bug div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+#Bug div:nth-child(2) {
+    opacity:0;
+    height: 0;
+    width: 0;
+}
+
+#Bug form span > div {
+    transition: 0.5s ease opacity 0s, 2s ease height 0.5s;
+}
+
+#Bug form span.hide > div:nth-child(1),
+#Bug form span.show > div:nth-child(2) {
+    opacity:0;
+    height: 0;
+    width: 0;
+}
+#Bug form span.hide > div:nth-child(2),
+#Bug form span.show > div:nth-child(1) {
+    opacity:1;
+    height: unset;
+    width: 100%;
+}
+
+#Sources ul ul {
+    list-style-type: auto;
+    font-size: 70%;
+}
+body > span {
+    position: fixed;
+    right: 1vw;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 4em;
+    transition: 1s ease transform;
+    cursor:pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */ -moz-user-select: none; /* Firefox 2+ */ -ms-user-select: none; /* IE 10+ */ user-select: none; /* Standard syntax */ user-drag: none;  -webkit-user-drag: none;
+    transition: .2s ease opacity;
+    opacity: 0.7;
+}
+body > span[name="up"]:active {
+    transform:scale(0.9);
+}
+body > span[name="down"]:active {
+    transform:scale(0.9);
+}
+body > span[name="up"] {
+    top: 30vh;
+}
+body > span[name="down"] {
+    bottom: 25vh;
+}
+body > span.hide {
+    opacity: 0;
+    pointer-events: none;
+}
 </style>
 
 </head>
@@ -372,62 +599,254 @@
 <body>
 
 <section id="navigation">
-    <span><a href="main.html"></a><h1><span>Version 1.0.0</span><p>FINALDEX</p></h1></span>
-    <div><button>Games List</button></div>
-    <div><button>FAQ</button></div>
-    <div><button>Submit a Bug</button></div>
-    <div><button>Changelog</button></div>
-    <div><button>Sources</button></div>
+    <span onclick="arrowUpdate('Home');document.getElementById('Home').scrollIntoView({ block: 'end',  behavior: 'smooth' });"><button></button><h1><span>Version 1.0.0</span><p>FINALDEX</p></h1></span>
+    <div><button onclick="arrowUpdate('Games');document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Games</button></div>
+    <div><button onclick="arrowUpdate('FAQ');document.getElementById('FAQ').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FAQ</button></div>
+    <div><button onclick="arrowUpdate('Bug');document.getElementById('Bug').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Submit a Bug</button></div>
+    <div><button onclick="arrowUpdate('Changelog');document.getElementById('Changelog').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Changelog</button></div>
+    <div><button onclick="arrowUpdate('Sources');document.getElementById('Sources').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Sources</button></div>
 </section>
-<div id="home">
-    <h1>FinalDex</h1>
-    <h5>A Pokémon Checklist with In-Game Data for all the Mainline Pokémon Games</h5>
+
+<span name="up" onclick="arrowMove('up')" class="hide">⮙</span>
+<span name="down" onclick="arrowMove('down')">⮛</span>
+
+<div id="Home">
+    <h1 onclick="arrowUpdate('Games');document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FinalDex</h1>
+    <h5>A complete online Pokédex with rich detailed data for all the Mainline Pokémon Games, </h5>
     <span>Version 1.0.0</span>
 </div>
-<div id="gameslist"></div>
+<div id="Games"></div>
+<div id="FAQ">
+    <span>
+        <h1>Frequently Asked Questions</h1>
+        <ul>
+            <li>I found a bug and some missing and invalid metadata, where do i let you know about it?</li>
+            <li>You can super easily submit bugs <a onclick="arrowUpdate('Bug');document.getElementById('Bug').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Here</a>.</li>
+        </ul>
+        <ul>
+            <li>How does the metadata work for different versions of the Games?</li>
+            <li>All Metadata corresponds to the lastest versions of the games (Including DLC).</li>
+        </ul>
+        <ul>
+            <li>How about different language versions of the games, like the Japanese Red/Green?</li>
+            <li>All Metadata only corresponds to the English releases of the games.</li>
+        </ul>
+        <ul>
+            <li>How does the metadata work for Pokémon Forms?</li>
+            <li>All data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</li>
+        </ul>
+        <ul>
+            <li>How was all of the metadata imported?</li>
+            <li>Data originated from <a href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a>, exported in to Google Sheets with various scripts.</li>
+        </ul>
+        <ul>
+            <li>Can i use this metadata for a Project of mine?</li>
+            <li>Sure, feel free to use it however you like.</li>
+        </ul>
+        <ul>
+            <li>Is there an API available for the data?</li>
+            <li>Currently there is not.</li>
+        </ul>
+        <ul>
+            <li>I have a suggestion or other questions i would like to ask, where do i contact you?</li>
+            <li>T.B.D</li>
+        </ul>
+    </span>
+</div>
+<div id="Bug">
+    <form class="gform" method="POST" data-email="warzhl0l@hotmail.com" action="https://script.google.com/macros/s/AKfycbzK_9WaVpefDGplO2amwIbVpJhsQR_0KK4bMjiMVGazmg9JeHQ/exec">
+        <span>
+            <div>
+                <h1>Submit A Bug</h1>
+                <select id="Bug Type" name="Bug Type" onchange="this.style.fontWeight = 'bold';">
+                    <option value="" disabled="" selected="">Select an option</option>
+                    <option value="Metadata">Invalid Metadata</option>
+                    <option value="Image">Image Error</option>
+                    <option value="Compatibility">Compatibility Issue</option>
+                    <option value="Other">Other</option>
+                </select>
+                <textarea id="Message" name="Message" placeholder="Describe the issue" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Describe the issue'" autocomplete="off"></textarea>
+                <input id="hp" type="text" name="hp" value="">
+                <button class="button-success">Send</button>
+            </div>
+            <div>
+                <h1>Thank You</h1>
+                <b onclick="event.target.parentElement.parentElement.classList.remove('hide');">Repeat</b>
+            </div>
+        </span>
+    </form>
+</div>
+<div id="Changelog">
+    <span>
+        <h1>Changelog</h1>
+        <ul>
+            <pre><li>Version 1.0.0</li>	Initial Release</pre>
+        </ul>
+    </span>
+</div>
+<div id="Sources">
+    <span>
+        <h1>Sources</h1>
+        <ul>
+            <li><a href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></li>
+            <ul>
+                <li>Pokémon Metadata</li>
+                <li>Location Metadata</li>
+                <li>Move Metadata</li>
+                <li>Item Metadata</li>
+                <li>Sprites/Images</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://veekun.com/">Veekun</a></li>
+            <ul>
+                <li>Sprites</li>
+                <li>Icons</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://www.pokemon.com/uk/pokedex">Pokémon</a></li>
+            <ul>
+                <li>Ken Sugimori Artwork</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://projectpokemon.org/">Project Pokémon</a></li>
+            <ul>
+                <li>Animated 3DS Sprites</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://www.pkparaiso.com/">PKParaiso</a></li>
+            <ul>
+                <li>Animated Switch Sprites</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://www.serebii.net/">Serebii</a></li>
+            <ul>
+                <li>Mechanic Research</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></li>
+            <ul>
+                <li>Mapify jquery</li>
+            </ul>
+        </ul>
+
+        <ul>
+            <li><a href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></li>
+            <ul>
+                <li>Red/Blue Sprites Recolor</li>
+            </ul>
+        </ul>
+
+    </span>
+</div>
 
 <script>
+var arrowChecker = [0];
+var wsrc = ["Home","Games","FAQ","Bug","Changelog","Sources"]
 
+function arrowMove(direction) {
+    var direction;
+    var int = arrowChecker[0];
+
+    if (direction == "up") {
+        if (int > 0) {
+            int = int-1;
+            document.getElementById(wsrc[int]).scrollIntoView({ block: 'end',  behavior: 'smooth' });
+        }
+    }
+    if (direction == "down") {
+        if (int < wsrc.length - 1) {
+            int = int+1;
+            document.getElementById(wsrc[int]).scrollIntoView({ block: 'end',  behavior: 'smooth' });
+        }
+    }
+
+    arrowChecker.fill(int);
+
+    arrowUpdate(wsrc[int])
+
+}
+function arrowUpdate(where) {
+    var where;
+    var int;
+    var up = document.querySelector("span[name='up']");
+    var down = document.querySelector("span[name='down']");
+
+    
+    for (var i = 0; i < wsrc.length; i++) {
+        if (wsrc[i] == where) {
+            int = i;
+            break;
+        }
+    }
+
+
+
+    arrowChecker.fill(int);
+
+
+    if (int <= 0) {
+        up.classList.add("hide");
+    }
+    else {
+        up.classList.remove("hide");
+    }
+    if (int >= (wsrc.length - 1)) {
+        down.classList.add("hide");
+    }
+    else {
+        down.classList.remove("hide");
+    }
+}
 
 function build() {
 
 var GamesFull = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
 var GamesSimple = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
-var GamesArt = ["Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","","","","Kanto_FRLG","Kanto_FRLG","","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","Johto_HGSS","Johto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
+var GamesArt = ["Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
 var GamesDescription = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
 
 
-var x = document.createElement("span");
-x.innerHTML = "‹";
-x.setAttribute("onclick","line('x')");
-document.querySelector("#gameslist").appendChild(x)
+
 
 
 for (var i = 0; i < GamesFull.length; i++) {
-    var x = i + 1;
+    var x = i;
     var btn = document.createElement("button");
-    var sp = document.createElement("span");
-    var p = document.createElement("p");
-
     btn.name = x;
-    btn.setAttribute("onclick","line("+x+")");
-    p.innerHTML = "Lorem Ipsum";
+    btn.addEventListener("keyup",function(event){if(event.which === 13){console.log(event.target); event.target.querySelector(":scope a").click();}});
+    document.querySelector("#Games").appendChild(btn)
 
-    document.querySelector("#gameslist").appendChild(btn)
-    btn.appendChild(sp)
 
     if (GamesArt[i] != "") {
         var art = document.createElement("img");
-        art.src = "C:/Users/Avaris/Downloads/mapart/" + GamesArt[i] + ".png";
+        art.src = "./media/Images/Misc/Region/" + GamesArt[i] + ".png";
         art.name = "Art";
         btn.appendChild(art)
     }
+    else {
+        btn.classList.add("miss");
+    }
 
+    var titlewrap = document.createElement("a");
     var title = document.createElement("img");
     title.src = "./media/Images/Misc/Title/Text/" + GamesSimple[i] + ".png";
-    btn.appendChild(title)
+    titlewrap.setAttribute("href","./Game.html"+"#"+GamesFull[i]);
+    titlewrap.setAttribute("tabindex","-1");
+    btn.appendChild(titlewrap)
+    titlewrap.appendChild(title)
 
-    btn.appendChild(p)
 }
 
 
@@ -437,54 +856,172 @@ for (var i = 0; i < GamesFull.length; i++) {
 
 function line(i) {
 
-    var cosp = document.querySelector("#gameslist > span");
-    var as0 = document.querySelectorAll("#gameslist > button");
-    var as1 = document.querySelectorAll("#gameslist > button:not([name='"+i+"'])");
-    var as2 = document.querySelectorAll("#gameslist > button[name='"+i+"']");
+var cosp = document.querySelector("#Games > span");
+var as0 = document.querySelectorAll("#Games > button");
+var as1 = document.querySelectorAll("#Games > button:not([name='"+i+"'])");
+var as2 = document.querySelectorAll("#Games > button[name='"+i+"']");
 
 
-    if (i == "x") {
-        for (var q = 0; q < as0.length; q++) {
-            as0[q].setAttribute("onclick","line("+q+")");
-        }
-
-        for (var u = 0; u < as0.length; u++) {
-            as0[u].classList.remove("inactive");
-            as0[u].classList.remove("active");
-        }
-
-        cosp.classList.remove("active");
-        cosp.classList.add("inactive");
+if (i == "x") {
+    for (var q = 0; q < as0.length; q++) {
+        as0[q].setAttribute("onclick","line("+q+")");
     }
-    else {
-        for (var q = 0; q < as0.length; q++) {
-            as0[q].removeAttribute("onclick");
-        }
-        for (var q = 0; q < as1.length; q++) {
-            as1[q].classList.add("inactive");
-        }
-        for (var q = 0; q < as2.length; q++) {
-            as2[q].classList.add("active");
-        }
 
-        cosp.classList.remove("inactive");
-        cosp.classList.add("active");
+    for (var u = 0; u < as0.length; u++) {
+        as0[u].classList.remove("inactive");
+        as0[u].classList.remove("active");
     }
+
+    cosp.classList.remove("active");
+    cosp.classList.add("inactive");
+}
+else {
+    for (var q = 0; q < as0.length; q++) {
+        as0[q].removeAttribute("onclick");
+    }
+    for (var q = 0; q < as1.length; q++) {
+        as1[q].classList.add("inactive");
+    }
+    for (var q = 0; q < as2.length; q++) {
+        as2[q].classList.add("active");
+    }
+
+    cosp.classList.remove("inactive");
+    cosp.classList.add("active");
+}
 
 }
 
 
 
-document.querySelector("#home").classList.add("active");
+document.querySelector("#Home").classList.add("active");
 build();
 
 
 
 
+$(window).on('beforeunload', function() {
+    $(window).scrollTop(0);
+});
 
+
+
+(function() {
+    // get all data in form and return object
+    function getFormData(form) {
+      var elements = form.elements;
+      var honeypot;
+  
+      var fields = Object.keys(elements).filter(function(k) {
+        if (elements[k].name === "hp") {
+          honeypot = elements[k].value;
+          return false;
+        }
+        return true;
+      }).map(function(k) {
+        if(elements[k].name !== undefined) {
+          return elements[k].name;
+        // special case for Edge's html collection
+        }else if(elements[k].length > 0){
+          return elements[k].item(0).name;
+        }
+      }).filter(function(item, pos, self) {
+        return self.indexOf(item) == pos && item;
+      });
+  
+      var formData = {};
+      fields.forEach(function(name){
+        var element = elements[name];
+        
+        // singular form elements just have one value
+        formData[name] = element.value;
+  
+        // when our element has multiple items, get their values
+        if (element.length) {
+          var data = [];
+          for (var i = 0; i < element.length; i++) {
+            var item = element.item(i);
+            if (item.checked || item.selected) {
+              data.push(item.value);
+            }
+          }
+          formData[name] = data.join(', ');
+        }
+      });
+  console.log(fields)
+      // add form-specific values into the data
+      formData.formDataNameOrder = JSON.stringify(fields);
+      formData.formGoogleSheetName = form.dataset.sheet || "reports"; // default sheet name
+      formData.formGoogleSendEmail
+        = form.dataset.email || ""; // no email by default
+  
+      return {data: formData, honeypot: honeypot};
+    }
+  
+    function handleFormSubmit(event) {  // handles form submit without any jquery
+      event.preventDefault();           // we are submitting via xhr below
+      var form = event.target;
+      var formData = getFormData(form);
+      var data = formData.data;
+  
+      // If a honeypot field is filled, assume it was done so by a spam bot.
+      if (formData.honeypot) {
+        return false;
+      }
+  
+      //disableAllButtons(form);
+      var url = form.action;
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      // xhr.withCredentials = true;
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            form.reset();
+            var formElements = form.querySelector(".gform > span")
+            if (formElements) {
+              formElements.classList.add("hide");
+            }
+          }
+      };
+      // url encode form data for sending as post data
+      var encoded = Object.keys(data).map(function(k) {
+          return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+      }).join('&');
+      xhr.send(encoded);
+    }
+    
+    function loaded() {
+      // bind to the submit event of our form
+      var forms = document.querySelectorAll("form.gform");
+      for (var i = 0; i < forms.length; i++) {
+        forms[i].addEventListener("submit", handleFormSubmit, false);
+      }
+    };
+    document.addEventListener("DOMContentLoaded", loaded, false);
+  
+    function disableAllButtons(form) {
+      var buttons = form.querySelectorAll(":scope div:nth-child(1) button");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+      }
+    }
+})();
 
 
 $(document).ready(function() {
+/*
+    document.body.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){
+        document.querySelector("span[name='up']").click();
+    }});
+    document.body.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(!delta.includes("-")){
+        document.querySelector("span[name='down']").click();
+    }});
+*/
+   
+
+    
+
 		// grab the initial top offset of the navigation 
 		var stickyNavTop = $('#navigation').offset().top;
 		
