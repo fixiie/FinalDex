@@ -21,7 +21,6 @@ var createData = function(id, i) {
 
 	for(var u = 0; u < finaldataPokémon.length; u++) {
 		if(finaldataPokémon[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
-			console.log(finaldataPokémonFormChange[u][JSONPath_FormChange] == undefined)
 			var dataFormInput = document.createElement("input");
 			var dataFormLabel = document.createElement("label");
 			var dataFormImg = document.createElement("img");
@@ -29,10 +28,10 @@ var createData = function(id, i) {
 			dataFormInput.setAttribute("name","data-form-selector"+id);
 			dataFormInput.setAttribute("id","data-form-selector-"+u);
 			dataFormLabel.title = getPokémonName(u);
-			if (finaldataPokémonFormChange[u][JSONPath_FormChange] == undefined) {
+			if (variant.length <= 1) {
 				dataFormLabel.title += "\n"+getPokémonName(u)+" cannot change form.";
 			}
-			else {
+			else if (finaldataPokémonFormChange[u][JSONPath_FormChange] != undefined) {
 				dataFormLabel.title += "\n"+finaldataPokémonFormChange[u][JSONPath_FormChange];
 			}
 			dataFormInput.value = u;
@@ -49,6 +48,9 @@ var createData = function(id, i) {
 			dataFormInput.addEventListener("click", loadData);
 		}
 	}
+
+	icount = [];
+
 	var dataAside1 = document.createElement("aside");
 	var dataAside1DivPortrait = document.createElement("div");
 	var dataAside1DivPortraitContent = document.createElement("div");
@@ -723,10 +725,20 @@ function modalData() {
 		activeWindow.classList.remove("open");
 	}
 	if(id != undefined) {
+		var windowCount;
+		var maxWindowCount;
 		var currentWindow;
 		var formSpec;
 		var formFirst;
+		maxWindowCount = 10;
+		windowCount = document.querySelectorAll("#data > div");
 		currentWindow = document.querySelector("#data-modal"+id);
+		if (windowCount.length >= maxWindowCount) {
+			for (var u = 0; u < windowCount.length; u++) {
+				windowCount[u].remove();
+			}
+			console.log("Cleared some space")
+		}
 		if(currentWindow == null) {
 			createData(id, int);
 		}
