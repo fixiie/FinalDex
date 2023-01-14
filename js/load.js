@@ -67,7 +67,7 @@ var saveddrag;
 var boxDrag;
 var loads = ["Game","Pokémon","Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics"];
 var baseurl = "https://raw.githubusercontent.com/fixiie/FinalDex/main/data/";
-var baseextension = ".json";
+var baseextension = "json";
 var baseextra = " Metadata"
 
 
@@ -76,7 +76,7 @@ var initLength = loads.length;
 var initTimeStart;
 
 for(var i = 0; i < loads.length; i++) {
-	var url = baseurl+loads[i]+baseextra+baseextension;
+	var url = baseurl+loads[i]+baseextra+"."+baseextension;
 	requestLoad(i,url);
 }
 
