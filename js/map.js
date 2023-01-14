@@ -1023,7 +1023,7 @@ var createMap = function() {
 
 					var mapAside4DescriptionPokType = document.createElement("span");
 					var mapAside4DescriptionPokTypeImage = document.createElement("img");
-					mapAside4DescriptionPokTypeImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter Icon"]+".png";
+					mapAside4DescriptionPokTypeImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter"]+".png";
 					mapAside4DescriptionPokTypeImage.title = poks[u]["Encounter"];
 					mapAside4DescriptionPokTypeImage.setAttribute("onerror", "this.style.display='none'");
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
@@ -1034,7 +1034,7 @@ var createMap = function() {
 			}
 		}
 
-
+		console.log(finaldataLocationPokémon)
 
 
 		for(var q = 0; q < tutors.length; q++) {
