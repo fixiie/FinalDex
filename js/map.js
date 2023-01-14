@@ -359,6 +359,8 @@ var createMap = function() {
 		if (mapImg.classList.contains("mapify")) {
 			mapBlink(mapAside3MapOuter,[location]);
 		}
+
+
 		
 
 		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Trainers", "Move Tutor"];
@@ -856,10 +858,8 @@ var createMap = function() {
 									mapAside4DescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
 									mapAside4DescriptionItemFieldImage.title = items[u]["Field"].split("/")[y];
 									mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldImage);
-	
 									mapAside4DescriptionItemField.setAttribute("name","Item");
 									mapAside4DescriptionItemField.setAttribute("value",itm);
-									console.log(mapAside4DescriptionItemField)
 									mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
 								}
 								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
@@ -936,28 +936,37 @@ var createMap = function() {
 			}
 		}
 
-
-
 		for(var q = 0; q < poks.length; q++) {
-			if (poks[q]["Area"] == undefined) {
-				poks[q]["Area"] = "a";
+			if (poks[q]["Area"] != undefined && poks[q]["Title"] != undefined) {
+				poks[q]["Sort"] = poks[q]["Area"]+" - "+poks[q]["Title"];
+			}
+			else if (poks[q]["Area"] == undefined && poks[q]["Title"] != undefined) {
+				poks[q]["Sort"] = poks[q]["Title"];
+			}
+			else if (poks[q]["Area"] != undefined && poks[q]["Title"] == undefined) {
+				poks[q]["Sort"] = poks[q]["Area"];
+			}
+			else {
+				poks[q]["Sort"] = "a";
 			}
 		}
 
-		poks = sortObjectArray(poks, "Area");
+
+		poks = sortObjectArray(poks, "Sort");
 
 		for(var q = 0; q < poks.length; q++) {
-			if (poks[q]["Area"] == "a") {
-				poks[q]["Area"] = location;
+			if (poks[q]["Sort"] == "a") {
+				poks[q]["Sort"] = location;
 			}
 		}
-
+	
+		console.log(poks)
 		var pokArea = [];
 		for(var q = 0; q < poks.length; q++) {
-			pokArea.push(poks[q]["Area"]);
+			pokArea.push(poks[q]["Sort"]);
 		}
 		pokArea = [...new Set(pokArea)];
-
+		console.log(pokArea)
 
 		var uls = mapAside4DescriptionPok.querySelectorAll(":scope > ul");
 		for(var q = 0; q < uls.length; q++) {
@@ -983,7 +992,7 @@ var createMap = function() {
 			ul = mapAside4DescriptionPok.querySelector(':scope > ul[name="'+pokArea[q]+'"]');
 
 			for(var u = 0; u < poks.length; u++) {
-				if (poks[u]["Area"] == pokArea[q]) {
+				if (poks[u]["Sort"] == pokArea[q]) {
 					var mapAside4DescriptionPokLi = document.createElement("li");
 					ul.appendChild(mapAside4DescriptionPokLi);
 
@@ -1003,7 +1012,7 @@ var createMap = function() {
 
 					var mapAside4DescriptionPokLvl = document.createElement("span");
 					var mapAside4DescriptionPokLvlText = document.createElement("p");
-					mapAside4DescriptionPokLvlText.innerText = "Lvl. "+poks[u]["Level"];
+					mapAside4DescriptionPokLvlText.innerText = poks[u]["Level"];
 					mapAside4DescriptionPokLvlText.title = "Level";
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokLvl);
 					mapAside4DescriptionPokLvl.appendChild(mapAside4DescriptionPokLvlText);
@@ -1033,9 +1042,6 @@ var createMap = function() {
 				}
 			}
 		}
-
-		console.log(finaldataLocationPokémon)
-
 
 		for(var q = 0; q < tutors.length; q++) {
 			if (tutors[q]["Area"] == undefined) {
@@ -1754,9 +1760,16 @@ var createMap = function() {
 			mapDescriptionTrainer[y].style.display = "unset";
 		}
 	}
+
+	var mapdescriptionsel = document.querySelector('.map-description-selector-outer input[value="'+mapSelectorVal[0]+'"]')
+
+	if (mapdescriptionsel != null) {
+		mapdescriptionsel.click();
+	}
+
 	}
 }
-var mapSelectorVal = [""];
+var mapSelectorVal = ["0"];
 function mapDescriptionSelector() {
 	var i = this.value;
 	var mapDescriptionOuters = document.querySelectorAll('#map-description base[name]');
