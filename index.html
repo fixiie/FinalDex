@@ -62,7 +62,7 @@
         left: 0;
         top: 0;
         z-index: 100;
-       
+        border-bottom: 1px solid;
     }
     
   
@@ -103,7 +103,7 @@
         display: block;
     }
 
-    #navigation > span > h1:hover > span {
+    #navigation.sticky > span:hover > h1 > span {
         font-size: 10px;
         opacity: 1;
     }
@@ -118,10 +118,10 @@
         object-fit: scale-down;
         cursor: pointer;
     }
-    #navigation > span > button:hover {
+    #navigation > span:hover > button {
         filter:brightness(1.1);
     }
-    #navigation > span > button:active {
+    #navigation > span:active > button {
         background-image: url("./media/Images/Misc/FinalDex/FinalDex2.png");
     }
     #navigation > div {
@@ -160,6 +160,7 @@
         display: flex;
     }
     #Home,
+    #Metadata,
     #FAQ,
     #Bug,
     #Changelog,
@@ -174,6 +175,7 @@
         background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
     }
     #Games,
+    #Metadata,
     #FAQ,
     #Bug,
     #Changelog,
@@ -344,7 +346,7 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    font-size: 80px;
+    font-size: 6em;
 }
 #Home > h1:hover {
     opacity: 0.8;
@@ -368,6 +370,7 @@
     bottom: 2px;
     right: 15px;
 }
+#Metadata span,
 #Sources span,
 #Changelog span,
 #FAQ span {
@@ -402,6 +405,7 @@
     font-weight:normal;
     list-style-type: circle;
 }
+#Metadata ul,
 #Sources ul {
     padding: 5px 0;
     width: 95%;
@@ -414,6 +418,7 @@
     display: flex;
     flex-direction: column;
 }
+#Metadata h1,
 #Sources h1,
 #FAQ h1 {
     width: 95%;
@@ -428,6 +433,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#Changelog ul pre {
+    padding: 5px 0;
 }
 #Changelog ul {
     width: 95%;
@@ -556,7 +564,9 @@ a {
     height: unset;
     width: 100%;
 }
-
+#Metadata ul ul {
+    font-size: 70%;
+}
 #Sources ul ul {
     list-style-type: auto;
     font-size: 70%;
@@ -569,15 +579,18 @@ body > span {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-size: 4em;
+    font-size: 3em;
     transition: 1s ease transform;
     cursor:pointer;
     -webkit-user-select: none; /* Safari 3.1+ */ -moz-user-select: none; /* Firefox 2+ */ -ms-user-select: none; /* IE 10+ */ user-select: none; /* Standard syntax */ user-drag: none;  -webkit-user-drag: none;
     transition: .2s ease opacity;
     opacity: 0.7;
 }
+body > span[name="up"] {
+    transform:scaleX(-1);
+}
 body > span[name="up"]:active {
-    transform:scale(0.9);
+    transform:scale(0.9) scaleX(-1);
 }
 body > span[name="down"]:active {
     transform:scale(0.9);
@@ -592,6 +605,13 @@ body > span.hide {
     opacity: 0;
     pointer-events: none;
 }
+body > span[name="num"] {
+    top: 50vh;
+    font-size: 1.5em;
+    font-family: Roboto;
+    right: 1vw;
+}
+
 </style>
 
 </head>
@@ -603,19 +623,22 @@ body > span.hide {
     <div><button onclick="arrowUpdate('Games');document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Games</button></div>
     <div><button onclick="arrowUpdate('FAQ');document.getElementById('FAQ').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FAQ</button></div>
     <div><button onclick="arrowUpdate('Bug');document.getElementById('Bug').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Submit a Bug</button></div>
-    <div><button onclick="arrowUpdate('Changelog');document.getElementById('Changelog').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Changelog</button></div>
+    <div><button onclick="arrowUpdate('Metadata');document.getElementById('Metadata').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Metadata</button></div>
     <div><button onclick="arrowUpdate('Sources');document.getElementById('Sources').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Sources</button></div>
+    <div><button onclick="arrowUpdate('Changelog');document.getElementById('Changelog').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Changelog</button></div>
 </section>
 
 <span name="up" onclick="arrowMove('up')" class="hide">⮙</span>
+<!--<span name="num">0/0</span>-->
 <span name="down" onclick="arrowMove('down')">⮛</span>
 
 <div id="Home">
     <h1 onclick="arrowUpdate('Games');document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FinalDex</h1>
-    <h5>A complete online Pokédex with rich detailed data for all the Mainline Pokémon Games, </h5>
+    <h5>A complete online Pokédex with rich detailed data for all the Mainline Pokémon Games</h5>
     <span>Version 1.0.0</span>
 </div>
 <div id="Games"></div>
+
 <div id="FAQ">
     <span>
         <h1>Frequently Asked Questions</h1>
@@ -633,14 +656,14 @@ body > span.hide {
         </ul>
         <ul>
             <li>How does the metadata work for Pokémon Forms?</li>
-            <li>All data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</li>
+            <li>All of the data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</li>
         </ul>
         <ul>
             <li>How was all of the metadata imported?</li>
-            <li>Data originated from <a href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a>, exported in to Google Sheets with various scripts.</li>
+            <li>Data originated from <a target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a>, exported in to Google Sheets with various scripts.</li>
         </ul>
         <ul>
-            <li>Can i use this metadata for a Project of mine?</li>
+            <li>Can i use this metadata for a project of mine?</li>
             <li>Sure, feel free to use it however you like.</li>
         </ul>
         <ul>
@@ -648,7 +671,7 @@ body > span.hide {
             <li>Currently there is not.</li>
         </ul>
         <ul>
-            <li>I have a suggestion or other questions i would like to ask, where do i contact you?</li>
+            <li>I have suggestions/questions/would like to express my opinions, where do i contact you?</li>
             <li>T.B.D</li>
         </ul>
     </span>
@@ -676,19 +699,74 @@ body > span.hide {
         </span>
     </form>
 </div>
-<div id="Changelog">
+<div id="Metadata">
     <span>
-        <h1>Changelog</h1>
-        <ul>
-            <pre><li>Version 1.0.0</li>	Initial Release</pre>
+        <h1>Metadata</h1>
+        <ul>   
+            <li>Pokémon</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Pokémon Metadata</a></li>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Pokémon Learnset Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Locations</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Location Pokémon Metadata</a></li>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Location Items Metadata</a></li>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Location Trainers Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Moves</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Moves Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Abilities</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Abilities Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Items</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Items Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Trainers</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Trainers Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Mechanics</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Mechanics Metadata</a></li>
+            </ul>
+        </ul>
+    
+        <ul>   
+            <li>Games</li>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1MxCyhnu2WK8H7hhfT8b8TZuusXtsf-b55ooa1CKPgrg">Games Metadata</a></li>
+            </ul>
         </ul>
     </span>
-</div>
+    </div>
 <div id="Sources">
     <span>
         <h1>Sources</h1>
         <ul>
-            <li><a href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></li>
+            <li><a target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></li>
             <ul>
                 <li>Pokémon Metadata</li>
                 <li>Location Metadata</li>
@@ -699,7 +777,7 @@ body > span.hide {
         </ul>
 
         <ul>
-            <li><a href="https://veekun.com/">Veekun</a></li>
+            <li><a target="_blank" href="https://veekun.com/">Veekun</a></li>
             <ul>
                 <li>Sprites</li>
                 <li>Icons</li>
@@ -707,42 +785,42 @@ body > span.hide {
         </ul>
 
         <ul>
-            <li><a href="https://www.pokemon.com/uk/pokedex">Pokémon</a></li>
+            <li><a target="_blank" href="https://www.pokemon.com/uk/pokedex">Pokémon</a></li>
             <ul>
                 <li>Ken Sugimori Artwork</li>
             </ul>
         </ul>
 
         <ul>
-            <li><a href="https://projectpokemon.org/">Project Pokémon</a></li>
+            <li><a target="_blank" href="https://projectpokemon.org/">Project Pokémon</a></li>
             <ul>
                 <li>Animated 3DS Sprites</li>
             </ul>
         </ul>
 
         <ul>
-            <li><a href="https://www.pkparaiso.com/">PKParaiso</a></li>
+            <li><a target="_blank" href="https://www.pkparaiso.com/">PKParaiso</a></li>
             <ul>
                 <li>Animated Switch Sprites</li>
             </ul>
         </ul>
 
         <ul>
-            <li><a href="https://www.serebii.net/">Serebii</a></li>
+            <li><a target="_blank" href="https://www.serebii.net/">Serebii</a></li>
             <ul>
                 <li>Mechanic Research</li>
             </ul>
         </ul>
 
         <ul>
-            <li><a href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></li>
+            <li><a target="_blank" href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></li>
             <ul>
                 <li>Mapify jquery</li>
             </ul>
         </ul>
 
         <ul>
-            <li><a href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></li>
+            <li><a target="_blank" href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></li>
             <ul>
                 <li>Red/Blue Sprites Recolor</li>
             </ul>
@@ -750,10 +828,17 @@ body > span.hide {
 
     </span>
 </div>
-
+<div id="Changelog">
+    <span>
+        <h1>Changelog</h1>
+        <ul>
+            <pre><li>Version 1.0.0</li>Initial Release</pre>
+        </ul>
+    </span>
+</div>
 <script>
 var arrowChecker = [0];
-var wsrc = ["Home","Games","FAQ","Bug","Changelog","Sources"]
+var wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
 
 function arrowMove(direction) {
     var direction;
