@@ -1305,7 +1305,9 @@ input[type=radio] {
 	color:#78D0F8;
 }
 
-
+#map-description-pok ul > li li > h6 {
+	font-size: 0.6em;
+}
 #map-description-pok ul > li li[name="Rate"] pre {
 	font-size: 130%;
 }
