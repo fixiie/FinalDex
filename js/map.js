@@ -1008,7 +1008,7 @@ var createMap = function() {
 					var mapAside4DescriptionPokIcon = document.createElement("img");
 					var mapAside4DescriptionPokText = document.createElement("h6");
 					mapAside4DescriptionPokOuter.setAttribute("name","Pok");
-					mapAside4DescriptionPokLvl.innerText = poks[u]["Level"];
+					mapAside4DescriptionPokLvl.innerText = "Lv. "+poks[u]["Level"];
 					mapAside4DescriptionPokLvl.title = "Level";
 					mapAside4DescriptionPokIcon.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
 					mapAside4DescriptionPokIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
@@ -1131,6 +1131,7 @@ var createMap = function() {
 							}
 
 							mapAside4DescriptionPokTypeEncounter.alt = encounter;
+							mapAside4DescriptionPokTypeEncounter.setAttribute("onerror","this.style.display='none';")
 							
 							if (encounters[r] == "Surfing") {
 								mapAside4DescriptionPokTypeEncounter.setAttribute("name","Move");
