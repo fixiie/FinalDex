@@ -1265,6 +1265,24 @@ input[type=radio] {
 	cursor:pointer;
 	text-align:center;
 }
+#map-description-pok ul > li li[name="Encounter"] > span {
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#map-description-pok ul > li li[name="Encounter"] > span > img[name="Tile"] {
+	display:block;
+}
+
+#map-description-pok ul > li li[name="Encounter"] > span > img[src][name="Encounter"]:not(:first-child) {
+	position: absolute;
+    bottom: 25%;
+    left: 25%;
+}
+
 #map-description-pok ul > li p pre[name="Spring"] {
 	color:#B0F858;
 }
