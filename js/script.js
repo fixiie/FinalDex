@@ -697,11 +697,11 @@ function dataRedirect() {
     var typevariant;
     var lock;
     var notval = ["⮜","⮝","⮟","⮞"];
-
-    if (tar.innerText != undefined && tar.innerText != "" && tar.firstElementChild == undefined && !notval.includes(tar.innerText)) {
-        x = tar.innerText;
-    } else if(tar.getAttribute("value") != undefined) {
+    
+    if(tar.getAttribute("value") != undefined) {
         x = tar.getAttribute("value");
+    } else if (tar.innerText != undefined && tar.innerText != "" && tar.firstElementChild == undefined && !notval.includes(tar.innerText)) {
+        x = tar.innerText;
     } else if(tar.getAttribute("title") != undefined) {
         x = tar.getAttribute("title");
     }
@@ -1165,6 +1165,7 @@ function loadData() {
                         pokLocationText.setAttribute("name","Map");
                         pokLocation.appendChild(pokLocationText);
                         pokLocationText.addEventListener("click",dataRedirect)
+                        pokLocationText.setAttribute("function","dataRedirect");
                     }
 
                     var pokLevel = document.createElement("span");
