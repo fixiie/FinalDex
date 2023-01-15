@@ -1236,7 +1236,7 @@ input[type=radio] {
 	border-top: none;
 }
 
-#map-description-pok ul li,
+#map-description-pok ul > li,
 #map-description-item ul li,
 #map-description-tutor ul li {
 	width: 100%;
@@ -1251,17 +1251,60 @@ input[type=radio] {
 	background: var(--color16);
 }
 
-#map-description-pok ul li,
-#map-description-tutor ul li {
+#map-description-pok ul > li,
+#map-description-tutor ul > li {
 	justify-content: space-around;
 }
-
-#map-description-pok ul li span {
+#map-description-pok ul > li li {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#map-description-pok ul > li li > span {
+	cursor:pointer;
+	text-align:center;
+}
+#map-description-pok ul > li p pre[name="Spring"] {
+	color:#B0F858;
+}
+#map-description-pok ul > li p pre[name="Summer"] {
+	color:#FFFA73;
+}
+#map-description-pok ul > li p pre[name="Autumn"] {
+	color:#F89058;
+}
+#map-description-pok ul > li p pre[name="Winter"] {
+	color:#78D0F8;
 }
 
+
+#map-description-pok ul > li li[name="Rate"] pre {
+	font-size: 130%;
+}
+#map-description-pok ul > li li[name="Rate"] p {
+	font-size: 70%;
+}
+
+#map-description-pok ul > li span[name="pok"] {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#map-description-pok ul > li > li[title] span > h6 {
+	text-decoration: underline;
+    text-decoration-style: dashed;
+}
+#map-description-pok ul > li > li[title]:hover span > h6 {
+	text-decoration-style: solid;
+}
+#map-description-pok ul > li span[name="pok"] > *:nth-child(1) {
+	padding: 0;
+}
+#map-description-pok ul > li span[name="pok"] > * {
+	padding: 2px 0;
+}
 
 #map-description-item ul li span[name="Description"] {
 	width: 100%;
@@ -1320,7 +1363,6 @@ input[type=radio] {
 	filter: brightness(1.2);
 }
 
-#map-description-pok ul li p,
 #map-description-item ul li p,
 #map-description-tutor ul li p {
 	font-size: 80%;
@@ -1366,7 +1408,7 @@ input[type=radio] {
 	font-weight: bold;
 }
 
-#map-description-pok ul li p {
+#map-description-pok ul > li p {
 	width: 100%;
     display: flex;
     align-items: center;
@@ -1377,7 +1419,7 @@ input[type=radio] {
 	flex-direction:column;
 }
 
-#map-description-pok ul li p > img {
+#map-description-pok ul > li p > img {
     max-width: 30px;
 	object-fit: scale-down;
 	image-rendering: -moz-crisp-edges;
@@ -1389,23 +1431,16 @@ input[type=radio] {
 
 
 
-#map-description-pok ul li p > img[title="Morning"] {
+#map-description-pok ul > li p > img[title="Morning"] {
 	filter: brightness(0) saturate(100%) invert(87%) sepia(49%) saturate(212%) hue-rotate(357deg) brightness(109%) contrast(101%);
 }
-#map-description-pok ul li p > img[title="Day"] {
+#map-description-pok ul > li p > img[title="Day"] {
 	filter: brightness(0) saturate(100%) invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
 }
-#map-description-pok ul li p > img[title="Night"] {
+#map-description-pok ul > li p > img[title="Night"] {
 	filter: brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
 }
 
-
-#map-description-pok ul li div {
-	width: 20%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 
 
 #map-description-tutor ul li div {
@@ -1448,7 +1483,7 @@ input[type=radio] {
 }
 
 
-#map-description-pok ul li div img,
+#map-description-pok ul > li div img,
 #map-description-item ul li div img {
 	object-fit: scale-down;
 }
@@ -1461,12 +1496,9 @@ input[type=radio] {
 	padding: 5px 10px;
 }
 
-#map-description-pok ul li div:first-child img {
-	cursor:pointer;
-}
 
 #map-description-item ul li div:hover img,
-#map-description-pok ul li div:first-child img:hover,
+#map-description-pok ul > li li > span:hover img,
 #map-description-trainer ul li div img:hover {
 	filter: brightness(1.1);
 }
