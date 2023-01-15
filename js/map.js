@@ -1025,29 +1025,6 @@ var createMap = function() {
 					mapAside4DescriptionPokWrap.addEventListener("click",modalData);
 
 
-					var mapAside4DescriptionPokType = document.createElement("li");
-					var mapAside4DescriptionPokTypeWrap = document.createElement("span");
-					var mapAside4DescriptionPokTypeTile = document.createElement("img");
-					var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
-					mapAside4DescriptionPokType.setAttribute("name","Encounter")
-					if (poks[u]["Tile"] != undefined) {
-						mapAside4DescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
-						mapAside4DescriptionPokTypeTile.title = poks[u]["Tile"];
-						mapAside4DescriptionPokTypeTile.alt = poks[u]["Tile"];
-					}
-					if (poks[u]["Encounter"] != undefined) {
-						mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter"]+".png";
-						mapAside4DescriptionPokTypeEncounter.title = poks[u]["Encounter"];
-						mapAside4DescriptionPokTypeEncounter.alt = poks[u]["Encounter"];
-					}
-					//mapAside4DescriptionPokTypeEncounter.setAttribute("onerror", "this.style.display='none'");
-					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
-					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeWrap);
-					mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTile);
-					mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeEncounter);
-
-
-
 					var mapAside4DescriptionPokRate = document.createElement("li");
 					var mapAside4DescriptionPokRateText = document.createElement("p");
 					mapAside4DescriptionPokRate.setAttribute("name","Rate")
@@ -1060,6 +1037,80 @@ var createMap = function() {
 					}
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokRate);
 					mapAside4DescriptionPokRate.appendChild(mapAside4DescriptionPokRateText);
+
+
+
+					var mapAside4DescriptionPokType = document.createElement("li");
+					var mapAside4DescriptionPokTypeWrap = document.createElement("span");
+					var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
+					mapAside4DescriptionPokType.setAttribute("name","Encounter")
+
+
+					//mapAside4DescriptionPokTypeEncounter.setAttribute("onerror", "this.style.display='none'");
+					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
+					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeWrap);
+
+
+					if (poks[u]["Tile"] != undefined) {
+						var mapAside4DescriptionPokTypeTile = document.createElement("img");
+						mapAside4DescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+						mapAside4DescriptionPokTypeTile.title = poks[u]["Tile"];
+						mapAside4DescriptionPokTypeTile.alt = poks[u]["Tile"];
+						mapAside4DescriptionPokTypeTile.setAttribute("name","Tile");
+						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTile);
+					}
+
+					var encounters = [];
+					// Encounter
+					if (poks[u]["Encounter"] != undefined) {
+						if (poks[u]["Encounter"].includes(",")) {
+							encounters = poks[u]["Encounter"].split(",");
+						}
+						else {
+							encounters = [poks[u]["Encounter"]];
+						}
+					}
+
+
+					for(var r = 0; r < encounters.length; r++) {
+						var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
+						console.log(encounters)
+						var encounter = encounters[r];
+						if (encounter.includes("Surfing")) {
+							encounter = encounter+"_M"
+						}
+						else {
+							encounter = encounter;
+						}
+
+						if (encounter != undefined) {						
+							if (encounter == "Static" && poks[u]["Tile"] == undefined) {
+								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Normal/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
+								mapAside4DescriptionPokTypeEncounter.title = encounter+" "+poks[u]["Pokémon"];
+							}
+							else if (encounter == "Static" && poks[u]["Tile"] != undefined) {
+								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Normal/PNG/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+								mapAside4DescriptionPokTypeEncounter.title = encounter+" "+poks[u]["Pokémon"];
+							}
+							else {
+								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";
+								mapAside4DescriptionPokTypeEncounter.title = encounter;
+							}
+							
+							mapAside4DescriptionPokTypeEncounter.alt = encounter;
+							mapAside4DescriptionPokTypeEncounter.setAttribute("name","Encounter");
+						}
+						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeEncounter);
+					}
+
+
+
+
+
+
+
+
+	
 
 
 				}
