@@ -224,6 +224,7 @@ var createItem = function() {
 			itemAside3DescriptionText.innerHTML = item+" contains the move <span name='Move'>"+getMachineMove(item)+"</span>.";
 			itemAside3Description.appendChild(itemAside3DescriptionText);
 			itemAside3DescriptionText.querySelector(":scope span").addEventListener("click",dataRedirect);
+			itemAside3DescriptionText.querySelector(":scope span").setAttribute("function","dataRedirect");
 		}
 		else {
 			for(var q = 0; q < finaldataItemsDescription.length; q++) {
@@ -332,6 +333,7 @@ var createItem = function() {
 					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
 
 					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
+					itemAside4SidebarLocationText.setAttribute("function","dataRedirect");
 
 
 					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
@@ -390,6 +392,7 @@ var createItem = function() {
 									itemAside4SidebarField.setAttribute("name","Item");
 									itemAside4SidebarField.setAttribute("value",itm);
 									itemAside4SidebarField.addEventListener("click",dataRedirect);
+									itemAside4SidebarField.setAttribute("function","dataRedirect");
 								}
 								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
 								if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
@@ -426,6 +429,7 @@ var createItem = function() {
 									itemAside4SidebarField.setAttribute("name","Item");
 									itemAside4SidebarField.setAttribute("value",itm);
 									itemAside4SidebarField.addEventListener("click",dataRedirect);
+									itemAside4SidebarField.setAttribute("function","dataRedirect");
 								}
 								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
 							}
@@ -457,6 +461,7 @@ var createItem = function() {
 								itemAside4SidebarField.setAttribute("name","Item");
 								itemAside4SidebarField.setAttribute("value",itm);
 								itemAside4SidebarField.addEventListener("click",dataRedirect);
+								itemAside4SidebarField.setAttribute("function","dataRedirect");
 							}
 							itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
 
@@ -527,6 +532,7 @@ var createItem = function() {
 
 
 					itemAside4SidebarPickupText.addEventListener("click",dataRedirect)
+					itemAside4SidebarPickupText.setAttribute("function","dataRedirect");
 
 	
 
