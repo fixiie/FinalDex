@@ -716,7 +716,8 @@ var createMap = function() {
 					mapAside4DescriptionItemIconOuter.setAttribute("value",items[u]["Item"])
 					ul.appendChild(mapAside4DescriptionItemLi);
 					mapAside4DescriptionItemLi.appendChild(mapAside4DescriptionItemIconOuter);
-					mapAside4DescriptionItemIconOuter.addEventListener("click",dataRedirect)
+					mapAside4DescriptionItemIconOuter.addEventListener("click",dataRedirect);
+					mapAside4DescriptionItemIconOuter.setAttribute("function","dataRedirect");
 
 					if (quantity == undefined) {
 						quantity = 1;
@@ -861,6 +862,7 @@ var createMap = function() {
 									mapAside4DescriptionItemField.setAttribute("name","Item");
 									mapAside4DescriptionItemField.setAttribute("value",itm);
 									mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+									mapAside4DescriptionItemField.setAttribute("function","dataRedirect");
 								}
 								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
 								if (y != items[u]["Field"].split("/").length - 1) {
@@ -896,6 +898,7 @@ var createMap = function() {
 									mapAside4DescriptionItemField.setAttribute("name","Item");
 									mapAside4DescriptionItemField.setAttribute("value",itm);
 									mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+									mapAside4DescriptionItemField.setAttribute("function","dataRedirect");
 								}
 								mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
 							}
@@ -926,6 +929,7 @@ var createMap = function() {
 								mapAside4DescriptionItemField.setAttribute("name","Item");
 								mapAside4DescriptionItemField.setAttribute("value",itm);
 								mapAside4DescriptionItemField.addEventListener("click",dataRedirect);
+								mapAside4DescriptionItemField.setAttribute("function","dataRedirect");
 							}
 							mapAside4DescriptionItemField.appendChild(mapAside4DescriptionItemFieldText);
 
@@ -960,13 +964,13 @@ var createMap = function() {
 			}
 		}
 	
-		console.log(poks)
+	
 		var pokArea = [];
 		for(var q = 0; q < poks.length; q++) {
 			pokArea.push(poks[q]["Sort"]);
 		}
 		pokArea = [...new Set(pokArea)];
-		console.log(pokArea)
+		
 
 		var uls = mapAside4DescriptionPok.querySelectorAll(":scope > ul");
 		for(var q = 0; q < uls.length; q++) {
@@ -1003,7 +1007,7 @@ var createMap = function() {
 					var mapAside4DescriptionPokWrap = document.createElement("span");
 					var mapAside4DescriptionPokIcon = document.createElement("img");
 					var mapAside4DescriptionPokText = document.createElement("h6");
-					mapAside4DescriptionPokOuter.setAttribute("name","pok");
+					mapAside4DescriptionPokOuter.setAttribute("name","Pok");
 					mapAside4DescriptionPokLvl.innerText = poks[u]["Level"];
 					mapAside4DescriptionPokLvl.title = "Level";
 					mapAside4DescriptionPokIcon.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
@@ -1030,7 +1034,7 @@ var createMap = function() {
 					mapAside4DescriptionPokRate.setAttribute("name","Rate")
 					mapAside4DescriptionPokRateText.title = "Rate";
 					if (poks[u]["Rate"].includes(",")) {
-						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll(",","\n").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="Spring">Spring</pre>').replaceAll("au:",'<pre name="Autumn">Autumn</pre>').replaceAll("su:",'<pre name="Summer">Summer</pre>').replaceAll("wi:",'<pre name="Winter">Winter</pre>');
+						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="Spring">Spring</pre>').replaceAll("au:",'<pre name="Autumn">Autumn</pre>').replaceAll("su:",'<pre name="Summer">Summer</pre>').replaceAll("wi:",'<pre name="Winter">Winter</pre>');
 					}
 					else {
 						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"];
@@ -1042,23 +1046,27 @@ var createMap = function() {
 
 					var mapAside4DescriptionPokType = document.createElement("li");
 					var mapAside4DescriptionPokTypeWrap = document.createElement("span");
-					var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
 					mapAside4DescriptionPokType.setAttribute("name","Encounter")
 
 
-					//mapAside4DescriptionPokTypeEncounter.setAttribute("onerror", "this.style.display='none'");
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
 					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeWrap);
 
 
-					if (poks[u]["Tile"] != undefined) {
+					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
 						var mapAside4DescriptionPokTypeTile = document.createElement("img");
+						var mapAside4DescriptionPokTypeTileText = document.createElement("h6");
+
 						mapAside4DescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
 						mapAside4DescriptionPokTypeTile.title = poks[u]["Tile"];
 						mapAside4DescriptionPokTypeTile.alt = poks[u]["Tile"];
 						mapAside4DescriptionPokTypeTile.setAttribute("name","Tile");
+						mapAside4DescriptionPokTypeTileText.innerText = poks[u]["Tile"];
 						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTile);
+						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTileText);
+												
 					}
+
 
 					var encounters = [];
 					// Encounter
@@ -1074,7 +1082,8 @@ var createMap = function() {
 
 					for(var r = 0; r < encounters.length; r++) {
 						var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
-						console.log(encounters)
+						var mapAside4DescriptionPokTypeEncounterText = document.createElement("h6");
+	
 						var encounter = encounters[r];
 						if (encounter.includes("Surfing")) {
 							encounter = encounter+"_M"
@@ -1083,29 +1092,100 @@ var createMap = function() {
 							encounter = encounter;
 						}
 
-						if (encounter != undefined) {						
+						if (encounter != undefined) {
+							
 							if (encounter == "Static" && poks[u]["Tile"] == undefined) {
 								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Normal/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
-								mapAside4DescriptionPokTypeEncounter.title = encounter+" "+poks[u]["Pokémon"];
+								mapAside4DescriptionPokTypeEncounter.title = encounters[r]+"\n"+poks[u]["Pokémon"];
+								mapAside4DescriptionPokTypeWrap.setAttribute("name","Static");
+								mapAside4DescriptionPokTypeWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
+								mapAside4DescriptionPokTypeWrap.addEventListener("click",modalData);
+								mapAside4DescriptionPokTypeEncounterText.innerText = encounters[r]+"\n"+poks[u]["Pokémon"];
 							}
 							else if (encounter == "Static" && poks[u]["Tile"] != undefined) {
 								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Normal/PNG/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
-								mapAside4DescriptionPokTypeEncounter.title = encounter+" "+poks[u]["Pokémon"];
+								mapAside4DescriptionPokTypeEncounter.title = encounters[r]+"\n"+poks[u]["Pokémon"];
+								mapAside4DescriptionPokTypeWrap.setAttribute("name","Static");
+								mapAside4DescriptionPokTypeWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
+								mapAside4DescriptionPokTypeWrap.addEventListener("click",modalData);
+								mapAside4DescriptionPokTypeEncounterText.innerText = encounters[r]+"\n"+poks[u]["Pokémon"];
 							}
 							else {
 								mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";
-								mapAside4DescriptionPokTypeEncounter.title = encounter;
+								mapAside4DescriptionPokTypeEncounter.title = encounters[r];
+								mapAside4DescriptionPokTypeEncounterText.innerText = encounters[r];
 							}
-							
+							if (poks[u]["Item"] != undefined) {
+			
+								if (poks[u]["Item"] == poks[u]["Encounter"]) {
+									mapAside4DescriptionPokTypeEncounter.setAttribute("name","Item");
+									mapAside4DescriptionPokTypeEncounter.setAttribute("value",poks[u]["Item"]);
+									mapAside4DescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
+									mapAside4DescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
+
+									mapAside4DescriptionPokTypeEncounterText.setAttribute("name","Item");
+									mapAside4DescriptionPokTypeEncounterText.setAttribute("value",poks[u]["Item"]);
+									mapAside4DescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+									mapAside4DescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+								}
+							}
+
 							mapAside4DescriptionPokTypeEncounter.alt = encounter;
-							mapAside4DescriptionPokTypeEncounter.setAttribute("name","Encounter");
+							
+							if (encounters[r] == "Surfing") {
+								mapAside4DescriptionPokTypeEncounter.setAttribute("name","Move");
+								mapAside4DescriptionPokTypeEncounter.setAttribute("value","Surf");
+								mapAside4DescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
+								mapAside4DescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
+
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("name","Move");
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("value","Surf");
+								mapAside4DescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+							}
+					
+							if (getMoveData(encounters[r], "Type") != undefined) {
+								mapAside4DescriptionPokTypeEncounter.setAttribute("name","Move");
+								mapAside4DescriptionPokTypeEncounter.setAttribute("value",encounters[r]);
+								mapAside4DescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
+								mapAside4DescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
+
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("name","Move");
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("value",encounters[r]);
+								mapAside4DescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+								mapAside4DescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+							}
 						}
 						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeEncounter);
+						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeEncounterText);
 					}
 
+					if (poks[u]["Machine"] != undefined) {
+						var machine = poks[u]["Machine"].replace(/,([^,]*)$/, ', and $1').replaceAll(",",", ").replaceAll("/"," or ").replaceAll("  "," ");
+						
+						if (machine != "") {
+							mapAside4DescriptionPokType.setAttribute("title","Requires: "+machine);
+						}
+					}
+
+					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static" && poks[u]["Encounter"] != undefined) {
+						mapAside4DescriptionPokTypeWrap.setAttribute("name","Multi");
 
 
+						var apds = mapAside4DescriptionPokType.querySelectorAll(":scope h6");
+						for(var t = 0; t < apds.length; t++) {
 
+							if (t == 0) {
+								apds[t].remove();
+							}
+							else {
+								mapAside4DescriptionPokType.append(apds[t]);
+							}
+						}
+
+					
+
+					}
 
 
 
@@ -1175,6 +1255,7 @@ var createMap = function() {
 					mapAside4DescriptionTutorLi.appendChild(mapAside4DescriptionTutorMove);
 					mapAside4DescriptionTutorMove.appendChild(mapAside4DescriptionTutorMoveText);
 					mapAside4DescriptionTutorMoveText.addEventListener("click",dataRedirect);
+					mapAside4DescriptionTutorMoveText.setAttribute("function","dataRedirect");
 
 					if (tutors[u]["Requirement"] != undefined || tutors[u]["Cost"] != undefined || tutors[u]["Rate"] != undefined || tutors[u]["Time"]) {
 						var mapAside4DescriptionTutorAdditional = document.createElement("span");
@@ -1228,6 +1309,7 @@ var createMap = function() {
 						var costImages = mapAside4DescriptionTutorCost.querySelectorAll(":scope img");
 						for(var y = 0; y < costImages.length; y++) {
 							costImages[y].addEventListener("click",dataRedirect);
+							costImages[y].setAttribute("function","dataRedirect");
 						}
 					}
 
@@ -1317,6 +1399,7 @@ var createMap = function() {
 					mapAside3NavigationInnerContent.appendChild(mapAside3NavigationInnerImg);
 					mapAside3NavigationInnerContent.appendChild(mapAside3NavigationInnerText);
 					mapAside3NavigationInnerContent.addEventListener("click",dataRedirect);
+					mapAside3NavigationInnerContent.setAttribute("function","dataRedirect");
 				}
 			}
 		}
