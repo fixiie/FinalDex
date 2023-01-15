@@ -436,6 +436,7 @@ var createMove = function() {
 								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
 							}
 							moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+							moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
 						}
 						
 					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by "+othermove[q]) {
@@ -453,6 +454,7 @@ var createMove = function() {
 									moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
 								}
 								moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
 							}
 						
 					}
@@ -470,6 +472,7 @@ var createMove = function() {
 					for(var r = 0; r < applicables.length; r++) {
 						applicables[r].setAttribute("name","Move");
 						applicables[r].addEventListener("click",dataRedirect);
+						applicables[r].setAttribute("function","dataRedirect");
 					}
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat") {
 					moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
@@ -488,6 +491,7 @@ var createMove = function() {
 							applicables[r].setAttribute("name","Ability");
 						}
 						applicables[r].addEventListener("click",dataRedirect);
+						applicables[r].setAttribute("function","dataRedirect");
 					}
 				}
 				moveAside3SidebarRight.appendChild(moveAside3SidebarOther);
@@ -516,6 +520,7 @@ var createMove = function() {
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
 			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
 			moveAside3SidebarHMTMText.addEventListener("click",dataRedirect)
+			moveAside3SidebarHMTMText.setAttribute("function","dataRedirect");
 		}
 		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
 			var moveAside3SidebarTutor = document.createElement("div");
@@ -533,6 +538,7 @@ var createMove = function() {
 			moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorTitle);
 			moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorText);
 			moveAside3SidebarTutorText.addEventListener("click",dataRedirect);
+			moveAside3SidebarTutorText.setAttribute("function","dataRedirect");
 		}
 		var lis = moveAside4LearnsetUl.querySelectorAll(":scope > li");
 		for(var u = 0; u < lis.length; u++) {
@@ -631,16 +637,19 @@ var createMove = function() {
 					moveAside4LearnsetLiSource.setAttribute("name","HM");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TM")) {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.setAttribute("name","TM");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TR")) {
 					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
 					moveAside4LearnsetLiSource.setAttribute("name","TR");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
 					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
 				}
 				
 
