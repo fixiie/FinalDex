@@ -993,50 +993,73 @@ var createMap = function() {
 
 			for(var u = 0; u < poks.length; u++) {
 				if (poks[u]["Sort"] == pokArea[q]) {
+
+
 					var mapAside4DescriptionPokLi = document.createElement("li");
 					ul.appendChild(mapAside4DescriptionPokLi);
 
-					var mapAside4DescriptionPokIconOuter = document.createElement("div");
-					var mapAside4DescriptionPokIconText = document.createElement("p");
+					var mapAside4DescriptionPokOuter = document.createElement("li");
+					var mapAside4DescriptionPokLvl = document.createElement("h6");
+					var mapAside4DescriptionPokWrap = document.createElement("span");
 					var mapAside4DescriptionPokIcon = document.createElement("img");
+					var mapAside4DescriptionPokText = document.createElement("h6");
+					mapAside4DescriptionPokOuter.setAttribute("name","pok");
+					mapAside4DescriptionPokLvl.innerText = poks[u]["Level"];
+					mapAside4DescriptionPokLvl.title = "Level";
 					mapAside4DescriptionPokIcon.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
 					mapAside4DescriptionPokIcon.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 					mapAside4DescriptionPokIcon.setAttribute("title",poks[u]["Pokémon"]);
-					mapAside4DescriptionPokIcon.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
-					mapAside4DescriptionPokIconText.innerText = poks[u]["Pokémon"];
-					mapAside4DescriptionPokIconOuter.appendChild(mapAside4DescriptionPokIcon);
-					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokIconOuter);
+					mapAside4DescriptionPokWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
+					mapAside4DescriptionPokText.innerText = poks[u]["Pokémon"];
 
-					mapAside4DescriptionPokIcon.addEventListener("click",modalData)
-					
+					if (poks[u]["Note"] != undefined) {
+						mapAside4DescriptionPokOuter.setAttribute("title",poks[u]["Note"]);
+					}
 
-					var mapAside4DescriptionPokLvl = document.createElement("span");
-					var mapAside4DescriptionPokLvlText = document.createElement("p");
-					mapAside4DescriptionPokLvlText.innerText = poks[u]["Level"];
-					mapAside4DescriptionPokLvlText.title = "Level";
-					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokLvl);
-					mapAside4DescriptionPokLvl.appendChild(mapAside4DescriptionPokLvlText);
+					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokOuter);
+					mapAside4DescriptionPokOuter.appendChild(mapAside4DescriptionPokLvl);
+					mapAside4DescriptionPokOuter.appendChild(mapAside4DescriptionPokWrap);
+					mapAside4DescriptionPokWrap.appendChild(mapAside4DescriptionPokIcon);
+					mapAside4DescriptionPokWrap.appendChild(mapAside4DescriptionPokText);
 
-					var mapAside4DescriptionPokRate = document.createElement("span");
+					mapAside4DescriptionPokWrap.addEventListener("click",modalData);
+
+
+					var mapAside4DescriptionPokType = document.createElement("li");
+					var mapAside4DescriptionPokTypeWrap = document.createElement("span");
+					var mapAside4DescriptionPokTypeTile = document.createElement("img");
+					var mapAside4DescriptionPokTypeEncounter = document.createElement("img");
+					mapAside4DescriptionPokType.setAttribute("name","Encounter")
+					if (poks[u]["Tile"] != undefined) {
+						mapAside4DescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+						mapAside4DescriptionPokTypeTile.title = poks[u]["Tile"];
+						mapAside4DescriptionPokTypeTile.alt = poks[u]["Tile"];
+					}
+					if (poks[u]["Encounter"] != undefined) {
+						mapAside4DescriptionPokTypeEncounter.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter"]+".png";
+						mapAside4DescriptionPokTypeEncounter.title = poks[u]["Encounter"];
+						mapAside4DescriptionPokTypeEncounter.alt = poks[u]["Encounter"];
+					}
+					//mapAside4DescriptionPokTypeEncounter.setAttribute("onerror", "this.style.display='none'");
+					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
+					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeWrap);
+					mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTile);
+					mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeEncounter);
+
+
+
+					var mapAside4DescriptionPokRate = document.createElement("li");
 					var mapAside4DescriptionPokRateText = document.createElement("p");
+					mapAside4DescriptionPokRate.setAttribute("name","Rate")
 					mapAside4DescriptionPokRateText.title = "Rate";
 					if (poks[u]["Rate"].includes(",")) {
-						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll(",","\n").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">');
+						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll(",","\n").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="Spring">Spring</pre>').replaceAll("au:",'<pre name="Autumn">Autumn</pre>').replaceAll("su:",'<pre name="Summer">Summer</pre>').replaceAll("wi:",'<pre name="Winter">Winter</pre>');
 					}
 					else {
 						mapAside4DescriptionPokRateText.innerHTML = poks[u]["Rate"];
 					}
 					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokRate);
 					mapAside4DescriptionPokRate.appendChild(mapAside4DescriptionPokRateText);
-
-
-					var mapAside4DescriptionPokType = document.createElement("span");
-					var mapAside4DescriptionPokTypeImage = document.createElement("img");
-					mapAside4DescriptionPokTypeImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Encounter"]+".png";
-					mapAside4DescriptionPokTypeImage.title = poks[u]["Encounter"];
-					mapAside4DescriptionPokTypeImage.setAttribute("onerror", "this.style.display='none'");
-					mapAside4DescriptionPokLi.appendChild(mapAside4DescriptionPokType);
-					mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeImage);
 
 
 				}
