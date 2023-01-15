@@ -1260,11 +1260,19 @@ input[type=radio] {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+	width: 100%;
 }
 #map-description-pok ul > li li > span {
-	cursor:pointer;
 	text-align:center;
 }
+#map-description-pok ul > li li[name="Pok"] > span,
+#map-description-pok ul > li li[name="Encounter"] > span[name="Static"] {
+	cursor:pointer;
+}
+#map-description-pok ul > li li[name="Encounter"] > span[name="Static"]:hover img {
+	filter:brightness(1.1);
+}
+
 #map-description-pok ul > li li[name="Encounter"] > span {
 	position: relative;
     display: flex;
@@ -1273,14 +1281,15 @@ input[type=radio] {
     align-items: center;
 }
 
-#map-description-pok ul > li li[name="Encounter"] > span > img[name="Tile"] {
-	display:block;
-}
 
-#map-description-pok ul > li li[name="Encounter"] > span > img[src][name="Encounter"]:not(:first-child) {
+#map-description-pok ul > li li[name="Encounter"] > span > img:not([function]) {
+	padding: 10px;
+} 
+
+#map-description-pok ul > li li[name="Encounter"] > span[name="Multi"] > img[src]:not([name="Tile"]) {
 	position: absolute;
-    bottom: 25%;
-    left: 25%;
+    bottom: 35%;
+    left: 40%;
 }
 
 #map-description-pok ul > li p pre[name="Spring"] {
@@ -1304,23 +1313,23 @@ input[type=radio] {
 	font-size: 70%;
 }
 
-#map-description-pok ul > li span[name="pok"] {
+#map-description-pok ul > li span[name="Pok"] {
 	display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-#map-description-pok ul > li > li[title] span > h6 {
+#map-description-pok ul > li > li[title] h6 {
 	text-decoration: underline;
     text-decoration-style: dashed;
 }
-#map-description-pok ul > li > li[title]:hover span > h6 {
+#map-description-pok ul > li > li[title]:hover h6 {
 	text-decoration-style: solid;
 }
-#map-description-pok ul > li span[name="pok"] > *:nth-child(1) {
+#map-description-pok ul > li span[name="Pok"] > *:nth-child(1) {
 	padding: 0;
 }
-#map-description-pok ul > li span[name="pok"] > * {
+#map-description-pok ul > li span[name="Pok"] > * {
 	padding: 2px 0;
 }
 
@@ -1516,7 +1525,8 @@ input[type=radio] {
 
 
 #map-description-item ul li div:hover img,
-#map-description-pok ul > li li > span:hover img,
+#map-description-pok ul > li li[name="Pok"] > span:hover img,
+#map-description-pok ul > li li[name="Encounter"] > span:hover img[name*="Static"],
 #map-description-trainer ul li div img:hover {
 	filter: brightness(1.1);
 }
@@ -6624,11 +6634,12 @@ span[name="Status"] {
 	flex-wrap: wrap;
 	flex-direction: column;
 }
-*[name="Ability"],
-*[name="Move"],
-*[name="Item"]/*,
-*[name="Map"]*/ {
+*[function] {
 	cursor: pointer;
+}
+img[function]:hover,
+*[function]:hover img {
+	filter:brightness(1.2);
 }
 
 .move-learnset-content ul li > span span {
