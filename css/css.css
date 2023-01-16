@@ -1236,6 +1236,7 @@ input[type=radio] {
 	border-top: none;
 }
 
+
 #map-description-pok ul > li,
 #map-description-item ul li,
 #map-description-tutor ul li {
@@ -1250,7 +1251,9 @@ input[type=radio] {
 	border-bottom: 1px dotted;
 	background: var(--color16);
 }
-
+#map-description-pok ul > li {
+    display: table;
+}
 #map-description-pok ul > li,
 #map-description-tutor ul > li {
 	justify-content: space-around;
@@ -1260,7 +1263,10 @@ input[type=radio] {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-	width: 100%;
+	width: 33%;
+	text-align: center;
+	display:table-cell;
+	vertical-align: middle;
 }
 #map-description-pok ul > li li > span {
 	text-align:center;
@@ -1280,7 +1286,30 @@ input[type=radio] {
     justify-content: center;
     align-items: center;
 }
+#map-description-pok > h5,
+#map-description-item > h5  {
+	position: fixed;
+    z-index: 100;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color19);
+    border-bottom-right-radius: 10px;
+	display: none;
+	opacity: 0.8;
+    pointer-events: none;
+}
 
+#map-description-pok ul > li li[name="Encounter"] > span > img {
+	max-width: 50px;
+    object-fit: scale-down;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+} 
 
 #map-description-pok ul > li li[name="Encounter"] > span > img:not([function]) {
 	padding: 10px;
@@ -1321,12 +1350,18 @@ input[type=radio] {
     justify-content: center;
     flex-direction: column;
 }
-#map-description-pok ul > li > li[title] h6 {
-	text-decoration: underline;
-    text-decoration-style: dashed;
+#map-description-pok ul > li > li[name="Pok"] > h6 {
+	text-decoration: none !important;
 }
-#map-description-pok ul > li > li[title]:hover h6 {
-	text-decoration-style: solid;
+#map-description-pok ul > li > li[title] h6,
+#map-description-pok ul > li > li[title] p {
+	text-decoration: underline;
+    text-decoration-style: solid;
+	cursor: default;
+}
+#map-description-pok ul > li > li[title]:hover h6,
+#map-description-pok ul > li > li[title]:hover p {
+	text-decoration-style: dashed;
 }
 #map-description-pok ul > li span[name="Pok"] > *:nth-child(1) {
 	padding: 0;
@@ -2917,6 +2952,7 @@ body {
 	box-shadow: 0 0 100px var(--color14);
 	border-left: 1px solid;
 	border-right: 1px solid;
+	overflow: auto;
 }
 
 .data-area-title {
@@ -9128,22 +9164,28 @@ img[function]:hover,
 	flex-direction: column;
 }
 
-.data-area-content li > span[name="Area"] {
-	width: 20%;
-}
+
 .data-area-content li > span[name="Location"] {
-	width: 100%;
-}
-.data-area-content li > span[name="Level"] {
-	width: 40%;
+	/*width: 50%;*/
 }
 .data-area-content li > span[name="Rate"] {
-	width: 40%;
+	width: 80%;
 }
 .data-area-content li > span[name="Encounter"] {
-	width: 20%;
+	/*width: 20%;*/
+}
+.data-area-content li > span[name="Pokémon"] {
+	/*width: 20%;*/
 }
 
+.data-area-content li > span[name="Encounter"] h3 {
+	padding-bottom: 5px;
+}
+
+.data-area-content li > span[name="Location"] h4 {
+	font-weight: normal;
+
+}
 
 .data-area-content li > span[name="Rate"] p {
 	display: flex;
@@ -9155,28 +9197,30 @@ img[function]:hover,
 
 .data-area-content li span img[title="Morning"] {
 	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
-	max-width: 40px;
+	max-width: 30px;
 }
 .data-area-content li span img[title="Day"] {
 	filter: invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
-	max-width: 40px;
+	max-width: 30px;
 }
 .data-area-content li span img[title="Night"] {
 	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
-	max-width: 40px;
+	max-width: 30px;
 }
 
 
-.data-area-content li span h3 {
-	cursor:pointer;
-}
 
-.data-area-content li span h3:hover {
+
+.data-area-content li span[name="Location"] h3:hover {
 	filter:brightness(0.8);
 }
-
+.data-area-content li span[name="Encounter"] img { 
+	max-width: 50px;
+}
+.data-area-content li span[name="Encounter"] img[title="Gift"] {
+	max-width: 10px;
+}
 .data-area-content li span img {
-	max-width: 100%;
     object-fit: scale-down;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
@@ -9184,12 +9228,15 @@ img[function]:hover,
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
 }
-
-
-
-
-
-
+.data-area-content li span[name="Encounter"] span  { 
+	position:relative;
+	padding-bottom: 5px;
+}
+.data-area-content li span[name="Encounter"] span > img:not(:first-child) { 
+	position: absolute;
+    top: -30%;
+    right: -30%;
+}
 
 
 
