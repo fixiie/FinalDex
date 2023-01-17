@@ -1258,6 +1258,8 @@ input[type=radio] {
 #map-description-tutor ul > li {
 	justify-content: space-around;
 }
+
+
 #map-description-pok ul > li li {
 	display: flex;
     justify-content: center;
@@ -1268,10 +1270,17 @@ input[type=radio] {
 	display:table-cell;
 	vertical-align: middle;
 }
+body[game="Sun"] #map-description-pok ul > li li,
+body[game="Moon"] #map-description-pok ul > li li,
+body[game="Ultra Sun"] #map-description-pok ul > li li,
+body[game="Ultra Moon"] #map-description-pok ul > li li {
+	width: 25%;
+}
+
 #map-description-pok ul > li li > span {
 	text-align:center;
 }
-#map-description-pok ul > li li[name="Pok"] > span,
+#map-description-pok ul > li li[name="Pok"] > span img,
 #map-description-pok ul > li li[name="Encounter"] > span[name="Static"] {
 	cursor:pointer;
 }
@@ -1282,9 +1291,10 @@ input[type=radio] {
 #map-description-pok ul > li li[name="Encounter"] > span {
 	position: relative;
     display: flex;
-    flex-direction: column;
+	flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+	padding: 5px 0;
 }
 #map-description-pok > h5,
 #map-description-item > h5  {
@@ -1311,34 +1321,72 @@ input[type=radio] {
 	-ms-interpolation-mode: nearest-neighbor;
 } 
 
-#map-description-pok ul > li li[name="Encounter"] > span > img:not([function]) {
-	padding: 10px;
-} 
+
+#map-description-pok ul > li li[name="Encounter"] > span > img[title="Gift"] {
+	max-width: 10px;
+}
 
 #map-description-pok ul > li li[name="Encounter"] > span[name="Multi"] > img[src]:not([name="Tile"]) {
-	position: absolute;
-    bottom: 35%;
-    left: 40%;
+	margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 10;
 }
 
-#map-description-pok ul > li p pre[name="Spring"] {
+*[name="Spring"] {
 	color:#B0F858;
+	text-shadow: 1px 1px 1px var(--border1);
 }
-#map-description-pok ul > li p pre[name="Summer"] {
+*[name="Summer"] {
 	color:#FFFA73;
+	text-shadow: 1px 1px 1px var(--border1);
 }
-#map-description-pok ul > li p pre[name="Autumn"] {
+*[name="Autumn"] {
 	color:#F89058;
+	text-shadow: 1px 1px 1px var(--border1);
 }
-#map-description-pok ul > li p pre[name="Winter"] {
+*[name="Winter"] {
 	color:#78D0F8;
+	text-shadow: 1px 1px 1px var(--border1);
 }
+
+
+*[name="Monday"] {
+	color:#FFE66D;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Tuesday"] {
+	color:#F87575;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Wednesday"] {
+	color:#357266;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Thursday"] {
+	color:#B8B08D ;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Friday"] {
+	color:#576CA8;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Saturday"] {
+	color:#F0D3F7;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+*[name="Sunday"] {
+	color:#9D5C63;
+	text-shadow: 1px 1px 1px var(--border1);
+}
+
+
 
 #map-description-pok ul > li li > h6 {
 	font-size: 0.6em;
 }
 #map-description-pok ul > li li[name="Rate"] pre {
 	font-size: 130%;
+	font-weight: bold;
 }
 #map-description-pok ul > li li[name="Rate"] p {
 	font-size: 70%;
@@ -1350,16 +1398,13 @@ input[type=radio] {
     justify-content: center;
     flex-direction: column;
 }
-#map-description-pok ul > li > li[name="Pok"] > h6 {
-	text-decoration: none !important;
-}
-#map-description-pok ul > li > li[title] h6,
+
+#map-description-pok ul > li > li[title] span h6,
 #map-description-pok ul > li > li[title] p {
 	text-decoration: underline;
     text-decoration-style: solid;
-	cursor: default;
 }
-#map-description-pok ul > li > li[title]:hover h6,
+#map-description-pok ul > li > li[title]:hover span h6,
 #map-description-pok ul > li > li[title]:hover p {
 	text-decoration-style: dashed;
 }
@@ -9186,14 +9231,50 @@ img[function]:hover,
 	font-weight: normal;
 
 }
+.data-area-content li > span[name="Location"][title] h3 {
+	text-decoration:underline;
+	text-decoration-style: solid;
+}
+.data-area-content li > span[name="Location"][title]:hover h3 {
+	text-decoration-style: dashed;
+}
+
+.data-area-content li > span[name="Rate"][title]  {
+	cursor:help;
+}
+
+
+
+.data-area-content li > span[name="Rate"][title] h4 {
+	text-decoration:underline;
+	text-decoration-style: solid;
+}
+.data-area-content li > span[name="Rate"][title]:hover h4 {
+	text-decoration-style: dashed;
+}
+
+.data-area-content li > span[name="Rate"] h4 {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+}
+
+
+
+.data-area-content li > span[name="Pokémon"] h5 {
+	padding: 2px 0;
+}
 
 .data-area-content li > span[name="Rate"] p {
 	display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
+.data-area-content li > span[name="Rate"] pre {
+    font-weight: bold;
+}
 
 .data-area-content li span img[title="Morning"] {
 	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
@@ -9207,13 +9288,21 @@ img[function]:hover,
 	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
 	max-width: 30px;
 }
-
-
-
-
-.data-area-content li span[name="Location"] h3:hover {
-	filter:brightness(0.8);
+.data-area-content li span[name="Pokémon"] img[title] {
+	border-bottom: 1px dashed;
+    border-color: var(--color1) !important;
+	cursor:help;
 }
+
+.data-area-content li span[name="Pokémon"] img[title]:hover {
+	border-bottom: 1px solid;
+}
+
+.data-area-content li > span[name="Allies"] {
+	display: block;
+}
+
+
 .data-area-content li span[name="Encounter"] img { 
 	max-width: 50px;
 }
@@ -9231,11 +9320,15 @@ img[function]:hover,
 .data-area-content li span[name="Encounter"] span  { 
 	position:relative;
 	padding-bottom: 5px;
+	display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
 }
 .data-area-content li span[name="Encounter"] span > img:not(:first-child) { 
-	position: absolute;
-    top: -30%;
-    right: -30%;
+	margin-left: 20px;
+    z-index: 10;
+	margin-bottom: -5px;
 }
 
 
@@ -9456,18 +9549,29 @@ img[function]:hover,
 	stroke: transparent;
   stroke-width: 2px;
 }
+
 svg[name="Mark"] .mapify-polygon[name="active"] {
-	fill: var(--colorGreen);
-	stroke: var(--color1);
+	fill: var(--colorRed);
+	stroke: none;
 }
+
+
+
 
 .mapify-polygon[name="active"] {
   animation: blinkOpacity0 normal 2.5s infinite ease-in-out;
 }
 
 .mapify-hover{
-	fill: var(--colorRed);
-    /*stroke: var(--color1);*/
+	fill: var(--colorGreen);
+    stroke: none;
+}
+body[game="Sun"] .mapify-hover,
+body[game="Moon"] .mapify-hover,
+body[game="Ultra Sun"] .mapify-hover,
+body[game="Ultra Moon"] .mapify-hover {
+	fill: transparent;
+    stroke: var(--color1);
 }
 
 .mapify-popOver button {
