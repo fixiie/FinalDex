@@ -1102,8 +1102,9 @@ var createMap = function() {
 						for(var r = 0; r < rgs.length; r++) {
 							mapAside4DescriptionPokTypeTileText.innerText = mapAside4DescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
 						}
+						mapAside4DescriptionPokTypeTileText.innerText = mapAside4DescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
 
-						mapAside4DescriptionPokTypeTileText.innerText = mapAside4DescriptionPokTypeTileText.innerText.replaceAll()
+
 						mapAside4DescriptionPokTypeWrap.appendChild(mapAside4DescriptionPokTypeTile);
 						mapAside4DescriptionPokType.appendChild(mapAside4DescriptionPokTypeTileText);
 												
