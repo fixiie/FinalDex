@@ -904,6 +904,8 @@ function loadData() {
 							pokEncounterTxt.innerText = encounterTxtArr[t]
 							pokEncounterText.appendChild(pokEncounterTxt);
 
+							pokEncounterTxt.innerText = pokEncounterTxt.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
+
 
 							var rgs;
 							if (Region.includes(",")) {
@@ -913,7 +915,7 @@ function loadData() {
 								rgs = [Region];
 							}
 							for(var r = 0; r < rgs.length; r++) {
-								encounterTxtArr[t] = encounterTxtArr[t].replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","").replaceAll(" Autumn","").replaceAll(" Spring","").replaceAll(" Winter","").replaceAll(" Summer","");
+								encounterTxtArr[t] = encounterTxtArr[t].replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
 							}
 
 
@@ -1103,9 +1105,10 @@ function loadData() {
 
                                     for(var u = 0; u < encounterTxtArr.length; u++) {
                                         var pokEncounterTxt = document.createElement("span");
-                                        pokEncounterTxt.innerText = encounterTxt[u]
+                                        pokEncounterTxt.innerText = encounterTxtArr[u]
                                         pokEncounterText.appendChild(pokEncounterTxt);
 
+										pokEncounterTxt.innerText = pokEncounterTxt.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
 
                                         var rgs;
                                         if (Region.includes(",")) {
@@ -1117,15 +1120,15 @@ function loadData() {
                                         for(var r = 0; r < rgs.length; r++) {
                                             encounterTxtArr[u] = encounterTxtArr[u].replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","").replaceAll(" Autumn","").replaceAll(" Spring","").replaceAll(" Winter","").replaceAll(" Summer","");
                                         }
-    
+										encounterTxtArr[u] = encounterTxtArr[u].replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
 
-                                        if (encounterTxt[u] == "Headbutt") {
+                                        if (encounterTxtArr[u] == "Headbutt") {
                                             pokEncounterTxt.setAttribute("name","Move");
                                             pokEncounterTxt.setAttribute("value","Headbutt");
                                             pokEncounterTxt.addEventListener("click", dataRedirect);
                                             pokEncounterTxt.setAttribute("function","dataRedirect");
                                         }
-                                        if (encounterTxt[u] == "Surfing") {
+                                        if (encounterTxtArr[u] == "Surfing") {
                                             pokEncounterTxt.setAttribute("name","Move");
                                             pokEncounterTxt.setAttribute("value","Surf");
                                             pokEncounterTxt.addEventListener("click", dataRedirect);
