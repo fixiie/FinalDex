@@ -1834,7 +1834,7 @@ var createMap = function() {
 				}
 
 				var mapAside4DescriptionTrainerPokémonImage = document.createElement("img");
-				mapAside4DescriptionTrainerPokémonImage.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageType_Path[0]+"/"+getPokémonMediaPath(getPokémonInt(pok),"Battle")+".png";
+				mapAside4DescriptionTrainerPokémonImage.src = "./media/Images/Pokémon/Battle/PNG/Normal/Front/"+ImageTypes[0]["path"]+"/"+getPokémonMediaPath(getPokémonInt(pok),"Battle")+".png";
 				mapAside4DescriptionTrainerPokémonImage.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
 				mapAside4DescriptionTrainerPokémonImage.setAttribute("title", pok);
 				mapAside4DescriptionTrainerPokémonImage.setAttribute("value",getPokémonInt(pok));
