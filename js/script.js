@@ -639,11 +639,16 @@ function variantSelector() {
 
         createContain(tempStr);
 
+        ImageType("Populate");
+
         memory("Save","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
         memory("Restore","check","game",document.querySelectorAll('#pokémon-outer > div > ul input[type="checkbox"]'));
-        memory("Restore","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
+        memory("Restore","imgtype-path","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Path"]'));
+        memory("Restore","imgtype-extension","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Extension"]'));
+        memory("Restore","imgtype-type","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Type"]'));
+        memory("Restore","imgtype-angle","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Angle"]'));
 
-        imageType();
+        ImageType("Execute");
         resizeDiv();
 		dexSwitch();
 
@@ -1205,46 +1210,6 @@ function partyDataSwitch() {
 }
 
 
-function imageType() {
-
-
-    var conimg = document.querySelectorAll('#pokémon-outer > div ul li label > img');
-    var parimg = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] div aside img[value]');
-
-    var select = document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select')
-
-    if (select.value != "") {
-
-        var dataPath = select.querySelector(":scope > option[value='"+select.value+"']").getAttribute("data-path");
-        var dataType = select.querySelector(":scope > option[value='"+select.value+"']").getAttribute("data-type");
-        var dataExtension = select.querySelector(":scope > option[value='"+select.value+"']").getAttribute("data-extension");
-        
-
-
-        if(!dataType.includes("Art")) {
-            for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
-            }
-            for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataExtension+'/Normal/Front/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension);
-            }
-        }
-        else {
-            for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
-            }
-            for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataType+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataType)+"."+dataExtension);
-            }
-        }
-    }
-
-    memory("Save","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
-}
 
 
 function openSettings() {
@@ -1601,8 +1566,12 @@ function createParty(base,data) {
     var baseFriendship = base.querySelector(':scope span[name="Additional"] label[name="Friendship"] input');
     var baseExport = base.querySelector(':scope aside > span:last-child > select:last-child');
 
-    var imgtype = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select')
-    var opt = imgtype.querySelector(':scope > option[value="'+imgtype.value+'"]');
+    var imgtype = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Path"]');
+    var imgtypePath = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Path"] option[value="'+imgtype.value+'"]').getAttribute("data-path");
+    var imgtypeCategory = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Path"] option[value="'+imgtype.value+'"]').getAttribute("data-category");
+    var imgtypeExtension = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Extension"]').value;
+    var imgtypeType = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Type"]').value;
+    var imgtypeAngle = document.querySelector('#pokémon-outer main[name="Settings"] span[name="ImageType"] select[name="Angle"]').value;
     
     var type1 = returnData(i,"Type","undefined")[0];
     var type2 = returnData(i,"Type","undefined")[1];
@@ -1616,12 +1585,9 @@ function createParty(base,data) {
         base.querySelector(":scope > aside:first-child").setAttribute("name",type1);
     }
 
-    if (opt.getAttribute("data-type") != "Art") {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-extension")+"/Normal/Front/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(i,opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
-    }
-    else {
-        basePok.src = "./media/Images/Pokémon/"+opt.getAttribute("data-type")+"/"+opt.getAttribute("data-path")+"/"+getPokémonMediaPath(i,opt.getAttribute("data-type"))+"."+opt.getAttribute("data-extension");
-    }
+    basePok.src = "./media/Images/Pokémon/"+imgtypeCategory+"/"+imgtypeExtension+"/"+imgtypeType+"/"+imgtypeAngle+"/"+imgtypePath+"/"+getPokémonMediaPath(i,imgtypeCategory)+"."+imgtypeExtension;
+   
+    
     basePok.setAttribute("value",i);
     basePok.title = getPokémonName(i);
     baseNick.setAttribute("placeholder",getPokémonName(i));
@@ -4481,4 +4447,121 @@ function consoleText(text) {
 }
 
 
+
+function ImageType(action) {
+    var action;
+
+
+
+    var tar = document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"]');
+    var path = tar.querySelector(":scope select[name='Path']");
+    var ext = tar.querySelector(":scope select[name='Extension']");
+    var type = tar.querySelector(":scope select[name='Type']");
+    var angle = tar.querySelector(":scope select[name='Angle']");
+
+    if (action.includes("Populate")) { 
+        var exts = [];
+        var types = [];
+        var angles = [];
+
+    
+        for (var q = 0; q < ImageTypes.length; q++) {
+            if (ImageTypes[q]["name"] == path.value) {
+                exts.push(ImageTypes[q]["extension"]);
+                types.push(ImageTypes[q]["type"]);
+                angles.push(ImageTypes[q]["angle"]);
+            }
+        }
+
+        exts = [...new Set(exts)];
+        types = [...new Set(types)];
+        angles = [...new Set(angles)];
+
+
+        if (exts.length == 1 || exts[0] == undefined) {
+            ext.classList.add("None");
+            ext.setAttribute("disabled","");
+        }
+        else {
+            ext.classList.remove("None");
+            ext.removeAttribute("disabled");
+        }
+        if (types.length == 1 || types[0] == undefined) {
+            type.classList.add("None");
+            type.setAttribute("disabled","");
+        }
+        else {
+            type.classList.remove("None");
+            type.removeAttribute("disabled");
+        }
+        if (angles.length == 1 || angles[0] == undefined) {
+            angle.classList.add("None");
+            angle.setAttribute("disabled","");
+        }
+        else {
+            angle.classList.remove("None");
+            angle.removeAttribute("disabled");
+        }
+
+
+        var oldoptions = tar.querySelectorAll(":scope > span:last-child option");
+        for (var q = 0; q < oldoptions.length; q++) {
+            oldoptions[q].remove();
+        }
+
+
+        for (var q = 0; q < exts.length; q++) {
+            var option = document.createElement("option");
+            option.innerText = exts[q];
+            option.setAttribute("value",exts[q]);
+            ext.appendChild(option);
+        }
+
+        for (var q = 0; q < types.length; q++) {
+            var option = document.createElement("option");
+            option.innerText = types[q];
+            option.setAttribute("value",types[q]);
+            type.appendChild(option);
+        }
+
+        for (var q = 0; q < angles.length; q++) {
+            var option = document.createElement("option");
+            option.innerText = angles[q];
+            option.setAttribute("value",angles[q]);
+            angle.appendChild(option);
+        }
+    }
+    if (action.includes("Execute")) {
+        var conimg = document.querySelectorAll('#pokémon-outer > div ul li label > img');
+        var parimg = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] div aside img[value]');
+
+        if (tar.value != "") {
+
+            var dataPath = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-path");
+            var dataCategory = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-category");
+            var dataExtension = ext.value;
+            var dataAngle = angle.value;
+            var dataType = type.value;
+            
+
+            for (var q = 0; q < conimg.length; q++) {
+                conimg[q].src = './media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataCategory)+"."+dataExtension;
+                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataCategory)+"."+dataExtension);
+            }
+            for (var q = 0; q < parimg.length; q++) {
+                parimg[q].src = './media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension;
+                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension);
+            }
+        
+            
+        }
+
+        memory("Save","imgtype-path","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Path"]'));
+        memory("Save","imgtype-extension","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Extension"]'));
+        memory("Save","imgtype-type","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Type"]'));
+        memory("Save","imgtype-angle","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Angle"]'));
+
+    }
+
+}
 
