@@ -7624,10 +7624,19 @@ img[function]:hover,
 	width: 100%;
 }
 
+#pokémon-outer > main[name='Settings'] span select.None {
+	color: rgba(0, 0, 0, 0.5);
+	/*font-style:italic;
+	text-shadow: 1px 1px rgb(0 0 0 / 10%);*/
+}
+
+
+#pokémon-outer > main[name='Settings'] span select:not([disabled]) {
+	cursor:pointer;
+}
 #pokémon-outer > main[name='Settings'] span select {
 	padding: 10px;
     width: 80%;
-	cursor: pointer;
 }
 #pokémon-outer > main[name='Settings'] span select,
 #pokémon-outer > main[name='Settings'] span option {
@@ -7695,6 +7704,28 @@ img[function]:hover,
 	display:flex
 }
 
+
+
+#pokémon-outer > main[name='Settings'] > span[name="ImageType"] > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+	width: 50%;
+    flex-direction: column;
+}
+#pokémon-outer > main[name='Settings'] > span[name="ImageType"] > span:first-child {
+	width: 60%;
+}
+
+#pokémon-outer > main[name='Settings'] > span[name="ImageType"] > span:last-child {
+	width: 40%;
+}
+
+#pokémon-outer > main[name='Settings'] > span[name="ImageType"] > span:last-child select {
+	padding: 5px;
+	margin: 2px 0;
+}
 
 
 
