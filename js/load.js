@@ -310,19 +310,17 @@ function initialize() {
 		boxMemory("Restore")
 		partyMemory("Restore");
 		memoryDexSwitch();
-		memory("Restore","imgtype","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select'));
+		memory("Restore","imgtype-path","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Path"]'));
+        memory("Restore","imgtype-extension","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Extension"]'));
+        memory("Restore","imgtype-type","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Type"]'));
+        memory("Restore","imgtype-angle","game",document.querySelector('#pokémon-outer > main[name="Settings"] > span[name="ImageType"] select[name="Angle"]'));
+		
 		memory("Restore","resize","site",document.getElementById('resize'));
 		memory("Restore","variant","game",document.querySelectorAll('#pokémon-outer > main[name="Settings"] > span[name="Variant"] input[type="checkbox"]'));
 
 		variantSelector();
 
 		load();
-
-		//console.log(finaldataLearnsetMachine)
-		//console.log(returnMoveSet(getPokémonInt("Alolan Rattata"),""))
-		
-		//var tempArr = [{Pokémon:"Charmander",Primary:"Monster",Secondary:"Dragon"},{Pokémon:"Charizard",Primary:"Dragon",Secondary:"Monster"},{Pokémon:"Blastoise",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Fearow",Primary:"Drake",Secondary:"Water"},{Pokémon:"Wartortle",Primary:"Flying",Secondary:"Dragon"},{Pokémon:"Squirtle",Primary:"Drake",Secondary:"Worgen"},{Pokémon:"Clefairy",Primary:"Fish",Secondary:"Water"},{Pokémon:"Psyduck",Primary:"Monster",Secondary:"Dragon"}]
-		///console.log(checkReturnDifferences(tempArr,["Primary","Secondary"],["Pokémon"]))
 
 	}
 }
