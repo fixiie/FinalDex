@@ -65,7 +65,7 @@ function boxMemory(action) {
 
 
 function memory(action,name,suffix,element) {
-
+	
 	var action;
 	var name;
 	var suffix;
@@ -90,7 +90,11 @@ function memory(action,name,suffix,element) {
 	else {
 		tempStr = tempArr[0];
 	}
-	
+
+	if(name.includes("imgtype") && !name.includes("path") && action == "Restore") {
+		//ImageType();
+	}
+
 	if (element != undefined) {
 		if (NodeList.prototype.isPrototypeOf(element) == true) {
 			for(var i = 0; i < element.length; i++) {
@@ -115,6 +119,7 @@ function memory(action,name,suffix,element) {
 			}
 		}
 	}
+	
 
 
 }
