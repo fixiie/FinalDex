@@ -102,7 +102,7 @@ var createPokémon = function() {
 	navigationSettings.appendChild(navigationSettingsImg);
 
     navigationSearch.addEventListener("keyup", function() {search("Pokémon");});
-    navigationSearchExit.addEventListener("click", function() {exitSearch("Pokémon");});
+    navigationSearchExit.addEventListener("click", function() {exitSearch("Pokémon");count();});
 
 
     var team = document.createElement("main");
@@ -729,8 +729,6 @@ var createPokémon = function() {
     settings.setAttribute("name","Settings");
 	contentOuter.appendChild(settings);
 
-    var settingsDefaultImgtypeOuter = document.createElement("span");
-    var settingsDefaultImgtype = document.createElement("select");
 
     var settingsDefaultResizeOuter = document.createElement("span");
     var settingsDefaultResize = document.createElement("div");
@@ -743,51 +741,38 @@ var createPokémon = function() {
     var settingsDefaultThemeSpan = document.createElement("span");
 
 
+    var settingsDefaultImgtypeOuter = document.createElement("span");
+    var settingsDefaultImgtypeOuterLeft = document.createElement("span");
 
 
+    var settingsDefaultImgtypePath = document.createElement("select");
+    var settingsDefaultImgtypeOuterRight = document.createElement("span");
+    var settingsDefaultImgtypeExtension = document.createElement("select");
+    var settingsDefaultImgtypeType = document.createElement("select");
+    var settingsDefaultImgtypeAngle = document.createElement("select");
 
+    var tempImgTypes = [...ImageTypes];
+    tempImgTypes = removeDuplicateObjectFromArray(tempImgTypes, "name");    
 
-
-
-    for (var i = 0; i < ImageType_Path.length; i++) { 
+    for (var i = 0; i < tempImgTypes.length; i++) { 
         var settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.setAttribute("data-path",ImageType_Path[i]);
-        settingsDefaultImgtypeOption.setAttribute("data-type",ImageType_Type[i]);
-        settingsDefaultImgtypeOption.setAttribute("data-extension",ImageType_Extension[i]);
+        settingsDefaultImgtypeOption.setAttribute("data-path",tempImgTypes[i]["path"]);
+        settingsDefaultImgtypeOption.setAttribute("data-category",tempImgTypes[i]["category"]);
 
-        if (ImageType_Type[i].includes("Battle")) {
-            settingsDefaultImgtypeOption.innerText = "Battle";
-            settingsDefaultImgtypeOption.value = "Battle";
-        }
-        if (ImageType_Type[i].includes("Battle") && Generation <= 5) {
-            settingsDefaultImgtypeOption.innerText = "Battle Sprites";
-            settingsDefaultImgtypeOption.value = "Battle Sprites";
-        }
-        if (ImageType_Type[i].includes("Battle") && Generation >= 6 || ImageType_Type[i].includes("Battle") && GameID == 12 || ImageType_Type[i].includes("Battle") && GameID == 13) {
-            settingsDefaultImgtypeOption.innerText = "Battle Models";
-            settingsDefaultImgtypeOption.value = "Battle Models";
-        }
-        if (ImageType_Type[i].includes("Art")) {
-            settingsDefaultImgtypeOption.innerText = ImageType_Path[i]+" "+ImageType_Type[i];
-            settingsDefaultImgtypeOption.value = ImageType_Path[i]+" "+ImageType_Type[i];
-        }
-        if (ImageType_Path[i].includes("Recolor")) {
-            settingsDefaultImgtypeOption.innerText = "Recolor Battle Sprites";
-            settingsDefaultImgtypeOption.value = "Recolor Battle Sprites";
-        }
-
-        if (ImageType_Extension[i].includes("GIF")) {
-            settingsDefaultImgtypeOption.innerText += " Animated";
-            settingsDefaultImgtypeOption.value += " Animated";
-    
-        }
+        settingsDefaultImgtypeOption.innerText = tempImgTypes[i]["name"];
+        settingsDefaultImgtypeOption.value = tempImgTypes[i]["name"];
   
-        settingsDefaultImgtype.appendChild(settingsDefaultImgtypeOption);
+        settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypeOption);
     }
 
-
-
-
+    settingsDefaultImgtypePath.setAttribute("name","Path");
+    settingsDefaultImgtypePath.setAttribute("title","Image Types");
+    settingsDefaultImgtypeExtension.setAttribute("name","Extension");
+    settingsDefaultImgtypeExtension.setAttribute("title","Extension");
+    settingsDefaultImgtypeType.setAttribute("name","Type");
+    settingsDefaultImgtypeType.setAttribute("title","Type");
+    settingsDefaultImgtypeAngle.setAttribute("name","Angle");
+    settingsDefaultImgtypeAngle.setAttribute("title","Angle");
     settingsDefaultImgtypeOuter.setAttribute("name","ImageType");
     settingsDefaultResizeOuter.setAttribute("name","Resize");
     settingsDefaultResize.setAttribute("id","resize-outer");
@@ -809,7 +794,13 @@ var createPokémon = function() {
 
 
     settings.appendChild(settingsDefaultImgtypeOuter);
-    settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtype);
+    settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtypeOuterLeft);
+    settingsDefaultImgtypeOuterLeft.appendChild(settingsDefaultImgtypePath);
+
+    settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtypeOuterRight);
+    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeExtension);
+    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeType);
+    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeAngle);
 
 
     settings.appendChild(settingsDefaultResizeOuter);
@@ -894,11 +885,11 @@ var createPokémon = function() {
 
 
 
-
-    settingsDefaultImgtype.addEventListener("change",imageType);
-
-
-
+    settingsDefaultImgtypePath.addEventListener("change", function() {ImageType("Populate,Execute");});
+    settingsDefaultImgtypeExtension.addEventListener("change", function() {ImageType("Execute");});
+    settingsDefaultImgtypeType.addEventListener("change", function() {ImageType("Execute");});
+    settingsDefaultImgtypeAngle.addEventListener("change", function() {ImageType("Execute");});
+    
 
     $( function() {
         $('#pokémon-outer > div li img').draggable();
